@@ -38,11 +38,14 @@ const FixturesView = (prop: FixturesViewProp) => {
             }/>
 
       </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
+      {
+        (fixtures.isSuccess == true) &&
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
         {(fixtures.data !== undefined) &&
           <FixtureCard overview={prop.overview} fixture={fixtures.data[30]}/>
         }
       </ScrollView>
+      }
     </View>
   )
 }

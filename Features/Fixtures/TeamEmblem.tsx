@@ -1,12 +1,22 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
+import { Emblems } from "../../Global/Images";
+import { FplFixtures } from "../../Models/FplFixtures";
+import {  Team } from "../../Models/FplOverview";
 
-const TeamEmblem = () => {
+interface TeamEmblemProp {
+    team: Team | undefined;
+}
+
+const TeamEmblem = (prop: TeamEmblemProp) => {
+
     return (
         <View style={styles.teamInfoView}>
-            <Image style={styles.emblems} source={require('../../assets/emblems/t1.png')} resizeMode='contain'/>
-            <Text style={{fontSize: 0.025 * GlobalConstants.width, alignSelf: 'center'}}>MUN</Text>
+            {(prop.team !== undefined) &&
+            <><Image style={styles.emblems} source={Emblems[prop.team.code]} resizeMode='contain' />
+              <Text style={{ fontSize: 0.025 * GlobalConstants.width, alignSelf: 'center' }}>{ prop.team.short_name }</Text></>
+            }
         </View>
     )
 }

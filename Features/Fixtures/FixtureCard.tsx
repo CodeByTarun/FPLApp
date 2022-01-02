@@ -9,7 +9,7 @@ import { FplFixtures } from '../../Models/FplFixtures'
 import { FplOverview } from '../../Models/FplOverview'
 import TeamEmblem from "./TeamEmblem"
 import moment from 'moment-timezone';
-import * as RNLocalize from 'react-native-localize'
+import * as Localization from 'expo-localization'
 
 interface FixtureCardProp {
     fixture: FplFixtures | undefined;
@@ -25,13 +25,13 @@ const FixtureCard = (prop : FixtureCardProp) => {
                     <View style={styles.card}>
                         <View style={styles.topbar}>
                             <Text style={styles.datetext}>
-                                { RNLocalize.getTimeZone() }
+                                { moment(prop.fixture.kickoff_time).tz(Localization.timezone).format('MMM d, h:mm z') }
                             </Text>
                         </View>
                         <View style={styles.scoreview}>
-                            <TeamEmblem/>
+                            <TeamEmblem team={prop.overview.teams[0]}/>
                             <Text style={styles.scoretext}>vs</Text>
-                            <TeamEmblem/>
+                            <TeamEmblem team={prop.overview.teams[1]}/>
                         </View>
                     </View>
                 }
