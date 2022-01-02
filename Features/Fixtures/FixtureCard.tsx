@@ -16,7 +16,13 @@ interface FixtureCardProp {
     overview: FplOverview | undefined;
 }
 
+
+
 const FixtureCard = (prop : FixtureCardProp) => {
+
+    const GetTeam = (teamNumber : number) => {
+        return prop.overview!.teams.filter(team => team.id == teamNumber)[0]
+    }
 
     return (
         
@@ -25,13 +31,13 @@ const FixtureCard = (prop : FixtureCardProp) => {
                     <View style={styles.card}>
                         <View style={styles.topbar}>
                             <Text style={styles.datetext}>
-                                { moment(prop.fixture.kickoff_time).tz(Localization.timezone).format('MMM d, h:mm z') }
+                                { moment(prop.fixture.kickoff_time).tz(Localization.timezone).format('MMM D, h:mm z') }
                             </Text>
                         </View>
                         <View style={styles.scoreview}>
-                            <TeamEmblem team={prop.overview.teams[0]}/>
+                            <TeamEmblem team={GetTeam(prop.fixture.team_h)}/>
                             <Text style={styles.scoretext}>vs</Text>
-                            <TeamEmblem team={prop.overview.teams[1]}/>
+                            <TeamEmblem team={GetTeam(prop.fixture.team_a)}/>
                         </View>
                     </View>
                 }

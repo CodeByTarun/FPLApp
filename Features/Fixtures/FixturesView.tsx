@@ -42,7 +42,11 @@ const FixturesView = (prop: FixturesViewProp) => {
         (fixtures.isSuccess == true) &&
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
         {(fixtures.data !== undefined) &&
-          <FixtureCard overview={prop.overview} fixture={fixtures.data[30]}/>
+
+          fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
+                       .map((fixture) => {
+                          return <FixtureCard overview={prop.overview} fixture={fixture}/>
+                        })
         }
       </ScrollView>
       }
