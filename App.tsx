@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import FixturesView from './Features/Fixtures/FixturesView';
+import PlayerSearch from './Features/PlayerStats/PlayerSearch';
+import LineupContainer from './Features/GameStats/LineupContainer';
+import { Provider } from 'react-redux';
+import store from './App/store'
+import { useGetOverviewQuery } from './App/fplSlice';
+import MainPage from './MainPage';
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <MainPage/>
+      </View>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: '100%'
   },
 });

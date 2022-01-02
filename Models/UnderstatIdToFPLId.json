@@ -1,0 +1,3122 @@
+[
+    {
+      "name": "Bernd Leno",
+      "fpl_id": 1,
+      "understat_id": "181"
+    },
+    {
+      "name": "R\u00FAnar Alex R\u00FAnarsson",
+      "fpl_id": 2,
+      "understat_id": null
+    },
+    {
+      "name": "Willian Borges Da Silva",
+      "fpl_id": 3,
+      "understat_id": null
+    },
+    {
+      "name": "Pierre-Emerick Aubameyang",
+      "fpl_id": 4,
+      "understat_id": "318"
+    },
+    {
+      "name": "C\u00E9dric Soares",
+      "fpl_id": 5,
+      "understat_id": "847"
+    },
+    {
+      "name": "Alexandre Lacazette",
+      "fpl_id": 6,
+      "understat_id": "3277"
+    },
+    {
+      "name": "Granit Xhaka",
+      "fpl_id": 7,
+      "understat_id": "204"
+    },
+    {
+      "name": "Pablo Mar\u00ED",
+      "fpl_id": 8,
+      "understat_id": "8380"
+    },
+    {
+      "name": "H\u00E9ctor Beller\u00EDn",
+      "fpl_id": 9,
+      "understat_id": null
+    },
+    {
+      "name": "Calum Chambers",
+      "fpl_id": 10,
+      "understat_id": "508"
+    },
+    {
+      "name": "Sead Kolasinac",
+      "fpl_id": 11,
+      "understat_id": "342"
+    },
+    {
+      "name": "Mohamed Naser El Sayed Elneny",
+      "fpl_id": 12,
+      "understat_id": "496"
+    },
+    {
+      "name": "Ainsley Maitland-Niles",
+      "fpl_id": 13,
+      "understat_id": "1750"
+    },
+    {
+      "name": "Rob Holding",
+      "fpl_id": 14,
+      "understat_id": "1749"
+    },
+    {
+      "name": "Thomas Partey",
+      "fpl_id": 15,
+      "understat_id": "2328"
+    },
+    {
+      "name": "Kieran Tierney",
+      "fpl_id": 16,
+      "understat_id": "8089"
+    },
+    {
+      "name": "Nicolas P\u00E9p\u00E9",
+      "fpl_id": 17,
+      "understat_id": "5656"
+    },
+    {
+      "name": "Lucas Torreira",
+      "fpl_id": 18,
+      "understat_id": null
+    },
+    {
+      "name": "Edward Nketiah",
+      "fpl_id": 20,
+      "understat_id": null
+    },
+    {
+      "name": "Emile Smith Rowe",
+      "fpl_id": 21,
+      "understat_id": "7230"
+    },
+    {
+      "name": "Bukayo Saka",
+      "fpl_id": 22,
+      "understat_id": "7322"
+    },
+    {
+      "name": "Gabriel Magalh\u00E3es",
+      "fpl_id": 23,
+      "understat_id": "5613"
+    },
+    {
+      "name": "Konstantinos Mavropanos",
+      "fpl_id": 24,
+      "understat_id": null
+    },
+    {
+      "name": "Matt\u00E9o Guendouzi",
+      "fpl_id": 25,
+      "understat_id": null
+    },
+    {
+      "name": "Gabriel Teodoro Martinelli Silva",
+      "fpl_id": 26,
+      "understat_id": "7752"
+    },
+    {
+      "name": "William Saliba",
+      "fpl_id": 27,
+      "understat_id": null
+    },
+    {
+      "name": "Ben White",
+      "fpl_id": 67,
+      "understat_id": "7298"
+    },
+    {
+      "name": "Nuno Varela Tavares",
+      "fpl_id": 466,
+      "understat_id": "9691"
+    },
+    {
+      "name": "Albert Sambi Lokonga",
+      "fpl_id": 478,
+      "understat_id": "9689"
+    },
+    {
+      "name": "Folarin Balogun",
+      "fpl_id": 530,
+      "understat_id": "9690"
+    },
+    {
+      "name": "Reiss Nelson",
+      "fpl_id": 531,
+      "understat_id": "6492"
+    },
+    {
+      "name": "Karl Hein",
+      "fpl_id": 532,
+      "understat_id": null
+    },
+    {
+      "name": "Martin \u00D8degaard",
+      "fpl_id": 558,
+      "understat_id": "2517"
+    },
+    {
+      "name": "Aaron Ramsdale",
+      "fpl_id": 559,
+      "understat_id": "5603"
+    },
+    {
+      "name": "Arthur Okonkwo",
+      "fpl_id": 572,
+      "understat_id": null
+    },
+    {
+      "name": "Takehiro Tomiyasu",
+      "fpl_id": 590,
+      "understat_id": "7931"
+    },
+    {
+      "name": "Jed Steer",
+      "fpl_id": 28,
+      "understat_id": "4475"
+    },
+    {
+      "name": "Conor Hourihane",
+      "fpl_id": 29,
+      "understat_id": null
+    },
+    {
+      "name": "Emiliano Mart\u00EDnez",
+      "fpl_id": 30,
+      "understat_id": "4401"
+    },
+    {
+      "name": "Bj\u00F6rn Engels",
+      "fpl_id": 31,
+      "understat_id": null
+    },
+    {
+      "name": "Bertrand Traor\u00E9",
+      "fpl_id": 32,
+      "understat_id": "695"
+    },
+    {
+      "name": "Morgan Sanson",
+      "fpl_id": 34,
+      "understat_id": null
+    },
+    {
+      "name": "John McGinn",
+      "fpl_id": 35,
+      "understat_id": "7723"
+    },
+    {
+      "name": "Kortney Hause",
+      "fpl_id": 36,
+      "understat_id": "6859"
+    },
+    {
+      "name": "Mahmoud Ahmed Ibrahim Hassan",
+      "fpl_id": 37,
+      "understat_id": null
+    },
+    {
+      "name": "Tyrone Mings",
+      "fpl_id": 38,
+      "understat_id": "1024"
+    },
+    {
+      "name": "Matt Targett",
+      "fpl_id": 39,
+      "understat_id": "884"
+    },
+    {
+      "name": "Ollie Watkins",
+      "fpl_id": 40,
+      "understat_id": "8865"
+    },
+    {
+      "name": "Marvelous Nakamba",
+      "fpl_id": 41,
+      "understat_id": "8040"
+    },
+    {
+      "name": "Anwar El Ghazi",
+      "fpl_id": 42,
+      "understat_id": "5612"
+    },
+    {
+      "name": "Emiliano Buend\u00EDa Stati",
+      "fpl_id": 43,
+      "understat_id": "2203"
+    },
+    {
+      "name": "Matthew Cash",
+      "fpl_id": 44,
+      "understat_id": "8864"
+    },
+    {
+      "name": "Ezri Konsa Ngoyo",
+      "fpl_id": 45,
+      "understat_id": "7726"
+    },
+    {
+      "name": "Fr\u00E9d\u00E9ric Guilbert",
+      "fpl_id": 46,
+      "understat_id": null
+    },
+    {
+      "name": "Wesley Moraes",
+      "fpl_id": 47,
+      "understat_id": "7724"
+    },
+    {
+      "name": "Mbwana Ally Samatta",
+      "fpl_id": 48,
+      "understat_id": null
+    },
+    {
+      "name": "Keinan Davis",
+      "fpl_id": 49,
+      "understat_id": "1053"
+    },
+    {
+      "name": "Douglas Luiz Soares de Paulo",
+      "fpl_id": 50,
+      "understat_id": "6122"
+    },
+    {
+      "name": "Jacob Ramsey",
+      "fpl_id": 51,
+      "understat_id": "8941"
+    },
+    {
+      "name": "Ashley Young",
+      "fpl_id": 52,
+      "understat_id": "631"
+    },
+    {
+      "name": "Axel Tuanzebe",
+      "fpl_id": 283,
+      "understat_id": "934"
+    },
+    {
+      "name": "Danny Ings",
+      "fpl_id": 337,
+      "understat_id": "986"
+    },
+    {
+      "name": "Leon Bailey",
+      "fpl_id": 492,
+      "understat_id": "5221"
+    },
+    {
+      "name": "Aaron Ramsey",
+      "fpl_id": 496,
+      "understat_id": null
+    },
+    {
+      "name": "Jaden Philogene-Bidace",
+      "fpl_id": 497,
+      "understat_id": "9415"
+    },
+    {
+      "name": "Carney Chukwuemeka",
+      "fpl_id": 526,
+      "understat_id": "9356"
+    },
+    {
+      "name": "Cameron Archer",
+      "fpl_id": 568,
+      "understat_id": "9912"
+    },
+    {
+      "name": "Viljami Sinisalo",
+      "fpl_id": 596,
+      "understat_id": null
+    },
+    {
+      "name": "Lamare Bogarde",
+      "fpl_id": 610,
+      "understat_id": null
+    },
+    {
+      "name": "Pontus Jansson",
+      "fpl_id": 76,
+      "understat_id": "1801"
+    },
+    {
+      "name": "Christian N\u00F8rgaard",
+      "fpl_id": 77,
+      "understat_id": "7083"
+    },
+    {
+      "name": "Ivan Toney",
+      "fpl_id": 78,
+      "understat_id": "998"
+    },
+    {
+      "name": "Tariqe Fosu-Henry",
+      "fpl_id": 79,
+      "understat_id": null
+    },
+    {
+      "name": "David Raya Martin",
+      "fpl_id": 80,
+      "understat_id": "9676"
+    },
+    {
+      "name": "Sergi Can\u00F3s",
+      "fpl_id": 81,
+      "understat_id": "1078"
+    },
+    {
+      "name": "Pelenda Joshua Dasilva",
+      "fpl_id": 82,
+      "understat_id": null
+    },
+    {
+      "name": "Rico Henry",
+      "fpl_id": 83,
+      "understat_id": "9679"
+    },
+    {
+      "name": "Vitaly Janelt",
+      "fpl_id": 84,
+      "understat_id": "9680"
+    },
+    {
+      "name": "Saman Ghoddos",
+      "fpl_id": 85,
+      "understat_id": "7069"
+    },
+    {
+      "name": "Mathias Jensen",
+      "fpl_id": 86,
+      "understat_id": "7166"
+    },
+    {
+      "name": "Charlie Goode",
+      "fpl_id": 87,
+      "understat_id": "9687"
+    },
+    {
+      "name": "Marcus Forss",
+      "fpl_id": 88,
+      "understat_id": "9684"
+    },
+    {
+      "name": "Mads Roerslev Rasmussen",
+      "fpl_id": 89,
+      "understat_id": "9685"
+    },
+    {
+      "name": "Mads Bech S\u00F8rensen",
+      "fpl_id": 90,
+      "understat_id": "9683"
+    },
+    {
+      "name": "Ethan Pinnock",
+      "fpl_id": 91,
+      "understat_id": "9678"
+    },
+    {
+      "name": "Ellery Balcombe",
+      "fpl_id": 92,
+      "understat_id": null
+    },
+    {
+      "name": "Jan Zamburek",
+      "fpl_id": 93,
+      "understat_id": null
+    },
+    {
+      "name": "Patrik Gunnarsson",
+      "fpl_id": 94,
+      "understat_id": null
+    },
+    {
+      "name": "Halil Dervi\u015Fo\u011Flu",
+      "fpl_id": 95,
+      "understat_id": null
+    },
+    {
+      "name": "Bryan Mbeumo",
+      "fpl_id": 96,
+      "understat_id": "6552"
+    },
+    {
+      "name": "Mads Bidstrup",
+      "fpl_id": 97,
+      "understat_id": "9682"
+    },
+    {
+      "name": "Frank Onyeka",
+      "fpl_id": 479,
+      "understat_id": "9681"
+    },
+    {
+      "name": "Kristoffer Ajer",
+      "fpl_id": 483,
+      "understat_id": "9677"
+    },
+    {
+      "name": "Dominic Thompson",
+      "fpl_id": 498,
+      "understat_id": null
+    },
+    {
+      "name": "Shandon Baptiste",
+      "fpl_id": 499,
+      "understat_id": "9914"
+    },
+    {
+      "name": "Yoane Wissa",
+      "fpl_id": 524,
+      "understat_id": "5786"
+    },
+    {
+      "name": "\u00C1lvaro Fern\u00E1ndez",
+      "fpl_id": 556,
+      "understat_id": "5191"
+    },
+    {
+      "name": "Finley Stevens",
+      "fpl_id": 569,
+      "understat_id": null
+    },
+    {
+      "name": "Mathias Jorgensen",
+      "fpl_id": 594,
+      "understat_id": "6030"
+    },
+    {
+      "name": "Paris Maghoma",
+      "fpl_id": 614,
+      "understat_id": null
+    },
+    {
+      "name": "Matthew Cox",
+      "fpl_id": 619,
+      "understat_id": null
+    },
+    {
+      "name": "Adam Lallana",
+      "fpl_id": 53,
+      "understat_id": "486"
+    },
+    {
+      "name": "Jason Steele",
+      "fpl_id": 54,
+      "understat_id": null
+    },
+    {
+      "name": "Pascal Gro\u00DF",
+      "fpl_id": 55,
+      "understat_id": "239"
+    },
+    {
+      "name": "Shane Duffy",
+      "fpl_id": 56,
+      "understat_id": "6047"
+    },
+    {
+      "name": "Davy Pr\u00F6pper",
+      "fpl_id": 57,
+      "understat_id": null
+    },
+    {
+      "name": "Dan Burn",
+      "fpl_id": 58,
+      "understat_id": "7382"
+    },
+    {
+      "name": "Lewis Dunk",
+      "fpl_id": 59,
+      "understat_id": "6048"
+    },
+    {
+      "name": "Solomon March",
+      "fpl_id": 60,
+      "understat_id": "6049"
+    },
+    {
+      "name": "Adam Webster",
+      "fpl_id": 61,
+      "understat_id": "7699"
+    },
+    {
+      "name": "Jo\u00EBl Veltman",
+      "fpl_id": 62,
+      "understat_id": "8780"
+    },
+    {
+      "name": "Neal Maupay",
+      "fpl_id": 63,
+      "understat_id": "3621"
+    },
+    {
+      "name": "Leandro Trossard",
+      "fpl_id": 64,
+      "understat_id": "7698"
+    },
+    {
+      "name": "Mathew Ryan",
+      "fpl_id": 65,
+      "understat_id": null
+    },
+    {
+      "name": "Alireza Jahanbakhsh",
+      "fpl_id": 66,
+      "understat_id": null
+    },
+    {
+      "name": "Bernardo Fernandes Da Silva Junior",
+      "fpl_id": 68,
+      "understat_id": "3635"
+    },
+    {
+      "name": "Robert S\u00E1nchez",
+      "fpl_id": 69,
+      "understat_id": "9098"
+    },
+    {
+      "name": "Yves Bissouma",
+      "fpl_id": 70,
+      "understat_id": "5609"
+    },
+    {
+      "name": "Tariq Lamptey",
+      "fpl_id": 71,
+      "understat_id": "8226"
+    },
+    {
+      "name": "Aaron Connolly",
+      "fpl_id": 72,
+      "understat_id": "7991"
+    },
+    {
+      "name": "Steven Alzate",
+      "fpl_id": 73,
+      "understat_id": "8020"
+    },
+    {
+      "name": "Alexis Mac Allister",
+      "fpl_id": 74,
+      "understat_id": "8379"
+    },
+    {
+      "name": "Jakub Moder",
+      "fpl_id": 75,
+      "understat_id": "9284"
+    },
+    {
+      "name": "Danny Welbeck",
+      "fpl_id": 447,
+      "understat_id": "501"
+    },
+    {
+      "name": "Enock Mwepu",
+      "fpl_id": 462,
+      "understat_id": "9734"
+    },
+    {
+      "name": "Kjell Scherpen",
+      "fpl_id": 476,
+      "understat_id": null
+    },
+    {
+      "name": "Florin Andone",
+      "fpl_id": 500,
+      "understat_id": null
+    },
+    {
+      "name": "Andi Zeqiri",
+      "fpl_id": 535,
+      "understat_id": null
+    },
+    {
+      "name": "Michal Karbownik",
+      "fpl_id": 536,
+      "understat_id": null
+    },
+    {
+      "name": "Taylor Richards",
+      "fpl_id": 537,
+      "understat_id": "9735"
+    },
+    {
+      "name": "Mois\u00E9s Caicedo",
+      "fpl_id": 538,
+      "understat_id": null
+    },
+    {
+      "name": "Haydon Roberts",
+      "fpl_id": 560,
+      "understat_id": null
+    },
+    {
+      "name": "Marc Cucurella",
+      "fpl_id": 584,
+      "understat_id": "7134"
+    },
+    {
+      "name": "J\u00FCrgen Locadia",
+      "fpl_id": 595,
+      "understat_id": null
+    },
+    {
+      "name": "Jeremy Sarmiento",
+      "fpl_id": 612,
+      "understat_id": null
+    },
+    {
+      "name": "James Tarkowski",
+      "fpl_id": 98,
+      "understat_id": "1665"
+    },
+    {
+      "name": "Phil Bardsley",
+      "fpl_id": 99,
+      "understat_id": null
+    },
+    {
+      "name": "Erik Pieters",
+      "fpl_id": 100,
+      "understat_id": "887"
+    },
+    {
+      "name": "Jack Cork",
+      "fpl_id": 101,
+      "understat_id": "712"
+    },
+    {
+      "name": "Dale Stephens",
+      "fpl_id": 102,
+      "understat_id": null
+    },
+    {
+      "name": "Kevin Long",
+      "fpl_id": 103,
+      "understat_id": null
+    },
+    {
+      "name": "Jay Rodriguez",
+      "fpl_id": 104,
+      "understat_id": "844"
+    },
+    {
+      "name": "Ashley Barnes",
+      "fpl_id": 105,
+      "understat_id": "4422"
+    },
+    {
+      "name": "Ben Mee",
+      "fpl_id": 106,
+      "understat_id": "1654"
+    },
+    {
+      "name": "Ashley Westwood",
+      "fpl_id": 107,
+      "understat_id": "669"
+    },
+    {
+      "name": "Johann Berg Gudmundsson",
+      "fpl_id": 108,
+      "understat_id": "1663"
+    },
+    {
+      "name": "Chris Wood",
+      "fpl_id": 109,
+      "understat_id": "4456"
+    },
+    {
+      "name": "Matthew Lowton",
+      "fpl_id": 110,
+      "understat_id": "1652"
+    },
+    {
+      "name": "Matej Vydra",
+      "fpl_id": 111,
+      "understat_id": "1017"
+    },
+    {
+      "name": "Nick Pope",
+      "fpl_id": 112,
+      "understat_id": "5552"
+    },
+    {
+      "name": "Charlie Taylor",
+      "fpl_id": 113,
+      "understat_id": "6044"
+    },
+    {
+      "name": "Will Norris",
+      "fpl_id": 114,
+      "understat_id": null
+    },
+    {
+      "name": "Josh Brownhill",
+      "fpl_id": 115,
+      "understat_id": "8323"
+    },
+    {
+      "name": "Josh Benson",
+      "fpl_id": 116,
+      "understat_id": null
+    },
+    {
+      "name": "Bailey Peacock-Farrell",
+      "fpl_id": 117,
+      "understat_id": null
+    },
+    {
+      "name": "Dwight McNeil",
+      "fpl_id": 118,
+      "understat_id": "6756"
+    },
+    {
+      "name": "Nathan Collins",
+      "fpl_id": 451,
+      "understat_id": "9733"
+    },
+    {
+      "name": "Wayne Hennessey",
+      "fpl_id": 480,
+      "understat_id": null
+    },
+    {
+      "name": "Lewis Richardson",
+      "fpl_id": 533,
+      "understat_id": null
+    },
+    {
+      "name": "Bobby Thomas",
+      "fpl_id": 534,
+      "understat_id": null
+    },
+    {
+      "name": "Owen Dodgson",
+      "fpl_id": 565,
+      "understat_id": null
+    },
+    {
+      "name": "Aaron Lennon",
+      "fpl_id": 575,
+      "understat_id": "593"
+    },
+    {
+      "name": "Maxwel Cornet",
+      "fpl_id": 578,
+      "understat_id": "3278"
+    },
+    {
+      "name": "Connor Roberts",
+      "fpl_id": 585,
+      "understat_id": null
+    },
+    {
+      "name": "C\u00E9sar Azpilicueta",
+      "fpl_id": 119,
+      "understat_id": "681"
+    },
+    {
+      "name": "Olivier Giroud",
+      "fpl_id": 120,
+      "understat_id": null
+    },
+    {
+      "name": "Thiago Emiliano da Silva",
+      "fpl_id": 121,
+      "understat_id": "3288"
+    },
+    {
+      "name": "Marcos Alonso",
+      "fpl_id": 122,
+      "understat_id": "1621"
+    },
+    {
+      "name": "Jorge Luiz Frello Filho",
+      "fpl_id": 123,
+      "understat_id": "1389"
+    },
+    {
+      "name": "Ross Barkley",
+      "fpl_id": 124,
+      "understat_id": "592"
+    },
+    {
+      "name": "Mateo Kovacic",
+      "fpl_id": 125,
+      "understat_id": "2254"
+    },
+    {
+      "name": "Michy Batshuayi",
+      "fpl_id": 126,
+      "understat_id": null
+    },
+    {
+      "name": "Antonio R\u00FCdiger",
+      "fpl_id": 127,
+      "understat_id": "1822"
+    },
+    {
+      "name": "Kepa Arrizabalaga",
+      "fpl_id": 129,
+      "understat_id": "5061"
+    },
+    {
+      "name": "N\u0027Golo Kant\u00E9",
+      "fpl_id": 130,
+      "understat_id": "751"
+    },
+    {
+      "name": "Hakim Ziyech",
+      "fpl_id": 131,
+      "understat_id": "8992"
+    },
+    {
+      "name": "Ruben Loftus-Cheek",
+      "fpl_id": 132,
+      "understat_id": "688"
+    },
+    {
+      "name": "Andreas Christensen",
+      "fpl_id": 133,
+      "understat_id": "200"
+    },
+    {
+      "name": "Timo Werner",
+      "fpl_id": 134,
+      "understat_id": "65"
+    },
+    {
+      "name": "Benjamin Chilwell",
+      "fpl_id": 135,
+      "understat_id": "782"
+    },
+    {
+      "name": "Tammy Abraham",
+      "fpl_id": 136,
+      "understat_id": null
+    },
+    {
+      "name": "Christian Pulisic",
+      "fpl_id": 137,
+      "understat_id": "2662"
+    },
+    {
+      "name": "Mason Mount",
+      "fpl_id": 138,
+      "understat_id": "7768"
+    },
+    {
+      "name": "Ethan Ampadu",
+      "fpl_id": 139,
+      "understat_id": null
+    },
+    {
+      "name": "Callum Hudson-Odoi",
+      "fpl_id": 140,
+      "understat_id": "6456"
+    },
+    {
+      "name": "Kai Havertz",
+      "fpl_id": 141,
+      "understat_id": "5220"
+    },
+    {
+      "name": "Reece James",
+      "fpl_id": 142,
+      "understat_id": "8067"
+    },
+    {
+      "name": "Edouard Mendy",
+      "fpl_id": 143,
+      "understat_id": "6880"
+    },
+    {
+      "name": "Malang Sarr",
+      "fpl_id": 501,
+      "understat_id": "5648"
+    },
+    {
+      "name": "Trevoh Chalobah",
+      "fpl_id": 527,
+      "understat_id": "6615"
+    },
+    {
+      "name": "Romelu Lukaku",
+      "fpl_id": 529,
+      "understat_id": "594"
+    },
+    {
+      "name": "Emerson Palmieri dos Santos",
+      "fpl_id": 539,
+      "understat_id": null
+    },
+    {
+      "name": "Sa\u00FAl \u00D1\u00EDguez",
+      "fpl_id": 592,
+      "understat_id": "2266"
+    },
+    {
+      "name": "Marcus Bettinelli",
+      "fpl_id": 606,
+      "understat_id": null
+    },
+    {
+      "name": "Conor Gallagher",
+      "fpl_id": 144,
+      "understat_id": "9040"
+    },
+    {
+      "name": "Vicente Guaita",
+      "fpl_id": 146,
+      "understat_id": "2190"
+    },
+    {
+      "name": "James Tomkins",
+      "fpl_id": 147,
+      "understat_id": "530"
+    },
+    {
+      "name": "James McArthur",
+      "fpl_id": 148,
+      "understat_id": "633"
+    },
+    {
+      "name": "Christian Benteke",
+      "fpl_id": 149,
+      "understat_id": "606"
+    },
+    {
+      "name": "Cheikhou Kouyat\u00E9",
+      "fpl_id": 150,
+      "understat_id": "532"
+    },
+    {
+      "name": "Martin Kelly",
+      "fpl_id": 151,
+      "understat_id": null
+    },
+    {
+      "name": "Luka Milivojevic",
+      "fpl_id": 152,
+      "understat_id": "5549"
+    },
+    {
+      "name": "Jordan Ayew",
+      "fpl_id": 153,
+      "understat_id": "672"
+    },
+    {
+      "name": "Wilfried Zaha",
+      "fpl_id": 154,
+      "understat_id": "522"
+    },
+    {
+      "name": "Jeffrey Schlupp",
+      "fpl_id": 155,
+      "understat_id": "757"
+    },
+    {
+      "name": "Jack Butland",
+      "fpl_id": 156,
+      "understat_id": null
+    },
+    {
+      "name": "Jairo Riedewald",
+      "fpl_id": 157,
+      "understat_id": "6027"
+    },
+    {
+      "name": "Jaros\u0142aw Jach",
+      "fpl_id": 158,
+      "understat_id": null
+    },
+    {
+      "name": "Jean-Philippe Mateta",
+      "fpl_id": 159,
+      "understat_id": "5735"
+    },
+    {
+      "name": "Eberechi Eze",
+      "fpl_id": 160,
+      "understat_id": null
+    },
+    {
+      "name": "Nathan Ferguson",
+      "fpl_id": 161,
+      "understat_id": null
+    },
+    {
+      "name": "Tyrick Mitchell",
+      "fpl_id": 162,
+      "understat_id": "8214"
+    },
+    {
+      "name": "Will Hughes",
+      "fpl_id": 386,
+      "understat_id": null
+    },
+    {
+      "name": "Michael Olise",
+      "fpl_id": 464,
+      "understat_id": "9948"
+    },
+    {
+      "name": "Joel Ward",
+      "fpl_id": 474,
+      "understat_id": "510"
+    },
+    {
+      "name": "Marc Gu\u00E9hi",
+      "fpl_id": 477,
+      "understat_id": "7603"
+    },
+    {
+      "name": "Joachim Andersen",
+      "fpl_id": 488,
+      "understat_id": "6314"
+    },
+    {
+      "name": "Nathaniel Clyne",
+      "fpl_id": 493,
+      "understat_id": null
+    },
+    {
+      "name": "Reece Hannam",
+      "fpl_id": 540,
+      "understat_id": null
+    },
+    {
+      "name": "Jesurun Rak-Sakyi",
+      "fpl_id": 541,
+      "understat_id": "9461"
+    },
+    {
+      "name": "Robert Street",
+      "fpl_id": 542,
+      "understat_id": null
+    },
+    {
+      "name": "Scott Banks",
+      "fpl_id": 543,
+      "understat_id": null
+    },
+    {
+      "name": "Remi Matthews",
+      "fpl_id": 561,
+      "understat_id": null
+    },
+    {
+      "name": "Odsonne Edouard",
+      "fpl_id": 586,
+      "understat_id": "3697"
+    },
+    {
+      "name": "Fabian Delph",
+      "fpl_id": 163,
+      "understat_id": "876"
+    },
+    {
+      "name": "Gylfi Sigurdsson",
+      "fpl_id": 164,
+      "understat_id": null
+    },
+    {
+      "name": "Seamus Coleman",
+      "fpl_id": 165,
+      "understat_id": "585"
+    },
+    {
+      "name": "James Rodr\u00EDguez",
+      "fpl_id": 166,
+      "understat_id": null
+    },
+    {
+      "name": "Bernard An\u00EDcio Caldeira Duarte",
+      "fpl_id": 167,
+      "understat_id": null
+    },
+    {
+      "name": "Lucas Digne",
+      "fpl_id": 168,
+      "understat_id": "1823"
+    },
+    {
+      "name": "Michael Keane",
+      "fpl_id": 169,
+      "understat_id": "1653"
+    },
+    {
+      "name": "Jordan Pickford",
+      "fpl_id": 170,
+      "understat_id": "741"
+    },
+    {
+      "name": "Allan Marques Loureiro",
+      "fpl_id": 171,
+      "understat_id": "1379"
+    },
+    {
+      "name": "Andr\u00E9 Filipe Tavares Gomes",
+      "fpl_id": 172,
+      "understat_id": "2383"
+    },
+    {
+      "name": "Abdoulaye Doucour\u00E9",
+      "fpl_id": 173,
+      "understat_id": "1726"
+    },
+    {
+      "name": "Alex Iwobi",
+      "fpl_id": 174,
+      "understat_id": "500"
+    },
+    {
+      "name": "Yerry Mina",
+      "fpl_id": 175,
+      "understat_id": "6521"
+    },
+    {
+      "name": "Tom Davies",
+      "fpl_id": 176,
+      "understat_id": "1042"
+    },
+    {
+      "name": "Dominic Calvert-Lewin",
+      "fpl_id": 177,
+      "understat_id": "5555"
+    },
+    {
+      "name": "Mason Holgate",
+      "fpl_id": 178,
+      "understat_id": "985"
+    },
+    {
+      "name": "Ben Godfrey",
+      "fpl_id": 179,
+      "understat_id": "7689"
+    },
+    {
+      "name": "Richarlison de Andrade",
+      "fpl_id": 180,
+      "understat_id": "6026"
+    },
+    {
+      "name": "Jo\u00E3o Virg\u00EDnia",
+      "fpl_id": 181,
+      "understat_id": null
+    },
+    {
+      "name": "Asmir Begovi\u0107",
+      "fpl_id": 481,
+      "understat_id": "694"
+    },
+    {
+      "name": "Andros Townsend",
+      "fpl_id": 482,
+      "understat_id": "775"
+    },
+    {
+      "name": "Demarai Gray",
+      "fpl_id": 484,
+      "understat_id": "762"
+    },
+    {
+      "name": "Jonjoe Kenny",
+      "fpl_id": 502,
+      "understat_id": "1084"
+    },
+    {
+      "name": "Anthony Gordon",
+      "fpl_id": 503,
+      "understat_id": "8150"
+    },
+    {
+      "name": "Jean-Philippe Gbamin",
+      "fpl_id": 504,
+      "understat_id": "4764"
+    },
+    {
+      "name": "Jarrad Branthwaite",
+      "fpl_id": 544,
+      "understat_id": null
+    },
+    {
+      "name": "Nathan Broadhead",
+      "fpl_id": 545,
+      "understat_id": null
+    },
+    {
+      "name": "Moise Kean",
+      "fpl_id": 564,
+      "understat_id": "1304"
+    },
+    {
+      "name": "Niels Nkounkou",
+      "fpl_id": 570,
+      "understat_id": null
+    },
+    {
+      "name": "Andy Lonergan",
+      "fpl_id": 571,
+      "understat_id": null
+    },
+    {
+      "name": "Salom\u00F3n Rond\u00F3n",
+      "fpl_id": 591,
+      "understat_id": "813"
+    },
+    {
+      "name": "Ellis Simms",
+      "fpl_id": 602,
+      "understat_id": null
+    },
+    {
+      "name": "Lewis Dobbin",
+      "fpl_id": 607,
+      "understat_id": "10027"
+    },
+    {
+      "name": "Charlie Whitaker",
+      "fpl_id": 613,
+      "understat_id": null
+    },
+    {
+      "name": "Harry Tyrer",
+      "fpl_id": 616,
+      "understat_id": null
+    },
+    {
+      "name": "Cenk Tosun",
+      "fpl_id": 622,
+      "understat_id": null
+    },
+    {
+      "name": "Reece Welch",
+      "fpl_id": 623,
+      "understat_id": null
+    },
+    {
+      "name": "Kasper Schmeichel",
+      "fpl_id": 200,
+      "understat_id": "745"
+    },
+    {
+      "name": "Jonny Evans",
+      "fpl_id": 201,
+      "understat_id": "807"
+    },
+    {
+      "name": "Marc Albrighton",
+      "fpl_id": 202,
+      "understat_id": "753"
+    },
+    {
+      "name": "Nampalys Mendy",
+      "fpl_id": 203,
+      "understat_id": null
+    },
+    {
+      "name": "Danny Ward",
+      "fpl_id": 204,
+      "understat_id": null
+    },
+    {
+      "name": "Jamie Vardy",
+      "fpl_id": 205,
+      "understat_id": "755"
+    },
+    {
+      "name": "Dennis Praet",
+      "fpl_id": 206,
+      "understat_id": null
+    },
+    {
+      "name": "Ricardo Domingos Barbosa Pereira",
+      "fpl_id": 207,
+      "understat_id": "3303"
+    },
+    {
+      "name": "Daniel Amartey",
+      "fpl_id": 208,
+      "understat_id": "759"
+    },
+    {
+      "name": "Timothy Castagne",
+      "fpl_id": 209,
+      "understat_id": "6157"
+    },
+    {
+      "name": "Youri Tielemans",
+      "fpl_id": 210,
+      "understat_id": "5956"
+    },
+    {
+      "name": "Ayoze P\u00E9rez",
+      "fpl_id": 211,
+      "understat_id": "770"
+    },
+    {
+      "name": "James Maddison",
+      "fpl_id": 212,
+      "understat_id": "6818"
+    },
+    {
+      "name": "Kelechi Iheanacho",
+      "fpl_id": 213,
+      "understat_id": "620"
+    },
+    {
+      "name": "Hamza Choudhury",
+      "fpl_id": 214,
+      "understat_id": "6418"
+    },
+    {
+      "name": "Harvey Barnes",
+      "fpl_id": 215,
+      "understat_id": "6681"
+    },
+    {
+      "name": "Wilfred Ndidi",
+      "fpl_id": 216,
+      "understat_id": "5545"
+    },
+    {
+      "name": "\u00C7aglar S\u00F6y\u00FCnc\u00FC",
+      "fpl_id": 217,
+      "understat_id": "5264"
+    },
+    {
+      "name": "James Justin",
+      "fpl_id": 218,
+      "understat_id": null
+    },
+    {
+      "name": "Luke Thomas",
+      "fpl_id": 219,
+      "understat_id": "8562"
+    },
+    {
+      "name": "Wesley Fofana",
+      "fpl_id": 220,
+      "understat_id": null
+    },
+    {
+      "name": "Jannik Vestergaard",
+      "fpl_id": 340,
+      "understat_id": "111"
+    },
+    {
+      "name": "Patson Daka",
+      "fpl_id": 455,
+      "understat_id": "9738"
+    },
+    {
+      "name": "Boubakary Soumar\u00E9",
+      "fpl_id": 458,
+      "understat_id": "6310"
+    },
+    {
+      "name": "Ryan Bertrand",
+      "fpl_id": 473,
+      "understat_id": "835"
+    },
+    {
+      "name": "Kiernan Dewsbury-Hall",
+      "fpl_id": 505,
+      "understat_id": "9739"
+    },
+    {
+      "name": "Eldin Jakupovic",
+      "fpl_id": 573,
+      "understat_id": null
+    },
+    {
+      "name": "Ademola Lookman",
+      "fpl_id": 587,
+      "understat_id": "5556"
+    },
+    {
+      "name": "Pablo Hern\u00E1ndez Dom\u00EDnguez",
+      "fpl_id": 182,
+      "understat_id": null
+    },
+    {
+      "name": "Francisco Casilla Cort\u00E9s",
+      "fpl_id": 183,
+      "understat_id": null
+    },
+    {
+      "name": "Liam Cooper",
+      "fpl_id": 184,
+      "understat_id": "8816"
+    },
+    {
+      "name": "Luke Ayling",
+      "fpl_id": 185,
+      "understat_id": "8716"
+    },
+    {
+      "name": "Mateusz Klich",
+      "fpl_id": 186,
+      "understat_id": "4381"
+    },
+    {
+      "name": "Rodrigo Moreno",
+      "fpl_id": 187,
+      "understat_id": "2381"
+    },
+    {
+      "name": "Stuart Dallas",
+      "fpl_id": 188,
+      "understat_id": "8718"
+    },
+    {
+      "name": "Patrick Bamford",
+      "fpl_id": 189,
+      "understat_id": "822"
+    },
+    {
+      "name": "Diego Llorente",
+      "fpl_id": 190,
+      "understat_id": "2163"
+    },
+    {
+      "name": "Kalvin Phillips",
+      "fpl_id": 191,
+      "understat_id": "8719"
+    },
+    {
+      "name": "H\u00E9lder Wander Sousa de Azevedo e Costa",
+      "fpl_id": 192,
+      "understat_id": "3428"
+    },
+    {
+      "name": "Tyler Roberts",
+      "fpl_id": 193,
+      "understat_id": "1014"
+    },
+    {
+      "name": "Robin Koch",
+      "fpl_id": 194,
+      "understat_id": "6273"
+    },
+    {
+      "name": "Ian Carlo Poveda-Ocampo",
+      "fpl_id": 195,
+      "understat_id": null
+    },
+    {
+      "name": "Raphael Dias Belloli",
+      "fpl_id": 196,
+      "understat_id": "8026"
+    },
+    {
+      "name": "Jamie Shackleton",
+      "fpl_id": 197,
+      "understat_id": "8721"
+    },
+    {
+      "name": "Pascal Struijk",
+      "fpl_id": 198,
+      "understat_id": "8717"
+    },
+    {
+      "name": "Illan Meslier",
+      "fpl_id": 199,
+      "understat_id": "8715"
+    },
+    {
+      "name": "Jack Harrison",
+      "fpl_id": 267,
+      "understat_id": "8720"
+    },
+    {
+      "name": "Daniel James",
+      "fpl_id": 287,
+      "understat_id": "5595"
+    },
+    {
+      "name": "H\u00E9ctor Junior Firpo Adames",
+      "fpl_id": 463,
+      "understat_id": "6485"
+    },
+    {
+      "name": "Kristoffer Klaesson",
+      "fpl_id": 490,
+      "understat_id": null
+    },
+    {
+      "name": "Sam Greenwood",
+      "fpl_id": 550,
+      "understat_id": null
+    },
+    {
+      "name": "Crysencio Summerville",
+      "fpl_id": 551,
+      "understat_id": "9492"
+    },
+    {
+      "name": "Adam Forshaw",
+      "fpl_id": 552,
+      "understat_id": "1711"
+    },
+    {
+      "name": "Cody Drameh",
+      "fpl_id": 562,
+      "understat_id": "9499"
+    },
+    {
+      "name": "Charlie Cresswell",
+      "fpl_id": 563,
+      "understat_id": "9220"
+    },
+    {
+      "name": "Liam McCarron",
+      "fpl_id": 576,
+      "understat_id": null
+    },
+    {
+      "name": "Joe Gelhardt",
+      "fpl_id": 577,
+      "understat_id": "9339"
+    },
+    {
+      "name": "Nohan Kenneh",
+      "fpl_id": 600,
+      "understat_id": null
+    },
+    {
+      "name": "Stuart McKinstry",
+      "fpl_id": 601,
+      "understat_id": null
+    },
+    {
+      "name": "Leo Fuhr Hjelde",
+      "fpl_id": 608,
+      "understat_id": null
+    },
+    {
+      "name": "Lewis Bate",
+      "fpl_id": 624,
+      "understat_id": null
+    },
+    {
+      "name": "James Milner",
+      "fpl_id": 221,
+      "understat_id": "489"
+    },
+    {
+      "name": "Jordan Henderson",
+      "fpl_id": 222,
+      "understat_id": "605"
+    },
+    {
+      "name": "Adri\u00E1n San Miguel del Castillo",
+      "fpl_id": 223,
+      "understat_id": null
+    },
+    {
+      "name": "Joel Matip",
+      "fpl_id": 224,
+      "understat_id": "332"
+    },
+    {
+      "name": "Thiago Alc\u00E1ntara do Nascimento",
+      "fpl_id": 225,
+      "understat_id": "229"
+    },
+    {
+      "name": "Xherdan Shaqiri",
+      "fpl_id": 226,
+      "understat_id": null
+    },
+    {
+      "name": "Alex Oxlade-Chamberlain",
+      "fpl_id": 227,
+      "understat_id": "966"
+    },
+    {
+      "name": "Roberto Firmino",
+      "fpl_id": 228,
+      "understat_id": "482"
+    },
+    {
+      "name": "Virgil van Dijk",
+      "fpl_id": 229,
+      "understat_id": "833"
+    },
+    {
+      "name": "Sadio Man\u00E9",
+      "fpl_id": 230,
+      "understat_id": "838"
+    },
+    {
+      "name": "Alisson Ramses Becker",
+      "fpl_id": 231,
+      "understat_id": "1257"
+    },
+    {
+      "name": "Fabio Henrique Tavares",
+      "fpl_id": 232,
+      "understat_id": "3420"
+    },
+    {
+      "name": "Mohamed Salah",
+      "fpl_id": 233,
+      "understat_id": "1250"
+    },
+    {
+      "name": "Andrew Robertson",
+      "fpl_id": 234,
+      "understat_id": "1688"
+    },
+    {
+      "name": "Divock Origi",
+      "fpl_id": 235,
+      "understat_id": "484"
+    },
+    {
+      "name": "Takumi Minamino",
+      "fpl_id": 236,
+      "understat_id": "8239"
+    },
+    {
+      "name": "Trent Alexander-Arnold",
+      "fpl_id": 237,
+      "understat_id": "1791"
+    },
+    {
+      "name": "Joseph Gomez",
+      "fpl_id": 238,
+      "understat_id": "987"
+    },
+    {
+      "name": "Naby Keita",
+      "fpl_id": 239,
+      "understat_id": "5247"
+    },
+    {
+      "name": "Diogo Jota",
+      "fpl_id": 240,
+      "understat_id": "6854"
+    },
+    {
+      "name": "Nathaniel Phillips",
+      "fpl_id": 241,
+      "understat_id": null
+    },
+    {
+      "name": "Caoimhin Kelleher",
+      "fpl_id": 242,
+      "understat_id": "7904"
+    },
+    {
+      "name": "Ibrahima Konat\u00E9",
+      "fpl_id": 243,
+      "understat_id": "6326"
+    },
+    {
+      "name": "Curtis Jones",
+      "fpl_id": 244,
+      "understat_id": "6665"
+    },
+    {
+      "name": "Konstantinos Tsimikas",
+      "fpl_id": 245,
+      "understat_id": "8852"
+    },
+    {
+      "name": "Neco Williams",
+      "fpl_id": 246,
+      "understat_id": "8204"
+    },
+    {
+      "name": "Rhys Williams",
+      "fpl_id": 247,
+      "understat_id": null
+    },
+    {
+      "name": "Ben Davies",
+      "fpl_id": 248,
+      "understat_id": "660"
+    },
+    {
+      "name": "Harvey Elliott",
+      "fpl_id": 506,
+      "understat_id": "7546"
+    },
+    {
+      "name": "Ben Woodburn",
+      "fpl_id": 553,
+      "understat_id": null
+    },
+    {
+      "name": "Tyler Morton",
+      "fpl_id": 620,
+      "understat_id": null
+    },
+    {
+      "name": "Jack Grealish",
+      "fpl_id": 33,
+      "understat_id": "675"
+    },
+    {
+      "name": "Kyle Walker",
+      "fpl_id": 249,
+      "understat_id": "638"
+    },
+    {
+      "name": "Ilkay G\u00FCndogan",
+      "fpl_id": 250,
+      "understat_id": "314"
+    },
+    {
+      "name": "Kevin De Bruyne",
+      "fpl_id": 251,
+      "understat_id": "447"
+    },
+    {
+      "name": "John Stones",
+      "fpl_id": 252,
+      "understat_id": "586"
+    },
+    {
+      "name": "Benjamin Mendy",
+      "fpl_id": 253,
+      "understat_id": "3389"
+    },
+    {
+      "name": "Riyad Mahrez",
+      "fpl_id": 254,
+      "understat_id": "750"
+    },
+    {
+      "name": "Raheem Sterling",
+      "fpl_id": 255,
+      "understat_id": "618"
+    },
+    {
+      "name": "Jo\u00E3o Pedro Cavaco Cancelo",
+      "fpl_id": 256,
+      "understat_id": "2379"
+    },
+    {
+      "name": "Ederson Santana de Moraes",
+      "fpl_id": 257,
+      "understat_id": "6054"
+    },
+    {
+      "name": "Nathan Ak\u00E9",
+      "fpl_id": 258,
+      "understat_id": "579"
+    },
+    {
+      "name": "Aymeric Laporte",
+      "fpl_id": 259,
+      "understat_id": "2498"
+    },
+    {
+      "name": "Zack Steffen",
+      "fpl_id": 260,
+      "understat_id": "7817"
+    },
+    {
+      "name": "Bernardo Mota Veiga de Carvalho e Silva",
+      "fpl_id": 261,
+      "understat_id": null
+    },
+    {
+      "name": "R\u00FAben Santos Gato Alves Dias",
+      "fpl_id": 262,
+      "understat_id": "8961"
+    },
+    {
+      "name": "Gabriel Fernando de Jesus",
+      "fpl_id": 263,
+      "understat_id": "5543"
+    },
+    {
+      "name": "Oleksandr Zinchenko",
+      "fpl_id": 264,
+      "understat_id": "2958"
+    },
+    {
+      "name": "Phil Foden",
+      "fpl_id": 265,
+      "understat_id": "6055"
+    },
+    {
+      "name": "Rodrigo Hernandez",
+      "fpl_id": 266,
+      "understat_id": "2496"
+    },
+    {
+      "name": "Ferran Torres",
+      "fpl_id": 268,
+      "understat_id": "6441"
+    },
+    {
+      "name": "Fernando Luiz Rosa",
+      "fpl_id": 453,
+      "understat_id": "614"
+    },
+    {
+      "name": "Cole Palmer",
+      "fpl_id": 507,
+      "understat_id": "8497"
+    },
+    {
+      "name": "Samuel Edozie",
+      "fpl_id": 508,
+      "understat_id": null
+    },
+    {
+      "name": "Tommy Doyle",
+      "fpl_id": 566,
+      "understat_id": null
+    },
+    {
+      "name": "Scott Carson",
+      "fpl_id": 593,
+      "understat_id": null
+    },
+    {
+      "name": "Luke Mbete",
+      "fpl_id": 603,
+      "understat_id": null
+    },
+    {
+      "name": "Joshua Wilson-Esbrand",
+      "fpl_id": 604,
+      "understat_id": null
+    },
+    {
+      "name": "Romeo Lavia",
+      "fpl_id": 605,
+      "understat_id": null
+    },
+    {
+      "name": "Cieran Slicker",
+      "fpl_id": 615,
+      "understat_id": null
+    },
+    {
+      "name": "Edinson Cavani",
+      "fpl_id": 269,
+      "understat_id": "3294"
+    },
+    {
+      "name": "David de Gea",
+      "fpl_id": 270,
+      "understat_id": "546"
+    },
+    {
+      "name": "Nemanja Matic",
+      "fpl_id": 271,
+      "understat_id": "697"
+    },
+    {
+      "name": "Paul Pogba",
+      "fpl_id": 272,
+      "understat_id": "1740"
+    },
+    {
+      "name": "Harry Maguire",
+      "fpl_id": 273,
+      "understat_id": "1687"
+    },
+    {
+      "name": "Frederico Rodrigues de Paula Santos",
+      "fpl_id": 274,
+      "understat_id": "6817"
+    },
+    {
+      "name": "Luke Shaw",
+      "fpl_id": 275,
+      "understat_id": "1006"
+    },
+    {
+      "name": "Jesse Lingard",
+      "fpl_id": 276,
+      "understat_id": "558"
+    },
+    {
+      "name": "Bruno Miguel Borges Fernandes",
+      "fpl_id": 277,
+      "understat_id": "1228"
+    },
+    {
+      "name": "Anthony Martial",
+      "fpl_id": 278,
+      "understat_id": "553"
+    },
+    {
+      "name": "Alex Nicolao Telles",
+      "fpl_id": 279,
+      "understat_id": "1828"
+    },
+    {
+      "name": "Dean Henderson",
+      "fpl_id": 280,
+      "understat_id": null
+    },
+    {
+      "name": "Marcus Rashford",
+      "fpl_id": 281,
+      "understat_id": "556"
+    },
+    {
+      "name": "Donny van de Beek",
+      "fpl_id": 282,
+      "understat_id": "8821"
+    },
+    {
+      "name": "Victor Lindel\u00F6f",
+      "fpl_id": 284,
+      "understat_id": "6080"
+    },
+    {
+      "name": "Scott McTominay",
+      "fpl_id": 285,
+      "understat_id": "5560"
+    },
+    {
+      "name": "Eric Bailly",
+      "fpl_id": 286,
+      "understat_id": "1739"
+    },
+    {
+      "name": "Aaron Wan-Bissaka",
+      "fpl_id": 288,
+      "understat_id": "5584"
+    },
+    {
+      "name": "Mason Greenwood",
+      "fpl_id": 289,
+      "understat_id": "7490"
+    },
+    {
+      "name": "Juan Mata",
+      "fpl_id": 459,
+      "understat_id": null
+    },
+    {
+      "name": "Jadon Sancho",
+      "fpl_id": 485,
+      "understat_id": "6345"
+    },
+    {
+      "name": "Tom Heaton",
+      "fpl_id": 509,
+      "understat_id": null
+    },
+    {
+      "name": "Jos\u00E9 Diogo Dalot Teixeira",
+      "fpl_id": 510,
+      "understat_id": "7281"
+    },
+    {
+      "name": "Andreas Pereira",
+      "fpl_id": 511,
+      "understat_id": null
+    },
+    {
+      "name": "Anthony Elanga",
+      "fpl_id": 512,
+      "understat_id": null
+    },
+    {
+      "name": "Rapha\u00EBl Varane",
+      "fpl_id": 555,
+      "understat_id": "2245"
+    },
+    {
+      "name": "Cristiano Ronaldo dos Santos Aveiro",
+      "fpl_id": 579,
+      "understat_id": "2371"
+    },
+    {
+      "name": "Joseph Willock",
+      "fpl_id": 19,
+      "understat_id": "6630"
+    },
+    {
+      "name": "Jonjo Shelvey",
+      "fpl_id": 291,
+      "understat_id": "769"
+    },
+    {
+      "name": "Matt Ritchie",
+      "fpl_id": 292,
+      "understat_id": "461"
+    },
+    {
+      "name": "Ciaran Clark",
+      "fpl_id": 293,
+      "understat_id": "875"
+    },
+    {
+      "name": "Karl Darlow",
+      "fpl_id": 294,
+      "understat_id": "780"
+    },
+    {
+      "name": "Martin Dubravka",
+      "fpl_id": 295,
+      "understat_id": null
+    },
+    {
+      "name": "Callum Wilson",
+      "fpl_id": 296,
+      "understat_id": "468"
+    },
+    {
+      "name": "Jeff Hendrick",
+      "fpl_id": 297,
+      "understat_id": "1746"
+    },
+    {
+      "name": "Ryan Fraser",
+      "fpl_id": 298,
+      "understat_id": "1683"
+    },
+    {
+      "name": "Jamaal Lascelles",
+      "fpl_id": 299,
+      "understat_id": "766"
+    },
+    {
+      "name": "Dwight Gayle",
+      "fpl_id": 300,
+      "understat_id": "743"
+    },
+    {
+      "name": "Paul Dummett",
+      "fpl_id": 301,
+      "understat_id": null
+    },
+    {
+      "name": "Javier Manquillo",
+      "fpl_id": 302,
+      "understat_id": "1719"
+    },
+    {
+      "name": "Emil Krafth",
+      "fpl_id": 303,
+      "understat_id": "1545"
+    },
+    {
+      "name": "Jacob Murphy",
+      "fpl_id": 304,
+      "understat_id": "6063"
+    },
+    {
+      "name": "Fabian Sch\u00E4r",
+      "fpl_id": 305,
+      "understat_id": "76"
+    },
+    {
+      "name": "Isaac Hayden",
+      "fpl_id": 306,
+      "understat_id": "6062"
+    },
+    {
+      "name": "Allan Saint-Maximin",
+      "fpl_id": 307,
+      "understat_id": "101"
+    },
+    {
+      "name": "Miguel Almir\u00F3n",
+      "fpl_id": 308,
+      "understat_id": "7420"
+    },
+    {
+      "name": "Sean Longstaff",
+      "fpl_id": 309,
+      "understat_id": "7078"
+    },
+    {
+      "name": "Joelinton C\u00E1ssio Apolin\u00E1rio de Lira",
+      "fpl_id": 310,
+      "understat_id": "87"
+    },
+    {
+      "name": "Jamal Lewis",
+      "fpl_id": 311,
+      "understat_id": "7691"
+    },
+    {
+      "name": "Matthew Longstaff",
+      "fpl_id": 312,
+      "understat_id": null
+    },
+    {
+      "name": "Federico Fern\u00E1ndez",
+      "fpl_id": 465,
+      "understat_id": "708"
+    },
+    {
+      "name": "Freddie Woodman",
+      "fpl_id": 513,
+      "understat_id": "852"
+    },
+    {
+      "name": "Mark Gillespie",
+      "fpl_id": 514,
+      "understat_id": null
+    },
+    {
+      "name": "Joe White",
+      "fpl_id": 599,
+      "understat_id": null
+    },
+    {
+      "name": "Elliot Anderson",
+      "fpl_id": 609,
+      "understat_id": null
+    },
+    {
+      "name": "Billy Gilmour",
+      "fpl_id": 145,
+      "understat_id": "7988"
+    },
+    {
+      "name": "Brandon Williams",
+      "fpl_id": 290,
+      "understat_id": "8075"
+    },
+    {
+      "name": "Michael McGovern",
+      "fpl_id": 313,
+      "understat_id": null
+    },
+    {
+      "name": "Tim Krul",
+      "fpl_id": 314,
+      "understat_id": "982"
+    },
+    {
+      "name": "Teemu Pukki",
+      "fpl_id": 315,
+      "understat_id": "7696"
+    },
+    {
+      "name": "Marco Stiepermann",
+      "fpl_id": 316,
+      "understat_id": null
+    },
+    {
+      "name": "Lukas Rupp",
+      "fpl_id": 317,
+      "understat_id": "62"
+    },
+    {
+      "name": "Kenny McLean",
+      "fpl_id": 318,
+      "understat_id": "7693"
+    },
+    {
+      "name": "Grant Hanley",
+      "fpl_id": 319,
+      "understat_id": "7690"
+    },
+    {
+      "name": "Onel Hern\u00E1ndez",
+      "fpl_id": 320,
+      "understat_id": null
+    },
+    {
+      "name": "Sam Byram",
+      "fpl_id": 321,
+      "understat_id": null
+    },
+    {
+      "name": "Jordan Hugill",
+      "fpl_id": 322,
+      "understat_id": null
+    },
+    {
+      "name": "Kieran Dowell",
+      "fpl_id": 323,
+      "understat_id": "1032"
+    },
+    {
+      "name": "Christoph Zimmermann",
+      "fpl_id": 324,
+      "understat_id": null
+    },
+    {
+      "name": "Todd Cantwell",
+      "fpl_id": 325,
+      "understat_id": "7695"
+    },
+    {
+      "name": "Max Aarons",
+      "fpl_id": 326,
+      "understat_id": "7688"
+    },
+    {
+      "name": "Jacob S\u00F8rensen",
+      "fpl_id": 327,
+      "understat_id": null
+    },
+    {
+      "name": "Przemyslaw Placheta",
+      "fpl_id": 328,
+      "understat_id": "10097"
+    },
+    {
+      "name": "Adam Idah",
+      "fpl_id": 329,
+      "understat_id": "8021"
+    },
+    {
+      "name": "Josh Martin",
+      "fpl_id": 330,
+      "understat_id": null
+    },
+    {
+      "name": "Andrew Omobamidele",
+      "fpl_id": 331,
+      "understat_id": "9833"
+    },
+    {
+      "name": "Angus Gunn",
+      "fpl_id": 448,
+      "understat_id": null
+    },
+    {
+      "name": "Milot Rashica",
+      "fpl_id": 449,
+      "understat_id": "6523"
+    },
+    {
+      "name": "Ben Gibson",
+      "fpl_id": 456,
+      "understat_id": "1707"
+    },
+    {
+      "name": "Dimitris Giannoulis",
+      "fpl_id": 457,
+      "understat_id": "9745"
+    },
+    {
+      "name": "Pierre Lees-Melou",
+      "fpl_id": 471,
+      "understat_id": "5619"
+    },
+    {
+      "name": "Bali Mumba",
+      "fpl_id": 515,
+      "understat_id": "9747"
+    },
+    {
+      "name": "Joshua Sargent",
+      "fpl_id": 516,
+      "understat_id": "7295"
+    },
+    {
+      "name": "Christos Tzolis",
+      "fpl_id": 528,
+      "understat_id": "9746"
+    },
+    {
+      "name": "Ozan Kabak",
+      "fpl_id": 580,
+      "understat_id": "7376"
+    },
+    {
+      "name": "Mathias Normann",
+      "fpl_id": 581,
+      "understat_id": "7470"
+    },
+    {
+      "name": "Theo Walcott",
+      "fpl_id": 332,
+      "understat_id": "503"
+    },
+    {
+      "name": "Fraser Forster",
+      "fpl_id": 333,
+      "understat_id": null
+    },
+    {
+      "name": "Alex McCarthy",
+      "fpl_id": 334,
+      "understat_id": "635"
+    },
+    {
+      "name": "Oriol Romeu Vidal",
+      "fpl_id": 335,
+      "understat_id": "842"
+    },
+    {
+      "name": "Nathan Redmond",
+      "fpl_id": 336,
+      "understat_id": "790"
+    },
+    {
+      "name": "Jack Stephens",
+      "fpl_id": 338,
+      "understat_id": "1735"
+    },
+    {
+      "name": "Stuart Armstrong",
+      "fpl_id": 339,
+      "understat_id": "6893"
+    },
+    {
+      "name": "James Ward-Prowse",
+      "fpl_id": 341,
+      "understat_id": "843"
+    },
+    {
+      "name": "Kyle Walker-Peters",
+      "fpl_id": 342,
+      "understat_id": "885"
+    },
+    {
+      "name": "Jan Bednarek",
+      "fpl_id": 343,
+      "understat_id": "6042"
+    },
+    {
+      "name": "Daniel N\u0027Lundulu",
+      "fpl_id": 344,
+      "understat_id": null
+    },
+    {
+      "name": "Che Adams",
+      "fpl_id": 345,
+      "understat_id": "7700"
+    },
+    {
+      "name": "Nathan Tella",
+      "fpl_id": 346,
+      "understat_id": "8456"
+    },
+    {
+      "name": "William Smallbone",
+      "fpl_id": 347,
+      "understat_id": null
+    },
+    {
+      "name": "Michael Obafemi",
+      "fpl_id": 348,
+      "understat_id": null
+    },
+    {
+      "name": "Ibrahima Diallo",
+      "fpl_id": 349,
+      "understat_id": "6736"
+    },
+    {
+      "name": "Moussa Djenepo",
+      "fpl_id": 350,
+      "understat_id": "7701"
+    },
+    {
+      "name": "Mohammed Salisu",
+      "fpl_id": 351,
+      "understat_id": "6923"
+    },
+    {
+      "name": "Romain Perraud",
+      "fpl_id": 460,
+      "understat_id": "6500"
+    },
+    {
+      "name": "Tino Livramento",
+      "fpl_id": 491,
+      "understat_id": "9512"
+    },
+    {
+      "name": "Mohamed Elyounoussi",
+      "fpl_id": 517,
+      "understat_id": "6894"
+    },
+    {
+      "name": "Armando Broja",
+      "fpl_id": 518,
+      "understat_id": "8384"
+    },
+    {
+      "name": "Shane Long",
+      "fpl_id": 519,
+      "understat_id": "839"
+    },
+    {
+      "name": "Adam Armstrong",
+      "fpl_id": 525,
+      "understat_id": "4419"
+    },
+    {
+      "name": "Yan Valery",
+      "fpl_id": 546,
+      "understat_id": null
+    },
+    {
+      "name": "Lyanco Evangelista Silveira Neves Vojnovic",
+      "fpl_id": 567,
+      "understat_id": "6252"
+    },
+    {
+      "name": "Joe Hart",
+      "fpl_id": 352,
+      "understat_id": null
+    },
+    {
+      "name": "Hugo Lloris",
+      "fpl_id": 353,
+      "understat_id": "637"
+    },
+    {
+      "name": "Toby Alderweireld",
+      "fpl_id": 355,
+      "understat_id": null
+    },
+    {
+      "name": "Erik Lamela",
+      "fpl_id": 356,
+      "understat_id": null
+    },
+    {
+      "name": "Harry Kane",
+      "fpl_id": 357,
+      "understat_id": "647"
+    },
+    {
+      "name": "Serge Aurier",
+      "fpl_id": 358,
+      "understat_id": null
+    },
+    {
+      "name": "Heung-Min Son",
+      "fpl_id": 359,
+      "understat_id": "453"
+    },
+    {
+      "name": "Matt Doherty",
+      "fpl_id": 360,
+      "understat_id": "6852"
+    },
+    {
+      "name": "Eric Dier",
+      "fpl_id": 361,
+      "understat_id": "643"
+    },
+    {
+      "name": "Lucas Rodrigues Moura da Silva",
+      "fpl_id": 362,
+      "understat_id": "3293"
+    },
+    {
+      "name": "Bamidele Alli",
+      "fpl_id": 363,
+      "understat_id": "645"
+    },
+    {
+      "name": "Ben Davies",
+      "fpl_id": 364,
+      "understat_id": "660"
+    },
+    {
+      "name": "Pierre-Emile H\u00F8jbjerg",
+      "fpl_id": 365,
+      "understat_id": "343"
+    },
+    {
+      "name": "Harry Winks",
+      "fpl_id": 366,
+      "understat_id": "971"
+    },
+    {
+      "name": "Davinson S\u00E1nchez",
+      "fpl_id": 367,
+      "understat_id": "6249"
+    },
+    {
+      "name": "Ryan Sessegnon",
+      "fpl_id": 368,
+      "understat_id": null
+    },
+    {
+      "name": "Steven Bergwijn",
+      "fpl_id": 369,
+      "understat_id": "8300"
+    },
+    {
+      "name": "Sergio Reguil\u00F3n",
+      "fpl_id": 370,
+      "understat_id": "7187"
+    },
+    {
+      "name": "Japhet Tanganga",
+      "fpl_id": 371,
+      "understat_id": "8222"
+    },
+    {
+      "name": "Giovani Lo Celso",
+      "fpl_id": 372,
+      "understat_id": "5681"
+    },
+    {
+      "name": "Oliver Skipp",
+      "fpl_id": 373,
+      "understat_id": "7198"
+    },
+    {
+      "name": "Joe Rodon",
+      "fpl_id": 374,
+      "understat_id": "6377"
+    },
+    {
+      "name": "Tanguy Ndombele",
+      "fpl_id": 375,
+      "understat_id": "5962"
+    },
+    {
+      "name": "Pierluigi Gollini",
+      "fpl_id": 486,
+      "understat_id": null
+    },
+    {
+      "name": "Bryan Gil Salvatierra",
+      "fpl_id": 487,
+      "understat_id": "7338"
+    },
+    {
+      "name": "Cristian Romero",
+      "fpl_id": 494,
+      "understat_id": "7218"
+    },
+    {
+      "name": "Dane Scarlett",
+      "fpl_id": 520,
+      "understat_id": null
+    },
+    {
+      "name": "Emerson Aparecido Leite de Souza Junior",
+      "fpl_id": 588,
+      "understat_id": "7430"
+    },
+    {
+      "name": "Dilan Markanday",
+      "fpl_id": 597,
+      "understat_id": null
+    },
+    {
+      "name": "Tobi Omole",
+      "fpl_id": 598,
+      "understat_id": null
+    },
+    {
+      "name": "Moussa Sissoko",
+      "fpl_id": 354,
+      "understat_id": "772"
+    },
+    {
+      "name": "Ben Foster",
+      "fpl_id": 376,
+      "understat_id": "803"
+    },
+    {
+      "name": "Danny Rose",
+      "fpl_id": 377,
+      "understat_id": "641"
+    },
+    {
+      "name": "Dan Gosling",
+      "fpl_id": 378,
+      "understat_id": "462"
+    },
+    {
+      "name": "Craig Cathcart",
+      "fpl_id": 379,
+      "understat_id": "581"
+    },
+    {
+      "name": "Troy Deeney",
+      "fpl_id": 380,
+      "understat_id": "574"
+    },
+    {
+      "name": "Tom Cleverley",
+      "fpl_id": 381,
+      "understat_id": "596"
+    },
+    {
+      "name": "Francisco Femen\u00EDa Far",
+      "fpl_id": 382,
+      "understat_id": "5043"
+    },
+    {
+      "name": "Andre Gray",
+      "fpl_id": 383,
+      "understat_id": null
+    },
+    {
+      "name": "Christian Kabasele",
+      "fpl_id": 384,
+      "understat_id": "1725"
+    },
+    {
+      "name": "Nathaniel Chalobah",
+      "fpl_id": 385,
+      "understat_id": null
+    },
+    {
+      "name": "William Troost-Ekong",
+      "fpl_id": 387,
+      "understat_id": "6996"
+    },
+    {
+      "name": "Stipe Perica",
+      "fpl_id": 388,
+      "understat_id": null
+    },
+    {
+      "name": "Daniel Bachmann",
+      "fpl_id": 389,
+      "understat_id": "1025"
+    },
+    {
+      "name": "Adam Masina",
+      "fpl_id": 390,
+      "understat_id": "1441"
+    },
+    {
+      "name": "Ken Sema",
+      "fpl_id": 391,
+      "understat_id": "6841"
+    },
+    {
+      "name": "Philip Zinckernagel",
+      "fpl_id": 392,
+      "understat_id": null
+    },
+    {
+      "name": "Isaac Success Ajayi",
+      "fpl_id": 393,
+      "understat_id": null
+    },
+    {
+      "name": "Ayotomiwa Dele-Bashiru",
+      "fpl_id": 394,
+      "understat_id": null
+    },
+    {
+      "name": "Ashley Fletcher",
+      "fpl_id": 395,
+      "understat_id": "1675"
+    },
+    {
+      "name": "Francisco Sierralta",
+      "fpl_id": 396,
+      "understat_id": "7081"
+    },
+    {
+      "name": "Domingos Quina",
+      "fpl_id": 397,
+      "understat_id": null
+    },
+    {
+      "name": "Marc Navarro",
+      "fpl_id": 398,
+      "understat_id": null
+    },
+    {
+      "name": "Ismaila Sarr",
+      "fpl_id": 399,
+      "understat_id": "5675"
+    },
+    {
+      "name": "Jeremy Ngakia",
+      "fpl_id": 400,
+      "understat_id": "8235"
+    },
+    {
+      "name": "Ben Wilmot",
+      "fpl_id": 401,
+      "understat_id": null
+    },
+    {
+      "name": "Joseph Hungbo",
+      "fpl_id": 402,
+      "understat_id": null
+    },
+    {
+      "name": "Imr\u00E2n Louza",
+      "fpl_id": 403,
+      "understat_id": "7278"
+    },
+    {
+      "name": "Jo\u00E3o Pedro Junqueira de Jesus",
+      "fpl_id": 404,
+      "understat_id": "8272"
+    },
+    {
+      "name": "Kwadwo Baah",
+      "fpl_id": 405,
+      "understat_id": null
+    },
+    {
+      "name": "Emmanuel Dennis",
+      "fpl_id": 450,
+      "understat_id": "9301"
+    },
+    {
+      "name": "Matthew Pollock",
+      "fpl_id": 454,
+      "understat_id": null
+    },
+    {
+      "name": "Oghenekaro Peter Etebo",
+      "fpl_id": 467,
+      "understat_id": "6538"
+    },
+    {
+      "name": "Joshua King",
+      "fpl_id": 468,
+      "understat_id": "465"
+    },
+    {
+      "name": "Adedapo Awokoya-Mebude",
+      "fpl_id": 469,
+      "understat_id": null
+    },
+    {
+      "name": "Juan Camilo Hern\u00E1ndez Su\u00E1rez",
+      "fpl_id": 472,
+      "understat_id": "6954"
+    },
+    {
+      "name": "Juraj Kucka",
+      "fpl_id": 495,
+      "understat_id": "1123"
+    },
+    {
+      "name": "Ozan Tufan",
+      "fpl_id": 557,
+      "understat_id": "9957"
+    },
+    {
+      "name": "Robert Elliot",
+      "fpl_id": 574,
+      "understat_id": null
+    },
+    {
+      "name": "Nicolas Nkoulou",
+      "fpl_id": 618,
+      "understat_id": "3387"
+    },
+    {
+      "name": "Kurt Zouma",
+      "fpl_id": 128,
+      "understat_id": "935"
+    },
+    {
+      "name": "Mark Noble",
+      "fpl_id": 406,
+      "understat_id": "533"
+    },
+    {
+      "name": "Darren Randolph",
+      "fpl_id": 407,
+      "understat_id": null
+    },
+    {
+      "name": "Lukasz Fabianski",
+      "fpl_id": 408,
+      "understat_id": "706"
+    },
+    {
+      "name": "Angelo Ogbonna",
+      "fpl_id": 409,
+      "understat_id": "528"
+    },
+    {
+      "name": "Winston Reid",
+      "fpl_id": 410,
+      "understat_id": null
+    },
+    {
+      "name": "Aaron Cresswell",
+      "fpl_id": 411,
+      "understat_id": "534"
+    },
+    {
+      "name": "Andriy Yarmolenko",
+      "fpl_id": 412,
+      "understat_id": "6274"
+    },
+    {
+      "name": "Michail Antonio",
+      "fpl_id": 413,
+      "understat_id": "531"
+    },
+    {
+      "name": "Craig Dawson",
+      "fpl_id": 414,
+      "understat_id": "804"
+    },
+    {
+      "name": "Ryan Fredericks",
+      "fpl_id": 415,
+      "understat_id": "6891"
+    },
+    {
+      "name": "Manuel Lanzini",
+      "fpl_id": 416,
+      "understat_id": "535"
+    },
+    {
+      "name": "Arthur Masuaku",
+      "fpl_id": 417,
+      "understat_id": "1760"
+    },
+    {
+      "name": "Vladimir Coufal",
+      "fpl_id": 418,
+      "understat_id": "8965"
+    },
+    {
+      "name": "Sa\u00EFd Benrahma",
+      "fpl_id": 419,
+      "understat_id": "3585"
+    },
+    {
+      "name": "Jarrod Bowen",
+      "fpl_id": 420,
+      "understat_id": "1776"
+    },
+    {
+      "name": "Declan Rice",
+      "fpl_id": 421,
+      "understat_id": "5553"
+    },
+    {
+      "name": "Tomas Soucek",
+      "fpl_id": 422,
+      "understat_id": "8288"
+    },
+    {
+      "name": "Pablo Fornals",
+      "fpl_id": 423,
+      "understat_id": "2335"
+    },
+    {
+      "name": "Issa Diop",
+      "fpl_id": 424,
+      "understat_id": null
+    },
+    {
+      "name": "Ben Johnson",
+      "fpl_id": 425,
+      "understat_id": "6424"
+    },
+    {
+      "name": "Alphonse Areola",
+      "fpl_id": 489,
+      "understat_id": null
+    },
+    {
+      "name": "Frederik Alves",
+      "fpl_id": 521,
+      "understat_id": null
+    },
+    {
+      "name": "Conor Coventry",
+      "fpl_id": 522,
+      "understat_id": null
+    },
+    {
+      "name": "Jamal Baptiste",
+      "fpl_id": 554,
+      "understat_id": null
+    },
+    {
+      "name": "Nikola Vlasic",
+      "fpl_id": 582,
+      "understat_id": "6276"
+    },
+    {
+      "name": "Alex Kral",
+      "fpl_id": 589,
+      "understat_id": null
+    },
+    {
+      "name": "Harrison Ashby",
+      "fpl_id": 617,
+      "understat_id": null
+    },
+    {
+      "name": "Jo\u00E3o Filipe Iria Santos Moutinho",
+      "fpl_id": 426,
+      "understat_id": "3422"
+    },
+    {
+      "name": "Rui Pedro dos Santos Patr\u00EDcio",
+      "fpl_id": 427,
+      "understat_id": null
+    },
+    {
+      "name": "Willy Boly",
+      "fpl_id": 428,
+      "understat_id": null
+    },
+    {
+      "name": "Conor Coady",
+      "fpl_id": 429,
+      "understat_id": "6851"
+    },
+    {
+      "name": "Ra\u00FAl Jim\u00E9nez",
+      "fpl_id": 430,
+      "understat_id": "4105"
+    },
+    {
+      "name": "Romain Sa\u00EFss",
+      "fpl_id": 431,
+      "understat_id": "3491"
+    },
+    {
+      "name": "Fernando Mar\u00E7al",
+      "fpl_id": 432,
+      "understat_id": "5708"
+    },
+    {
+      "name": "Jonathan Castro Otto",
+      "fpl_id": 433,
+      "understat_id": null
+    },
+    {
+      "name": "Leander Dendoncker",
+      "fpl_id": 434,
+      "understat_id": "7236"
+    },
+    {
+      "name": "Adama Traor\u00E9",
+      "fpl_id": 435,
+      "understat_id": "900"
+    },
+    {
+      "name": "R\u00FAben Diogo da Silva Neves",
+      "fpl_id": 436,
+      "understat_id": "6853"
+    },
+    {
+      "name": "N\u00E9lson Cabral Semedo",
+      "fpl_id": 437,
+      "understat_id": "6163"
+    },
+    {
+      "name": "Daniel Castelo Podence",
+      "fpl_id": 438,
+      "understat_id": "8291"
+    },
+    {
+      "name": "Max Kilman",
+      "fpl_id": 439,
+      "understat_id": "7332"
+    },
+    {
+      "name": "Morgan Gibbs-White",
+      "fpl_id": 440,
+      "understat_id": "6857"
+    },
+    {
+      "name": "Pedro Lomba Neto",
+      "fpl_id": 441,
+      "understat_id": null
+    },
+    {
+      "name": "Owen Otasowie",
+      "fpl_id": 442,
+      "understat_id": null
+    },
+    {
+      "name": "Ki-Jana Hoever",
+      "fpl_id": 443,
+      "understat_id": "8351"
+    },
+    {
+      "name": "Andreas S\u00F6ndergaard",
+      "fpl_id": 444,
+      "understat_id": null
+    },
+    {
+      "name": "Fabio Silva",
+      "fpl_id": 445,
+      "understat_id": "8778"
+    },
+    {
+      "name": "Yerson Mosquera Valdelamar",
+      "fpl_id": 446,
+      "understat_id": null
+    },
+    {
+      "name": "John Ruddy",
+      "fpl_id": 452,
+      "understat_id": null
+    },
+    {
+      "name": "Francisco Machado Mota de Castro Trinc\u00E3o",
+      "fpl_id": 461,
+      "understat_id": "8934"
+    },
+    {
+      "name": "Rayan Ait Nouri",
+      "fpl_id": 470,
+      "understat_id": "6674"
+    },
+    {
+      "name": "Jos\u00E9 Malheiro de S\u00E1",
+      "fpl_id": 475,
+      "understat_id": "9740"
+    },
+    {
+      "name": "Patrick Cutrone",
+      "fpl_id": 523,
+      "understat_id": null
+    },
+    {
+      "name": "Luke Cundle",
+      "fpl_id": 547,
+      "understat_id": null
+    },
+    {
+      "name": "Chem Campbell",
+      "fpl_id": 548,
+      "understat_id": null
+    },
+    {
+      "name": "Christian Marques",
+      "fpl_id": 549,
+      "understat_id": null
+    },
+    {
+      "name": "Hee-Chan Hwang",
+      "fpl_id": 583,
+      "understat_id": "8845"
+    },
+    {
+      "name": "Louie Moulden",
+      "fpl_id": 611,
+      "understat_id": null
+    },
+    {
+      "name": "James Storer",
+      "fpl_id": 621,
+      "understat_id": null
+    }
+  ]

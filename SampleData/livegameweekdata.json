@@ -1,0 +1,41 @@
+{
+    "id": 63,
+    "stats": {
+        "minutes": 73,
+        "goals_scored": 1,
+        "assists": 0,
+        "clean_sheets": 1,
+        "goals_conceded": 0,
+        "own_goals": 0,
+        "penalties_saved": 0,
+        "penalties_missed": 0,
+        "yellow_cards": 0,
+        "red_cards": 0,
+        "saves": 0,
+        "bonus": 0,
+        "bps": 26,
+        "influence": "0.0",
+        "creativity": "0.0",
+        "threat": "0.0",
+        "ict_index": "0.0",
+        "total_points": 6,
+        "in_dreamteam": false
+    },
+    "explain": [
+        {
+            "fixture": 182,
+            "stats": [
+                {
+                    "identifier": "minutes",
+                    "points": 2,
+                    "value": 73
+                },
+                {
+                    "identifier": "goals_scored",
+                    "points": 4,
+                    "value": 1
+                }
+            ]
+        }
+    ]
+}

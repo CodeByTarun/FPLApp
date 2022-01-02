@@ -1,0 +1,19 @@
+{
+    "code": 2210613,
+    "event": 35,
+    "finished": false,
+    "finished_provisional": false,
+    "id": 343,
+    "kickoff_time": "2022-04-30T14:00:00Z",
+    "minutes": 0,
+    "provisional_start_time": false,
+    "started": false,
+    "team_a": 12,
+    "team_a_score": null,
+    "team_h": 10,
+    "team_h_score": null,
+    "stats": [],
+    "team_h_difficulty": 4,
+    "team_a_difficulty": 2,
+    "pulse_id": 66684
+}
