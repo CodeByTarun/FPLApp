@@ -16,11 +16,13 @@ const MainPage = () => {
             {overview.isSuccess == true &&
                 <><View style={styles.fixturesView}>
                     <FixturesView overview={overview.data} />
-                </View><View style={styles.playerSearchView}>
-                        <PlayerSearch />
-                    </View><View style={styles.lineupView}>
+                  </View>
+                  <View style={styles.playerSearchView}>
+                      <PlayerSearch />
+                  </View>
+                  <View style={styles.lineupView}>
                         <LineupContainer />
-                    </View></>
+                  </View></>
             }
         </SafeAreaView>
     )

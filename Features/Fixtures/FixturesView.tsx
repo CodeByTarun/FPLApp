@@ -45,7 +45,7 @@ const FixturesView = (prop: FixturesViewProp) => {
 
           fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
                        .map((fixture) => {
-                          return <FixtureCard overview={prop.overview} fixture={fixture}/>
+                          return <FixtureCard key={fixture.code} overview={prop.overview} fixture={fixture}/>
                         })
         }
       </ScrollView>

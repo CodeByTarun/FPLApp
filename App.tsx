@@ -1,8 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import FixturesView from './Features/Fixtures/FixturesView';
-import PlayerSearch from './Features/PlayerStats/PlayerSearch';
-import LineupContainer from './Features/GameStats/LineupContainer';
+import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './App/store'
 import { useGetOverviewQuery } from './App/fplSlice';

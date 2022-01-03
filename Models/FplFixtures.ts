@@ -1,4 +1,4 @@
-export interface FplFixtures {
+export interface FplFixture {
     code:                   number;
     event:                  number | null;
     finished:               boolean;
