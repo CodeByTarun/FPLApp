@@ -1,21 +1,37 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FplFixture } from "../Models/FplFixtures";
 
-const initialState = null as FplFixture | null;
+export interface FixtureInfo {
+    fixture: FplFixture | null,
+    isHome: boolean,
+}
+
+const initialState: FixtureInfo = {
+    fixture: null,
+    isHome: true,
+}
 
 const fixtureSlice = createSlice({
     name: 'fixture',
     initialState,
     reducers: {
-        fixtureChanged(state: FplFixture | null, action: PayloadAction<FplFixture|null>): void {
-            state = action.payload;
+        fixtureChanged(state: FixtureInfo, action: PayloadAction<FplFixture|null>): void {
+            state.fixture = action.payload;
         }, 
 
-        removeFixture(state: FplFixture | null): void {
-            state = null;
-        }
+        removeFixture(state: FixtureInfo): void {
+            state.fixture = null;
+        },
+
+        toggleTeamShown(state: FixtureInfo) : void {
+            state.isHome = !state.isHome;
+        },
+
+        setIsHomeToTrue(state: FixtureInfo) : void {
+            state.isHome = true;
+        },
     }
 });
 
-export const { fixtureChanged, removeFixture } = fixtureSlice.actions;
+export const { fixtureChanged, removeFixture, toggleTeamShown, setIsHomeToTrue } = fixtureSlice.actions;
 export default fixtureSlice.reducer;
