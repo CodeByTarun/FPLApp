@@ -20,7 +20,7 @@ const PlayerSearch = () => {
             </TouchableOpacity>
         </View>
     )
-};
+}
 
 const styles = StyleSheet.create({
 
@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
         width : '65%',
         alignSelf: 'center',
     },
-})
+});
 
 export default PlayerSearch;

@@ -47,6 +47,6 @@ const styles = StyleSheet.create(
             alignSelf: 'center'
         }
     }
-)
+);
 
 export default TeamSelector; 

@@ -33,6 +33,6 @@ const styles = StyleSheet.create(
             height: '65%',
         },
     }
-)
+);
 
 export default TeamEmblem;

@@ -1,22 +1,29 @@
 import React, { useRef } from "react";
 import { TouchableOpacity, View, StyleSheet, Dimensions, Text, TouchableHighlight, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
+import { useGetFixturesQuery, useGetOverviewQuery } from "../../App/fplSlice";
+import { useAppDispatch, useAppSelector } from "../../App/hooks";
 import * as GlobalConstants from '../../Global/GlobalConstants'
+import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
+import { FplFixture } from "../../Models/FplFixtures";
 
 // This is going to be a switch selector control
 // First i need a background,
 // Place the colored blurb over the left team
 // Put the text for the team names and the touchable opacity at the top level
 
+var viewWidth: number;
+
+const getViewWidth= (event: LayoutChangeEvent) => {
+    viewWidth = event.nativeEvent.layout.width;
+}
+
 const TeamSwitch = () => {
+
+    const currentFixture: FplFixture | null = useAppSelector((state) => state.fixture);
+    const overview = useGetOverviewQuery();
 
     const translateAnim = useRef(new Animated.Value(0)).current; 
     var isHome = true;
-    var viewWidth: number;
-    
-
-    const getViewWidth= (event: LayoutChangeEvent) => {
-        viewWidth = event.nativeEvent.layout.width;
-    }
 
     const switchTeam = () => {
         Animated.spring(translateAnim, {
@@ -28,15 +35,21 @@ const TeamSwitch = () => {
         isHome = !isHome
     }
 
+
     return (
+
         <View style={styles.container} onLayout={(event) => getViewWidth(event)}>
+            { (currentFixture !== null && overview.data !== undefined) &&
+            <>
             <Animated.View style={[styles.highlight, {transform: [{translateX: translateAnim}, { perspective: 100}] }]}/>
             <TouchableWithoutFeedback style={styles.button} onPress={switchTeam}>
                 <View style={styles.buttonContainer}>
-                    <Text style={styles.text}>MUN</Text>
-                    <Text style={styles.text}>CHE</Text>
+                    <Text style={styles.text}>{ GetTeamDataFromOverviewWithFixtureTeamID(currentFixture.team_h, overview.data) }</Text>
+                    <Text style={styles.text}>{ GetTeamDataFromOverviewWithFixtureTeamID(currentFixture.team_a, overview.data) }</Text>
                 </View>
             </TouchableWithoutFeedback>
+            </>
+            }
         </View>
     )
 }
@@ -77,6 +90,6 @@ const styles = StyleSheet.create(
             textAlign: "center"
         }
     }
-)
+);
 
 export default TeamSwitch;

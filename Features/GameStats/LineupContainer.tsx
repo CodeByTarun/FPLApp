@@ -46,6 +46,6 @@ const styles = StyleSheet.create(
             backgroundColor: 'lightgray'
         }
     }
-)
+);
 
 export default LineupContainer;

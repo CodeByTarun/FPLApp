@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { fplSlice } from './fplSlice'
+import fixtureReducer from './fixtureSlice'
 
 export const store = configureStore({
   reducer: {
+    fixture: fixtureReducer,
     [fplSlice.reducerPath]: fplSlice.reducer
   },
   middleware: getDefaultMiddleware =>

@@ -17,6 +17,7 @@
     "expo-status-bar": "~1.2.0",
     "moment-timezone": "^0.5.34",
     "react": "17.0.1",
+    "react-devtools": "^4.22.0",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-picker-select": "^8.0.4",
@@ -31,5 +32,8 @@
     "jest": "^27.4.5",
     "typescript": "~4.3.5"
   },
+  "resolutions": {
+    "react-devtools-core": "4.13.0"
+    },
   "private": true
 }

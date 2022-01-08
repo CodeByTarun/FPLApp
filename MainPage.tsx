@@ -9,20 +9,13 @@ import { useGetOverviewQuery } from './App/fplSlice';
 const MainPage = () => {
 
     const overview = useGetOverviewQuery();
-
-
+    
     return (
         <SafeAreaView style={styles.safeArea}>
             {overview.isSuccess == true &&
-                <><View style={styles.fixturesView}>
-                    <FixturesView overview={overview.data} />
-                  </View>
-                  <View style={styles.playerSearchView}>
-                      <PlayerSearch />
-                  </View>
-                  <View style={styles.lineupView}>
-                        <LineupContainer />
-                  </View></>
+              <><View style={styles.fixturesView}>
+                  <FixturesView overview={overview.data} />
+                </View></>
             }
         </SafeAreaView>
     )
@@ -38,17 +31,9 @@ const styles = StyleSheet.create({
       flex: 1,
       marginTop: '0%',
     },
-  
-    playerSearchView: {
-      flex: 1,
-    },
-  
+
     fixturesView: {
-      flex: 2,
-    },
-  
-    lineupView: {
-      flex: 10,
+      flex: 1,
     },
   });
 

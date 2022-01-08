@@ -20,8 +20,8 @@ export const fplSlice = createApi({
 
     getGameekData: builder.query<FplGameweek, number|void >({
       query: (gameweek: number) => '/event/${gameweek}/live'
-    })
+    }),
   })
-})
+});
 
 export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameekDataQuery } = fplSlice
