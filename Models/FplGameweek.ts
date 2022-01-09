@@ -2,7 +2,7 @@ export interface FplGameweek {
     elements: Element[];
 }
 
-export interface Element {
+export interface Player {
     id:      number;
     stats:   Stats;
     explain: Explain[];

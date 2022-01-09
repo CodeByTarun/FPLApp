@@ -12,7 +12,7 @@ import PlayerSearch from "../PlayerStats/PlayerSearch";
 import { FplFixture } from "../../Models/FplFixtures";
 import { fixtureChanged, removeFixture } from "../../App/fixtureSlice";
 
-//TODO: Decide on a good refresh rate for live game data
+//TODO: Decide on a good refresh rate for live game data (right now set to 30 seconds)
 
 interface FixturesViewProp {
   overview: FplOverview|undefined;
@@ -74,38 +74,29 @@ const FixturesView = (prop: FixturesViewProp) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.fixturesView}> 
-        <View style={styles.gameweekView}>
+      <View style={styles.gameweekView}>
 
-          <RNPickerSelect 
-              value = { gameweekNumber }
-              onValueChange={(value) => setGameweekNumber(value)} 
-              style={pickerSelectStyles}
-              items = {
-                prop.overview!.events.map((event) => {
-                return { label: event.name, value:event.id}
-              })
-              }/>
+        <RNPickerSelect 
+            value = { gameweekNumber }
+            onValueChange={(value) => setGameweekNumber(value)} 
+            style={pickerSelectStyles}
+            items = {
+              prop.overview!.events.map((event) => {
+              return { label: event.name, value:event.id}
+            })
+            }/>
 
-        </View>
-        { (fixtures.isSuccess == true) &&
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
-          { (fixtures.data !== undefined) &&
+      </View>
+      { (fixtures.isSuccess == true) &&
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
+        { (fixtures.data !== undefined) &&
 
-            fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
-                         .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                         .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture}/> })     
-          }
-        </ScrollView>
+          fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
+                        .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
+                        .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture}/> })     
         }
-      </View>
-
-      <View style={styles.playerSearchView}>
-        <PlayerSearch />
-      </View>
-      <View style={styles.lineupView}>
-        <LineupContainer />
-      </View>
+      </ScrollView>
+      }
     </View>
   )
 }
@@ -127,14 +118,6 @@ const styles = StyleSheet.create({
 
     fixturesView: {
       flex: 2,
-    },
-
-    playerSearchView: {
-      flex: 1,
-    },
-  
-    lineupView: {
-      flex: 10,
     },
   });
 

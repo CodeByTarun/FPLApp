@@ -5,12 +5,27 @@
 
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
+import { useGetGameekDataQuery } from "../../App/fplSlice";
+import { useAppSelector } from "../../App/hooks";
+import { FplGameweek, Player } from "../../Models/FplGameweek";
 import PlayerGamePointsImage from "./PlayerGamePointsImage";
 
 const Lineup = () => {
+
+    const fixtureInfo = useAppSelector((state) => state.fixture);
+    var gameweekData;
+
+    if (fixtureInfo.fixture !== null && fixtureInfo.fixture.event !== null) {
+        gameweekData = useGetGameekDataQuery(fixtureInfo.fixture.event);
+    }
+
+    // Need to create a function that takes the list of players and based on position and number of players puts them in the right rows
+
     return (
         <View style={styles.container}>
             <Image style={styles.field} source={require('../../assets/threequartersfield.jpg')}/>
+
+            {(fixtureInfo.fixture !== null) && 
             <View style={styles.playerContainer}>
                 <View style={styles.playerRowContainer}>
                     <PlayerGamePointsImage/>
@@ -32,6 +47,8 @@ const Lineup = () => {
                     <PlayerGamePointsImage/>
                 </View>
             </View>
+            }
+
         </View>
     )
 }

@@ -15,6 +15,12 @@ const MainPage = () => {
             {overview.isSuccess == true &&
               <><View style={styles.fixturesView}>
                   <FixturesView overview={overview.data} />
+                </View>
+                <View style={styles.playerSearchView}>
+                  <PlayerSearch />
+                </View>
+                <View style={styles.lineupView}>
+                  <LineupContainer />
                 </View></>
             }
         </SafeAreaView>
@@ -33,8 +39,16 @@ const styles = StyleSheet.create({
     },
 
     fixturesView: {
+      flex: 2,
+    },
+
+    playerSearchView: {
       flex: 1,
     },
+  
+    lineupView: {
+      flex: 10,
+    },    
   });
 
   export default MainPage;
