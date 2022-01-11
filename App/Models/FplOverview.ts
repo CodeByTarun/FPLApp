@@ -4,7 +4,7 @@ export interface FplOverview {
     phases:        Phase[];
     teams:         Team[];
     total_players: number;
-    elements:      Element[];
+    elements:      PlayerOverview[];
     element_stats: ElementStat[];
     element_types: ElementType[];
 }
@@ -28,7 +28,7 @@ export interface ElementType {
     element_count:        number;
 }
 
-export interface Element {
+export interface PlayerOverview {
     chance_of_playing_next_round:         number | null;
     chance_of_playing_this_round:         number | null;
     code:                                 number;

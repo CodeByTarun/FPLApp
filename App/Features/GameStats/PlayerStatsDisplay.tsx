@@ -2,7 +2,7 @@ import React from "react";
 import { Image, View, StyleSheet, Text } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 
-const PlayerGamePointsImage = () => {
+const PlayerStatsDisplay = () => {
 
     return (
         <View style={styles.container}>
@@ -127,4 +127,4 @@ const styles = StyleSheet.create(
     }
 );
 
-export default PlayerGamePointsImage;
+export default PlayerStatsDisplay;

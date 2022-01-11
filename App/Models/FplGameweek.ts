@@ -1,5 +1,5 @@
 export interface FplGameweek {
-    elements: Element[];
+    player: Player[];
 }
 
 export interface Player {

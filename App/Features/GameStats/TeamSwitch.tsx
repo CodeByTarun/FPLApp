@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { TouchableOpacity, View, StyleSheet, Dimensions, Text, TouchableHighlight, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
-import { FixtureInfo, toggleTeamShown } from "../../App/fixtureSlice";
-import { useGetFixturesQuery, useGetOverviewQuery } from "../../App/fplSlice";
-import { useAppDispatch, useAppSelector } from "../../App/hooks";
+import { FixtureInfo, toggleTeamShown } from "../../Store/fixtureSlice";
+import { useGetFixturesQuery, useGetOverviewQuery } from "../../Store/fplSlice";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import * as GlobalConstants from '../../Global/GlobalConstants'
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { FplFixture } from "../../Models/FplFixtures";

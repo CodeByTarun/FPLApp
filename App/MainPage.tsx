@@ -4,7 +4,7 @@ import FixturesView from './Features/Fixtures/FixturesView';
 import PlayerSearch from './Features/PlayerStats/PlayerSearch';
 import LineupContainer from './Features/GameStats/LineupContainer';
 import * as GlobalConstants from './Global/GlobalConstants'
-import { useGetOverviewQuery } from './App/fplSlice';
+import { useGetOverviewQuery } from './Store/fplSlice';
 
 const MainPage = () => {
 

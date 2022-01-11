@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import GlobalStyles from "../../Global/GlobalStyles";
 import FixtureCard from './FixtureCard'
-import { useAppDispatch, useAppSelector } from "../../App/hooks";
-import { useGetFixturesQuery, useGetOverviewQuery, } from '../../App/fplSlice'
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
+import { useGetFixturesQuery, useGetOverviewQuery, } from '../../Store/fplSlice'
 import * as GlobalConstants from '../../Global/GlobalConstants'
 import { FplOverview } from "../../Models/FplOverview";
 import RNPickerSelect from 'react-native-picker-select';
 import LineupContainer from "../GameStats/LineupContainer";
 import PlayerSearch from "../PlayerStats/PlayerSearch";
 import { FplFixture } from "../../Models/FplFixtures";
-import { fixtureChanged, removeFixture } from "../../App/fixtureSlice";
+import { fixtureChanged, removeFixture } from "../../Store/fixtureSlice";
 
 //TODO: Decide on a good refresh rate for live game data (right now set to 30 seconds)
 

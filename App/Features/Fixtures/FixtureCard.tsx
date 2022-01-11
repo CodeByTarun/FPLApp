@@ -6,13 +6,12 @@ import React from 'react'
 import { View, StyleSheet, Text, Dimensions, Image, TouchableOpacity } from 'react-native'
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { FplFixture } from '../../Models/FplFixtures'
-import { FplOverview } from '../../Models/FplOverview'
 import TeamEmblem from "./TeamEmblem"
 import moment from 'moment-timezone';
 import * as Localization from 'expo-localization'
-import { useGetOverviewQuery } from '../../App/fplSlice'
-import { useAppDispatch } from '../../App/hooks'
-import { fixtureChanged } from '../../App/fixtureSlice'
+import { useGetOverviewQuery } from '../../Store/fplSlice'
+import { useAppDispatch } from '../../Store/hooks'
+import { fixtureChanged } from '../../Store/fixtureSlice'
 import { GetTeamDataFromOverviewWithFixtureTeamID } from '../../Helpers/FplAPIHelpers'
 
 interface FixtureCardProp {
