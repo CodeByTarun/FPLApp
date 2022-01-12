@@ -2,50 +2,64 @@
 // add a dropdown to show the bps for that match, this will happen when clicked on??? idk how 
 // to incorporate this yet
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, StyleSheet, Text, Dimensions, Image, TouchableOpacity } from 'react-native'
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { FplFixture } from '../../Models/FplFixtures'
 import TeamEmblem from "./TeamEmblem"
 import moment from 'moment-timezone';
 import * as Localization from 'expo-localization'
-import { useGetOverviewQuery } from '../../Store/fplSlice'
+import { useGetGameweekDataQuery, useGetOverviewQuery } from '../../Store/fplSlice'
 import { useAppDispatch } from '../../Store/hooks'
 import { fixtureChanged } from '../../Store/fixtureSlice'
 import { GetTeamDataFromOverviewWithFixtureTeamID } from '../../Helpers/FplAPIHelpers'
+import { FplGameweek } from '../../Models/FplGameweek'
 
 interface FixtureCardProp {
     fixture: FplFixture | undefined;
+    gameweekNumber: number;
 }
 
-const SetScoreAndTime = (fixture: FplFixture) => {
+const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek | undefined) => {
 
     if (fixture !== undefined) {
-        if (fixture.finished == true) {
+        if (fixture.finished_provisional == true) {
            return <><Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
                     <Text style={styles.timeText}>FT</Text></>
-        } else if (fixture.started == true) {
-           return <Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
+        } else if (fixture.started == true && gameweek !== undefined) {
+           return <><Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
+                    <Text style={styles.timeText}>{getHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
         } else {
             return <Text style={styles.scoreText}>vs</Text>
         }
     }
 }
 
+function getHighestMinForAPlayer(fixture: FplFixture, gameweek: FplGameweek): number {
+    var minutes = fixture.stats.filter(stat => stat.identifier === 'bps')[0].h
+                               .map((stat) => gameweek.elements.find(element => element.id === stat.element)?.stats.minutes as number);
+
+    return Math.max(...minutes)               
+}
+
 const FixtureCard = (prop : FixtureCardProp) => {
 
     const dispatch = useAppDispatch();
-
-    const onPress = () => {
-        dispatch(fixtureChanged(prop.fixture!))
-    };
-
+    const gameweekData = useGetGameweekDataQuery(prop.gameweekNumber)
     const overview = useGetOverviewQuery();
 
+    const onPress = () => {
+
+        if (prop.fixture !== undefined) {
+            dispatch(fixtureChanged(prop.fixture))
+        }
+    };
+
     return (
+        
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={onPress} disabled={!prop.fixture?.started}>            
-            { (prop.fixture !== undefined && overview.data !== undefined) &&
+            { (prop.fixture !== undefined && overview.data !== undefined && gameweekData.data !== undefined) &&
                 <View style={styles.card}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
@@ -55,7 +69,7 @@ const FixtureCard = (prop : FixtureCardProp) => {
                     <View style={styles.scoreView}>
                         <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(prop.fixture.team_h, overview.data)}/>
                         <View style={styles.scoreAndTimeView}>
-                            { SetScoreAndTime(prop.fixture) }
+                            { SetScoreAndTime(prop.fixture, gameweekData.data) }
                         </View>
                         <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(prop.fixture.team_a, overview.data)}/>
                     </View>

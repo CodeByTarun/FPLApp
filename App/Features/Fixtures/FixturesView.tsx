@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import GlobalStyles from "../../Global/GlobalStyles";
 import FixtureCard from './FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { useGetFixturesQuery, useGetOverviewQuery, } from '../../Store/fplSlice'
+import { useGetFixturesQuery, useGetGameweekDataQuery, useGetOverviewQuery, } from '../../Store/fplSlice'
 import * as GlobalConstants from '../../Global/GlobalConstants'
 import { FplOverview } from "../../Models/FplOverview";
 import RNPickerSelect from 'react-native-picker-select';
@@ -24,7 +24,7 @@ function IsThereAMatchInProgress(gameweekNumber: number, fixtures: FplFixture[])
 }
 
 function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
-  if (fixture1.finished !== true && fixture2.finished === true) {
+  if (fixture1.finished_provisional !== true && fixture2.finished_provisional === true) {
     return -1;
   }
   return 0;
@@ -55,19 +55,26 @@ const FixturesView = (prop: FixturesViewProp) => {
       }
     }, [gameweekNumber]);
 
+  // TODO: Need to test this while a game is on
   useEffect(
     function refetchLiveGameweekData() {
-      let refetch: NodeJS.Timer;
-      
+      let refetchFixture: NodeJS.Timer;
+      let refetchGameweek: NodeJS.Timer;
+
       if (gameweekNumber !== undefined && fixtures.data !== undefined) {
+        console.log(IsThereAMatchInProgress(gameweekNumber, fixtures.data))
         if (gameweekNumber === liveGameweek && IsThereAMatchInProgress(gameweekNumber, fixtures.data)) {
-          refetch = setInterval(() => fixtures.refetch(), 30000);
+          
+          let gameweekData = useGetGameweekDataQuery(gameweekNumber);
+          refetchFixture = setInterval(() => fixtures.refetch(), 30000);
+          refetchGameweek = setInterval(() => gameweekData.refetch(), 30000);
         }
       }
       
       return function stopRefetchingLiveGameweekData() {
-        if (refetch !== undefined) {
-          clearInterval(refetch);
+        if (refetchFixture !== undefined) {
+          clearInterval(refetchFixture);
+          clearInterval(refetchGameweek);
         }
       };
     }, [gameweekNumber]);
@@ -89,11 +96,11 @@ const FixturesView = (prop: FixturesViewProp) => {
       </View>
       { (fixtures.isSuccess == true) &&
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
-        { (fixtures.data !== undefined) &&
+        { (fixtures.data !== undefined && gameweekNumber !== undefined) &&
 
           fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
                         .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                        .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture}/> })     
+                        .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekNumber={gameweekNumber}/> })     
         }
       </ScrollView>
       }

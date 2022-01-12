@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
-import store from './App/store'
-import { useGetOverviewQuery } from './App/fplSlice';
+import store from './Store/store'
+import { useGetOverviewQuery } from './Store/fplSlice';
 import MainPage from './MainPage';
 
 export default function App() {

@@ -16,7 +16,7 @@ const PlayerSearch = () => {
         <View style={styles.container}>
             <TextInput style={styles.searchbox}  placeholder="Search player..."/>
             <TouchableOpacity style={styles.button} onPress={onTablePress}>
-                <Image style={styles.tableImage} source={require('../../assets/tablet.png')} resizeMode="contain"/>
+                <Image style={styles.tableImage} source={require('../../../assets/tablet.png')} resizeMode="contain"/>
             </TouchableOpacity>
         </View>
     )

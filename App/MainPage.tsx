@@ -4,15 +4,16 @@ import FixturesView from './Features/Fixtures/FixturesView';
 import PlayerSearch from './Features/PlayerStats/PlayerSearch';
 import LineupContainer from './Features/GameStats/LineupContainer';
 import * as GlobalConstants from './Global/GlobalConstants'
-import { useGetOverviewQuery } from './Store/fplSlice';
+import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
 
 const MainPage = () => {
 
     const overview = useGetOverviewQuery();
+    const fixtures = useGetFixturesQuery();
     
     return (
         <SafeAreaView style={styles.safeArea}>
-            {overview.isSuccess == true &&
+            {(overview.isSuccess == true && fixtures.isSuccess == true) &&
               <><View style={styles.fixturesView}>
                   <FixturesView overview={overview.data} />
                 </View>

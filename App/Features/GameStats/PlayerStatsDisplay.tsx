@@ -1,34 +1,40 @@
 import React from "react";
 import { Image, View, StyleSheet, Text } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
+import { PlayerData } from "../../Models/CombinedData";
+import { Player } from "../../Models/FplGameweek";
 
-const PlayerStatsDisplay = () => {
+interface PlayerStatsDisplayProps {
+    player: PlayerData;
+}
+
+const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
 
-                <Image style={styles.jersey} source={require('../../assets/jerseys/8.png')} resizeMode="contain"/> 
+                <Image style={styles.jersey} source={require('../../../assets/jerseys/8.png')} resizeMode="contain"/> 
 
                 <View style={styles.allStatsContainer}>
                     <View style={styles.statsContainer}>
-                        <Image style={styles.statsImage} source={require('../../assets/stats/goal.png')} resizeMode="contain"/>
+                        <Image style={styles.statsImage} source={require('../../../assets/stats/goal.png')} resizeMode="contain"/>
                     </View> 
                     <View style={styles.statsContainer}>
-                        <Image style={styles.statsImage} source={require('../../assets/stats/assist.png')} resizeMode="contain"/>
+                        <Image style={styles.statsImage} source={require('../../../assets/stats/assist.png')} resizeMode="contain"/>
                     </View> 
                     <View style={styles.cardsContainer}>
-                        <Image style={styles.cardImage} source={require('../../assets/stats/yellowcard.png')} resizeMode="contain"/>
-                        <Image style={styles.cardImage} source={require('../../assets/stats/redcard.png')} resizeMode="contain"/>
+                        <Image style={styles.cardImage} source={require('../../../assets/stats/yellowcard.png')} resizeMode="contain"/>
+                        <Image style={styles.cardImage} source={require('../../../assets/stats/redcard.png')} resizeMode="contain"/>
                     </View> 
                 </View>
 
                 <View style={styles.scoreContainer}>
-                    <Text style={styles.scoreText}>15</Text>
+                    <Text style={styles.scoreText}>{prop.player.gameweekData.stats.total_points}</Text>
                 </View>   
 
             </View>
-            <Text style={styles.text}>Sancho</Text>
+            <Text style={styles.text}>{prop.player.overviewData.web_name}</Text>
         </View>
     )
 }
@@ -115,14 +121,14 @@ const styles = StyleSheet.create(
         //#endregion
         
         text: {
-            fontSize: GlobalConstants.width*0.03,
+            fontSize: GlobalConstants.width*0.025,
             textAlign: 'center',
             backgroundColor: GlobalConstants.secondayColor,
             color: GlobalConstants.textPrimaryColor,
-            padding: 3,
+            padding: 2,
             marginTop: 2,
             borderRadius: 3,
-            overflow: "hidden",
+            overflow: 'hidden'            
         }
     }
 );

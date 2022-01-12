@@ -17,7 +17,7 @@ export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek,
         combinedPlayerData = listOfPlayersFromFixtures.map(
             (fixturePlayer) => (
                 { 
-                    gameweekData: gameweekData.player.find((gameweekPlayer) => gameweekPlayer.id === fixturePlayer.element),
+                    gameweekData: gameweekData.elements.find((gameweekPlayer) => gameweekPlayer.id === fixturePlayer.element),
                     overviewData: overviewData.elements.find((overviewPlayer) => overviewPlayer.id === fixturePlayer.element),
                 } as PlayerData))
 
