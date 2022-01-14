@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1641928496625" clover="3.2.0">
-  <project timestamp="1641928496625" name="All files">
-    <metrics statements="11" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="6" elements="24" coveredelements="17" complexity="0" loc="11" ncloc="11" packages="1" files="1" classes="1"/>
+<coverage generated="1642148157195" clover="3.2.0">
+  <project timestamp="1642148157195" name="All files">
+    <metrics statements="27" coveredstatements="18" conditionals="16" coveredconditionals="9" methods="22" coveredmethods="12" elements="65" coveredelements="39" complexity="0" loc="27" ncloc="27" packages="1" files="1" classes="1"/>
     <file name="FplAPIHelpers.tsx" path="T:\Coding\FPLApp\App\Helpers\FplAPIHelpers.tsx">
-      <metrics statements="11" coveredstatements="9" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="6"/>
-      <line num="7" count="0" type="stmt"/>
-      <line num="11" count="10" type="cond" truecount="1" falsecount="1"/>
-      <line num="12" count="0" type="stmt"/>
-      <line num="14" count="1" type="stmt"/>
-      <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
-      <line num="17" count="1" type="stmt"/>
-      <line num="19" count="14" type="stmt"/>
-      <line num="20" count="1351" type="stmt"/>
-      <line num="21" count="728" type="stmt"/>
-      <line num="24" count="36" type="stmt"/>
-      <line num="27" count="1" type="stmt"/>
+      <metrics statements="27" coveredstatements="18" conditionals="16" coveredconditionals="9" methods="22" coveredmethods="12"/>
+      <line num="8" count="0" type="stmt"/>
+      <line num="12" count="669" type="cond" truecount="1" falsecount="1"/>
+      <line num="13" count="0" type="stmt"/>
+      <line num="15" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="18" count="35" type="stmt"/>
+      <line num="19" count="6660" type="stmt"/>
+      <line num="23" count="35" type="stmt"/>
+      <line num="24" count="35" type="stmt"/>
+      <line num="27" count="0" type="stmt"/>
+      <line num="32" count="35" type="cond" truecount="1" falsecount="1"/>
+      <line num="33" count="35" type="stmt"/>
+      <line num="35" count="35" type="cond" truecount="1" falsecount="1"/>
+      <line num="36" count="35" type="stmt"/>
+      <line num="38" count="35" type="cond" truecount="4" falsecount="0"/>
+      <line num="39" count="14" type="stmt"/>
+      <line num="44" count="21" type="stmt"/>
+      <line num="49" count="0" type="stmt"/>
+      <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="54" count="0" type="stmt"/>
+      <line num="55" count="0" type="stmt"/>
+      <line num="57" count="0" type="stmt"/>
+      <line num="61" count="1" type="stmt"/>
+      <line num="63" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="64" count="3" type="stmt"/>
+      <line num="65" count="1" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
     </file>
   </project>
 </coverage>

@@ -12,12 +12,14 @@ import * as Localization from 'expo-localization'
 import { useGetGameweekDataQuery, useGetOverviewQuery } from '../../Store/fplSlice'
 import { useAppDispatch } from '../../Store/hooks'
 import { fixtureChanged } from '../../Store/fixtureSlice'
-import { GetTeamDataFromOverviewWithFixtureTeamID } from '../../Helpers/FplAPIHelpers'
+import { GetHighestMinForAPlayer, GetTeamDataFromOverviewWithFixtureTeamID } from '../../Helpers/FplAPIHelpers'
 import { FplGameweek } from '../../Models/FplGameweek'
+import { FplOverview } from '../../Models/FplOverview'
 
 interface FixtureCardProp {
     fixture: FplFixture | undefined;
-    gameweekNumber: number;
+    gameweekData: FplGameweek | undefined;
+    overviewData: FplOverview | undefined;
 }
 
 const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek | undefined) => {
@@ -28,25 +30,16 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek | undefined)
                     <Text style={styles.timeText}>FT</Text></>
         } else if (fixture.started == true && gameweek !== undefined) {
            return <><Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
-                    <Text style={styles.timeText}>{getHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
+                    <Text style={styles.timeText}>{GetHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
         } else {
             return <Text style={styles.scoreText}>vs</Text>
         }
     }
 }
 
-function getHighestMinForAPlayer(fixture: FplFixture, gameweek: FplGameweek): number {
-    var minutes = fixture.stats.filter(stat => stat.identifier === 'bps')[0].h
-                               .map((stat) => gameweek.elements.find(element => element.id === stat.element)?.stats.minutes as number);
-
-    return Math.max(...minutes)               
-}
-
 const FixtureCard = (prop : FixtureCardProp) => {
 
     const dispatch = useAppDispatch();
-    const gameweekData = useGetGameweekDataQuery(prop.gameweekNumber)
-    const overview = useGetOverviewQuery();
 
     const onPress = () => {
 
@@ -59,7 +52,7 @@ const FixtureCard = (prop : FixtureCardProp) => {
         
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={onPress} disabled={!prop.fixture?.started}>            
-            { (prop.fixture !== undefined && overview.data !== undefined && gameweekData.data !== undefined) &&
+            { (prop.fixture !== undefined && prop.overviewData !== undefined && prop.gameweekData !== undefined) &&
                 <View style={styles.card}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
@@ -67,11 +60,11 @@ const FixtureCard = (prop : FixtureCardProp) => {
                         </Text>
                     </View>
                     <View style={styles.scoreView}>
-                        <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(prop.fixture.team_h, overview.data)}/>
+                        <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(prop.fixture.team_h, prop.overviewData)}/>
                         <View style={styles.scoreAndTimeView}>
-                            { SetScoreAndTime(prop.fixture, gameweekData.data) }
+                            { SetScoreAndTime(prop.fixture, prop.gameweekData) }
                         </View>
-                        <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(prop.fixture.team_a, overview.data)}/>
+                        <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(prop.fixture.team_a, prop.overviewData)}/>
                     </View>
                 </View>
             }

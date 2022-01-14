@@ -11,16 +11,13 @@ import LineupContainer from "../GameStats/LineupContainer";
 import PlayerSearch from "../PlayerStats/PlayerSearch";
 import { FplFixture } from "../../Models/FplFixtures";
 import { fixtureChanged, removeFixture } from "../../Store/fixtureSlice";
+import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 //TODO: Decide on a good refresh rate for live game data (right now set to 30 seconds)
 
 interface FixturesViewProp {
   overview: FplOverview|undefined;
-}
-
-function IsThereAMatchInProgress(gameweekNumber: number, fixtures: FplFixture[]): boolean {
-  return fixtures.filter((event) => { return event.id == gameweekNumber })
-                 .some((event) => { return event.finished == false && event.started == true });
 }
 
 function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
@@ -34,9 +31,10 @@ const FixturesView = (prop: FixturesViewProp) => {
 
   const dispatch = useAppDispatch();
 
-  const liveGameweek = prop.overview?.events.filter((event) => { return event.is_current == true; })[0].id;
+  const liveGameweek = prop.overview?.events.filter((event) => { return event.is_current === true; })[0].id;
   const [gameweekNumber, setGameweekNumber] = useState(liveGameweek);
   const fixtures = useGetFixturesQuery();
+  const gameweekData = useGetGameweekDataQuery((gameweekNumber !== undefined) ? gameweekNumber : skipToken);
 
   useEffect(
     function setSelectedFixture() {
@@ -55,17 +53,14 @@ const FixturesView = (prop: FixturesViewProp) => {
       }
     }, [gameweekNumber]);
 
-  // TODO: Need to test this while a game is on
   useEffect(
     function refetchLiveGameweekData() {
       let refetchFixture: NodeJS.Timer;
       let refetchGameweek: NodeJS.Timer;
 
       if (gameweekNumber !== undefined && fixtures.data !== undefined) {
-        console.log(IsThereAMatchInProgress(gameweekNumber, fixtures.data))
         if (gameweekNumber === liveGameweek && IsThereAMatchInProgress(gameweekNumber, fixtures.data)) {
           
-          let gameweekData = useGetGameweekDataQuery(gameweekNumber);
           refetchFixture = setInterval(() => fixtures.refetch(), 30000);
           refetchGameweek = setInterval(() => gameweekData.refetch(), 30000);
         }
@@ -96,11 +91,11 @@ const FixturesView = (prop: FixturesViewProp) => {
       </View>
       { (fixtures.isSuccess == true) &&
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
-        { (fixtures.data !== undefined && gameweekNumber !== undefined) &&
+        { (fixtures.data !== undefined && gameweekData.data !== undefined && prop.overview !== undefined) &&
 
           fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
                         .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                        .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekNumber={gameweekNumber}/> })     
+                        .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overviewData={prop.overview}/> })     
         }
       </ScrollView>
       }

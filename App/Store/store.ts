@@ -8,7 +8,10 @@ export const store = configureStore({
     [fplSlice.reducerPath]: fplSlice.reducer
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(fplSlice.middleware)
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat(fplSlice.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

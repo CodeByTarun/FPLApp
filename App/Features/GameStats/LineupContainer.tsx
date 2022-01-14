@@ -23,7 +23,7 @@ const styles = StyleSheet.create(
     {
         container: {
             flex: 1,
-            margin: 5,
+            margin: 0,
         },
 
         top: {
@@ -33,12 +33,6 @@ const styles = StyleSheet.create(
         middle: {
             flex: 8,
             width : '100%',
-        },
-
-        field: {
-            width: '100%',
-            height: '110%',
-            alignSelf: 'center',
         },
 
         bottom: {

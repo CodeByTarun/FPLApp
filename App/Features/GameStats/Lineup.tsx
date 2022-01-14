@@ -41,7 +41,7 @@ const CreatePlayerStatsView = (gameweek: FplGameweek, overview: FplOverview, fix
 
             playerStatsView.push(
                 <View style={styles.playerRowContainer}>
-                    { players.slice(i, i + positionCount).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player}/> })}
+                    { players.slice(i, i + positionCount).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview}/> })}
                 </View>
             )
 
@@ -88,6 +88,7 @@ const styles = StyleSheet.create(
 
         playerContainer: {
             flex: 1,
+            padding: 5,
             alignItems: 'center',
             justifyContent: 'space-evenly',
         },
