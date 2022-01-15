@@ -2,13 +2,23 @@ import { PlayerData } from "../Models/CombinedData";
 import { FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from "../Models/FplGameweek";
 import { FplOverview, Team } from "../Models/FplOverview";
-import { FixtureInfo } from "../Store/fixtureSlice";
+import { FixtureInfo, TeamInfo, TeamTypes } from "../Store/teamSlice";
 
 export function GetTeamDataFromOverviewWithFixtureTeamID(teamNumber : number, overview: FplOverview): Team {
     return overview.teams.filter(team => team.id == teamNumber)[0]
 };
 
-export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek, overviewData: FplOverview, fixtureInfo: FixtureInfo): PlayerData[] | null {
+export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo): PlayerData[] | null {
+
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        return GetFixturePlayerData(gameweekData, overviewData, teamInfo);
+    } else {
+        return null;
+    }
+
+}
+
+export function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: FplOverview, fixtureInfo: FixtureInfo): PlayerData[] | null {
     let listOfPlayersFromFixtures = fixtureInfo.isHome ? overviewData.elements.filter(element => element.team == fixtureInfo.fixture?.team_h) :
                                                          overviewData.elements.filter(element => element.team == fixtureInfo.fixture?.team_a);
 

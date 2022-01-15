@@ -9,10 +9,11 @@ import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
 const MainPage = () => {
 
     const overview = useGetOverviewQuery();
+    const fixtures = useGetFixturesQuery();
     
     return (
         <SafeAreaView style={styles.safeArea}>
-            {(overview.isSuccess == true) &&
+            {(overview.isSuccess == true && fixtures.isSuccess) &&
               <><View style={styles.fixturesView}>
                   <FixturesView overview={overview.data} />
                 </View>

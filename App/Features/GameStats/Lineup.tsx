@@ -4,7 +4,7 @@
 // The input for this component is a list of player IDs
 
 import React, { useEffect } from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useGetGameweekDataQuery, useGetOverviewQuery } from "../../Store/fplSlice";
 import { useAppSelector } from "../../Store/hooks";
 import PlayerStatsDisplay from "./PlayerStatsDisplay";
@@ -13,23 +13,25 @@ import { PlayerData } from "../../Models/CombinedData";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { FplGameweek } from "../../Models/FplGameweek";
 import { FplOverview } from "../../Models/FplOverview";
-import { FixtureInfo } from "../../Store/fixtureSlice";
+import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import { width } from "../../Global/GlobalConstants";
+import * as GlobalConstants from "../../Global/GlobalConstants";
 
 
-const CreatePlayerStatsView = (gameweek: FplGameweek, overview: FplOverview, fixtureInfo: FixtureInfo) => {
+const CreatePlayerStatsView = (gameweek: FplGameweek, overview: FplOverview, teamInfo: TeamInfo) => {
 
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, fixtureInfo);
+    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo);
     const playerStatsView = [];
 
     if (players !== null) {
         let i = 0;
-        let elementtype = 1;
+        let elementType = 1;
         let remainder = 0;
         const numberOfPlayersAllowedInARow = 6;
 
         while (i < players.length) {
 
-            let positionCount = players.filter(player => player.overviewData.element_type == elementtype).length;
+            let positionCount = players.filter(player => player.overviewData.element_type == elementType).length;
             
             if (positionCount + remainder > numberOfPlayersAllowedInARow) {
                 remainder = remainder + positionCount - numberOfPlayersAllowedInARow;
@@ -40,13 +42,13 @@ const CreatePlayerStatsView = (gameweek: FplGameweek, overview: FplOverview, fix
             }
 
             playerStatsView.push(
-                <View style={styles.playerRowContainer}>
+                <View style={styles.playerRowContainer} key={elementType}>
                     { players.slice(i, i + positionCount).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview}/> })}
                 </View>
             )
 
             i += positionCount;
-            elementtype += 1;
+            elementType += 1;
         }
     }
 
@@ -55,17 +57,20 @@ const CreatePlayerStatsView = (gameweek: FplGameweek, overview: FplOverview, fix
 
 const Lineup = () => {
 
-    const fixtureInfo = useAppSelector((state) => state.fixture);
+    const teamInfo = useAppSelector((state) => state.team);
     const overview = useGetOverviewQuery();
-    const gameweek = useGetGameweekDataQuery((fixtureInfo.fixture !== null && fixtureInfo.fixture.event !== null) ? fixtureInfo.fixture.event : skipToken);
+    const gameweek = useGetGameweekDataQuery((teamInfo.teamType !== TeamTypes.Empty) ? teamInfo.gameweek : skipToken);
     
     return (
         <View style={styles.container}>
             <Image style={styles.field} source={require('../../../assets/threequartersfield.jpg')}/>
-            {(fixtureInfo.fixture !== null && gameweek.data !== undefined && overview.data !== undefined) && 
+            <TouchableOpacity style={styles.dreamTeamButton}>
+                <Image style={styles.dreamTeamIcon} source={require('../../../assets/dreamteam.png')} resizeMode="contain"/>
+            </TouchableOpacity>
+            {(teamInfo.teamType !== TeamTypes.Empty && gameweek.data && overview.data) && 
 
             <View style={styles.playerContainer}>
-                {CreatePlayerStatsView(gameweek.data, overview.data, fixtureInfo)}
+                {CreatePlayerStatsView(gameweek.data, overview.data, teamInfo)}
             </View>
             }
 
@@ -84,6 +89,21 @@ const styles = StyleSheet.create(
             height: '107.5%',
             alignSelf: 'center',
             position: "absolute"
+        },
+
+        dreamTeamButton: {
+            position: 'absolute',
+            width: '15%',
+            height: '15%',
+            margin: 10,
+            justifyContent: 'center',
+            alignContent: 'center',
+        },
+
+        dreamTeamIcon: {
+            width: '70%',
+            height: '70%',
+            alignSelf: 'center'
         },
 
         playerContainer: {

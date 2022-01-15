@@ -3,19 +3,29 @@ import { Image, View, StyleSheet, Text } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
 import { Jerseys } from "../../Global/Images";
-import { GetPlayerPointsForAFixture, GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
+import { GetFixturePlayerData, GetPlayerPointsForAFixture, GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
-import { FixtureInfo } from "../../Store/fixtureSlice";
+import { FixtureInfo, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
     overview: FplOverview;
 }
 
-const GoalView = (player:PlayerData, fixtureInfo: FixtureInfo) => {
+function GetFixtureStats(player: PlayerData, fixtureInfo: FixtureInfo, identifier: string) {
+    return player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === identifier)?.value;
+}
 
-    let goalsScored = player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === "goals_scored")?.value;
+const GoalView = (player:PlayerData, teamInfo: TeamInfo) => {
+
+    let goalsScored : number | undefined;
+
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        goalsScored = GetFixtureStats(player, teamInfo, "goals_scored")
+    } else {
+        goalsScored = player.gameweekData.stats.assists;
+    }
 
     if (goalsScored === undefined) {
         return null;
@@ -27,9 +37,15 @@ const GoalView = (player:PlayerData, fixtureInfo: FixtureInfo) => {
     }
 }
 
-const AssistView = (player:PlayerData, fixtureInfo: FixtureInfo) => {
+const AssistView = (player:PlayerData, teamInfo: TeamInfo) => {
 
-    let assistsScored = player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === "assists")?.value;
+    let assistsScored : number | undefined;
+
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        assistsScored = GetFixtureStats(player, teamInfo, "assists")
+    } else {
+        assistsScored = player.gameweekData.stats.goals_scored;
+    }
 
     if (assistsScored === undefined) {
         return null;
@@ -42,8 +58,15 @@ const AssistView = (player:PlayerData, fixtureInfo: FixtureInfo) => {
 
 }
 
-const OwnGoalsView = (player:PlayerData, fixtureInfo: FixtureInfo) => { 
-    let ownGoalsScored = player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === "own_goals")?.value;
+const OwnGoalsView = (player:PlayerData, teamInfo: TeamInfo) => { 
+    
+    let ownGoalsScored : number | undefined;
+
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        ownGoalsScored = GetFixtureStats(player, teamInfo, "own_goals")
+    } else {
+        ownGoalsScored = player.gameweekData.stats.own_goals;
+    }
 
     if (ownGoalsScored === undefined) {
         return null;
@@ -55,33 +78,95 @@ const OwnGoalsView = (player:PlayerData, fixtureInfo: FixtureInfo) => {
     }
 }
 
+const SavesView = (player:PlayerData, teamInfo: TeamInfo) => { 
+    
+    let saves : number | undefined;
+
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        saves = GetFixtureStats(player, teamInfo, "saves")
+    } else {
+        saves = player.gameweekData.stats.saves;
+    }
+
+    if (saves === undefined) {
+        return null;
+    } else {
+
+        saves = Math.floor(saves / 3);
+
+        return <View style={styles.statsContainer}>
+                    {[...Array(saves)].map(() =>  <Image style={styles.statsImage} source={require('../../../assets/stats/penaltysave.png')} resizeMode="contain"/>)}
+                </View> 
+    }
+}
+
+const YellowCardView = (player: PlayerData, teamInfo: TeamInfo) => {
+    let yellowCards : number | undefined;
+
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        yellowCards = GetFixtureStats(player, teamInfo, "yellow_cards")
+    } else {
+        yellowCards = player.gameweekData.stats.yellow_cards;
+    }
+
+    if (yellowCards === undefined) {
+        return null;
+    } else {
+
+        return  <>{[...Array(yellowCards)].map(() =>  <Image style={styles.cardImage} source={require('../../../assets/stats/yellowcard.png')} resizeMode="contain"/>)}</>
+    }
+}
+
+const RedCardView = (player: PlayerData, teamInfo: TeamInfo) => {
+    let redCards : number | undefined;
+
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        redCards = GetFixtureStats(player, teamInfo, "red_cards")
+    } else {
+        redCards = player.gameweekData.stats.red_cards;
+    }
+
+    if (redCards === undefined) {
+        return null;
+    } else {
+
+        return  <>{[...Array(redCards)].map(() => <Image style={styles.cardImage} source={require('../../../assets/stats/redcard.png')} resizeMode="contain"/>)}</>
+    }
+}
+
+function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
+    
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        return GetPlayerPointsForAFixture(player, teamInfo);
+    } else {
+        return player.gameweekData.stats.total_points;
+    }
+}
+
 const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
-    const fixtureInfo = useAppSelector((state) => state.fixture);
+    const teamInfo = useAppSelector((state) => state.team);
 
     return (
         <View style={styles.container}>
-            { (fixtureInfo.fixture !== null && prop.player.gameweekData.explain.find(fixture => fixture.fixture === fixtureInfo.fixture?.id) !== undefined) &&
+            { (teamInfo.teamType !== TeamTypes.Empty) &&
             <><View style={styles.imageContainer}>
 
-                <Image style={styles.jersey} source={Jerseys[GetTeamDataFromOverviewWithFixtureTeamID(fixtureInfo.isHome ? fixtureInfo.fixture.team_h : fixtureInfo.fixture.team_a, prop.overview).code]} resizeMode="contain"/> 
+                <Image style={styles.jersey} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/> 
 
                 <View style={styles.allStatsContainer}>
-                    { GoalView(prop.player, fixtureInfo) }
-                    { AssistView(prop.player, fixtureInfo) }
-                    { OwnGoalsView(prop.player, fixtureInfo) }
+                    { GoalView(prop.player, teamInfo) }
+                    { AssistView(prop.player, teamInfo) }
+                    { SavesView(prop.player, teamInfo) }
+                    { OwnGoalsView(prop.player, teamInfo) }
                     <View style={styles.cardsContainer}>
-                        { (prop.player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === "yellow_cards") !== undefined) &&
-                            <Image style={styles.cardImage} source={require('../../../assets/stats/yellowcard.png')} resizeMode="contain"/>
-                        }
-                        { (prop.player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === "red_cards") !== undefined) &&
-                            <Image style={styles.cardImage} source={require('../../../assets/stats/redcard.png')} resizeMode="contain"/>
-                        }
+                        { YellowCardView(prop.player, teamInfo) }
+                        { RedCardView(prop.player, teamInfo) }
                     </View> 
                 </View>
 
                 <View style={styles.scoreContainer}>
-                    <Text style={styles.scoreText}>{GetPlayerPointsForAFixture(prop.player, fixtureInfo)}</Text>
+                    <Text style={styles.scoreText}>{GetPointTotal(prop.player, teamInfo)}</Text>
                 </View>   
 
             </View>
@@ -110,9 +195,9 @@ const styles = StyleSheet.create(
         jersey: {
             position: 'absolute',
             alignSelf: 'center',
-            height: '80%',
+            height: '75%',
             width: '70%',
-            marginTop: 5
+            marginTop: 8
         },
 
         //#region Stats
@@ -148,7 +233,8 @@ const styles = StyleSheet.create(
             height: GlobalConstants.width/20,
             width: GlobalConstants.width/20,
             marginRight: -13,
-            marginTop: -1
+            marginTop: -1,
+            transform: [{ rotate: "337deg" }]
         },
         //#endregion
 

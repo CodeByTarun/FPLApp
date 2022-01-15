@@ -11,7 +11,7 @@ import moment from 'moment-timezone';
 import * as Localization from 'expo-localization'
 import { useGetGameweekDataQuery, useGetOverviewQuery } from '../../Store/fplSlice'
 import { useAppDispatch } from '../../Store/hooks'
-import { fixtureChanged } from '../../Store/fixtureSlice'
+import { changeToFixture } from '../../Store/teamSlice'
 import { GetHighestMinForAPlayer, GetTeamDataFromOverviewWithFixtureTeamID } from '../../Helpers/FplAPIHelpers'
 import { FplGameweek } from '../../Models/FplGameweek'
 import { FplOverview } from '../../Models/FplOverview'
@@ -27,7 +27,7 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek | undefined)
     if (fixture !== undefined) {
         if (fixture.finished_provisional == true) {
            return <><Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
-                    <Text style={styles.timeText}>FT</Text></>
+                    <Text style={styles.fullTimeText}>FT</Text></>
         } else if (fixture.started == true && gameweek !== undefined) {
            return <><Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
                     <Text style={styles.timeText}>{GetHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
@@ -43,8 +43,8 @@ const FixtureCard = (prop : FixtureCardProp) => {
 
     const onPress = () => {
 
-        if (prop.fixture !== undefined) {
-            dispatch(fixtureChanged(prop.fixture))
+        if (prop.fixture) {
+            dispatch(changeToFixture(prop.fixture))
         }
     };
 
@@ -52,7 +52,7 @@ const FixtureCard = (prop : FixtureCardProp) => {
         
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={onPress} disabled={!prop.fixture?.started}>            
-            { (prop.fixture !== undefined && prop.overviewData !== undefined && prop.gameweekData !== undefined) &&
+            { (prop.fixture && prop.overviewData && prop.gameweekData) &&
                 <View style={styles.card}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
@@ -131,8 +131,16 @@ const styles = StyleSheet.create({
     timeText: {
         fontSize: 0.025 * GlobalConstants.width,
         alignSelf: 'center',
-        color: 'gray'
+        color: 'red',
+        fontWeight: "bold",
+        marginLeft: 3
     },
+
+    fullTimeText: {
+        fontSize: 0.025 * GlobalConstants.width,
+        alignSelf: 'center',
+        color: 'gray'
+    }
     //#endregion
 });
 

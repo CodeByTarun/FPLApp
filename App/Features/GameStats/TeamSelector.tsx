@@ -36,7 +36,7 @@ const styles = StyleSheet.create(
             justifyContent: 'center',
             alignSelf: 'center',
             position: 'absolute',
-            right: 0,
+            right: 5,
             backgroundColor: GlobalConstants.buttonColor,
             borderRadius: GlobalConstants.cornerRadius,
             width: 70,

@@ -12,7 +12,7 @@ const TeamEmblem = (prop: TeamEmblemProp) => {
 
     return (
         <View style={styles.teamInfoView}>
-            {(prop.team !== undefined) &&
+            {(prop.team) &&
             <><Image style={styles.emblems} source={Emblems[prop.team.code]} resizeMode='contain' />
               <Text style={{ fontSize: 0.025 * GlobalConstants.width, alignSelf: 'center' }}>{ prop.team.short_name }</Text></>
             }

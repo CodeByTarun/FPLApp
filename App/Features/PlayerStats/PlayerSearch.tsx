@@ -16,7 +16,7 @@ const PlayerSearch = () => {
         <View style={styles.container}>
             <TextInput style={styles.searchbox}  placeholder="Search player..."/>
             <TouchableOpacity style={styles.button} onPress={onTablePress}>
-                <Image style={styles.tableImage} source={require('../../../assets/tablet.png')} resizeMode="contain"/>
+                <Image style={styles.tableImage} source={require('../../../assets/table.png')} resizeMode="contain"/>
             </TouchableOpacity>
         </View>
     )
@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
     },
 
     tableImage: {
-        height: '65%',
-        width : '65%',
+        height: '75%',
+        width : '75%',
         alignSelf: 'center',
     },
 });

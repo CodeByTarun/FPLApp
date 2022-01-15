@@ -10,7 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import LineupContainer from "../GameStats/LineupContainer";
 import PlayerSearch from "../PlayerStats/PlayerSearch";
 import { FplFixture } from "../../Models/FplFixtures";
-import { fixtureChanged, removeFixture } from "../../Store/fixtureSlice";
+import { changeToFixture, removeFixture } from "../../Store/teamSlice";
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 
@@ -34,7 +34,7 @@ const FixturesView = (prop: FixturesViewProp) => {
   const liveGameweek = prop.overview?.events.filter((event) => { return event.is_current === true; })[0].id;
   const [gameweekNumber, setGameweekNumber] = useState(liveGameweek);
   const fixtures = useGetFixturesQuery();
-  const gameweekData = useGetGameweekDataQuery((gameweekNumber !== undefined) ? gameweekNumber : skipToken);
+  const gameweekData = useGetGameweekDataQuery((gameweekNumber) ? gameweekNumber : skipToken);
 
   useEffect(
     function setSelectedFixture() {
@@ -45,7 +45,7 @@ const FixturesView = (prop: FixturesViewProp) => {
       if (sortedGameweekFixtures !== undefined) {
 
         if (sortedGameweekFixtures[0].started === true) {
-          dispatch(fixtureChanged(sortedGameweekFixtures[0]))
+          dispatch(changeToFixture(sortedGameweekFixtures[0]))
         } 
         else {
           dispatch(removeFixture())
@@ -59,8 +59,9 @@ const FixturesView = (prop: FixturesViewProp) => {
       let refetchGameweek: NodeJS.Timer;
 
       if (gameweekNumber !== undefined && fixtures.data !== undefined) {
+        console.log("first check");
         if (gameweekNumber === liveGameweek && IsThereAMatchInProgress(gameweekNumber, fixtures.data)) {
-          
+          console.log("second check");
           refetchFixture = setInterval(() => fixtures.refetch(), 30000);
           refetchGameweek = setInterval(() => gameweekData.refetch(), 30000);
         }
@@ -91,7 +92,7 @@ const FixturesView = (prop: FixturesViewProp) => {
       </View>
       { (fixtures.isSuccess == true) &&
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>
-        { (fixtures.data !== undefined && gameweekData.data !== undefined && prop.overview !== undefined) &&
+        { (fixtures.data && gameweekData.data && prop.overview) &&
 
           fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
                         .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
