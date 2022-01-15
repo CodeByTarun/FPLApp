@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
-import { TouchableOpacity, View, StyleSheet, Dimensions, Text, TouchableHighlight, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
+import { TouchableOpacity, View, StyleSheet, Image, Text, TouchableHighlight, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
 import { TeamInfo, TeamTypes, toggleTeamShown } from "../../Store/teamSlice";
 import { useGetFixturesQuery, useGetOverviewQuery } from "../../Store/fplSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import * as GlobalConstants from '../../Global/GlobalConstants'
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { FplFixture } from "../../Models/FplFixtures";
+import { Emblems } from "../../Global/Images";
 
 // This is going to be a switch selector control
 // First i need a background,
@@ -48,9 +49,13 @@ const TeamSwitch = () => {
             <>
             <Animated.View style={[styles.highlight, {transform: [{translateX: translateAnim}, { perspective: 100}] }]}/>
             <TouchableWithoutFeedback style={styles.button} onPress={switchTeam}>
-                <View style={styles.buttonContainer}>
-                    <Text style={styles.text}>{ GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview.data).short_name }</Text>
-                    <Text style={styles.text}>{ GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview.data).short_name }</Text>
+                <View style={styles.touchableContainer}>
+                    <View style={styles.buttonContainer}>
+                        <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview.data).code]} resizeMode='contain' />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview.data).code]} resizeMode='contain' />
+                    </View>
                 </View>
             </TouchableWithoutFeedback>
             </>
@@ -62,8 +67,9 @@ const TeamSwitch = () => {
 const styles = StyleSheet.create(
     {
         container: {
+            margin: 6,
+            flex: 1,
             flexDirection: 'row',
-            height: "70%",
             alignItems: 'center',
             backgroundColor: GlobalConstants.tertiaryColor,
             borderRadius: GlobalConstants.cornerRadius
@@ -72,21 +78,33 @@ const styles = StyleSheet.create(
         highlight: {
             height: "100%",
             width: "50%",
+            position: 'absolute',
             backgroundColor: GlobalConstants.secondayColor,
-            position: "absolute",
             borderRadius: GlobalConstants.cornerRadius,
         },
 
         button: {
-            height: "70%",
+            flex: 1,
+            flexDirection: 'row',
+        },
+
+        touchableContainer: {
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
             justifyContent: 'center',
         },
 
         buttonContainer: {
+            flex: 1,
             flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center'
+        },
 
+        emblems: {
+            flex:1,
+            margin: 8,
+            resizeMode: 'contain',
+            alignSelf: 'center'
         },
 
         text: {

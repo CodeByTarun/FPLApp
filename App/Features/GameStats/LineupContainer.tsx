@@ -27,16 +27,16 @@ const styles = StyleSheet.create(
         },
 
         top: {
-            flex: 1,
+            flex: 2,
         },
 
         middle: {
-            flex: 8,
+            flex: 14,
             width : '100%',
         },
 
         bottom: {
-            flex: 2,
+            flex: 3,
             backgroundColor: 'lightgray'
         }
     }

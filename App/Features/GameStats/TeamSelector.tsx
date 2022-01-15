@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch";
 
@@ -7,14 +7,21 @@ const onMyTeamButtonPress = () => {
 
 }
 
+const onDreamTeamPress = () => {
+
+}
+
 const TeamSelector = () => {
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.dreamTeamButton} onPress={onDreamTeamPress}>
+                <Image style={styles.Icon} source={require('../../../assets/dreamteam.png')} resizeMode="contain"/>
+            </TouchableOpacity>
             <View style={styles.switchContainer}>
                 <TeamSwitch/>
             </View>
             <TouchableOpacity style={styles.myTeamButton} onPress={onMyTeamButtonPress}>
-                <Text style={styles.text}>My Team</Text>
+            <Image style={styles.Icon} source={require('../../../assets/team.png')} resizeMode="contain"/>
             </TouchableOpacity>
         </View>
     )
@@ -30,6 +37,24 @@ const styles = StyleSheet.create(
 
         switchContainer: {
             alignSelf: 'center',
+            width: '30%'
+        },
+
+        dreamTeamButton: {
+            justifyContent: 'center',
+            alignSelf: 'center',
+            position: 'absolute',
+            left: 5,
+            backgroundColor: GlobalConstants.buttonColor,
+            borderRadius: GlobalConstants.cornerRadius,
+            width: GlobalConstants.width*0.1,
+            height: '70%',
+        },
+
+        Icon: {
+            width: '80%',
+            height: '80%',
+            alignSelf: 'center'
         },
 
         myTeamButton: {
@@ -39,7 +64,7 @@ const styles = StyleSheet.create(
             right: 5,
             backgroundColor: GlobalConstants.buttonColor,
             borderRadius: GlobalConstants.cornerRadius,
-            width: 70,
+            width: GlobalConstants.width*0.1,
             height: '70%'   
         },
 

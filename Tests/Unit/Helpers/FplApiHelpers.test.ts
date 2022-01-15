@@ -14,7 +14,7 @@ const teamInfo: TeamInfo =  {
     teamType: TeamTypes.Fixture,
     fixture: fixture as FplFixture,
     isHome: true,
-
+    gameweek: 21,
 }
 
 

@@ -64,9 +64,6 @@ const Lineup = () => {
     return (
         <View style={styles.container}>
             <Image style={styles.field} source={require('../../../assets/threequartersfield.jpg')}/>
-            <TouchableOpacity style={styles.dreamTeamButton}>
-                <Image style={styles.dreamTeamIcon} source={require('../../../assets/dreamteam.png')} resizeMode="contain"/>
-            </TouchableOpacity>
             {(teamInfo.teamType !== TeamTypes.Empty && gameweek.data && overview.data) && 
 
             <View style={styles.playerContainer}>
@@ -89,21 +86,6 @@ const styles = StyleSheet.create(
             height: '107.5%',
             alignSelf: 'center',
             position: "absolute"
-        },
-
-        dreamTeamButton: {
-            position: 'absolute',
-            width: '15%',
-            height: '15%',
-            margin: 10,
-            justifyContent: 'center',
-            alignContent: 'center',
-        },
-
-        dreamTeamIcon: {
-            width: '70%',
-            height: '70%',
-            alignSelf: 'center'
         },
 
         playerContainer: {
