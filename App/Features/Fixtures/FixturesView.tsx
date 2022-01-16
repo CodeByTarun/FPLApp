@@ -107,16 +107,14 @@ const FixturesView = (prop: FixturesViewProp) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingRight:5,
     },
 
     gameweekView: {
       height:30,
-      margin: 3,
+      margin: 4,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      paddingLeft: 5,
     },
 
     fixturesView: {

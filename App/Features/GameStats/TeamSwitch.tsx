@@ -102,7 +102,10 @@ const styles = StyleSheet.create(
 
         emblems: {
             flex:1,
-            margin: 8,
+            marginLeft: 6,
+            position: 'absolute',
+            height: '80%',
+            width: '80%',
             resizeMode: 'contain',
             alignSelf: 'center'
         },
