@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
-import GlobalStyles from "../../Global/GlobalStyles";
 import FixtureCard from './FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { useGetFixturesQuery, useGetGameweekDataQuery, useGetOverviewQuery, } from '../../Store/fplSlice'
 import * as GlobalConstants from '../../Global/GlobalConstants'
 import { FplOverview } from "../../Models/FplOverview";
 import RNPickerSelect from 'react-native-picker-select';
-import LineupContainer from "../GameStats/LineupContainer";
-import PlayerSearch from "../PlayerStats/PlayerSearch";
 import { FplFixture } from "../../Models/FplFixtures";
 import { changeToFixture, removeFixture } from "../../Store/teamSlice";
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
@@ -59,9 +56,7 @@ const FixturesView = (prop: FixturesViewProp) => {
       let refetchGameweek: NodeJS.Timer;
 
       if (gameweekNumber !== undefined && fixtures.data !== undefined) {
-        console.log("first check");
         if (gameweekNumber === liveGameweek && IsThereAMatchInProgress(gameweekNumber, fixtures.data)) {
-          console.log("second check");
           refetchFixture = setInterval(() => fixtures.refetch(), 30000);
           refetchGameweek = setInterval(() => gameweekData.refetch(), 30000);
         }
@@ -125,6 +120,7 @@ const styles = StyleSheet.create({
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: GlobalConstants.width*0.04,
+    fontWeight: "600",
     paddingVertical: 12,
     paddingHorizontal: 10,
     color: GlobalConstants.textPrimaryColor,

@@ -45,7 +45,7 @@ const styles = StyleSheet.create(
 
         switchContainer: {
             alignSelf: 'center',
-            width: '30%'
+            width: '40%'
         },
 
         dreamTeamButton: {

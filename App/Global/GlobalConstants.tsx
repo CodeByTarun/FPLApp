@@ -8,8 +8,8 @@ export const cornerRadius = 8;
 
 // Color Scheme
 export const buttonColor = 'whitesmoke';
-export const primaryColor = 'purple';
-export const secondayColor = 'indigo';
-export const tertiaryColor = 'whitesmoke';
+export const primaryColor = 'indigo';
+export const secondayColor = 'rebeccapurple';
+export const tertiaryColor = 'white';
 export const textPrimaryColor = 'white';
 export const textSecondaryColor = 'black';
