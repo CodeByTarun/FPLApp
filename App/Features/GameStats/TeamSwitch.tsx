@@ -1,13 +1,11 @@
 import React, { useRef } from "react";
-import { TouchableOpacity, View, StyleSheet, Image, Text, TouchableHighlight, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, Image, Text, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
 import { TeamInfo, TeamTypes, toggleTeamShown } from "../../Store/teamSlice";
-import { useGetFixturesQuery, useGetOverviewQuery } from "../../Store/fplSlice";
+import { useGetOverviewQuery } from "../../Store/fplSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import * as GlobalConstants from '../../Global/GlobalConstants'
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
-import { FplFixture } from "../../Models/FplFixtures";
 import { Emblems } from "../../Global/Images";
-import { isWhiteSpaceLike } from "typescript";
 
 // This is going to be a switch selector control
 // First i need a background,
@@ -52,13 +50,17 @@ const TeamSwitch = () => {
             <TouchableWithoutFeedback style={styles.button} onPress={switchTeam}>
                 <View style={styles.touchableContainer}>
                     <View style={styles.buttonContainer}>
-                        <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview.data).code]} resizeMode='contain' />
+                        <View style={styles.emblemView}>
+                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview.data).code]} resizeMode='contain' />
+                        </View>
                         <Text style={[styles.scoreText, teamInfo.isHome ? styles.textWhite : null]}>{teamInfo.fixture.team_h_score}</Text>
                     </View>
                     <Text> </Text>
                     <View style={styles.buttonContainer}>
                         <Text style={[styles.scoreText, teamInfo.isHome ? null : styles.textWhite]}>{teamInfo.fixture.team_a_score}</Text>
-                        <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview.data).code]} resizeMode='contain' />
+                        <View style={styles.emblemView}>
+                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview.data).code]} resizeMode='contain' />
+                        </View>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -108,11 +110,16 @@ const styles = StyleSheet.create(
             padding: 7
         },
 
+        emblemView: {
+            flex:1,
+        },
+
         emblems: {
             flex:1,
             resizeMode: 'contain',
-            alignSelf: 'center',
-            margin: 5
+            alignSelf: 'flex-start',
+            height: '100%',
+            width: '100%',
          },
 
         scoreText: {
@@ -127,9 +134,9 @@ const styles = StyleSheet.create(
 
         text: {
             width: GlobalConstants.width*0.17,
-            fontSize: GlobalConstants.width*0.04,
+            fontSize: GlobalConstants.width*0.04, 
             textAlign: "center"
-        }
+        },
     }
 );
 

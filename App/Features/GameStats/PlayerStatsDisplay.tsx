@@ -3,7 +3,7 @@ import { Image, View, StyleSheet, Text } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
 import { Jerseys } from "../../Global/Images";
-import { GetFixturePlayerData, GetPlayerPointsForAFixture, GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
+import { GetPlayerPointsForAFixture } from "../../Helpers/FplAPIHelpers";
 import { useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
 import { FixtureInfo, TeamInfo, TeamTypes } from "../../Store/teamSlice";
@@ -24,7 +24,7 @@ const GoalView = (player:PlayerData, teamInfo: TeamInfo) => {
     if (teamInfo.teamType === TeamTypes.Fixture) {
         goalsScored = GetFixtureStats(player, teamInfo, "goals_scored")
     } else {
-        goalsScored = player.gameweekData.stats.assists;
+        goalsScored = player.gameweekData.stats.goals_scored;
     }
 
     if (goalsScored === undefined) {
@@ -44,7 +44,7 @@ const AssistView = (player:PlayerData, teamInfo: TeamInfo) => {
     if (teamInfo.teamType === TeamTypes.Fixture) {
         assistsScored = GetFixtureStats(player, teamInfo, "assists")
     } else {
-        assistsScored = player.gameweekData.stats.goals_scored;
+        assistsScored = player.gameweekData.stats.assists;
     }
 
     if (assistsScored === undefined) {

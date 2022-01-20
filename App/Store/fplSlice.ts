@@ -2,12 +2,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { FplDraftGameweekPicks } from '../Models/FplDraftGameekPicks';
 import { FplDraftLeagueInfo } from '../Models/FplDraftLeagueInfo';
 import { FplDraftUserInfo } from '../Models/FplDraftUserInfo';
-import { FplDreamTeam } from '../Models/FplDreamTeam';
-import { FplFixture } from "../Models/FplFixtures"
-import { FplGameweek } from '../Models/FplGameweek'
+import { FplFixture } from "../Models/FplFixtures";
+import { FplGameweek } from '../Models/FplGameweek';
 import { FplManagerGameweekPicks } from '../Models/FplManagerGameweekPicks';
 import { FplManagerInfo } from '../Models/FplManagerInfo';
-import { FplOverview } from '../Models/FplOverview'
+import { FplOverview } from '../Models/FplOverview';
 
 export const fplSlice = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
@@ -26,10 +25,6 @@ export const fplSlice = createApi({
 
     getGameweekData: builder.query<FplGameweek, number>({
       query: (gameweek: number) => `/event/${gameweek}/live`
-    }),
-
-    getGameweekDreamTeam: builder.query<FplDreamTeam, number>({
-      query: (gameweek:number) => `/dreamteam/${gameweek}`
     }),
 
     getDraftUserInfo: builder.query<FplDraftUserInfo, number>({
@@ -54,5 +49,5 @@ export const fplSlice = createApi({
   })
 })
 
-export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetGameweekDreamTeamQuery, useGetDraftUserInfoQuery,
+export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetDraftUserInfoQuery,
                useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetManagerInfoQuery, useGetManagerGameweekPicksQuery } = fplSlice

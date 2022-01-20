@@ -12,13 +12,17 @@ export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek,
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return GetFixturePlayerData(gameweekData, overviewData, teamInfo);
-    } else {
+    }
+    else if (teamInfo.teamType === TeamTypes.Dream) {
+        return GetDreamTeamPlayerData(gameweekData, overviewData, teamInfo);
+    }
+    else {
         return null;
     }
 
 }
 
-export function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: FplOverview, fixtureInfo: FixtureInfo): PlayerData[] | null {
+function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: FplOverview, fixtureInfo: FixtureInfo): PlayerData[] | null {
     let listOfPlayersFromFixtures = fixtureInfo.isHome ? overviewData.elements.filter(element => element.team == fixtureInfo.fixture?.team_h) :
                                                          overviewData.elements.filter(element => element.team == fixtureInfo.fixture?.team_a);
 
@@ -32,6 +36,23 @@ export function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: Fp
 
         return combinedPlayerData.filter(player => FilterForPlayerThatHavePlayedInTheFixture(player, fixtureInfo))
                                  .sort((playerA, playerB) => (playerA.overviewData.element_type - playerB.overviewData.element_type));
+    }
+    
+    return null;
+}
+
+function GetDreamTeamPlayerData(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo) {
+    let listOfDreamTeamPlayers = gameweekData.elements.filter(element => element.stats.in_dreamteam === true);
+
+    if (listOfDreamTeamPlayers != undefined) {
+        let combinedPlayerData = listOfDreamTeamPlayers.map(
+            (dreamTeamPlayer) => (
+                {
+                    gameweekData: dreamTeamPlayer,
+                    overviewData: overviewData.elements.find((player => player.id === dreamTeamPlayer.id))
+                } as PlayerData))
+        
+        return combinedPlayerData.sort((playerA, playerB) => (playerA.overviewData.element_type - playerB.overviewData.element_type)) 
     }
     
     return null;
