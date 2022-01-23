@@ -74,7 +74,7 @@ const styles = StyleSheet.create(
         //#region Modal Styling
         modal: {
             position: 'absolute',
-            top: GlobalConstants.height * 0.3,
+            top: GlobalConstants.height * 0.2,
             height: '25%',
             width: '65%',
             backgroundColor: 'red',
