@@ -1,36 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1642148157195" clover="3.2.0">
-  <project timestamp="1642148157195" name="All files">
-    <metrics statements="27" coveredstatements="18" conditionals="16" coveredconditionals="9" methods="22" coveredmethods="12" elements="65" coveredelements="39" complexity="0" loc="27" ncloc="27" packages="1" files="1" classes="1"/>
-    <file name="FplAPIHelpers.tsx" path="T:\Coding\FPLApp\App\Helpers\FplAPIHelpers.tsx">
-      <metrics statements="27" coveredstatements="18" conditionals="16" coveredconditionals="9" methods="22" coveredmethods="12"/>
-      <line num="8" count="0" type="stmt"/>
-      <line num="12" count="669" type="cond" truecount="1" falsecount="1"/>
-      <line num="13" count="0" type="stmt"/>
-      <line num="15" count="1" type="cond" truecount="1" falsecount="1"/>
-      <line num="16" count="1" type="stmt"/>
-      <line num="18" count="35" type="stmt"/>
-      <line num="19" count="6660" type="stmt"/>
-      <line num="23" count="35" type="stmt"/>
-      <line num="24" count="35" type="stmt"/>
-      <line num="27" count="0" type="stmt"/>
-      <line num="32" count="35" type="cond" truecount="1" falsecount="1"/>
-      <line num="33" count="35" type="stmt"/>
-      <line num="35" count="35" type="cond" truecount="1" falsecount="1"/>
-      <line num="36" count="35" type="stmt"/>
-      <line num="38" count="35" type="cond" truecount="4" falsecount="0"/>
-      <line num="39" count="14" type="stmt"/>
-      <line num="44" count="21" type="stmt"/>
-      <line num="49" count="0" type="stmt"/>
-      <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="54" count="0" type="stmt"/>
-      <line num="55" count="0" type="stmt"/>
-      <line num="57" count="0" type="stmt"/>
-      <line num="61" count="1" type="stmt"/>
-      <line num="63" count="1" type="cond" truecount="1" falsecount="1"/>
-      <line num="64" count="3" type="stmt"/>
-      <line num="65" count="1" type="stmt"/>
-      <line num="68" count="0" type="stmt"/>
-    </file>
+<coverage generated="1642923348186" clover="3.2.0">
+  <project timestamp="1642923348186" name="All files">
+    <metrics statements="80" coveredstatements="28" conditionals="46" coveredconditionals="13" methods="40" coveredmethods="17" elements="166" coveredelements="58" complexity="0" loc="80" ncloc="80" packages="2" files="3" classes="3"/>
+    <package name="Helpers">
+      <metrics statements="68" coveredstatements="25" conditionals="38" coveredconditionals="13" methods="34" coveredmethods="17"/>
+      <file name="FplAPIHelpers.tsx" path="T:\Coding\FPLApp\App\Helpers\FplAPIHelpers.tsx">
+        <metrics statements="39" coveredstatements="22" conditionals="22" coveredconditionals="12" methods="28" coveredmethods="16"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="13" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="26" count="2007" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="32" count="105" type="stmt"/>
+        <line num="33" count="19980" type="stmt"/>
+        <line num="37" count="105" type="stmt"/>
+        <line num="38" count="105" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="63" count="105" type="cond" truecount="1" falsecount="1"/>
+        <line num="64" count="105" type="stmt"/>
+        <line num="66" count="105" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="105" type="stmt"/>
+        <line num="69" count="105" type="cond" truecount="4" falsecount="0"/>
+        <line num="70" count="42" type="stmt"/>
+        <line num="75" count="63" type="stmt"/>
+        <line num="80" count="380" type="stmt"/>
+        <line num="81" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="94" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="95" count="3" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+      </file>
+      <file name="FplDataStorageService.ts" path="T:\Coding\FPLApp\App\Helpers\FplDataStorageService.ts">
+        <metrics statements="29" coveredstatements="3" conditionals="16" coveredconditionals="1" methods="6" coveredmethods="1"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="Store">
+      <metrics statements="12" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="teamSlice.ts" path="T:\Coding\FPLApp\App\Store\teamSlice.ts">
+        <metrics statements="12" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="66" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="72" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>
