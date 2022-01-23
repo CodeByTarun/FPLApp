@@ -1,7 +1,7 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
-import React from "react";
-import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
+import React, { useState } from "react";
+import { View, Image, StyleSheet, TouchableOpacity, Text, Modal } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch";
@@ -30,8 +30,10 @@ const LineupContainer = () => {
     const teamInfo: TeamInfo = useAppSelector((state) => state.team);
     const dispatch = useAppDispatch();
 
-    const onMyTeamButtonPress = () => {
+    const [addLeagueModalVisible, setAddLeagueModalVisible] = useState(false);
 
+    const onMyTeamButtonPress = () => {
+        setAddLeagueModalVisible(true);
     }
     
     const onDreamTeamPress = () => {
@@ -40,16 +42,22 @@ const LineupContainer = () => {
 
     return (
         <View style={styles.container}>
+            <Modal animationType="fade" transparent={true} visible={addLeagueModalVisible}>
+                <View style={styles.modal}>
+                    <Text>Hello</Text>
+                </View>
+            </Modal>
+            
             <View style={styles.top}>
                 <View style={styles.topContainer}>
                     <TouchableOpacity style={styles.dreamTeamButton} onPress={onDreamTeamPress}>
-                        <Image style={styles.Icon} source={require('../../../assets/dreamteam.png')} resizeMode="contain"/>
+                        <Image style={styles.icon} source={require('../../../assets/dreamteam.png')} resizeMode="contain"/>
                     </TouchableOpacity>
 
                     {TeamSelectorHeader(teamInfo)}
                     
                     <TouchableOpacity style={styles.myTeamButton} onPress={onMyTeamButtonPress}>
-                        <Image style={styles.Icon} source={require('../../../assets/team.png')} resizeMode="contain"/>
+                        <Image style={styles.icon} source={require('../../../assets/team.png')} resizeMode="contain"/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -63,6 +71,20 @@ const LineupContainer = () => {
 
 const styles = StyleSheet.create(
     {
+        //#region Modal Styling
+        modal: {
+            position: 'absolute',
+            top: GlobalConstants.height * 0.3,
+            height: '25%',
+            width: '65%',
+            backgroundColor: 'red',
+            alignSelf: 'center',
+            borderRadius: GlobalConstants.cornerRadius,
+            padding: 10,
+        },
+        //#endregion
+
+        //#region Container styling
         container: {
             flex: 1,
             margin: 0,
@@ -104,7 +126,7 @@ const styles = StyleSheet.create(
             height: '70%',
         },
 
-        Icon: {
+        icon: {
             width: '80%',
             height: '80%',
             alignSelf: 'center'
@@ -127,7 +149,7 @@ const styles = StyleSheet.create(
             fontSize: GlobalConstants.width*0.045,
             fontWeight: 'bold'
         }
-        
+        //#endregion
     }
 );
 

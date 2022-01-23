@@ -7,7 +7,7 @@ import * as GlobalConstants from '../../Global/GlobalConstants'
 import { FplOverview } from "../../Models/FplOverview";
 import RNPickerSelect from 'react-native-picker-select';
 import { FplFixture } from "../../Models/FplFixtures";
-import { changeToFixture, removeFixture } from "../../Store/teamSlice";
+import { changeGameweek, changeToFixture, removeFixture } from "../../Store/teamSlice";
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 
@@ -32,6 +32,16 @@ const FixturesView = (prop: FixturesViewProp) => {
   const [gameweekNumber, setGameweekNumber] = useState(liveGameweek);
   const fixtures = useGetFixturesQuery();
   const gameweekData = useGetGameweekDataQuery((gameweekNumber) ? gameweekNumber : skipToken);
+
+  useEffect(
+    function setInitialGameweek() {
+      if (prop.overview) {
+        let gameweekNumber = prop.overview.events.find(event => event.is_current === true)?.id;
+        if (gameweekNumber) {
+          dispatch(changeGameweek(gameweekNumber))
+        }
+      }
+    }, []);
 
   useEffect(
     function setSelectedFixture() {
