@@ -5,7 +5,7 @@
 
 import React, { useEffect } from "react";
 import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { useGetGameweekDataQuery, useGetOverviewQuery } from "../../Store/fplSlice";
+import { useGetBudgetGameweekPicksQuery, useGetDraftGameweekPicksQuery, useGetGameweekDataQuery, useGetOverviewQuery } from "../../Store/fplSlice";
 import { useAppSelector } from "../../Store/hooks";
 import PlayerStatsDisplay from "./PlayerStatsDisplay";
 import { GetPlayerGameweekDataSortedByPosition } from "../../Helpers/FplAPIHelpers";
@@ -60,6 +60,8 @@ const Lineup = () => {
     const teamInfo = useAppSelector((state) => state.team);
     const overview = useGetOverviewQuery();
     const gameweek = useGetGameweekDataQuery((teamInfo.teamType !== TeamTypes.Empty) ? teamInfo.gameweek : skipToken);
+    const draftGameweek = useGetDraftGameweekPicksQuery((teamInfo.teamType === TeamTypes.Draft) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
+    const budgetGameweek = useGetBudgetGameweekPicksQuery((teamInfo.teamType === TeamTypes.Budget) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
     
     return (
         <View style={styles.container}>

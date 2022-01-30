@@ -1,39 +1,47 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
-import React, { useState } from "react";
-import { View, Image, StyleSheet, TouchableOpacity, Text, Modal } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Image, StyleSheet, TouchableOpacity, Text, Modal, Button, Pressable, TextInput, ScrollView } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
 import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import globalStyles from "../../Global/GlobalStyles";
+import { Icons } from "../../Global/Images";
+import TeamModal from "./TeamModal";
+import { useGetDraftLeagueInfoQuery, useGetDraftUserInfoQuery } from "../../Store/fplSlice";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 const TeamSelectorHeader = (teamInfo: TeamInfo) => {
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return (
         <View style={styles.switchContainer}>
-                        <TeamSwitch/>
+            <TeamSwitch/>
         </View>
         )
     }
-    
     else if (teamInfo.teamType === TeamTypes.Dream) {
         return (
             <Text style={styles.text}>Dream Team</Text>
         ) 
+    }
+    else if (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) {
+        return (
+            <Text style={styles.text}>{teamInfo.info.name}</Text>
+        )
     }
 }
 
 const LineupContainer = () => {
 
     const teamInfo: TeamInfo = useAppSelector((state) => state.team);
+    const [isTeamModalVisible, setIsTeamModalVisible] = useState(false);
     const dispatch = useAppDispatch();
 
-    const [addLeagueModalVisible, setAddLeagueModalVisible] = useState(false);
-
     const onMyTeamButtonPress = () => {
-        setAddLeagueModalVisible(true);
+        setIsTeamModalVisible(!isTeamModalVisible);
     }
     
     const onDreamTeamPress = () => {
@@ -42,11 +50,8 @@ const LineupContainer = () => {
 
     return (
         <View style={styles.container}>
-            <Modal animationType="fade" transparent={true} visible={addLeagueModalVisible}>
-                <View style={styles.modal}>
-                    <Text>Hello</Text>
-                </View>
-            </Modal>
+
+            <TeamModal isVisible={isTeamModalVisible} isVisibleFunction={setIsTeamModalVisible}/>
             
             <View style={styles.top}>
                 <View style={styles.topContainer}>
@@ -71,19 +76,6 @@ const LineupContainer = () => {
 
 const styles = StyleSheet.create(
     {
-        //#region Modal Styling
-        modal: {
-            position: 'absolute',
-            top: GlobalConstants.height * 0.2,
-            height: '25%',
-            width: '65%',
-            backgroundColor: 'red',
-            alignSelf: 'center',
-            borderRadius: GlobalConstants.cornerRadius,
-            padding: 10,
-        },
-        //#endregion
-
         //#region Container styling
         container: {
             flex: 1,

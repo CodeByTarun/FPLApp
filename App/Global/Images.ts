@@ -48,3 +48,25 @@ export const Emblems: { [key: number]: ImageURISource} =
         90: require('../../assets/jerseys/90.png'),
         94: require('../../assets/jerseys/94.png'),
     }
+
+    export const StatImages: { [key: string]: ImageURISource} = 
+    {
+        "goals_scored" : require('../../assets/stats/goal.png'), 
+        "assists" : require('../../assets/stats/assist.png'), 
+        "saves" : require('../../assets/stats/penaltysave.png'), 
+        "yellow_cards" : require('../../assets/stats/yellowcard.png'), 
+        "red_cards" : require('../../assets/stats/redcard.png'), 
+        "own_goals" : require('../../assets/stats/owngoal.png'), 
+        //"clean_sheets" : require("('../../../assets/stats/goal.png"), 
+    }
+
+    export const Icons: { [key:string]: ImageURISource} = 
+    {
+        "close" : require('../../assets/icons/close.png'),
+        "favourite" : require('../../assets/icons/favourite.png'),
+        "unfavourite" : require('../../assets/icons/unfavourite.png'),
+        "edit" : require('../../assets/icons/edit.png'),
+        "delete" : require('../../assets/icons/delete.png'),
+        "checkmark" : require('../../assets/icons/checkmark.png'),
+        "edit_disabled" : require('../../assets/icons/editdisabled.png'),
+    }

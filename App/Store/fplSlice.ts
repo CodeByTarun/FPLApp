@@ -39,15 +39,11 @@ export const fplSlice = createApi({
       query: ({entryId, gameweek}) => `https://draft.premierleague.com/api/entry/${entryId}/event/${gameweek}`
     }),
 
-    getManagerInfo: builder.query<FplManagerInfo, number>({
-      query: (managerId: number) => `https://fantasy.premierleague.com/api/entry/${managerId}/`
-    }),
-
-    getManagerGameweekPicks: builder.query<FplManagerGameweekPicks, { managerId: number, gameweek: number }>({
-      query: ({managerId, gameweek}) => `https://fantasy.premierleague.com/api/entry/${managerId}/event/${gameweek}/picks/`
+    getBudgetGameweekPicks: builder.query<FplManagerGameweekPicks, { entryId: number, gameweek: number }>({
+      query: ({entryId, gameweek}) => `https://fantasy.premierleague.com/api/entry/${entryId}/event/${gameweek}/picks/`
     })
   })
 })
 
 export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetDraftUserInfoQuery,
-               useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetManagerInfoQuery, useGetManagerGameweekPicksQuery } = fplSlice
+               useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetBudgetGameweekPicksQuery } = fplSlice

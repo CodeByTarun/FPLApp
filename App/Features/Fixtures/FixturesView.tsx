@@ -7,7 +7,7 @@ import * as GlobalConstants from '../../Global/GlobalConstants'
 import { FplOverview } from "../../Models/FplOverview";
 import RNPickerSelect from 'react-native-picker-select';
 import { FplFixture } from "../../Models/FplFixtures";
-import { changeGameweek, changeToFixture, removeFixture } from "../../Store/teamSlice";
+import { changeGameweek, changeToFixture, changingFixtureWhenGameweekChanged, removeFixture } from "../../Store/teamSlice";
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 
@@ -27,7 +27,6 @@ function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
 const FixturesView = (prop: FixturesViewProp) => {
 
   const dispatch = useAppDispatch();
-
   const liveGameweek = prop.overview?.events.filter((event) => { return event.is_current === true; })[0].id;
   const [gameweekNumber, setGameweekNumber] = useState(liveGameweek);
   const fixtures = useGetFixturesQuery();
@@ -52,13 +51,17 @@ const FixturesView = (prop: FixturesViewProp) => {
       if (sortedGameweekFixtures !== undefined) {
 
         if (sortedGameweekFixtures[0].started === true) {
-          dispatch(changeToFixture(sortedGameweekFixtures[0]))
+          dispatch(changingFixtureWhenGameweekChanged(sortedGameweekFixtures[0]))
         } 
         else {
           dispatch(removeFixture())
         }                              
       }
     }, [gameweekNumber]);
+
+  useEffect( function gameweekChanged() {
+    if (gameweekNumber) dispatch(changeGameweek(gameweekNumber));
+  }, [gameweekNumber])
 
   useEffect(
     function refetchLiveGameweekData() {

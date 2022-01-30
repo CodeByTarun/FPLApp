@@ -88,6 +88,15 @@ export function GetHighestMinForAPlayer(fixture: FplFixture, gameweek: FplGamewe
     return Math.max(...minutes)               
 }
 
+export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
+    
+    if (teamInfo.teamType === TeamTypes.Fixture) {
+        return GetPlayerPointsForAFixture(player, teamInfo);
+    } else {
+        return player.gameweekData.stats.total_points;
+    }
+}
+
 export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: FixtureInfo) : number {
     let playerStats = playerData.gameweekData.explain.find(explain => explain.fixture === fixtureInfo.fixture?.id)?.stats;
 
@@ -97,4 +106,8 @@ export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: 
     }
 
     return 0;
+}
+
+export function GetFixtureStats(player: PlayerData, fixtureInfo: FixtureInfo, identifier: string) {
+    return player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === identifier)?.value;
 }

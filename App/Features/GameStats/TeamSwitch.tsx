@@ -31,13 +31,13 @@ const TeamSwitch = () => {
 
         if (teamInfo.teamType === TeamTypes.Fixture) {
 
-        Animated.spring(translateAnim, {
-            toValue: teamInfo.isHome ? viewWidth / 2 + 2 : 0,
-            friction: 10,
-            useNativeDriver: true
-        }).start()
+            Animated.spring(translateAnim, {
+                toValue: teamInfo.isHome ? viewWidth / 2 + 2 : 0,
+                friction: 10,
+                useNativeDriver: true
+            }).start()
 
-        dispatch(toggleTeamShown());
+            dispatch(toggleTeamShown());
 
         }
     }

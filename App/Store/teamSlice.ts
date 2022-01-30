@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ActionSheetIOS } from "react-native";
+import UserTeamInfo from "../Helpers/FplDataStorageService";
 import { FplDraftUserInfo } from "../Models/FplDraftUserInfo";
 import { FplFixture } from "../Models/FplFixtures";
 import { FplManagerInfo } from "../Models/FplManagerInfo";
@@ -14,11 +15,13 @@ export interface FixtureInfo {
 export interface DraftInfo {
     teamType: TeamTypes.Draft,
     gameweek: number,
+    info: UserTeamInfo,
 }
 
 export interface BudgetInfo {
     teamType: TeamTypes.Budget,
     gameweek: number,
+    info: UserTeamInfo,
 }
 
 export interface DreamTeamInfo {
@@ -52,6 +55,14 @@ const teamSlice = createSlice({
             state.gameweek = action.payload;
         },
 
+        changingFixtureWhenGameweekChanged(state: TeamInfo, action: PayloadAction<FplFixture|null>): TeamInfo {
+            if ( state.teamType === TeamTypes.Fixture) {
+                return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event } as FixtureInfo;
+            }
+
+            return state;
+        },
+
         changeToFixture(state: TeamInfo, action: PayloadAction<FplFixture|null>): FixtureInfo {
             return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event } as FixtureInfo;
         },
@@ -77,8 +88,16 @@ const teamSlice = createSlice({
         changeToDreamTeam(state: TeamInfo): DreamTeamInfo {
             return {teamType: TeamTypes.Dream, gameweek: state.gameweek}
         },
+
+        changeToDraftTeam(state: TeamInfo, action: PayloadAction<UserTeamInfo>): DraftInfo {
+            return { teamType: TeamTypes.Draft, gameweek: state.gameweek, info: action.payload }
+        },
+
+        changeToBudgetTeam(state: TeamInfo, action: PayloadAction<UserTeamInfo>): BudgetInfo {
+            return { teamType: TeamTypes.Budget, gameweek: state.gameweek, info: action.payload }
+        }
     }
 });
 
-export const { changeGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam } = teamSlice.actions;
+export const { changeGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam, changeToDraftTeam, changeToBudgetTeam, changingFixtureWhenGameweekChanged } = teamSlice.actions;
 export default teamSlice.reducer;

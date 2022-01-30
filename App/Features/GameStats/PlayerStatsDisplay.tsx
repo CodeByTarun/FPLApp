@@ -1,145 +1,42 @@
 import React from "react";
-import { Image, View, StyleSheet, Text } from "react-native";
+import { Image, View, StyleSheet, Text, Falsy, ImageStyle, RecursiveArray, RegisteredStyle } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
-import { Jerseys } from "../../Global/Images";
-import { GetPlayerPointsForAFixture } from "../../Helpers/FplAPIHelpers";
+import { Jerseys, StatImages } from "../../Global/Images";
+import { GetFixtureStats, GetPointTotal } from "../../Helpers/FplAPIHelpers";
 import { useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
-import { FixtureInfo, TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import { Identifier } from "../../Models/FplGameweek";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
     overview: FplOverview;
 }
 
-function GetFixtureStats(player: PlayerData, fixtureInfo: FixtureInfo, identifier: string) {
-    return player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === identifier)?.value;
-}
-
-const GoalView = (player:PlayerData, teamInfo: TeamInfo) => {
-
-    let goalsScored : number | undefined;
+const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
+    let stat : number | undefined;
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
-        goalsScored = GetFixtureStats(player, teamInfo, "goals_scored")
+        stat = GetFixtureStats(player, teamInfo, statIdentifier)
     } else {
-        goalsScored = player.gameweekData.stats.goals_scored;
+        stat = player.gameweekData.stats[statIdentifier];
     }
 
-    if (goalsScored === undefined) {
+    if (!stat) {
         return null;
     } else {
 
-    return <View style={styles.statsContainer}>
-                {[...Array(goalsScored)].map(() =>  <Image style={styles.statsImage} source={require('../../../assets/stats/goal.png')} resizeMode="contain"/>)}
-            </View> 
-    }
-}
-
-const AssistView = (player:PlayerData, teamInfo: TeamInfo) => {
-
-    let assistsScored : number | undefined;
-
-    if (teamInfo.teamType === TeamTypes.Fixture) {
-        assistsScored = GetFixtureStats(player, teamInfo, "assists")
-    } else {
-        assistsScored = player.gameweekData.stats.assists;
-    }
-
-    if (assistsScored === undefined) {
-        return null;
-    } else {
-
-    return <View style={styles.statsContainer}>
-                {[...Array(assistsScored)].map(() =>  <Image style={styles.statsImage} source={require('../../../assets/stats/assist.png')} resizeMode="contain"/>)}
-            </View> 
-    }
-
-}
-
-const OwnGoalsView = (player:PlayerData, teamInfo: TeamInfo) => { 
-    
-    let ownGoalsScored : number | undefined;
-
-    if (teamInfo.teamType === TeamTypes.Fixture) {
-        ownGoalsScored = GetFixtureStats(player, teamInfo, "own_goals")
-    } else {
-        ownGoalsScored = player.gameweekData.stats.own_goals;
-    }
-
-    if (ownGoalsScored === undefined) {
-        return null;
-    } else {
-
-    return <View style={styles.statsContainer}>
-                {[...Array(ownGoalsScored)].map(() =>  <Image style={styles.statsImage} source={require('../../../assets/stats/owngoal.png')} resizeMode="contain"/>)}
-            </View> 
-    }
-}
-
-const SavesView = (player:PlayerData, teamInfo: TeamInfo) => { 
-    
-    let saves : number | undefined;
-
-    if (teamInfo.teamType === TeamTypes.Fixture) {
-        saves = GetFixtureStats(player, teamInfo, "saves")
-    } else {
-        saves = player.gameweekData.stats.saves;
-    }
-
-    if (saves === undefined) {
-        return null;
-    } else {
-
-        saves = Math.floor(saves / 3);
+        if (statIdentifier === Identifier.Saves) {
+            stat = Math.floor(stat / 3);
+        }
 
         return <View style={styles.statsContainer}>
-                    {[...Array(saves)].map(() =>  <Image style={styles.statsImage} source={require('../../../assets/stats/penaltysave.png')} resizeMode="contain"/>)}
+                {[...Array(stat)].map((i, index) =>  <Image style={(statIdentifier === Identifier.YellowCards || statIdentifier === Identifier.RedCards) ? styles.cardImage : styles.statsImage} 
+                                                            source={StatImages[statIdentifier]} 
+                                                            resizeMode="contain" 
+                                                            key={index.toString()}/>)}
                 </View> 
-    }
-}
-
-const YellowCardView = (player: PlayerData, teamInfo: TeamInfo) => {
-    let yellowCards : number | undefined;
-
-    if (teamInfo.teamType === TeamTypes.Fixture) {
-        yellowCards = GetFixtureStats(player, teamInfo, "yellow_cards")
-    } else {
-        yellowCards = player.gameweekData.stats.yellow_cards;
-    }
-
-    if (yellowCards === undefined) {
-        return null;
-    } else {
-
-        return  <>{[...Array(yellowCards)].map(() =>  <Image style={styles.cardImage} source={require('../../../assets/stats/yellowcard.png')} resizeMode="contain"/>)}</>
-    }
-}
-
-const RedCardView = (player: PlayerData, teamInfo: TeamInfo) => {
-    let redCards : number | undefined;
-
-    if (teamInfo.teamType === TeamTypes.Fixture) {
-        redCards = GetFixtureStats(player, teamInfo, "red_cards")
-    } else {
-        redCards = player.gameweekData.stats.red_cards;
-    }
-
-    if (redCards === undefined) {
-        return null;
-    } else {
-
-        return  <>{[...Array(redCards)].map(() => <Image style={styles.cardImage} source={require('../../../assets/stats/redcard.png')} resizeMode="contain"/>)}</>
-    }
-}
-
-function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
-    
-    if (teamInfo.teamType === TeamTypes.Fixture) {
-        return GetPlayerPointsForAFixture(player, teamInfo);
-    } else {
-        return player.gameweekData.stats.total_points;
     }
 }
 
@@ -155,13 +52,13 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
                 <Image style={styles.jersey} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/> 
 
                 <View style={styles.allStatsContainer}>
-                    { GoalView(prop.player, teamInfo) }
-                    { AssistView(prop.player, teamInfo) }
-                    { SavesView(prop.player, teamInfo) }
-                    { OwnGoalsView(prop.player, teamInfo) }
+                    { StatView(prop.player, teamInfo, Identifier.GoalsScored) }
+                    { StatView(prop.player, teamInfo, Identifier.Assists) }
+                    { StatView(prop.player, teamInfo, Identifier.Saves) }
+                    { StatView(prop.player, teamInfo, Identifier.OwnGoals) }
                     <View style={styles.cardsContainer}>
-                        { YellowCardView(prop.player, teamInfo) }
-                        { RedCardView(prop.player, teamInfo) }
+                        { StatView(prop.player, teamInfo, Identifier.YellowCards) }
+                        { StatView(prop.player, teamInfo, Identifier.RedCards) }
                     </View> 
                 </View>
 

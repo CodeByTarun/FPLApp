@@ -1,15 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { findConfigFile } from 'typescript';
-import LeagueInfo, { addLeagueInfo, changeFavouriteTeam, editLeagueInfo, getAllLeagueInfo, removeLeagueInfo } from '../../../App/Helpers/FplDataStorageService'
+import LeagueInfo, { addUserTeamInfo, editUserTeamInfo, getAllUserTeamInfo, removeUserTeamInfo, changeFavouriteUserTeam } from '../../../App/Helpers/FplDataStorageService'
 
-const firstLeague: LeagueInfo = {
+const firstTeam: LeagueInfo = {
     id: 1,
     name: 'Taddu FC',
     isDraftTeam: true,
     isFavourite: true,
 }
 
-const secondLeague: LeagueInfo = {
+const secondTeam: LeagueInfo = {
     id: 2,
     name: 'LukWhosBack',
     isDraftTeam: true,
@@ -23,7 +22,7 @@ afterAll(async () => {
 describe('getAllLeagueInfo', () => {
 
     test('if no data return an empty array', async () => {
-        const result = await getAllLeagueInfo();
+        const result = await getAllUserTeamInfo();
         expect(result).toEqual([] as LeagueInfo[]);
     });
 });
@@ -31,27 +30,27 @@ describe('getAllLeagueInfo', () => {
 describe('addLeagueInfo', () => {
     
     test('add to an empty array', async () => {
-        await addLeagueInfo(firstLeague);
-        const result = await getAllLeagueInfo();
-        expect(result).toEqual([firstLeague])
+        await addUserTeamInfo(firstTeam);
+        const result = await getAllUserTeamInfo();
+        expect(result).toEqual([firstTeam])
     });
 
     test('add to array with another one it', async () => {
-        await addLeagueInfo(secondLeague);
-        const result = await getAllLeagueInfo();
-        expect(result).toEqual([firstLeague, secondLeague]);
+        await addUserTeamInfo(secondTeam);
+        const result = await getAllUserTeamInfo();
+        expect(result).toEqual([firstTeam, secondTeam]);
     })
 
 });
 
 describe('editLeagueInfo', () => {
 
-    let  editedLeague = firstLeague;
-    firstLeague.isDraftTeam = false;
+    let  editedTeam = firstTeam;
+    firstTeam.isDraftTeam = false;
 
     test('edit first league', async () => {
-        await editLeagueInfo(editedLeague);
-        const result = await getAllLeagueInfo();
+        await editUserTeamInfo(editedTeam);
+        const result = await getAllUserTeamInfo();
         if (result) {
             expect(result[0].isDraftTeam).toEqual(false);
         }
@@ -60,13 +59,13 @@ describe('editLeagueInfo', () => {
 
 describe('removeLeagueInfo', () => {
 
-    let  editedLeague = firstLeague;
-    firstLeague.isDraftTeam = false;
+    let  editedTeam = firstTeam;
+    firstTeam.isDraftTeam = false;
 
     test('remove second league', async () => {
-        await removeLeagueInfo(secondLeague);
-        const result = await getAllLeagueInfo();
-        expect(result).toEqual([editedLeague])
+        await removeUserTeamInfo(secondTeam);
+        const result = await getAllUserTeamInfo();
+        expect(result).toEqual([editedTeam])
     });
 
 });
@@ -74,9 +73,9 @@ describe('removeLeagueInfo', () => {
 describe('changeFavouriteTeam', () => {
 
     test('set second team as favourite', async ()=> {
-        await addLeagueInfo(secondLeague);
-        await changeFavouriteTeam(secondLeague);
-        const result = await getAllLeagueInfo();
+        await addUserTeamInfo(secondTeam);
+        await changeFavouriteUserTeam(secondTeam);
+        const result = await getAllUserTeamInfo();
 
         if (result) {
             expect(result[0].isFavourite).toEqual(false);
@@ -84,3 +83,4 @@ describe('changeFavouriteTeam', () => {
         }
     });
 })
+

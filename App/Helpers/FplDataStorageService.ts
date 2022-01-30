@@ -1,49 +1,49 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default interface LeagueInfo {
+export default interface UserTeamInfo {
     id: number,
     name: string,
     isDraftTeam: boolean,
     isFavourite: boolean,
 }
 
-export async function getAllLeagueInfo() {
+export async function getAllUserTeamInfo() {
     try {
         const jsonValue = await AsyncStorage.getItem('leagues');
-        return jsonValue != null ? JSON.parse(jsonValue) as LeagueInfo[] : [] as LeagueInfo[];
+        return jsonValue != null ? JSON.parse(jsonValue) as UserTeamInfo[] : [] as UserTeamInfo[];
     } catch(e) {
         console.log('error has occured');// error
     }
 }
 
 
-export async function addLeagueInfo(leagueInfo: LeagueInfo) {
+export async function addUserTeamInfo(teamInfo: UserTeamInfo) {
     try {
-        let allLeagueInfo = await getAllLeagueInfo();
+        let allTeamInfo = await getAllUserTeamInfo();
         
-        if (allLeagueInfo !== undefined && allLeagueInfo.length > 0) {
-            allLeagueInfo.push(leagueInfo);
-            await setLeagues(allLeagueInfo);
+        if (allTeamInfo !== undefined && allTeamInfo.length > 0) {
+            allTeamInfo.push(teamInfo);
+            await setUserTeams(allTeamInfo);
         } 
-        else if (allLeagueInfo !== undefined) {
-            leagueInfo.isFavourite = true;
-            await setLeagues([leagueInfo]);
+        else if (allTeamInfo !== undefined) {
+            teamInfo.isFavourite = true;
+            await setUserTeams([teamInfo]);
         }        
     } catch (e) {
         console.log('error has occured');
     }
 }
 
-export async function editLeagueInfo(editedLeague: LeagueInfo) {
+export async function editUserTeamInfo(editedTeam: UserTeamInfo) {
     try {
-        let allLeagueInfo = await getAllLeagueInfo();
+        let allTeamInfo = await getAllUserTeamInfo();
 
-        if (allLeagueInfo) {
+        if (allTeamInfo) {
 
-            let index = allLeagueInfo.findIndex(leagueInfo => leagueInfo.id === editedLeague.id);
-            allLeagueInfo[index] = editedLeague;
+            let index = allTeamInfo.findIndex(teamInfo => teamInfo.id === editedTeam.id);
+            allTeamInfo[index] = editedTeam;
 
-            await setLeagues(allLeagueInfo);
+            await setUserTeams(allTeamInfo);
         } 
 
     } catch (e) {
@@ -51,15 +51,19 @@ export async function editLeagueInfo(editedLeague: LeagueInfo) {
     }
 }
 
-export async function removeLeagueInfo(leagueToRemove: LeagueInfo) {
+export async function removeUserTeamInfo(teamToRemove: UserTeamInfo) {
     try {
-        let allLeagueInfo = await getAllLeagueInfo();
+        let allTeamInfo = await getAllUserTeamInfo();
         
-        if (allLeagueInfo) {
+        if (allTeamInfo) {
 
-            let filteredList = allLeagueInfo.filter(leagueInfo => leagueInfo.id !== leagueToRemove.id)
+            let filteredList = allTeamInfo.filter(teamInfo => teamInfo.id !== teamToRemove.id)
 
-            await setLeagues(filteredList);
+            if (!filteredList.some(team => team.isFavourite === true) && filteredList.length > 0) {
+                filteredList[0].isFavourite = true;
+            }
+
+            await setUserTeams(filteredList);
         }
         
     } catch(e) {
@@ -67,27 +71,32 @@ export async function removeLeagueInfo(leagueToRemove: LeagueInfo) {
     }
 }
 
-export async function changeFavouriteTeam(leagueToFavourite: LeagueInfo) {
+export async function changeFavouriteUserTeam(teamToFavourite: UserTeamInfo) {
     try {
-        let allLeagueInfo = await getAllLeagueInfo();
+        let allTeamInfo = await getAllUserTeamInfo();
 
-        if (allLeagueInfo) {
+        if (allTeamInfo) {
 
-            allLeagueInfo.find(league => league.isFavourite == true)!.isFavourite = false;
-            allLeagueInfo.find(league => league.id === leagueToFavourite.id)!.isFavourite = true;
+            allTeamInfo.find(team => team.isFavourite == true)!.isFavourite = false;
+            allTeamInfo.find(team => team.id === teamToFavourite.id)!.isFavourite = true;
             
-            await setLeagues(allLeagueInfo);
+            await setUserTeams(allTeamInfo);
         }
     } catch(e) {
         console.log('error has occured');
     }
 }
 
-async function setLeagues(allLeagueInfo: LeagueInfo[]) {
+async function setUserTeams(allTeamInfo: UserTeamInfo[]) {
     try{
-        const jsonValue = JSON.stringify(allLeagueInfo);
+        const jsonValue = JSON.stringify(allTeamInfo);
         await AsyncStorage.setItem('leagues', jsonValue);
     } catch(e) {
         console.log('error has occured');
     }
 }
+
+export async function clearAsyncStorage() {
+    AsyncStorage.clear();
+}
+
