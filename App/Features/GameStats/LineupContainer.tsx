@@ -1,17 +1,13 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
-import React, { useEffect, useState } from "react";
-import { View, Image, StyleSheet, TouchableOpacity, Text, Modal, Button, Pressable, TextInput, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
 import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
-import globalStyles from "../../Global/GlobalStyles";
-import { Icons } from "../../Global/Images";
 import TeamModal from "./TeamModal";
-import { useGetDraftLeagueInfoQuery, useGetDraftUserInfoQuery } from "../../Store/fplSlice";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 const TeamSelectorHeader = (teamInfo: TeamInfo) => {
 

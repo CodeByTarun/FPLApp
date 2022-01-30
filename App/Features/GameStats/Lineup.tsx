@@ -3,24 +3,24 @@
 // or in previous gameweeks
 // The input for this component is a list of player IDs
 
-import React, { useEffect } from "react";
-import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React from "react";
+import { Image, StyleSheet, View } from "react-native";
 import { useGetBudgetGameweekPicksQuery, useGetDraftGameweekPicksQuery, useGetGameweekDataQuery, useGetOverviewQuery } from "../../Store/fplSlice";
 import { useAppSelector } from "../../Store/hooks";
 import PlayerStatsDisplay from "./PlayerStatsDisplay";
 import { GetPlayerGameweekDataSortedByPosition } from "../../Helpers/FplAPIHelpers";
-import { PlayerData } from "../../Models/CombinedData";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { FplGameweek } from "../../Models/FplGameweek";
 import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
-import { width } from "../../Global/GlobalConstants";
-import * as GlobalConstants from "../../Global/GlobalConstants";
+import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
+import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
 
 
-const CreatePlayerStatsView = (gameweek: FplGameweek, overview: FplOverview, teamInfo: TeamInfo) => {
+const CreatePlayerStatsView = (gameweek: FplGameweek, overview: FplOverview, teamInfo: TeamInfo, 
+                               draftPicks?: FplDraftGameweekPicks, budgetPicks?: FplManagerGameweekPicks) => {
 
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo);
+    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftPicks, budgetPicks);
     const playerStatsView = [];
 
     if (players !== null) {
@@ -66,13 +66,22 @@ const Lineup = () => {
     return (
         <View style={styles.container}>
             <Image style={styles.field} source={require('../../../assets/threequartersfield.jpg')}/>
-            {(teamInfo.teamType !== TeamTypes.Empty && gameweek.data && overview.data) && 
-
-            <View style={styles.playerContainer}>
-                {CreatePlayerStatsView(gameweek.data, overview.data, teamInfo)}
-            </View>
+            {(teamInfo.teamType !== TeamTypes.Empty && gameweek.data && overview.data) &&
+                <>
+                {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 
+                    <View style={styles.playerContainer}>
+                        {CreatePlayerStatsView(gameweek.data, overview.data, teamInfo)}
+                    </View>
+                :
+                ((teamInfo.teamType === TeamTypes.Budget && budgetGameweek.data) || (teamInfo.teamType === TeamTypes.Draft && draftGameweek.data)) ?
+                    <View style={styles.playerContainer}>
+                        {CreatePlayerStatsView(gameweek.data, overview.data, teamInfo, draftGameweek.data, budgetGameweek.data)}
+                    </View>
+                    :
+                    null
+                }
+                </>
             }
-
         </View>
     )
 }

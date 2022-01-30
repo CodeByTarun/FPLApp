@@ -1,6 +1,8 @@
 import { PlayerData } from "../Models/CombinedData";
+import { FplDraftGameweekPicks } from "../Models/FplDraftGameekPicks";
 import { FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from "../Models/FplGameweek";
+import { FplManagerGameweekPicks } from "../Models/FplManagerGameweekPicks";
 import { FplOverview, Team } from "../Models/FplOverview";
 import { FixtureInfo, TeamInfo, TeamTypes } from "../Store/teamSlice";
 
@@ -8,7 +10,9 @@ export function GetTeamDataFromOverviewWithFixtureTeamID(teamNumber : number, ov
     return overview.teams.filter(team => team.id == teamNumber)[0]
 };
 
-export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo): PlayerData[] | null {
+export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo,
+                                                      draftPicks?: FplDraftGameweekPicks, 
+                                                      budgetPicks?: FplManagerGameweekPicks): PlayerData[] | null {
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return GetFixturePlayerData(gameweekData, overviewData, teamInfo);
