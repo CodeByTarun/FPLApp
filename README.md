@@ -30,43 +30,27 @@
 
 ![image](https://user-images.githubusercontent.com/14295466/119246293-70d85100-bb4e-11eb-95e0-7907fef3961b.png)
 
-Project tracker was created because I wanted an easy-to-use lightweight Kanban board application to keep track of projects that I was working on. Also, it was a way for me to showcase a lot of the programming concepts and skills I have developed. A detailed explanation of how to use the application is in the [Usage](https://github.com/TarunBola/ProjectTracker#usage) section below. 
+This project was made as a quicker way for someone to view their fpl (fantasy premier league) teams and see how players are doing for any fixture in any game week. The application uses data from the fantasy premier league API and Understat website. This was a great project to learn about the React Native framework, Expo, Jest, Typescript and Redux. A detailed explanation of how to use this mobile application is in the [Usage](https://github.com/TarunBola/FPLApp#usage) section below.
 
-This WPF application was created using the Model-view-viewmodel (MVVM) design pattern. The separation this pattern provides between the UI and business logic made it easier to make changes to the application. Many other design patterns were used to create this project such as the singleton pattern, composite pattern, command pattern, observer pattern, factory method pattern, etc. IOC containers were used as well for easier use of dependency injection.
-
-All the service classes were created through test driven development (TTD) which saved a lot of time when the service classes dealt with concepts such as linked lists in SQL and SQL queries. The database was created using the Code First approach in Entity Framework. This allowed for creation of the model in C# first and then through configurations of each class in the model, a database was created to match it.  
+This project utilized functional components, react native hooks and the redux design pattern. The redux design pattern made using fetched data across the application easy. Redux was also used for storing the main state of the team whether it is the team of the week, a user’s team, or a team currently playing in a match. Test driven development (TDD) was used for the creation of services and helper functions using Jest.  Also, AsyncStorage was used to keep data offline in a key-value storage system.
 
 ### Built With
-* [.NET Core](https://dotnet.microsoft.com/)
-* [WPF (Windows Presentation Foundation)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/?view=netdesktop-5.0)
-* [Entity Framework Core](https://docs.microsoft.com/en-us/ef/)
+* [React Native](https://reactnative.dev/)
+* [Node.js](https://nodejs.org/en/)
+* [Redux](https://redux.js.org/)
+* [Expo](https://docs.expo.dev/)
 
 ## Getting Started
 
-To use this application you must have Visual Studio 2019. Open the solution in Visual Studio and publish it wherever you would like to store the application. Now you can start using Project Tracker!
+To use this application you must install it via XCode for iPhones or download the apk file provided for the android build.
 
 ## Usage
 
-![image](https://user-images.githubusercontent.com/14295466/120536731-6e79c080-c3b2-11eb-9c11-2b63b55e35ac.png)
-
-When the application is opened you will be taken to the home page. Here is where all your projects are shown in a list. This list can be searched through and filtered by tag and status. To create a project, click on the add button located in the top right. Multiple projects can be opened at once as this application features tabs for easy multitasking. These tabs can be rearranged by drag and drop. 
-
-![image](https://user-images.githubusercontent.com/14295466/120390651-f94bb400-c2fb-11eb-8b92-da94bc1dbdc6.png)
-
-Tags are not project specific. To create a tag, click on the tag button located to the left of the minimize button. Tags are fully customizable and are a great way to keep your projects, boards and issues organized. Deleting or editing a tag will be reflected for ALL projects so be cautious when making changes to a tag. 
-
-![image](https://user-images.githubusercontent.com/14295466/120537037-cfa19400-c3b2-11eb-9a2b-624a59172f33.png)
-
-After creating a project, double click on it to be taken to the projects page. Here, you can create boards to work on different parts of you project. Each of these boards will have their own set of Kanban groups and issues. This allows for a good breakdown of the different sections of your projects. Boards can be cycled through on the Kanban board page as well for faster navigation.
-
-![image](https://user-images.githubusercontent.com/14295466/120537499-5e161580-c3b3-11eb-8cd7-0f564af570ac.png)
-
-Usage of the Kanban board is straight forward. Create as many groups as needed and then you can create issues under each of the groups. Groups can be rearranged through drag and drop, and issues can be moved to different groups by doing this as well. 
-
+***TODO***
 
 ## Roadmap
 
-See the [open issues](https://github.com/TarunBola/ProjectTracker/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/TarunBola/FPLApp/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
@@ -85,13 +69,13 @@ Distributed under the [MIT License](https://github.com/othneildrew/Best-README-T
 ## Contact
 Tarun Bola - bolatarun@gmail.com
 
-Project Link: [https://github.com/TarunBola/ProjectTracker](https://github.com/TarunBola/ProjectTracker)
+Project Link: [https://github.com/TarunBola/FPLApp](https://github.com/TarunBola/FPLApp)
 
 ## Acknowledgments
-* [Extended WPF Toolkit](https://github.com/xceedsoftware/wpftoolkit)
-* [XAML Behaviours WPF](https://github.com/Microsoft/XamlBehaviorsWpf)
-* [Font Awesome](https://fontawesome.com)
-* [Icons8](https://icons8.com/)
+* [React Native Async Storage](https://github.com/react-native-async-storage/async-storage)
+* [React Native Picker Select](https://github.com/lawnstarter/react-native-picker-select)
+* [Moment Timezone](https://momentjs.com/timezone/)
+* [flaticon](https://www.flaticon.com/free-icons/soccer)
 
 <!-- Links and Images -->
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
