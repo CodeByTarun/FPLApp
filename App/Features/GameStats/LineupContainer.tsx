@@ -65,7 +65,6 @@ const LineupContainer = () => {
             <View style={styles.middle}>
                 <Lineup/>
             </View>
-            <View style={styles.bottom}></View>
         </View>
     )
 }
@@ -79,17 +78,12 @@ const styles = StyleSheet.create(
         },
 
         top: {
-            flex: 2,
+            flex: 1,
         },
 
         middle: {
-            flex: 14,
+            flex: 9,
             width : '100%',
-        },
-
-        bottom: {
-            flex: 3,
-            backgroundColor: 'lightgray'
         },
 
         topContainer: {

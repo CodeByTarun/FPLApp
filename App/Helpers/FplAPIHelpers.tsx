@@ -1,5 +1,6 @@
 import { PlayerData } from "../Models/CombinedData";
 import { FplDraftGameweekPicks } from "../Models/FplDraftGameekPicks";
+import { FplDraftOverview } from "../Models/FplDraftOverview";
 import { FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from "../Models/FplGameweek";
 import { FplManagerGameweekPicks } from "../Models/FplManagerGameweekPicks";
@@ -11,6 +12,7 @@ export function GetTeamDataFromOverviewWithFixtureTeamID(teamNumber : number, ov
 };
 
 export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo,
+                                                      draftOverview?: FplDraftOverview,
                                                       draftPicks?: FplDraftGameweekPicks, 
                                                       budgetPicks?: FplManagerGameweekPicks): PlayerData[] | null {
 
@@ -19,6 +21,9 @@ export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek,
     }
     else if (teamInfo.teamType === TeamTypes.Dream) {
         return GetDreamTeamPlayerData(gameweekData, overviewData, teamInfo);
+    }
+    else if (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) {
+        return GetDraftOrBudgetPlayerData(gameweekData, overviewData, teamInfo, draftOverview, draftPicks, budgetPicks);
     }
     else {
         return null;
@@ -30,7 +35,7 @@ function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: FplOvervi
     let listOfPlayersFromFixtures = fixtureInfo.isHome ? overviewData.elements.filter(element => element.team == fixtureInfo.fixture?.team_h) :
                                                          overviewData.elements.filter(element => element.team == fixtureInfo.fixture?.team_a);
 
-    if (listOfPlayersFromFixtures !== undefined) {
+    if (listOfPlayersFromFixtures) {
         let combinedPlayerData = listOfPlayersFromFixtures.map(
             (fixturePlayer) => (
                 { 
@@ -45,10 +50,10 @@ function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: FplOvervi
     return null;
 }
 
-function GetDreamTeamPlayerData(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo) {
+function GetDreamTeamPlayerData(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo): PlayerData[] | null {
     let listOfDreamTeamPlayers = gameweekData.elements.filter(element => element.stats.in_dreamteam === true);
 
-    if (listOfDreamTeamPlayers != undefined) {
+    if (listOfDreamTeamPlayers) {
         let combinedPlayerData = listOfDreamTeamPlayers.map(
             (dreamTeamPlayer) => (
                 {
@@ -59,6 +64,44 @@ function GetDreamTeamPlayerData(gameweekData: FplGameweek, overviewData: FplOver
         return combinedPlayerData.sort((playerA, playerB) => (playerA.overviewData.element_type - playerB.overviewData.element_type)) 
     }
     
+    return null;
+}
+
+function GetDraftOrBudgetPlayerData(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo, draftOverview?: FplDraftOverview,
+                                    draftPicks?: FplDraftGameweekPicks, budgetPicks?: FplManagerGameweekPicks) : PlayerData[] | null {
+    
+    let picks = (teamInfo.teamType === TeamTypes.Budget) ? budgetPicks : draftPicks;
+
+    if (picks) {
+        if (teamInfo.teamType === TeamTypes.Budget) {
+            let combinedPlayerData =  picks.picks.map(
+                (pick) => {
+                    return (
+                    {
+                        gameweekData: gameweekData.elements.find(player => player.id === pick.element),
+                        overviewData: overviewData.elements.find(player => player.id === pick.element),
+                    } as PlayerData)
+                })
+            
+            return combinedPlayerData;
+        } 
+        else {
+            let combinedPlayerData =  picks.picks.map(
+                (pick) => {
+                    let code = draftOverview?.elements.find(player => player.id === pick.element)?.code;
+                    let pickOverviewData = overviewData.elements.find(player => player.code === code);
+
+                    return (
+                    {
+                        gameweekData: gameweekData.elements.find(player => player.id === pickOverviewData?.id),
+                        overviewData: pickOverviewData,
+                    } as PlayerData)
+                })
+            
+            return combinedPlayerData;
+        }
+    }
+
     return null;
 }
 

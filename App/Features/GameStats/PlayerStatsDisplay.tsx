@@ -1,5 +1,5 @@
-import React from "react";
-import { Image, View, StyleSheet, Text, Falsy, ImageStyle, RecursiveArray, RegisteredStyle } from "react-native";
+import React, { useState } from "react";
+import { Image, View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
 import { Jerseys, StatImages } from "../../Global/Images";
@@ -8,10 +8,12 @@ import { useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { Identifier } from "../../Models/FplGameweek";
+import PlayerCard from "../PlayerStats/PlayerCard";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
     overview: FplOverview;
+    teamInfo: TeamInfo;
 }
 
 const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
@@ -42,34 +44,38 @@ const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identi
 
 const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
-    const teamInfo = useAppSelector((state) => state.team);
+    const [isPlayerCardModalVisible, setIsPlayerCardModalVisible] = useState(false);
 
     return (
-        <View style={styles.container}>
-            { (teamInfo.teamType !== TeamTypes.Empty) &&
+        <>
+        <PlayerCard player={prop.player}  teamInfo={prop.teamInfo} isVisible={isPlayerCardModalVisible} isVisibleFunction={setIsPlayerCardModalVisible}/>
+
+        <TouchableOpacity style={styles.container} onPress={() => setIsPlayerCardModalVisible(!isPlayerCardModalVisible)}>
+            { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
             <><View style={styles.imageContainer}>
 
                 <Image style={styles.jersey} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/> 
 
                 <View style={styles.allStatsContainer}>
-                    { StatView(prop.player, teamInfo, Identifier.GoalsScored) }
-                    { StatView(prop.player, teamInfo, Identifier.Assists) }
-                    { StatView(prop.player, teamInfo, Identifier.Saves) }
-                    { StatView(prop.player, teamInfo, Identifier.OwnGoals) }
+                    { StatView(prop.player, prop.teamInfo, Identifier.GoalsScored) }
+                    { StatView(prop.player, prop.teamInfo, Identifier.Assists) }
+                    { StatView(prop.player, prop.teamInfo, Identifier.Saves) }
+                    { StatView(prop.player, prop.teamInfo, Identifier.OwnGoals) }
                     <View style={styles.cardsContainer}>
-                        { StatView(prop.player, teamInfo, Identifier.YellowCards) }
-                        { StatView(prop.player, teamInfo, Identifier.RedCards) }
+                        { StatView(prop.player, prop.teamInfo, Identifier.YellowCards) }
+                        { StatView(prop.player, prop.teamInfo, Identifier.RedCards) }
                     </View> 
                 </View>
 
                 <View style={styles.scoreContainer}>
-                    <Text style={styles.scoreText}>{GetPointTotal(prop.player, teamInfo)}</Text>
+                    <Text style={styles.scoreText}>{GetPointTotal(prop.player, prop.teamInfo)}</Text>
                 </View>   
 
             </View>
             <Text style={styles.text}>{prop.player.overviewData.web_name}</Text></>
             }
-        </View>
+        </TouchableOpacity>
+        </>
     )
 }
 

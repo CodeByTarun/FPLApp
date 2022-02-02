@@ -211,10 +211,10 @@ const TeamModal = (props: TeamModalProps) => {
 
     return (
         <Modal animationType="fade" transparent={true} visible={props.isVisible}>
-            <View style={styles.modalBackground}/>
+            <View style={globalStyles.modalBackground}/>
 
-            <View style={[styles.modal, globalStyles.modalShadow]}>
-                <Pressable style={styles.closeButton} onPressIn={() => props.isVisibleFunction(false)}>
+            <View style={[globalStyles.modalView, globalStyles.modalShadow, {height: '50%'}]}>
+                <Pressable style={globalStyles.closeButton} onPressIn={() => props.isVisibleFunction(false)}>
                     <Image style={{height: '100%', width: '100%'}} source={Icons["close"]} resizeMode="contain"/>
                 </Pressable>
                 <Text style={[styles.titleText]}>{(teamFormOpen) ? (userTeamState.teamEditing) ? "Edit Team" : "Add Team" : "My Teams"}</Text>
@@ -301,24 +301,6 @@ const TeamModal = (props: TeamModalProps) => {
 const styles = StyleSheet.create(
     {
         //#region Modal Styling
-        modalBackground: {
-            backgroundColor: 'black',
-            height: "100%",
-            width: "100%",
-            opacity: 0.50,
-        },
-
-        modal: {
-            position: 'absolute',
-            top: GlobalConstants.height * 0.2,
-            height: '50%',
-            width: '75%',
-            backgroundColor: GlobalConstants.primaryColor,
-            alignSelf: 'center',
-            borderRadius: GlobalConstants.cornerRadius,
-            padding: 10,
-        },
-
         closeButton: {
             position: 'absolute',
             zIndex: 1,
