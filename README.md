@@ -28,7 +28,7 @@
 
 ## About The Project
 
-This project was made as a quicker way for someone to view their fpl (fantasy premier league) teams and see how players are doing for any fixture in any game week. The application uses data from the fantasy premier league API and Understat website. This was a great project to learn about the React Native framework, Expo, Jest, Typescript and Redux. A detailed explanation of how to use this mobile application is in the [Usage](https://github.com/TarunBola/FPLApp#usage) section below.
+This project was made as a quicker way for someone to view their fpl (fantasy premier league) teams and see how players are doing for any fixture in any game week. The application uses data from the fantasy premier league API and Understat website. This was a great project to learn about the React Native framework, Expo, Jest, Typescript and Redux. A detailed explanation of how to use this mobile application is in the [Usage](https://github.com/CodeByTarun/FPLApp/blob/master/README.md#usage) section below.
 
 This project utilized functional components, react native hooks and the redux design pattern. The redux design pattern made using fetched data across the application easy. Redux was also used for storing the main state of the team whether it is the team of the week, a user’s team, or a team currently playing in a match. Test driven development (TDD) was used for the creation of services and helper functions using Jest.  Also, AsyncStorage was used to keep data offline in a key-value storage system.
 
