@@ -48,7 +48,7 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
     return (
         <>
-        <PlayerCard player={prop.player}  teamInfo={prop.teamInfo} isVisible={isPlayerCardModalVisible} isVisibleFunction={setIsPlayerCardModalVisible}/>
+        <PlayerCard player={prop.player}  teamInfo={prop.teamInfo} overview={prop.overview} isVisible={isPlayerCardModalVisible} isVisibleFunction={setIsPlayerCardModalVisible}/>
 
         <TouchableOpacity style={styles.container} onPress={() => setIsPlayerCardModalVisible(!isPlayerCardModalVisible)}>
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
