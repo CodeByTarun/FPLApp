@@ -9,11 +9,13 @@ import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { Identifier } from "../../Models/FplGameweek";
 import PlayerCard from "../PlayerStats/PlayerCard";
+import { FplFixture } from "../../Models/FplFixtures";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
     overview: FplOverview;
     teamInfo: TeamInfo;
+    fixtures: FplFixture[];
 }
 
 const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
@@ -48,7 +50,7 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
     return (
         <>
-        <PlayerCard player={prop.player}  teamInfo={prop.teamInfo} overview={prop.overview} isVisible={isPlayerCardModalVisible} isVisibleFunction={setIsPlayerCardModalVisible}/>
+        <PlayerCard player={prop.player}  teamInfo={prop.teamInfo} overview={prop.overview} fixtures={prop.fixtures} isVisible={isPlayerCardModalVisible} isVisibleFunction={setIsPlayerCardModalVisible}/>
 
         <TouchableOpacity style={styles.container} onPress={() => setIsPlayerCardModalVisible(!isPlayerCardModalVisible)}>
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&

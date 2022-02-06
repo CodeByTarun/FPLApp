@@ -3,59 +3,170 @@
 //TODO: think about adding a compare feature between two players?
 //TODO: also this way might not be the best since you cant filter by most pts, xg, assits, position
 
-import React from "react";
-import { TextInput, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useCallback, useRef, useState } from "react";
+import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
+import { FplOverview } from "../../Models/FplOverview";
+import { useGetOverviewQuery } from "../../Store/fplSlice";
 
-const onTablePress = () => {
 
+
+const PlayerTable = (overview: FplOverview, playerSearchText: string) => {
+
+    let players = overview.elements;
+
+    return (
+        players.slice().filter(player => player.web_name.includes(playerSearchText)).sort((playerA, playerB) => playerB.total_points - playerA.total_points).map(player => 
+            <View key={player.id} style={styles.tableView}>
+                <View style={{flex: 2}}>
+                    <Text style={styles.tableText}>{player.web_name}</Text>
+                </View>
+                <View style={styles.tableNumberView}>
+                    <Text style={styles.tableText}>{player.team}</Text>
+                </View >
+                    
+                <View style={styles.tableNumberView}>
+                    <Text style={styles.tableText}>{player.element_type}</Text>
+                </View>
+                    
+                <View style={styles.tableNumberView}>
+                    <Text style={styles.tableText}>{player.total_points}</Text>
+                </View>
+
+                
+            </View>
+    ))
 }
 
 const PlayerSearch = () => {
+    const [isSelected, setIsSelected] = useState(false)
+    const [playerSearchText, setPlayerSearchText] = useState('')
+    const expandAnim = useRef(new Animated.Value(0)).current;
+    const overview = useGetOverviewQuery();
+
+    const heightInterpolate = expandAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange:[(1/13 * 100).toString() + '%', '100%']
+    })
+
+    const OpenPlayerSearch = useCallback(() => {
+        setIsSelected(true);
+        Expand();
+    }, [])
+
+    const ClosePlayerSearch = useCallback(() => {
+        setIsSelected(false);
+        Keyboard.dismiss();
+        Minimize();
+    }, [])
+
+    const Expand = useCallback(() => {
+        Animated.spring(expandAnim, {
+            toValue: 1,
+            friction: 8,
+            useNativeDriver: false
+        }).start();
+    }, [])
+    
+    const Minimize = useCallback(() => {
+        Animated.spring(expandAnim, {
+            toValue: 0,
+            friction: 10,
+            useNativeDriver: false
+        }).start();
+    },[])
+
     return (
-        <View style={styles.container}>
-            <TextInput style={styles.searchbox}  placeholder="Search player..."/>
-            <TouchableOpacity style={styles.button} onPress={onTablePress}>
-                <Image style={styles.tableImage} source={require('../../../assets/table.png')} resizeMode="contain"/>
-            </TouchableOpacity>
-        </View>
+        <Animated.View style={[styles.container, { height: heightInterpolate }]}>
+            <View style={styles.searchContainer}>
+                <View style={styles.searchBoxContainer}>
+                    <TextInput style={styles.searchbox} 
+                               value={playerSearchText}
+                               onChangeText={text => setPlayerSearchText(text)}
+                               onFocus={OpenPlayerSearch} 
+                               placeholder="Search player..." 
+                               placeholderTextColor={'white'}/>
+                </View>
+                { isSelected &&
+                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginRight: 7}} onPress={ClosePlayerSearch}>
+                        <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>Cancel</Text>
+                    </TouchableOpacity>
+                }
+                
+            </View>
+
+            <View style={{ flex: isSelected ? 1 : 0, flexDirection: 'row', backgroundColor: 'green' }}/>
+            <View style={{ flex: isSelected ? 11 : 0 }}>
+                          
+                <ScrollView style={{ flex: 1, padding: 5 }}>
+                    { overview.data && 
+                        PlayerTable(overview.data, playerSearchText)
+                    }
+                </ScrollView>
+            </View>  
+        </Animated.View>
     )
 }
 
 const styles = StyleSheet.create({
 
     container: {
-        height: '100%',
+        position: 'absolute',
+        bottom: 0,
+        width: GlobalConstants.width,
+        backgroundColor: GlobalConstants.primaryColor,
+        display: 'flex'
+    },
+
+    //#region  search styling
+
+    searchContainer: {
+        height: GlobalConstants.height * 1/13,
         flexDirection: 'row',
-        alignItems: 'flex-end',
-        paddingTop: 0,
-        paddingRight: 5,
-        paddingLeft: 5
+    },
+
+    searchBoxContainer: {
+        flex: 1,
+        margin: 7,
+        padding: 7,
+        backgroundColor: GlobalConstants.secondayColor,
+        flexDirection: 'row',
+        borderRadius: GlobalConstants.cornerRadius,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     searchbox: {
         flex: 1,
-        height: 40,
-        marginRight: 5,
-        borderWidth: 1,
-        padding: 10,
-        backgroundColor: GlobalConstants.tertiaryColor,
-        borderRadius: GlobalConstants.cornerRadius,
-    },
-
-    button: {
-        height: 40,
-        width: 40,
-        justifyContent: 'center',
-        backgroundColor: GlobalConstants.tertiaryColor,
-        borderRadius: GlobalConstants.cornerRadius,
-    },
-
-    tableImage: {
-        height: '75%',
-        width : '75%',
         alignSelf: 'center',
+        color: 'white'
     },
+
+    //#endregion
+
+    //#region player table
+
+    tableView: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingLeft: 5,
+        paddingRight: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+    },
+
+    tableNumberView: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    tableText: {
+        color: GlobalConstants.textPrimaryColor,
+    },
+
+    //#endregion
+
 });
 
 export default PlayerSearch;

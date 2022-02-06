@@ -12,6 +12,7 @@ import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
+import { each } from "immer/dist/internal";
 
 interface PlayerCardProps {
     player: PlayerData;
@@ -19,56 +20,69 @@ interface PlayerCardProps {
     overview: FplOverview;
     isVisible: boolean;
     isVisibleFunction : (value: React.SetStateAction<boolean>) => void;
+    fixtures: FplFixture[];
 }
 
-function FixturePlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, overview: FplOverview) {
+function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) {
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
 
-        let fixtureId = teamInfo.fixture?.id;
-
         if (teamInfo.fixture) {
-            return (
-                <View style={{ alignItems: 'center', marginTop: 15, marginBottom: 5}}>
-                    <View style={styles.fixtureScoreView}>
-                        <View style={styles.emblemView}>
-                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview).code]} resizeMode='contain' />
-                        </View>
-                        <Text style={[styles.scoreText, {alignSelf: 'center'}]}>{teamInfo.fixture.team_h_score}  -  {teamInfo.fixture.team_a_score}</Text>
-                        <View style={styles.emblemView}>
-                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview).code]} resizeMode='contain' />
-                        </View>
-                        
-                    </View>
-
-                    <View style={{flexDirection: 'row', borderColor: 'lightgray', borderBottomWidth: 1, padding: 5}}>
-                        <Text style={[styles.statText, {flex: 3}]}>Stat</Text>
-                        <View style={{flex: 1, alignItems: 'center'}}>
-                            <Text style={styles.statText}>Value</Text>
-                        </View>
-                        <View style={{flex: 1, alignItems: 'center'}}>
-                            <Text style={styles.statText}>Points</Text>
-                        </View>
-                    </View>
-                    {
-                        playerData.gameweekData.explain.find(game => game.fixture === fixtureId)?.stats.map(stat => 
-                                <View key={stat.identifier} style={{flexDirection: 'row', padding: 5}}>
-                                    <Text style={[styles.statText, {flex: 3}]}>{StatNames[stat.identifier]}</Text>
-                                    <View style={{flex: 1, alignItems: 'center'}}>
-                                        <Text style={styles.statText}>{stat.value}</Text>
-                                    </View>
-                                    <View style={{flex: 1, alignItems: 'center'}}>
-                                        <Text style={styles.statText}>{stat.points}</Text>
-                                    </View>
-                                </View>
-                            )
-                    }
-                </View>
-            )
+            return FixturePlayerStatsView(playerData, overview, teamInfo.fixture);
         }
     }
+    else if (teamInfo.teamType !== TeamTypes.Empty) {
+
+        let game: FplFixture | undefined;
+
+        return playerData.gameweekData.explain.map(fixture => 
+            {
+                game = fixtures.find(game => game.id === fixture.fixture)
+                if (game) return FixturePlayerStatsView(playerData, overview, game)
+            })        
+    }
+
     return null;
-    
+}
+
+function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, fixture: FplFixture) {
+    return (
+        <View key={fixture.id} style={{ alignItems: 'center', marginTop: 15, marginBottom: 5}}>
+            <View style={styles.fixtureScoreView}>
+                <View style={styles.emblemView}>
+                    <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview).code]} resizeMode='contain' />
+                </View>
+                <Text style={[styles.scoreText, {alignSelf: 'center'}]}>{fixture.team_h_score}  -  {fixture.team_a_score}</Text>
+                <View style={styles.emblemView}>
+                    <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview).code]} resizeMode='contain' />
+                </View>
+                
+            </View>
+
+            <View style={{flexDirection: 'row', borderColor: 'lightgray', borderBottomWidth: 1, padding: 5}}>
+                <Text style={[styles.statText, {flex: 3}]}>Stat</Text>
+                <View style={{flex: 1, alignItems: 'center'}}>
+                    <Text style={styles.statText}>Value</Text>
+                </View>
+                <View style={{flex: 1, alignItems: 'center'}}>
+                    <Text style={styles.statText}>Points</Text>
+                </View>
+            </View>
+            {
+                playerData.gameweekData.explain.find(game => game.fixture === fixture.id)?.stats.map(stat => 
+                        <View key={stat.identifier} style={{flexDirection: 'row', padding: 5}}>
+                            <Text style={[styles.statText, {flex: 3}]}>{StatNames[stat.identifier]}</Text>
+                            <View style={{flex: 1, alignItems: 'center'}}>
+                                <Text style={styles.statText}>{stat.value}</Text>
+                            </View>
+                            <View style={{flex: 1, alignItems: 'center'}}>
+                                <Text style={styles.statText}>{stat.points}</Text>
+                            </View>
+                        </View>
+                    )
+            }
+        </View>
+    )
 }
 
 const PlayerCard = (props: PlayerCardProps) => {
@@ -77,12 +91,12 @@ const PlayerCard = (props: PlayerCardProps) => {
         <Modal animationType="fade" transparent={true} visible={props.isVisible}>
             <Pressable style={globalStyles.modalBackground} onPressIn={() => props.isVisibleFunction(false)}/>
 
-            <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height }]}>
+            <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
                 <Pressable style={globalStyles.closeButton} onPressIn={() => props.isVisibleFunction(false)}>
                     <Image style={{height: '100%', width: '100%'}} source={Icons["close"]} resizeMode="contain"/>
                 </Pressable> 
                 <ScrollView style={{ flex: 1 }}>
-                    { FixturePlayerStatsView(props.player, props.teamInfo, props.overview) }      
+                    { AllFixturesPlayerStatsView(props.player, props.teamInfo, props.overview, props.fixtures) }      
                 </ScrollView>
                          
             </View>            

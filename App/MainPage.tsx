@@ -17,12 +17,12 @@ const MainPage = () => {
               <><View style={styles.fixturesView}>
                   <FixturesView overview={overview.data} />
                 </View>
-                <View style={styles.playerSearchView}>
-                  <PlayerSearch />
-                </View>
                 <View style={styles.lineupView}>
                   <LineupContainer />
-                </View></>
+                </View>
+                <View style={{ flex: 1 }}></View>
+                <PlayerSearch />
+                </>
             }
         </SafeAreaView>
     )
@@ -36,17 +36,12 @@ const styles = StyleSheet.create({
     safeArea: {
       backgroundColor: GlobalConstants.primaryColor,
       flex: 1,
-      marginTop: '0%',
     },
 
     fixturesView: {
       flex: 2,
     },
 
-    playerSearchView: {
-      flex: 1,
-    },
-  
     lineupView: {
       flex: 10,
     },    
