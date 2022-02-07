@@ -4,38 +4,44 @@
 //TODO: also this way might not be the best since you cant filter by most pts, xg, assits, position
 
 import React, { useCallback, useRef, useState } from "react";
-import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView } from "react-native";
+import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView, FlatList, ListRenderItem } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
-import { FplOverview } from "../../Models/FplOverview";
+import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { useGetOverviewQuery } from "../../Store/fplSlice";
 
-
+const renderPlayerItem = ({item} : {item: PlayerOverview}) => {
+    return (
+        <View key={item.id} style={styles.tableView}>
+            <View style={{flex: 2}}>
+                <Text style={styles.tableText}>{item.web_name}</Text>
+            </View>
+            <View style={styles.tableNumberView}>
+                <Text style={styles.tableText}>{item.team}</Text>
+            </View >
+                
+            <View style={styles.tableNumberView}>
+                <Text style={styles.tableText}>{item.element_type}</Text>
+            </View>
+                
+            <View style={styles.tableNumberView}>
+                <Text style={styles.tableText}>{item.total_points}</Text>
+            </View>
+        </View> )
+}
 
 const PlayerTable = (overview: FplOverview, playerSearchText: string) => {
 
-    let players = overview.elements;
+    let players = overview.elements.slice().filter(player => player.web_name.includes(playerSearchText)).sort((playerA, playerB) => playerB.total_points - playerA.total_points);
 
     return (
-        players.slice().filter(player => player.web_name.includes(playerSearchText)).sort((playerA, playerB) => playerB.total_points - playerA.total_points).map(player => 
-            <View key={player.id} style={styles.tableView}>
-                <View style={{flex: 2}}>
-                    <Text style={styles.tableText}>{player.web_name}</Text>
-                </View>
-                <View style={styles.tableNumberView}>
-                    <Text style={styles.tableText}>{player.team}</Text>
-                </View >
-                    
-                <View style={styles.tableNumberView}>
-                    <Text style={styles.tableText}>{player.element_type}</Text>
-                </View>
-                    
-                <View style={styles.tableNumberView}>
-                    <Text style={styles.tableText}>{player.total_points}</Text>
-                </View>
-
-                
-            </View>
-    ))
+        <FlatList
+            data={players}
+            renderItem={renderPlayerItem}
+            keyExtractor={item => item.id.toString()}
+            removeClippedSubviews={true}
+            maxToRenderPerBatch={30}/>
+            
+    )
 }
 
 const PlayerSearch = () => {
