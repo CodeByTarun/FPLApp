@@ -41,10 +41,16 @@ const globalStyles = StyleSheet.create(
        closeButton: {
             position: 'absolute',
             zIndex: 1,
-            right: 0,
+            right: -5,
+            top: -5,
             height: 15,
             width: 15,
-            margin: 15,
+            margin: 0,
+            backgroundColor: GlobalConstants.primaryColor,
+        },
+
+        closeButtonBackground: {
+            
         },
     }
 )

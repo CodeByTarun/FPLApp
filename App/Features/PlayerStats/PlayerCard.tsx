@@ -13,6 +13,7 @@ import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { each } from "immer/dist/internal";
+import CloseButton from "../Controls/CloseButton";
 
 interface PlayerCardProps {
     player: PlayerData;
@@ -92,9 +93,7 @@ const PlayerCard = (props: PlayerCardProps) => {
             <Pressable style={globalStyles.modalBackground} onPressIn={() => props.isVisibleFunction(false)}/>
 
             <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
-                <Pressable style={globalStyles.closeButton} onPressIn={() => props.isVisibleFunction(false)}>
-                    <Image style={{height: '100%', width: '100%'}} source={Icons["close"]} resizeMode="contain"/>
-                </Pressable> 
+                <CloseButton boolFunction={props.isVisibleFunction}/>
                 <ScrollView style={{ flex: 1 }}>
                     { AllFixturesPlayerStatsView(props.player, props.teamInfo, props.overview, props.fixtures) }      
                 </ScrollView>
@@ -106,10 +105,6 @@ const PlayerCard = (props: PlayerCardProps) => {
 
 const styles = StyleSheet.create(
     {
-        fixtureView: {
-
-        },
-
         statText: {
             color: GlobalConstants.textPrimaryColor,
             fontSize: GlobalConstants.mediumFont,

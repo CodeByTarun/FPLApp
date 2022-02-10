@@ -7,6 +7,7 @@ import UserTeamInfo, { changeFavouriteUserTeam, getAllUserTeamInfo, removeUserTe
 import { StringMappingType } from "typescript";
 import { useAppDispatch } from "../../Store/hooks";
 import { changeToBudgetTeam, changeToDraftTeam } from "../../Store/teamSlice";
+import CloseButton from "../Controls/CloseButton";
 
 enum UserTeamActionKind {
     ChangeName,
@@ -214,9 +215,7 @@ const TeamModal = (props: TeamModalProps) => {
             <View style={globalStyles.modalBackground}/>
 
             <View style={[globalStyles.modalView, globalStyles.modalShadow, {height: '50%'}]}>
-                <Pressable style={globalStyles.closeButton} onPressIn={() => props.isVisibleFunction(false)}>
-                    <Image style={{height: '100%', width: '100%'}} source={Icons["close"]} resizeMode="contain"/>
-                </Pressable>
+                <CloseButton boolFunction={props.isVisibleFunction}/>
                 <Text style={[styles.titleText]}>{(teamFormOpen) ? (userTeamState.teamEditing) ? "Edit Team" : "Add Team" : "My Teams"}</Text>
 
             { (teamFormOpen) ?

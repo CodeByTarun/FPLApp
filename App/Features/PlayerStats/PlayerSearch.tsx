@@ -3,52 +3,22 @@
 //TODO: think about adding a compare feature between two players?
 //TODO: also this way might not be the best since you cant filter by most pts, xg, assits, position
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView, FlatList, ListRenderItem } from "react-native";
-import * as GlobalConstants from "../../Global/GlobalConstants"
+import * as GlobalConstants from "../../Global/GlobalConstants";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { useGetOverviewQuery } from "../../Store/fplSlice";
+import PlayerTable from "./PlayerTable";
+   
 
-const renderPlayerItem = ({item} : {item: PlayerOverview}) => {
-    return (
-        <View key={item.id} style={styles.tableView}>
-            <View style={{flex: 2}}>
-                <Text style={styles.tableText}>{item.web_name}</Text>
-            </View>
-            <View style={styles.tableNumberView}>
-                <Text style={styles.tableText}>{item.team}</Text>
-            </View >
-                
-            <View style={styles.tableNumberView}>
-                <Text style={styles.tableText}>{item.element_type}</Text>
-            </View>
-                
-            <View style={styles.tableNumberView}>
-                <Text style={styles.tableText}>{item.total_points}</Text>
-            </View>
-        </View> )
+interface PlayerSearchProps {
+    overview: FplOverview;
 }
 
-const PlayerTable = (overview: FplOverview, playerSearchText: string) => {
-
-    let players = overview.elements.slice().filter(player => player.web_name.includes(playerSearchText)).sort((playerA, playerB) => playerB.total_points - playerA.total_points);
-
-    return (
-        <FlatList
-            data={players}
-            renderItem={renderPlayerItem}
-            keyExtractor={item => item.id.toString()}
-            removeClippedSubviews={true}
-            maxToRenderPerBatch={30}/>
-            
-    )
-}
-
-const PlayerSearch = () => {
+const PlayerSearch = (props: PlayerSearchProps) => {
     const [isSelected, setIsSelected] = useState(false)
     const [playerSearchText, setPlayerSearchText] = useState('')
     const expandAnim = useRef(new Animated.Value(0)).current;
-    const overview = useGetOverviewQuery();
 
     const heightInterpolate = expandAnim.interpolate({
         inputRange: [0, 1],
@@ -62,6 +32,7 @@ const PlayerSearch = () => {
 
     const ClosePlayerSearch = useCallback(() => {
         setIsSelected(false);
+        setPlayerSearchText('');
         Keyboard.dismiss();
         Minimize();
     }, [])
@@ -101,15 +72,7 @@ const PlayerSearch = () => {
                 
             </View>
 
-            <View style={{ flex: isSelected ? 1 : 0, flexDirection: 'row', backgroundColor: 'green' }}/>
-            <View style={{ flex: isSelected ? 11 : 0 }}>
-                          
-                <ScrollView style={{ flex: 1, padding: 5 }}>
-                    { overview.data && 
-                        PlayerTable(overview.data, playerSearchText)
-                    }
-                </ScrollView>
-            </View>  
+            <PlayerTable overview={props.overview} playerSearchText={playerSearchText}/>
         </Animated.View>
     )
 }
@@ -150,28 +113,7 @@ const styles = StyleSheet.create({
 
     //#endregion
 
-    //#region player table
-
-    tableView: {
-        flex: 1,
-        flexDirection: 'row',
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 5,
-        paddingBottom: 5,
-    },
-
-    tableNumberView: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    tableText: {
-        color: GlobalConstants.textPrimaryColor,
-    },
-
-    //#endregion
+    
 
 });
 

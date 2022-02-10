@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import FixturesView from './Features/Fixtures/FixturesView';
 import PlayerSearch from './Features/PlayerStats/PlayerSearch';
 import LineupContainer from './Features/GameStats/LineupContainer';
 import * as GlobalConstants from './Global/GlobalConstants'
 import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
+import { FplFixture } from "./Models/FplFixtures";
 
 const MainPage = () => {
 
     const overview = useGetOverviewQuery();
     const fixtures = useGetFixturesQuery();
-    
+
     return (
         <SafeAreaView style={styles.safeArea}>
-            {(overview.isSuccess == true && fixtures.isSuccess) &&
+            {(overview.data && fixtures.data) &&
               <><View style={styles.fixturesView}>
                   <FixturesView overview={overview.data} />
                 </View>
@@ -21,7 +22,7 @@ const MainPage = () => {
                   <LineupContainer />
                 </View>
                 <View style={{ flex: 1 }}></View>
-                <PlayerSearch />
+                <PlayerSearch overview={overview.data}/>
                 </>
             }
         </SafeAreaView>
@@ -29,22 +30,22 @@ const MainPage = () => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      height: '100%'
-    },
+  container: {
+    height: '100%'
+  },
   
-    safeArea: {
-      backgroundColor: GlobalConstants.primaryColor,
-      flex: 1,
-    },
+  safeArea: {
+    backgroundColor: GlobalConstants.primaryColor,
+    flex: 1,
+  },
 
-    fixturesView: {
-      flex: 2,
-    },
+  fixturesView: {
+    flex: 2,
+  },
 
-    lineupView: {
-      flex: 10,
-    },    
-  });
+  lineupView: {
+    flex: 10,
+  },    
+});
 
-  export default MainPage;
+export default MainPage;

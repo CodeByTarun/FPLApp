@@ -86,17 +86,17 @@ const FixturesView = (prop: FixturesViewProp) => {
   return (
     <View style={styles.container}>
       <View style={styles.gameweekView}>
-
-        <RNPickerSelect 
-            value = { gameweekNumber }
-            onValueChange={(value) => setGameweekNumber(value)} 
-            style={pickerSelectStyles}
-            items = {
-              prop.overview!.events.map((event) => {
-              return { label: event.name, value:event.id}
-            })
-            }/>
-
+        {prop.overview && 
+          <RNPickerSelect 
+              value = { gameweekNumber }
+              onValueChange={(value) => setGameweekNumber(value)} 
+              style={pickerSelectStyles}
+              items = {
+                prop.overview.events.map((event) => {
+                return { label: event.name, value:event.id}
+              })
+              }/>
+          }
       </View>
       { (fixtures.isSuccess == true) &&
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.fixturesView}>

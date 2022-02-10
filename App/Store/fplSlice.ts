@@ -13,7 +13,11 @@ export const fplSlice = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
   reducerPath: 'api',
 
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://fantasy.premierleague.com/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://fantasy.premierleague.com/api',
+                              prepareHeaders: (headers, { getState }) => {
+                                headers.set("User-Agent", "Mozilla/5.0")
+                                return headers
+                              }}),
   // The "endpoints" represent operations and requests for this server
   endpoints: builder => ({
     getOverview: builder.query<FplOverview, void>({
