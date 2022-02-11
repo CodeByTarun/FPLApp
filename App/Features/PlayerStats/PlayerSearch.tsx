@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     searchContainer: {
         height: GlobalConstants.height * 1/13,
         flexDirection: 'row',
+        marginBottom: 5,
     },
 
     searchBoxContainer: {

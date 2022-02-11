@@ -44,10 +44,12 @@ const PlayerTable = (props: PlayerTableProps) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <View style={{ flex: 1 , flexDirection: 'row', backgroundColor: 'green', zIndex: 1 }}>
-                <Dropdown placeholderText="Team"/>
-                <Dropdown placeholderText="Position"/>
-                <Dropdown placeholderText="Stat"/>
+            <View style={{ flex: 1 , flexDirection: 'row', zIndex: 1 }}>
+                <View style={{ flex: 1, paddingBottom: 10, paddingTop: 5, flexDirection:'row' }}>
+                    <Dropdown placeholderText="Team"/>
+                    <Dropdown placeholderText="Position"/>
+                    <Dropdown placeholderText="Stat"/>
+                </View>
             </View>
             <View style={{ flex: 11 }}>
                 <FlatList
