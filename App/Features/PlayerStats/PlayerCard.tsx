@@ -3,7 +3,7 @@
 
 import React from "react";
 import { Modal, Pressable, View, Image, StyleSheet, Text, ScrollView } from "react-native";
-import { StatNames } from "../../Global/Enums";
+import { StatNames } from "../../Global/EnumsAndDicts";
 import globalStyles from "../../Global/GlobalStyles";
 import { Emblems, Icons } from "../../Global/Images";
 import { PlayerData } from "../../Models/CombinedData";
@@ -12,7 +12,6 @@ import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
-import { each } from "immer/dist/internal";
 import CloseButton from "../Controls/CloseButton";
 
 interface PlayerCardProps {

@@ -6,6 +6,7 @@ import { FlatList, View, Text, StyleSheet } from "react-native";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import Dropdown from "../Controls/Dropdown";
+import { OverviewStats } from "../../Global/EnumsAndDicts"
 
 const renderPlayerItem = ({item} : {item: PlayerOverview}) => {
     return (
@@ -46,9 +47,9 @@ const PlayerTable = (props: PlayerTableProps) => {
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1 , flexDirection: 'row', zIndex: 1 }}>
                 <View style={{ flex: 1, paddingBottom: 10, paddingTop: 5, flexDirection:'row' }}>
-                    <Dropdown placeholderText="Team"/>
-                    <Dropdown placeholderText="Position"/>
-                    <Dropdown placeholderText="Stat"/>
+                    <Dropdown placeholderText="Team" options={Array.from(props.overview.teams.map(team => team.name))}/>
+                    <Dropdown placeholderText="Position" options={Array.from(props.overview.element_types.map(type => type.plural_name))}/>
+                    <Dropdown placeholderText="Stat" options={Object.values(OverviewStats)}/>
                 </View>
             </View>
             <View style={{ flex: 11 }}>

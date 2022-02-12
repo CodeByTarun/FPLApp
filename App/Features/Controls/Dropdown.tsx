@@ -8,14 +8,13 @@ import CloseButton from "./CloseButton";
 
 interface DropdownProps {
     placeholderText: string;
+    options: string[];
 }
 
 const Dropdown = (props: DropdownProps) => {
     
     const [selectedOption, setSelectedOption] = useState(props.placeholderText);
     const [showDropdown, setShowDropdown] = useState(false);
-
-    const optionsDummy = ['hi', 'hello', 'hey', 'bye', 'salut'] as string[];
 
     useEffect(() => {
         Keyboard.dismiss();
@@ -32,11 +31,17 @@ const Dropdown = (props: DropdownProps) => {
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => setShowDropdown(false)}/>
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5, minHeight: GlobalConstants.height * 0.4 }]}>
                     <CloseButton boolFunction={setShowDropdown}/> 
+                    <Text style={styles.titleText}>Options</Text>
                     <FlatList
                         style={styles.flatList}
                         ListHeaderComponentStyle = {{elevation: 0.1, zIndex: 1}}
-                        data={optionsDummy}
-                        renderItem={({item}) => <Text>{item}</Text>}/>
+                        data={props.options}
+                        keyExtractor={item => item}
+                        renderItem={({item}) => 
+                            <View style={styles.itemView}>
+                                <Text style={styles.itemText}>{item}</Text>
+                            </View>
+                        }/>
                 </View>
             </Modal>
         </View>
@@ -61,8 +66,27 @@ const styles = StyleSheet.create({
         zIndex: 0.5,
     },
 
-    flatList: {
+    titleText: {
+        color: GlobalConstants.textPrimaryColor,
+        alignSelf: 'center',
+        marginTop: 15,
+        fontSize: GlobalConstants.largeFont,
+        fontWeight: 'bold'
+    },
 
+    flatList: {
+        margin: 10
+    },
+
+    itemView: {
+        borderBottomColor: 'lightgray',
+        borderBottomWidth: 1,
+    },
+
+    itemText: {
+        color: GlobalConstants.textPrimaryColor,
+        paddingBottom: 15,
+        paddingTop: 15,
     },
 
 })

@@ -1,7 +1,7 @@
 
 export const StatNames: {[key: string]: string} = 
     {
-       "assists" : "Assists",
+        "assists" : "Assists",
         "bonus" : "Bonus",
         "clean_sheets": "Clean Sheets",
         "goals_conceded": "Goals Conceded",
@@ -11,6 +11,8 @@ export const StatNames: {[key: string]: string} =
         "red_cards": "Red Cards",
         "saves": "Saves",
         "yellow_cards": "Yellow Cards",
+        "penalties_missed": "Penalties Missed",
+        "penalties_saved": "Penalties Saved",
     }
 
 export const OverviewStats: {[key: string]: string} = 
