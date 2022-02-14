@@ -169,7 +169,7 @@ const styles = StyleSheet.create(
             fontSize: GlobalConstants.width*0.025,
             textAlign: 'center',
             height: "20%",
-            backgroundColor: GlobalConstants.secondayColor,
+            backgroundColor: GlobalConstants.secondaryColor,
             color: GlobalConstants.textPrimaryColor,
             padding: 2,
             marginTop: 2,    

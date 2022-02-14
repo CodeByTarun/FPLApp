@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 7,
         padding: 7,
-        backgroundColor: GlobalConstants.secondayColor,
+        backgroundColor: GlobalConstants.secondaryColor,
         flexDirection: 'row',
         borderRadius: GlobalConstants.cornerRadius,
         alignItems: 'center',

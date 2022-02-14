@@ -105,7 +105,7 @@ const PlayerCard = (props: PlayerCardProps) => {
 const styles = StyleSheet.create(
     {
         statText: {
-            color: GlobalConstants.textPrimaryColor,
+            color: GlobalConstants.modalTextColor,
             fontSize: GlobalConstants.mediumFont,
         },
 
@@ -120,7 +120,7 @@ const styles = StyleSheet.create(
         },
 
         scoreText: {
-            color: GlobalConstants.textPrimaryColor,
+            color: GlobalConstants.modalTextColor,
             fontSize: GlobalConstants.largeFont,
             marginLeft: 5,
             marginRight: 5,

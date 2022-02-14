@@ -86,7 +86,7 @@ const styles = StyleSheet.create(
             width: "50%",
             position: 'absolute',
             left: -1,
-            backgroundColor: GlobalConstants.secondayColor,
+            backgroundColor: GlobalConstants.secondaryColor,
             borderRadius: GlobalConstants.cornerRadius,
         },
 

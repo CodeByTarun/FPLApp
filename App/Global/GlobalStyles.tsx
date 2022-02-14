@@ -14,7 +14,7 @@ const globalStyles = StyleSheet.create(
             position: 'absolute',
             top: GlobalConstants.height * 0.23,
             width: '75%',
-            backgroundColor: GlobalConstants.primaryColor,
+            backgroundColor: GlobalConstants.modalBackgroundColor,
             alignSelf: 'center',
             borderRadius: GlobalConstants.cornerRadius,
             padding: 10,

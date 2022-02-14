@@ -138,7 +138,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingHorizontal: 10,
     color: GlobalConstants.textPrimaryColor,
     borderRadius: GlobalConstants.cornerRadius,
-    backgroundColor: GlobalConstants.secondayColor,
+    backgroundColor: GlobalConstants.secondaryColor,
   },
   inputAndroid: {
     fontSize: GlobalConstants.width*0.04,
@@ -146,7 +146,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingVertical: 8,
     color: GlobalConstants.textPrimaryColor,
     borderRadius: GlobalConstants.cornerRadius,
-    backgroundColor: GlobalConstants.secondayColor,
+    backgroundColor: GlobalConstants.secondaryColor,
   },
 });
 

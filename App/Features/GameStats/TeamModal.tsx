@@ -311,7 +311,7 @@ const styles = StyleSheet.create(
 
         titleText: {
             alignSelf: 'center',
-            color: GlobalConstants.textPrimaryColor,
+            color: GlobalConstants.modalTextColor,
             fontSize: GlobalConstants.largeFont,
             fontWeight: 'bold',
             marginTop: 12, 
@@ -319,12 +319,12 @@ const styles = StyleSheet.create(
         },
 
         text: {
-            color: GlobalConstants.textPrimaryColor,
+            color: GlobalConstants.modalTextColor,
             fontSize: GlobalConstants.mediumFont,
         },
 
         textInput: {
-            backgroundColor: GlobalConstants.secondayColor,
+            backgroundColor: GlobalConstants.modalButtonColor,
             height: '70%',
             padding: 7,
             borderRadius: GlobalConstants.cornerRadius,
@@ -374,15 +374,11 @@ const styles = StyleSheet.create(
         modalTeamList: {
             flex: 1,
             margin: 5,
-        },
-
-        
-
-        
+        },        
 
         addButton: {
             width: '40%',
-            backgroundColor: GlobalConstants.secondayColor,
+            backgroundColor: GlobalConstants.modalButtonColor,
             height: '10%',
             alignItems: 'center',
             justifyContent: 'center',

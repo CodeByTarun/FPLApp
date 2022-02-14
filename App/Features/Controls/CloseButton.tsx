@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-        backgroundColor: GlobalConstants.secondayColor,
+        backgroundColor: GlobalConstants.secondaryColor,
         borderRadius: 20,
     },
 })

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
          alignSelf: 'center',
          paddingLeft: 7,
          justifyContent: 'center',
-         backgroundColor: GlobalConstants.secondayColor,
+         backgroundColor: GlobalConstants.secondaryColor,
          borderRadius: GlobalConstants.cornerRadius,
          zIndex: 0.5
     },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
 
     titleText: {
-        color: GlobalConstants.textPrimaryColor,
+        color: GlobalConstants.modalTextColor,
         alignSelf: 'center',
         marginTop: 15,
         fontSize: GlobalConstants.largeFont,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     },
 
     itemText: {
-        color: GlobalConstants.textPrimaryColor,
+        color: GlobalConstants.modalTextColor,
         paddingBottom: 15,
         paddingTop: 15,
     },
