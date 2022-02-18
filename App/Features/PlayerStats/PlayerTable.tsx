@@ -36,26 +36,68 @@ interface PlayerTableProps {
 const PlayerTable = (props: PlayerTableProps) => {
 
     const [playerList, setPlayerList] = useState([] as PlayerOverview[]);
+    const [teamFilter, setTeamFilter] = useState('Team');
+    const [positionFilter, setPositionFilter] = useState('Position');
+    const [statFilter, setStatFilter] = useState('Total Points');
 
     useEffect(function FilterPlayerList() {
+
+        let stat = Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview;
+        
         setPlayerList(
-            props.overview.elements.slice().filter(player => player.web_name.includes(props.playerSearchText)).sort((playerA, playerB) => playerB.total_points - playerA.total_points)
+            props.overview.elements.slice().filter(player => player.web_name.includes(props.playerSearchText) && 
+                                                             (teamFilter === 'Team' || player.team_code === props.overview.teams.find(team => team.name === teamFilter)?.code) &&
+                                                             (positionFilter === 'Position' || player.element_type === props.overview.element_types.find(element => element.plural_name === positionFilter)?.id))
+                                           .sort((playerA, playerB) => (playerB[stat] as number) - (playerA[stat] as number))
         );
-    }, [props.playerSearchText])
+    }, [props.playerSearchText, teamFilter, positionFilter, statFilter])
 
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1 , flexDirection: 'row', zIndex: 1 }}>
                 <View style={{ flex: 1, paddingBottom: 10, paddingTop: 5, flexDirection:'row' }}>
-                    <Dropdown placeholderText="Team" options={Array.from(props.overview.teams.map(team => team.name))}/>
-                    <Dropdown placeholderText="Position" options={Array.from(props.overview.element_types.map(type => type.plural_name))}/>
-                    <Dropdown placeholderText="Stat" options={Object.values(OverviewStats)}/>
+                    <Dropdown defaultValue="Team" 
+                              options={Array.from(props.overview.teams.map(team => team.name))} 
+                              value={teamFilter} 
+                              setValue={setTeamFilter}/>
+                    <Dropdown defaultValue="Position" 
+                              options={Array.from(props.overview.element_types.map(type => type.plural_name))} 
+                              value={positionFilter} 
+                              setValue={setPositionFilter}/>
+                    <Dropdown defaultValue="Total Points" 
+                              options={Object.values(OverviewStats).sort()} 
+                              value={statFilter} 
+                              setValue={setStatFilter}/>
                 </View>
             </View>
             <View style={{ flex: 11 }}>
                 <FlatList
                     data={playerList}
-                    renderItem={renderPlayerItem}
+                    renderItem={ ({item}) =>
+                        <View key={item.id} style={styles.tableView}>
+                            <View style={{flex: 2}}>
+                                <Text style={styles.tableText}>{item.web_name}</Text>
+                            </View>
+                            <View style={styles.tableNumberView}>
+                                <Text style={styles.tableText}>{props.overview.teams.find(team => team.code === item.team_code)?.short_name}</Text>
+                            </View >
+                                
+                            <View style={styles.tableNumberView}>
+                                <Text style={styles.tableText}>{props.overview.element_types.find(element => element.id === item.element_type)?.singular_name_short}</Text>
+                            </View>
+                                
+                            <View style={styles.tableNumberView}>
+                                <Text style={styles.tableText}>
+                                    {  (statFilter !== 'Cost') ? 
+                                        
+                                        item[Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview] :
+
+                                        (item[Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
+                                    }
+                                </Text>
+                            </View>
+                        </View>
+                    }
                     keyExtractor={item => item.id.toString()}
                     removeClippedSubviews={true}
                     maxToRenderPerBatch={50}/>

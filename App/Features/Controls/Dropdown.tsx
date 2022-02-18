@@ -1,5 +1,5 @@
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FlatList, Image, Keyboard, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
@@ -7,29 +7,39 @@ import { Icons } from "../../Global/Images";
 import CloseButton from "./CloseButton";
 
 interface DropdownProps {
-    placeholderText: string;
+    defaultValue: string;
     options: string[];
+    value: string | null;
+    setValue: (value: React.SetStateAction<string>) => void;
 }
 
 const Dropdown = (props: DropdownProps) => {
     
-    const [selectedOption, setSelectedOption] = useState(props.placeholderText);
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
         Keyboard.dismiss();
     }, [showDropdown])
 
+    useEffect(function optionSelected() {
+        setShowDropdown(false);
+    }, [props.value])
+
+    const clearValue = useCallback(() => {
+        props.setValue(props.defaultValue);
+        setShowDropdown(false);
+    }, [])
+
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <Pressable style={styles.container} 
                        onPress={() => setShowDropdown(!showDropdown)}
                        hitSlop={5}>
-                <Text style={styles.selectedValueText}>{selectedOption}</Text>
+                <Text style={styles.selectedValueText}>{props.value}</Text>
             </Pressable>
-            <Modal style={{justifyContent: 'center', alignItems: 'center', flex: 1, zIndex: 2, position: 'absolute'}} transparent={true} visible={showDropdown}>
+            <Modal style={{justifyContent: 'center', alignItems: 'center', alignSelf: 'center', flex: 1, zIndex: 1, position: 'absolute'}} transparent={true} visible={showDropdown}>
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => setShowDropdown(false)}/>
-                <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5, minHeight: GlobalConstants.height * 0.4 }]}>
+                <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.6, minHeight: GlobalConstants.height * 0.5 }]}>
                     <CloseButton boolFunction={setShowDropdown}/> 
                     <Text style={styles.titleText}>Options</Text>
                     <FlatList
@@ -38,10 +48,13 @@ const Dropdown = (props: DropdownProps) => {
                         data={props.options}
                         keyExtractor={item => item}
                         renderItem={({item}) => 
-                            <View style={styles.itemView}>
+                            <Pressable style={styles.itemView} onPress={() => props.setValue(item)}>
                                 <Text style={styles.itemText}>{item}</Text>
-                            </View>
+                            </Pressable>
                         }/>
+                    <Pressable style={styles.clearButton} onPress={clearValue}>
+                        <Text style={{fontSize: GlobalConstants.mediumFont, color: GlobalConstants.textPrimaryColor}}>Reset</Text>
+                    </Pressable>
                 </View>
             </Modal>
         </View>
@@ -63,6 +76,7 @@ const styles = StyleSheet.create({
 
     selectedValueText: {
         color: GlobalConstants.textPrimaryColor,
+        fontSize: GlobalConstants.mediumFont,
         zIndex: 0.5,
     },
 
@@ -89,6 +103,16 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
 
+    clearButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: GlobalConstants.redColor,
+        borderRadius: GlobalConstants.cornerRadius,
+        width: '40%',
+        alignSelf: 'center',
+        padding: 10,
+        margin: 10,
+    },
 })
 
 export default Dropdown;

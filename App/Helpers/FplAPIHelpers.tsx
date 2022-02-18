@@ -130,7 +130,9 @@ export function IsThereAMatchInProgress(gameweekNumber: number, fixtures: FplFix
 
 export function GetHighestMinForAPlayer(fixture: FplFixture, gameweek: FplGameweek) : number {
     var minutes = fixture.stats.filter(stat => stat.identifier === 'bps')[0].h
-                               .map((stat) => gameweek.elements.find(element => element.id === stat.element)?.stats.minutes as number);
+                               .map((stat) => gameweek.elements.find(element => element.id === stat.element)?.explain
+                                                               .find(game => game.fixture === fixture.id)?.stats
+                                                               .find(stat => stat.identifier === 'minutes')?.value as number);
 
     return Math.max(...minutes)               
 }

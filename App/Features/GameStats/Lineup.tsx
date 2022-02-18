@@ -82,9 +82,9 @@ function CreateBenchView(gameweek: FplGameweek, overview: FplOverview, fixtures:
     return playerStatsView;
 }
 
-function CreateBonusPointView(teamInfo: FixtureInfo, overviewData: FplOverview) {
+function CreateBonusPointView(teamInfo: FixtureInfo, overviewData: FplOverview, fixturesData: FplFixture[]) {
     
-    let bonusPoints = teamInfo.fixture?.stats.find(stat => stat.identifier === 'bps');
+    let bonusPoints = fixturesData.find(fixture => fixture.id === teamInfo.fixture?.id)?.stats.find(stat => stat.identifier === 'bps');
 
     if (bonusPoints) {
 
@@ -186,7 +186,7 @@ const Lineup = () => {
     
                 { (teamInfo.teamType === TeamTypes.Fixture) ? 
                     <>
-                    { CreateBonusPointView(teamInfo, overview.data)}
+                    { CreateBonusPointView(teamInfo, overview.data, fixtures.data)}
                     </>     
                 : (teamInfo.teamType === TeamTypes.Dream) ? 
                     <>

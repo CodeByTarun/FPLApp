@@ -245,24 +245,24 @@ const TeamModal = (props: TeamModalProps) => {
 
                     <View style={{flex: 1, flexDirection:'row', alignItems: 'center'}}>
                         <Text style={[styles.text, {padding: 7}]}>Is this a draft team?</Text>
-                        <Switch style={[styles.switch]} trackColor={{false: 'red', true: 'green'}} 
+                        <Switch style={[styles.switch]} trackColor={{false: GlobalConstants.redColor, true: GlobalConstants.fieldColor}} 
                                 value={ userTeamState.userTeam.isDraftTeam } 
                                 onValueChange={ value => userTeamDispatch({ type: UserTeamActionKind.IsDraft, value: value, data: userTeams })}/>
                     </View>
                     <View style={{flex: 0.5, justifyContent: 'center'}}>
-                        <Text style={[styles.text, {color: 'orangered', padding: 7}]}>{ userTeamState.error }</Text>
+                        <Text style={[styles.text, {color: GlobalConstants.redColor, padding: 7}]}>{ userTeamState.error }</Text>
                     </View>
                     <View style={{flexDirection: 'row'}}>
 
                         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                            <Pressable style={[styles.formButton, {backgroundColor: (userTeamState.teamEditing) ? 'red' : 'grey' }]}
+                            <Pressable style={[styles.formButton, {backgroundColor: (userTeamState.teamEditing) ? GlobalConstants.redColor : 'grey' }]}
                                     onPress={(userTeamState.teamEditing) ? removeATeam : closeForm}>
                                 <Text style={{alignSelf:'center'}}>{(userTeamState.teamEditing) ? 'Delete' : 'Back'}</Text>
                             </Pressable>
                         </View>                         
 
                         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                            <Pressable style={[styles.formButton, {backgroundColor: 'limegreen', opacity: confirmIsDisabled ? 0.5 : 1}]}
+                            <Pressable style={[styles.formButton, {opacity: confirmIsDisabled ? 0.5 : 1}]}
                                        disabled={confirmIsDisabled}
                                        onPress={(userTeamState.teamEditing) ? editTeam : addTeam}>
                                 <Text style={{alignSelf:'center'}}>Confirm</Text>
@@ -347,7 +347,7 @@ const styles = StyleSheet.create(
 
         formButton: {
             justifyContent: 'center',
-            backgroundColor: 'limegreen',
+            backgroundColor: GlobalConstants.fieldColor,
             padding: 9,
             width: GlobalConstants.width * 0.25,
             borderRadius: GlobalConstants.cornerRadius,
@@ -401,18 +401,11 @@ const styles = StyleSheet.create(
             marginLeft: 5,
         },
 
-        
-    
-
-
         editButton: {
             flex: 1,
             justifyContent: 'center',
             padding: 3,
         },
-
-
-
 
     }
 )

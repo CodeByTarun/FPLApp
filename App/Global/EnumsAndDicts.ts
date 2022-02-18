@@ -39,7 +39,7 @@ export const OverviewStats: {[key: string]: string} =
         "red_cards": "Red Cards",
         "saves": "Saves",
         "bonus": "Bonus",
-        "bps": "bps",
+        "bps": "Bonus Points Total",
         "influence": "Influence",
         "creativity": "Creativity",
         "threat": "Threat",

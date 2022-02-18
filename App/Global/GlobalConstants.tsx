@@ -8,6 +8,7 @@ export const cornerRadius = 8;
 
 // Color Scheme
 export const fieldColor = '#629512';
+export const redColor = '#f44336';
 
 export const buttonColor = 'whitesmoke';
 export const primaryColor = '#451295';
