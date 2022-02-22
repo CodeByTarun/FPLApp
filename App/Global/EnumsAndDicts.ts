@@ -46,5 +46,14 @@ export const OverviewStats: {[key: string]: string} =
         "ict_index": "ICT Index",
     }
 
+    // Team Difficulty Colors
+export const DifficultyColors: {[key: number]: string} = 
+    {
+        1 : '#86f88e',
+        2 : '#36f443',
+        3 : '#e6e6e6',
+        4 : '#f44336',
+        5 : '#9f2c23',   
+    }
     
-
+    

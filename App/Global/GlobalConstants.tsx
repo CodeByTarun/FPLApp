@@ -21,8 +21,6 @@ export const modalTextColor = 'white';
 export const modalBackgroundColor = primaryColor;
 export const modalButtonColor = secondaryColor;
 
-
-
 // Fonts
 export const smallFont = width*0.025;
 export const mediumFont = width*0.035;

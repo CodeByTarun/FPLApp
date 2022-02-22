@@ -2,31 +2,12 @@
 // will also have a search function to find players faster
 
 import React, { useEffect, useState } from "react";
-import { FlatList, View, Text, StyleSheet } from "react-native";
+import { FlatList, View, Text, StyleSheet, Image } from "react-native";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import Dropdown from "../Controls/Dropdown";
 import { OverviewStats } from "../../Global/EnumsAndDicts"
-
-const renderPlayerItem = ({item} : {item: PlayerOverview}) => {
-    return (
-        <View key={item.id} style={styles.tableView}>
-            <View style={{flex: 2}}>
-                <Text style={styles.tableText}>{item.web_name}</Text>
-            </View>
-            <View style={styles.tableNumberView}>
-                <Text style={styles.tableText}>{item.team}</Text>
-            </View >
-                
-            <View style={styles.tableNumberView}>
-                <Text style={styles.tableText}>{item.element_type}</Text>
-            </View>
-                
-            <View style={styles.tableNumberView}>
-                <Text style={styles.tableText}>{item.total_points}</Text>
-            </View>
-        </View> )
-}
+import { Jerseys } from "../../Global/Images";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -75,15 +56,18 @@ const PlayerTable = (props: PlayerTableProps) => {
                     data={playerList}
                     renderItem={ ({item}) =>
                         <View key={item.id} style={styles.tableView}>
-                            <View style={{flex: 2}}>
-                                <Text style={styles.tableText}>{item.web_name}</Text>
-                            </View>
-                            <View style={styles.tableNumberView}>
-                                <Text style={styles.tableText}>{props.overview.teams.find(team => team.code === item.team_code)?.short_name}</Text>
-                            </View >
+                            <View style={{flex: 2, flexDirection: 'row', height: GlobalConstants.height* 0.05}}>
+                                <View style={{ flex: 1 }}>
+                                    <Image style={styles.jersey} source={Jerseys[item.team_code]} resizeMode="contain"/>
+                                </View>
                                 
-                            <View style={styles.tableNumberView}>
-                                <Text style={styles.tableText}>{props.overview.element_types.find(element => element.id === item.element_type)?.singular_name_short}</Text>
+                                <View style={{flex: 3}}> 
+                                    <Text style={styles.tableText}>{item.web_name}</Text>
+                                    <View style={{flexDirection: 'row', marginTop: 2}}>
+                                        <Text style={[styles.tableText, {fontWeight: 'bold'}]}>{props.overview.teams.find(team => team.code === item.team_code)?.short_name}  </Text>
+                                        <Text style={styles.tableText}>{props.overview.element_types.find(element => element.id === item.element_type)?.singular_name_short}</Text>
+                                    </View>
+                                </View>
                             </View>
                                 
                             <View style={styles.tableNumberView}>
@@ -111,11 +95,11 @@ const styles = StyleSheet.create({
 
     tableView: {
         flex: 1,
+        backgroundColor: GlobalConstants.secondaryColor,
+        margin: 5,
         flexDirection: 'row',
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
 
     tableNumberView: {
@@ -126,6 +110,12 @@ const styles = StyleSheet.create({
 
     tableText: {
         color: GlobalConstants.textPrimaryColor,
+    },
+
+    jersey: {
+        height: '100%',
+        width: '100%',
+        alignSelf: 'center',
     },
 
     //#endregion
