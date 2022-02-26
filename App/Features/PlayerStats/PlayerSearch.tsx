@@ -6,6 +6,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView, FlatList, ListRenderItem } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
+import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { useGetOverviewQuery } from "../../Store/fplSlice";
 import PlayerTable from "./PlayerTable";
@@ -13,6 +14,7 @@ import PlayerTable from "./PlayerTable";
 
 interface PlayerSearchProps {
     overview: FplOverview;
+    fixtures: FplFixture[];
 }
 
 const PlayerSearch = (props: PlayerSearchProps) => {
@@ -72,7 +74,7 @@ const PlayerSearch = (props: PlayerSearchProps) => {
                 
             </View>
 
-            <PlayerTable overview={props.overview} playerSearchText={playerSearchText}/>
+            <PlayerTable overview={props.overview} fixtures={props.fixtures} playerSearchText={playerSearchText}/>
         </Animated.View>
     )
 }

@@ -8,9 +8,12 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import Dropdown from "../Controls/Dropdown";
 import { OverviewStats } from "../../Global/EnumsAndDicts"
 import { Jerseys } from "../../Global/Images";
+import PlayerListItem from "./PlayerListItem";
+import { FplFixture } from "../../Models/FplFixtures";
 
 interface PlayerTableProps {
     overview: FplOverview;
+    fixtures: FplFixture[];
     playerSearchText: string;
 }
 
@@ -54,33 +57,7 @@ const PlayerTable = (props: PlayerTableProps) => {
             <View style={{ flex: 11 }}>
                 <FlatList
                     data={playerList}
-                    renderItem={ ({item}) =>
-                        <View key={item.id} style={styles.tableView}>
-                            <View style={{flex: 2, flexDirection: 'row', height: GlobalConstants.height* 0.05}}>
-                                <View style={{ flex: 1 }}>
-                                    <Image style={styles.jersey} source={Jerseys[item.team_code]} resizeMode="contain"/>
-                                </View>
-                                
-                                <View style={{flex: 3}}> 
-                                    <Text style={styles.tableText}>{item.web_name}</Text>
-                                    <View style={{flexDirection: 'row', marginTop: 2}}>
-                                        <Text style={[styles.tableText, {fontWeight: 'bold'}]}>{props.overview.teams.find(team => team.code === item.team_code)?.short_name}  </Text>
-                                        <Text style={styles.tableText}>{props.overview.element_types.find(element => element.id === item.element_type)?.singular_name_short}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                                
-                            <View style={styles.tableNumberView}>
-                                <Text style={styles.tableText}>
-                                    {  (statFilter !== 'Cost') ? 
-                                        
-                                        item[Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview] :
-
-                                        (item[Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
-                                    }
-                                </Text>
-                            </View>
-                        </View>
+                    renderItem={ ({item}) => <PlayerListItem overview={props.overview} fixtures={props.fixtures} player={item} statFilter={statFilter}/>
                     }
                     keyExtractor={item => item.id.toString()}
                     removeClippedSubviews={true}
@@ -93,34 +70,8 @@ const PlayerTable = (props: PlayerTableProps) => {
 const styles = StyleSheet.create({ 
     //#region player table
 
-    tableView: {
-        flex: 1,
-        backgroundColor: GlobalConstants.secondaryColor,
-        margin: 5,
-        flexDirection: 'row',
-        paddingTop: 10,
-        paddingBottom: 10,
-    },
-
-    tableNumberView: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    tableText: {
-        color: GlobalConstants.textPrimaryColor,
-    },
-
-    jersey: {
-        height: '100%',
-        width: '100%',
-        alignSelf: 'center',
-    },
 
     //#endregion
 })
 
 export default PlayerTable;
-
-//let players = playerList.filter(player => player.web_name.includes(playerSearchText)).sort((playerA, playerB) => playerB.total_points - playerA.total_points);

@@ -22,7 +22,7 @@ const MainPage = () => {
                   <LineupContainer />
                 </View>
                 <View style={{ flex: 1 }}></View>
-                <PlayerSearch overview={overview.data}/>
+                <PlayerSearch overview={overview.data} fixtures={fixtures.data}/>
                 </>
             }
         </SafeAreaView>
