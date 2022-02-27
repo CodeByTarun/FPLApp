@@ -5,6 +5,7 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Jerseys } from "../../Global/Images";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
+import FixtureDifficultyList from "./FixtureDifficultyList";
 
 interface PlayerListItemProps {
     player: PlayerOverview;
@@ -13,12 +14,14 @@ interface PlayerListItemProps {
     statFilter: string;
 }
 
-const PlayerListItem = (props: PlayerListItemProps) => {
+const PlayerListItem = React.memo((props: PlayerListItemProps) => {
+
+    const currentGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     return (
         <View key={props.player.id} style={styles.tableView}>
-            <View style={{flex: 1, flexDirection: 'row', height: GlobalConstants.height* 0.05}}>
-                <View style={{ flex: 1 }}>
+            <View style={{flex: 3, flexDirection: 'row', height: GlobalConstants.height* 0.05}}>
+                <View style={{ flex: 1}}>
                     <Image style={styles.jersey} source={Jerseys[props.player.team_code]} resizeMode="contain"/>
                 </View>
                 
@@ -31,7 +34,11 @@ const PlayerListItem = (props: PlayerListItemProps) => {
                 </View>
             </View>
 
-            <View style={styles.tableNumberView}>
+            <View style={{flex: 3}}>
+                <FixtureDifficultyList team={props.player.team} isFullList={false} currentGameweek={currentGameweek} fixtures={props.fixtures} overview={props.overview}/>
+            </View>
+
+            <View style={[styles.tableNumberView, {flex: 1}]}>
                 <Text style={styles.tableText}>
                     {  (props.statFilter !== 'Cost') ? 
                         
@@ -44,14 +51,13 @@ const PlayerListItem = (props: PlayerListItemProps) => {
         </View>
     )
 
-}
+})
 
 export default PlayerListItem;
 
 const styles = StyleSheet.create({
 
     tableView: {
-        flex: 1,
         backgroundColor: GlobalConstants.secondaryColor,
         margin: 5,
         flexDirection: 'row',
@@ -74,7 +80,6 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         alignSelf: 'center',
-        backgroundColor: 'red',
     },
 
 });
