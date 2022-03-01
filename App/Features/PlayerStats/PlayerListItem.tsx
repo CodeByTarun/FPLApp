@@ -1,10 +1,12 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Pressable } from "react-native";
 import { OverviewStats } from "../../Global/EnumsAndDicts";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Jerseys } from "../../Global/Images";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
+import { useAppDispatch } from "../../Store/hooks";
+import { openPlayerDetailedStatsModal } from "../../Store/modalSlice";
 import FixtureDifficultyList from "./FixtureDifficultyList";
 
 interface PlayerListItemProps {
@@ -16,10 +18,11 @@ interface PlayerListItemProps {
 
 const PlayerListItem = React.memo((props: PlayerListItemProps) => {
 
+    const dispatch = useAppDispatch();
     const currentGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     return (
-        <View key={props.player.id} style={styles.tableView}>
+        <Pressable key={props.player.id} style={styles.tableView} onPress={() => dispatch(openPlayerDetailedStatsModal(props.player))}>
             <View style={{flex: 3, flexDirection: 'row', height: GlobalConstants.height* 0.05}}>
                 <View style={{ flex: 1}}>
                     <Image style={styles.jersey} source={Jerseys[props.player.team_code]} resizeMode="contain"/>
@@ -48,7 +51,7 @@ const PlayerListItem = React.memo((props: PlayerListItemProps) => {
                     }
                 </Text>
             </View>
-        </View>
+        </Pressable>
     )
 
 })

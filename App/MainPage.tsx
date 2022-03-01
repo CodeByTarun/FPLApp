@@ -6,6 +6,7 @@ import LineupContainer from './Features/GameStats/LineupContainer';
 import * as GlobalConstants from './Global/GlobalConstants'
 import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
 import { FplFixture } from "./Models/FplFixtures";
+import PlayerDetailedStatsModal from "./Features/PlayerStats/PlayerDetailedStatsModal";
 
 const MainPage = () => {
 
@@ -23,7 +24,9 @@ const MainPage = () => {
                 </View>
                 <View style={{ flex: 1 }}></View>
                 <PlayerSearch overview={overview.data} fixtures={fixtures.data}/>
-                </>
+                
+                <PlayerDetailedStatsModal overview={overview.data} fixtures={fixtures.data}/>
+              </>
             }
         </SafeAreaView>
     )
