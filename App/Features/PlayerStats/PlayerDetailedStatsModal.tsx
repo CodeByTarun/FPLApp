@@ -46,7 +46,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     </View>
 
                                     <View style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
-                                        <Text style={styles.text}>{player.selected_by_percent}% owned</Text>
+                                        <Text style={styles.text}>Sel. {player.selected_by_percent}%</Text>
                                     </View>                                    
                                 </View>
                             </View>
