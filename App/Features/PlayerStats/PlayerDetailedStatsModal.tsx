@@ -10,6 +10,7 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Icons } from "../../Global/Images";
 import FixtureDifficultyList from "./FixtureDifficultyList";
 import { template } from "@babel/core";
+import PieChart from "../Controls/PieChart";
 
 interface PlayerDetailedStatsModalProps {
     overview: FplOverview;
@@ -50,6 +51,14 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     </View>                                    
                                 </View>
                             </View>
+                            <View style={{flex: 1, padding: 10}}>
+                                <PieChart/>
+                            </View>
+
+                            <View style={{flex: 1}}>
+
+                            </View>
+                            
 
                         </View>
 
