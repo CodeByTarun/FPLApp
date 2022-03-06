@@ -2,8 +2,6 @@ import React, { useCallback, useState } from "react";
 import { View, StyleSheet, LayoutChangeEvent, Text } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 
-
-
 const PieChart = () => {
 
     const [diameter, setDiameter] = useState(0)
@@ -15,19 +13,15 @@ const PieChart = () => {
 
     return (
         <View style={{flex: 1}} onLayout={getDimensions}>
-            <View style={[styles.backgroundCircle, { height: diameter, width: diameter }]}>
+        
+        
             <View style={styles.textContainer}>
                 <Text style={styles.text}>G: 1</Text>
                 <Text style={styles.text}>A: 4</Text>
-            </View>
-            </View>
-            <View style ={{ borderWidth: 10, borderRadius: 100, height: diameter, width: diameter, position: 'absolute', borderColor: 'red' }}>
-
-            </View>
+            </View>            
             
         </View>
     )
-
 }
 
 export default PieChart;
@@ -38,7 +32,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 10,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',  
     },
     
     textContainer: {
@@ -50,4 +44,4 @@ const styles = StyleSheet.create({
         fontWeight: '500'
     },
 
-})
+});
