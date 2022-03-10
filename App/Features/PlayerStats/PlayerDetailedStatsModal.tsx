@@ -52,7 +52,9 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                 </View>
                             </View>
                             <View style={{flex: 1, padding: 10}}>
-                                <PieChart/>
+                                <PieChart firstStatName="G" secondStatName="A" 
+                                          firstStatColor="red" secondStatColor="green" 
+                                          firstStatValue={1} secondStatValue={3}/>
                             </View>
 
                             <View style={{flex: 1}}>

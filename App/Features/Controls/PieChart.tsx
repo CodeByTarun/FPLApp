@@ -3,12 +3,23 @@ import { View, StyleSheet, LayoutChangeEvent, Text } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 
-const PieChart = () => {
+interface PieChartProps {
+    firstStatName: string;
+    secondStatName: string;
+    firstStatValue: number;
+    secondStatValue: number;
+    firstStatColor: string;
+    secondStatColor: string;
+}
+
+const PieChart = (props: PieChartProps) => {
 
     const [dimensions, setDimensions] = useState([0,0]);
 
     const startingX = dimensions[0] / 2;
     const startingY = dimensions[1] > dimensions[0] ? (dimensions[1] / 2) - (dimensions[0] / 2) : 10;
+    // TODO: const secondStatX =
+    // TODO: const secondStatY =
     const radius = dimensions[0] > dimensions[1] ? dimensions[1] / 2 : dimensions[0] / 2;
 
 
@@ -22,20 +33,19 @@ const PieChart = () => {
                 <Svg width={dimensions[0]} height={dimensions[1]} style={{alignSelf: 'center', position: 'absolute'}}>
                     <Path d={`M${startingX} ${startingY} A1 1 0 0 1 ${startingX} ${dimensions[1] - 10}`} 
                           fill="none" 
-                          stroke="white"
+                          stroke={props.firstStatColor}
                           strokeWidth={7}/>
                     <Path d={`M${startingX} ${startingY} A1 1 0 0 0 ${startingX} ${dimensions[1] - 10}`} 
                           fill="none" 
-                          stroke="green"
+                          stroke={props.secondStatColor}
                           strokeWidth={7}/>
                 </Svg>
             }
             
             <View style={styles.textContainer}>
-                <Text style={[styles.text, {fontSize: radius * 0.3}]}>G: 1</Text>
-                <Text style={[styles.text, {fontSize: radius * 0.3}]}>A: 4</Text>
+                <Text style={[styles.text, {fontSize: radius * 0.28}]}>{props.firstStatName}: {props.firstStatValue}</Text>
+                <Text style={[styles.text, {fontSize: radius * 0.28}]}>{props.secondStatName}: {props.secondStatValue}</Text>
             </View>            
-            
         </View>
     )
 }
