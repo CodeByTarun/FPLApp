@@ -39,8 +39,8 @@ const PieChart = (props: PieChartProps) => {
             }
             
             <View style={styles.textContainer}>
-                <Text style={[styles.text, {fontSize: radius * 0.4, color:props.firstStatColor}]}>{props.firstStatName}: {props.firstStatValue}</Text>
-                <Text style={[styles.text, {fontSize: radius * 0.4, color:props.secondStatColor}]}>{props.secondStatName}: {props.secondStatValue}</Text>
+                <Text style={[styles.text, {fontSize: radius * 0.35, color:props.firstStatColor}]}>{props.firstStatName}: {props.firstStatValue}</Text>
+                <Text style={[styles.text, {fontSize: radius * 0.35, color:props.secondStatColor}]}>{props.secondStatName}: {props.secondStatValue}</Text>
             </View>            
         </View>
     )

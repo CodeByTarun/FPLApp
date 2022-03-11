@@ -23,6 +23,8 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
     const player = useAppSelector(state => state.modal);
     const currentGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
+    var rate = 1.2;
+
     return (
         <>
         { (player) && 
@@ -51,11 +53,11 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     </View>                                    
                                 </View>
                             </View>
-                            <View style={{flex: 1, padding: 10}}>
+                            <View style={{flex: 1, padding: 10, flexDirection:'row'}}>
                                 <PieChart firstStatName="G" secondStatName="A" 
                                           firstStatColor="red" secondStatColor="green" 
-                                          firstStatValue={5} secondStatValue={22}/>
-                            </View>
+                                          firstStatValue={parseFloat((player.goals_scored / rate).toFixed(2))} secondStatValue={parseFloat((player.assists / rate).toFixed(2))}/>
+                                </View>
 
                             <View style={{flex: 1}}>
 
