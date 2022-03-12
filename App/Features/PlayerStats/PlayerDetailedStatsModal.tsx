@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Pressable, View, StyleSheet, Image, Text } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
@@ -9,7 +9,6 @@ import CloseButton from "../Controls/CloseButton";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Icons } from "../../Global/Images";
 import FixtureDifficultyList from "./FixtureDifficultyList";
-import { template } from "@babel/core";
 import PieChart from "../Controls/PieChart";
 
 interface PlayerDetailedStatsModalProps {
@@ -23,21 +22,22 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
     const player = useAppSelector(state => state.modal);
     const currentGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
-    var rate = 1.2;
+    const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
+    var rate = 1;
 
     return (
         <>
         { (player) && 
             <Modal animationType="fade" transparent={true} visible={player ? true : false} style={{position: 'absolute'}}>
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => dispatch(closePlayerDetailedStatsModal())}/>       
-                <View style={[globalStyles.modalView, globalStyles.modalShadow, { height: GlobalConstants.height * 0.5, padding: 15 }]}>
+                <View style={[globalStyles.modalView, globalStyles.modalShadow, { height: GlobalConstants.height * 0.6, width: GlobalConstants.width* 0.8, padding: 15 }]}>
                     <Pressable style={styles.closeButton} onPressIn={() => dispatch(closePlayerDetailedStatsModal())}>
                         <View style={styles.closeButtonBackground}>
                             <Image style={{height: '50%', width: '50%'}} source={Icons["close"]} resizeMode="contain"/>
                         </View>
                     </Pressable>    
                     <View style={{flex: 1}}>
-                        <View style={{flex: 7}}>
+                        <View style={{flex: 10}}>
 
                             <View style={styles.header}>
                                 <Text style={styles.titleText}>{player.web_name}</Text>
@@ -53,11 +53,34 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     </View>                                    
                                 </View>
                             </View>
+
+                            <View style={styles.controlsContainer}>
+                                <View style={{flex: 1}}/>
+                                <Pressable style={{flex: 2, alignItems:'center', justifyContent: 'center', flexDirection: 'row'}} onPress={() => setIsStatViewShowing(!isStatsViewShowing)}>
+                                    <View style={[styles.viewToggleStyle, {backgroundColor: isStatsViewShowing ? 'white' : GlobalConstants.secondaryColor,
+                                                  borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}>
+                                        <Text style={{alignSelf: 'center', color: isStatsViewShowing ? GlobalConstants.textSecondaryColor : GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.mediumFont * 0.9}}>Stats</Text>
+                                    </View>
+                                    <View style={[styles.viewToggleStyle, {backgroundColor: isStatsViewShowing ? GlobalConstants.secondaryColor : 'white', 
+                                                  borderTopRightRadius: 5, borderBottomRightRadius: 5}]}>
+                                        <Text style={{alignSelf: 'center', color: isStatsViewShowing ? GlobalConstants.textPrimaryColor : GlobalConstants.textSecondaryColor, fontSize: GlobalConstants.mediumFont * 0.9}}>History</Text>
+                                    </View>
+                                </Pressable>
+                                
+                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                    {isStatsViewShowing && 
+                                        <Image style={{height: '60%', width: '40%', alignSelf:'flex-end'}} source={require('../../../assets/filter.png')} resizeMode='contain'/>
+                                    }
+                                </View>
+                            </View>
+
+
+
                             <View style={{flex: 1, padding: 10, flexDirection:'row'}}>
                                 <PieChart firstStatName="G" secondStatName="A" 
                                           firstStatColor="red" secondStatColor="green" 
                                           firstStatValue={parseFloat((player.goals_scored / rate).toFixed(2))} secondStatValue={parseFloat((player.assists / rate).toFixed(2))}/>
-                                </View>
+                            </View>
 
                             <View style={{flex: 1}}>
 
@@ -80,7 +103,13 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 const styles = StyleSheet.create({
 
     header: {
-        flex: 1,
+    },
+
+    controlsContainer: {
+        height: GlobalConstants.height*0.05,
+        flexDirection: 'row',
+        marginTop: 10,
+        marginBottom: 5,
     },
 
     titleText: {
@@ -92,6 +121,14 @@ const styles = StyleSheet.create({
     text: {
         fontSize: GlobalConstants.mediumFont,
         color: GlobalConstants.textPrimaryColor,
+    },
+
+    viewToggleStyle: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent:'center',
+        backgroundColor:'red',
+        padding: 5,
     },
 
     //#region  close button

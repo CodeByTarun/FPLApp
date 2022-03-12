@@ -8,6 +8,7 @@ import { FplGameweek } from '../Models/FplGameweek';
 import { FplManagerGameweekPicks } from '../Models/FplManagerGameweekPicks';
 import { FplManagerInfo } from '../Models/FplManagerInfo';
 import { FplOverview } from '../Models/FplOverview';
+import { FplPlayerSummary } from '../Models/FplPlayerSummary';
 
 export const fplSlice = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
@@ -30,6 +31,10 @@ export const fplSlice = createApi({
 
     getGameweekData: builder.query<FplGameweek, number>({
       query: (gameweek: number) => `/event/${gameweek}/live`
+    }),
+
+    getPlayerSummary: builder.query<FplPlayerSummary, number>({
+      query: (playerId: number) => `https://fantasy.premierleague.com/api/element-summary/${playerId}/`
     }),
 
     getDraftOverview: builder.query<FplDraftOverview, void>({
