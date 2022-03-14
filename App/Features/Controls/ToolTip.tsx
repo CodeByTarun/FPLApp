@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import { Modal, Pressable, StyleSheet, View } from "react-native";
+import { Modal, Pressable, StyleSheet, View, Text } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import CloseButton from "./CloseButton";
 
 interface toolTipProps {
     view: JSX.Element;
-    children: React.ReactNode;
 }
 
-const ToolTip = (props: toolTipProps) => {
+const ToolTip = (props: React.PropsWithChildren<toolTipProps>) => {
 
     const [isVisible, setIsVisible] = useState(false);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ backgroundColor: 'green', flex:1 }}>
             <Modal animationType="fade" transparent={true} visible={isVisible} style={{position: 'absolute'}}>
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => {setIsVisible(false)}}/>
                 <CloseButton boolFunction={setIsVisible}/>

@@ -69,7 +69,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                 </Pressable>
                                 
                                 
-                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red'}}>
                                     <ToolTip view={<Text>hello</Text>}>
                                         {isStatsViewShowing && 
                                             <Image style={{height: '60%', width: '40%', alignSelf:'flex-end'}} source={require('../../../assets/filter.png')} resizeMode='contain'/>
