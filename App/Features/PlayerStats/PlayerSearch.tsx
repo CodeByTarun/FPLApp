@@ -3,12 +3,11 @@
 //TODO: think about adding a compare feature between two players?
 //TODO: also this way might not be the best since you cant filter by most pts, xg, assits, position
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView, FlatList, ListRenderItem } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { FplFixture } from "../../Models/FplFixtures";
-import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
-import { useGetOverviewQuery } from "../../Store/fplSlice";
+import { FplOverview } from "../../Models/FplOverview";
 import PlayerTable from "./PlayerTable";
    
 

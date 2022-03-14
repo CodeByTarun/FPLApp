@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react";
-import { Modal, Pressable, View, Image, Text, ScrollView, TextInput, StyleSheet, Switch, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Modal, Pressable, View, Image, Text, ScrollView, TextInput, StyleSheet } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Icons } from "../../Global/Images";
 import UserTeamInfo, { changeFavouriteUserTeam, getAllUserTeamInfo, removeUserTeamInfo, addUserTeamInfo, editUserTeamInfo } from "../../Helpers/FplDataStorageService";
-import { StringMappingType } from "typescript";
 import { useAppDispatch } from "../../Store/hooks";
 import { changeToBudgetTeam, changeToDraftTeam } from "../../Store/teamSlice";
 import CloseButton from "../Controls/CloseButton";
+import Checkbox from "expo-checkbox";
 
 enum UserTeamActionKind {
     ChangeName,
@@ -244,10 +244,10 @@ const TeamModal = (props: TeamModalProps) => {
                     </View>
 
                     <View style={{flex: 1, flexDirection:'row', alignItems: 'center'}}>
-                        <Text style={[styles.text, {padding: 7}]}>Is this a draft team?</Text>
-                        <Switch style={[styles.switch]} trackColor={{false: GlobalConstants.redColor, true: GlobalConstants.fieldColor}} 
-                                value={ userTeamState.userTeam.isDraftTeam } 
-                                onValueChange={ value => userTeamDispatch({ type: UserTeamActionKind.IsDraft, value: value, data: userTeams })}/>
+                        <Text style={[styles.text, {padding: 7}]}>Is this a draft team?  </Text>
+                        <Checkbox color={userTeamState.userTeam.isDraftTeam ? GlobalConstants.fieldColor : 'white'} 
+                                  value={ userTeamState.userTeam.isDraftTeam } 
+                                  onValueChange={ value => userTeamDispatch({ type: UserTeamActionKind.IsDraft, value: value, data: userTeams })}/>
                     </View>
                     <View style={{flex: 0.5, justifyContent: 'center'}}>
                         <Text style={[styles.text, {color: GlobalConstants.redColor, padding: 7}]}>{ userTeamState.error }</Text>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal, Pressable, View, StyleSheet, Image, Text } from "react-native";
+import React, { useEffect, useReducer, useState } from "react";
+import { Modal, Pressable, View, StyleSheet, Image, Text, Switch } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
@@ -11,6 +11,50 @@ import { Icons } from "../../Global/Images";
 import FixtureDifficultyList from "./FixtureDifficultyList";
 import PieChart from "../Controls/PieChart";
 import ToolTip from "../Controls/ToolTip";
+import { Slider } from "@miblanchard/react-native-slider";
+import Checkbox from "expo-checkbox";
+
+// If gamespan is null it will do overall stats for all games played
+interface StatsFilterState {
+    gameSpan: number | null;
+    isPer90: boolean;
+}
+
+enum StatsFilterActionKind {
+    ChangeGameSpan,
+    ChangeIsPer90,
+    Reset,
+}
+
+type StatsFilterAction = {
+    type: StatsFilterActionKind.ChangeGameSpan;
+    value: number;
+} | {
+    type: StatsFilterActionKind.ChangeIsPer90;
+} | {
+    type: StatsFilterActionKind.Reset;
+    value: number;
+}
+
+function statsFilterReducer(state: StatsFilterState, action: StatsFilterAction): StatsFilterState {
+    switch (action.type) {
+        case StatsFilterActionKind.ChangeGameSpan: {
+            return {
+                gameSpan: action.value,
+                isPer90: state.isPer90,
+            }
+        }
+        case StatsFilterActionKind.ChangeIsPer90: {
+            return {
+                gameSpan: state.gameSpan, 
+                isPer90: !state.isPer90,
+            }
+        }
+        case StatsFilterActionKind.Reset: {
+            return { gameSpan: action.value, isPer90: false };
+        }
+    }
+}
 
 interface PlayerDetailedStatsModalProps {
     overview: FplOverview;
@@ -24,7 +68,12 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
     const currentGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
-    var rate = 1;
+    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: currentGameweek, isPer90: false })
+
+    useEffect( function ModalClosed() {
+        statsFilterDispatch({type: StatsFilterActionKind.Reset, value: currentGameweek });
+        setIsStatViewShowing(true);
+    }, [player]);
 
     return (
         <>
@@ -69,22 +118,45 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                 </Pressable>
                                 
                                 
-                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red'}}>
-                                    <ToolTip view={<Text>hello</Text>}>
+                                <View style={{flex: 1}}>
+                                    <ToolTip view={
+                                        <View style={{width: GlobalConstants.width* 0.45, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
+                                            <View style={{flexDirection: 'row', marginTop: 10}}>                                            
+                                                <Text style={[styles.text, {flex: 1}]}>Per 90 Stats?   </Text> 
+                                                <Checkbox value={ statsFilterState.isPer90 } 
+                                                          color={statsFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
+                                                          onValueChange={ () => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })}/>
+                                            </View>
+                                            <View style={{marginTop: 20}}>
+                                                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                                    <Text style={[styles.text, {flex: 1}]}>Game span</Text>
+                                                    <Text style={styles.text}>{ statsFilterState.gameSpan }</Text>
+                                                </View>
+                                                
+                                                <Slider value={ statsFilterState.gameSpan ? statsFilterState.gameSpan : 0 } 
+                                                        onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number })}
+                                                        minimumValue={1}
+                                                        maximumValue={currentGameweek}
+                                                        step={1}
+                                                        thumbTintColor={GlobalConstants.primaryColor}
+                                                        maximumTrackTintColor={'white'}
+                                                        minimumTrackTintColor={GlobalConstants.primaryColor}/>
+                                            </View>
+                                        </View>                                        
+                                    }>
                                         {isStatsViewShowing && 
-                                            <Image style={{height: '60%', width: '40%', alignSelf:'flex-end'}} source={require('../../../assets/filter.png')} resizeMode='contain'/>
+                                            <Image style={{height: '70%', width: '40%', alignSelf:'flex-end'}} source={require('../../../assets/filter.png')} resizeMode='contain'/>
                                         }
                                     </ToolTip>
                                 </View>
                                 
                             </View>
 
-
-
                             <View style={{flex: 1, padding: 10, flexDirection:'row'}}>
                                 <PieChart firstStatName="G" secondStatName="A" 
                                           firstStatColor="red" secondStatColor="green" 
-                                          firstStatValue={parseFloat((player.goals_scored / rate).toFixed(2))} secondStatValue={parseFloat((player.assists / rate).toFixed(2))}/>
+                                          firstStatValue={parseFloat(statsFilterState.isPer90 ? (player.goals_scored / player.minutes * 90).toFixed(2) : player.goals_scored.toString())} 
+                                          secondStatValue={parseFloat(statsFilterState.isPer90 ? (player.assists / player.minutes * 90).toFixed(2) : player.assists.toString())}/>
                             </View>
 
                             <View style={{flex: 1}}>
@@ -123,17 +195,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     }, 
 
-    text: {
-        fontSize: GlobalConstants.mediumFont,
-        color: GlobalConstants.textPrimaryColor,
-    },
-
     viewToggleStyle: {
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
         backgroundColor:'red',
         padding: 5,
+    },
+
+    text: {
+        color: GlobalConstants.textPrimaryColor,
+        fontSize: GlobalConstants.mediumFont,
+        fontWeight: '500'
     },
 
     //#region  close button

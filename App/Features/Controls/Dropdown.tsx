@@ -1,5 +1,5 @@
 
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Image, Keyboard, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
