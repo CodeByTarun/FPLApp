@@ -10,6 +10,7 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Icons } from "../../Global/Images";
 import FixtureDifficultyList from "./FixtureDifficultyList";
 import PieChart from "../Controls/PieChart";
+import ToolTip from "../Controls/ToolTip";
 
 interface PlayerDetailedStatsModalProps {
     overview: FplOverview;
@@ -67,11 +68,15 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     </View>
                                 </Pressable>
                                 
+                                
                                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                                    {isStatsViewShowing && 
-                                        <Image style={{height: '60%', width: '40%', alignSelf:'flex-end'}} source={require('../../../assets/filter.png')} resizeMode='contain'/>
-                                    }
+                                    <ToolTip view={<Text>hello</Text>}>
+                                        {isStatsViewShowing && 
+                                            <Image style={{height: '60%', width: '40%', alignSelf:'flex-end'}} source={require('../../../assets/filter.png')} resizeMode='contain'/>
+                                        }
+                                    </ToolTip>
                                 </View>
+                                
                             </View>
 
 

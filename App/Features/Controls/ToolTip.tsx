@@ -5,21 +5,27 @@ import CloseButton from "./CloseButton";
 
 interface toolTipProps {
     view: JSX.Element;
+    children: React.ReactNode;
 }
 
-const ToolTip = () => {
+const ToolTip = (props: toolTipProps) => {
 
-    const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false);
 
     return (
-        <Modal animationType="fade" transparent={true} visible={isVisible} style={{position: 'absolute'}}>
-            <Pressable style={globalStyles.modalBackground} onPressIn={() => {setIsVisible(false)}}/>
-            <CloseButton boolFunction={setIsVisible}/>
-            <View style={[globalStyles.modalView, globalStyles.modalShadow]}>
-            
-            </View>
+        <View style={{ flex: 1 }}>
+            <Modal animationType="fade" transparent={true} visible={isVisible} style={{position: 'absolute'}}>
+                <Pressable style={globalStyles.modalBackground} onPressIn={() => {setIsVisible(false)}}/>
+                <CloseButton boolFunction={setIsVisible}/>
+                <View style={[globalStyles.modalView, globalStyles.modalShadow]}>
+                    { props.view }
+                </View>
 
-        </Modal>
+            </Modal>
+
+            { props.children }
+
+        </View>
     )
 
 }
@@ -30,7 +36,6 @@ const styles = StyleSheet.create({
 
     modalView: {
         backgroundColor: 'grey',
-
     }
 
 });
