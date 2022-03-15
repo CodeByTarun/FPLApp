@@ -158,13 +158,29 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
 
                                 { isStatsViewShowing ?
-                                <View style={{flex: 1, padding: 10, flexDirection:'row'}}>
-                                    <PieChart firstStatName="G" secondStatName="A" 
-                                            firstStatColor="red" secondStatColor="green" 
-                                            firstStatValue={parseFloat(statsFilterState.isPer90 ? (player.goals_scored / player.minutes * 90).toFixed(2) : player.goals_scored.toString())} 
-                                            secondStatValue={parseFloat(statsFilterState.isPer90 ? (player.assists / player.minutes * 90).toFixed(2) : player.assists.toString())}/>
+                                <View style={{flex: 1, padding: 10,}}>
+                                    <View style={{flex: 1, borderWidth: 2, 
+                                                borderColor: GlobalConstants.aLittleLighterColor, 
+                                                borderRadius: GlobalConstants.cornerRadius}}>
+                                        <Text style={{
+                                              backgroundColor: GlobalConstants.primaryColor,
+                                              fontSize: GlobalConstants.largeFont,
+                                              fontWeight: 'bold',
+                                              color: GlobalConstants.textPrimaryColor,
+                                              position: 'absolute',
+                                              top: -20, left: 15,
+                                              padding: 5,
+                                        }}>
+                                            {statsFilterState.isPer90 ? " Per 90 " : " Totals "}
+                                        </Text>
+                                        <PieChart firstStatName="G" secondStatName="A" 
+                                                firstStatColor={'white'} secondStatColor={GlobalConstants.lightColor} 
+                                                firstStatValue={parseFloat(statsFilterState.isPer90 ? (player.goals_scored / player.minutes * 90).toFixed(2) : player.goals_scored.toString())} 
+                                                secondStatValue={parseFloat(statsFilterState.isPer90 ? (player.assists / player.minutes * 90).toFixed(2) : player.assists.toString())}/>
+                                    </View>
+                                    <View style={{flex: 2}}/>
                                 </View> :
-                                <View style={{flex: 1, paddingBottom: 5, backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5}}>
+                                <View style={{flex: 1, paddingBottom: 5, marginBottom: 5, backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5}}>
                                     <ScrollView horizontal={true}>
                                         <FlatList style={{flex: 1}} contentContainerStyle={{justifyContent: 'center'}} data={playerData.data.history}
                                                 ListHeaderComponent={() => {
@@ -178,7 +194,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                                         { shortFormStatNames.map((stat) => {
                                                             return (
                                                                 <View key={stat} style={styles.tableTextContainer}>
-                                                                    <Text key={stat} style={[styles.headerText]}>{ stat }</Text>
+                                                                    <Text key={stat} style={[[styles.headerText, {fontWeight: '700'}]]}>{ stat }</Text>
                                                                 </View>
                                                             )})}
                                                     </View>
@@ -191,12 +207,16 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                                         { statNames.map((stat) => {
                                                            return (
                                                             <View key={stat} style={styles.tableTextContainer}>
-                                                                <Text  style={[styles.headerText]}>{ item.item[stat as keyof History] }</Text>
+                                                                {(stat !== 'opponent_team') ? 
+                                                                    <Text style={[styles.headerText]}>{ item.item[stat as keyof History] }</Text>
+                                                                    :
+                                                                    <Text style={[styles.headerText]}>{ props.overview.teams.find(team => team.id === item.item[stat as keyof History])?.short_name }</Text>
+                                                                }
                                                             </View>
                                                            )
                                                         })}
                                                     </View>)}}
-                                                    stickyHeaderIndices={[0]}
+                                                stickyHeaderIndices={[0]}
                                                 ListFooterComponent={ () =>
                                                     <View style={{flexDirection: 'row', borderTopColor: GlobalConstants.lightColor, borderTopWidth: 1, paddingTop: 5,}}>
                                                         { statNames.map((stat) => {
@@ -208,8 +228,6 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                                         })}
                                                     </View>
                                                 }/>
-                                        
-                                        
                                     </ScrollView>
                                 </View>
                                 }
