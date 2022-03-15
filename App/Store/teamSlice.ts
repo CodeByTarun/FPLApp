@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ActionSheetIOS } from "react-native";
 import UserTeamInfo from "../Helpers/FplDataStorageService";
-import { FplDraftUserInfo } from "../Models/FplDraftUserInfo";
 import { FplFixture } from "../Models/FplFixtures";
-import { FplManagerInfo } from "../Models/FplManagerInfo";
 
 export interface FixtureInfo {
     teamType: TeamTypes.Fixture,

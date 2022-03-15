@@ -6,7 +6,6 @@ import { FplDraftUserInfo } from '../Models/FplDraftUserInfo';
 import { FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from '../Models/FplGameweek';
 import { FplManagerGameweekPicks } from '../Models/FplManagerGameweekPicks';
-import { FplManagerInfo } from '../Models/FplManagerInfo';
 import { FplOverview } from '../Models/FplOverview';
 import { FplPlayerSummary } from '../Models/FplPlayerSummary';
 
@@ -59,5 +58,5 @@ export const fplSlice = createApi({
   })
 })
 
-export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetDraftUserInfoQuery,
+export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetDraftUserInfoQuery, useGetPlayerSummaryQuery,
                useGetDraftOverviewQuery, useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetBudgetGameweekPicksQuery } = fplSlice
