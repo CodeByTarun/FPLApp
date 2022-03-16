@@ -94,7 +94,13 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                             <View style={{flex: 10}}>
 
                                 <View style={styles.header}>
-                                    <Text style={styles.titleText}>{player.web_name}</Text>
+                                    <View style={{flexDirection: 'row'}}>
+                                        <Text style={styles.titleText}>{player.web_name}</Text>
+                                        <View style={{flex: 1, alignContent: 'flex-end', justifyContent: 'flex-end'}}>
+                                            <Text style={[styles.text, {alignSelf: 'flex-end', marginBottom: 1}]}>Form: {player.form}</Text>
+                                        </View>
+                                        
+                                    </View>
                                     <View style={{flexDirection: 'row', paddingTop: 3}}>
                                         <View style={{flexDirection: 'row'}}>
                                             <Text style={styles.text}>£{(player.now_cost / 10).toFixed(1)}  </Text>
@@ -158,27 +164,55 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
 
                                 { isStatsViewShowing ?
-                                <View style={{flex: 1, padding: 10,}}>
-                                    <View style={{flex: 1, borderWidth: 2, 
-                                                borderColor: GlobalConstants.aLittleLighterColor, 
-                                                borderRadius: GlobalConstants.cornerRadius}}>
+                                <View style={{flex: 1, paddingTop: 10, paddingLeft: 5, paddingRight: 5, paddingBottom: 5}}>
+                                    <View style={[styles.sectionBorder, {flex: 3, flexDirection: 'row'}]}>
+                                        <Text style={styles.sectionHeaderText}>
+                                            {statsFilterState.isPer90 ? " Per 90 " : " Totals "}
+                                        </Text>
+
                                         <Text style={{
                                               backgroundColor: GlobalConstants.primaryColor,
                                               fontSize: GlobalConstants.largeFont,
                                               fontWeight: 'bold',
                                               color: GlobalConstants.textPrimaryColor,
                                               position: 'absolute',
-                                              top: -20, left: 15,
-                                              padding: 5,
-                                        }}>
-                                            {statsFilterState.isPer90 ? " Per 90 " : " Totals "}
+                                              top: -20, right: 15,
+                                              padding: 5}}>
+                                            {statsFilterState.isPer90 ? " " + (player.total_points * 90 / player.minutes).toFixed(2) + "pts " : " " + player.total_points + "pts "}
                                         </Text>
-                                        <PieChart firstStatName="G" secondStatName="A" 
-                                                firstStatColor={'white'} secondStatColor={GlobalConstants.lightColor} 
-                                                firstStatValue={parseFloat(statsFilterState.isPer90 ? (player.goals_scored / player.minutes * 90).toFixed(2) : player.goals_scored.toString())} 
-                                                secondStatValue={parseFloat(statsFilterState.isPer90 ? (player.assists / player.minutes * 90).toFixed(2) : player.assists.toString())}/>
+
+                                        <View style={{flex: 3, margin: 5}}>
+                                            <View style={{flex: 2, margin: 5}}>
+                                                <PieChart firstStatName="G" secondStatName="A" 
+                                                    firstStatColor={'white'} secondStatColor={GlobalConstants.lightColor} 
+                                                    firstStatValue={parseFloat(statsFilterState.isPer90 ? (player.goals_scored / player.minutes * 90).toFixed(2) : player.goals_scored.toString())} 
+                                                    secondStatValue={parseFloat(statsFilterState.isPer90 ? (player.assists / player.minutes * 90).toFixed(2) : player.assists.toString())}/>
+                                            </View>
+                                            
+                                        </View>
+                                        <View style={{flex: 3, marginTop: 15, marginRight: 15, marginBottom: 15}}>
+                                            {rightStatText("Bonus", player.bonus)}
+                                            {rightStatText("BPS", player.bps)}
+                                            {rightStatText("Clean Sheets", player.clean_sheets)}
+                                            {rightStatText("Saves", player.saves)}
+                                            {rightStatText("Influence", player.influence)}
+                                            {rightStatText("Creativity", player.creativity)}
+                                            {rightStatText("Threat", player.threat)}
+                                        </View>
+                                        
                                     </View>
-                                    <View style={{flex: 2}}/>
+
+                                    <View style={[styles.sectionBorder, {flex: 1, marginTop: 20, padding: 5, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}]}>
+                                        <Text style={styles.sectionHeaderText}>
+                                            GW {currentGameweek} 
+                                        </Text>
+                                        
+                                        {statText("Points", player.event_points, 2)}
+                                        {statText("xPoints", player.ep_this, 2)}
+                                        {statText("Transfers In", player.transfers_in_event, 3)}
+                                        {statText("Transfers Out", player.transfers_out_event, 3)}
+                                        
+                                    </View>
                                 </View> :
                                 <View style={{flex: 1, paddingBottom: 5, marginBottom: 5, backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5}}>
                                     <ScrollView horizontal={true}>
@@ -248,6 +282,31 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
 const shortFormStatNames = ['GW', 'OPP', 'PTS', 'MP', 'GS', 'A', 'CS', 'OG',  'PS', 'PM', 'YC', 'RC', 'S', 'B', 'BPS'];
 const statNames = ['round', 'opponent_team', 'total_points', 'minutes', 'goals_scored', 'assists', 'clean_sheets', 'own_goals', 'penalties_saved', 'penalties_missed', 'yellow_cards', 'red_cards', 'saves', 'bonus', 'bps'];
+const filteredStats = ['total_points', 'goals_scored', 'assists', 'bonus', 'bps', 'clean_sheets', 'saves', 'influence', 'creativity', 'threat'];
+
+type FilteredStats = {
+   total_points: number; 
+   goals_scored: number;
+}
+
+const statText = (stat: string, value: number | string, flexValue: number) => {
+    return (
+    <View style={{flex: flexValue}}>
+        <Text style={styles.gameweekSectionText}>{stat}</Text>
+        <Text style={styles.gameweekSectionText}>{value}</Text>
+    </View>)
+}
+
+const rightStatText = (stat: string, value: number | string) => {
+    return (
+        <View style={{flex: 1, flexDirection: 'row'}}>
+            <Text style={styles.gameweekSectionText}>{stat}</Text>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={[styles.gameweekSectionText, {alignSelf: 'flex-end'}]}>{value}</Text>
+            </View>
+        </View>
+    )
+}
 
 const styles = StyleSheet.create({
 
@@ -277,7 +336,7 @@ const styles = StyleSheet.create({
 
     text: {
         color: GlobalConstants.textPrimaryColor,
-        fontSize: GlobalConstants.mediumFont,
+        fontSize: GlobalConstants.mediumFont * 0.9,
         fontWeight: '500'
     },
 
@@ -288,9 +347,33 @@ const styles = StyleSheet.create({
 
     headerText: {
         color: GlobalConstants.textPrimaryColor,
-        fontSize: GlobalConstants.mediumFont,
+        fontSize: GlobalConstants.mediumFont * 0.9,
         fontWeight: '500',
         alignSelf: 'center',
+    },
+
+    sectionBorder: {
+        borderWidth: 2, 
+        borderColor: GlobalConstants.aLittleLighterColor, 
+        borderRadius: GlobalConstants.cornerRadius,
+    },
+
+    sectionHeaderText: {
+        backgroundColor: GlobalConstants.primaryColor,
+        fontSize: GlobalConstants.largeFont,
+        fontWeight: 'bold',
+        color: GlobalConstants.textPrimaryColor,
+        position: 'absolute',
+        top: -20, 
+        left: 15,
+        padding: 5
+    },
+
+    gameweekSectionText: {
+        color: GlobalConstants.textPrimaryColor,
+        fontSize: GlobalConstants.mediumFont * 0.8,
+        fontWeight: '500',
+        alignSelf: 'center'
     },
 
     //#region  close button

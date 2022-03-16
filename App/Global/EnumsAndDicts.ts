@@ -44,6 +44,8 @@ export const OverviewStats: {[key: string]: string} =
         "creativity": "Creativity",
         "threat": "Threat",
         "ict_index": "ICT Index",
+        "ep_this": "Expected Points",
+        "ep_next": "Expected Points Next Week"
     }
 
 // Team Difficulty Colors
