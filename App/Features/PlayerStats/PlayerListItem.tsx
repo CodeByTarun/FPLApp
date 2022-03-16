@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
 
     tableView: {
         backgroundColor: GlobalConstants.secondaryColor,
-        margin: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: GlobalConstants.lightColor,
         flexDirection: 'row',
         paddingTop: 10,
         paddingBottom: 10,

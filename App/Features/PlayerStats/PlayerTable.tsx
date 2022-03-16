@@ -10,6 +10,7 @@ import { OverviewStats } from "../../Global/EnumsAndDicts"
 import { Jerseys } from "../../Global/Images";
 import PlayerListItem from "./PlayerListItem";
 import { FplFixture } from "../../Models/FplFixtures";
+import globalStyles from "../../Global/GlobalStyles";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -37,8 +38,8 @@ const PlayerTable = (props: PlayerTableProps) => {
     }, [props.playerSearchText, teamFilter, positionFilter, statFilter])
 
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ flex: 1 , flexDirection: 'row', zIndex: 1 }}>
+        <View style={{ flex: 1, overflow: "hidden" }}>
+            <View style={[globalStyles.bottomShadow, { flex: 1 , flexDirection: 'row', zIndex: 1, backgroundColor: GlobalConstants.primaryColor }]}>
                 <View style={{ flex: 1, paddingBottom: 10, paddingTop: 5, flexDirection:'row' }}>
                     <Dropdown defaultValue="Team" 
                               options={Array.from(props.overview.teams.map(team => team.name))} 

@@ -52,6 +52,15 @@ const globalStyles = StyleSheet.create(
         closeButtonBackground: {
             
         },
+
+        // Make the parent elements overflow: hidden to make this work for only the bottom!
+        bottomShadow: {
+            shadowColor: 'black',
+            shadowOffset: {width: 0, height: 4},
+            shadowRadius: 5,
+            shadowOpacity: 0.2,
+            elevation: 3,
+        },
     }
 )
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import { Modal, Pressable, View, StyleSheet, Image, Text, Switch, FlatList, ScrollView } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
@@ -72,11 +72,41 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
     const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
     const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: currentGameweek, isPer90: false });
+    const [playerFilteredStats, setPlayerFilteredStats] = useState(initialFilteredStats);
 
     useEffect( function ModalClosed() {
         statsFilterDispatch({type: StatsFilterActionKind.Reset, value: currentGameweek });
         setIsStatViewShowing(true);
     }, [player]);
+
+    useEffect( function getInitialPlayerFilteredStats() {
+        if (player) {
+            setPlayerFilteredStats({
+                total_points: player.total_points,
+                goals_scored: player.goals_scored,
+                assists: player.assists,
+                bonus: player.bonus,
+                bps: player.bps,
+                clean_sheets: player.clean_sheets,
+                saves: player.saves,
+                influence: Number(player.influence),
+                creativity: Number(player.creativity),
+                threat: Number(player.threat),
+                minutes: player.minutes,
+            })
+        }
+    }, [player])
+
+    useEffect( function updatePlayerFilteredStats() {
+
+        if (playerData.data && statsFilterState.gameSpan) {
+            var filteredPlayerStats: FilteredStats = initialFilteredStats;
+            filteredStats.map((stat) => filteredPlayerStats[stat as keyof FilteredStats] = playerData.data!.history.slice(statsFilterState.gameSpan! * -1)
+                                                                                                                   .reduce((prev, curr) => prev + (Number(curr[stat as keyof History])), 0))
+            setPlayerFilteredStats(filteredPlayerStats);
+        }     
+
+    }, [statsFilterState.gameSpan])
 
     return (
         <>
@@ -178,26 +208,26 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                               position: 'absolute',
                                               top: -20, right: 15,
                                               padding: 5}}>
-                                            {statsFilterState.isPer90 ? " " + (player.total_points * 90 / player.minutes).toFixed(2) + "pts " : " " + player.total_points + "pts "}
+                                            {statsFilterState.isPer90 ? " " + (playerFilteredStats.total_points * 90 / playerFilteredStats.minutes).toFixed(2) + "pts " : " " + playerFilteredStats.total_points + "pts "}
                                         </Text>
 
                                         <View style={{flex: 3, margin: 5}}>
                                             <View style={{flex: 2, margin: 5}}>
                                                 <PieChart firstStatName="G" secondStatName="A" 
                                                     firstStatColor={'white'} secondStatColor={GlobalConstants.lightColor} 
-                                                    firstStatValue={parseFloat(statsFilterState.isPer90 ? (player.goals_scored / player.minutes * 90).toFixed(2) : player.goals_scored.toString())} 
-                                                    secondStatValue={parseFloat(statsFilterState.isPer90 ? (player.assists / player.minutes * 90).toFixed(2) : player.assists.toString())}/>
+                                                    firstStatValue={parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.goals_scored / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.goals_scored.toString())} 
+                                                    secondStatValue={parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.assists / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.assists.toString())}/>
                                             </View>
                                             
                                         </View>
                                         <View style={{flex: 3, marginTop: 15, marginRight: 15, marginBottom: 15}}>
-                                            {rightStatText("Bonus", player.bonus)}
-                                            {rightStatText("BPS", player.bps)}
-                                            {rightStatText("Clean Sheets", player.clean_sheets)}
-                                            {rightStatText("Saves", player.saves)}
-                                            {rightStatText("Influence", player.influence)}
-                                            {rightStatText("Creativity", player.creativity)}
-                                            {rightStatText("Threat", player.threat)}
+                                            {rightStatText("Bonus", parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.bonus / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.bonus.toString()))}
+                                            {rightStatText("BPS", parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.bps / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.bps.toString()))}
+                                            {rightStatText("Clean Sheets", parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.clean_sheets / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.clean_sheets.toString()))}
+                                            {rightStatText("Saves", parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.saves / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.saves.toString()))}
+                                            {rightStatText("Influence", parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.influence / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.influence.toFixed(2)))}
+                                            {rightStatText("Creativity", parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.creativity / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.creativity.toFixed(2)))}
+                                            {rightStatText("Threat", parseFloat(statsFilterState.isPer90 ? (playerFilteredStats.threat / playerFilteredStats.minutes * 90).toFixed(2) : playerFilteredStats.threat.toFixed(2)))}
                                         </View>
                                         
                                     </View>
@@ -282,11 +312,34 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
 const shortFormStatNames = ['GW', 'OPP', 'PTS', 'MP', 'GS', 'A', 'CS', 'OG',  'PS', 'PM', 'YC', 'RC', 'S', 'B', 'BPS'];
 const statNames = ['round', 'opponent_team', 'total_points', 'minutes', 'goals_scored', 'assists', 'clean_sheets', 'own_goals', 'penalties_saved', 'penalties_missed', 'yellow_cards', 'red_cards', 'saves', 'bonus', 'bps'];
-const filteredStats = ['total_points', 'goals_scored', 'assists', 'bonus', 'bps', 'clean_sheets', 'saves', 'influence', 'creativity', 'threat'];
+const filteredStats = ['total_points', 'goals_scored', 'assists', 'bonus', 'bps', 'clean_sheets', 'saves', 'influence', 'creativity', 'threat', 'minutes'];
 
 type FilteredStats = {
    total_points: number; 
    goals_scored: number;
+   assists: number;
+   bonus: number;
+   bps: number;
+   clean_sheets: number;
+   saves: number;
+   influence: number;
+   creativity: number;
+   threat: number;
+   minutes: number;
+}
+
+const initialFilteredStats : FilteredStats = {
+    total_points: 0,
+    goals_scored: 0,
+    assists: 0,
+    bonus: 0,
+    bps: 0,
+    clean_sheets: 0,
+    saves: 0,
+    influence: 0,
+    creativity: 0,
+    threat: 0,
+    minutes: 0,
 }
 
 const statText = (stat: string, value: number | string, flexValue: number) => {
