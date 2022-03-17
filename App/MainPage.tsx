@@ -22,7 +22,6 @@ const MainPage = () => {
                 <View style={styles.lineupView}>
                   <LineupContainer />
                 </View>
-                <View style={{ flex: 1 }}></View>
                 <PlayerSearch overview={overview.data} fixtures={fixtures.data}/>
                 
                 <PlayerDetailedStatsModal overview={overview.data} fixtures={fixtures.data}/>
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   fixturesView: {
-    flex: 2,
+    
   },
 
   lineupView: {

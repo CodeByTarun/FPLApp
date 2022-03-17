@@ -15,6 +15,7 @@ import { changeToFixture } from '../../Store/teamSlice'
 import { GetHighestMinForAPlayer, GetTeamDataFromOverviewWithFixtureTeamID } from '../../Helpers/FplAPIHelpers'
 import { FplGameweek } from '../../Models/FplGameweek'
 import { FplOverview } from '../../Models/FplOverview'
+import globalStyles from '../../Global/GlobalStyles'
 
 interface FixtureCardProp {
     fixture: FplFixture | undefined;
@@ -32,7 +33,7 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek | undefined)
            return <><Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
                     <Text style={styles.timeText}>{GetHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
         } else {
-            return <Text style={styles.scoreText}>vs</Text>
+            return <Text style={[styles.scoreText, {paddingBottom: 10}]}>vs</Text>
         }
     }
 }
@@ -50,10 +51,10 @@ const FixtureCard = (prop : FixtureCardProp) => {
 
     return (
         
-        <View style={styles.container}>
-            <TouchableOpacity style={styles.button} onPress={onPress} disabled={!prop.fixture?.started}>            
+        <View style={[styles.container]}>
+            <TouchableOpacity style={[styles.button]} onPress={onPress} disabled={!prop.fixture?.started}>            
             { (prop.fixture && prop.overviewData && prop.gameweekData) &&
-                <View style={styles.card}>
+                <View style={[styles.card]}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
                             { moment(prop.fixture.kickoff_time).tz(Localization.timezone).format('MMM D, H:mm z') }
@@ -78,8 +79,7 @@ const styles = StyleSheet.create({
     //#region main layout
     container: {
         height: '100%',
-        width: GlobalConstants.width * 0.33,
-        paddingLeft: 5,
+        width: GlobalConstants.width * 0.334,
     },
 
     button: {
@@ -87,11 +87,14 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        backgroundColor: GlobalConstants.tertiaryColor,
+        backgroundColor: GlobalConstants.primaryColor,
         height: '100%',
-        borderRadius: GlobalConstants.cornerRadius,
         flexDirection: 'column',
-        padding: 4,
+        padding: 5,
+        borderLeftColor: GlobalConstants.secondaryColor,
+        borderRightColor: GlobalConstants.secondaryColor,
+        borderLeftWidth: 0,
+        borderRightWidth: 1,
     },
     //#endregion
 
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
         fontSize: 0.03 * GlobalConstants.width,
         alignSelf: 'center',
         paddingLeft: 5,
-        color: 'gray'
+        color: GlobalConstants.textPrimaryColor
     },
 
     //#endregion
@@ -115,17 +118,20 @@ const styles = StyleSheet.create({
     scoreView: {
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center',
         flexGrow: 1,
         padding: 3,
     },
 
     scoreAndTimeView: {
+        paddingBottom: 5
     },
 
     scoreText: {
         fontSize: 0.04 * GlobalConstants.width,
         alignSelf: 'center',
         margin: 2,
+        color: GlobalConstants.textPrimaryColor,
     },
 
     timeText: {

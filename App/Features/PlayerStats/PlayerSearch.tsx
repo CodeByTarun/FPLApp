@@ -23,7 +23,7 @@ const PlayerSearch = (props: PlayerSearchProps) => {
 
     const heightInterpolate = expandAnim.interpolate({
         inputRange: [0, 1],
-        outputRange:[(1/13 * 100).toString() + '%', '100%']
+        outputRange:[(0).toString() + '%', '100%']
     })
 
     const OpenPlayerSearch = useCallback(() => {

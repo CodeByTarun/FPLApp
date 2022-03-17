@@ -85,8 +85,8 @@ const FixturesView = (prop: FixturesViewProp) => {
     }, [gameweekNumber]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 4.5, backgroundColor: 'red'}}>
+    <View style={styles.container}>
+      <View style={{ flex: 2, backgroundColor: 'red'}}>
         {prop.overview && <></>
           // <Dropdown value={ gameweekNumber }
           //           setValue={ setGameweekNumber }
@@ -97,7 +97,7 @@ const FixturesView = (prop: FixturesViewProp) => {
         }
       </View>
       { (fixtures.isSuccess == true) &&
-        <View style={{flex: 5.5}}>
+        <View style={{flex: 3}}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1 }}>
             { (fixtures.data && gameweekData.data && prop.overview) &&
 
@@ -114,7 +114,8 @@ const FixturesView = (prop: FixturesViewProp) => {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      height: GlobalConstants.height * 0.16,
+      width: GlobalConstants.width,
     },
   });
 

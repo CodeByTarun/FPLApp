@@ -50,16 +50,17 @@ const LineupContainer = () => {
             <TeamModal isVisible={isTeamModalVisible} isVisibleFunction={setIsTeamModalVisible}/>
             
             <View style={styles.top}>
-                <View style={styles.topContainer}>
+                <View style={styles.buttonsContainer}>
                     <TouchableOpacity style={styles.dreamTeamButton} onPress={onDreamTeamPress}>
                         <Image style={styles.icon} source={require('../../../assets/dreamteam.png')} resizeMode="contain"/>
                     </TouchableOpacity>
 
-                    {TeamSelectorHeader(teamInfo)}
-                    
                     <TouchableOpacity style={styles.myTeamButton} onPress={onMyTeamButtonPress}>
                         <Image style={styles.icon} source={require('../../../assets/team.png')} resizeMode="contain"/>
                     </TouchableOpacity>
+                </View>
+                <View style={styles.topContainer}>
+                    {TeamSelectorHeader(teamInfo)}
                 </View>
             </View>
             <View style={styles.middle}>
@@ -78,12 +79,18 @@ const styles = StyleSheet.create(
         },
 
         top: {
-            flex: 1,
+            height: GlobalConstants.height* 0.15,
         },
 
         middle: {
             flex: 9,
             width : '100%',
+        },
+
+        buttonsContainer: {
+            flex: 1,
+            justifyContent: 'center',
+            flexDirection: 'row',
         },
 
         topContainer: {
