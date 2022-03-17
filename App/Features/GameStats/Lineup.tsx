@@ -245,13 +245,14 @@ const styles = StyleSheet.create(
             justifyContent: 'center',
             alignContent: 'center',
             backgroundColor: GlobalConstants.primaryColor, 
-            borderColor: 'white',
+            borderColor: GlobalConstants.aLittleLighterColor,
+            paddingBottom: 3,
         },
 
         bottomViewTitle: {
             color: GlobalConstants.textPrimaryColor,
             alignSelf: 'center',
-            fontSize: GlobalConstants.smallFont*1.2,
+            fontSize: GlobalConstants.width*0.035,
             fontWeight: 'bold',
             padding: 5,
             marginTop: 2,
@@ -261,7 +262,7 @@ const styles = StyleSheet.create(
         bonusPointsText: {
             color: GlobalConstants.textPrimaryColor,
             alignSelf: 'center',
-            fontSize: GlobalConstants.smallFont,
+            fontSize: GlobalConstants.width*0.025,
         },
 
         kingsView: {

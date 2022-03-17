@@ -8,6 +8,7 @@ import TeamSwitch from "./TeamSwitch";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
 import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import TeamModal from "./TeamModal";
+import { CustomButton } from "../Controls/CustomButton";
 
 const TeamSelectorHeader = (teamInfo: TeamInfo) => {
 
@@ -51,16 +52,16 @@ const LineupContainer = () => {
             
             <View style={styles.top}>
                 <View style={styles.buttonsContainer}>
-                    <TouchableOpacity style={styles.dreamTeamButton} onPress={onDreamTeamPress}>
-                        <Image style={styles.icon} source={require('../../../assets/dreamteam.png')} resizeMode="contain"/>
-                    </TouchableOpacity>
+
+                    <View style={{height: '100%', width: '20%'}}>
+                        <CustomButton imageSource={'../../../assets/dreamteam.png'} buttonFunction={onDreamTeamPress}/>
+                    </View>
+
+                    {TeamSelectorHeader(teamInfo)}
 
                     <TouchableOpacity style={styles.myTeamButton} onPress={onMyTeamButtonPress}>
                         <Image style={styles.icon} source={require('../../../assets/team.png')} resizeMode="contain"/>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.topContainer}>
-                    {TeamSelectorHeader(teamInfo)}
                 </View>
             </View>
             <View style={styles.middle}>
@@ -79,7 +80,7 @@ const styles = StyleSheet.create(
         },
 
         top: {
-            height: GlobalConstants.height* 0.15,
+            height: GlobalConstants.height* 0.075,
         },
 
         middle: {
