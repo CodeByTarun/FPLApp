@@ -44,6 +44,22 @@ const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identi
     }
 }
 
+const FixturesText = (player: PlayerData, fixtures: FplFixture[], overview: FplOverview) => {
+
+    var currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
+    var playerFixtures = fixtures.filter(fixture => (fixture.event === currentGameweek) && ((fixture.team_a === player.overviewData.team) || (fixture.team_h === player.overviewData.team)))
+
+    return (
+        <Text style={[styles.text, {fontSize: playerFixtures.length === 1 ? GlobalConstants.smallFont 
+                                                                          : (playerFixtures.length === 2 ? GlobalConstants.smallFont*0.9 
+                                                                                                         : GlobalConstants.smallFont*0.8)}]}>
+            { playerFixtures.map(fixture => (fixture.team_a === player.overviewData.team) ? (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)'
+                                                                                          : (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)')
+                            .join(', ')}
+        </Text>
+    )
+}
+
 const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
     const [isPlayerCardModalVisible, setIsPlayerCardModalVisible] = useState(false);
@@ -54,27 +70,27 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
         <TouchableOpacity style={styles.container} onPress={() => setIsPlayerCardModalVisible(!isPlayerCardModalVisible)}>
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
-            <><View style={styles.imageContainer}>
-
-                <Image style={styles.jersey} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/> 
-
-                <View style={styles.allStatsContainer}>
-                    { StatView(prop.player, prop.teamInfo, Identifier.GoalsScored) }
-                    { StatView(prop.player, prop.teamInfo, Identifier.Assists) }
-                    { StatView(prop.player, prop.teamInfo, Identifier.Saves) }
-                    { StatView(prop.player, prop.teamInfo, Identifier.OwnGoals) }
-                    <View style={styles.cardsContainer}>
-                        { StatView(prop.player, prop.teamInfo, Identifier.YellowCards) }
-                        { StatView(prop.player, prop.teamInfo, Identifier.RedCards) }
-                    </View> 
-                </View>
-
-                <View style={styles.scoreContainer}>
-                    <Text style={styles.scoreText}>{GetPointTotal(prop.player, prop.teamInfo)}</Text>
-                </View>   
-
+            <>
+            
+            <View style={{flex:3, justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'red'}}>
+                <Image style={{alignSelf: 'center', height: '75%'}} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/> 
             </View>
-            <Text style={styles.text}>{prop.player.overviewData.web_name}</Text></>
+
+            <View style={{flex: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? 2 : 1, 
+                          justifyContent: 'center', 
+                          alignItems: 'center',
+                          paddingBottom: 1, 
+                          width: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '130%' : '95%'}}>
+                <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor}}>
+                    <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont * 1.1, fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
+                </View>
+                {(prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && 
+                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.primaryColor, paddingLeft: 5, paddingRight: 5 }}>
+                        { FixturesText(prop.player, prop.fixtures, prop.overview)}
+                    </View>
+                }
+            </View>
+            </>
             }
         </TouchableOpacity>
         </>
@@ -84,25 +100,18 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 const styles = StyleSheet.create(
     {
         container: {
-            padding: 5,
             height: '100%',
+            width: GlobalConstants.width*(1/6),
             justifyContent: 'center',
-            alignItems: 'center'
-        },
-
-        imageContainer: {
-            height: '75%',
-            width: GlobalConstants.width/6,
-            flex:1,
             alignItems: 'center',
         },
 
-        jersey: {
-            position: 'absolute',
-            alignSelf: 'center',
-            height: '75%',
-            width: '70%',
-            marginTop: 8
+        text: {
+            flex: 1, 
+            fontSize: GlobalConstants.smallFont, 
+            alignSelf: 'center', 
+            textAlign:'center',
+            color: GlobalConstants.textPrimaryColor,
         },
 
         //#region Stats
@@ -164,16 +173,6 @@ const styles = StyleSheet.create(
 
         },
         //#endregion
-        
-        text: {
-            fontSize: GlobalConstants.width*0.025,
-            textAlign: 'center',
-            height: "20%",
-            backgroundColor: GlobalConstants.secondaryColor,
-            color: GlobalConstants.textPrimaryColor,
-            padding: 2,
-            marginTop: 2,    
-        }
     }
 );
 

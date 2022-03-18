@@ -86,7 +86,7 @@ const FixturesView = (prop: FixturesViewProp) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 2, backgroundColor: 'red'}}>
+      <View style={{ flex: 2 }}>
         {prop.overview && <></>
           // <Dropdown value={ gameweekNumber }
           //           setValue={ setGameweekNumber }
@@ -98,7 +98,7 @@ const FixturesView = (prop: FixturesViewProp) => {
       </View>
       { (fixtures.isSuccess == true) &&
         <View style={{flex: 3}}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1 }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }}>
             { (fixtures.data && gameweekData.data && prop.overview) &&
 
               fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})

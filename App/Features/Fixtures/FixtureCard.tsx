@@ -54,7 +54,7 @@ const FixtureCard = (prop : FixtureCardProp) => {
         <View style={[styles.container]}>
             <TouchableOpacity style={[styles.button]} onPress={onPress} disabled={!prop.fixture?.started}>            
             { (prop.fixture && prop.overviewData && prop.gameweekData) &&
-                <View style={[styles.card]}>
+                <View style={[styles.card, styles.shadow]}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
                             { moment(prop.fixture.kickoff_time).tz(Localization.timezone).format('MMM D, H:mm z') }
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     //#region main layout
     container: {
         height: '100%',
-        width: GlobalConstants.width * 0.334,
+        width: GlobalConstants.width * 0.329,
     },
 
     button: {
@@ -87,14 +87,21 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        backgroundColor: GlobalConstants.primaryColor,
-        height: '100%',
+        backgroundColor: GlobalConstants.secondaryColor,
+        flex: 1,
         flexDirection: 'column',
+        marginLeft: 3,
+        marginRight: 3,
         padding: 5,
-        borderLeftColor: GlobalConstants.secondaryColor,
-        borderRightColor: GlobalConstants.secondaryColor,
-        borderLeftWidth: 0,
-        borderRightWidth: 1,
+        borderRadius: GlobalConstants.cornerRadius,
+    },
+
+    shadow: {
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 3},
+        shadowRadius: 2,
+        shadowOpacity: 0.08,
+        elevation: 3,
     },
     //#endregion
 
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
     fullTimeText: {
         fontSize: 0.025 * GlobalConstants.width,
         alignSelf: 'center',
-        color: 'gray'
+        color: GlobalConstants.lightColor
     }
     //#endregion
 });

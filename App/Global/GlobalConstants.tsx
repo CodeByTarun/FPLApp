@@ -29,3 +29,6 @@ export const modalButtonColor = secondaryColor;
 export const smallFont = width*0.025;
 export const mediumFont = width*0.035;
 export const largeFont = width*0.045;
+
+// Current Colors:
+// TODO: export const secondaryColor = '#582aa0' or '#370e77';

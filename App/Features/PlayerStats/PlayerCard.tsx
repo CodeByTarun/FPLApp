@@ -93,6 +93,9 @@ const PlayerCard = (props: PlayerCardProps) => {
 
             <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
                 <CloseButton boolFunction={props.isVisibleFunction}/>
+                <Text style={{fontSize: GlobalConstants.largeFont, color: GlobalConstants.textPrimaryColor, alignSelf: 'center', paddingTop: 10, fontWeight: '500', textAlign: 'center'}}>
+                    {props.player.overviewData.first_name + " " + props.player.overviewData.second_name}
+                </Text>
                 <ScrollView style={{ flex: 1 }}>
                     { AllFixturesPlayerStatsView(props.player, props.teamInfo, props.overview, props.fixtures) }      
                 </ScrollView>

@@ -61,6 +61,14 @@ const globalStyles = StyleSheet.create(
             shadowOpacity: 0.2,
             elevation: 3,
         },
+        
+        shadow: {
+            shadowColor: 'black',
+            shadowOffset: {width: 0, height: 4},
+            shadowRadius: 2,
+            shadowOpacity: 0.08,
+            elevation: 3,
+        },
     }
 )
 

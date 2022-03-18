@@ -30,7 +30,7 @@ const styles = StyleSheet.create(
         emblems: {
             alignSelf: 'center',
             width: '100%',
-            height: '65%',
+            height: '55%',
         },
     }
 );

@@ -69,4 +69,7 @@ export const Emblems: { [key: number]: ImageURISource} =
         "delete" : require('../../assets/icons/delete.png'),
         "checkmark" : require('../../assets/icons/checkmark.png'),
         "edit_disabled" : require('../../assets/icons/editdisabled.png'),
+        "dreamteam": require('../../assets/icons/dreamteam.png'),
+        "team": require('../../assets/icons/team.png'),
+        "table": require('../../assets/icons/table.png'),
     }

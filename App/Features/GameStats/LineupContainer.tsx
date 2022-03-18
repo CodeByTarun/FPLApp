@@ -8,13 +8,13 @@ import TeamSwitch from "./TeamSwitch";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
 import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import TeamModal from "./TeamModal";
-import { CustomButton } from "../Controls/CustomButton";
+import CustomButton from "../Controls/CustomButton";
 
 const TeamSelectorHeader = (teamInfo: TeamInfo) => {
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return (
-        <View style={styles.switchContainer}>
+        <View style={{alignSelf: 'center', height: '90%', width: '60%'}}>
             <TeamSwitch/>
         </View>
         )
@@ -51,17 +51,24 @@ const LineupContainer = () => {
             <TeamModal isVisible={isTeamModalVisible} isVisibleFunction={setIsTeamModalVisible}/>
             
             <View style={styles.top}>
-                <View style={styles.buttonsContainer}>
+                <View style={styles.controlsContainer}>
 
-                    <View style={{height: '100%', width: '20%'}}>
-                        <CustomButton imageSource={'../../../assets/dreamteam.png'} buttonFunction={onDreamTeamPress}/>
+                    <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5}}>
+                        <View style={styles.buttonContainer}>
+                            <CustomButton image={'dreamteam'} buttonFunction={onDreamTeamPress}/>
+                        </View>
                     </View>
 
-                    {TeamSelectorHeader(teamInfo)}
+                    <View style={{flex: 3, justifyContent: 'center', alignItems: 'center'}}>
+                        {TeamSelectorHeader(teamInfo)}
+                    </View>
 
-                    <TouchableOpacity style={styles.myTeamButton} onPress={onMyTeamButtonPress}>
-                        <Image style={styles.icon} source={require('../../../assets/team.png')} resizeMode="contain"/>
-                    </TouchableOpacity>
+                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end', paddingRight: 5}}>
+                        <View style={styles.buttonContainer}>
+                            <CustomButton image={'team'} buttonFunction={onMyTeamButtonPress}/>
+                        </View>
+                    </View>
+
                 </View>
             </View>
             <View style={styles.middle}>
@@ -88,49 +95,28 @@ const styles = StyleSheet.create(
             width : '100%',
         },
 
-        buttonsContainer: {
+        controlsContainer: {
             flex: 1,
             justifyContent: 'center',
             flexDirection: 'row',
         },
 
-        topContainer: {
-            flex: 1,
-            justifyContent: 'center',
-            flexDirection: 'row',
+        buttonContainer: {
+            height: '70%',
+            aspectRatio: 1,
+            margin: 5
         },
 
         switchContainer: {
             alignSelf: 'center',
-            width: '40%'
-        },
-
-        dreamTeamButton: {
-            justifyContent: 'center',
-            alignSelf: 'center',
-            position: 'absolute',
-            left: 5,
-            backgroundColor: GlobalConstants.buttonColor,
-            borderRadius: GlobalConstants.cornerRadius,
-            width: GlobalConstants.width*0.1,
-            height: '70%',
+            height: '100%',
+            width: '100%',
         },
 
         icon: {
             width: '80%',
             height: '80%',
             alignSelf: 'center'
-        },
-
-        myTeamButton: {
-            justifyContent: 'center',
-            alignSelf: 'center',
-            position: 'absolute',
-            right: 5,
-            backgroundColor: GlobalConstants.buttonColor,
-            borderRadius: GlobalConstants.cornerRadius,
-            width: GlobalConstants.width*0.1,
-            height: '70%'   
         },
 
         text: {
