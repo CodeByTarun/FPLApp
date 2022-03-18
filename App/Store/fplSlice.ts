@@ -25,11 +25,12 @@ export const fplSlice = createApi({
     }),
 
     getFixtures: builder.query<FplFixture[], void>({
-      query: () => '/fixtures'
+      query: () => '/fixtures/',
+      
     }),
 
     getGameweekData: builder.query<FplGameweek, number>({
-      query: (gameweek: number) => `/event/${gameweek}/live`
+      query: (gameweek: number) => `/event/${gameweek}/live/`
     }),
 
     getPlayerSummary: builder.query<FplPlayerSummary, number>({

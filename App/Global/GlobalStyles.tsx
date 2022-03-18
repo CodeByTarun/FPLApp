@@ -64,10 +64,10 @@ const globalStyles = StyleSheet.create(
         
         shadow: {
             shadowColor: 'black',
-            shadowOffset: {width: 0, height: 4},
-            shadowRadius: 2,
-            shadowOpacity: 0.08,
-            elevation: 3,
+            shadowOffset: {width: 0, height: 0},
+            shadowRadius: 1,
+            shadowOpacity: 0.3,
+            elevation: 2,
         },
     }
 )

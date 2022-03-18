@@ -97,7 +97,7 @@ const FixturesView = (prop: FixturesViewProp) => {
         }
       </View>
       { (fixtures.isSuccess == true) &&
-        <View style={{flex: 3}}>
+        <View style={{flex: 3.5}}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }}>
             { (fixtures.data && gameweekData.data && prop.overview) &&
 

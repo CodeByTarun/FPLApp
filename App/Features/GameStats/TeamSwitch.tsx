@@ -7,6 +7,8 @@ import * as GlobalConstants from '../../Global/GlobalConstants'
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { Emblems } from "../../Global/Images";
 import globalStyles from "../../Global/GlobalStyles";
+import { FplOverview } from "../../Models/FplOverview";
+import { FplFixture } from "../../Models/FplFixtures";
 
 // This is going to be a switch selector control
 // First i need a background,
@@ -19,10 +21,14 @@ const getViewWidth= (event: LayoutChangeEvent) => {
     viewWidth = event.nativeEvent.layout.width;
 }
 
-const TeamSwitch = () => {
+interface TeamSwitchProps {
+    overview: FplOverview,
+    fixtures: FplFixture[],
+}
+
+const TeamSwitch = (props: TeamSwitchProps) => {
 
     const teamInfo: TeamInfo = useAppSelector((state) => state.team);
-    const overview = useGetOverviewQuery();
     const dispatch = useAppDispatch();
 
     const translateAnim = useRef(new Animated.Value(0)).current; 
@@ -45,7 +51,7 @@ const TeamSwitch = () => {
 
     return (
         <View style={styles.container} onLayout={(event) => getViewWidth(event)}>
-            { (teamInfo.teamType === TeamTypes.Fixture && teamInfo.fixture !== null && overview.data !== undefined) &&
+            { (teamInfo.teamType === TeamTypes.Fixture && teamInfo.fixture !== null && props.overview !== undefined) &&
             
             <TouchableWithoutFeedback style={{flex: 1, flexDirection: 'row'}} onPress={switchTeam}>
             
@@ -53,15 +59,15 @@ const TeamSwitch = () => {
                 <Animated.View style={[styles.highlight, {transform: [{translateX: translateAnim}] }, globalStyles.shadow, {shadowOpacity: 0.2, shadowRadius: 5 }]}/>
                     <View style={[styles.buttonContainer]}>
                         <View style={{ flex: 1 }}>
-                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview.data).code]} resizeMode='contain' />
+                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, props.overview).code]} resizeMode='contain' />
                         </View>
-                        <Text style={[styles.scoreText]}>{teamInfo.fixture.team_h_score}</Text>
+                        <Text style={[styles.scoreText]}>{props.fixtures.find(fixture => fixture.id === teamInfo.fixture!.id)?.team_h_score}</Text>
                     </View>
                     <Text> </Text>
                     <View style={styles.buttonContainer}>
-                        <Text style={[styles.scoreText]}>{teamInfo.fixture.team_a_score}</Text>
+                        <Text style={[styles.scoreText]}>{props.fixtures.find(fixture => fixture.id === teamInfo.fixture!.id)?.team_a_score}</Text>
                         <View style={{ flex: 1 }}>
-                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview.data).code]} resizeMode='contain' />
+                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, props.overview).code]} resizeMode='contain' />
                         </View>
                     </View>
                     

@@ -138,7 +138,7 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             position: "absolute",
             right: 10,
-            top: -1,
+            top: 1,
 
         },
 

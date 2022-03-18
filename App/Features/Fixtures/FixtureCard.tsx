@@ -54,7 +54,7 @@ const FixtureCard = (prop : FixtureCardProp) => {
         <View style={[styles.container]}>
             <TouchableOpacity style={[styles.button]} onPress={onPress} disabled={!prop.fixture?.started}>            
             { (prop.fixture && prop.overviewData && prop.gameweekData) &&
-                <View style={[styles.card, styles.shadow]}>
+                <View style={[styles.card, globalStyles.shadow]}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
                             { moment(prop.fixture.kickoff_time).tz(Localization.timezone).format('MMM D, H:mm z') }
@@ -87,22 +87,17 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        backgroundColor: GlobalConstants.secondaryColor,
+        backgroundColor: GlobalConstants.primaryColor,
         flex: 1,
         flexDirection: 'column',
+        marginTop: 3,
         marginLeft: 3,
         marginRight: 3,
+        marginBottom: 3,
         padding: 5,
         borderRadius: GlobalConstants.cornerRadius,
     },
 
-    shadow: {
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 3},
-        shadowRadius: 2,
-        shadowOpacity: 0.08,
-        elevation: 3,
-    },
     //#endregion
 
     //#region  top bar

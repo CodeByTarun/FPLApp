@@ -9,13 +9,15 @@ import { useAppSelector, useAppDispatch } from "../../Store/hooks";
 import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import TeamModal from "./TeamModal";
 import CustomButton from "../Controls/CustomButton";
+import { FplOverview } from "../../Models/FplOverview";
+import { FplFixture } from "../../Models/FplFixtures";
 
-const TeamSelectorHeader = (teamInfo: TeamInfo) => {
+const TeamSelectorHeader = (teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) => {
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return (
         <View style={{alignSelf: 'center', height: '90%', width: '60%'}}>
-            <TeamSwitch/>
+            <TeamSwitch overview={overview} fixtures={fixtures}/>
         </View>
         )
     }
@@ -31,7 +33,12 @@ const TeamSelectorHeader = (teamInfo: TeamInfo) => {
     }
 }
 
-const LineupContainer = () => {
+interface LineupContainerProps {
+    overview: FplOverview,
+    fixtures: FplFixture[],
+}
+
+const LineupContainer = (props: LineupContainerProps) => {
 
     const teamInfo: TeamInfo = useAppSelector((state) => state.team);
     const [isTeamModalVisible, setIsTeamModalVisible] = useState(false);
@@ -60,7 +67,7 @@ const LineupContainer = () => {
                     </View>
 
                     <View style={{flex: 3, justifyContent: 'center', alignItems: 'center'}}>
-                        {TeamSelectorHeader(teamInfo)}
+                        {TeamSelectorHeader(teamInfo, props.overview, props.fixtures)}
                     </View>
 
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end', paddingRight: 5}}>
