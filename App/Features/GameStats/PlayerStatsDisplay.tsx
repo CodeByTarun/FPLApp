@@ -50,14 +50,15 @@ const FixturesText = (player: PlayerData, fixtures: FplFixture[], overview: FplO
     var playerFixtures = fixtures.filter(fixture => (fixture.event === currentGameweek) && ((fixture.team_a === player.overviewData.team) || (fixture.team_h === player.overviewData.team)))
 
     return (
-        <Text style={[styles.text, {fontSize: playerFixtures.length === 1 ? GlobalConstants.smallFont 
-                                                                          : (playerFixtures.length === 2 ? GlobalConstants.smallFont*0.9 
-                                                                                                         : GlobalConstants.smallFont*0.8)}]}>
+        <Text numberOfLines={1} style={[styles.text, {fontWeight: '400', fontSize: GlobalConstants.smallFont}]}>
             { playerFixtures.map(fixture => (fixture.team_a === player.overviewData.team) ? (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)'
                                                                                           : (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)')
                             .join(', ')}
         </Text>
+
+    //   <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont*0.9}]}>MAN(A), MCI(H)</Text>
     )
+
 }
 
 const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
@@ -72,20 +73,31 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
             <>
             
-            <View style={{flex:3, justifyContent: 'center', alignItems: 'center', width: '100%', backgroundColor: 'red'}}>
-                <Image style={{alignSelf: 'center', height: '75%'}} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/> 
+            <View style={{flex:3, justifyContent: 'center', alignItems: 'center', width: '100%'}}>
+                <Image style={{alignSelf: 'center', height: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '85%' : '75%'}} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/>
+
+                <View style={{alignItems: 'flex-start', justifyContent: 'flex-start', width: '90%', height: '90%', position: 'absolute'}}>
+                    { StatView(prop.player, prop.teamInfo, Identifier.GoalsScored) }
+                    { StatView(prop.player, prop.teamInfo, Identifier.Assists) }
+                    { StatView(prop.player, prop.teamInfo, Identifier.Saves) }
+                    { StatView(prop.player, prop.teamInfo, Identifier.OwnGoals) }
+                    <View style={styles.cardsContainer}>
+                        { StatView(prop.player, prop.teamInfo, Identifier.YellowCards) }
+                        { StatView(prop.player, prop.teamInfo, Identifier.RedCards) }
+                    </View> 
+                </View> 
             </View>
 
-            <View style={{flex: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? 2 : 1, 
+            <View style={{flex: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? 1.5 : 0.75, 
                           justifyContent: 'center', 
                           alignItems: 'center',
                           paddingBottom: 1, 
                           width: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '130%' : '95%'}}>
-                <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor}}>
+                <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.primaryColor}}>
                     <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont * 1.1, fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
                 </View>
                 {(prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && 
-                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.primaryColor, paddingLeft: 5, paddingRight: 5 }}>
+                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
                         { FixturesText(prop.player, prop.fixtures, prop.overview)}
                     </View>
                 }
@@ -115,24 +127,17 @@ const styles = StyleSheet.create(
         },
 
         //#region Stats
-        allStatsContainer: {
-            alignItems: 'flex-start',
-            justifyContent: 'flex-start',
-            width: "100%",
-            height: "100%",
-        },
-
         statsContainer: {
             flexDirection: 'row',
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
-            marginLeft: 6,
+            marginLeft: 0,
         },
 
         cardsContainer: {
             flexDirection: 'row',
             position: "absolute",
-            right: 18,
+            right: 10,
             top: -1,
 
         },
