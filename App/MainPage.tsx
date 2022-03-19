@@ -30,7 +30,7 @@ const MainPage = () => {
         <SafeAreaView style={styles.safeArea}>
             {(overview.data && fixtures.data) &&
               <><View style={{}}>
-                  <FixturesView overview={overview.data} />
+                  <FixturesView overview={overview.data}/>
                 </View>
                 <View style={styles.lineupView}>
                   <LineupContainer overview={overview.data} fixtures={fixtures.data}/>

@@ -110,16 +110,17 @@ const styles = StyleSheet.create(
         emblems: {
             flex:1,
             resizeMode: 'contain',
-            alignSelf: 'flex-start',
+            alignSelf: 'center',
             height: '100%',
-            width: '100%',
+            width: '90%',
          },
 
         scoreText: {
             marginLeft: 3,
             marginRight: 3,
             fontWeight: '700',
-            color: GlobalConstants.textPrimaryColor
+            color: GlobalConstants.textPrimaryColor,
+            fontSize: GlobalConstants.mediumFont,
         },
     }
 );

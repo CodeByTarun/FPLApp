@@ -16,7 +16,7 @@ const TeamSelectorHeader = (teamInfo: TeamInfo, overview: FplOverview, fixtures:
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return (
-        <View style={{alignSelf: 'center', height: '90%', width: '60%'}}>
+        <View style={{alignSelf: 'center', height: '90%', width: '65%'}}>
             <TeamSwitch overview={overview} fixtures={fixtures}/>
         </View>
         )

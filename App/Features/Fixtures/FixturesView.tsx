@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
 import FixtureCard from './FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { useGetFixturesQuery, useGetGameweekDataQuery, useGetOverviewQuery, } from '../../Store/fplSlice'
@@ -11,6 +11,8 @@ import { changeGameweek, changeToFixture, changingFixtureWhenGameweekChanged, re
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import Dropdown from "../Controls/Dropdown";
+import globalStyles from "../../Global/GlobalStyles";
+import CustomButton from "../Controls/CustomButton";
 
 //TODO: Decide on a good refresh rate for live game data (right now set to 30 seconds)
 
@@ -25,18 +27,18 @@ function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
   return 0;
 }
 
-const FixturesView = (prop: FixturesViewProp) => {
+const FixturesView = (props: FixturesViewProp) => {
 
   const dispatch = useAppDispatch();
-  const liveGameweek = prop.overview.events.filter((event) => { return event.is_current === true; })[0].id;
+  const liveGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
   const [gameweekNumber, setGameweekNumber] = useState(liveGameweek);
   const fixtures = useGetFixturesQuery();
   const gameweekData = useGetGameweekDataQuery((gameweekNumber) ? gameweekNumber : skipToken);
 
   useEffect(
     function setInitialGameweek() {
-      if (prop.overview) {
-        let gameweekNumber = prop.overview.events.find(event => event.is_current === true)?.id;
+      if (props.overview) {
+        let gameweekNumber = props.overview.events.find(event => event.is_current === true)?.id;
         if (gameweekNumber) {
           dispatch(changeGameweek(gameweekNumber))
         }
@@ -84,10 +86,31 @@ const FixturesView = (prop: FixturesViewProp) => {
       };
     }, [gameweekNumber]);
 
+    const onInfoButtonPress = useCallback(() => {
+
+    }, [])
+
+    const onPlayerTableButtonPress = useCallback(() => {
+
+    }, [])
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 2 }}>
-        {prop.overview && <></>
+        {props.overview && 
+
+          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingLeft: 10, paddingRight: 10}}>
+            <View style={{flex: 1}}/>
+            <TouchableOpacity style={[styles.gameweekButton, globalStyles.shadow]}>
+              <Text style={{color: GlobalConstants.textPrimaryColor, alignSelf: 'center', fontSize: GlobalConstants.mediumFont, fontWeight: '700'}}>Gameweek {gameweekNumber}</Text>
+            </TouchableOpacity>
+            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
+              <View style={{height: '80%', aspectRatio: 1}}>
+                <CustomButton image="table" buttonFunction={onPlayerTableButtonPress}/>
+              </View>
+            </View>
+          </View>  
+          
           // <Dropdown value={ gameweekNumber }
           //           setValue={ setGameweekNumber }
           //           defaultValue = { liveGameweek }
@@ -99,11 +122,11 @@ const FixturesView = (prop: FixturesViewProp) => {
       { (fixtures.isSuccess == true) &&
         <View style={{flex: 3.5}}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }}>
-            { (fixtures.data && gameweekData.data && prop.overview) &&
+            { (fixtures.data && gameweekData.data && props.overview) &&
 
               fixtures.data.filter((fixture) => { return fixture.event == gameweekNumber})
                             .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                            .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overviewData={prop.overview}/> })     
+                            .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overviewData={props.overview}/> })     
             }
           </ScrollView>
         </View>
@@ -117,26 +140,17 @@ const styles = StyleSheet.create({
       height: GlobalConstants.height * 0.16,
       width: GlobalConstants.width,
     },
-  });
 
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: GlobalConstants.width*0.04,
-    fontWeight: "600",
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    color: GlobalConstants.textPrimaryColor,
-    borderRadius: GlobalConstants.cornerRadius,
-    backgroundColor: GlobalConstants.secondaryColor,
-  },
-  inputAndroid: {
-    fontSize: GlobalConstants.width*0.04,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    color: GlobalConstants.textPrimaryColor,
-    borderRadius: GlobalConstants.cornerRadius,
-    backgroundColor: GlobalConstants.secondaryColor,
-  },
-});
+    gameweekButton: {
+      flex: 1,
+      alignSelf: 'center',
+      backgroundColor: GlobalConstants.primaryColor,
+      borderRadius: GlobalConstants.cornerRadius,
+      height: '80%',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+
+  });
 
 export default FixturesView;
