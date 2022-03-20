@@ -52,12 +52,10 @@ const FixturesText = (player: PlayerData, fixtures: FplFixture[], overview: FplO
 
     return (
         <Text numberOfLines={1} style={[styles.text, {fontWeight: '400', fontSize: GlobalConstants.smallFont}]}>
-            { playerFixtures.map(fixture => (fixture.team_a === player.overviewData.team) ? (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)'
+            { (playerFixtures.length > 0) ? playerFixtures.map(fixture => (fixture.team_a === player.overviewData.team) ? (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)'
                                                                                           : (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)')
-                            .join(', ')}
+                            .join(', ') : "-" }
         </Text>
-
-    //   <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont*0.9}]}>MAN(A), MCI(H)</Text>
     )
 
 }
@@ -96,10 +94,13 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
                     <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont * 1.1, fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
                 </View>
                 {(prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && 
-                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
+                    <View style={{padding: 3, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
                         { FixturesText(prop.player, prop.fixtures, prop.overview)}
                     </View>
                 }
+                <View style={styles.scoreContainer}>
+                    <Text style={styles.scoreText}>{GetPointTotal(prop.player, prop.teamInfo)}</Text>
+                </View>
             </View>
             </>
             }
@@ -159,22 +160,22 @@ const styles = StyleSheet.create(
         //#region Score
         scoreText: {
             fontSize: GlobalConstants.width*0.03,
-            position: "absolute",
-            overflow: 'hidden',
+            color: GlobalConstants.textPrimaryColor,
+            paddingLeft: 3,
+            paddingRight: 3,
+           
         },
 
         scoreContainer: {
-            height: GlobalConstants.width/24,
-            width: GlobalConstants.width/24,
-            borderRadius: GlobalConstants.width/24/2,
-            backgroundColor: GlobalConstants.tertiaryColor,
+            position: 'absolute',
+            top: -GlobalConstants.width/20,
+            right: 0,
+            height: GlobalConstants.width/20,
+            aspectRatio: 1,
+            backgroundColor: GlobalConstants.secondaryColor,
             color: GlobalConstants.textSecondaryColor,
             alignItems: 'center',
             justifyContent: 'center',
-            position: 'absolute',
-            right: 7,
-            bottom: 0
-
         },
         //#endregion
     }
