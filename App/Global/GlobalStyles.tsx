@@ -32,9 +32,10 @@ const globalStyles = StyleSheet.create(
        },
 
        modalBackground: {
-        backgroundColor: 'black',
-        height: "100%",
-        width: "100%",
+        position: 'absolute',
+        height: '100%',
+         width: '100%',
+         top: 0,
         opacity: 0.50,
        },
 

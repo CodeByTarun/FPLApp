@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react";
 import { Modal, Pressable, View, Image, Text, ScrollView, TextInput, StyleSheet } from "react-native";
-import globalStyles from "../../Global/GlobalStyles";
-import * as GlobalConstants from "../../Global/GlobalConstants";
-import { Icons } from "../../Global/Images";
-import UserTeamInfo, { changeFavouriteUserTeam, getAllUserTeamInfo, removeUserTeamInfo, addUserTeamInfo, editUserTeamInfo } from "../../Helpers/FplDataStorageService";
-import { useAppDispatch } from "../../Store/hooks";
-import { changeToBudgetTeam, changeToDraftTeam } from "../../Store/teamSlice";
-import CloseButton from "../Controls/CloseButton";
+import globalStyles from "../Global/GlobalStyles";
+import * as GlobalConstants from "../Global/GlobalConstants";
+import { Icons } from "../Global/Images";
+import UserTeamInfo, { changeFavouriteUserTeam, getAllUserTeamInfo, removeUserTeamInfo, addUserTeamInfo, editUserTeamInfo } from "../Helpers/FplDataStorageService";
+import { useAppDispatch } from "../Store/hooks";
+import { changeToBudgetTeam, changeToDraftTeam } from "../Store/teamSlice";
+import CloseButton from "../Features/Controls/CloseButton";
 import Checkbox from "expo-checkbox";
+import { closeModal, ModalInfo, ModalTypes } from "../Store/modalSlice";
 
 enum UserTeamActionKind {
     ChangeName,
@@ -118,11 +119,10 @@ function userTeamReducer(state: UserTeamState, action: UserTeamActions) : UserTe
 }
 
 interface TeamModalProps {
-    isVisible: boolean;
-    isVisibleFunction : (value: React.SetStateAction<boolean>) => void;
+    modalInfo: ModalInfo,
 }
 
-const TeamModal = (props: TeamModalProps) => {
+const TeamModal = ({modalInfo}: TeamModalProps) => {
 
     const [userTeams, setUserTeams] = useState([] as UserTeamInfo[] | undefined);
     const [confirmIsDisabled, setConfirmIsDisabled] = useState(true)
@@ -145,11 +145,11 @@ const TeamModal = (props: TeamModalProps) => {
     }, [userTeamState])
 
     useEffect( function resetModal() {
-        if (props.isVisible === false) {
+        if (modalInfo.modalType !== ModalTypes.TeamModal) {
             userTeamDispatch({ type: UserTeamActionKind.Reset })
             setTeamFormOpen(false);
         }
-    }, [props.isVisible])
+    }, [modalInfo])
 
     const addTeam = useCallback(async() => {
 
@@ -207,15 +207,15 @@ const TeamModal = (props: TeamModalProps) => {
         else {
             dispatch(changeToBudgetTeam(teamSelected))
         }
-        props.isVisibleFunction(false);
+        dispatch(closeModal());
     }, [])
 
     return (
-        <Modal animationType="fade" transparent={true} visible={props.isVisible}>
+        <Modal animationType="fade" transparent={true} visible={true}>
             <View style={globalStyles.modalBackground}/>
 
             <View style={[globalStyles.modalView, globalStyles.modalShadow, {height: '50%'}]}>
-                <CloseButton boolFunction={props.isVisibleFunction}/>
+                <CloseButton closeFunction={() => dispatch(closeModal())}/>
                 <Text style={[styles.titleText]}>{(teamFormOpen) ? (userTeamState.teamEditing) ? "Edit Team" : "Add Team" : "My Teams"}</Text>
 
             { (teamFormOpen) ?
@@ -300,14 +300,27 @@ const TeamModal = (props: TeamModalProps) => {
 const styles = StyleSheet.create(
     {
         //#region Modal Styling
+        //#region  close button
         closeButton: {
             position: 'absolute',
             zIndex: 1,
-            right: 0,
-            height: 15,
-            width: 15,
-            margin: 15,
+            right: -7,
+            top: -7,
+            height: 25,
+            width: 25,
+            margin: 0,
+            borderRadius: 20,
         },
+
+        closeButtonBackground: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+            backgroundColor: GlobalConstants.secondaryColor,
+            borderRadius: 20,
+        },
+
+        //#endregion
 
         titleText: {
             alignSelf: 'center',

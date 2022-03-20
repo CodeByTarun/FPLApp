@@ -71,5 +71,7 @@ export const Emblems: { [key: number]: ImageURISource} =
         "edit_disabled" : require('../../assets/icons/editdisabled.png'),
         "dreamteam": require('../../assets/icons/dreamteam.png'),
         "team": require('../../assets/icons/team.png'),
-        "table": require('../../assets/icons/table.png'),
+        "calendar": require('../../assets/icons/calendar.png'),
+        "playersearch" : require('../../assets/icons/playersearch.png'),
+        "info" : require('../../assets/icons/info.png'),
     }

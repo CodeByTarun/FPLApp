@@ -3,24 +3,24 @@
 
 import React from "react";
 import { Modal, Pressable, View, Image, StyleSheet, Text, ScrollView } from "react-native";
-import { StatNames } from "../../Global/EnumsAndDicts";
-import globalStyles from "../../Global/GlobalStyles";
-import { Emblems, Icons } from "../../Global/Images";
-import { PlayerData } from "../../Models/CombinedData";
-import { FplFixture } from "../../Models/FplFixtures";
-import { FplOverview } from "../../Models/FplOverview";
-import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
-import * as GlobalConstants from "../../Global/GlobalConstants";
-import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
-import CloseButton from "../Controls/CloseButton";
+import { StatNames } from "../Global/EnumsAndDicts";
+import globalStyles from "../Global/GlobalStyles";
+import { Emblems, Icons } from "../Global/Images";
+import { PlayerData } from "../Models/CombinedData";
+import { FplFixture } from "../Models/FplFixtures";
+import { FplOverview } from "../Models/FplOverview";
+import { TeamInfo, TeamTypes } from "../Store/teamSlice";
+import * as GlobalConstants from "../Global/GlobalConstants";
+import { GetTeamDataFromOverviewWithFixtureTeamID } from "../Helpers/FplAPIHelpers";
+import CloseButton from "../Features/Controls/CloseButton";
+import { useAppDispatch, useAppSelector } from "../Store/hooks";
+import { closeModal, ModalTypes } from "../Store/modalSlice";
 
 interface PlayerCardProps {
+    overview: FplOverview;
+    fixtures: FplFixture[];
     player: PlayerData;
     teamInfo: TeamInfo;
-    overview: FplOverview;
-    isVisible: boolean;
-    isVisibleFunction : (value: React.SetStateAction<boolean>) => void;
-    fixtures: FplFixture[];
 }
 
 function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) {
@@ -85,22 +85,23 @@ function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, f
     )
 }
 
-const PlayerCard = (props: PlayerCardProps) => {
+const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) => {
+
+    const dispatch = useAppDispatch();
 
     return (
-        <Modal animationType="fade" transparent={true} visible={props.isVisible}>
-            <Pressable style={globalStyles.modalBackground} onPressIn={() => props.isVisibleFunction(false)}/>
-
-            <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
-                <CloseButton boolFunction={props.isVisibleFunction}/>
-                <Text style={{fontSize: GlobalConstants.largeFont, color: GlobalConstants.textPrimaryColor, alignSelf: 'center', paddingTop: 10, fontWeight: '500', textAlign: 'center'}}>
-                    {props.player.overviewData.first_name + " " + props.player.overviewData.second_name}
-                </Text>
-                <ScrollView style={{ flex: 1 }}>
-                    { AllFixturesPlayerStatsView(props.player, props.teamInfo, props.overview, props.fixtures) }      
-                </ScrollView>
-                         
-            </View>            
+        <Modal animationType="fade" transparent={true} visible={true}>
+            <Pressable style={globalStyles.modalBackground} onPress={() => dispatch(closeModal())}/>
+                <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
+                    <CloseButton closeFunction={() => dispatch(closeModal())}/>
+                    <Text style={{fontSize: GlobalConstants.largeFont, color: GlobalConstants.textPrimaryColor, alignSelf: 'center', paddingTop: 10, fontWeight: '500', textAlign: 'center'}}>
+                        {player.overviewData.first_name + " " + player.overviewData.second_name}
+                    </Text>
+                    <ScrollView style={{ flex: 1 }}>
+                        { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
+                    </ScrollView>
+                            
+                </View>        
         </Modal>
     )
 }
@@ -143,4 +144,4 @@ const styles = StyleSheet.create(
     }
 )
 
-export default PlayerCard;
+export default PlayerModal;

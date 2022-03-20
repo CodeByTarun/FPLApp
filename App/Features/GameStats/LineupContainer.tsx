@@ -7,10 +7,11 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
 import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
-import TeamModal from "./TeamModal";
+import TeamModal from "../../Modals/TeamModal";
 import CustomButton from "../Controls/CustomButton";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
+import { openTeamModal } from "../../Store/modalSlice";
 
 const TeamSelectorHeader = (teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) => {
 
@@ -26,11 +27,10 @@ const TeamSelectorHeader = (teamInfo: TeamInfo, overview: FplOverview, fixtures:
             <Text style={styles.text}>Dream Team</Text>
         ) 
     }
-    else if (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) {
+    else if (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) 
         return (
             <Text style={styles.text}>{teamInfo.info.name}</Text>
         )
-    }
 }
 
 interface LineupContainerProps {
@@ -41,11 +41,10 @@ interface LineupContainerProps {
 const LineupContainer = (props: LineupContainerProps) => {
 
     const teamInfo: TeamInfo = useAppSelector((state) => state.team);
-    const [isTeamModalVisible, setIsTeamModalVisible] = useState(false);
     const dispatch = useAppDispatch();
 
     const onMyTeamButtonPress = () => {
-        setIsTeamModalVisible(!isTeamModalVisible);
+        dispatch(openTeamModal())
     }
     
     const onDreamTeamPress = () => {
@@ -54,9 +53,6 @@ const LineupContainer = (props: LineupContainerProps) => {
 
     return (
         <View style={styles.container}>
-
-            <TeamModal isVisible={isTeamModalVisible} isVisibleFunction={setIsTeamModalVisible}/>
-            
             <View style={styles.top}>
                 <View style={styles.controlsContainer}>
 

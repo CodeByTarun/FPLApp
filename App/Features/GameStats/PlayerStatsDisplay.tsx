@@ -4,12 +4,13 @@ import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
 import { Jerseys, StatImages } from "../../Global/Images";
 import { GetFixtureStats, GetPointTotal } from "../../Helpers/FplAPIHelpers";
-import { useAppSelector } from "../../Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { Identifier } from "../../Models/FplGameweek";
-import PlayerCard from "../PlayerStats/PlayerCard";
+import PlayerCard from "../../Modals/PlayerModal";
 import { FplFixture } from "../../Models/FplFixtures";
+import { openPlayerModal } from "../../Store/modalSlice";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
@@ -63,13 +64,11 @@ const FixturesText = (player: PlayerData, fixtures: FplFixture[], overview: FplO
 
 const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
-    const [isPlayerCardModalVisible, setIsPlayerCardModalVisible] = useState(false);
+    const dispatch = useAppDispatch();
 
     return (
         <>
-        <PlayerCard player={prop.player}  teamInfo={prop.teamInfo} overview={prop.overview} fixtures={prop.fixtures} isVisible={isPlayerCardModalVisible} isVisibleFunction={setIsPlayerCardModalVisible}/>
-
-        <TouchableOpacity style={styles.container} onPress={() => setIsPlayerCardModalVisible(!isPlayerCardModalVisible)}>
+        <TouchableOpacity style={styles.container} onPress={() => dispatch(openPlayerModal(prop.player))}>
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
             <>
             

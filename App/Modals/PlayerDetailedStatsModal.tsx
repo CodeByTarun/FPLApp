@@ -1,20 +1,21 @@
 import React, { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import { Modal, Pressable, View, StyleSheet, Image, Text, Switch, FlatList, ScrollView } from "react-native";
-import globalStyles from "../../Global/GlobalStyles";
-import { FplFixture } from "../../Models/FplFixtures";
-import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
-import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { closePlayerDetailedStatsModal } from "../../Store/modalSlice";
-import * as GlobalConstants from "../../Global/GlobalConstants";
-import { Icons } from "../../Global/Images";
-import FixtureDifficultyList from "./FixtureDifficultyList";
-import PieChart from "../Controls/PieChart";
-import ToolTip from "../Controls/ToolTip";
+import globalStyles from "../Global/GlobalStyles";
+import { FplFixture } from "../Models/FplFixtures";
+import { FplOverview, PlayerOverview } from "../Models/FplOverview";
+import { useAppDispatch, useAppSelector } from "../Store/hooks";
+import { closeModal } from "../Store/modalSlice";
+import * as GlobalConstants from "../Global/GlobalConstants";
+import { Icons } from "../Global/Images";
+import FixtureDifficultyList from "../Features/PlayerStats/FixtureDifficultyList";
+import PieChart from "../Features/Controls/PieChart";
+import ToolTip from "../Features/Controls/ToolTip";
 import { Slider } from "@miblanchard/react-native-slider";
 import Checkbox from "expo-checkbox";
-import { useGetPlayerSummaryQuery } from "../../Store/fplSlice";
+import { useGetPlayerSummaryQuery } from "../Store/fplSlice";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
-import { History } from "../../Models/FplPlayerSummary";
+import { History } from "../Models/FplPlayerSummary";
+import CloseButton from "../Features/Controls/CloseButton";
 
 // If gamespan is null it will do overall stats for all games played
 interface StatsFilterState {
@@ -61,13 +62,14 @@ function statsFilterReducer(state: StatsFilterState, action: StatsFilterAction):
 interface PlayerDetailedStatsModalProps {
     overview: FplOverview;
     fixtures: FplFixture[];
+    player: PlayerOverview;
 }
 
 const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
     const dispatch = useAppDispatch();
-    const player = useAppSelector(state => state.modal);
-    const playerData = useGetPlayerSummaryQuery(player ? player.id : skipToken);
+    const modalInfo = useAppSelector(state => state.modal);
+    const playerData = useGetPlayerSummaryQuery(props.player ? props.player.id : skipToken);
     const currentGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
@@ -77,25 +79,25 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
     useEffect( function ModalClosed() {
         statsFilterDispatch({type: StatsFilterActionKind.Reset, value: currentGameweek });
         setIsStatViewShowing(true);
-    }, [player]);
+    }, [props.player]);
 
     useEffect( function getInitialPlayerFilteredStats() {
-        if (player) {
+        if (props.player) {
             setPlayerFilteredStats({
-                total_points: player.total_points,
-                goals_scored: player.goals_scored,
-                assists: player.assists,
-                bonus: player.bonus,
-                bps: player.bps,
-                clean_sheets: player.clean_sheets,
-                saves: player.saves,
-                influence: Number(player.influence),
-                creativity: Number(player.creativity),
-                threat: Number(player.threat),
-                minutes: player.minutes,
+                total_points: props.player.total_points,
+                goals_scored: props.player.goals_scored,
+                assists: props.player.assists,
+                bonus: props.player.bonus,
+                bps: props.player.bps,
+                clean_sheets: props.player.clean_sheets,
+                saves: props.player.saves,
+                influence: Number(props.player.influence),
+                creativity: Number(props.player.creativity),
+                threat: Number(props.player.threat),
+                minutes: props.player.minutes,
             })
         }
-    }, [player])
+    }, [props.player])
 
     useEffect( function updatePlayerFilteredStats() {
 
@@ -110,36 +112,32 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
     return (
         <>
-        { (player) && 
-            <Modal animationType="fade" transparent={true} visible={player ? true : false} style={{position: 'absolute'}}>
-                <Pressable style={globalStyles.modalBackground} onPressIn={() => dispatch(closePlayerDetailedStatsModal())}/>       
+        { (props.player) && 
+            <Modal animationType="fade" transparent={true} visible={props.player ? true : false} style={{position: 'absolute'}}>
+                <Pressable style={globalStyles.modalBackground} onPressIn={() => dispatch(closeModal())}/>       
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, { height: GlobalConstants.height * 0.6, width: GlobalConstants.width* 0.8, padding: 15 }]}>
-                    <Pressable style={styles.closeButton} onPressIn={() => dispatch(closePlayerDetailedStatsModal())}>
-                        <View style={styles.closeButtonBackground}>
-                            <Image style={{height: '50%', width: '50%'}} source={Icons["close"]} resizeMode="contain"/>
-                        </View>
-                    </Pressable>    
+                    <CloseButton closeFunction={() => dispatch(closeModal())}/> 
                     { playerData.isSuccess && 
                         <View style={{flex: 1}}>
                             <View style={{flex: 10}}>
 
                                 <View style={styles.header}>
                                     <View style={{flexDirection: 'row'}}>
-                                        <Text style={styles.titleText}>{player.web_name}</Text>
+                                        <Text style={styles.titleText}>{props.player.web_name}</Text>
                                         <View style={{flex: 1, alignContent: 'flex-end', justifyContent: 'flex-end'}}>
-                                            <Text style={[styles.text, {alignSelf: 'flex-end', marginBottom: 1}]}>Form: {player.form}</Text>
+                                            <Text style={[styles.text, {alignSelf: 'flex-end', marginBottom: 1}]}>Form: {props.player.form}</Text>
                                         </View>
                                         
                                     </View>
                                     <View style={{flexDirection: 'row', paddingTop: 3}}>
                                         <View style={{flexDirection: 'row'}}>
-                                            <Text style={styles.text}>£{(player.now_cost / 10).toFixed(1)}  </Text>
-                                            <Text style={[styles.text, {fontWeight: 'bold'}]}>{props.overview.teams.find(team => team.code === player.team_code)?.short_name}  </Text>
-                                            <Text style={styles.text}>{props.overview.element_types.find(element => element.id === player.element_type)?.singular_name_short}  </Text>
+                                            <Text style={styles.text}>£{(props.player.now_cost / 10).toFixed(1)}  </Text>
+                                            <Text style={[styles.text, {fontWeight: 'bold'}]}>{props.overview.teams.find(team => team.code === props.player.team_code)?.short_name}  </Text>
+                                            <Text style={styles.text}>{props.overview.element_types.find(element => element.id === props.player.element_type)?.singular_name_short}  </Text>
                                         </View>
 
                                         <View style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
-                                            <Text style={styles.text}>Sel. {player.selected_by_percent}%</Text>
+                                            <Text style={styles.text}>Sel. {props.player.selected_by_percent}%</Text>
                                         </View>                                    
                                     </View>
                                 </View>
@@ -185,7 +183,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                             </View>                                        
                                         }>
                                             {isStatsViewShowing && 
-                                                <Image style={{height: '70%', width: '40%', alignSelf:'flex-end'}} source={require('../../../assets/filter.png')} resizeMode='contain'/>
+                                                <Image style={{height: '70%', width: '40%', alignSelf:'flex-end'}} source={require('../../assets/filter.png')} resizeMode='contain'/>
                                             }
                                         </ToolTip>
                                     </View>
@@ -237,10 +235,10 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                             GW {currentGameweek} 
                                         </Text>
                                         
-                                        {statText("Points", player.event_points, 2)}
-                                        {statText("xPoints", player.ep_this, 2)}
-                                        {statText("Transfers In", player.transfers_in_event, 3)}
-                                        {statText("Transfers Out", player.transfers_out_event, 3)}
+                                        {statText("Points", props.player.event_points, 2)}
+                                        {statText("xPoints", props.player.ep_this, 2)}
+                                        {statText("Transfers In", props.player.transfers_in_event, 3)}
+                                        {statText("Transfers Out", props.player.transfers_out_event, 3)}
                                         
                                     </View>
                                 </View> :
@@ -286,7 +284,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                                         { statNames.map((stat) => {
                                                             return (
                                                             <View key={stat} style={styles.tableTextContainer}>
-                                                                <Text  style={[styles.headerText]}>{ player[stat as keyof PlayerOverview] }</Text>
+                                                                <Text  style={[styles.headerText]}>{ props.player[stat as keyof PlayerOverview] }</Text>
                                                             </View>
                                                             )
                                                         })}
@@ -299,7 +297,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                             </View>
 
                             <View style={{flex: 1, paddingTop: 10}}>
-                                <FixtureDifficultyList isFullList={true} overview={props.overview} fixtures={props.fixtures} currentGameweek={currentGameweek} team={player.team}/>
+                                <FixtureDifficultyList isFullList={true} overview={props.overview} fixtures={props.fixtures} currentGameweek={currentGameweek} team={props.player.team}/>
                             </View>
                         </View>
                     }

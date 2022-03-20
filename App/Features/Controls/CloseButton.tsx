@@ -5,13 +5,13 @@ import { Icons } from "../../Global/Images";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 
 interface CloseButtonProps {
-    boolFunction: (value: React.SetStateAction<boolean>) => void;
+    closeFunction: () => void;
 }
 
-const CloseButton = (props: CloseButtonProps) => {
+const CloseButton = ({closeFunction}: CloseButtonProps) => {
 
     return(
-        <Pressable style={styles.closeButton} onPressIn={() => props.boolFunction(false)}>
+        <Pressable style={styles.closeButton} onPressIn={closeFunction}>
             <View style={styles.closeButtonBackground}>
                 <Image style={{height: '50%', width: '50%'}} source={Icons["close"]} resizeMode="contain"/>
             </View>

@@ -40,7 +40,7 @@ const Dropdown = (props: DropdownProps) => {
             <Modal style={{justifyContent: 'center', alignItems: 'center', alignSelf: 'center', flex: 1, zIndex: 1, position: 'absolute'}} transparent={true} visible={showDropdown}>
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => setShowDropdown(false)}/>
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.6, minHeight: GlobalConstants.height * 0.5 }]}>
-                    <CloseButton boolFunction={setShowDropdown}/> 
+                    <CloseButton closeFunction={() => setShowDropdown(!showDropdown)}/> 
                     <Text style={styles.titleText}>Options</Text>
                     <FlatList
                         style={styles.flatList}

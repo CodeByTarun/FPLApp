@@ -90,13 +90,13 @@ const FixturesView = (props: FixturesViewProp) => {
 
     }, [])
 
-    const onPlayerTableButtonPress = useCallback(() => {
+    const onCalendarButtonPress = useCallback(() => {
 
     }, [])
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 2 }}>
+      <View style={{ height: GlobalConstants.height* 0.075, width: '100%' }}>
         {props.overview && 
 
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingLeft: 10, paddingRight: 10}}>
@@ -105,8 +105,8 @@ const FixturesView = (props: FixturesViewProp) => {
               <Text style={{color: GlobalConstants.textPrimaryColor, alignSelf: 'center', fontSize: GlobalConstants.mediumFont, fontWeight: '700'}}>Gameweek {gameweekNumber}</Text>
             </TouchableOpacity>
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
-              <View style={{height: '80%', aspectRatio: 1}}>
-                <CustomButton image="table" buttonFunction={onPlayerTableButtonPress}/>
+              <View style={{height: '70%', aspectRatio: 1}}>
+                <CustomButton image="calendar" buttonFunction={onCalendarButtonPress}/>
               </View>
             </View>
           </View>  
@@ -120,7 +120,7 @@ const FixturesView = (props: FixturesViewProp) => {
         }
       </View>
       { (fixtures.isSuccess == true) &&
-        <View style={{flex: 3.5}}>
+        <View style={{height: GlobalConstants.height* 0.1, width: '100%'}}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }}>
             { (fixtures.data && gameweekData.data && props.overview) &&
 
@@ -137,8 +137,7 @@ const FixturesView = (props: FixturesViewProp) => {
 
 const styles = StyleSheet.create({
     container: {
-      height: GlobalConstants.height * 0.16,
-      width: GlobalConstants.width,
+
     },
 
     gameweekButton: {
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       backgroundColor: GlobalConstants.primaryColor,
       borderRadius: GlobalConstants.cornerRadius,
-      height: '80%',
+      height: '70%',
       justifyContent: 'center',
       alignItems: 'center'
     },
