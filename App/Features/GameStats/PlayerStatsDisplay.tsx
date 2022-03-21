@@ -45,10 +45,9 @@ const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identi
     }
 }
 
-const FixturesText = (player: PlayerData, fixtures: FplFixture[], overview: FplOverview) => {
+const FixturesText = (player: PlayerData, fixtures: FplFixture[], overview: FplOverview, teamInfo: TeamInfo) => {
 
-    var currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
-    var playerFixtures = fixtures.filter(fixture => (fixture.event === currentGameweek) && ((fixture.team_a === player.overviewData.team) || (fixture.team_h === player.overviewData.team)))
+    var playerFixtures = fixtures.filter(fixture => (fixture.event === teamInfo.gameweek) && ((fixture.team_a === player.overviewData.team) || (fixture.team_h === player.overviewData.team)))
 
     return (
         <Text numberOfLines={1} style={[styles.text, {fontWeight: '400', fontSize: GlobalConstants.smallFont}]}>
@@ -94,8 +93,8 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
                     <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont * 1.1, fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
                 </View>
                 {(prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && 
-                    <View style={{padding: 3, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
-                        { FixturesText(prop.player, prop.fixtures, prop.overview)}
+                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
+                        { FixturesText(prop.player, prop.fixtures, prop.overview, prop.teamInfo)}
                     </View>
                 }
                 <View style={styles.scoreContainer}>
@@ -159,11 +158,10 @@ const styles = StyleSheet.create(
 
         //#region Score
         scoreText: {
-            fontSize: GlobalConstants.width*0.03,
-            color: GlobalConstants.textPrimaryColor,
-            paddingLeft: 3,
-            paddingRight: 3,
-           
+            fontSize: GlobalConstants.width*0.028,
+            color: GlobalConstants.textPrimaryColor,   
+            textAlign: 'center',
+            fontWeight: '600', 
         },
 
         scoreContainer: {

@@ -8,6 +8,7 @@ import { FplFixture } from "../Models/FplFixtures";
 import { FplOverview } from "../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
 import { closeModal, ModalTypes } from "../Store/modalSlice";
+import GameweekModal from "./GameweekModal";
 
 interface BaseModalProps {
     overview: FplOverview,
@@ -34,10 +35,10 @@ const BaseModal = ({overview, fixtures} : BaseModalProps) => {
             {(modalInfo.modalType === ModalTypes.DetailedPlayerModal) &&
                 <PlayerDetailedStatsModal overview={overview} fixtures={fixtures} player={modalInfo.player}/>
             }
+            
+            <TeamModal modalInfo={modalInfo}/>
+            <GameweekModal overview={overview} fixtures={fixtures} isVisible={(modalInfo.modalType === ModalTypes.GameweekModal)}/>
 
-            {(modalInfo.modalType === ModalTypes.TeamModal) &&
-                <TeamModal modalInfo={modalInfo}/>
-            }
         </>
     )
 }

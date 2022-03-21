@@ -51,12 +51,16 @@ const LineupContainer = (props: LineupContainerProps) => {
         dispatch(changeToDreamTeam())
     }    
 
+    const onPlayerSearchPress = () => {
+
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.top}>
                 <View style={styles.controlsContainer}>
 
-                    <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5}}>
+                    <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5 }}>
                         <View style={styles.buttonContainer}>
                             <CustomButton image={'dreamteam'} buttonFunction={onDreamTeamPress}/>
                         </View>
@@ -66,7 +70,10 @@ const LineupContainer = (props: LineupContainerProps) => {
                         {TeamSelectorHeader(teamInfo, props.overview, props.fixtures)}
                     </View>
 
-                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end', paddingRight: 5}}>
+                    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', paddingRight: 5 }}>
+                        <View style={[styles.buttonContainer, {height: '60%', marginTop: 4}]}>
+                            <CustomButton image={'playersearch'} buttonFunction={onPlayerSearchPress}/>
+                        </View>
                         <View style={styles.buttonContainer}>
                             <CustomButton image={'team'} buttonFunction={onMyTeamButtonPress}/>
                         </View>
@@ -107,7 +114,7 @@ const styles = StyleSheet.create(
         buttonContainer: {
             height: '70%',
             aspectRatio: 1,
-            margin: 5
+            margin: 3
         },
 
         switchContainer: {

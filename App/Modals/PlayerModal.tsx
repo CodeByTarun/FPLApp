@@ -14,7 +14,7 @@ import * as GlobalConstants from "../Global/GlobalConstants";
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../Helpers/FplAPIHelpers";
 import CloseButton from "../Features/Controls/CloseButton";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
-import { closeModal, ModalTypes } from "../Store/modalSlice";
+import { closeModal, ModalInfo, ModalTypes } from "../Store/modalSlice";
 
 interface PlayerCardProps {
     overview: FplOverview;

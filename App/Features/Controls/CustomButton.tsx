@@ -13,7 +13,7 @@ const CustomButton = ({image, buttonFunction} : ButtonProps) => {
 
 
     return (
-        <TouchableOpacity style={[styles.touchable, globalStyles.shadow]} onPress={buttonFunction}>
+        <TouchableOpacity style={[styles.touchable]} onPress={buttonFunction}>
             <Image style={[styles.icon]} source={Icons[image]} resizeMode='contain'/>
         </TouchableOpacity>
     )
@@ -26,15 +26,13 @@ const styles = StyleSheet.create({
     touchable: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: primaryColor,
-        borderRadius: 1000,
         flex: 1,
         padding: 3,
     }, 
 
     icon: {
-        width: '75%',
-        height: '75%',
+        width: '90%',
+        height: '90%',
         alignSelf: 'center'
     },
 });

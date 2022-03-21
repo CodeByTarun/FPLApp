@@ -211,7 +211,7 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
     }, [])
 
     return (
-        <Modal animationType="fade" transparent={true} visible={true}>
+        <Modal animationType="fade" transparent={true} visible={modalInfo.modalType === ModalTypes.TeamModal}>
             <View style={globalStyles.modalBackground}/>
 
             <View style={[globalStyles.modalView, globalStyles.modalShadow, {height: '50%'}]}>
