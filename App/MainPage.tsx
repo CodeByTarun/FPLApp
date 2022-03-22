@@ -28,7 +28,7 @@ const MainPage = () => {
     <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>
       <SafeAreaView style={styles.safeArea}>
           {(overview.data && fixtures.data) &&
-            <>
+            <View style={{flex: 1}}>
               <View style={{height: '19%', width: '100%', zIndex: 1}}>
                 <FixturesView overview={overview.data}/>
               </View>
@@ -36,7 +36,7 @@ const MainPage = () => {
                 <LineupContainer overview={overview.data} fixtures={fixtures.data}/>
               </View>
               <PlayerSearch overview={overview.data} fixtures={fixtures.data}/>
-            </> 
+            </View>
           }
 
           {(fixtures.isError || overview.isError) && 
