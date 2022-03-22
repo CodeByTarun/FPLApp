@@ -3,11 +3,13 @@
 //TODO: think about adding a compare feature between two players?
 //TODO: also this way might not be the best since you cant filter by most pts, xg, assits, position
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView, FlatList, ListRenderItem } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
+import { goToMainScreen, ScreenTypes } from "../../Store/navigationSlice";
 import PlayerTable from "./PlayerTable";
    
 
@@ -17,7 +19,8 @@ interface PlayerSearchProps {
 }
 
 const PlayerSearch = (props: PlayerSearchProps) => {
-    const [isSelected, setIsSelected] = useState(false)
+    const dispatch = useAppDispatch();
+    const navigation = useAppSelector(state => state.navigation);
     const [playerSearchText, setPlayerSearchText] = useState('')
     const expandAnim = useRef(new Animated.Value(0)).current;
 
@@ -27,12 +30,10 @@ const PlayerSearch = (props: PlayerSearchProps) => {
     })
 
     const OpenPlayerSearch = useCallback(() => {
-        setIsSelected(true);
         Expand();
     }, [])
 
     const ClosePlayerSearch = useCallback(() => {
-        setIsSelected(false);
         setPlayerSearchText('');
         Keyboard.dismiss();
         Minimize();
@@ -54,6 +55,14 @@ const PlayerSearch = (props: PlayerSearchProps) => {
         }).start();
     },[])
 
+    useEffect( function openAndClosePlayerSearch() {
+        if (navigation.screenType === ScreenTypes.PlayerStats) {
+            OpenPlayerSearch();
+        } else {
+            ClosePlayerSearch();
+        }
+    }, [navigation])
+
     return (
         <Animated.View style={[styles.container, { height: heightInterpolate }]}>
             <View style={styles.searchContainer}>
@@ -65,11 +74,10 @@ const PlayerSearch = (props: PlayerSearchProps) => {
                                placeholder="Search player..." 
                                placeholderTextColor={'white'}/>
                 </View>
-                { isSelected &&
-                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginRight: 7}} onPress={ClosePlayerSearch}>
-                        <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>Cancel</Text>
-                    </TouchableOpacity>
-                }
+                
+                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginRight: 7}} onPress={() => dispatch(goToMainScreen())}>
+                    <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>Cancel</Text>
+                </TouchableOpacity>
                 
             </View>
 
@@ -85,7 +93,8 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: GlobalConstants.width,
         backgroundColor: GlobalConstants.primaryColor,
-        display: 'flex'
+        display: 'flex',
+        zIndex: 2,
     },
 
     //#region  search styling

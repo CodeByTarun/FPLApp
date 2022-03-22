@@ -10,12 +10,13 @@ import TeamEmblem from "./TeamEmblem"
 import moment from 'moment-timezone';
 import * as Localization from 'expo-localization'
 import { useGetGameweekDataQuery, useGetOverviewQuery } from '../../Store/fplSlice'
-import { useAppDispatch } from '../../Store/hooks'
+import { useAppDispatch, useAppSelector } from '../../Store/hooks'
 import { changeToFixture } from '../../Store/teamSlice'
 import { GetHighestMinForAPlayer, GetTeamDataFromOverviewWithFixtureTeamID } from '../../Helpers/FplAPIHelpers'
 import { FplGameweek } from '../../Models/FplGameweek'
 import { FplOverview } from '../../Models/FplOverview'
 import globalStyles from '../../Global/GlobalStyles'
+import { goToMainScreen, ScreenTypes } from '../../Store/navigationSlice'
 
 interface FixtureCardProp {
     fixture: FplFixture | undefined;
@@ -41,8 +42,13 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek | undefined)
 const FixtureCard = (prop : FixtureCardProp) => {
 
     const dispatch = useAppDispatch();
+    const navigation = useAppSelector(state => state.navigation);
 
     const onPress = () => {
+
+        if (navigation.screenType === ScreenTypes.Fixtures) {
+            dispatch(goToMainScreen());
+        }
 
         if (prop.fixture) {
             dispatch(changeToFixture(prop.fixture))
@@ -78,8 +84,8 @@ const styles = StyleSheet.create({
 
     //#region main layout
     container: {
-        height: '100%',
-        width: GlobalConstants.width * 0.329,
+        height: GlobalConstants.height * 0.11,
+        width: GlobalConstants.width * 0.3288,
     },
 
     button: {

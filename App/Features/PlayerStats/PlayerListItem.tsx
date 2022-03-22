@@ -61,9 +61,9 @@ export default PlayerListItem;
 const styles = StyleSheet.create({
 
     tableView: {
-        backgroundColor: GlobalConstants.secondaryColor,
+        backgroundColor: GlobalConstants.primaryColor,
         borderBottomWidth: 1,
-        borderBottomColor: GlobalConstants.lightColor,
+        borderBottomColor: GlobalConstants.secondaryColor,
         flexDirection: 'row',
         paddingTop: 10,
         paddingBottom: 10,

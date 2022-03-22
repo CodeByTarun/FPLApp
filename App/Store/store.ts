@@ -1,12 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { fplSlice } from './fplSlice'
-import teamReducer from './teamSlice'
-import modalReducer from './modalSlice'
+import { configureStore } from '@reduxjs/toolkit';
+import { fplSlice } from './fplSlice';
+import teamReducer from './teamSlice';
+import modalReducer from './modalSlice';
+import navigationReducer from './navigationSlice';
 
 export const store = configureStore({
   reducer: {
     team: teamReducer,
     modal: modalReducer,
+    navigation: navigationReducer,
     [fplSlice.reducerPath]: fplSlice.reducer
   },
   middleware: getDefaultMiddleware =>

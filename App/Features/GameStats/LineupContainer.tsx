@@ -12,6 +12,7 @@ import CustomButton from "../Controls/CustomButton";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import { openTeamModal } from "../../Store/modalSlice";
+import { goToPlayerStatsScreen } from "../../Store/navigationSlice";
 
 const TeamSelectorHeader = (teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) => {
 
@@ -44,15 +45,15 @@ const LineupContainer = (props: LineupContainerProps) => {
     const dispatch = useAppDispatch();
 
     const onMyTeamButtonPress = () => {
-        dispatch(openTeamModal())
+        dispatch(openTeamModal());
     }
     
     const onDreamTeamPress = () => {
-        dispatch(changeToDreamTeam())
+        dispatch(changeToDreamTeam());
     }    
 
     const onPlayerSearchPress = () => {
-
+        dispatch(goToPlayerStatsScreen());
     }
 
     return (
@@ -66,7 +67,7 @@ const LineupContainer = (props: LineupContainerProps) => {
                         </View>
                     </View>
 
-                    <View style={{flex: 3, justifyContent: 'center', alignItems: 'center'}}>
+                    <View style={{flex: 3, justifyContent: 'center', alignItems: 'center', padding: 6}}>
                         {TeamSelectorHeader(teamInfo, props.overview, props.fixtures)}
                     </View>
 

@@ -81,7 +81,7 @@ const TeamSwitch = (props: TeamSwitchProps) => {
 const styles = StyleSheet.create(
     {
         container: {
-            margin: 6,
+            
             flex: 1,
             flexDirection: 'row',
             alignItems: 'center',

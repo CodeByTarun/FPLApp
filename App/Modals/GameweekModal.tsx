@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import { View, StyleSheet, Modal, Pressable, ScrollView, Text } from "react-native";
+import { View, StyleSheet, Modal, Pressable, ScrollView, Text, Platform } from "react-native";
 import CloseButton from "../Features/Controls/CloseButton";
 import globalStyles from "../Global/GlobalStyles";
 import { FplFixture } from "../Models/FplFixtures";
@@ -31,11 +31,15 @@ const GameweekModal = ({overview, isVisible} : GameweekModalProps) => {
     useEffect( function scrollToCurrentlySelectedGameweek() {
 
         function scroll() {
-            gameweekScrollViewRef.current?.scrollTo({x: 0, y: (teamInfo.gameweek - 1) * GlobalConstants.height*0.06, animated: false});
+            gameweekScrollViewRef.current?.scrollTo({x: 0, y: (teamInfo.gameweek - 1) * GlobalConstants.height*0.06, animated: true});
         }
 
         if (isVisible === true) {
-            setTimeout(scroll, 50);
+            if (Platform.OS === "ios") {
+                setTimeout(scroll, 50);
+            } else {
+                scroll();
+            }
         }
     }, [isVisible]);
 
