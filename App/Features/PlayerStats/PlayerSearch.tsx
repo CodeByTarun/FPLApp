@@ -24,9 +24,9 @@ const PlayerSearch = (props: PlayerSearchProps) => {
     const [playerSearchText, setPlayerSearchText] = useState('')
     const expandAnim = useRef(new Animated.Value(0)).current;
 
-    const heightInterpolate = expandAnim.interpolate({
+    const bottomInterpolate = expandAnim.interpolate({
         inputRange: [0, 1],
-        outputRange:[(0).toString() + '%', '100%']
+        outputRange:[(GlobalConstants.height * -1) - 100, 0]
     })
 
     const OpenPlayerSearch = useCallback(() => {
@@ -64,7 +64,7 @@ const PlayerSearch = (props: PlayerSearchProps) => {
     }, [navigation])
 
     return (
-        <Animated.View style={[styles.container, { height: heightInterpolate }]}>
+        <Animated.View style={[styles.container, { height: '100%', bottom: bottomInterpolate }]}>
             <View style={styles.searchContainer}>
                 <View style={styles.searchBoxContainer}>
                     <TextInput style={styles.searchbox} 
