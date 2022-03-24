@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from "react";
-import { Modal, Pressable, View, StyleSheet, Image, Text, Switch, FlatList, ScrollView } from "react-native";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
+import { Modal, Pressable, View, StyleSheet, Image, Text, FlatList, ScrollView } from "react-native";
 import globalStyles from "../Global/GlobalStyles";
 import { FplFixture } from "../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
 import { closeModal } from "../Store/modalSlice";
 import * as GlobalConstants from "../Global/GlobalConstants";
-import { Icons } from "../Global/Images";
 import FixtureDifficultyList from "../Features/PlayerStats/FixtureDifficultyList";
 import PieChart from "../Features/Controls/PieChart";
 import ToolTip from "../Features/Controls/ToolTip";
@@ -110,6 +109,26 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
     }, [statsFilterState.gameSpan])
 
+    const renderHistoryItem = useCallback(({item}: {item: History}) => {
+        return (
+            <View style={{flexDirection: 'row', 
+                            alignItems: 'center',  
+                            flex: 1, 
+                            borderBottomColor: GlobalConstants.lightColor, borderBottomWidth: 1,
+                            paddingBottom: 5, paddingTop: 10,
+                            backgroundColor: GlobalConstants.secondaryColor}}>
+                { shortFormStatNames.map((stat) => {
+                    return (
+                        <View key={stat} style={styles.tableTextContainer}>
+                            <Text key={stat} style={[[styles.headerText, {fontWeight: '700'}]]}>{ stat }</Text>
+                        </View>
+                    )})}
+            </View>
+        )
+    }, [])
+
+    const historyItemKeyExtractor = useCallback((history: History) => history.fixture.toString(), []);
+
     return (
         <>
         { (props.player) && 
@@ -131,9 +150,9 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     </View>
                                     <View style={{flexDirection: 'row', paddingTop: 3}}>
                                         <View style={{flexDirection: 'row'}}>
-                                            <Text style={styles.text}>£{(props.player.now_cost / 10).toFixed(1)}  </Text>
                                             <Text style={[styles.text, {fontWeight: 'bold'}]}>{props.overview.teams.find(team => team.code === props.player.team_code)?.short_name}  </Text>
                                             <Text style={styles.text}>{props.overview.element_types.find(element => element.id === props.player.element_type)?.singular_name_short}  </Text>
+                                            <Text style={styles.text}>£{(props.player.now_cost / 10).toFixed(1)}  </Text>
                                         </View>
 
                                         <View style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
@@ -157,13 +176,13 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     
                                     
                                     <View style={{flex: 1}}>
-                                        <ToolTip view={
+                                        <ToolTip distanceFromRight={30} distanceForArrowFromRight={30} view={
                                             <View style={{width: GlobalConstants.width* 0.45, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
                                                 <View style={{flexDirection: 'row', marginTop: 10}}>                                            
                                                     <Text style={[styles.text, {flex: 1}]}>Per 90 Stats?   </Text> 
                                                     <Checkbox value={ statsFilterState.isPer90 } 
-                                                            color={statsFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
-                                                            onValueChange={ () => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })}/>
+                                                              color={statsFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
+                                                              onValueChange={ () => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })}/>
                                                 </View>
                                                 <View style={{marginTop: 20}}>
                                                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -245,23 +264,8 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                 <View style={{flex: 1, paddingBottom: 5, marginBottom: 5, backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5}}>
                                     <ScrollView horizontal={true}>
                                         <FlatList style={{flex: 1}} contentContainerStyle={{justifyContent: 'center'}} data={playerData.data.history}
-                                                ListHeaderComponent={() => {
-                                                    return (
-                                                    <View style={{flexDirection: 'row', 
-                                                                  alignItems: 'center',  
-                                                                  flex: 1, 
-                                                                  borderBottomColor: GlobalConstants.lightColor, borderBottomWidth: 1,
-                                                                  paddingBottom: 5, paddingTop: 10,
-                                                                  backgroundColor: GlobalConstants.secondaryColor}}>
-                                                        { shortFormStatNames.map((stat) => {
-                                                            return (
-                                                                <View key={stat} style={styles.tableTextContainer}>
-                                                                    <Text key={stat} style={[[styles.headerText, {fontWeight: '700'}]]}>{ stat }</Text>
-                                                                </View>
-                                                            )})}
-                                                    </View>
-                                                    )}}
-                                                keyExtractor={item => item.fixture.toString()}
+                                                ListHeaderComponent={renderHistoryItem}
+                                                keyExtractor={historyItemKeyExtractor}
                                                 renderItem={(item) => {
                                                    return (<View style={{flex: 1, flexDirection: 'row', alignItems: 'center', 
                                                                          justifyContent: 'center', paddingBottom: 5, paddingTop: 5,

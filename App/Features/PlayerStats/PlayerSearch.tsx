@@ -4,7 +4,7 @@
 //TODO: also this way might not be the best since you cant filter by most pts, xg, assits, position
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { TextInput, View, StyleSheet, Image, TouchableOpacity, SafeAreaView, Text, Keyboard, Animated, ScrollView, FlatList, ListRenderItem } from "react-native";
+import { TextInput, View, StyleSheet, TouchableOpacity, Text, Keyboard, Animated } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
@@ -66,16 +66,18 @@ const PlayerSearch = (props: PlayerSearchProps) => {
     return (
         <Animated.View style={[styles.container, { height: '100%', bottom: bottomInterpolate }]}>
             <View style={styles.searchContainer}>
-                <View style={styles.searchBoxContainer}>
-                    <TextInput style={styles.searchbox} 
-                               value={playerSearchText}
-                               onChangeText={text => setPlayerSearchText(text)}
-                               onFocus={OpenPlayerSearch} 
-                               placeholder="Search player..." 
-                               placeholderTextColor={'white'}/>
+                <View style={{flex: 9}}>
+                    <View style={styles.searchBoxContainer}>
+                        <TextInput style={styles.searchbox} 
+                                value={playerSearchText}
+                                onChangeText={text => setPlayerSearchText(text)}
+                                onFocus={OpenPlayerSearch} 
+                                placeholder="Search player..." 
+                                placeholderTextColor={'white'}/>
+                    </View>
                 </View>
                 
-                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginRight: 7}} onPress={() => dispatch(goToMainScreen())}>
+                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', flex: 1.5, marginRight: 2.5}} onPress={() => dispatch(goToMainScreen())}>
                     <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>Cancel</Text>
                 </TouchableOpacity>
                 
@@ -100,20 +102,22 @@ const styles = StyleSheet.create({
     //#region  search styling
 
     searchContainer: {
-        height: GlobalConstants.height * 1/13,
+        height: 60,
         flexDirection: 'row',
         marginBottom: 5,
+        alignItems: 'center',
     },
 
     searchBoxContainer: {
-        flex: 1,
-        margin: 7,
-        padding: 7,
         backgroundColor: GlobalConstants.secondaryColor,
         flexDirection: 'row',
         borderRadius: GlobalConstants.cornerRadius,
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 10,
+        marginLeft: 5,
+        marginRight: 2.5,
+        
     },
 
     searchbox: {

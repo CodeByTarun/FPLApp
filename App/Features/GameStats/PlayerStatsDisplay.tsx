@@ -65,6 +65,7 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
 
     return (
         <>
+        {prop.player.gameweekData &&
         <TouchableOpacity style={styles.container} onPress={() => dispatch(openPlayerModal(prop.player))}>
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
             <>
@@ -104,6 +105,7 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
             </>
             }
         </TouchableOpacity>
+}
         </>
     )
 }

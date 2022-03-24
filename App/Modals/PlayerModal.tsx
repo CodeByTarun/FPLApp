@@ -94,7 +94,9 @@ const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) =>
             <Pressable style={globalStyles.modalBackground} onPress={() => dispatch(closeModal())}/>
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
                     <CloseButton closeFunction={() => dispatch(closeModal())}/>
-                    <Text style={{fontSize: GlobalConstants.largeFont, color: GlobalConstants.textPrimaryColor, alignSelf: 'center', paddingTop: 10, fontWeight: '500', textAlign: 'center'}}>
+                    <Text style={{fontSize: GlobalConstants.largeFont, color: GlobalConstants.textPrimaryColor, 
+                                  alignSelf: 'center', paddingTop: 10, fontWeight: '500', 
+                                  textAlign: 'center', paddingBottom: 10}}>
                         {player.overviewData.first_name + " " + player.overviewData.second_name}
                     </Text>
                     <ScrollView style={{ flex: 1 }}>

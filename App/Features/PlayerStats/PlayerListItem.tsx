@@ -8,6 +8,7 @@ import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { useAppDispatch } from "../../Store/hooks";
 import { openPlayerDetailedStatsModal } from "../../Store/modalSlice";
 import FixtureDifficultyList from "./FixtureDifficultyList";
+import PlayerListInfo from "./PlayerListInfo";
 
 interface PlayerListItemProps {
     player: PlayerOverview;
@@ -23,18 +24,8 @@ const PlayerListItem = React.memo((props: PlayerListItemProps) => {
 
     return (
         <Pressable key={props.player.id} style={styles.tableView} onPress={() => dispatch(openPlayerDetailedStatsModal(props.player))}>
-            <View style={{flex: 3, flexDirection: 'row', height: GlobalConstants.height* 0.05}}>
-                <View style={{ flex: 1}}>
-                    <Image style={styles.jersey} source={Jerseys[props.player.team_code]} resizeMode="contain"/>
-                </View>
-                
-                <View style={{flex: 3}}> 
-                    <Text style={styles.tableText}>{props.player.web_name}</Text>
-                    <View style={{flexDirection: 'row', marginTop: 2}}>
-                        <Text style={[styles.tableText, {fontWeight: 'bold'}]}>{props.overview.teams.find(team => team.code === props.player.team_code)?.short_name}  </Text>
-                        <Text style={styles.tableText}>{props.overview.element_types.find(element => element.id === props.player.element_type)?.singular_name_short}</Text>
-                    </View>
-                </View>
+            <View style={{flex: 3, height: GlobalConstants.height* 0.05}}>
+                <PlayerListInfo overview={props.overview} player={props.player}/>
             </View>
 
             <View style={{flex: 3}}>
@@ -77,7 +68,7 @@ const styles = StyleSheet.create({
 
     tableText: {
         color: GlobalConstants.textPrimaryColor,
-        fontSize: GlobalConstants.mediumFont,
+        fontSize: GlobalConstants.mediumFont * 0.95,
     },
 
     jersey: {

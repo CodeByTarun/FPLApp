@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
-import { Modal, Pressable, StyleSheet, View, Text, LayoutChangeEvent, Button } from "react-native";
-import { cornerRadius, secondaryColor, width } from "../../Global/GlobalConstants";
+import { Modal, Pressable, StyleSheet, View, Text, LayoutChangeEvent, Button, TouchableOpacity } from "react-native";
+import { cornerRadius, primaryColor, secondaryColor, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 
 interface dimensions {
@@ -11,14 +11,16 @@ interface dimensions {
 }
 
 interface toolTipProps {
+    distanceFromRight: number,
+    distanceForArrowFromRight: number,
+    distanceFromTop? : number,
     view: JSX.Element;
 }
 
-const ToolTip = (props: React.PropsWithChildren<toolTipProps>) => {
+const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, view, distanceFromTop = 0, children }: React.PropsWithChildren<toolTipProps>) => {
 
-    //const [position, setPosition] = useState([0,0]);
     const [isVisible, setIsVisible] = useState(false);
-    const pressableRef = useRef<View>(null);
+    const pressableRef = useRef<TouchableOpacity>(null);
 
     const [dimensions, setDimensions] = useState({
         x: 0,
@@ -28,25 +30,28 @@ const ToolTip = (props: React.PropsWithChildren<toolTipProps>) => {
     })
 
     const getCoordinates = useCallback((event: LayoutChangeEvent) => {
-        pressableRef.current?.measure((x, y, width, height, pageX, pageY) => setDimensions({x: pageX, y: pageY, width: width, height: height}))
+        pressableRef.current?.measure((x, y, width, height, pageX, pageY) => setDimensions({x: pageX, y: pageY, width: width, height: height}));
     }, [])
 
     return (
-        <Pressable style={{ height: '100%', width: '100%', justifyContent: 'center' }} 
+        <TouchableOpacity style={{ height: '100%', width: '100%', justifyContent: 'center', zIndex: 10 }} 
                    onPress={() => setIsVisible(true)} 
                    onLayout={(event) => getCoordinates(event)}
                    ref={(pressableRef)}>
-            <Modal animationType="fade" transparent={true} visible={isVisible} style={{position: 'absolute'}}>
-                <Pressable style={globalStyles.modalBackground} onPressIn={() => {setIsVisible(false)}}/>
-                <View style={[styles.modalView ,globalStyles.modalShadow, { top: dimensions.y + dimensions.height + 15, right: (width - dimensions.x - dimensions.width - 30) }]}>
-                    <View style={styles.arrow}/>
-                    { props.view }
+            <Modal animationType="fade" transparent={true} visible={isVisible}>
+                <Pressable style={globalStyles.modalBackground} onPressIn={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
+                <View style={[styles.modalView ,
+                              globalStyles.modalShadow, 
+                              { top: dimensions.y + dimensions.height + 15 + distanceFromTop, 
+                                right: (width - dimensions.x - dimensions.width - distanceFromRight) }]}>
+                    <View style={[styles.arrow, {right: distanceForArrowFromRight}]}/>
+                    { view }
                 </View>
             </Modal>
 
-            { props.children }
+            { children }
 
-        </Pressable>
+        </TouchableOpacity>
     )
 
 }
