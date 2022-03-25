@@ -176,7 +176,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     
                                     
                                     <View style={{flex: 1}}>
-                                        <ToolTip distanceFromRight={30} distanceForArrowFromRight={30} view={
+                                        <ToolTip distanceFromRight={-18} distanceForArrowFromRight={18} view={
                                             <View style={{width: GlobalConstants.width* 0.45, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
                                                 <View style={{flexDirection: 'row', marginTop: 10}}>                                            
                                                     <Text style={[styles.text, {flex: 1}]}>Per 90 Stats?   </Text> 
@@ -211,7 +211,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
 
                                 { isStatsViewShowing ?
-                                <View style={{flex: 1, paddingTop: 10, paddingLeft: 5, paddingRight: 5, paddingBottom: 5}}>
+                                <View style={{flex: 1, paddingTop: 10, paddingLeft: 5, paddingRight: 5, paddingBottom: 5, zIndex: -1}}>
                                     <View style={[styles.sectionBorder, {flex: 3, flexDirection: 'row'}]}>
                                         <Text style={styles.sectionHeaderText}>
                                             {statsFilterState.isPer90 ? " Per 90 " : " Totals "}
@@ -300,7 +300,7 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
                             </View>
 
-                            <View style={{flex: 1, paddingTop: 10}}>
+                            <View style={{flex: 1, paddingTop: 10, zIndex: -1}}>
                                 <FixtureDifficultyList isFullList={true} overview={props.overview} fixtures={props.fixtures} currentGameweek={currentGameweek} team={props.player.team}/>
                             </View>
                         </View>

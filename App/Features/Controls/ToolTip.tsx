@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import { Modal, Pressable, StyleSheet, View, Text, LayoutChangeEvent, Button, TouchableOpacity } from "react-native";
-import { cornerRadius, primaryColor, secondaryColor, width } from "../../Global/GlobalConstants";
+import { cornerRadius, height, primaryColor, secondaryColor, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 
 interface dimensions {
@@ -13,11 +13,10 @@ interface dimensions {
 interface toolTipProps {
     distanceFromRight: number,
     distanceForArrowFromRight: number,
-    distanceFromTop? : number,
     view: JSX.Element;
 }
 
-const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, view, distanceFromTop = 0, children }: React.PropsWithChildren<toolTipProps>) => {
+const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, view, children }: React.PropsWithChildren<toolTipProps>) => {
 
     const [isVisible, setIsVisible] = useState(false);
     const pressableRef = useRef<TouchableOpacity>(null);
@@ -34,24 +33,22 @@ const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, view, distanceF
     }, [])
 
     return (
-        <TouchableOpacity style={{ height: '100%', width: '100%', justifyContent: 'center', zIndex: 10 }} 
-                   onPress={() => setIsVisible(true)} 
-                   onLayout={(event) => getCoordinates(event)}
-                   ref={(pressableRef)}>
-            <Modal animationType="fade" transparent={true} visible={isVisible}>
-                <Pressable style={globalStyles.modalBackground} onPressIn={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
-                <View style={[styles.modalView ,
-                              globalStyles.modalShadow, 
-                              { top: dimensions.y + dimensions.height + 15 + distanceFromTop, zIndex: 14,
-                                right: (width - dimensions.x - dimensions.width - distanceFromRight) }]}>
-                    <View style={[styles.arrow, {right: distanceForArrowFromRight}]}/>
-                    { view }
-                </View>
-            </Modal>
-
-            { children }
-
-        </TouchableOpacity>
+        <View style={{flex: 1, overflow: 'visible', zIndex: 100}}>
+            <TouchableOpacity style={{ height: '100%', width: '100%', justifyContent: 'center' }} 
+                            onPress={() => setIsVisible(true)}>
+                { children }
+            </TouchableOpacity>
+            { isVisible && 
+                <>
+                    <Pressable style={styles.modalBackground} onPressIn={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
+                    <View style={[styles.modalView, {right: distanceFromRight}]}>
+                        <View style={[styles.arrow, {right: distanceForArrowFromRight}]}/>
+                        { view }
+                    </View>
+                </>
+            }
+        </View>
+        
     )
 
 }
@@ -61,17 +58,34 @@ export default ToolTip;
 const styles = StyleSheet.create({
 
     modalView: {
+        zIndex: 100,
+        elevation: 100,
         position: 'absolute',
+        top: 50,
         backgroundColor: secondaryColor,
         borderRadius: cornerRadius,
+        
+    },
+
+    modalBackground: {
+        position: 'absolute',
+        height: height * 2,
+        width: width * 2,
+        top: -height,
+        left: -width,
+        opacity: 0.50,
+        zIndex: 100, 
+        elevation: 100, 
+        backgroundColor: 'black'
     },
 
     arrow: {
         position: 'absolute',
-        top: -15,
-        right: 30,
+        top: -14,
+        right: 0,
         height: 1,
         width: 5,
+        zIndex: 100,
         borderLeftWidth:15,
         borderLeftColor:"transparent",
         borderRightWidth:15,

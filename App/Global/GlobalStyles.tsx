@@ -32,12 +32,12 @@ const globalStyles = StyleSheet.create(
        },
 
        modalBackground: {
-        position: 'absolute',
-        height: '100%',
-         width: '100%',
-         top: 0,
-        opacity: 0.50,
-       },
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            top: 0,
+            opacity: 0.50,
+        },
 
        closeButton: {
             position: 'absolute',

@@ -191,7 +191,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                         
                     </View>
                     <View style={{flex: 1.2, height: '55%', alignSelf: 'center', marginBottom: 2}}>
-                            <ToolTip distanceFromRight={20} distanceForArrowFromRight={GlobalConstants.width * 0.75/12.4} distanceFromTop={StatusBarHeight - 10}
+                            <ToolTip distanceFromRight={-18} distanceForArrowFromRight={GlobalConstants.width * 0.75/12.4}
                                     view={
                                         <View style={{width: GlobalConstants.width* 0.60, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
                                             <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
@@ -249,7 +249,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                 </View>
             </View>
 
-            <View style={{ flex: 11 }}>
+            <View style={{ flex: 11, zIndex: -1 }}>
                 <PlayerList overview={overview} fixtures={fixtures} filters={playerTableFilterState}/>
             </View>
             
