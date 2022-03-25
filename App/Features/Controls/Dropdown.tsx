@@ -10,7 +10,7 @@ interface DropdownProps {
     defaultValue: string;
     options: string[];
     value: string | null;
-    setValue: (value: React.SetStateAction<string>) => void;
+    setValue: (value: string) => void;
 }
 
 const Dropdown = (props: DropdownProps) => {

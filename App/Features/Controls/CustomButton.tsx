@@ -7,13 +7,14 @@ import { Icons } from "../../Global/Images";
 interface ButtonProps {
     image: string,
     buttonFunction: () => void,
+    isDisabled?: boolean,
 }
 
-const CustomButton = ({image, buttonFunction} : ButtonProps) => {
+const CustomButton = ({image, buttonFunction, isDisabled = false} : ButtonProps) => {
 
 
     return (
-        <TouchableOpacity style={[styles.touchable]} onPress={buttonFunction}>
+        <TouchableOpacity style={[styles.touchable]} onPress={buttonFunction} disabled={isDisabled}>
             <Image style={[styles.icon]} source={Icons[image]} resizeMode='contain'/>
         </TouchableOpacity>
     )

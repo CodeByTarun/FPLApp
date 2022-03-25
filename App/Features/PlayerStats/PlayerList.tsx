@@ -1,24 +1,153 @@
-import React, { useCallback } from "react";
-import { FlatList } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, Pressable, StyleSheet, View, Text } from "react-native";
+import { OverviewStats } from "../../Global/EnumsAndDicts";
+import { height, mediumFont, primaryColor, secondaryColor, textPrimaryColor } from "../../Global/GlobalConstants";
+import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../Helpers/FplDataStorageService";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
-import PlayerListItem from "./PlayerListItem";
+import { useAppDispatch } from "../../Store/hooks";
+import { openPlayerDetailedStatsModal } from "../../Store/modalSlice";
+import FixtureDifficultyList from "./FixtureDifficultyList";
+import PlayerListInfo from "./PlayerListInfo";
+import { PlayerTableFilterState } from "./PlayerTable";
+
+function getNum(val: number) {
+    if (isNaN(val)) {
+        return 0;
+    }
+    return val;
+}
 
 interface PlayerListProps {
     overview: FplOverview,
     fixtures: FplFixture[],
-    playerList: PlayerOverview[],
-    statFilter: string,
+    filters: PlayerTableFilterState;
 }
 
-const PlayerList = React.memo(({overview, fixtures, playerList, statFilter}: PlayerListProps) => {
-    
-    const renderPlayerItem = useCallback((({item}: {item: PlayerOverview}) => {
-        return(
-            <PlayerListItem overview={overview} fixtures={fixtures} player={item} statFilter={statFilter}/>
-        )}), [statFilter]);
+const Per90Stats = ["Total Points", "Goals Scored", "Assists", 
+                    "Clean Sheets", "Goals Conceded", "Own Goals",
+                    "Yellow Cards", "Red Cards", "Saves", "Bonus",
+                    "Bonus Points Total", "Influence", "Creativity",
+                    "Threat", "ICT Index"];
+
+const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) => {
+
+    const [playerList, setPlayerList] = useState([] as PlayerOverview[]);
+    const [watchlist, setWatchlist] = useState({playerIds: []} as PlayersWatchlist | undefined);
+
+    const dispatch = useAppDispatch();
+    const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
+
+    //#region Player Watchlist
+    useEffect( function initialSetup() {
+        async function getWatchlist() {
+            setWatchlist(await getPlayersWatchlist());
+        }
+        getWatchlist();
+    },[]);
+
+    const addToWatchlist = async(id: number) => {
+        await addPlayerToWatchList(id);
+        setWatchlist(await getPlayersWatchlist());
+    }
+
+    const removeFromWatchlist = async(id: number) => {
+        await removePlayerFromWatchlist(id);
+        setWatchlist(await getPlayersWatchlist());
+    }
+
+    //#endregion
+
+    //#region Filter Effects
+    useEffect(function FilterPlayerList() {   
+        filteringPlayerList(); 
+        
+    }, [filters.teamFilter, filters.positionFilter, filters.statFilter, filters.isPer90, filters.isInWatchlist]);
+
+    useEffect(function debouncedFilterPlayerListPriceRange() {
+        const timer = setTimeout(() => {
+            filteringPlayerList();
+        }, 500)
+        
+        return () => clearTimeout(timer);
+    }, [filters.priceRange, filters.minutesRange]);
+
+    useEffect(function debouncedFilterPlayerListPriceRange() {
+        const timer = setTimeout(() => {
+            filteringPlayerList();
+        }, 300)
+
+        return () => clearTimeout(timer);
+    }, [filters.playerSearchText]);
+
+    //#endregion 
+
+    //#region Filter Functions
+    const filteringPlayerList = () => {
+        setPlayerList(overview.elements.filter(filterPlayers)
+                                       .sort(sortPlayers));
+    }
+
+    const filterPlayers = useCallback((player: PlayerOverview) => {
+
+            return (
+                player.web_name.startsWith(filters.playerSearchText) && 
+                (filters.teamFilter === 'All Teams' || player.team_code === overview.teams.find(team => team.name === filters.teamFilter)?.code) &&
+                (filters.positionFilter === 'All Positions' || player.element_type === overview.element_types.find(element => element.plural_name === filters.positionFilter)?.id) &&
+                (player.now_cost >= filters.priceRange[0] && player.now_cost <= filters.priceRange[1]) &&
+                (getNum(player.minutes) >= filters.minutesRange[0] && getNum(player.minutes) <= filters.minutesRange[1])
+            );
+    }, [filters])
+
+    const sortPlayers = useCallback((playerA: PlayerOverview, playerB: PlayerOverview) => {
+        
+        let stat = Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview;
+        
+        if (filters.isPer90 && Per90Stats.includes(filters.statFilter)) {
+            return (getNum(playerB[stat] as number / playerB.minutes * 90)) - getNum((playerA[stat] as number / playerA.minutes * 90));
+        } else {
+            return (playerB[stat] as number) - (playerA[stat] as number);
+        }
+
+    }, [filters.statFilter, filters.isPer90]);
+
+    //#endregion
+
+    //#region Flatlist Functions
+    const getStatValue = useCallback((player : PlayerOverview) => {
+
+        if (filters.statFilter !== 'Cost') {
+            
+            if (filters.isPer90 && Per90Stats.includes(filters.statFilter)) {
+        
+                return (getNum(player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / player.minutes * 90)).toFixed(2)
+            } else {
+                return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview])
+            }
+        }
+        else {
+            return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
+        }
+    }, [filters.statFilter, filters.isPer90])
+
+    const renderPlayerItem = useCallback((({item}: {item: PlayerOverview}) => (
+        <Pressable key={item.id} style={styles.tableView} onPress={() => dispatch(openPlayerDetailedStatsModal(item))}>
+            <View style={{ flex: 3, height: height * 0.05 }}>
+                <PlayerListInfo overview={overview} player={item} />
+            </View>
+
+            <View style={{ flex: 3 }}>
+                <FixtureDifficultyList team={item.team} isFullList={false} currentGameweek={currentGameweek} fixtures={fixtures} overview={overview} />
+            </View>
+
+            <View style={[styles.tableNumberView, { flex: 1 }]}>
+                <Text style={styles.tableText}>{getStatValue(item)}</Text>
+            </View>
+        </Pressable>
+    )), [filters.statFilter, filters.isPer90]);
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
+    //#endregion
     
     return(
         <FlatList
@@ -26,8 +155,39 @@ const PlayerList = React.memo(({overview, fixtures, playerList, statFilter}: Pla
             renderItem={renderPlayerItem}
             keyExtractor={keyExtractor}
             removeClippedSubviews={true}
-            maxToRenderPerBatch={50}/>
+            initialNumToRender={15}
+            maxToRenderPerBatch={40}/>
     )
 });
 
 export default PlayerList;
+
+const styles = StyleSheet.create({
+
+    tableView: {
+        backgroundColor: primaryColor,
+        borderBottomWidth: 1,
+        borderBottomColor: secondaryColor,
+        flexDirection: 'row',
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+
+    tableNumberView: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    tableText: {
+        color: textPrimaryColor,
+        fontSize: mediumFont * 0.95,
+    },
+
+    jersey: {
+        height: '100%',
+        width: '100%',
+        alignSelf: 'center',
+    },
+
+});

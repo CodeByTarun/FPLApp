@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: GlobalConstants.smallFont*1
+        fontSize: GlobalConstants.smallFont
     }
 
 })

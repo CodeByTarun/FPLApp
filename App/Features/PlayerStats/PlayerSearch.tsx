@@ -21,7 +21,6 @@ interface PlayerSearchProps {
 const PlayerSearch = (props: PlayerSearchProps) => {
     const dispatch = useAppDispatch();
     const navigation = useAppSelector(state => state.navigation);
-    const [playerSearchText, setPlayerSearchText] = useState('')
     const expandAnim = useRef(new Animated.Value(0)).current;
 
     const bottomInterpolate = expandAnim.interpolate({
@@ -34,7 +33,6 @@ const PlayerSearch = (props: PlayerSearchProps) => {
     }, [])
 
     const ClosePlayerSearch = useCallback(() => {
-        setPlayerSearchText('');
         Keyboard.dismiss();
         Minimize();
     }, [])
@@ -42,16 +40,18 @@ const PlayerSearch = (props: PlayerSearchProps) => {
     const Expand = useCallback(() => {
         Animated.spring(expandAnim, {
             toValue: 1,
-            friction: 8,
-            useNativeDriver: false
+            friction: 100,
+            tension: 70,
+            useNativeDriver: false,
         }).start();
     }, [])
     
     const Minimize = useCallback(() => {
         Animated.spring(expandAnim, {
             toValue: 0,
-            friction: 10,
-            useNativeDriver: false
+            friction: 100,
+            tension: 70,
+            useNativeDriver: false,
         }).start();
     },[])
 
@@ -65,25 +65,7 @@ const PlayerSearch = (props: PlayerSearchProps) => {
 
     return (
         <Animated.View style={[styles.container, { height: '100%', bottom: bottomInterpolate }]}>
-            <View style={styles.searchContainer}>
-                <View style={{flex: 9}}>
-                    <View style={styles.searchBoxContainer}>
-                        <TextInput style={styles.searchbox} 
-                                value={playerSearchText}
-                                onChangeText={text => setPlayerSearchText(text)}
-                                onFocus={OpenPlayerSearch} 
-                                placeholder="Search player..." 
-                                placeholderTextColor={'white'}/>
-                    </View>
-                </View>
-                
-                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', flex: 1.5, marginRight: 2.5}} onPress={() => dispatch(goToMainScreen())}>
-                    <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>Cancel</Text>
-                </TouchableOpacity>
-                
-            </View>
-
-            <PlayerTable overview={props.overview} fixtures={props.fixtures} playerSearchText={playerSearchText}/>
+            <PlayerTable overview={props.overview} fixtures={props.fixtures}/>
         </Animated.View>
     )
 }
@@ -98,38 +80,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         zIndex: 2,
     },
-
-    //#region  search styling
-
-    searchContainer: {
-        height: 60,
-        flexDirection: 'row',
-        marginBottom: 5,
-        alignItems: 'center',
-    },
-
-    searchBoxContainer: {
-        backgroundColor: GlobalConstants.secondaryColor,
-        flexDirection: 'row',
-        borderRadius: GlobalConstants.cornerRadius,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 10,
-        marginLeft: 5,
-        marginRight: 2.5,
-        
-    },
-
-    searchbox: {
-        flex: 1,
-        alignSelf: 'center',
-        color: 'white'
-    },
-
-    //#endregion
-
-    
-
 });
 
 export default PlayerSearch;

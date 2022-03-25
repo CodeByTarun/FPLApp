@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+//#region UserTeams
 export default interface UserTeamInfo {
     id: number,
     name: string,
@@ -15,7 +16,6 @@ export async function getAllUserTeamInfo() {
         console.log('error has occured');// error
     }
 }
-
 
 export async function addUserTeamInfo(teamInfo: UserTeamInfo) {
     try {
@@ -95,6 +95,61 @@ async function setUserTeams(allTeamInfo: UserTeamInfo[]) {
         console.log('error has occured');
     }
 }
+
+//#endregion
+
+//#region Player Watchlist
+export interface PlayersWatchlist {
+    playerIds: number[],
+}
+
+export async function setPlayersWatchlist(watchlist: PlayersWatchlist) {
+    try{
+        const jsonValue = JSON.stringify(watchlist);
+        await AsyncStorage.setItem('watchlist', jsonValue);
+    } catch(e) {
+        console.log('error has occured');
+    }
+}
+
+export async function getPlayersWatchlist() { 
+    try {
+        const jsonValue = await AsyncStorage.getItem('watchlist');
+        return jsonValue != null ? JSON.parse(jsonValue) as PlayersWatchlist : {playerIds: []} as PlayersWatchlist;
+    } catch(e) {
+        console.log('error has occured');// error
+    }
+}
+
+export async function addPlayerToWatchList(id: number) {
+    try {
+        let watchlist = await getPlayersWatchlist();
+
+        if (watchlist !== undefined) {
+            watchlist.playerIds.push(id);
+            await setPlayersWatchlist(watchlist);
+        }       
+    } catch (e) {
+        console.log('error has occured');
+    }
+}
+
+export async function removePlayerFromWatchlist(id: number) {
+    try {
+        let watchlist = await getPlayersWatchlist();
+
+        if (watchlist !== undefined) {
+            let newWatchlist: PlayersWatchlist = {
+                playerIds: watchlist?.playerIds.filter(playerId => playerId !== id),
+            }
+            await setPlayersWatchlist(newWatchlist);
+        }
+    } catch (e) {
+        console.log('error has occured');
+    }
+}
+
+//#endregion
 
 export async function clearAsyncStorage() {
     AsyncStorage.clear();
