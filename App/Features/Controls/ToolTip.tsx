@@ -42,7 +42,7 @@ const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, view, distanceF
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
                 <View style={[styles.modalView ,
                               globalStyles.modalShadow, 
-                              { top: dimensions.y + dimensions.height + 15 + distanceFromTop, 
+                              { top: dimensions.y + dimensions.height + 15 + distanceFromTop, zIndex: 14,
                                 right: (width - dimensions.x - dimensions.width - distanceFromRight) }]}>
                     <View style={[styles.arrow, {right: distanceForArrowFromRight}]}/>
                     { view }

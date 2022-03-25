@@ -17,6 +17,7 @@ import PlayerList from "./PlayerList";
 import CustomButton from "../Controls/CustomButton";
 import { useAppDispatch } from "../../Store/hooks";
 import { goToMainScreen } from "../../Store/navigationSlice";
+import { StatusBarHeight } from "../../Global/StatusBarHeight";
 
 export interface PlayerTableFilterState {
     isPer90: boolean,
@@ -146,6 +147,11 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
         playerTableFilterDispatch({type: 'StatFilterChange', filterValue: value})
     }, [])
 
+    const closePlayerSearch = useCallback(() => {
+        dispatch(goToMainScreen());
+        playerTableFilterDispatch({type: 'Reset', range: initialPriceRange})
+    }, [])
+
     return (
         <View style={{flex: 1}}>
             <View style={[{ flex: 2, backgroundColor: GlobalConstants.primaryColor }]}>
@@ -160,7 +166,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                         </View>
                     </View>
                     
-                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', flex: 1.5, marginRight: 2.5}} onPress={() => dispatch(goToMainScreen())}>
+                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', flex: 1.5, marginRight: 2.5}} onPress={closePlayerSearch}>
                         <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>Cancel</Text>
                     </TouchableOpacity>
                     
@@ -185,7 +191,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                         
                     </View>
                     <View style={{flex: 1.2, height: '55%', alignSelf: 'center', marginBottom: 2}}>
-                            <ToolTip distanceFromRight={20} distanceForArrowFromRight={23} distanceFromTop={(GlobalConstants.height + 95 + (Platform.OS === 'android' ? StatusBar.currentHeight! + 10 : 0)) * -1}
+                            <ToolTip distanceFromRight={20} distanceForArrowFromRight={GlobalConstants.width * 0.75/12.4} distanceFromTop={StatusBarHeight - 10}
                                     view={
                                         <View style={{width: GlobalConstants.width* 0.60, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
                                             <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
