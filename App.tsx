@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './App/Store/store'
-import { useGetOverviewQuery } from './App/Store/fplSlice';
 import MainPage from './App/MainPage';
 
 export default function App() {

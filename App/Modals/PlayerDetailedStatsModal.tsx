@@ -15,6 +15,7 @@ import { useGetPlayerSummaryQuery } from "../Store/fplSlice";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { History } from "../Models/FplPlayerSummary";
 import CloseButton from "../Features/Controls/CloseButton";
+import CustomButton from "../Features/Controls/CustomButton";
 
 // If gamespan is null it will do overall stats for all games played
 interface StatsFilterState {
@@ -67,13 +68,13 @@ interface PlayerDetailedStatsModalProps {
 const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
 
     const dispatch = useAppDispatch();
-    const modalInfo = useAppSelector(state => state.modal);
     const playerData = useGetPlayerSummaryQuery(props.player ? props.player.id : skipToken);
     const currentGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
     const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: currentGameweek, isPer90: false });
     const [playerFilteredStats, setPlayerFilteredStats] = useState(initialFilteredStats);
+    const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
 
     useEffect( function ModalClosed() {
         statsFilterDispatch({type: StatsFilterActionKind.Reset, value: currentGameweek });
@@ -176,35 +177,10 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                     
                                     
                                     <View style={{flex: 1}}>
-                                        <ToolTip distanceFromRight={-18} distanceForArrowFromRight={18} view={
-                                            <View style={{width: GlobalConstants.width* 0.45, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
-                                                <View style={{flexDirection: 'row', marginTop: 10}}>                                            
-                                                    <Text style={[styles.text, {flex: 1}]}>Per 90 Stats?   </Text> 
-                                                    <Checkbox value={ statsFilterState.isPer90 } 
-                                                              color={statsFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
-                                                              onValueChange={ () => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })}/>
-                                                </View>
-                                                <View style={{marginTop: 20}}>
-                                                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                                        <Text style={[styles.text, {flex: 1}]}>Game span</Text>
-                                                        <Text style={styles.text}>{ statsFilterState.gameSpan }</Text>
-                                                    </View>
-                                                    
-                                                    <Slider value={ statsFilterState.gameSpan ? statsFilterState.gameSpan : 0 } 
-                                                            onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number })}
-                                                            minimumValue={1}
-                                                            maximumValue={currentGameweek}
-                                                            step={1}
-                                                            thumbTintColor={GlobalConstants.primaryColor}
-                                                            maximumTrackTintColor={'white'}
-                                                            minimumTrackTintColor={GlobalConstants.primaryColor}/>
-                                                </View>
-                                            </View>                                        
-                                        }>
+                                        
                                             {isStatsViewShowing && 
-                                                <Image style={{height: '70%', width: '40%', alignSelf:'flex-end'}} source={require('../../assets/filter.png')} resizeMode='contain'/>
+                                                <CustomButton image={'filter'} buttonFunction={() => setIsFilterModalVisible(true)}/>                            
                                             }
-                                        </ToolTip>
                                     </View>
                                     
                                 </View>
@@ -305,6 +281,33 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                             </View>
                         </View>
                     }
+                    <ToolTip distanceFromRight={GlobalConstants.width* 0.8 * 0.055} distanceForArrowFromRight={18}
+                             distanceFromTop={GlobalConstants.height * 0.6 * 0.30}
+                             isVisible={isFilterModalVisible} 
+                             setIsVisible={setIsFilterModalVisible}
+                        view={<View style={{ width: GlobalConstants.width * 0.45, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <Text style={[styles.text, { flex: 1 }]}>Per 90 Stats?</Text>
+                                <Checkbox value={statsFilterState.isPer90}
+                                    color={statsFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
+                                    onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
+                            </View>
+                            <View style={{ marginTop: 20 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={[styles.text, { flex: 1 }]}>Game span</Text>
+                                    <Text style={styles.text}>{statsFilterState.gameSpan}</Text>
+                                </View>
+
+                                <Slider value={statsFilterState.gameSpan ? statsFilterState.gameSpan : 0}
+                                    onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number })}
+                                    minimumValue={1}
+                                    maximumValue={currentGameweek}
+                                    step={1}
+                                    thumbTintColor={GlobalConstants.primaryColor}
+                                    maximumTrackTintColor={'white'}
+                                    minimumTrackTintColor={GlobalConstants.primaryColor} />
+                            </View>
+                        </View>}/>
                 </View>
             </Modal>
         }

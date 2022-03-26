@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { FlatList, Pressable, StyleSheet, View, Text } from "react-native";
+import { FlatList, Pressable, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { OverviewStats } from "../../Global/EnumsAndDicts";
 import { height, mediumFont, primaryColor, secondaryColor, textPrimaryColor } from "../../Global/GlobalConstants";
 import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../Helpers/FplDataStorageService";
@@ -7,6 +7,7 @@ import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { useAppDispatch } from "../../Store/hooks";
 import { openPlayerDetailedStatsModal } from "../../Store/modalSlice";
+import CustomButton from "../Controls/CustomButton";
 import FixtureDifficultyList from "./FixtureDifficultyList";
 import PlayerListInfo from "./PlayerListInfo";
 import { PlayerTableFilterState } from "./PlayerTable";
@@ -46,13 +47,13 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
         getWatchlist();
     },[]);
 
-    const addToWatchlist = async(id: number) => {
-        await addPlayerToWatchList(id);
+    const addToWatchlist = async(playerId: number) => {
+        await addPlayerToWatchList(playerId);
         setWatchlist(await getPlayersWatchlist());
     }
 
-    const removeFromWatchlist = async(id: number) => {
-        await removePlayerFromWatchlist(id);
+    const removeFromWatchlist = async(playerId: number) => {
+        await removePlayerFromWatchlist(playerId);
         setWatchlist(await getPlayersWatchlist());
     }
 
@@ -62,7 +63,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
     useEffect(function FilterPlayerList() {   
         filteringPlayerList(); 
         
-    }, [filters.teamFilter, filters.positionFilter, filters.statFilter, filters.isPer90, filters.isInWatchlist]);
+    }, [filters.teamFilter, filters.positionFilter, filters.statFilter, filters.isPer90, filters.isInWatchlist, watchlist]);
 
     useEffect(function debouncedFilterPlayerListPriceRange() {
         const timer = setTimeout(() => {
@@ -92,6 +93,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
             return (
                 player.web_name.startsWith(filters.playerSearchText) && 
+                (!filters.isInWatchlist || watchlist?.playerIds.includes(player.id)) &&
                 (filters.teamFilter === 'All Teams' || player.team_code === overview.teams.find(team => team.name === filters.teamFilter)?.code) &&
                 (filters.positionFilter === 'All Positions' || player.element_type === overview.element_types.find(element => element.plural_name === filters.positionFilter)?.id) &&
                 (player.now_cost >= filters.priceRange[0] && player.now_cost <= filters.priceRange[1]) &&
@@ -128,10 +130,17 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
         else {
             return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
         }
-    }, [filters.statFilter, filters.isPer90])
+    }, [filters.statFilter, filters.isPer90]);
 
-    const renderPlayerItem = useCallback((({item}: {item: PlayerOverview}) => (
+    const renderPlayerItem = useCallback((({item}: {item: PlayerOverview}) => {
+
+        let isInWatchList = watchlist?.playerIds.includes(item.id);
+
+        return (
         <Pressable key={item.id} style={styles.tableView} onPress={() => dispatch(openPlayerDetailedStatsModal(item))}>
+            <View style={{flex: 0.60, justifyContent: 'center', opacity: isInWatchList ? 1 : 0.5}}>
+                <CustomButton image={isInWatchList ? "favourite" : "unfavourite"} buttonFunction={isInWatchList ? () => removeFromWatchlist(item.id) : () => addToWatchlist(item.id)}/>
+            </View>
             <View style={{ flex: 3, height: height * 0.05 }}>
                 <PlayerListInfo overview={overview} player={item} />
             </View>
@@ -143,8 +152,8 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
             <View style={[styles.tableNumberView, { flex: 1 }]}>
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
-        </Pressable>
-    )), [filters.statFilter, filters.isPer90]);
+        </Pressable>)
+    }), [filters.statFilter, filters.isPer90, watchlist]);
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion
@@ -171,6 +180,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 10,
         paddingBottom: 10,
+        paddingLeft: 5,
     },
 
     tableNumberView: {

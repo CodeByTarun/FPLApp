@@ -1,8 +1,8 @@
 // Basic table that will show pts, goals, assists, playernames and positions
 // will also have a search function to find players faster
 
-import React, { useCallback, useReducer } from "react";
-import { View, Text, StyleSheet, Image, StatusBar, Platform, TextInput, TouchableOpacity } from "react-native";
+import React, { useCallback, useReducer, useState } from "react";
+import { View, Text, StyleSheet, Image, StatusBar, Platform, TextInput, TouchableOpacity, LayoutChangeEvent } from "react-native";
 import { FplOverview } from "../../Models/FplOverview";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import Dropdown from "../Controls/Dropdown";
@@ -134,6 +134,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
     }
 
     const [playerTableFilterState, playerTableFilterDispatch] = useReducer(playerTableFilterReducer, initialPlayerTableFilterState);   
+    const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
 
     const teamFilterDispatch = useCallback((value: string) => {
         playerTableFilterDispatch({type: 'TeamFilterChange', filterValue: value})
@@ -149,11 +150,16 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
 
     const closePlayerSearch = useCallback(() => {
         dispatch(goToMainScreen());
-        playerTableFilterDispatch({type: 'Reset', range: initialPriceRange})
+    }, [])
+
+    const [viewHeight, setViewHeight] = useState(0);
+
+    const getViewHeight = useCallback((event: LayoutChangeEvent) => {
+        setViewHeight(event.nativeEvent.layout.height);
     }, [])
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, zIndex: -1}} onLayout={event => getViewHeight(event)}>
             <View style={[{ flex: 2, backgroundColor: GlobalConstants.primaryColor }]}>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                     <View style={{flex: 9}}>
@@ -191,57 +197,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                         
                     </View>
                     <View style={{flex: 1.2, height: '55%', alignSelf: 'center', marginBottom: 2}}>
-                            <ToolTip distanceFromRight={-18} distanceForArrowFromRight={GlobalConstants.width * 0.75/12.4}
-                                    view={
-                                        <View style={{width: GlobalConstants.width* 0.60, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
-                                            <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
-                                                <Text style={styles.filterText}>Per 90 (if applicable):</Text>
-                                                <Checkbox value={ playerTableFilterState.isPer90 } 
-                                                        color={true ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
-                                                        onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsPer90'})}/>
-                                            </View>
-                                            <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
-                                                <Text style={styles.filterText}>On Watchlist:</Text>
-                                                <Checkbox value={ playerTableFilterState.isInWatchlist } 
-                                                        color={true ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
-                                                        onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsInWatchlist'})}/>
-                                            </View>
-                                            <View style={{flex: 2, padding: 5}}>
-                                                <Text style={styles.filterText}>Price Range:</Text>
-                                                <View style={{ flexDirection: 'row', paddingTop: 10}}>
-                                                    <Text style={[styles.filterText, {fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[0] / 10}</Text>
-                                                    <Text style={[styles.filterText, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[1] / 10}</Text>
-                                                </View>
-                                                <Slider value={ playerTableFilterState.priceRange } 
-                                                        onValueChange={value => playerTableFilterDispatch({type: 'ChangePriceRange', range: value as number[]})}
-                                                        minimumValue={initialPriceRange[0]}
-                                                        maximumValue={initialPriceRange[1]}
-                                                        step={1}
-                                                        thumbTintColor={GlobalConstants.primaryColor}
-                                                        maximumTrackTintColor={'white'}
-                                                        minimumTrackTintColor={GlobalConstants.primaryColor}/>
-                                            </View>
-                                            <View style={{flex: 2, padding: 5}}>
-                                                <Text style={styles.filterText}>Minutes Per Game Range:</Text>
-                                                <View style={{ flexDirection: 'row', paddingTop: 10}}>
-                                                    <Text style={[styles.filterText, {fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.minutesRange[0]}</Text>
-                                                    <Text style={[styles.filterText, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.minutesRange[1]}</Text>
-                                                </View>
-                                                <Slider value={ playerTableFilterState.minutesRange } 
-                                                        onValueChange={value => playerTableFilterDispatch({type: 'ChangeMinutesRange', range: value as number[]})}
-                                                        minimumValue={0}
-                                                        maximumValue={(90 * 38)}
-                                                        step={1}
-                                                        thumbTintColor={GlobalConstants.primaryColor}
-                                                        maximumTrackTintColor={'white'}
-                                                        minimumTrackTintColor={GlobalConstants.primaryColor}/>
-                                            </View>
-                                        </View>
-                                    }>
-                                <View style={{flex: 1}}>
-                                    <Image style={{height: '100%', aspectRatio: 1, alignSelf:'center'}} source={Icons['filter']} resizeMode='contain'/>
-                                </View>
-                            </ToolTip>
+                        <CustomButton image={'filter'} buttonFunction={() => setIsFilterModalVisible(true)}/>                            
                     </View>
                     <View style={{flex: 1.2, height: '55%', alignSelf: 'center', marginBottom: 2}}>
                         <CustomButton image={"close"} buttonFunction={() => playerTableFilterDispatch({type: 'Reset', range: initialPriceRange})}/>
@@ -252,7 +208,57 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
             <View style={{ flex: 11, zIndex: -1 }}>
                 <PlayerList overview={overview} fixtures={fixtures} filters={playerTableFilterState}/>
             </View>
-            
+            <ToolTip distanceFromRight={GlobalConstants.width * 0.6/12.4} 
+                     distanceForArrowFromRight={GlobalConstants.width * 0.75/12.4}
+                     distanceFromTop={viewHeight*(2/13) + 5}
+                     isVisible={isFilterModalVisible}
+                     setIsVisible={setIsFilterModalVisible}
+                     view={
+                        <View style={{width: GlobalConstants.width* 0.60, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10}}>
+                            <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
+                                <Text style={styles.filterText}>Per 90 (if applicable):</Text>
+                                <Checkbox value={ playerTableFilterState.isPer90 } 
+                                        color={true ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
+                                        onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsPer90'})}/>
+                            </View>
+                            <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
+                                <Text style={styles.filterText}>On Watchlist:</Text>
+                                <Checkbox value={ playerTableFilterState.isInWatchlist } 
+                                        color={true ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
+                                        onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsInWatchlist'})}/>
+                            </View>
+                            <View style={{flex: 2, padding: 5}}>
+                                <Text style={styles.filterText}>Price Range:</Text>
+                                <View style={{ flexDirection: 'row', paddingTop: 10}}>
+                                    <Text style={[styles.filterText, {fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[0] / 10}</Text>
+                                    <Text style={[styles.filterText, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[1] / 10}</Text>
+                                </View>
+                                <Slider value={ playerTableFilterState.priceRange } 
+                                        onValueChange={value => playerTableFilterDispatch({type: 'ChangePriceRange', range: value as number[]})}
+                                        minimumValue={initialPriceRange[0]}
+                                        maximumValue={initialPriceRange[1]}
+                                        step={1}
+                                        thumbTintColor={GlobalConstants.primaryColor}
+                                        maximumTrackTintColor={'white'}
+                                        minimumTrackTintColor={GlobalConstants.primaryColor}/>
+                            </View>
+                            <View style={{flex: 2, padding: 5}}>
+                                <Text style={styles.filterText}>Minutes Per Game Range:</Text>
+                                <View style={{ flexDirection: 'row', paddingTop: 10}}>
+                                    <Text style={[styles.filterText, {fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.minutesRange[0]}</Text>
+                                    <Text style={[styles.filterText, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.minutesRange[1]}</Text>
+                                </View>
+                                <Slider value={ playerTableFilterState.minutesRange } 
+                                        onValueChange={value => playerTableFilterDispatch({type: 'ChangeMinutesRange', range: value as number[]})}
+                                        minimumValue={0}
+                                        maximumValue={(90 * 38)}
+                                        step={1}
+                                        thumbTintColor={GlobalConstants.primaryColor}
+                                        maximumTrackTintColor={'white'}
+                                        minimumTrackTintColor={GlobalConstants.primaryColor}/>
+                            </View>
+                        </View>
+                     }/>
         </View>
 
     )
