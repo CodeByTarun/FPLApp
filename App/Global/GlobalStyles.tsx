@@ -54,21 +54,30 @@ const globalStyles = StyleSheet.create(
             
         },
 
+        baseButton: {
+            borderRadius: 100,
+            backgroundColor: GlobalConstants.secondaryColor,
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 10
+        },
+
         // Make the parent elements overflow: hidden to make this work for only the bottom!
         bottomShadow: {
             shadowColor: 'black',
             shadowOffset: {width: 0, height: 0},
-            shadowRadius: 3,
-            shadowOpacity: 0.2,
+            shadowRadius: 4,
+            shadowOpacity: 0.25,
             elevation: 3,
         },
         
         shadow: {
             shadowColor: 'black',
             shadowOffset: {width: 0, height: 0},
-            shadowRadius: 1.5,
-            shadowOpacity: 0.4,
-            elevation: 2,
+            shadowRadius: 2,
+            shadowOpacity: 0.15,
+            elevation: 1,
         },
     }
 )

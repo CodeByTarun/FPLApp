@@ -77,4 +77,5 @@ export const Emblems: { [key: number]: ImageURISource} =
         "filter" : require('../../assets/icons/filter.png'),
         "out" : require('../../assets/icons/out.png'),
         "doubtful" : require('../../assets/icons/doubtful.png'),
+        "search" : require('../../assets/icons/search.png'),
     }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { cornerRadius, height, secondaryColor, width } from "../../Global/GlobalConstants";
+import globalStyles from "../../Global/GlobalStyles";
 
 interface dimensions {
     x: number;

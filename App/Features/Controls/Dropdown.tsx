@@ -8,6 +8,7 @@ import CloseButton from "./CloseButton";
 
 interface DropdownProps {
     defaultValue: string;
+    headerText: string;
     options: string[];
     value: string | null;
     setValue: (value: string) => void;
@@ -31,12 +32,18 @@ const Dropdown = (props: DropdownProps) => {
     }, [])
 
     return (
-        <View style={{flex: 1, flexDirection: 'row'}}>
-            <Pressable style={styles.container} 
+        <View style={{flex: 1, flexDirection: 'column', alignItems:'center', justifyContent:'center'}}>
+            
+            <Text style={styles.headerText}>{props.headerText}</Text>
+            <Pressable style={[styles.container]} 
                        onPress={() => setShowDropdown(!showDropdown)}
                        hitSlop={5}>
-                <Text style={styles.selectedValueText}>{props.value}</Text>
+                <Text numberOfLines={1} style={styles.selectedValueText}>{props.value}  </Text>
+                <Text style={{color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.mediumFont * 0.6,
+                              fontWeight: '700', marginTop: 0, transform: [{rotate: '-45deg'}], 
+                              alignSelf: 'center', marginBottom: 6}}>◣</Text>
             </Pressable>
+
             <Modal style={{justifyContent: 'center', alignItems: 'center', alignSelf: 'center', flex: 1, zIndex: 1, position: 'absolute'}} transparent={true} visible={showDropdown}>
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => setShowDropdown(false)}/>
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.6, minHeight: GlobalConstants.height * 0.5 }]}>
@@ -64,20 +71,25 @@ const Dropdown = (props: DropdownProps) => {
 const styles = StyleSheet.create({
     container: {
          flex: 1, 
-         margin: 5,
-         height: '100%',
+         flexDirection: 'row',
+         width: '100%',
          alignSelf: 'center',
-         paddingLeft: 7,
-         justifyContent: 'center',
-         backgroundColor: GlobalConstants.secondaryColor,
-         borderRadius: GlobalConstants.cornerRadius,
-         zIndex: 0.5
+         zIndex: 0.5,
+    },
+
+    headerText: {
+        alignSelf: 'flex-start', 
+        color: GlobalConstants.textSecondaryColor, 
+        fontSize: GlobalConstants.mediumFont * 0.8,
+        paddingLeft: 2,
     },
 
     selectedValueText: {
         color: GlobalConstants.textPrimaryColor,
-        fontSize: GlobalConstants.mediumFont,
         zIndex: 0.5,
+        marginRight: 5,
+        alignSelf: 'center',
+        maxWidth: '80%'
     },
 
     titleText: {

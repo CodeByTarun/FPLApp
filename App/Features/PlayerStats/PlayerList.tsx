@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { OverviewStats } from "../../Global/EnumsAndDicts";
-import { height, mediumFont, primaryColor, secondaryColor, textPrimaryColor } from "../../Global/GlobalConstants";
+import { height, mediumFont, Per90Stats, primaryColor, secondaryColor, textPrimaryColor } from "../../Global/GlobalConstants";
 import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../Helpers/FplDataStorageService";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
@@ -24,12 +24,6 @@ interface PlayerListProps {
     fixtures: FplFixture[],
     filters: PlayerTableFilterState;
 }
-
-const Per90Stats = ["Total Points", "Goals Scored", "Assists", 
-                    "Clean Sheets", "Goals Conceded", "Own Goals",
-                    "Yellow Cards", "Red Cards", "Saves", "Bonus",
-                    "Bonus Points Total", "Influence", "Creativity",
-                    "Threat", "ICT Index"];
 
 const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) => {
 

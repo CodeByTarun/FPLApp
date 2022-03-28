@@ -23,9 +23,10 @@ const FixtureDifficultyList = React.memo((props: FixtureDifficultyListProps) => 
 
     const renderItem = useCallback(({item}: {item: FplFixture}) => {
         return (
-            <View style={[styles.container, { backgroundColor: DifficultyColors[item.team_a === props.team ? item.team_a_difficulty : item.team_h_difficulty] }]}>
+            <View style={[styles.container]}>
                 <Text style={[styles.text, {fontWeight: 'bold'}]}>GW {item.event}</Text>
                 <Text style={styles.text}>{item.team_a === props.team ? props.overview.teams.find(team => team.id === item.team_h)?.short_name + '(A)' : props.overview.teams.find(team => team.id === item.team_a)?.short_name + '(H)'}</Text>
+                <View style={{position: 'absolute', height: '100%', width: '115%', borderBottomColor: DifficultyColors[item.team_a === props.team ? item.team_a_difficulty : item.team_h_difficulty], borderBottomWidth: 2, bottom: 0}}/>
             </View>
         )}, []);
 
@@ -50,7 +51,9 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: GlobalConstants.smallFont
+        fontSize: GlobalConstants.smallFont,
+        color: GlobalConstants.textPrimaryColor,
+        textAlign: 'center', 
     }
 
 })

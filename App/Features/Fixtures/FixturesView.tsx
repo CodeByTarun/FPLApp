@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { useGetFixturesQuery, useGetGameweekDataQuery, useGetOverviewQuery, } from '../../Store/fplSlice'
 import * as GlobalConstants from '../../Global/GlobalConstants'
 import { FplOverview } from "../../Models/FplOverview";
-import RNPickerSelect from 'react-native-picker-select';
 import { FplFixture } from "../../Models/FplFixtures";
 import { changeGameweek, changeToFixture, changingFixtureWhenGameweekChanged, removeFixture } from "../../Store/teamSlice";
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";

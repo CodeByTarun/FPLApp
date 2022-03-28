@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Image, View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
-import { Jerseys, StatImages } from "../../Global/Images";
+import { Icons, Jerseys, StatImages } from "../../Global/Images";
 import { GetFixtureStats, GetPointTotal } from "../../Helpers/FplAPIHelpers";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
@@ -69,7 +69,6 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
         <TouchableOpacity style={styles.container} onPress={() => dispatch(openPlayerModal(prop.player))}>
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
             <>
-            
             <View style={{flex:3, justifyContent: 'center', alignItems: 'center', width: '100%'}}>
                 <Image style={{alignSelf: 'center', height: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '85%' : '75%'}} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/>
 
@@ -82,6 +81,20 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
                         { StatView(prop.player, prop.teamInfo, Identifier.YellowCards) }
                         { StatView(prop.player, prop.teamInfo, Identifier.RedCards) }
                     </View> 
+                    {(prop.player.gameweekData.stats.in_dreamteam && prop.teamInfo.teamType !== TeamTypes.Dream) &&
+                        <View style={styles.dreamTeamContainer}>
+                            <Image style={styles.dreamTeamImage} source={Icons['dreamteam']} resizeMode="contain"/>
+                        </View>
+                    }
+                    {((prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && prop.player.overviewData.status !== 'a') &&
+                    <View style={styles.injuredContainer}>
+                        <Image style={styles.injuredImage} resizeMode="contain"
+                               source={(prop.player.overviewData.status === 'd') ? Icons['doubtful'] : Icons['out']}/>
+                    </View>
+                    }
+                    { ((prop.teamInfo.teamType === TeamTypes.Budget))
+
+                    }
                 </View> 
             </View>
 
@@ -92,6 +105,9 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
                           width: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '130%' : '95%'}}>
                 <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.primaryColor}}>
                     <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont * 1.1, fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
+                </View>
+                <View style={styles.captainAndViceCaptainContainer}>
+                    <Text style={{alignSelf: 'center'}}>C</Text>
                 </View>
                 {(prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && 
                     <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
@@ -143,6 +159,32 @@ const styles = StyleSheet.create(
 
         },
 
+        dreamTeamContainer: {
+            flexDirection: 'row',
+            position: "absolute",
+            left: -2,
+            bottom: 0,
+        },
+
+        injuredContainer: {
+            flexDirection: 'row',
+            position: "absolute",
+            right: 5,
+            bottom: -7,
+        },
+
+        captainAndViceCaptainContainer: {
+            position: 'absolute',
+            height: '50%',
+            aspectRatio: 1,
+            top: 0,
+            left: 0,
+            alignContent: 'center',
+            justifyContent: 'center',
+            backgroundColor: GlobalConstants.secondaryColor,
+            borderRadius: 100
+        },
+
         statsImage: {
             height: GlobalConstants.width/26,
             width: GlobalConstants.width/26,
@@ -156,6 +198,21 @@ const styles = StyleSheet.create(
             marginTop: -1,
             transform: [{ rotate: "337deg" }]
         },
+
+        dreamTeamImage: {
+            height: GlobalConstants.width/20,
+            width: GlobalConstants.width/20,
+            marginRight: 0,
+        },
+
+        injuredImage: {
+            height: GlobalConstants.width/16,
+            width: GlobalConstants.width/16,
+        }, 
+
+        captainAndViceCaptainText: {
+            color: GlobalConstants.textPrimaryColor,
+        },
         //#endregion
 
         //#region Score
@@ -168,15 +225,18 @@ const styles = StyleSheet.create(
 
         scoreContainer: {
             position: 'absolute',
-            top: -GlobalConstants.width/20,
+            top: GlobalConstants.width/19,
             right: 0,
             height: GlobalConstants.width/20,
             aspectRatio: 1,
             backgroundColor: GlobalConstants.secondaryColor,
             color: GlobalConstants.textSecondaryColor,
+            borderRadius: 100,
             alignItems: 'center',
             justifyContent: 'center',
         },
+
+        
         //#endregion
     }
 );

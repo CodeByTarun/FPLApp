@@ -16,6 +16,7 @@ import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { History } from "../Models/FplPlayerSummary";
 import CloseButton from "../Features/Controls/CloseButton";
 import CustomButton from "../Features/Controls/CustomButton";
+import { Icons } from "../Global/Images";
 
 // If gamespan is null it will do overall stats for all games played
 interface StatsFilterState {
@@ -135,7 +136,8 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
         { (props.player) && 
             <Modal animationType="fade" transparent={true} visible={props.player ? true : false} style={{position: 'absolute'}}>
                 <Pressable style={globalStyles.modalBackground} onPressIn={() => dispatch(closeModal())}/>       
-                <View style={[globalStyles.modalView, globalStyles.modalShadow, { height: GlobalConstants.height * 0.6, width: GlobalConstants.width* 0.8, padding: 15 }]}>
+                <View style={[globalStyles.modalView, globalStyles.modalShadow, { height: GlobalConstants.height * 0.6 + ((props.player.status !== 'a') ? 40 : 0), 
+                                                                                  width: GlobalConstants.width* 0.8, padding: 15 }]}>
                     <CloseButton closeFunction={() => dispatch(closeModal())}/> 
                     { playerData.isSuccess && 
                         <View style={{flex: 1}}>
@@ -160,6 +162,16 @@ const PlayerDetailedStatsModal = (props: PlayerDetailedStatsModalProps) => {
                                             <Text style={styles.text}>Sel. {props.player.selected_by_percent}%</Text>
                                         </View>                                    
                                     </View>
+                                    { (props.player.status !== 'a') && 
+                                        <View style={{ flexDirection: 'row', height: 30, marginTop: 10, backgroundColor: GlobalConstants.secondaryColor}}>
+                                            <View style={{height: '90%', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', marginLeft: 3, marginRight: 3}}>
+                                                <Image style={{height: '100%', width: '100%', alignSelf: 'center', marginBottom: -2}} source={(props.player.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
+                                            </View>
+                                            <View style={{flex: 1, justifyContent: 'center'}}> 
+                                                <Text style={[styles.text, { flexWrap: 'wrap'}]}>{props.player.news}</Text>
+                                            </View>
+                                        </View>
+                                    }
                                 </View>
 
                                 <View style={styles.controlsContainer}>
@@ -395,7 +407,7 @@ const styles = StyleSheet.create({
     text: {
         color: GlobalConstants.textPrimaryColor,
         fontSize: GlobalConstants.mediumFont * 0.9,
-        fontWeight: '500'
+        fontWeight: '500',
     },
 
     tableTextContainer: {

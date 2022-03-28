@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Image, StyleSheet, Text } from "react-native";
-import { Jerseys } from "../../Global/Images";
+import { Icons, Jerseys } from "../../Global/Images";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 
@@ -13,7 +13,14 @@ const PlayerListInfo = React.memo(({overview, player} : PlayerListInfoProps) => 
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{ flex: 1}}>
-                <Image style={styles.jersey} source={Jerseys[player.team_code]} resizeMode="contain"/>
+                <Image style={styles.image} source={Jerseys[player.team_code]} resizeMode="contain"/>
+
+                { (player.status !== 'a') && 
+                    <View style={{ position: 'absolute', bottom: -6, right: -2, height: '60%', width: '60%'}}>
+                        <Image style={styles.image} source={(player.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
+                    </View>
+                }
+
             </View>
             
             <View style={{flex: 3, justifyContent: 'center'}}> 
@@ -36,7 +43,7 @@ const styles = StyleSheet.create({
         fontSize: GlobalConstants.mediumFont * 0.95,
     },
 
-    jersey: {
+    image: {
         height: '100%',
         width: '100%',
         alignSelf: 'center',
