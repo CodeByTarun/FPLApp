@@ -177,7 +177,7 @@ const Lineup = () => {
                     :
                     ((teamInfo.teamType === TeamTypes.Budget && budgetGameweek.data) || (teamInfo.teamType === TeamTypes.Draft && draftGameweek.data && draftOverview.data)) &&
                         <>
-                            <View style={{position: 'absolute', height: '25%', width: '37%', right: 0}}>
+                            <View style={{position: 'absolute', height: '25%', aspectRatio: 1, right: 0}}>
                                 {(teamInfo.teamType === TeamTypes.Budget) ? 
                                     <ManagerInfoCard teamInfo={teamInfo} budgetGameweek={budgetGameweek.data}/> :
                                     <ManagerInfoCard teamInfo={teamInfo}/> 

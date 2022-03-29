@@ -12,6 +12,17 @@ interface ManagerInfoCardProps {
     budgetGameweek? : FplManagerGameweekPicks,
 }
 
+const statSection = (title: string, value: string | number) => {
+    return (
+        <View style={styles.column}>
+            <Text style={styles.text}>{title}</Text>
+            <View style={{flex: 1}}>
+                <Text style={styles.text}>{value}</Text>
+            </View>
+        </View>
+    )
+}
+
 const ManagerInfoCard = (props: ManagerInfoCardProps) => {
 
     const draftUserInfo = useGetDraftUserInfoQuery((props.teamInfo.teamType === TeamTypes.Draft) ? props.teamInfo.info.id : skipToken );
@@ -19,11 +30,22 @@ const ManagerInfoCard = (props: ManagerInfoCardProps) => {
 
     return (
         <View style={[styles.container, globalStyles.shadow]}>
-
-            <Text style={styles.text}>Gameweek Points:</Text>
-            <Text style={styles.text}>Overall Points:</Text>
-            <Text style={styles.text}>Transaction Total:</Text>
-
+            <View style={styles.row}>
+                <Text style={styles.titleText}>Gameweek</Text>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    {statSection("PTS", 24)}
+                    {statSection("Rank", 283746354)}
+                    {statSection("TXN", 24)}
+                </View>
+            </View>
+            <View style={styles.row}>
+                <Text style={styles.titleText}>Overall</Text>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    {statSection("PTS", 24)}
+                    {statSection("Rank", 283746354)}
+                    {statSection("TXN", 24)}
+                </View>
+            </View>
         </View>
     )
 }
@@ -38,10 +60,32 @@ const styles = StyleSheet.create({
         borderRadius: cornerRadius,
         backgroundColor: primaryColor,
     },
+
+    titleText: {
+        fontSize: mediumFont * 0.9,
+        color: textPrimaryColor,
+        fontWeight: '600'
+    },
     
     text: {
-        fontSize: mediumFont * 0.8,
+        fontSize: mediumFont * 0.6,
         color: textPrimaryColor
     },
+
+    row: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    column: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 3,
+        paddingBottom: 3,
+    },
+
+
 });
 
