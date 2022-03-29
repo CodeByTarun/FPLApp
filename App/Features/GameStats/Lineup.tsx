@@ -16,10 +16,10 @@ import { BudgetInfo, DraftInfo, FixtureInfo, TeamInfo, TeamTypes } from "../../S
 import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
 import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
 import { FplDraftOverview } from "../../Models/FplDraftOverview";
-import globalStyles from "../../Global/GlobalStyles";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Jerseys } from "../../Global/Images";
 import { FplFixture } from "../../Models/FplFixtures";
+import ManagerInfoCard from "./ManagerInfoCard";
 
 
 function CreatePlayerStatsView(gameweek: FplGameweek, overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, draftOverview?: FplDraftOverview, 
@@ -176,9 +176,17 @@ const Lineup = () => {
                         </View>
                     :
                     ((teamInfo.teamType === TeamTypes.Budget && budgetGameweek.data) || (teamInfo.teamType === TeamTypes.Draft && draftGameweek.data && draftOverview.data)) &&
-                        <View style={styles.playerContainer}>
-                            {CreatePlayerStatsView(gameweek.data, overview.data, fixtures.data, teamInfo, draftOverview.data, draftGameweek.data, budgetGameweek.data)}
-                        </View>
+                        <>
+                            <View style={{position: 'absolute', height: '25%', width: '37%', right: 0}}>
+                                {(teamInfo.teamType === TeamTypes.Budget) ? 
+                                    <ManagerInfoCard teamInfo={teamInfo} budgetGameweek={budgetGameweek.data}/> :
+                                    <ManagerInfoCard teamInfo={teamInfo}/> 
+                                }
+                            </View>
+                            <View style={styles.playerContainer}>
+                                {CreatePlayerStatsView(gameweek.data, overview.data, fixtures.data, teamInfo, draftOverview.data, draftGameweek.data, budgetGameweek.data)}
+                            </View>
+                        </>
                     }
                     </>
             </View>

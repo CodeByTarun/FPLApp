@@ -80,6 +80,8 @@ function GetDraftOrBudgetPlayerData(gameweekData: FplGameweek, overviewData: Fpl
                     {
                         gameweekData: gameweekData.elements.find(player => player.id === pick.element),
                         overviewData: overviewData.elements.find(player => player.id === pick.element),
+                        isCaptain: pick.is_captain,
+                        isViceCaptain: pick.is_vice_captain,
                     } as PlayerData)
                 })
             

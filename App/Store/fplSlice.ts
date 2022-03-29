@@ -6,6 +6,7 @@ import { FplDraftUserInfo } from '../Models/FplDraftUserInfo';
 import { FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from '../Models/FplGameweek';
 import { FplManagerGameweekPicks } from '../Models/FplManagerGameweekPicks';
+import { FplManagerInfo } from '../Models/FplManagerInfo';
 import { FplOverview } from '../Models/FplOverview';
 import { FplPlayerSummary } from '../Models/FplPlayerSummary';
 
@@ -55,9 +56,14 @@ export const fplSlice = createApi({
 
     getBudgetGameweekPicks: builder.query<FplManagerGameweekPicks, { entryId: number, gameweek: number }>({
       query: ({entryId, gameweek}) => `https://fantasy.premierleague.com/api/entry/${entryId}/event/${gameweek}/picks/`
-    })
+    }),
+
+    getBudgetUserInfo: builder.query<FplManagerInfo, number>({
+      query: (entryId: number) => `https://fantasy.premierleague.com/api/entry/${entryId}/`
+    }),
   })
 })
 
 export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetDraftUserInfoQuery, useGetPlayerSummaryQuery,
-               useGetDraftOverviewQuery, useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetBudgetGameweekPicksQuery } = fplSlice
+               useGetDraftOverviewQuery, useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, 
+               useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery } = fplSlice

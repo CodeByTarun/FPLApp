@@ -11,6 +11,7 @@ import { Identifier } from "../../Models/FplGameweek";
 import PlayerCard from "../../Modals/PlayerModal";
 import { FplFixture } from "../../Models/FplFixtures";
 import { openPlayerModal } from "../../Store/modalSlice";
+import { typeParameterInstantiation } from "@babel/traverse/node_modules/@babel/types";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
@@ -45,18 +46,43 @@ const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identi
     }
 }
 
-const FixturesText = (player: PlayerData, fixtures: FplFixture[], overview: FplOverview, teamInfo: TeamInfo) => {
+const ScoreAndFixtureText = (player: PlayerData, fixtures: FplFixture[], overview: FplOverview, teamInfo: TeamInfo) => {
+
+    if ((teamInfo.teamType !== TeamTypes.Budget && teamInfo.teamType !== TeamTypes.Draft)) {
+        return <Text style={styles.text}>{GetPointTotal(player, teamInfo)}</Text>
+    }
 
     var playerFixtures = fixtures.filter(fixture => (fixture.event === teamInfo.gameweek) && ((fixture.team_a === player.overviewData.team) || (fixture.team_h === player.overviewData.team)))
 
-    return (
-        <Text numberOfLines={1} style={[styles.text, {fontWeight: '400', fontSize: GlobalConstants.smallFont}]}>
-            { (playerFixtures.length > 0) ? playerFixtures.map(fixture => (fixture.team_a === player.overviewData.team) ? (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)'
-                                                                                          : (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)')
-                            .join(', ') : "-" }
-        </Text>
-    )
+    if (playerFixtures.length === 0) {
+        return <Text style={styles.text}>-</Text>
+    } 
+    else if (!playerFixtures.some(fixture => (fixture.started === false))) {
+        return <Text style={styles.text}>{GetPointTotal(player, teamInfo)}</Text>
+    }
+    else if (playerFixtures.some(fixture => (fixture.started === true))) {
+        if (playerFixtures.length === 1) {
+            return <Text style={styles.text}>{GetPointTotal(player, teamInfo)}</Text>
+        }
+        else {
+            let scoreText = GetPointTotal(player, teamInfo).toString();
+            let fixtureText = playerFixtures.map(fixture => (fixture.started === false) ?  
+                                                                ((fixture.team_a === player.overviewData.team) ? 
+                                                                    "," + (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)' :
+                                                                    "," + (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)') : '')
 
+            return <Text style={styles.text}>{scoreText + fixtureText}</Text>
+        }
+    }
+    else {
+        return (
+            <Text numberOfLines={1} style={styles.text}>
+                { playerFixtures.map(fixture => ((fixture.team_a === player.overviewData.team) ? (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)'
+                                                                                              : (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)'))
+                                .join(', ')}
+            </Text>
+        )
+    }  
 }
 
 const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
@@ -70,7 +96,7 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
             { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
             <>
             <View style={{flex:3, justifyContent: 'center', alignItems: 'center', width: '100%'}}>
-                <Image style={{alignSelf: 'center', height: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '85%' : '75%'}} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/>
+                <Image style={{alignSelf: 'center', height: '85%'}} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/>
 
                 <View style={{alignItems: 'flex-start', justifyContent: 'flex-start', width: '90%', height: '90%', position: 'absolute'}}>
                     { StatView(prop.player, prop.teamInfo, Identifier.GoalsScored) }
@@ -92,30 +118,24 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
                                source={(prop.player.overviewData.status === 'd') ? Icons['doubtful'] : Icons['out']}/>
                     </View>
                     }
-                    { ((prop.teamInfo.teamType === TeamTypes.Budget))
-
+                    { ((prop.teamInfo.teamType === TeamTypes.Budget) && (prop.player.isCaptain || prop.player.isViceCaptain)) &&
+                    <View style={styles.captainAndViceCaptainContainer}>
+                        <Text style={styles.captainAndViceCaptainText}>{prop.player.isCaptain ? "C" : "V"}</Text>
+                    </View>
                     }
                 </View> 
             </View>
 
-            <View style={{flex: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? 1.5 : 0.75, 
+            <View style={{flex: 1.5, 
                           justifyContent: 'center', 
                           alignItems: 'center',
                           paddingBottom: 1, 
                           width: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '130%' : '95%'}}>
                 <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.primaryColor}}>
-                    <Text numberOfLines={1} style={[styles.text, {fontSize: GlobalConstants.smallFont * 1.1, fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
+                    <Text numberOfLines={1} style={[styles.text, {fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
                 </View>
-                <View style={styles.captainAndViceCaptainContainer}>
-                    <Text style={{alignSelf: 'center'}}>C</Text>
-                </View>
-                {(prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && 
-                    <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
-                        { FixturesText(prop.player, prop.fixtures, prop.overview, prop.teamInfo)}
-                    </View>
-                }
-                <View style={styles.scoreContainer}>
-                    <Text style={styles.scoreText}>{GetPointTotal(prop.player, prop.teamInfo)}</Text>
+                <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
+                    { ScoreAndFixtureText(prop.player, prop.fixtures, prop.overview, prop.teamInfo)}
                 </View>
             </View>
             </>
@@ -137,7 +157,8 @@ const styles = StyleSheet.create(
 
         text: {
             flex: 1, 
-            fontSize: GlobalConstants.smallFont, 
+            fontSize: GlobalConstants.smallFont* 1.1,
+            fontWeight: '700', 
             alignSelf: 'center', 
             textAlign:'center',
             color: GlobalConstants.textPrimaryColor,
@@ -164,6 +185,7 @@ const styles = StyleSheet.create(
             position: "absolute",
             left: -2,
             bottom: 0,
+            zIndex: 1,
         },
 
         injuredContainer: {
@@ -175,27 +197,27 @@ const styles = StyleSheet.create(
 
         captainAndViceCaptainContainer: {
             position: 'absolute',
-            height: '50%',
+            height: '30%',
             aspectRatio: 1,
-            top: 0,
-            left: 0,
+            bottom: 0,
+            right: -10,
             alignContent: 'center',
             justifyContent: 'center',
-            backgroundColor: GlobalConstants.secondaryColor,
+            backgroundColor: GlobalConstants.primaryColor,
             borderRadius: 100
         },
 
         statsImage: {
-            height: GlobalConstants.width/26,
+            aspectRatio: 1,
             width: GlobalConstants.width/26,
             marginRight: -8,
         },
 
         cardImage: {
-            height: GlobalConstants.width/20,
-            width: GlobalConstants.width/20,
-            marginRight: -13,
-            marginTop: -1,
+            aspectRatio: 1,
+            width: GlobalConstants.width/24,
+            marginRight: -10,
+            marginTop: 0,
             transform: [{ rotate: "337deg" }]
         },
 
@@ -212,6 +234,10 @@ const styles = StyleSheet.create(
 
         captainAndViceCaptainText: {
             color: GlobalConstants.textPrimaryColor,
+            alignSelf: 'center',
+            fontSize: GlobalConstants.smallFont * 1.3,
+            fontWeight: '800',
+            textAlign: 'center'
         },
         //#endregion
 

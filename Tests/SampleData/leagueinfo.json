@@ -1,0 +1,152 @@
+{
+    "league": {
+        "admin_entry": 1843,
+        "closed": true,
+        "draft_dt": "2021-08-09T23:30:00Z",
+        "draft_pick_time_limit": 90,
+        "draft_status": "post",
+        "draft_tz_show": "America/Toronto",
+        "id": 651,
+        "ko_rounds": 0,
+        "make_code_public": false,
+        "max_entries": 10,
+        "min_entries": 4,
+        "name": "Fantasy Soccer 2021/2022",
+        "scoring": "c",
+        "start_event": 1,
+        "stop_event": 38,
+        "trades": "a",
+        "transaction_mode": "waivers",
+        "variety": "x"
+    },
+    "league_entries": [
+        {
+            "entry_id": 1843,
+            "entry_name": "Let's Get MESSI",
+            "id": 1843,
+            "joined_time": "2021-06-22T14:36:04.854411Z",
+            "player_first_name": "Ramandeep",
+            "player_last_name": "Jhajj",
+            "short_name": "RJ",
+            "waiver_pick": 4
+        },
+        {
+            "entry_id": 1899,
+            "entry_name": "It’s Coming Home",
+            "id": 1899,
+            "joined_time": "2021-06-22T14:42:04.720613Z",
+            "player_first_name": "Jason",
+            "player_last_name": "Parmar",
+            "short_name": "JP",
+            "waiver_pick": 7
+        },
+        {
+            "entry_id": 2033,
+            "entry_name": "DeadPanda FC",
+            "id": 2033,
+            "joined_time": "2021-06-22T14:53:23.403079Z",
+            "player_first_name": "Manraj",
+            "player_last_name": "Dhaliwal",
+            "short_name": "MD",
+            "waiver_pick": 5
+        },
+        {
+            "entry_id": 2534,
+            "entry_name": "HarryPane",
+            "id": 2534,
+            "joined_time": "2021-06-22T15:48:21.198552Z",
+            "player_first_name": "Gagan",
+            "player_last_name": "Legha",
+            "short_name": "GL",
+            "waiver_pick": 3
+        },
+        {
+            "entry_id": 34459,
+            "entry_name": "¯\\_(ツ)_/¯",
+            "id": 34480,
+            "joined_time": "2021-07-05T18:10:37.304859Z",
+            "player_first_name": "Jibran",
+            "player_last_name": "Akbar",
+            "short_name": "JA",
+            "waiver_pick": 1
+        },
+        {
+            "entry_id": 61187,
+            "entry_name": "Taddu FC",
+            "id": 61227,
+            "joined_time": "2021-07-16T18:26:00.689847Z",
+            "player_first_name": "Tarun",
+            "player_last_name": "Bola",
+            "short_name": "TB",
+            "waiver_pick": 6
+        },
+        {
+            "entry_id": 61207,
+            "entry_name": "Mental trades FC",
+            "id": 61247,
+            "joined_time": "2021-07-16T18:30:35.366164Z",
+            "player_first_name": "Muneet",
+            "player_last_name": "Sidhu",
+            "short_name": "MS",
+            "waiver_pick": 2
+        }
+    ],
+    "standings": [
+        {
+            "event_total": 35,
+            "last_rank": 1,
+            "league_entry": 1899,
+            "rank": 1,
+            "rank_sort": 1,
+            "total": 1424
+        },
+        {
+            "event_total": 13,
+            "last_rank": 2,
+            "league_entry": 61227,
+            "rank": 2,
+            "rank_sort": 2,
+            "total": 1399
+        },
+        {
+            "event_total": 42,
+            "last_rank": 4,
+            "league_entry": 2033,
+            "rank": 2,
+            "rank_sort": 3,
+            "total": 1399
+        },
+        {
+            "event_total": 1,
+            "last_rank": 3,
+            "league_entry": 1843,
+            "rank": 4,
+            "rank_sort": 4,
+            "total": 1379
+        },
+        {
+            "event_total": 29,
+            "last_rank": 5,
+            "league_entry": 2534,
+            "rank": 5,
+            "rank_sort": 5,
+            "total": 1371
+        },
+        {
+            "event_total": 18,
+            "last_rank": 6,
+            "league_entry": 61247,
+            "rank": 6,
+            "rank_sort": 6,
+            "total": 1257
+        },
+        {
+            "event_total": 8,
+            "last_rank": 7,
+            "league_entry": 34480,
+            "rank": 7,
+            "rank_sort": 7,
+            "total": 1124
+        }
+    ]
+}
