@@ -5,7 +5,7 @@
 
 import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView } from "react-native";
-import { useGetBudgetGameweekPicksQuery, useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetOverviewQuery } from "../../Store/fplSlice";
+import { useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery, useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetDraftUserInfoQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetOverviewQuery } from "../../Store/fplSlice";
 import { useAppSelector } from "../../Store/hooks";
 import PlayerStatsDisplay from "./PlayerStatsDisplay";
 import { GetPlayerGameweekDataSortedByPosition } from "../../Helpers/FplAPIHelpers";
@@ -161,6 +161,8 @@ const Lineup = () => {
     const draftGameweek = useGetDraftGameweekPicksQuery((teamInfo.teamType === TeamTypes.Draft) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
     const draftOverview = useGetDraftOverviewQuery((teamInfo.teamType === TeamTypes.Draft) ? undefined : skipToken );
     const budgetGameweek = useGetBudgetGameweekPicksQuery((teamInfo.teamType === TeamTypes.Budget) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
+    const draftUserInfo = useGetDraftUserInfoQuery((teamInfo.teamType === TeamTypes.Draft) ? teamInfo.info.id : skipToken );
+    const budgetUserInfo = useGetBudgetUserInfoQuery((teamInfo.teamType === TeamTypes.Budget) ? teamInfo.info.id : skipToken);
 
     return (
         <>
@@ -177,14 +179,14 @@ const Lineup = () => {
                     :
                     ((teamInfo.teamType === TeamTypes.Budget && budgetGameweek.data) || (teamInfo.teamType === TeamTypes.Draft && draftGameweek.data && draftOverview.data)) &&
                         <>
-                            <View style={{position: 'absolute', height: '25%', aspectRatio: 1, right: 0}}>
-                                {(teamInfo.teamType === TeamTypes.Budget) ? 
-                                    <ManagerInfoCard teamInfo={teamInfo} budgetGameweek={budgetGameweek.data}/> :
-                                    <ManagerInfoCard teamInfo={teamInfo}/> 
-                                }
-                            </View>
                             <View style={styles.playerContainer}>
                                 {CreatePlayerStatsView(gameweek.data, overview.data, fixtures.data, teamInfo, draftOverview.data, draftGameweek.data, budgetGameweek.data)}
+                            </View>
+                            <View style={{position: 'absolute', height: '20%', aspectRatio: 1, right: 0, zIndex: 0}}>
+                                {(teamInfo.teamType === TeamTypes.Budget) ? 
+                                    ((budgetGameweek.data && budgetUserInfo.data) ? <ManagerInfoCard teamInfo={teamInfo} budgetGameweek={budgetGameweek.data} budgetManagerInfo={budgetUserInfo.data}/> : <></>) :
+                                    ((draftUserInfo.data) ? <ManagerInfoCard teamInfo={teamInfo} draftManagerInfo={draftUserInfo.data}/> : <></>)
+                                }
                             </View>
                         </>
                     }

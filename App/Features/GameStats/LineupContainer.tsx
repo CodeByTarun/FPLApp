@@ -13,6 +13,7 @@ import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import { openTeamModal } from "../../Store/modalSlice";
 import { goToPlayerStatsScreen } from "../../Store/navigationSlice";
+import globalStyles from "../../Global/GlobalStyles";
 
 const TeamSelectorHeader = (teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) => {
 
@@ -59,7 +60,7 @@ const LineupContainer = (props: LineupContainerProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.top}>
-                <View style={styles.controlsContainer}>
+                <View style={[styles.controlsContainer, globalStyles.bottomShadow]}>
 
                     <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5 }}>
                         <View style={styles.buttonContainer}>
@@ -99,6 +100,8 @@ const styles = StyleSheet.create(
 
         top: {
             height: GlobalConstants.height* 0.075,
+            backgroundColor: GlobalConstants.primaryColor,
+            zIndex: 1,
         },
 
         middle: {
@@ -110,6 +113,8 @@ const styles = StyleSheet.create(
             flex: 1,
             justifyContent: 'center',
             flexDirection: 'row',
+            zIndex: 1,
+            backgroundColor: GlobalConstants.primaryColor,
         },
 
         buttonContainer: {

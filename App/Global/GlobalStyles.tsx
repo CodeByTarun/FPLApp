@@ -67,7 +67,7 @@ const globalStyles = StyleSheet.create(
         bottomShadow: {
             shadowColor: 'black',
             shadowOffset: {width: 0, height: 0},
-            shadowRadius: 4,
+            shadowRadius: 5,
             shadowOpacity: 0.25,
             elevation: 3,
         },
