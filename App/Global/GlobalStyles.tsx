@@ -66,9 +66,9 @@ const globalStyles = StyleSheet.create(
         // Make the parent elements overflow: hidden to make this work for only the bottom!
         bottomShadow: {
             shadowColor: 'black',
-            shadowOffset: {width: 0, height: 0},
+            shadowOffset: {width: 0, height: 10},
             shadowRadius: 5,
-            shadowOpacity: 0.25,
+            shadowOpacity: 0.05,
             elevation: 3,
         },
         

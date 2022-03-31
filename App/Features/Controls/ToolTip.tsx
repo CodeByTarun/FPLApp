@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         top: -height,
         left: -width,
         opacity: 0.5,
+        backgroundColor: 'black',
         zIndex: 10000, 
         elevation: 10000, 
     },

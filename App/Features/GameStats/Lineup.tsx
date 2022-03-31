@@ -20,12 +20,13 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Jerseys } from "../../Global/Images";
 import { FplFixture } from "../../Models/FplFixtures";
 import ManagerInfoCard from "./ManagerInfoCard";
+import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";
+import { FplManagerInfo } from "../../Models/FplManagerInfo";
+import { PlayerData } from "../../Models/CombinedData";
 
 
-function CreatePlayerStatsView(gameweek: FplGameweek, overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, draftOverview?: FplDraftOverview, 
-                               draftPicks?: FplDraftGameweekPicks, budgetPicks?: FplManagerGameweekPicks) {
+function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo) {
 
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftPicks, budgetPicks);
     const playerStatsView = [];
 
     if (players !== null) {
@@ -65,10 +66,19 @@ function CreatePlayerStatsView(gameweek: FplGameweek, overview: FplOverview, fix
     return playerStatsView;
 }
 
-function CreateBenchView(gameweek: FplGameweek, overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, draftOverview?: FplDraftOverview, 
-                         draftPicks?: FplDraftGameweekPicks, budgetPicks?: FplManagerGameweekPicks) {
-    
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftPicks, budgetPicks);
+function CreateManagerInfoCard(teamInfo: TeamInfo, players: PlayerData[], draftUserInfo?: FplDraftUserInfo, budgetUserInfo?: FplManagerInfo,  budgetPicks?: FplManagerGameweekPicks) {
+    return (
+        <>
+            {(teamInfo.teamType === TeamTypes.Budget) ? 
+                                        <ManagerInfoCard teamInfo={teamInfo} players={players} budgetGameweekPicks={budgetPicks} budgetManagerInfo={budgetUserInfo}/> :
+                                        <ManagerInfoCard teamInfo={teamInfo} players={players} draftManagerInfo={draftUserInfo}/>
+            }
+        </>
+    )    
+}
+
+function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo) {
+
     const playerStatsView = [];
     
     if (players) {
@@ -151,22 +161,25 @@ function CreateKingsOfTheGameweekView(overviewData: FplOverview) {
 
 }
 
+interface LineupProps {
+    overview: FplOverview;
+    teamInfo: TeamInfo;
+    fixtures: FplFixture[];
+    gameweek: FplGameweek;
+    draftGameweekPicks? : FplDraftGameweekPicks;
+    draftOverview? : FplDraftOverview;
+    budgetGameweekPicks? : FplManagerGameweekPicks;
+    draftUserInfo? : FplDraftUserInfo;
+    budgetUserInfo? : FplManagerInfo;
+}
 
-const Lineup = () => {
+const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, draftOverview, budgetGameweekPicks, budgetUserInfo, draftUserInfo} : LineupProps) => {
 
-    const teamInfo = useAppSelector((state) => state.team);
-    const overview = useGetOverviewQuery();
-    const fixtures = useGetFixturesQuery();
-    const gameweek = useGetGameweekDataQuery((teamInfo.teamType !== TeamTypes.Empty) ? teamInfo.gameweek : skipToken);
-    const draftGameweek = useGetDraftGameweekPicksQuery((teamInfo.teamType === TeamTypes.Draft) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
-    const draftOverview = useGetDraftOverviewQuery((teamInfo.teamType === TeamTypes.Draft) ? undefined : skipToken );
-    const budgetGameweek = useGetBudgetGameweekPicksQuery((teamInfo.teamType === TeamTypes.Budget) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
-    const draftUserInfo = useGetDraftUserInfoQuery((teamInfo.teamType === TeamTypes.Draft) ? teamInfo.info.id : skipToken );
-    const budgetUserInfo = useGetBudgetUserInfoQuery((teamInfo.teamType === TeamTypes.Budget) ? teamInfo.info.id : skipToken);
+    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftGameweekPicks, budgetGameweekPicks);
 
     return (
         <>
-        {(teamInfo.teamType !== TeamTypes.Empty && gameweek.data && overview.data && fixtures.data) &&
+        {(teamInfo.teamType !== TeamTypes.Empty && gameweek && overview && fixtures && players) &&
         <View style={{flexDirection: 'column', flex: 1}}>
             <View style={styles.lineupContainer}>
                 <Image style={styles.field} source={require('../../../assets/threequartersfield.jpg')}/>
@@ -174,19 +187,16 @@ const Lineup = () => {
                     <>
                     {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 
                         <View style={styles.playerContainer}>
-                            {CreatePlayerStatsView(gameweek.data, overview.data, fixtures.data, teamInfo)}
+                            {CreatePlayerStatsView(players, overview, fixtures, teamInfo)}
                         </View>
                     :
-                    ((teamInfo.teamType === TeamTypes.Budget && budgetGameweek.data) || (teamInfo.teamType === TeamTypes.Draft && draftGameweek.data && draftOverview.data)) &&
+                    ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                         <>
                             <View style={styles.playerContainer}>
-                                {CreatePlayerStatsView(gameweek.data, overview.data, fixtures.data, teamInfo, draftOverview.data, draftGameweek.data, budgetGameweek.data)}
+                                {CreatePlayerStatsView(players, overview, fixtures, teamInfo)}
                             </View>
                             <View style={{position: 'absolute', height: '20%', aspectRatio: 1, right: 0, zIndex: 0}}>
-                                {(teamInfo.teamType === TeamTypes.Budget) ? 
-                                    ((budgetGameweek.data && budgetUserInfo.data) ? <ManagerInfoCard teamInfo={teamInfo} budgetGameweek={budgetGameweek.data} budgetManagerInfo={budgetUserInfo.data}/> : <></>) :
-                                    ((draftUserInfo.data) ? <ManagerInfoCard teamInfo={teamInfo} draftManagerInfo={draftUserInfo.data}/> : <></>)
-                                }
+                                {CreateManagerInfoCard(teamInfo, players, draftUserInfo, budgetUserInfo, budgetGameweekPicks)}
                             </View>
                         </>
                     }
@@ -196,16 +206,16 @@ const Lineup = () => {
     
                 { (teamInfo.teamType === TeamTypes.Fixture) ? 
                     <>
-                    { CreateBonusPointView(teamInfo, overview.data, fixtures.data)}
+                    { CreateBonusPointView(teamInfo, overview, fixtures)}
                     </>     
                 : (teamInfo.teamType === TeamTypes.Dream) ? 
                     <>
-                    { CreateKingsOfTheGameweekView(overview.data) }
+                    { CreateKingsOfTheGameweekView(overview) }
                     </>
                 :
-                ((teamInfo.teamType === TeamTypes.Budget && budgetGameweek.data) || (teamInfo.teamType === TeamTypes.Draft && draftGameweek.data && draftOverview.data)) &&
+                ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                     <>
-                    { CreateBenchView(gameweek.data, overview.data, fixtures.data, teamInfo, draftOverview.data, draftGameweek.data, budgetGameweek.data) }
+                    { CreateBenchView(players, overview, fixtures, teamInfo) }
                     </>
                 }
 

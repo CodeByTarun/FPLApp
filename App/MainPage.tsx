@@ -28,8 +28,8 @@ const MainPage = () => {
     <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>
       <SafeAreaView style={styles.safeArea}>
           {(overview.data && fixtures.data) &&
-            <View style={{flex: 1, overflow: 'hidden'}}>
-              <View style={{height: '19%', width: '100%', zIndex: 1}}>
+            <View style={{flex: 1}}>
+              <View style={{height: '19%', width: '100%', zIndex: -1}}>
                 <FixturesView overview={overview.data}/>
               </View>
               <View style={styles.lineupView}>

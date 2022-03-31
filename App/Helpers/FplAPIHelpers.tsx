@@ -162,3 +162,15 @@ export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: 
 export function GetFixtureStats(player: PlayerData, fixtureInfo: FixtureInfo, identifier: string) {
     return player.gameweekData.explain.find(details => details.fixture === fixtureInfo.fixture?.id)?.stats.find(stat => stat.identifier === identifier)?.value;
 }
+
+export function GetTeamTotalPoints(teamInfo: TeamInfo, players: PlayerData[], budgetPicks?: FplManagerGameweekPicks) {
+
+    if (teamInfo.teamType === TeamTypes.Budget && budgetPicks) {
+        return players.reduce((prev, player, index) => (player.gameweekData.stats.total_points * budgetPicks.picks[index].multiplier) + prev, 0)
+    }
+    else {
+        return players.slice(0, 11).reduce((prev, player) => player.gameweekData.stats.total_points + prev, 0)
+    }   
+
+    return 0;
+}
