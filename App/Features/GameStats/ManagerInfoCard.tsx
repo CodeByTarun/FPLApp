@@ -39,7 +39,7 @@ const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo,
                 stat: 'Points',
                 index: 1});
  
-    }, [players])
+    }, [players]);
 
     const changingBudgetStat = useCallback(() => {
 
