@@ -31,7 +31,7 @@ const GameweekModal = ({overview, isVisible} : GameweekModalProps) => {
     useEffect( function scrollToCurrentlySelectedGameweek() {
 
         function scroll() {
-            gameweekScrollViewRef.current?.scrollTo({x: 0, y: (teamInfo.gameweek - 1) * GlobalConstants.height*0.06, animated: true});
+            gameweekScrollViewRef.current?.scrollTo({x: 0, y: (teamInfo.gameweek - 1) * GlobalConstants.height*0.06, animated: false});
         }
 
         if (isVisible === true) {

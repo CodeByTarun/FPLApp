@@ -1,12 +1,12 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
-import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import { changeToDraftTeam, changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import CustomButton from "../Controls/CustomButton";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
@@ -16,6 +16,7 @@ import globalStyles from "../../Global/GlobalStyles";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetBudgetGameweekPicksQuery, useGetDraftUserInfoQuery, useGetBudgetUserInfoQuery, useGetGameweekDataQuery, useGetDraftLeagueInfoQuery } from "../../Store/fplSlice";
 import ToolTip from "../Controls/ToolTip";
+import { LeagueEntry } from "../../Models/FplDraftLeagueInfo";
 
 interface LineupContainerProps {
     overview: FplOverview,
@@ -38,21 +39,24 @@ const LineupContainer = ({overview, fixtures}: LineupContainerProps) => {
 
     const [isDraftStandingsModalVisible, setIsDraftStandingsModalVisible] = useState(false); 
 
-    useEffect(() => {
-        console.log('hello');
-    }, [isDraftStandingsModalVisible])
-
-    const onMyTeamButtonPress = () => {
+    const onMyTeamButtonPress = useCallback(() => {
         dispatch(openTeamModal());
-    }
+    }, []);
     
-    const onDreamTeamPress = () => {
+    const onDreamTeamPress = useCallback(() => {
         dispatch(changeToDreamTeam());
-    }    
+    }, []);
 
-    const onPlayerSearchPress = () => {
+    const onPlayerSearchPress = useCallback(() => {
         dispatch(goToPlayerStatsScreen());
-    }
+    }, [])
+
+    const openDraftTeamFromStandings = useCallback((leagueEntry: LeagueEntry | undefined) => {
+        if (leagueEntry) {
+            dispatch(changeToDraftTeam({id: leagueEntry.entry_id, name: leagueEntry.entry_name, isDraftTeam: true, isFavourite: false}));
+            setIsDraftStandingsModalVisible(false);
+        }
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -113,34 +117,53 @@ const LineupContainer = ({overview, fixtures}: LineupContainerProps) => {
                 }
             </View>
             { draftLeagueInfo.isSuccess &&
-                <ToolTip distanceFromRight={GlobalConstants.width * 0.2} 
+                <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
                         distanceFromTop={55} 
-                        distanceForArrowFromRight={GlobalConstants.width*0.26} 
+                        distanceForArrowFromRight={GlobalConstants.width*0.36} 
                         isVisible={isDraftStandingsModalVisible} 
                         setIsVisible={setIsDraftStandingsModalVisible} 
                         view={
-                            <View style={[{height: GlobalConstants.height * 0.3, 
-                                        width: GlobalConstants.width * 0.6,
+                            <View style={[{height: GlobalConstants.height * 0.55, 
+                                        width: GlobalConstants.width * 0.8,
                                         borderRadius: GlobalConstants.cornerRadius,
                                         padding: 5,
                                         backgroundColor: GlobalConstants.secondaryColor}, globalStyles.shadow]}>
-                                <Text style={{textAlign: 'center', color: GlobalConstants.textPrimaryColor, fontWeight: '600', marginBottom: 5, marginTop: 5}}>Standings</Text>
-                                <View style={{flexDirection: 'row', marginBottom: 5,}}>
-                                    <Text style={[styles.leagueText, {flex: 1}]}>Rank</Text>
-                                    <Text style={[styles.leagueText, {flex: 3}]}>Team & Manager</Text>
-                                    <Text style={[styles.leagueText, {flex: 1}]}>GW</Text>
-                                    <Text style={[styles.leagueText, {flex: 1}]}>Total</Text>                                
+                                <Text style={{textAlign: 'center', color: GlobalConstants.textPrimaryColor, 
+                                              fontWeight: '700', marginBottom: 10, marginTop: 10, fontSize: GlobalConstants.largeFont}}>Standings</Text>
+                                <View style={{flex: 1, marginBottom: 5, marginLeft: 5, marginRight: 5}}>
+                                    <View style={{flexDirection: 'row', marginBottom: 5}}>
+                                        <Text style={[styles.leagueHeaderText, {flex: 1}]}>Rank</Text>
+                                        <Text style={[styles.leagueHeaderTextLeft, {flex: 3, paddingLeft: 5}]}>Team & Manager</Text>
+                                        <Text style={[styles.leagueHeaderText, {flex: 1}]}>GW</Text>
+                                        <Text style={[styles.leagueHeaderText, {flex: 1}]}>Total</Text>                                
+                                    </View>
+                                    <ScrollView style={{flex: 1, borderTopColor: GlobalConstants.textSecondaryColor, borderTopWidth: 1}}>
+                                        {draftLeagueInfo.data.standings.map(standing => {
+
+                                            let leagueEntry = draftLeagueInfo.data.league_entries.find(entry => entry.id === standing.league_entry);
+
+                                            return (
+                                                <TouchableOpacity key={standing.league_entry} 
+                                                                  onPress={() => openDraftTeamFromStandings(leagueEntry)}
+                                                                  style={{flexDirection: 'row', alignContent: 'center', 
+                                                                          alignItems: 'center', paddingBottom: 10, 
+                                                                          paddingTop: 10, borderBottomColor: GlobalConstants.aLittleLighterColor,
+                                                                          borderBottomWidth: 1,}}>
+                                                    <Text style={[styles.leagueText, {flex: 1}]}>{standing.rank}</Text>
+                                                    <View style={{flex: 3, paddingLeft: 5}}>
+                                                        <Text numberOfLines={1} style={{textAlign: 'left', flex: 1, color: GlobalConstants.textPrimaryColor, 
+                                                                                        fontSize: GlobalConstants.smallFont * 1.4, fontWeight: '600'}}>
+                                                            {leagueEntry?.entry_name}</Text>
+                                                        <Text numberOfLines={1} style={{textAlign: 'left', flex: 1, color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.smallFont * 1.1,}}>
+                                                            {leagueEntry?.player_first_name + " " + leagueEntry?.player_last_name}</Text>
+                                                    </View>
+                                                    <Text style={[styles.leagueText, {flex: 1}]}>{standing.event_total}</Text>
+                                                    <Text style={[styles.leagueText, {flex: 1}]}>{standing.total}</Text> 
+                                                </TouchableOpacity>
+                                            )
+                                        })}
+                                    </ScrollView>
                                 </View>
-                                <ScrollView style={{flex: 1, backgroundColor: 'red'}}>
-                                    {draftLeagueInfo.data.standings.map(standing => 
-                                        <View>
-                                            <Text style={[styles.leagueText, {flex: 1}]}>{standing.rank}</Text>
-                                            <Text style={[styles.leagueText, {flex: 3}]}>Team & Manager</Text>
-                                            <Text style={[styles.leagueText, {flex: 1}]}>GW</Text>
-                                            <Text style={[styles.leagueText, {flex: 1}]}>Total</Text>
-                                        </View>
-                                    )}
-                                </ScrollView>
 
                             </View>
                         }>
@@ -203,9 +226,25 @@ const styles = StyleSheet.create(
             fontWeight: 'bold'
         },
 
+        leagueHeaderText: {
+            color: GlobalConstants.textPrimaryColor,
+            fontSize: GlobalConstants.smallFont * 1.3,
+            alignSelf: 'center',
+            textAlign: 'center',
+            fontWeight: '600'
+        },
+
+        leagueHeaderTextLeft: {
+            color: GlobalConstants.textPrimaryColor,
+            fontSize: GlobalConstants.smallFont * 1.3,
+            alignSelf: 'center',
+            textAlign: 'left',
+            fontWeight: '600'
+        },
+
         leagueText: {
             color: GlobalConstants.textPrimaryColor,
-            fontSize: GlobalConstants.smallFont * 1.2,
+            fontSize: GlobalConstants.smallFont * 1.3,
             alignSelf: 'center',
             textAlign: 'center'
         },

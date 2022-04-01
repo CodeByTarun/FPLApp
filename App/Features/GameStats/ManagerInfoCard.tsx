@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { cornerRadius, height, lightColor, primaryColor, smallFont, textPrimaryColor, textSecondaryColor } from "../../Global/GlobalConstants";
-import { GetTeamTotalPoints } from "../../Helpers/FplAPIHelpers";
+import globalStyles from "../../Global/GlobalStyles";
+import { GetTeamTotalExpectedPoints, GetTeamTotalPoints } from "../../Helpers/FplAPIHelpers";
 import { PlayerData } from "../../Models/CombinedData";
 import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";
 import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
 import { FplManagerInfo } from "../../Models/FplManagerInfo";
-import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import { BudgetInfo, DraftInfo, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 
 interface statInfo {
     title: string,
@@ -16,21 +17,22 @@ interface statInfo {
 }
 
 interface ManagerInfoCardProps {
-    teamInfo: TeamInfo,
+    teamInfo: DraftInfo | BudgetInfo,
     players : PlayerData[],
+    currentGameweek: number,
     budgetManagerInfo? : FplManagerInfo,
     budgetGameweekPicks? : FplManagerGameweekPicks,
     draftManagerInfo? : FplDraftUserInfo,
 }
 
-const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPicks, draftManagerInfo}: ManagerInfoCardProps) => {
+const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo, budgetGameweekPicks, draftManagerInfo}: ManagerInfoCardProps) => {
 
     const [stat, setStat] = useState({title: "Gameweek", 
-                           value: (teamInfo.teamType === TeamTypes.Budget) ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : GetTeamTotalPoints(teamInfo, players) , 
-                           stat: 'Points',
-                           index: 1 } as statInfo);
+                                      value: (teamInfo.teamType === TeamTypes.Budget) ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : GetTeamTotalPoints(teamInfo, players) , 
+                                      stat: 'Points',
+                                      index: 1 } as statInfo);
 
-    useEffect(() => {
+    useEffect(function setGameweekPointsWhenGameweekChanged() {
 
         setStat({title: "Gameweek", 
                 value: (teamInfo.teamType === TeamTypes.Budget) ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : GetTeamTotalPoints(teamInfo, players) , 
@@ -40,43 +42,92 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
     }, [players])
 
     const changingBudgetStat = useCallback(() => {
-        if (stat.stat === 'Points') {
-            setStat({title: stat.title, 
-                     value: (stat.title === "Overall") ? budgetManagerInfo?.summary_overall_rank : budgetManagerInfo?.summary_event_rank, 
-                     stat: 'Rank',
-                     index: (stat.title === "Overall") ? 5 : 2})
+
+        if (stat.index === 1) {
+            setStat({
+                title: "Gameweek",
+                value: GetTeamTotalExpectedPoints(teamInfo, players, budgetGameweekPicks),
+                stat: 'xPoints',
+                index: 2,
+            })
         }
-        else if(stat.stat === 'Rank') {
-            setStat({title: stat.title, 
-                     value: (stat.title === "Overall") ? budgetManagerInfo?.last_deadline_total_transfers : budgetGameweekPicks?.entry_history["event_transfers"], 
-                     stat: 'Transactions',
-                     index: (stat.title === "Overall") ? 6 : 3})
+        else if (stat.index === 2) {
+            setStat({
+                title: "Gameweek",
+                value: budgetManagerInfo?.summary_event_rank,
+                stat: 'Rank',
+                index: 3,
+            })
+        }
+        else if (stat.index === 3) {
+            setStat({
+                title: "Gameweek",
+                value: budgetGameweekPicks?.entry_history["event_transfers"],
+                stat: 'Transactions',
+                index: 4,
+            })
+        }
+        else if (stat.index === 4) {
+            setStat({
+                title: "Overall",
+                value: budgetManagerInfo?.summary_overall_points,
+                stat: 'Points',
+                index: 5,
+            })
+        }
+        else if (stat.index === 5) {
+            setStat({
+                title: "Overall",
+                value: budgetManagerInfo?.summary_overall_rank,
+                stat: 'Rank',
+                index: 6,
+            })
+        }
+        else if (stat.index === 6) {
+            setStat({
+                title: "Overall",
+                value: budgetManagerInfo?.last_deadline_total_transfers,
+                stat: 'Transactions',
+                index: 7,
+            })
         } 
         else {
-            setStat({title: (stat.title === "Overall") ? "Gameweek" : "Overall", 
-                     value: (stat.title === "Overall") ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : budgetManagerInfo?.summary_overall_points, 
-                     stat: 'Points',
-                     index: (stat.title === "Overall") ? 1 : 4})
+            setStat({
+                title: "Gameweek",
+                value: GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks),
+                stat: 'Points',
+                index: 1,
+            })
         }
-    }, [stat, teamInfo.gameweek])
+    }, [stat, teamInfo.gameweek, teamInfo.info.id])
 
     const changingDraftStat = useCallback(() => {
         if (stat.stat === 'Points') {
             setStat({title: stat.title, 
-                     value: (stat.title === "Overall") ? draftManagerInfo?.entry.transactions_total : draftManagerInfo?.entry.transactions_event, 
-                     stat: 'Transactions',
-                     index: (stat.title === "Overall") ? 4 : 2})
+                     value: (stat.title === "Overall") ? draftManagerInfo?.entry.transactions_total : GetTeamTotalExpectedPoints(teamInfo, players), 
+                     stat: (stat.title === "Overall") ? 'Transactions' : 'xPoints',
+                     index: (stat.title === "Overall") ? 5 : 2})
+        }
+        else if(stat.stat === 'xPoints') {
+            setStat({
+                title: stat.title,
+                value: draftManagerInfo?.entry.transactions_event,
+                stat: 'Transactions',
+                index: 3,
+            })
         }
         else {
             setStat({title: (stat.title === "Overall") ? "Gameweek" : "Overall", 
                      value: (stat.title === "Overall") ? GetTeamTotalPoints(teamInfo, players) : draftManagerInfo?.entry.overall_points, 
                      stat: 'Points',
-                     index: (stat.title === "Overall") ? 1 : 3})
+                     index: (stat.title === "Overall") ? 1 : 4})
         }
-    }, [stat, teamInfo.gameweek])
+    }, [stat, teamInfo.gameweek, teamInfo.info.id])
 
     return (
-        <Pressable style={[styles.container, styles.shadow]} onPress={(teamInfo.teamType === TeamTypes.Budget) ? changingBudgetStat : changingDraftStat}>
+        <Pressable style={[styles.container, globalStyles.tabShadow]} onPress={(teamInfo.gameweek !== currentGameweek) ? () => {} : 
+                                                                                                                         (teamInfo.teamType === TeamTypes.Budget) ? changingBudgetStat : 
+                                                                                                                                                                    changingDraftStat}>
             {((((teamInfo.teamType === TeamTypes.Budget) && budgetManagerInfo) || ((teamInfo.teamType === TeamTypes.Draft) && draftManagerInfo)) && players) &&
             <>
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -88,18 +139,21 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>
                     <Text style={styles.text}>{stat.stat}</Text>
                 </View>
-                <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 7}}>
-                    <View style={[styles.dots, {backgroundColor: stat.index === 1 ? textPrimaryColor : lightColor}]}/>
-                    <View style={[styles.dots, {backgroundColor: stat.index === 2 ? textPrimaryColor : lightColor}]}/>
-                    <View style={[styles.dots, {backgroundColor: stat.index === 3 ? textPrimaryColor : lightColor}]}/>
-                    <View style={[styles.dots, {backgroundColor: stat.index === 4 ? textPrimaryColor : lightColor}]}/>
-                    {(teamInfo.teamType === TeamTypes.Budget) &&
-                        <>  
-                            <View style={[styles.dots, {backgroundColor: stat.index === 5 ? textPrimaryColor : lightColor}]}/>
-                            <View style={[styles.dots, {backgroundColor: stat.index === 6 ? textPrimaryColor : lightColor}]}/>
-                        </>
-                    }
-                </View>
+                {(teamInfo.gameweek === currentGameweek) &&
+                    <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 7}}>  
+                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 1 ? textPrimaryColor : lightColor}]}/>
+                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 2 ? textPrimaryColor : lightColor}]}/>
+                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 3 ? textPrimaryColor : lightColor}]}/>
+                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 4 ? textPrimaryColor : lightColor}]}/>
+                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 5 ? textPrimaryColor : lightColor}]}/>
+                        {(teamInfo.teamType === TeamTypes.Budget) &&
+                            <>  
+                                <View style={[globalStyles.dots, {backgroundColor: stat.index === 6 ? textPrimaryColor : lightColor}]}/>
+                                <View style={[globalStyles.dots, {backgroundColor: stat.index === 7 ? textPrimaryColor : lightColor}]}/>
+                            </>
+                        }                        
+                    </View>
+                }
             </>
             }
         </Pressable>
@@ -139,23 +193,6 @@ const styles = StyleSheet.create({
         color: textSecondaryColor,
         fontWeight: '500',
         alignSelf: 'center'
-    },
-
-    shadow: {
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 0},
-        shadowRadius: 5,
-        shadowOpacity: 0.35,
-        elevation: 2,
-    },
-
-    dots: {
-        height: height*0.005,
-        aspectRatio: 1,
-        backgroundColor: textSecondaryColor,
-        borderRadius: 100,
-        marginRight: 1.5,
-        marginLeft: 1.5,
     },
 });
 

@@ -6,11 +6,14 @@ import LineupContainer from './Features/GameStats/LineupContainer';
 import * as GlobalConstants from './Global/GlobalConstants'
 import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
 import BaseModal from "./Modals/BaseModal";
+import { useAppSelector } from "./Store/hooks";
+import { ScreenTypes } from "./Store/navigationSlice";
 
 const MainPage = () => {
 
   const overview = useGetOverviewQuery();
   const fixtures = useGetFixturesQuery();
+  const navigation = useAppSelector(state => state.navigation);
 
   useEffect( function refetchFixtures() {
     if (fixtures.isError) {
@@ -29,7 +32,7 @@ const MainPage = () => {
       <SafeAreaView style={styles.safeArea}>
           {(overview.data && fixtures.data) &&
             <View style={{flex: 1}}>
-              <View style={{height: '19%', width: '100%', zIndex: -1}}>
+              <View style={{height: '19%', width: '100%', zIndex: (navigation.screenType === ScreenTypes.Fixtures) ? 1 : 0}}>
                 <FixturesView overview={overview.data}/>
               </View>
               <View style={styles.lineupView}>

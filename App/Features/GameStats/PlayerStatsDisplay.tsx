@@ -12,12 +12,14 @@ import PlayerCard from "../../Modals/PlayerModal";
 import { FplFixture } from "../../Models/FplFixtures";
 import { openPlayerModal } from "../../Store/modalSlice";
 import { typeParameterInstantiation } from "@babel/traverse/node_modules/@babel/types";
+import FixtureDifficultyList from "../PlayerStats/FixtureDifficultyList";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
     overview: FplOverview;
     teamInfo: TeamInfo;
     fixtures: FplFixture[];
+    showAdditionalInfo: boolean;
 }
 
 const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
@@ -85,42 +87,42 @@ const ScoreAndFixtureText = (player: PlayerData, fixtures: FplFixture[], overvie
     }  
 }
 
-const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
+const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, showAdditionalInfo}: PlayerStatsDisplayProps) => {
 
     const dispatch = useAppDispatch();
 
     return (
         <>
-        {prop.player.gameweekData &&
-        <TouchableOpacity style={styles.container} onPress={() => dispatch(openPlayerModal(prop.player))}>
-            { (prop.teamInfo.teamType !== TeamTypes.Empty) &&
+        {player.gameweekData &&
+        <TouchableOpacity style={styles.container} onPress={() => dispatch(openPlayerModal(player))}>
+            { (teamInfo.teamType !== TeamTypes.Empty && !showAdditionalInfo) &&
             <>
             <View style={{flex:3, justifyContent: 'center', alignItems: 'center', width: '100%'}}>
-                <Image style={{alignSelf: 'center', height: '85%'}} source={Jerseys[prop.player.overviewData.team_code]} resizeMode="contain"/>
+                <Image style={{alignSelf: 'center', height: '85%'}} source={Jerseys[player.overviewData.team_code]} resizeMode="contain"/>
 
                 <View style={{alignItems: 'flex-start', justifyContent: 'flex-start', width: '90%', height: '90%', position: 'absolute'}}>
-                    { StatView(prop.player, prop.teamInfo, Identifier.GoalsScored) }
-                    { StatView(prop.player, prop.teamInfo, Identifier.Assists) }
-                    { StatView(prop.player, prop.teamInfo, Identifier.Saves) }
-                    { StatView(prop.player, prop.teamInfo, Identifier.OwnGoals) }
+                    { StatView(player, teamInfo, Identifier.GoalsScored) }
+                    { StatView(player, teamInfo, Identifier.Assists) }
+                    { StatView(player, teamInfo, Identifier.Saves) }
+                    { StatView(player, teamInfo, Identifier.OwnGoals) }
                     <View style={styles.cardsContainer}>
-                        { StatView(prop.player, prop.teamInfo, Identifier.YellowCards) }
-                        { StatView(prop.player, prop.teamInfo, Identifier.RedCards) }
+                        { StatView(player, teamInfo, Identifier.YellowCards) }
+                        { StatView(player, teamInfo, Identifier.RedCards) }
                     </View> 
-                    {(prop.player.gameweekData.stats.in_dreamteam && prop.teamInfo.teamType !== TeamTypes.Dream) &&
+                    {(player.gameweekData.stats.in_dreamteam && teamInfo.teamType !== TeamTypes.Dream) &&
                         <View style={styles.dreamTeamContainer}>
                             <Image style={styles.dreamTeamImage} source={Icons['dreamteam']} resizeMode="contain"/>
                         </View>
                     }
-                    {((prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) && prop.player.overviewData.status !== 'a') &&
+                    {((teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) && player.overviewData.status !== 'a') &&
                     <View style={styles.injuredContainer}>
                         <Image style={styles.injuredImage} resizeMode="contain"
-                               source={(prop.player.overviewData.status === 'd') ? Icons['doubtful'] : Icons['out']}/>
+                               source={(player.overviewData.status === 'd') ? Icons['doubtful'] : Icons['out']}/>
                     </View>
                     }
-                    { ((prop.teamInfo.teamType === TeamTypes.Budget) && (prop.player.isCaptain || prop.player.isViceCaptain)) &&
+                    { ((teamInfo.teamType === TeamTypes.Budget) && (player.isCaptain || player.isViceCaptain)) &&
                     <View style={styles.captainAndViceCaptainContainer}>
-                        <Text style={styles.captainAndViceCaptainText}>{prop.player.isCaptain ? "C" : "V"}</Text>
+                        <Text style={styles.captainAndViceCaptainText}>{player.isCaptain ? "C" : "V"}</Text>
                     </View>
                     }
                 </View> 
@@ -130,15 +132,36 @@ const PlayerStatsDisplay = (prop: PlayerStatsDisplayProps) => {
                           justifyContent: 'center', 
                           alignItems: 'center',
                           paddingBottom: 1, 
-                          width: (prop.teamInfo.teamType === TeamTypes.Budget || prop.teamInfo.teamType === TeamTypes.Draft) ? '130%' : '95%'}}>
+                          width: (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) ? '130%' : '95%'}}>
                 <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.primaryColor}}>
-                    <Text numberOfLines={1} style={[styles.text, {fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{prop.player.overviewData.web_name}</Text>
+                    <Text numberOfLines={1} style={[styles.text, {fontWeight: '500', paddingLeft: 5, paddingRight: 5}]}>{player.overviewData.web_name}</Text>
                 </View>
                 <View style={{flex: 1, flexDirection: 'row', backgroundColor: GlobalConstants.secondaryColor, paddingLeft: 5, paddingRight: 5, marginTop: -0.1 }}>
-                    { ScoreAndFixtureText(prop.player, prop.fixtures, prop.overview, prop.teamInfo)}
+                    { ScoreAndFixtureText(player, fixtures, overview, teamInfo)}
                 </View>
             </View>
             </>
+            }
+            { (teamInfo.teamType !== TeamTypes.Empty && showAdditionalInfo) &&
+                <View style={{height: '95%', width: '110%', margin: 10, backgroundColor: 'red'}}>
+                    <Text style={[styles.detailedStatsText]}>{player.overviewData.web_name}</Text>
+                    <Text style={styles.detailedStatsText}>Form: {player.overviewData.form}</Text>
+                    <Text style={styles.detailedStatsText}>Owned: {player.overviewData.selected_by_percent}%</Text>
+                    <Text style={styles.detailedStatsText}>{player.overviewData.now_cost}</Text>
+                    <View style={{flex: 2, backgroundColor: 'red', flexDirection: 'row'}}>
+                        <Text style={styles.detailedStatsText}>{player.overviewData.event_points}</Text>
+                        <Text style={styles.detailedStatsText}>{player.overviewData.ep_this}</Text>
+                        <Text style={styles.detailedStatsText}>{player.overviewData.ep_next}</Text>
+                    </View>
+                    <View style={{flex: 2, backgroundColor: 'red', flexDirection: 'row'}}>
+                        <Text style={styles.detailedStatsText}>Pts</Text>
+                        <Text style={styles.detailedStatsText}>xPts</Text>
+                        <Text style={styles.detailedStatsText}>xPts Next Week</Text>
+                    </View >
+                    <View style={{flex: 3, backgroundColor: 'purple'}}>
+                        
+                    </View>
+                </View>
             }
         </TouchableOpacity>
 }
@@ -261,9 +284,14 @@ const styles = StyleSheet.create(
             alignItems: 'center',
             justifyContent: 'center',
         },
-
         
         //#endregion
+        
+        detailedStatsText: { 
+            color: GlobalConstants.textPrimaryColor,
+            fontSize: GlobalConstants.smallFont * 0.9,
+            textAlign: 'center'
+        },
     }
 );
 

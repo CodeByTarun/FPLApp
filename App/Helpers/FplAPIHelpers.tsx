@@ -166,10 +166,22 @@ export function GetFixtureStats(player: PlayerData, fixtureInfo: FixtureInfo, id
 export function GetTeamTotalPoints(teamInfo: TeamInfo, players: PlayerData[], budgetPicks?: FplManagerGameweekPicks) {
 
     if (teamInfo.teamType === TeamTypes.Budget && budgetPicks) {
-        return players.reduce((prev, player, index) => (player.gameweekData.stats.total_points * budgetPicks.picks[index].multiplier) + prev, 0)
+        return players.reduce((prev, player, index) => (player.gameweekData.stats.total_points * budgetPicks.picks[index].multiplier) + prev, 0);
     }
-    else {
-        return players.slice(0, 11).reduce((prev, player) => player.gameweekData.stats.total_points + prev, 0)
+    else if (teamInfo.teamType === TeamTypes.Draft) {
+        return players.slice(0, 11).reduce((prev, player) => player.gameweekData.stats.total_points + prev, 0);
+    }   
+
+    return 0;
+}
+
+export function GetTeamTotalExpectedPoints(teamInfo: TeamInfo, players: PlayerData[], budgetPicks?: FplManagerGameweekPicks) {
+
+    if (teamInfo.teamType === TeamTypes.Budget && budgetPicks) {
+        return (players.reduce((prev, player, index) => (Number(player.overviewData.ep_this) * budgetPicks.picks[index].multiplier) + prev, 0)).toFixed(1);
+    }
+    else if (teamInfo.teamType === TeamTypes.Draft) {
+        return (players.slice(0, 11).reduce((prev, player) => Number(player.overviewData.ep_this) + prev, 0)).toFixed(1);
     }   
 
     return 0;

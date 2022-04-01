@@ -79,6 +79,23 @@ const globalStyles = StyleSheet.create(
             shadowOpacity: 0.15,
             elevation: 1,
         },
+
+        dots: {
+            height: GlobalConstants.height*0.005,
+            aspectRatio: 1,
+            backgroundColor: GlobalConstants.textSecondaryColor,
+            borderRadius: 100,
+            marginRight: 1.5,
+            marginLeft: 1.5,
+        },
+        
+        tabShadow: {
+            shadowColor: 'black',
+            shadowOffset: {width: 0, height: 0},
+            shadowRadius: 5,
+            shadowOpacity: 0.35,
+            elevation: 2,
+        },
     }
 )
 
