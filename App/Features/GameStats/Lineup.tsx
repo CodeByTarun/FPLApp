@@ -4,12 +4,9 @@
 // The input for this component is a list of player IDs
 
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, View, Text, ScrollView, Switch, Pressable } from "react-native";
-import { useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery, useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetDraftUserInfoQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetOverviewQuery } from "../../Store/fplSlice";
-import { useAppSelector } from "../../Store/hooks";
+import { Image, StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
 import PlayerStatsDisplay from "./PlayerStatsDisplay";
 import { GetPlayerGameweekDataSortedByPosition } from "../../Helpers/FplAPIHelpers";
-import { coreModule, skipToken } from "@reduxjs/toolkit/dist/query";
 import { FplGameweek } from "../../Models/FplGameweek";
 import { FplOverview } from "../../Models/FplOverview";
 import { BudgetInfo, DraftInfo, FixtureInfo, TeamInfo, TeamTypes } from "../../Store/teamSlice";
@@ -23,11 +20,10 @@ import ManagerInfoCard from "./ManagerInfoCard";
 import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";
 import { FplManagerInfo } from "../../Models/FplManagerInfo";
 import { PlayerData } from "../../Models/CombinedData";
-import Checkbox from "expo-checkbox";
 import globalStyles from "../../Global/GlobalStyles";
 
 
-function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, showAdditionalInfoView: boolean) {
+function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number) {
 
     const playerStatsView = [];
 
@@ -58,7 +54,7 @@ function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fix
                 <View style={styles.playerRowContainer} key={elementType}>
                     { lineupPlayers.slice(i, i + positionCount).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
                                                                                                            fixtures={fixtures} teamInfo={teamInfo}
-                                                                                                           showAdditionalInfo={showAdditionalInfoView}/> })}
+                                                                                                           viewIndex={viewIndex}/> })}
                 </View>
             )
 
@@ -83,7 +79,7 @@ function CreateManagerInfoCard(teamInfo: TeamInfo, players: PlayerData[], curren
     )    
 }
 
-function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, showAdditionalInfoView: boolean) {
+function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, viewIndex: number) {
 
     const playerStatsView = [];
     
@@ -92,7 +88,7 @@ function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures:
             <View style={styles.playerRowContainer} key={5}>
                 { players.slice(11, 15).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
                                                                                    fixtures={fixtures} teamInfo={teamInfo}
-                                                                                   showAdditionalInfo={showAdditionalInfoView}/> })}
+                                                                                   viewIndex={viewIndex}/> })}
             </View>
         )
     }
@@ -169,6 +165,8 @@ function CreateKingsOfTheGameweekView(overviewData: FplOverview) {
 
 }
 
+const viewIndexScenes = ["Lineup", "More Info", "Points", "Fixtures"]
+
 interface LineupProps {
     overview: FplOverview;
     teamInfo: TeamInfo;
@@ -186,10 +184,10 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
     const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftGameweekPicks, budgetGameweekPicks);
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
     
-    const [showAdditionalInfoView, setShowAdditionalInfoView] = useState(false); 
+    const [viewIndex, setViewIndex] = useState(0); 
 
     useEffect(function gameweekChanged() {
-        setShowAdditionalInfoView(false);
+        setViewIndex(0);
     }, [teamInfo.gameweek])
 
     return (
@@ -202,13 +200,13 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                     <>
                     {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 
                         <View style={styles.playerContainer}>
-                            {CreatePlayerStatsView(players, overview, fixtures, teamInfo, showAdditionalInfoView)}
+                            {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex)}
                         </View>
                     :
                     ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                         <>
                             <View style={styles.playerContainer}>
-                                {CreatePlayerStatsView(players, overview, fixtures, teamInfo, showAdditionalInfoView)}
+                                {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex)}
                             </View>
                             <View style={{position: 'absolute', height: '20%', aspectRatio: 1, right: 0, zIndex: 0}}>
                                 {CreateManagerInfoCard(teamInfo, players, currentGameweek, draftUserInfo, budgetUserInfo, budgetGameweekPicks)}
@@ -216,15 +214,20 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                             {
                                 (teamInfo.gameweek === currentGameweek) &&
                         
-                                <Pressable style={[{position: 'absolute', left: 7, height: '10%', aspectRatio: 1.5, alignContent:'center', justifyContent: 'center',
+                                <Pressable style={[{position: 'absolute', left: 7, height: '12%', aspectRatio: 1.2, alignContent:'center', justifyContent: 'center',
                                                     backgroundColor: GlobalConstants.primaryColor, borderBottomLeftRadius: GlobalConstants.cornerRadius, zIndex: 1,
-                                                    borderBottomRightRadius: GlobalConstants.cornerRadius, paddingLeft: 5, paddingRight: 5}, globalStyles.tabShadow]}
-                                            onPress={() => setShowAdditionalInfoView(!showAdditionalInfoView)}>
-                                    <Text style={{fontSize: GlobalConstants.smallFont, color: GlobalConstants.textSecondaryColor, 
-                                                alignSelf: 'center', textAlign: 'center', fontWeight: '600'}}>{showAdditionalInfoView ? "More Info" : "Current"}</Text>   
-                                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent:'center', paddingTop: 5}}>
-                                        <View style={[globalStyles.dots, {backgroundColor: showAdditionalInfoView ? GlobalConstants.lightColor : GlobalConstants.textPrimaryColor}]}/>
-                                        <View style={[globalStyles.dots, {backgroundColor: showAdditionalInfoView ? GlobalConstants.textPrimaryColor : GlobalConstants.lightColor}]}/>                            
+                                                    borderBottomRightRadius: GlobalConstants.cornerRadius}, globalStyles.tabShadow]}
+                                            onPress={() => setViewIndex((viewIndex + 1 < viewIndexScenes.length) ? viewIndex + 1 : 0)}>
+                                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                        <Text style={{fontSize: GlobalConstants.smallFont, color: GlobalConstants.textSecondaryColor,
+                                                    alignSelf: 'center', textAlign: 'center', fontWeight: '600'}}>{viewIndexScenes[viewIndex]}</Text>
+                                    </View>
+                                       
+                                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent:'center', paddingBottom: 7}}>
+                                        <View style={[globalStyles.dots, {backgroundColor: viewIndex === 0 ? GlobalConstants.textPrimaryColor : GlobalConstants.lightColor}]}/>
+                                        <View style={[globalStyles.dots, {backgroundColor: viewIndex === 1 ? GlobalConstants.textPrimaryColor : GlobalConstants.lightColor}]}/>          
+                                        <View style={[globalStyles.dots, {backgroundColor: viewIndex === 2 ? GlobalConstants.textPrimaryColor : GlobalConstants.lightColor}]}/>
+                                        <View style={[globalStyles.dots, {backgroundColor: viewIndex === 3 ? GlobalConstants.textPrimaryColor : GlobalConstants.lightColor}]}/>                            
                                     </View>
                                 </Pressable>
                             }
@@ -245,7 +248,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                 :
                 ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                     <>
-                    { CreateBenchView(players, overview, fixtures, teamInfo, showAdditionalInfoView) }
+                    { CreateBenchView(players, overview, fixtures, teamInfo, viewIndex) }
                     </>
                 }
 

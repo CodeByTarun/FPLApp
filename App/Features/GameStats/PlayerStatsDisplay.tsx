@@ -13,13 +13,14 @@ import { FplFixture } from "../../Models/FplFixtures";
 import { openPlayerModal } from "../../Store/modalSlice";
 import { typeParameterInstantiation } from "@babel/traverse/node_modules/@babel/types";
 import FixtureDifficultyList from "../PlayerStats/FixtureDifficultyList";
+import globalStyles from "../../Global/GlobalStyles";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
     overview: FplOverview;
     teamInfo: TeamInfo;
     fixtures: FplFixture[];
-    showAdditionalInfo: boolean;
+    viewIndex: number;
 }
 
 const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
@@ -87,15 +88,30 @@ const ScoreAndFixtureText = (player: PlayerData, fixtures: FplFixture[], overvie
     }  
 }
 
-const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, showAdditionalInfo}: PlayerStatsDisplayProps) => {
+const singleStatView = (label: string, value: number | string) => {
+    return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', paddingLeft: 5, paddingRight: 5}}>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontSize: GlobalConstants.smallFont, color: GlobalConstants.textSecondaryColor, 
+                            fontWeight: '500', alignSelf: 'center'}}>{label}</Text>
+            </View>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingBottom: 0}}>
+                <Text style={{fontSize: GlobalConstants.smallFont * 1.2, color: GlobalConstants.textPrimaryColor, 
+                                textAlign: 'right', fontWeight: '500', alignSelf: 'flex-end'}}>{value}</Text>
+            </View>
+        </View>
+    )
+}
+
+const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: PlayerStatsDisplayProps) => {
 
     const dispatch = useAppDispatch();
 
     return (
         <>
-        {player.gameweekData &&
+        {(player.gameweekData && teamInfo.teamType !== TeamTypes.Empty) &&
         <TouchableOpacity style={styles.container} onPress={() => dispatch(openPlayerModal(player))}>
-            { (teamInfo.teamType !== TeamTypes.Empty && !showAdditionalInfo) &&
+            { viewIndex === 0 &&
             <>
             <View style={{flex:3, justifyContent: 'center', alignItems: 'center', width: '100%'}}>
                 <Image style={{alignSelf: 'center', height: '85%'}} source={Jerseys[player.overviewData.team_code]} resizeMode="contain"/>
@@ -142,24 +158,36 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, showAdditiona
             </View>
             </>
             }
-            { (teamInfo.teamType !== TeamTypes.Empty && showAdditionalInfo) &&
-                <View style={{height: '95%', width: '110%', margin: 10, backgroundColor: 'red'}}>
-                    <Text style={[styles.detailedStatsText]}>{player.overviewData.web_name}</Text>
-                    <Text style={styles.detailedStatsText}>Form: {player.overviewData.form}</Text>
-                    <Text style={styles.detailedStatsText}>Owned: {player.overviewData.selected_by_percent}%</Text>
-                    <Text style={styles.detailedStatsText}>{player.overviewData.now_cost}</Text>
-                    <View style={{flex: 2, backgroundColor: 'red', flexDirection: 'row'}}>
-                        <Text style={styles.detailedStatsText}>{player.overviewData.event_points}</Text>
-                        <Text style={styles.detailedStatsText}>{player.overviewData.ep_this}</Text>
-                        <Text style={styles.detailedStatsText}>{player.overviewData.ep_next}</Text>
+            { (viewIndex !== 0) &&
+                <View style={[{height: '95%', width: '110%', margin: 10, backgroundColor: GlobalConstants.primaryColor, 
+                              borderRadius: GlobalConstants.cornerRadius}, globalStyles.tabShadow]}>
+                    <View style={{flex: 4, padding: 2}}>
+                        {(viewIndex === 1) && 
+                        <>
+                            {singleStatView('Form', player.overviewData.form)}
+                            {singleStatView('Sel.', player.overviewData.selected_by_percent + '%')}
+                            {singleStatView('Cost', player.overviewData.now_cost)}
+                        </>
+                        }
+                        { (viewIndex === 2) && 
+                        <>
+                            {singleStatView('PTS', player.overviewData.event_points)}
+                            {singleStatView('xPTS', player.overviewData.ep_this)}
+                            <Text style={{color: GlobalConstants.textSecondaryColor, fontSize: GlobalConstants.smallFont*0.9,
+                                          fontWeight: '400', alignSelf: 'center', paddingTop: 0}}>Next Week</Text>
+                            {singleStatView('xPTS', player.overviewData.ep_next)}
+                        </>
+                        }
+                        { (viewIndex === 3) && 
+                        <>
+                        </>
+                        }
                     </View>
-                    <View style={{flex: 2, backgroundColor: 'red', flexDirection: 'row'}}>
-                        <Text style={styles.detailedStatsText}>Pts</Text>
-                        <Text style={styles.detailedStatsText}>xPts</Text>
-                        <Text style={styles.detailedStatsText}>xPts Next Week</Text>
-                    </View >
-                    <View style={{flex: 3, backgroundColor: 'purple'}}>
-                        
+                    <View style={{flex: 1, backgroundColor: GlobalConstants.secondaryColor, alignItems: 'center', justifyContent: 'center',
+                                  borderBottomRightRadius: GlobalConstants.cornerRadius, borderBottomLeftRadius: GlobalConstants.cornerRadius}}>
+                        <Text numberOfLines={1} style={{fontWeight: '600', paddingLeft: 5, paddingRight: 5, 
+                                                        fontSize: GlobalConstants.smallFont * 1.1, textAlign: 'center',
+                                                        color: GlobalConstants.textPrimaryColor}}>{player.overviewData.web_name}</Text>
                     </View>
                 </View>
             }
@@ -179,7 +207,7 @@ const styles = StyleSheet.create(
         },
 
         text: {
-            flex: 1, 
+            flex: 1,
             fontSize: GlobalConstants.smallFont* 1.1,
             fontWeight: '700', 
             alignSelf: 'center', 
