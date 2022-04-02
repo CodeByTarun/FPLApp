@@ -14,6 +14,7 @@ import { openPlayerModal } from "../../Store/modalSlice";
 import { typeParameterInstantiation } from "@babel/traverse/node_modules/@babel/types";
 import FixtureDifficultyList from "../PlayerStats/FixtureDifficultyList";
 import globalStyles from "../../Global/GlobalStyles";
+import { DifficultyColors } from "../../Global/EnumsAndDicts";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
@@ -21,6 +22,7 @@ interface PlayerStatsDisplayProps {
     teamInfo: TeamInfo;
     fixtures: FplFixture[];
     viewIndex: number;
+    currentGameweek: number;
 }
 
 const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
@@ -103,7 +105,7 @@ const singleStatView = (label: string, value: number | string) => {
     )
 }
 
-const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: PlayerStatsDisplayProps) => {
+const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex, currentGameweek}: PlayerStatsDisplayProps) => {
 
     const dispatch = useAppDispatch();
 
@@ -161,12 +163,12 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: P
             { (viewIndex !== 0) &&
                 <View style={[{height: '95%', width: '110%', margin: 10, backgroundColor: GlobalConstants.primaryColor, 
                               borderRadius: GlobalConstants.cornerRadius}, globalStyles.tabShadow]}>
-                    <View style={{flex: 4, padding: 2}}>
+                    <View style={{flex: 4, padding: 3}}>
                         {(viewIndex === 1) && 
                         <>
-                            {singleStatView('Form', player.overviewData.form)}
+                            {singleStatView('Cost', '£' + (player.overviewData.now_cost / 10).toFixed(1))}
                             {singleStatView('Sel.', player.overviewData.selected_by_percent + '%')}
-                            {singleStatView('Cost', player.overviewData.now_cost)}
+                            {singleStatView('Form', player.overviewData.form)}
                         </>
                         }
                         { (viewIndex === 2) && 
@@ -180,6 +182,22 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: P
                         }
                         { (viewIndex === 3) && 
                         <>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            <Text style={[styles.fixtureViewText, {color: GlobalConstants.textSecondaryColor, fontWeight: '600'}]}>GW</Text>
+                            <Text style={[styles.fixtureViewText, {flex: 2, color: GlobalConstants.textSecondaryColor, fontWeight: '600'}]}>Opp</Text>
+                        </View>
+                        { fixtures.filter((fixture) => (fixture.team_a === player.overviewData.team || fixture.team_h === player.overviewData.team) && 
+                                                       (fixture.event && fixture.event >= currentGameweek + 1)).slice(0,5).map(fixture => {
+                                                           return (
+                                                               <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection:'row', marginTop: -1,
+                                                                             backgroundColor: DifficultyColors[fixture.team_a === player.overviewData.team ? fixture.team_a_difficulty : fixture.team_h_difficulty]}}
+                                                                     key={fixture.id}>
+                                                                   <Text style={styles.fixtureViewText}>{fixture.event}</Text>
+                                                                   <Text style={[styles.fixtureViewText, {flex: 2}]}>{fixture.team_a === player.overviewData.team ? overview.teams.find(team => team.id === fixture.team_h)?.short_name + '(A)' : 
+                                                                                                                                            overview.teams.find(team => team.id === fixture.team_a)?.short_name + '(H)'}</Text>
+                                                               </View>
+                                                           )
+                                                       })}
                         </>
                         }
                     </View>
@@ -319,6 +337,15 @@ const styles = StyleSheet.create(
             color: GlobalConstants.textPrimaryColor,
             fontSize: GlobalConstants.smallFont * 0.9,
             textAlign: 'center'
+        },
+
+        fixtureViewText: {
+            fontSize: GlobalConstants.smallFont * 0.9, 
+            color: 'black', 
+            fontWeight: '400', 
+            alignSelf: 'center',
+            flex: 1,
+            textAlign:'center'
         },
     }
 );

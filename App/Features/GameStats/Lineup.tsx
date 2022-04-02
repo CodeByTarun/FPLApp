@@ -22,8 +22,7 @@ import { FplManagerInfo } from "../../Models/FplManagerInfo";
 import { PlayerData } from "../../Models/CombinedData";
 import globalStyles from "../../Global/GlobalStyles";
 
-
-function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number) {
+function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number, currentGameweek: number) {
 
     const playerStatsView = [];
 
@@ -54,7 +53,7 @@ function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fix
                 <View style={styles.playerRowContainer} key={elementType}>
                     { lineupPlayers.slice(i, i + positionCount).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
                                                                                                            fixtures={fixtures} teamInfo={teamInfo}
-                                                                                                           viewIndex={viewIndex}/> })}
+                                                                                                           viewIndex={viewIndex} currentGameweek={currentGameweek}/> })}
                 </View>
             )
 
@@ -79,7 +78,7 @@ function CreateManagerInfoCard(teamInfo: TeamInfo, players: PlayerData[], curren
     )    
 }
 
-function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, viewIndex: number) {
+function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, viewIndex: number, currentGameweek: number) {
 
     const playerStatsView = [];
     
@@ -88,7 +87,7 @@ function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures:
             <View style={styles.playerRowContainer} key={5}>
                 { players.slice(11, 15).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
                                                                                    fixtures={fixtures} teamInfo={teamInfo}
-                                                                                   viewIndex={viewIndex}/> })}
+                                                                                   viewIndex={viewIndex} currentGameweek={currentGameweek}/> })}
             </View>
         )
     }
@@ -200,13 +199,13 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                     <>
                     {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 
                         <View style={styles.playerContainer}>
-                            {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex)}
+                            {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}
                         </View>
                     :
                     ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                         <>
                             <View style={styles.playerContainer}>
-                                {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex)}
+                                {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}
                             </View>
                             <View style={{position: 'absolute', height: '20%', aspectRatio: 1, right: 0, zIndex: 0}}>
                                 {CreateManagerInfoCard(teamInfo, players, currentGameweek, draftUserInfo, budgetUserInfo, budgetGameweekPicks)}
@@ -248,7 +247,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                 :
                 ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                     <>
-                    { CreateBenchView(players, overview, fixtures, teamInfo, viewIndex) }
+                    { CreateBenchView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek) }
                     </>
                 }
 
