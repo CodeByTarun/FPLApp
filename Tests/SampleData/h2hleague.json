@@ -1,0 +1,62 @@
+{
+    "new_entries": {
+        "has_next": false,
+        "page": 1,
+        "results": []
+    },
+    "last_updated_data": "2022-04-03T19:05:37Z",
+    "league": {
+        "id": 212321,
+        "name": "League Chappas",
+        "created": "2021-07-15T13:15:10.104057Z",
+        "closed": false,
+        "max_entries": null,
+        "league_type": "x",
+        "scoring": "c",
+        "admin_entry": 1133075,
+        "start_event": 1,
+        "code_privacy": "p",
+        "has_cup": false,
+        "cup_league": null,
+        "rank": null
+    },
+    "standings": {
+        "has_next": false,
+        "page": 1,
+        "results": [
+            {
+                "id": 8392582,
+                "event_total": 36,
+                "player_name": "Sam Chapman",
+                "rank": 1,
+                "last_rank": 1,
+                "rank_sort": 1,
+                "total": 1711,
+                "entry": 1525134,
+                "entry_name": "Johnny Top-Bins"
+            },
+            {
+                "id": 6100883,
+                "event_total": 33,
+                "player_name": "Aaron Chapman",
+                "rank": 2,
+                "last_rank": 2,
+                "rank_sort": 2,
+                "total": 1499,
+                "entry": 1133075,
+                "entry_name": "TheresOnlyOneUnited"
+            },
+            {
+                "id": 38950226,
+                "event_total": 6,
+                "player_name": "Katrina Chapman",
+                "rank": 3,
+                "last_rank": 3,
+                "rank_sort": 3,
+                "total": 907,
+                "entry": 5616553,
+                "entry_name": "KISSKLC"
+            }
+        ]
+    }
+}

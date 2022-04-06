@@ -4,7 +4,7 @@ export interface FplDraftLeagueInfo {
     league:         League;
     league_entries: LeagueEntry[];
     matches:        Match[];
-    standings:      { [key: string]: number }[];
+    standings:      Standing[];
 }
 
 export interface League {
@@ -49,4 +49,13 @@ export interface Match {
     started:               boolean;
     winning_league_entry:  null;
     winning_method:        null;
+}
+
+export interface Standing {
+    event_total: number;
+    last_rank: number,
+    league_entry: number,
+    rank: number,
+    rank_sort: number,
+    total: number,
 }

@@ -2,12 +2,22 @@ import React from "react";
 import * as GlobalConstants from '../Global/GlobalConstants';
 import { StyleSheet } from "react-native";
 
-const globalStyles = StyleSheet.create(
+export const globalStyles = StyleSheet.create(
     {
        flip: {
            transform: [
                { scaleX: -1 }
            ]
+       },
+
+       dropDownSymbol: {
+            color: GlobalConstants.textPrimaryColor, 
+            fontSize: GlobalConstants.mediumFont * 0.6, 
+            fontWeight: '700', 
+            marginTop: 0, 
+            transform: [{rotate: '-45deg'}], 
+            alignSelf: 'center',
+            marginBottom: 5
        },
 
        modalView: {

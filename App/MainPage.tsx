@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
-import FixturesView from './Features/Fixtures/FixturesView';
-import PlayerSearch from './Features/PlayerStats/PlayerSearch';
-import LineupContainer from './Features/GameStats/LineupContainer';
+import FixturesView from './Features/Fixtures/Fixtures';
 import * as GlobalConstants from './Global/GlobalConstants'
 import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
-import BaseModal from "./Modals/BaseModal";
 import { useAppSelector } from "./Store/hooks";
 import { ScreenTypes } from "./Store/navigationSlice";
+import ModalNavigator from "./Modals/ModalNavigator";
+import LineupView from "./Features/LineupView";
+import PlayerStats from "./Features/PlayerStats";
 
 const MainPage = () => {
 
@@ -36,9 +36,9 @@ const MainPage = () => {
                 <FixturesView overview={overview.data}/>
               </View>
               <View style={styles.lineupView}>
-                <LineupContainer overview={overview.data} fixtures={fixtures.data}/>
+                <LineupView overview={overview.data} fixtures={fixtures.data}/>
               </View>
-              <PlayerSearch overview={overview.data} fixtures={fixtures.data}/>
+              <PlayerStats overview={overview.data} fixtures={fixtures.data}/>
             </View>
           }
 
@@ -52,7 +52,7 @@ const MainPage = () => {
       </SafeAreaView>
 
       {(overview.data && fixtures.data) &&
-        <BaseModal overview={overview.data} fixtures={fixtures.data}/>
+        <ModalNavigator overview={overview.data} fixtures={fixtures.data}/>
       }
 
     </View>

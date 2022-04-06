@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { FplBudgetLeagueInfo } from '../Models/FplBudgetLeagueInfo';
 import { FplDraftGameweekPicks } from '../Models/FplDraftGameekPicks';
 import { FplDraftLeagueInfo } from '../Models/FplDraftLeagueInfo';
 import { FplDraftOverview } from '../Models/FplDraftOverview';
@@ -61,9 +62,13 @@ export const fplSlice = createApi({
     getBudgetUserInfo: builder.query<FplManagerInfo, number>({
       query: (entryId: number) => `https://fantasy.premierleague.com/api/entry/${entryId}/`
     }),
+
+    getBudgetLeagueInfo: builder.query<FplBudgetLeagueInfo, number>({
+      query: (leagueId: number) => `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_new_entries=1&page_standings=1&phase=1`
+    }),
   })
 })
 
 export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetDraftUserInfoQuery, useGetPlayerSummaryQuery,
-               useGetDraftOverviewQuery, useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, 
+               useGetDraftOverviewQuery, useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetBudgetLeagueInfoQuery, 
                useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery } = fplSlice
