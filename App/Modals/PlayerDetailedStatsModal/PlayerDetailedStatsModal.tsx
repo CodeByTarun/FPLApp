@@ -14,6 +14,7 @@ import { History } from "../../Models/FplPlayerSummary";
 import { Icons } from "../../Global/Images";
 import FixtureDifficultyList from "../../Features/PlayerStats/PlayerList/FixtureDifficultyList";
 import { CloseButton, CustomButton, PieChart, ToolTip } from "../../Features/Controls";
+import { styles } from "./PlayerDetailedStatsModalStyles";
 
 // If gamespan is null it will do overall stats for all games played
 interface StatsFilterState {
@@ -374,96 +375,5 @@ const rightStatText = (stat: string, value: number | string) => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-
-    header: {
-    },
-
-    controlsContainer: {
-        height: GlobalConstants.height*0.05,
-        flexDirection: 'row',
-        marginTop: 10,
-        marginBottom: 5,
-    },
-
-    titleText: {
-        fontSize: GlobalConstants.largeFont * 1.3,
-        color: GlobalConstants.textPrimaryColor,
-        fontWeight: 'bold',
-    }, 
-
-    viewToggleStyle: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent:'center',
-        backgroundColor:'red',
-        padding: 5,
-    },
-
-    text: {
-        color: GlobalConstants.textPrimaryColor,
-        fontSize: GlobalConstants.mediumFont * 0.9,
-        fontWeight: '500',
-    },
-
-    tableTextContainer: {
-        width: GlobalConstants.width*0.1,
-        flex: 1,
-    },
-
-    headerText: {
-        color: GlobalConstants.textPrimaryColor,
-        fontSize: GlobalConstants.mediumFont * 0.9,
-        fontWeight: '500',
-        alignSelf: 'center',
-    },
-
-    sectionBorder: {
-        borderWidth: 2, 
-        borderColor: GlobalConstants.aLittleLighterColor, 
-        borderRadius: GlobalConstants.cornerRadius,
-    },
-
-    sectionHeaderText: {
-        backgroundColor: GlobalConstants.primaryColor,
-        fontSize: GlobalConstants.largeFont,
-        fontWeight: 'bold',
-        color: GlobalConstants.textPrimaryColor,
-        position: 'absolute',
-        top: -20, 
-        left: 15,
-        padding: 5
-    },
-
-    gameweekSectionText: {
-        color: GlobalConstants.textPrimaryColor,
-        fontSize: GlobalConstants.mediumFont * 0.8,
-        fontWeight: '500',
-        alignSelf: 'center'
-    },
-
-    //#region  close button
-    closeButton: {
-        position: 'absolute',
-        zIndex: 1,
-        right: -7,
-        top: -7,
-        height: 25,
-        width: 25,
-        margin: 0,
-        borderRadius: 20,
-    },
-
-    closeButtonBackground: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        backgroundColor: GlobalConstants.secondaryColor,
-        borderRadius: 20,
-    },
-
-    //#endregion
-})
 
 export default PlayerDetailedStatsModal;
