@@ -113,7 +113,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
         {(teamInfo.teamType !== TeamTypes.Empty && gameweek && overview && fixtures && players) &&
         <View style={{flex: 1}}>
             <View style={{flex: 4}}>
-                <Image style={styles.field} source={require('../../../assets/threequartersfield.jpg')}/>
+                <Image style={styles.field} source={require('../../../../assets/threequartersfield.jpg')}/>
                 
                     
                     {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 

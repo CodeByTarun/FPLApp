@@ -3,7 +3,7 @@ import { height, largeFont, mediumFont, primaryColor, textPrimaryColor } from ".
 
 export const styles = StyleSheet.create({
     animatedView: {
-        backgrouendColor: primaryColor, 
+        backgroundColor: primaryColor, 
         zIndex: 2
     },
 
