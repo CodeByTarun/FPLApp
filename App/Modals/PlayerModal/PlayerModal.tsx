@@ -15,6 +15,7 @@ import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHe
 import { useAppDispatch } from "../../Store/hooks";
 import { closeModal } from "../../Store/modalSlice";
 import { CloseButton } from "../../Features/Controls";
+import { styles } from "./PlayerModalStyles";
 
 interface PlayerCardProps {
     overview: FplOverview;
@@ -47,7 +48,7 @@ function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, 
 
 function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, fixture: FplFixture) {
     return (
-        <View key={fixture.id} style={{ alignItems: 'center', marginTop: 15, marginBottom: 5}}>
+        <View key={fixture.id} style={styles.fixtureContainer}>
             <View style={styles.fixtureScoreView}>
                 <View style={styles.emblemView}>
                     <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview).code]} resizeMode='contain' />
@@ -59,7 +60,7 @@ function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, f
                 
             </View>
 
-            <View style={{flexDirection: 'row', borderColor: 'lightgray', borderBottomWidth: 1, padding: 5}}>
+            <View style={styles.statHeaderContainer}>
                 <Text style={[styles.statText, {flex: 3}]}>Stat</Text>
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <Text style={styles.statText}>Value</Text>
@@ -70,7 +71,7 @@ function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, f
             </View>
             {
                 playerData.gameweekData.explain.find(game => game.fixture === fixture.id)?.stats.map(stat => 
-                        <View key={stat.identifier} style={{flexDirection: 'row', padding: 5}}>
+                        <View key={stat.identifier} style={styles.statContainer}>
                             <Text style={[styles.statText, {flex: 3}]}>{StatNames[stat.identifier]}</Text>
                             <View style={{flex: 1, alignItems: 'center'}}>
                                 <Text style={styles.statText}>{stat.value}</Text>
@@ -94,9 +95,7 @@ const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) =>
             <Pressable style={globalStyles.modalBackground} onPress={() => dispatch(closeModal())}/>
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
                     <CloseButton closeFunction={() => dispatch(closeModal())}/>
-                    <Text style={{fontSize: GlobalConstants.largeFont, color: GlobalConstants.textPrimaryColor, 
-                                  alignSelf: 'center', paddingTop: 10, fontWeight: '500', 
-                                  textAlign: 'center', paddingBottom: 10}}>
+                    <Text style={styles.titleText}>
                         {player.overviewData.first_name + " " + player.overviewData.second_name}
                     </Text>
                     <ScrollView style={{ flex: 1 }}>
@@ -107,43 +106,5 @@ const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) =>
         </Modal>
     )
 }
-
-const styles = StyleSheet.create(
-    {
-        statText: {
-            color: GlobalConstants.modalTextColor,
-            fontSize: GlobalConstants.mediumFont,
-        },
-
-        fixtureScoreView: {
-            flexDirection: 'row', 
-            width: '75%', 
-            alignSelf: 'center', 
-            height: GlobalConstants.height*0.05, 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            marginBottom: 10,
-        },
-
-        scoreText: {
-            color: GlobalConstants.modalTextColor,
-            fontSize: GlobalConstants.largeFont,
-            marginLeft: 5,
-            marginRight: 5,
-        },
-
-        emblemView: {
-            width:'25%',
-        },
-
-        emblems: {
-            resizeMode: 'contain',
-            alignSelf:'center',
-            height: '100%',
-            width: '100%',
-         },
-
-    }
-)
 
 export default PlayerModal;

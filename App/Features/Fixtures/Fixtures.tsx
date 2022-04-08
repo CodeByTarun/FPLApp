@@ -89,8 +89,7 @@ const Fixtures = (props: FixturesViewProp) => {
       }
     }, [teamInfo.gameweek]);
 
-  useEffect(
-    function refetchLiveGameweekData() {
+  useEffect( function refetchLiveGameweekData() {
       let refetchFixture: NodeJS.Timer;
       let refetchGameweek: NodeJS.Timer;
 
@@ -142,7 +141,7 @@ const Fixtures = (props: FixturesViewProp) => {
           <View style={styles.innerControlsContainer}>
             <View style={{flex: 1}}/>
             <TouchableOpacity style={[styles.gameweekButton]} onPress={onGameweekButtonPress}>
-              <Text style={styles.gameweekText}>Gameweek {teamInfo.gameweek}  </Text>
+              <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
               <Text style={styles.gameweekDropDownSymbol}>◣</Text>
             </TouchableOpacity>
             <View style={styles.buttonsContainers}>

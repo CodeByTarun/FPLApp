@@ -14,7 +14,7 @@ import { useAppDispatch } from "../../../Store/hooks";
 import { goToMainScreen } from "../../../Store/navigationSlice";
 import { Icons } from "../../../Global/Images";
 import globalStyles from "../../../Global/GlobalStyles";
-import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilter";
+import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
 import { styles } from "./PlayerTableStyles";
 import { Dropdown, ToolTip, CustomButton } from "../../Controls";
 

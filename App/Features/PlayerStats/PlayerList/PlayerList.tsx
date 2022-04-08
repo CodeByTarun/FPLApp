@@ -8,7 +8,7 @@ import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { useAppDispatch } from "../../../Store/hooks";
 import { openPlayerDetailedStatsModal } from "../../../Store/modalSlice";
 import { CustomButton } from "../../Controls";
-import { PlayerTableFilterState } from "../PlayerTable/PlayerTableFilter";
+import { PlayerTableFilterState } from "../PlayerTable/PlayerTableFilterReducer";
 import FixtureDifficultyList from "./FixtureDifficultyList";
 import PlayerListInfo from "./PlayerListInfo/PlayerListInfo";
 import { styles } from "./PlayerListStyles";
