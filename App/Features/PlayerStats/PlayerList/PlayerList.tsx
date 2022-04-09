@@ -4,6 +4,7 @@ import { FlatList, Pressable, View, Text } from "react-native";
 import { OverviewStats } from "../../../Global/EnumsAndDicts";
 import { height, Per90Stats } from "../../../Global/GlobalConstants";
 import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../../Helpers/FplDataStorageService";
+import TeamModal from "../../../Modals/TeamModal";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { useGetDraftLeagueInfoQuery, useGetDraftLeaguePlayerStatusesQuery, useGetDraftUserInfoQuery } from "../../../Store/fplSlice";
@@ -45,9 +46,11 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     const getOwnedPlayersMangerShortInitialsIfOwned = (playerId : number) => {
 
+        
         let player = draftLeagueRosters.data?.element_status.find(player => player.element === playerId);
 
         if (player && player.status === 'o') {
+            
             return draftLeagueInfo.data?.league_entries.find(entry => entry.entry_id === player?.owner)?.short_name;
         } 
         else {
@@ -150,7 +153,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
         }
     }, [filters.statFilter, filters.isPer90]);
 
-    const renderPlayerItem = useCallback((({item}: {item: PlayerOverview}) => {
+    const renderPlayerItem = ({item}: {item: PlayerOverview}) => {
 
         let isInWatchList = watchlist?.playerIds.includes(item.id);
 
@@ -171,14 +174,14 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
         </Pressable>)
-    }), [filters.statFilter, filters.isPer90, watchlist, teamInfo.teamType]);
+    }
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion
     
     return(
         <>
-        {((teamInfo.teamType !== TeamTypes.Draft) || (draftUserInfo.isSuccess && draftLeagueInfo.isSuccess && draftLeagueRosters.isSuccess)) &&
+        {((teamInfo.teamType !== TeamTypes.Draft) || (draftUserInfo.data && draftLeagueInfo.data && draftLeagueRosters.data)) &&
         <FlatList
             data={playerList}
             renderItem={renderPlayerItem}

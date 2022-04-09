@@ -11,6 +11,7 @@ interface PlayerListInfoProps {
 }
 
 const PlayerListInfo = React.memo(({overview, player, owner} : PlayerListInfoProps) => {
+
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{ flex: 1}}>
