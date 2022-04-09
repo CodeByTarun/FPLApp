@@ -7,7 +7,7 @@ import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlay
 import TeamModal from "../../../Modals/TeamModal";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
-import { useGetDraftLeagueInfoQuery, useGetDraftLeaguePlayerStatusesQuery, useGetDraftUserInfoQuery } from "../../../Store/fplSlice";
+import { useGetDraftLeagueInfoQuery, useGetDraftLeaguePlayerStatusesQuery, useGetDraftOverviewQuery, useGetDraftUserInfoQuery } from "../../../Store/fplSlice";
 import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
 import { openPlayerDetailedStatsModal } from "../../../Store/modalSlice";
 import { TeamTypes } from "../../../Store/teamSlice";
@@ -40,14 +40,17 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     //#region Draft League info to add if in draft league 
     const teamInfo = useAppSelector(state => state.team);
+    const draftOverview = useGetDraftOverviewQuery((teamInfo.teamType === TeamTypes.Draft) ? undefined : skipToken );
     const draftUserInfo = useGetDraftUserInfoQuery((teamInfo.teamType === TeamTypes.Draft) ? teamInfo.info.id : skipToken );
     const draftLeagueInfo = useGetDraftLeagueInfoQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
     const draftLeagueRosters =  useGetDraftLeaguePlayerStatusesQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
 
     const getOwnedPlayersMangerShortInitialsIfOwned = (playerId : number) => {
 
-        
-        let player = draftLeagueRosters.data?.element_status.find(player => player.element === playerId);
+        let code = draftOverview.data?.elements.find(player => player.id === playerId)?.code;
+        let budgetPlayerId = overview.elements.find(player => player.code === code)?.id;
+
+        let player = draftLeagueRosters.data?.element_status.find(player => player.element === budgetPlayerId);
 
         if (player && player.status === 'o') {
             

@@ -172,17 +172,16 @@ const Fixtures = ({overview}: FixturesViewProp) => {
         }
       </View>
       <View style={{flex: 1}}>
-      { (fixtures.isSuccess == true) &&
+      { (fixtures.isSuccess && gameweekData.isSuccess) &&
           <ScrollView ref={fixtureScrollViewRef} 
                       horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
                       showsHorizontalScrollIndicator={false} 
                       style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }} 
                       contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}>
-            { (fixtures.data && gameweekData.data && overview) &&
-
+            { 
               fixtures.data.filter((fixture) => { return fixture.event == teamInfo.gameweek})
                             .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                            .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overviewData={overview}/> })     
+                            .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overview={overview}/> })     
             }
           </ScrollView>
       }

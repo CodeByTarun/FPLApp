@@ -1,7 +1,7 @@
 import { PlayerData } from "../Models/CombinedData";
 import { FplDraftGameweekPicks } from "../Models/FplDraftGameekPicks";
 import { FplDraftOverview } from "../Models/FplDraftOverview";
-import { FplFixture } from "../Models/FplFixtures";
+import { A, FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from "../Models/FplGameweek";
 import { FplManagerGameweekPicks } from "../Models/FplManagerGameweekPicks";
 import { FplOverview, Team } from "../Models/FplOverview";
@@ -137,6 +137,36 @@ export function GetHighestMinForAPlayer(fixture: FplFixture, gameweek: FplGamewe
                                                                .find(stat => stat.identifier === 'minutes')?.value as number);
 
     return Math.max(...minutes)               
+}
+
+export function GetScoreForLiveFixture(fixture: FplFixture, gameweek:FplGameweek) : number[] {
+    let score = [0,0];
+
+    let homePlayers = fixture.stats.find(stat => stat.identifier === 'bps')?.h;
+    let awayPlayers = fixture.stats.find(stat => stat.identifier === 'bps')?.a;
+
+    let homeGoals = getStatTotal(fixture, gameweek, 'goals_scored', homePlayers);
+    let awayGoals = getStatTotal(fixture, gameweek, 'goals_scored', awayPlayers);
+    let homeOwnGoals = getStatTotal(fixture, gameweek, 'own_goals', homePlayers);
+    let awayOwnGoals = getStatTotal(fixture, gameweek, 'own_goals', awayPlayers);
+    
+    score[0] = (homeGoals ? homeGoals : 0) + (awayOwnGoals ? awayOwnGoals : 0);
+    score[0] = (awayGoals ? awayGoals : 0) + (homeOwnGoals ? homeOwnGoals : 0);
+
+    return score;
+}
+
+function getStatTotal(fixture: FplFixture, gameweek:FplGameweek, statIdentifier: string, players: A[] | undefined) {
+
+    if (players) {
+        return players.map((stat) => gameweek.elements.find(element => element.id === stat.element)?.explain
+                                                    .find(game => game.fixture === fixture.id)?.stats
+                                                    .find(stat => stat.identifier === statIdentifier)?.value as number)
+                                                    .filter(num => num !== undefined)
+                                                    .reduce((prev, curr) => prev + curr, 0);
+    }
+
+    return 0;
 }
 
 export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {

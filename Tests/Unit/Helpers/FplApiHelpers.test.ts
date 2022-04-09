@@ -1,4 +1,4 @@
-import { GetPlayerGameweekDataSortedByPosition, IsThereAMatchInProgress, GetPlayerPointsForAFixture } from "../../../App/Helpers/FplAPIHelpers";
+import { GetPlayerGameweekDataSortedByPosition, IsThereAMatchInProgress, GetPlayerPointsForAFixture, GetScoreForLiveFixture } from "../../../App/Helpers/FplAPIHelpers";
 import overview from "../../SampleData/fploverview.json";
 import gameweek from "../../SampleData/gameweekdata.json";
 import fixture from "../../SampleData/provisionalfinishedfixture.json";
@@ -33,3 +33,8 @@ test('MatchInProgress_True', () => {
 test('PointsForAntonioDuringDoubleGameweekAreCorrect', () => {
     expect(GetPlayerPointsForAFixture((GetPlayerGameweekDataSortedByPosition(gameweek as FplGameweek, overview as FplOverview, teamInfo) as PlayerData[])[0] as PlayerData, teamInfo)).toBe(0);
 })
+
+// TODO: Test this tomorrow (need live data)
+// text('ScoreCorrectForLiveFixture', () => {
+//     expect(GetScoreForLiveFixture())
+// })

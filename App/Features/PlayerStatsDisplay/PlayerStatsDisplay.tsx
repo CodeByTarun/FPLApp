@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, View, Text, TouchableOpacity } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
 import { Icons, Jerseys, StatImages } from "../../Global/Images";
@@ -11,7 +11,6 @@ import { Identifier } from "../../Models/FplGameweek";
 import { FplFixture } from "../../Models/FplFixtures";
 import { openPlayerModal } from "../../Store/modalSlice";
 import globalStyles from "../../Global/GlobalStyles";
-import { DifficultyColors } from "../../Global/EnumsAndDicts";
 import { styles } from "./PlayerStatsDisplayStyles";
 import FixtureDifficultyDisplay from "./FixtureDifficultyDisplay";
 
