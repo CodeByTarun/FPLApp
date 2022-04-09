@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { modalTextColor, mediumFont, height, largeFont, textPrimaryColor } from "../../Global/GlobalConstants";
+import { modalTextColor, mediumFont, height, largeFont, textPrimaryColor, secondaryColor, cornerRadius, textSecondaryColor } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
@@ -7,10 +7,10 @@ export const styles = StyleSheet.create({
         fontSize: largeFont, 
         color: textPrimaryColor, 
         alignSelf: 'center', 
-        paddingTop: 10, 
+        paddingTop: 15, 
         fontWeight: '500', 
         textAlign: 'center', 
-        paddingBottom: 10
+        paddingBottom: 5
     },
 
     fixtureContainer: {
@@ -63,5 +63,21 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         padding: 5
     },
+
+    button: {
+        height: 40,
+        width: '50%',
+        backgroundColor: secondaryColor,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: cornerRadius,
+        marginTop: 10,
+        alignSelf: 'center'
+    },
+
+    buttonText: {
+        color: textPrimaryColor,
+        fontWeight: '500',
+    }
 
 }); 

@@ -1,3 +1,4 @@
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, View, Text } from "react-native";
 import { OverviewStats } from "../../../Global/EnumsAndDicts";
@@ -5,8 +6,10 @@ import { height, Per90Stats } from "../../../Global/GlobalConstants";
 import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../../Helpers/FplDataStorageService";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
-import { useAppDispatch } from "../../../Store/hooks";
+import { useGetDraftLeagueInfoQuery, useGetDraftLeaguePlayerStatusesQuery, useGetDraftUserInfoQuery } from "../../../Store/fplSlice";
+import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
 import { openPlayerDetailedStatsModal } from "../../../Store/modalSlice";
+import { TeamTypes } from "../../../Store/teamSlice";
 import { CustomButton } from "../../Controls";
 import { PlayerTableFilterState } from "../PlayerTable/PlayerTableFilterReducer";
 import FixtureDifficultyList from "./FixtureDifficultyList";
@@ -33,6 +36,26 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     const dispatch = useAppDispatch();
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
+
+    //#region Draft League info to add if in draft league 
+    const teamInfo = useAppSelector(state => state.team);
+    const draftUserInfo = useGetDraftUserInfoQuery((teamInfo.teamType === TeamTypes.Draft) ? teamInfo.info.id : skipToken );
+    const draftLeagueInfo = useGetDraftLeagueInfoQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
+    const draftLeagueRosters =  useGetDraftLeaguePlayerStatusesQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
+
+    const getOwnedPlayersMangerShortInitialsIfOwned = (playerId : number) => {
+
+        let player = draftLeagueRosters.data?.element_status.find(player => player.element === playerId);
+
+        if (player && player.status === 'o') {
+            return draftLeagueInfo.data?.league_entries.find(entry => entry.entry_id === player?.owner)?.short_name;
+        } 
+        else {
+            return null
+        }
+    }
+
+    //#endregion
 
     //#region Player Watchlist
     useEffect( function initialSetup() {
@@ -137,7 +160,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                 <CustomButton image={isInWatchList ? "favourite" : "unfavourite"} buttonFunction={isInWatchList ? () => removeFromWatchlist(item.id) : () => addToWatchlist(item.id)}/>
             </View>
             <View style={{ flex: 3, height: height * 0.05 }}>
-                <PlayerListInfo overview={overview} player={item} />
+                <PlayerListInfo overview={overview} player={item} owner={(teamInfo.teamType === TeamTypes.Draft) ? getOwnedPlayersMangerShortInitialsIfOwned(item.id) : null}/>
             </View>
 
             <View style={{ flex: 3 }}>
@@ -148,12 +171,14 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
         </Pressable>)
-    }), [filters.statFilter, filters.isPer90, watchlist]);
+    }), [filters.statFilter, filters.isPer90, watchlist, teamInfo.teamType]);
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion
     
     return(
+        <>
+        {((teamInfo.teamType !== TeamTypes.Draft) || (draftUserInfo.isSuccess && draftLeagueInfo.isSuccess && draftLeagueRosters.isSuccess)) &&
         <FlatList
             data={playerList}
             renderItem={renderPlayerItem}
@@ -161,6 +186,8 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
             removeClippedSubviews={true}
             initialNumToRender={15}
             maxToRenderPerBatch={40}/>
+        }
+        </>
     )
 });
 

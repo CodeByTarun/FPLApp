@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
-import { primaryColor, textPrimaryColor, width, smallFont, cornerRadius, height, secondaryColor } from "../../Global/GlobalConstants";
+import { primaryColor, textPrimaryColor, width, smallFont, cornerRadius, height, secondaryColor, largeFont, mediumFont } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
-    //#region Container styling
+
     container: {
         flex: 1,
         margin: 0,
@@ -94,6 +94,21 @@ export const styles = StyleSheet.create({
         borderRadius: cornerRadius,
         padding: 5,
         backgroundColor: secondaryColor
-    }
-    //#endregion
+    },
+
+    button: {
+        position: 'absolute',
+        top: '33%',
+        padding: 20, 
+        backgroundColor: secondaryColor, 
+        borderRadius: cornerRadius, 
+        width: '60%', alignSelf: 'center'
+    },
+
+    buttonText: {
+        color: textPrimaryColor,
+        fontWeight: '500',
+        fontSize: mediumFont * 1.1,
+        alignSelf: 'center'
+    },
 });

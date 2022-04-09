@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Animated } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Animated } from "react-native";
 import FixtureCard from './FixtureCard/FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { useGetFixturesQuery, useGetGameweekDataQuery, } from '../../Store/fplSlice'
-import * as GlobalConstants from '../../Global/GlobalConstants'
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
-import { changeGameweek, changingFixtureWhenGameweekChanged, removeFixture } from "../../Store/teamSlice";
+import { changeGameweek, changeToBudgetTeam, changeToDraftTeam, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
-import { openGameweekModal } from "../../Store/modalSlice";
+import { openGameweekModal, openInfoModal } from "../../Store/modalSlice";
 import { goToFixturesScreen, goToMainScreen, ScreenTypes } from "../../Store/navigationSlice";
 import { styles } from "./FixturesStyles";
 import { CustomButton } from "../Controls";
+import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
 
 interface FixturesViewProp {
   overview: FplOverview;
@@ -25,10 +25,10 @@ function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
   return 0;
 }
 
-const Fixtures = (props: FixturesViewProp) => {
+const Fixtures = ({overview}: FixturesViewProp) => {
 
   const dispatch = useAppDispatch();
-  const liveGameweek = props.overview.events.filter((event) => { return event.is_current === true; })[0].id;
+  const liveGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
   const teamInfo = useAppSelector(state => state.team);
   const navigation = useAppSelector(state => state.navigation);
   const fixtures = useGetFixturesQuery();
@@ -58,12 +58,24 @@ const Fixtures = (props: FixturesViewProp) => {
       }).start();
   },[]);
 
-  useEffect( function setInitialGameweek() {
-      if (props.overview) {
-        let gameweekNumber = props.overview.events.find(event => event.is_current === true)?.id;
-        if (gameweekNumber) {
-          dispatch(changeGameweek(gameweekNumber))
+  useEffect( function setInitialData() {
+      async function setTeam() {
+        let teams = await getAllUserTeamInfo();
+        
+        if (teams) {
+          let favouriteTeam = teams.find(team => team.isFavourite === true);
+
+          if (favouriteTeam) {
+            dispatch(favouriteTeam?.isDraftTeam ? changeToDraftTeam(favouriteTeam) : changeToBudgetTeam(favouriteTeam))
+          }
         }
+      }
+
+      let gameweekNumber = overview.events.find(event => event.is_current === true)?.id;
+
+      if (gameweekNumber) {
+        dispatch(changeGameweek(gameweekNumber))
+        setTeam();
       }
     }, []);
 
@@ -71,17 +83,19 @@ const Fixtures = (props: FixturesViewProp) => {
 
       fixtureScrollViewRef.current?.scrollTo({ x:0, y:0, animated:true });
 
-      let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.data?.filter((fixture) => { return fixture.event == teamInfo.gameweek})
-                                                                           .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2));
+      if(teamInfo.teamType === TeamTypes.Fixture) {
+        let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.data?.filter((fixture) => { return fixture.event == teamInfo.gameweek})
+                                                                            .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2));
+      
+        if (sortedGameweekFixtures !== undefined) {
 
-      if (sortedGameweekFixtures !== undefined) {
-
-        if (sortedGameweekFixtures[0].started === true) {
-          dispatch(changingFixtureWhenGameweekChanged(sortedGameweekFixtures[0]));
-        } 
-        else {
-          dispatch(removeFixture());
-        }                              
+          if (sortedGameweekFixtures[0].started === true) {
+            dispatch(changingFixtureWhenGameweekChanged(sortedGameweekFixtures[0]));
+          } 
+          else {
+            dispatch(removeFixture());
+          }                              
+        }
       }
 
       if ((teamInfo.gameweek > liveGameweek) && (navigation.screenType !== ScreenTypes.Fixtures)) {
@@ -109,7 +123,7 @@ const Fixtures = (props: FixturesViewProp) => {
     }, [teamInfo.gameweek]);
 
     const onInfoButtonPress = useCallback(() => {
-
+      dispatch(openInfoModal());
     }, [])
 
     const onCalendarButtonPress = useCallback(() => {
@@ -136,7 +150,7 @@ const Fixtures = (props: FixturesViewProp) => {
   return (
     <Animated.View style={[styles.animatedView, { height: heightInterpolate }]}>
       <View style={styles.controlsContainer}>
-        {props.overview && 
+        {overview && 
 
           <View style={styles.innerControlsContainer}>
             <View style={{flex: 1}}/>
@@ -164,11 +178,11 @@ const Fixtures = (props: FixturesViewProp) => {
                       showsHorizontalScrollIndicator={false} 
                       style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }} 
                       contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}>
-            { (fixtures.data && gameweekData.data && props.overview) &&
+            { (fixtures.data && gameweekData.data && overview) &&
 
               fixtures.data.filter((fixture) => { return fixture.event == teamInfo.gameweek})
                             .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                            .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overviewData={props.overview}/> })     
+                            .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overviewData={overview}/> })     
             }
           </ScrollView>
       }

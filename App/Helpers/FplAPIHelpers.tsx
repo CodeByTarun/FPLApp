@@ -170,7 +170,7 @@ export function GetTeamTotalPoints(teamInfo: TeamInfo, players: PlayerData[], bu
     }
     else if (teamInfo.teamType === TeamTypes.Draft) {
         return players.slice(0, 11).reduce((prev, player) => player.gameweekData.stats.total_points + prev, 0);
-    }   
+    }
 
     return 0;
 }
@@ -183,6 +183,6 @@ export function GetTeamTotalExpectedPoints(teamInfo: TeamInfo, players: PlayerDa
     else if (teamInfo.teamType === TeamTypes.Draft) {
         return (players.slice(0, 11).reduce((prev, player) => Number(player.overviewData.ep_this) + prev, 0)).toFixed(1);
     }   
-
+    
     return 0;
 }

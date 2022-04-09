@@ -2,7 +2,7 @@
 // ppl see how a player is performing recently as well as on the overall season
 
 import React from "react";
-import { Modal, Pressable, View, Image, StyleSheet, Text, ScrollView } from "react-native";
+import { Modal, Pressable, View, Image, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
 import { StatNames } from "../../Global/EnumsAndDicts";
 import globalStyles from "../../Global/GlobalStyles";
 import { Emblems } from "../../Global/Images";
@@ -13,7 +13,7 @@ import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { useAppDispatch } from "../../Store/hooks";
-import { closeModal } from "../../Store/modalSlice";
+import { closeModal, openPlayerDetailedStatsModal } from "../../Store/modalSlice";
 import { CloseButton } from "../../Features/Controls";
 import { styles } from "./PlayerModalStyles";
 
@@ -90,6 +90,10 @@ const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) =>
 
     const dispatch = useAppDispatch();
 
+    const onMoreInfoPress = () => {
+        dispatch(openPlayerDetailedStatsModal(player.overviewData))
+    }
+
     return (
         <Modal animationType="fade" transparent={true} visible={true}>
             <Pressable style={globalStyles.modalBackground} onPress={() => dispatch(closeModal())}/>
@@ -101,7 +105,10 @@ const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) =>
                     <ScrollView style={{ flex: 1 }}>
                         { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
                     </ScrollView>
-                            
+                    <TouchableOpacity style={[styles.button, globalStyles.shadow]}
+                                      onPress={onMoreInfoPress}>
+                        <Text style={styles.buttonText}>More Info</Text>
+                    </TouchableOpacity>
                 </View>        
         </Modal>
     )

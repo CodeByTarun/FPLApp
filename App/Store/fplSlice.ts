@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { FplBudgetLeagueInfo } from '../Models/FplBudgetLeagueInfo';
 import { FplDraftGameweekPicks } from '../Models/FplDraftGameekPicks';
 import { FplDraftLeagueInfo } from '../Models/FplDraftLeagueInfo';
+import { FplDraftLeaguePlayerStatuses } from '../Models/FplDraftLeaguePlayerStatuses';
 import { FplDraftOverview } from '../Models/FplDraftOverview';
 import { FplDraftUserInfo } from '../Models/FplDraftUserInfo';
 import { FplFixture } from "../Models/FplFixtures";
@@ -55,6 +56,10 @@ export const fplSlice = createApi({
       query: ({entryId, gameweek}) => `https://draft.premierleague.com/api/entry/${entryId}/event/${gameweek}`
     }),
 
+    getDraftLeaguePlayerStatuses: builder.query<FplDraftLeaguePlayerStatuses, number>({
+      query: (leagueId: number) => `https://draft.premierleague.com/api/league/${leagueId}/element-status`
+    }),
+
     getBudgetGameweekPicks: builder.query<FplManagerGameweekPicks, { entryId: number, gameweek: number }>({
       query: ({entryId, gameweek}) => `https://fantasy.premierleague.com/api/entry/${entryId}/event/${gameweek}/picks/`
     }),
@@ -70,5 +75,5 @@ export const fplSlice = createApi({
 })
 
 export const { useGetOverviewQuery, useGetFixturesQuery, useGetGameweekDataQuery, useGetDraftUserInfoQuery, useGetPlayerSummaryQuery,
-               useGetDraftOverviewQuery, useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetBudgetLeagueInfoQuery, 
-               useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery } = fplSlice
+               useGetDraftOverviewQuery, useGetDraftLeagueInfoQuery, useGetDraftGameweekPicksQuery, useGetDraftLeaguePlayerStatusesQuery,
+               useGetBudgetLeagueInfoQuery, useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery } = fplSlice

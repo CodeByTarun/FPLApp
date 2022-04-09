@@ -4,7 +4,7 @@
 // The input for this component is a list of player IDs
 
 import React, { useEffect, useState } from "react";
-import { Image, View } from "react-native";
+import { Image, TouchableOpacity, View, Text } from "react-native";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../Helpers/FplAPIHelpers";
 import { FplGameweek } from "../../../Models/FplGameweek";
 import { FplOverview } from "../../../Models/FplOverview";
@@ -22,6 +22,7 @@ import PlayerStatsDisplay from "../../PlayerStatsDisplay";
 import AdditionalInfoCard from "./AdditionalInfoCard";
 import BonusPointView from "./BonusPointView";
 import KingsOfTheGameweekView from "./KingsOfTheGameweekView";
+import { cornerRadius, secondaryColor } from "../../../Global/GlobalConstants";
 
 function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number, currentGameweek: number) {
 
@@ -110,7 +111,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
 
     return (
         <>
-        {(teamInfo.teamType !== TeamTypes.Empty && gameweek && overview && fixtures && players) &&
+        {(teamInfo.teamType !== TeamTypes.Empty && players && teamInfo.gameweek <= currentGameweek) &&
         <View style={{flex: 1}}>
             <View style={{flex: 4}}>
                 <Image style={styles.field} source={require('../../../../assets/threequartersfield.jpg')}/>

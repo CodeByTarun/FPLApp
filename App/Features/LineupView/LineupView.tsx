@@ -1,7 +1,7 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
 import React, { useCallback, useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch/TeamSwitch";
@@ -109,8 +109,15 @@ const LineupView = ({overview, fixtures}: LineupViewProps) => {
 
                  (teamInfo.teamType !== TeamTypes.Draft && teamInfo.teamType !== TeamTypes.Budget && gameweek.data) ?
                     <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek.data} /> : 
-                    <></>
+                
+                    <View style={{flex: 1, alignContent: 'center', justifyContent: 'center'}}>
+                        <TouchableOpacity style={styles.button} onPress={() => dispatch(openTeamModal())}>
+                            <Text style={styles.buttonText}>Add your fantasy team</Text>
+                        </TouchableOpacity>
+                    </View>
+            
                 }
+                
             </View>
                 <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
                         distanceFromTop={55} 

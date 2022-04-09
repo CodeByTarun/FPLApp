@@ -1,5 +1,5 @@
 export interface StatsFilterState {
-    gameSpan: number | null;
+    gameSpan: number[];
     isPer90: boolean;
 }
 
@@ -11,12 +11,12 @@ export enum StatsFilterActionKind {
 
 export type StatsFilterAction = {
     type: StatsFilterActionKind.ChangeGameSpan;
-    value: number;
+    value: number[];
 } | {
     type: StatsFilterActionKind.ChangeIsPer90;
 } | {
     type: StatsFilterActionKind.Reset;
-    value: number;
+    value: number[];
 }
 
 export function statsFilterReducer(state: StatsFilterState, action: StatsFilterAction): StatsFilterState {

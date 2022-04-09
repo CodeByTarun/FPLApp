@@ -35,8 +35,8 @@ const Stats = ({statsFilterState, player, playerData, currentGameweek} : StatsPr
 
     const getMinutes = useCallback(() => {
         if (playerData && statsFilterState.gameSpan) {
-            return playerData.history.slice(statsFilterState.gameSpan *  -1)
-                                          .reduce((prev, curr) => prev + curr.minutes, 0); 
+            return playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
+                                     .reduce((prev, curr) => prev + curr.minutes, 0); 
         } else {
             return player.minutes;
         }
@@ -49,8 +49,8 @@ const Stats = ({statsFilterState, player, playerData, currentGameweek} : StatsPr
         let statValue: number;
 
         if (playerData && statsFilterState.gameSpan) {
-            statValue = playerData.history.slice(statsFilterState.gameSpan *  -1)
-                                               .reduce((prev, curr) => prev + (Number(curr[stat as keyof History])), 0) 
+            statValue = playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
+                                          .reduce((prev, curr) => prev + (Number(curr[stat as keyof History])), 0) 
         } else {
             statValue = Number(player[stat as keyof PlayerOverview]);
         }

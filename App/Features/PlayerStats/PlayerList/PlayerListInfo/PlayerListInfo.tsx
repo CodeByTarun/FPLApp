@@ -7,9 +7,10 @@ import { styles } from "./PlayerListInfoStyles";
 interface PlayerListInfoProps {
     overview: FplOverview,
     player: PlayerOverview,
+    owner? : string | null | undefined,
 }
 
-const PlayerListInfo = React.memo(({overview, player} : PlayerListInfoProps) => {
+const PlayerListInfo = React.memo(({overview, player, owner} : PlayerListInfoProps) => {
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{ flex: 1}}>
@@ -24,7 +25,13 @@ const PlayerListInfo = React.memo(({overview, player} : PlayerListInfoProps) => 
             </View>
             
             <View style={{flex: 3, justifyContent: 'center'}}> 
-                <Text numberOfLines={1} style={styles.tableText}>{player.web_name}</Text>
+                <View style={{flexDirection: 'row'}}>
+                    { owner && 
+                        <Text style={styles.ownerText}>{owner}</Text>
+                    }
+                    <Text numberOfLines={1} style={[styles.tableText, {flex: 1}]}>{player.web_name}</Text>
+                    
+                </View>
                 <View style={{flexDirection: 'row', marginTop: 2}}>
                     <Text style={[styles.tableText, {fontWeight: 'bold'}]}>{overview.teams.find(team => team.code === player.team_code)?.short_name}  </Text>
                     <Text style={styles.tableText}>{overview.element_types.find(element => element.id === player.element_type)?.singular_name_short}  </Text>

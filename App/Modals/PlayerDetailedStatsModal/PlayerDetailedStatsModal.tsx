@@ -30,11 +30,11 @@ const PlayerDetailedStatsModal = ({overview, fixtures, player}: PlayerDetailedSt
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
-    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: currentGameweek, isPer90: false });
+    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, currentGameweek], isPer90: false });
     const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
 
     useEffect( function ModalClosed() {
-        statsFilterDispatch({type: StatsFilterActionKind.Reset, value: currentGameweek });
+        statsFilterDispatch({ type: StatsFilterActionKind.Reset, value: [1, currentGameweek] });
         setIsStatViewShowing(true);
     }, [player]);
 
@@ -129,20 +129,23 @@ const PlayerDetailedStatsModal = ({overview, fixtures, player}: PlayerDetailedSt
                                          color={statsFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
                                          onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
                                  </View>
-                                 <View style={{ marginTop: 20 }}>
-                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                         <Text style={[styles.text, { flex: 1 }]}>Game span</Text>
-                                         <Text style={styles.text}>{statsFilterState.gameSpan}</Text>
+                                 <View style={{ marginTop: 10 }}>
+                                     <View style={{ alignItems: 'center' }}>
+                                         <Text style={[styles.text, { flex: 1, alignSelf: 'flex-start', paddingBottom: 5 }]}>Gameweeks:</Text>
+                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text style={[styles.text, {flex: 1}]}>{statsFilterState.gameSpan[0]}</Text>
+                                            <Text style={[styles.text]}>{statsFilterState.gameSpan[1]}</Text>
+                                         </View>
                                      </View>
 
-                                     <Slider value={statsFilterState.gameSpan ? statsFilterState.gameSpan : 0}
-                                         onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number })}
+                                     <Slider value={statsFilterState.gameSpan}
+                                         onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number[] })}
                                          minimumValue={1}
                                          maximumValue={currentGameweek}
                                          step={1}
                                          thumbTintColor={GlobalConstants.primaryColor}
                                          maximumTrackTintColor={'white'}
-                                         minimumTrackTintColor={GlobalConstants.primaryColor} />
+                                         minimumTrackTintColor={GlobalConstants.primaryColor}/>
                                  </View>
                              </View>}/>
                 </View>
