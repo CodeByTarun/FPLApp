@@ -1,0 +1,184 @@
+{
+    "code": 2210583,
+    "event": 32,
+    "finished": false,
+    "finished_provisional": false,
+    "id": 313,
+    "kickoff_time": "2022-04-10T13:00:00Z",
+    "minutes": 0,
+    "provisional_start_time": false,
+    "started": true,
+    "team_a": 19,
+    "team_a_score": 0,
+    "team_h": 3,
+    "team_h_score": 1,
+    "stats": [
+        {
+            "identifier": "goals_scored",
+            "a": [],
+            "h": [
+                {
+                    "value": 1,
+                    "element": 96
+                }
+            ]
+        },
+        {
+            "identifier": "assists",
+            "a": [],
+            "h": [
+                {
+                    "value": 1,
+                    "element": 78
+                }
+            ]
+        },
+        {
+            "identifier": "own_goals",
+            "a": [],
+            "h": []
+        },
+        {
+            "identifier": "penalties_saved",
+            "a": [],
+            "h": []
+        },
+        {
+            "identifier": "penalties_missed",
+            "a": [],
+            "h": []
+        },
+        {
+            "identifier": "yellow_cards",
+            "a": [],
+            "h": []
+        },
+        {
+            "identifier": "red_cards",
+            "a": [],
+            "h": []
+        },
+        {
+            "identifier": "saves",
+            "a": [
+                {
+                    "value": 4,
+                    "element": 408
+                }
+            ],
+            "h": [
+                {
+                    "value": 1,
+                    "element": 80
+                }
+            ]
+        },
+        {
+            "identifier": "bonus",
+            "a": [],
+            "h": []
+        },
+        {
+            "identifier": "bps",
+            "a": [
+                {
+                    "value": 14,
+                    "element": 408
+                },
+                {
+                    "value": 11,
+                    "element": 418
+                },
+                {
+                    "value": 11,
+                    "element": 421
+                },
+                {
+                    "value": 8,
+                    "element": 414
+                },
+                {
+                    "value": 8,
+                    "element": 416
+                },
+                {
+                    "value": 6,
+                    "element": 128
+                },
+                {
+                    "value": 6,
+                    "element": 411
+                },
+                {
+                    "value": 5,
+                    "element": 423
+                },
+                {
+                    "value": 5,
+                    "element": 424
+                },
+                {
+                    "value": 3,
+                    "element": 420
+                },
+                {
+                    "value": 3,
+                    "element": 422
+                },
+                {
+                    "value": 1,
+                    "element": 413
+                }
+            ],
+            "h": [
+                {
+                    "value": 20,
+                    "element": 96
+                },
+                {
+                    "value": 17,
+                    "element": 78
+                },
+                {
+                    "value": 11,
+                    "element": 594
+                },
+                {
+                    "value": 9,
+                    "element": 83
+                },
+                {
+                    "value": 9,
+                    "element": 699
+                },
+                {
+                    "value": 6,
+                    "element": 80
+                },
+                {
+                    "value": 6,
+                    "element": 91
+                },
+                {
+                    "value": 5,
+                    "element": 77
+                },
+                {
+                    "value": 5,
+                    "element": 84
+                },
+                {
+                    "value": 3,
+                    "element": 483
+                },
+                {
+                    "value": 3,
+                    "element": 524
+                }
+            ]
+        }
+    ],
+    "team_h_difficulty": 3,
+    "team_a_difficulty": 2,
+    "pulse_id": 66654
+}

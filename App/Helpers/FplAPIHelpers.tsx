@@ -149,9 +149,9 @@ export function GetScoreForLiveFixture(fixture: FplFixture, gameweek:FplGameweek
     let awayGoals = getStatTotal(fixture, gameweek, 'goals_scored', awayPlayers);
     let homeOwnGoals = getStatTotal(fixture, gameweek, 'own_goals', homePlayers);
     let awayOwnGoals = getStatTotal(fixture, gameweek, 'own_goals', awayPlayers);
-    
-    score[0] = (homeGoals ? homeGoals : 0) + (awayOwnGoals ? awayOwnGoals : 0);
-    score[0] = (awayGoals ? awayGoals : 0) + (homeOwnGoals ? homeOwnGoals : 0);
+
+    score[0] += (homeGoals ? homeGoals : 0) + (awayOwnGoals ? awayOwnGoals : 0);
+    score[1] += (awayGoals ? awayGoals : 0) + (homeOwnGoals ? homeOwnGoals : 0);
 
     return score;
 }

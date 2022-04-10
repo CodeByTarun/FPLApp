@@ -72,9 +72,9 @@ const LineupView = ({overview, fixtures}: LineupViewProps) => {
 
                     <View style={styles.lineupHeaderContainer}>
                         {
-                            (teamInfo.teamType === TeamTypes.Fixture) ?
+                            (teamInfo.teamType === TeamTypes.Fixture && gameweek.isSuccess) ?
                                 <View style={styles.teamSwitchContainer}>
-                                    <TeamSwitch overview={overview} fixtures={fixtures}/>
+                                    <TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek.data}/>
                                 </View> :
                             (teamInfo.teamType === TeamTypes.Dream) ?
                                 <Text style={styles.text}>Dream Team</Text> :

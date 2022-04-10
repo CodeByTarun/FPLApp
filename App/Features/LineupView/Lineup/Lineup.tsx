@@ -44,7 +44,7 @@ function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fix
             let positionCount = lineupPlayers.filter(player => player.overviewData.element_type == elementType).length;
             
             if (positionCount + remainder > numberOfPlayersAllowedInARow) {
-                remainder = remainder + positionCount - numberOfPlayersAllowedInARow;
+                remainder = remainder + (positionCount - numberOfPlayersAllowedInARow);
                 positionCount = numberOfPlayersAllowedInARow;
             } else {
                 positionCount = positionCount + remainder;
@@ -62,6 +62,11 @@ function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fix
             i += positionCount;
             elementType += 1;
         }
+    }
+
+    // Adds another row if no forwards have played for the team
+    if (playerStatsView.length === 3) {
+        playerStatsView.push(<View style={{flex: 1}}/>);
     }
 
     return playerStatsView;
