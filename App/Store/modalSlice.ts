@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PlayerData } from "../Models/CombinedData";
 import { PlayerOverview } from "../Models/FplOverview";
+import { FplPlayerSummary } from "../Models/FplPlayerSummary";
 
 export enum ModalTypes {
     PlayerModal, 
@@ -8,6 +9,7 @@ export enum ModalTypes {
     TeamModal,
     GameweekModal,
     GameweekOverviewModal,
+    PlayerComparisonModal,
     InfoModal,
     BackgroundOnly,
     Closed,
@@ -35,6 +37,12 @@ export interface GameweekOverviewModalInfo {
     modalType: ModalTypes.GameweekOverviewModal,
 }
 
+export interface PlayerComparisonModalInfo {
+    modalType: ModalTypes.PlayerComparisonModal,
+    playerOverview: PlayerOverview,
+    playerSummary: FplPlayerSummary,
+}
+
 export interface InfoModalInfo {
     modalType: ModalTypes.InfoModal,
 }
@@ -46,7 +54,7 @@ export interface ClosedInfo {
     modalType: ModalTypes.Closed,
 }
 
-export type ModalInfo = PlayerModalInfo | DetailedPlayerModalInfo | TeamModalInfo | 
+export type ModalInfo = PlayerModalInfo | DetailedPlayerModalInfo | PlayerComparisonModalInfo | TeamModalInfo | 
                         GameweekModalInfo | GameweekOverviewModalInfo | InfoModalInfo |
                         BackgroundOnlyInfo | ClosedInfo;
 
@@ -63,6 +71,10 @@ const modalSlice = createSlice({
 
         openPlayerDetailedStatsModal(state: ModalInfo, playerOverview: PayloadAction<PlayerOverview>): ModalInfo {
             return { modalType: ModalTypes.DetailedPlayerModal, player: playerOverview.payload };
+        },
+
+        openPlayerComparisonModal(state: ModalInfo, playerData: PayloadAction<{playerOverview: PlayerOverview, playerSummary: FplPlayerSummary}>): ModalInfo {
+            return { modalType: ModalTypes.PlayerComparisonModal, playerOverview: playerData.payload.playerOverview, playerSummary: playerData.payload.playerSummary }
         },
 
         openTeamModal(state: ModalInfo): ModalInfo {
@@ -91,5 +103,6 @@ const modalSlice = createSlice({
     }
 });
 
-export const { openPlayerModal, openPlayerDetailedStatsModal, openTeamModal, openGameweekModal, openGameweekOverviewModal, openInfoModal, closeModal, showModalBackground } =  modalSlice.actions;
+export const { openPlayerModal, openPlayerDetailedStatsModal, openPlayerComparisonModal, openTeamModal, 
+               openGameweekModal, openGameweekOverviewModal, openInfoModal, closeModal, showModalBackground } =  modalSlice.actions;
 export default modalSlice.reducer;

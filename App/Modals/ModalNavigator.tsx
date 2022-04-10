@@ -11,6 +11,7 @@ import { closeModal, ModalTypes } from "../Store/modalSlice";
 import GameweekModal from "./GameweekModal";
 import GameweekOverviewModal from "./GameweekOverviewModal";
 import InfoModal from "./InfoModal";
+import PlayerComparisonModal from "./PlayerComparisonModal";
 
 interface ModalNavigatorProps {
     overview: FplOverview,
@@ -39,6 +40,10 @@ const ModalNavigator = ({overview, fixtures} : ModalNavigatorProps) => {
 
             {(modalInfo.modalType === ModalTypes.GameweekOverviewModal) &&
                 <GameweekOverviewModal overview={overview}/>
+            }
+
+            {(modalInfo.modalType === ModalTypes.PlayerComparisonModal) && 
+                <PlayerComparisonModal fixtures={fixtures} playerOverview={modalInfo.playerOverview} playerSummary={modalInfo.playerSummary}/>
             }
 
             {(modalInfo.modalType === ModalTypes.InfoModal) &&

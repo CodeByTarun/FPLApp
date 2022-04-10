@@ -4,7 +4,7 @@ import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { useAppDispatch } from "../../Store/hooks";
-import { closeModal } from "../../Store/modalSlice";
+import { closeModal, openPlayerComparisonModal } from "../../Store/modalSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Slider } from "@miblanchard/react-native-slider";
 import Checkbox from "expo-checkbox";
@@ -82,7 +82,9 @@ const PlayerDetailedStatsModal = ({overview, fixtures, player}: PlayerDetailedSt
                                 </View>
 
                                 <View style={styles.controlsContainer}>
-                                    <View style={{flex: 1}}/>
+                                    <View style={{flex: 1}}>
+                                        <CustomButton image="playercomparison" buttonFunction={() => dispatch(openPlayerComparisonModal({playerOverview: player, playerSummary: playerData.data}))}/>
+                                    </View>
                                     <Pressable style={{flex: 2, alignItems:'center', justifyContent: 'center', flexDirection: 'row'}} onPress={() => setIsStatViewShowing(!isStatsViewShowing)}>
                                         <View style={[styles.viewToggleStyle, {backgroundColor: isStatsViewShowing ? 'white' : GlobalConstants.secondaryColor,
                                                     borderTopLeftRadius: 5, borderBottomLeftRadius: 5}]}>
