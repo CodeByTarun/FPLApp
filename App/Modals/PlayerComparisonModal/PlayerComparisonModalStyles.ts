@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 8,
         color: textSecondaryColor,
         fontWeight: '500',
-        fontSize: mediumFont,
+        fontSize: mediumFont * 0.9,
     },
 
     sectionBorder: {

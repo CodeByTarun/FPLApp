@@ -1,16 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Modal, Pressable, View, Text, TouchableOpacity, Animated } from "react-native";
 import { CloseButton } from "../../Features/Controls";
+import FixtureDifficultyList from "../../Features/PlayerStats/PlayerList/FixtureDifficultyList";
 import { height, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
-import { PlayerOverview } from "../../Models/FplOverview";
+import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
 import { useAppDispatch } from "../../Store/hooks";
 import { closeModal } from "../../Store/modalSlice";
 import { styles } from "./PlayerComparisonModalStyles";
 
 interface PlayerComparisonModalProps {
+    overview: FplOverview,
     fixtures: FplFixture[],
     playerOverview: PlayerOverview,
     playerSummary: FplPlayerSummary,
@@ -18,9 +20,38 @@ interface PlayerComparisonModalProps {
 
 const views = ['GW', 'Stats 1', 'Stats 2', 'FDR'];
 
-const PlayerComparisonModal = ({fixtures, playerOverview, playerSummary} : PlayerComparisonModalProps) => {
+const gameweekView = (playerOverview: PlayerOverview) => {
+    return (
+        <View style={{flexDirection: 'row'}}>
+            <Text>Form: {playerOverview.form} </Text>
+            <Text>Sel. {playerOverview.selected_by_percent}% </Text>
+        </View>
+)}
+
+const stats1View = () => {
+    return (<></>)
+}
+
+const stats2View = () => {
+    return (<></>)
+}
+
+const showView = (index: number, overview: FplOverview, fixtures: FplFixture[], playerOverview: PlayerOverview, playerSummary: FplPlayerSummary, currentGameweek: number) => {
+    if (index === 0) return gameweekView(playerOverview);
+    if (index === 1) return stats1View();
+    if (index === 2) return stats2View();
+    else return (
+        <View style={{padding: 5}}>
+            <FixtureDifficultyList team={playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} currentGameweek={currentGameweek}/>
+        </View>
+    )
+}
+
+const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummary} : PlayerComparisonModalProps) => {
+
 
     const dispatch = useAppDispatch();
+    const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     const [view, setView] = useState(0);
 
@@ -43,10 +74,7 @@ const PlayerComparisonModal = ({fixtures, playerOverview, playerSummary} : Playe
 
     useEffect( function changeView() {
         translateAnimation();
-    }, [view])
-
-    
-    
+    }, [view]);
 
     return (
         <Modal animationType="fade" transparent={true} visible={true}>
@@ -67,10 +95,7 @@ const PlayerComparisonModal = ({fixtures, playerOverview, playerSummary} : Playe
                     <View style={styles.sectionBorder}>
                         <Text numberOfLines={1} style={styles.sectionNameText}>{playerOverview.web_name}</Text>
                         <Text style={styles.sectionCostText}>£{(playerOverview.now_cost / 10).toFixed(1)}</Text>
-                        <View style={{flexDirection: 'row'}}>
-                            <Text>Form: {playerOverview.form} </Text>
-                            <Text>Sel. {playerOverview.selected_by_percent}% </Text>
-                        </View>
+                        {showView(view, overview, fixtures, playerOverview, playerSummary, currentGameweek)}
                     </View>
                 </View>
                 <TouchableOpacity style={styles.button}>

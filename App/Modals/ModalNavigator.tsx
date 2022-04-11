@@ -43,7 +43,7 @@ const ModalNavigator = ({overview, fixtures} : ModalNavigatorProps) => {
             }
 
             {(modalInfo.modalType === ModalTypes.PlayerComparisonModal) && 
-                <PlayerComparisonModal fixtures={fixtures} playerOverview={modalInfo.playerOverview} playerSummary={modalInfo.playerSummary}/>
+                <PlayerComparisonModal overview={overview} fixtures={fixtures} playerOverview={modalInfo.playerOverview} playerSummary={modalInfo.playerSummary}/>
             }
 
             {(modalInfo.modalType === ModalTypes.InfoModal) &&
