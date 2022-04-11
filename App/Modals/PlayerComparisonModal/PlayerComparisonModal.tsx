@@ -22,14 +22,21 @@ const views = ['GW', 'Stats 1', 'Stats 2', 'FDR'];
 
 const gameweekView = (playerOverview: PlayerOverview) => {
     return (
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'column'}}>
             <Text>Form: {playerOverview.form} </Text>
             <Text>Sel. {playerOverview.selected_by_percent}% </Text>
+            <Text>Points {playerOverview.event_points}</Text>
+            <Text>xPoints {playerOverview.ep_this}</Text>
+            <Text>Transfers In {playerOverview.transfers_in_event}</Text>
+            <Text>Transfers Out {playerOverview.transfers_out_event}</Text>
         </View>
 )}
 
 const stats1View = () => {
-    return (<></>)
+    return (
+        <View>
+        </View>
+    )
 }
 
 const stats2View = () => {
