@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
-import { aLittleLighterColor, cornerRadius, height, largeFont, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor } from "../../Global/GlobalConstants";
+import { aLittleLighterColor, cornerRadius, height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     
     modalContainer: {
-        maxHeight: height * 0.75,
+        height: height * 0.80,
         width: '85%',
         padding: 10,
+        paddingTop: 20,
+        top: '10%'
     },
     
     titleText: {
@@ -14,21 +16,30 @@ export const styles = StyleSheet.create({
         color: textPrimaryColor, 
         fontWeight: '600',
         textAlign: 'center',
-        padding: 20,
-        paddingBottom: 20
+        paddingBottom: 20,
+        paddingTop: 10
+    },
+
+    text: {
+        color: textPrimaryColor,
+        fontSize: mediumFont * 0.9,
+        fontWeight: '500',
+    },
+
+    controlsOuterContainers: {
+        marginBottom: 30,
     },
 
     controlContainer: {
-        width: '85%',
+        width: '60%',
         flexDirection: 'row',
-        marginBottom: 30,
         alignSelf: 'center',
         backgroundColor: secondaryColor,
         borderRadius: cornerRadius,
     },
 
     switch: {
-        width: '25%',
+        width: '33.3333%',
         height: '100%',
         backgroundColor: primaryColor,
         position: 'absolute',
@@ -48,38 +59,8 @@ export const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 8,
         color: textSecondaryColor,
-        fontWeight: '500',
+        fontWeight: '600',
         fontSize: mediumFont * 0.9,
-    },
-
-    sectionBorder: {
-        borderWidth: 2,
-        borderColor: aLittleLighterColor,
-        borderRadius: cornerRadius,
-        padding: 10,
-    },
-
-    sectionNameText: {
-        backgroundColor: primaryColor,
-        fontSize: largeFont,
-        fontWeight: 'bold',
-        color: textPrimaryColor,
-        position: 'absolute',
-        top: -20, 
-        left: 15,
-        padding: 5,
-        maxWidth: '75%'
-    },
-
-    sectionCostText: {
-        backgroundColor: primaryColor,
-        fontSize: largeFont,
-        fontWeight: 'bold',
-        color: textPrimaryColor,
-        position: 'absolute',
-        top: -20, 
-        right: 15,
-        padding: 5
     },
 
     button: {
@@ -90,12 +71,18 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: cornerRadius,
         marginBottom: 5,
+        marginTop: 15,
         alignSelf: 'center'
     },
 
     buttonText: {
         color: textPrimaryColor,
         fontWeight: '500',
-    }
+    },
 
+    searchBox: {
+        flex: 1,
+        alignSelf: 'center',
+        color: textPrimaryColor,
+    },
 });

@@ -1,16 +1,25 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Modal, Pressable, View, Text, TouchableOpacity, Animated } from "react-native";
-import { CloseButton } from "../../Features/Controls";
-import FixtureDifficultyList from "../../Features/PlayerStats/PlayerList/FixtureDifficultyList";
-import { height, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import Checkbox from "expo-checkbox";
+import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { Modal, Pressable, View, Text, TouchableOpacity, Animated, ScrollView } from "react-native";
+import { Slider } from "@miblanchard/react-native-slider";
+import { CloseButton, CustomButton, ToolTip } from "../../Features/Controls";
+import { fieldColor, height, lightColor, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
 import { useAppDispatch } from "../../Store/hooks";
 import { closeModal } from "../../Store/modalSlice";
+import { StatsFilterActionKind, statsFilterReducer } from "../PlayerDetailedStatsModal/StatsFilterReducer";
 import { styles } from "./PlayerComparisonModalStyles";
+import AddPlayerModal from "./AddPlayerModal";
+import PlayerComparisonView from "./PlayerComparisonView";
 
+
+export interface CombinedPlayerData {
+    playerOverview: PlayerOverview;
+    playerSummary: FplPlayerSummary;
+}
 interface PlayerComparisonModalProps {
     overview: FplOverview,
     fixtures: FplFixture[],
@@ -18,41 +27,7 @@ interface PlayerComparisonModalProps {
     playerSummary: FplPlayerSummary,
 }
 
-const views = ['GW', 'Stats 1', 'Stats 2', 'FDR'];
-
-const gameweekView = (playerOverview: PlayerOverview) => {
-    return (
-        <View style={{flexDirection: 'column'}}>
-            <Text>Form: {playerOverview.form} </Text>
-            <Text>Sel. {playerOverview.selected_by_percent}% </Text>
-            <Text>Points {playerOverview.event_points}</Text>
-            <Text>xPoints {playerOverview.ep_this}</Text>
-            <Text>Transfers In {playerOverview.transfers_in_event}</Text>
-            <Text>Transfers Out {playerOverview.transfers_out_event}</Text>
-        </View>
-)}
-
-const stats1View = () => {
-    return (
-        <View>
-        </View>
-    )
-}
-
-const stats2View = () => {
-    return (<></>)
-}
-
-const showView = (index: number, overview: FplOverview, fixtures: FplFixture[], playerOverview: PlayerOverview, playerSummary: FplPlayerSummary, currentGameweek: number) => {
-    if (index === 0) return gameweekView(playerOverview);
-    if (index === 1) return stats1View();
-    if (index === 2) return stats2View();
-    else return (
-        <View style={{padding: 5}}>
-            <FixtureDifficultyList team={playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} currentGameweek={currentGameweek}/>
-        </View>
-    )
-}
+const views = ['GW', 'Stats', 'FDR'];
 
 const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummary} : PlayerComparisonModalProps) => {
 
@@ -60,56 +35,129 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
     const dispatch = useAppDispatch();
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
-    const [view, setView] = useState(0);
+    const [viewIndex, setViewIndex] = useState(0);
+    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, currentGameweek], isPer90: false });
+    const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
+    const [isAddPlayerModalVisible, setIsAddPlayerModalVisible] = useState(false);
+    const [playersToCompare, setPlayersToCompare] = useState([{playerOverview: playerOverview, playerSummary: playerSummary}] as CombinedPlayerData[]);
 
     //#region  Control Animation
     const translateAnim = useRef(new Animated.Value(0)).current;
 
     const translateInterpolate = translateAnim.interpolate({
         inputRange: [0, 100],
-        outputRange: [0, ((width * 0.85) - 20) * 0.85],
+        outputRange: [0, ((width * 0.85) - 20) * 0.60],
     });
 
     const translateAnimation = useCallback(() => {
         Animated.spring(translateAnim, {
-            toValue: (view * 25),
+            toValue: (viewIndex * 33.3333),
             friction: 10,
             useNativeDriver: true,
         }).start();
-    }, [view, translateAnim])
-    //#endregion
-
+    }, [viewIndex, translateAnim])
+    
     useEffect( function changeView() {
         translateAnimation();
-    }, [view]);
+    }, [viewIndex]);
+    //#endregion
+
+    //#region Players to compare functions
+    const addPlayer = (playerToAdd: PlayerOverview) => {
+
+        if (playersToCompare.find(player => player.playerOverview.id === playerToAdd.id) !== undefined) return
+
+        fetch(`https://fantasy.premierleague.com/api/element-summary/${playerToAdd.id}/`)
+        .then(response => response.json())
+        .then(data => {
+            setPlayersToCompare([...playersToCompare, {playerOverview: playerToAdd, playerSummary: data as FplPlayerSummary}])
+        },
+        error => {
+            return
+        })
+
+        console.log(playersToCompare.length);
+    }
+
+    const removePlayer = (playerToRemove: PlayerOverview) => {
+        setPlayersToCompare(playersToCompare.filter(player => player.playerOverview.id !== playerToRemove.id));
+    }
+    //#endregion
 
     return (
         <Modal animationType="fade" transparent={true} visible={true}>
-            <Pressable style={globalStyles.modalBackground} onPress={() => dispatch(closeModal())}/>
             <View style={[globalStyles.modalView, globalStyles.shadow, styles.modalContainer]}>
                 <CloseButton closeFunction={() => dispatch(closeModal())}/>
                 <Text style={styles.titleText}>Player Comparison</Text>
-                <View style={styles.controlContainer}>
-                    <Animated.View style={[styles.switch, globalStyles.shadow, {transform: [{translateX: translateInterpolate}]}]}/>
+                <View style={styles.controlsOuterContainers}>
+                    <View style={styles.controlContainer}>
+                        <Animated.View style={[styles.switch, globalStyles.shadow, {transform: [{translateX: translateInterpolate}]}]}/>
 
-                    { views.map( (name, index) =>
-                        <TouchableOpacity key={index} style={styles.controlButtons} onPress={() => setView(index)}>
-                            <Text style={[styles.controlText, {color: view === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
-                        </TouchableOpacity>
-                    )}
-                </View>
-                <View style={{paddingBottom: 15}}>
-                    <View style={styles.sectionBorder}>
-                        <Text numberOfLines={1} style={styles.sectionNameText}>{playerOverview.web_name}</Text>
-                        <Text style={styles.sectionCostText}>£{(playerOverview.now_cost / 10).toFixed(1)}</Text>
-                        {showView(view, overview, fixtures, playerOverview, playerSummary, currentGameweek)}
+                        { views.map( (name, index) =>
+                            <TouchableOpacity key={index} style={styles.controlButtons} onPress={() => setViewIndex(index)}>
+                                <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
+                            </TouchableOpacity>
+                        )}
                     </View>
+                    {viewIndex === 1 &&
+                        <View style={{position: 'absolute', right: 0, height: '100%', width: '15%'}}>
+                            <CustomButton image={"filter"} buttonFunction={() => setIsFilterModalVisible(true)}/>
+                        </View>
+                    }
                 </View>
-                <TouchableOpacity style={styles.button}>
+                <ScrollView style={{paddingBottom: 15, flex: 1, paddingTop: 15}}>
+                    { playersToCompare.map(player => { return(
+                        <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
+                                              playerOverview={player.playerOverview} playerSummary={player.playerSummary} 
+                                              playerList={playersToCompare}
+                                              viewIndex={viewIndex} statsFilterState={statsFilterState} 
+                                              currentGameweek={currentGameweek} removePlayerFunction={removePlayer}/>
+                    )})}
+
+                </ScrollView>
+                <TouchableOpacity style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]} onPress={() => setIsAddPlayerModalVisible(true)} disabled={playersToCompare.length >= 5}>
                     <Text style={styles.buttonText}>Add Player</Text>
                 </TouchableOpacity>
             </View>
+            <ToolTip distanceFromRight={width* 0.8 * 0.09} distanceForArrowFromRight={18}
+                     distanceFromTop={height * 0.28}
+                     isVisible={isFilterModalVisible} 
+                     setIsVisible={setIsFilterModalVisible}
+                     isArrowAbove={true}
+                     view={<View style={{ width: width * 0.65, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <Text style={[styles.text, { flex: 1 }]}>Per 90 Stats?</Text>
+                                <Checkbox value={statsFilterState.isPer90}
+                                    color={statsFilterState.isPer90 ? fieldColor : primaryColor}
+                                    onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
+                            </View>
+                            <View style={{ marginTop: 10 }}>
+                                <View style={{ alignItems: 'center' }}>
+                                    <Text style={[styles.text, { flex: 1, alignSelf: 'flex-start', paddingBottom: 5 }]}>Gameweeks:</Text>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={[styles.text, {flex: 1}]}>{statsFilterState.gameSpan[0]}</Text>
+                                    <Text style={[styles.text]}>{statsFilterState.gameSpan[1]}</Text>
+                                    </View>
+                                </View>
 
+                                <Slider value={statsFilterState.gameSpan}
+                                        onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number[] })}
+                                        minimumValue={1}
+                                        maximumValue={currentGameweek}
+                                        step={1}
+                                        thumbTintColor={primaryColor}
+                                        maximumTrackTintColor={'white'}
+                                        minimumTrackTintColor={primaryColor}/>
+                            </View>
+                        </View>}/>
+            <ToolTip distanceFromRight={width * 0.15} distanceForArrowFromRight={-width}
+                     distanceFromTop={height * 0.15}
+                     isVisible={isAddPlayerModalVisible} 
+                     setIsVisible={setIsAddPlayerModalVisible}
+                     isArrowAbove={true}
+                     view={<AddPlayerModal overview={overview} 
+                                           closeFunction={() => setIsAddPlayerModalVisible(false)}
+                                           addPlayerFunction={addPlayer}/>}/>
         </Modal>
     )
 }
