@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">17.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>3/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">17.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>3/17</span>
             </div>
         
             
@@ -146,7 +146,23 @@
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -202,6 +218,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,6 +244,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -230,10 +262,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ActionSheetIOS } from "react-native";
-import { FplDraftUserInfo } from "../Models/FplDraftUserInfo";
+import UserTeamInfo from "../Helpers/FplDataStorageService";
 import { FplFixture } from "../Models/FplFixtures";
-import { FplManagerInfo } from "../Models/FplManagerInfo";
 &nbsp;
 export interface FixtureInfo {
     teamType: TeamTypes.Fixture,
@@ -245,11 +275,13 @@ export interface FixtureInfo {
 export interface DraftInfo {
     teamType: TeamTypes.Draft,
     gameweek: number,
+    info: UserTeamInfo,
 }
 &nbsp;
 export interface BudgetInfo {
     teamType: TeamTypes.Budget,
     gameweek: number,
+    info: UserTeamInfo,
 }
 &nbsp;
 export interface DreamTeamInfo {
@@ -283,6 +315,14 @@ const teamSlice = createSlice({
 <span class="cstat-no" title="statement not covered" >            state.gameweek = action.payload;</span>
         },
 &nbsp;
+<span class="fstat-no" title="function not covered" >        ch</span>angingFixtureWhenGameweekChanged(state: TeamInfo, action: PayloadAction&lt;FplFixture|null&gt;): TeamInfo {
+<span class="cstat-no" title="statement not covered" >            if ( state.teamType === TeamTypes.Fixture) {</span>
+<span class="cstat-no" title="statement not covered" >                return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event } as FixtureInfo;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return state;</span>
+        },
+&nbsp;
 <span class="fstat-no" title="function not covered" >        ch</span>angeToFixture(state: TeamInfo, action: PayloadAction&lt;FplFixture|null&gt;): FixtureInfo {
 <span class="cstat-no" title="statement not covered" >            return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event } as FixtureInfo;</span>
         },
@@ -308,10 +348,18 @@ const teamSlice = createSlice({
 <span class="fstat-no" title="function not covered" >        ch</span>angeToDreamTeam(state: TeamInfo): DreamTeamInfo {
 <span class="cstat-no" title="statement not covered" >            return {teamType: TeamTypes.Dream, gameweek: state.gameweek}</span>
         },
+&nbsp;
+<span class="fstat-no" title="function not covered" >        ch</span>angeToDraftTeam(state: TeamInfo, action: PayloadAction&lt;UserTeamInfo&gt;): DraftInfo {
+<span class="cstat-no" title="statement not covered" >            return { teamType: TeamTypes.Draft, gameweek: state.gameweek, info: action.payload }</span>
+        },
+&nbsp;
+<span class="fstat-no" title="function not covered" >        ch</span>angeToBudgetTeam(state: TeamInfo, action: PayloadAction&lt;UserTeamInfo&gt;): BudgetInfo {
+<span class="cstat-no" title="statement not covered" >            return { teamType: TeamTypes.Budget, gameweek: state.gameweek, info: action.payload }</span>
+        }
     }
 });
 &nbsp;
-export const { changeGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam } = teamSlice.actions;
+export const { changeGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam, changeToDraftTeam, changeToBudgetTeam, changingFixtureWhenGameweekChanged } = teamSlice.actions;
 export default teamSlice.reducer;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -319,7 +367,7 @@ export default teamSlice.reducer;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Jan 23 2022 02:35:48 GMT-0500 (Eastern Standard Time)
+                at Wed Apr 13 2022 13:41:28 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

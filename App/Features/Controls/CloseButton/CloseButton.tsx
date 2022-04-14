@@ -1,6 +1,5 @@
 import React from "react";
 import { Pressable, View, Image, StyleSheet } from "react-native";
-import globalStyles from "../../../Global/GlobalStyles";
 import { Icons } from "../../../Global/Images";
 import * as GlobalConstants from "../../../Global/GlobalConstants"
 
@@ -11,7 +10,7 @@ interface CloseButtonProps {
 const CloseButton = ({closeFunction}: CloseButtonProps) => {
 
     return(
-        <Pressable style={styles.closeButton} onPressIn={closeFunction}>
+        <Pressable testID="closeButton" style={styles.closeButton} onPress={closeFunction}>
             <View style={styles.closeButtonBackground}>
                 <Image style={{height: '50%', width: '50%'}} source={Icons["close"]} resizeMode="contain"/>
             </View>

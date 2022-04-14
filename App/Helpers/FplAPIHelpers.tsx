@@ -28,7 +28,6 @@ export function GetPlayerGameweekDataSortedByPosition(gameweekData: FplGameweek,
     else {
         return null;
     }
-
 }
 
 function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: FplOverview, fixtureInfo: FixtureInfo): PlayerData[] | null {

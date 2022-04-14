@@ -17,7 +17,6 @@ const teamInfo: TeamInfo =  {
     gameweek: 21,
 }
 
-
 test('give a fixture and get the correct sorted list out (check if first one is a goalie)', () => {
      expect((GetPlayerGameweekDataSortedByPosition(gameweek as FplGameweek, overview as FplOverview, teamInfo) as PlayerData[])[0].overviewData.element_type).toBe(1)
     })

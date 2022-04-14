@@ -14,7 +14,7 @@ const CustomButton = ({image, buttonFunction, isDisabled = false} : ButtonProps)
 
 
     return (
-        <TouchableOpacity style={[styles.touchable]} onPress={buttonFunction} disabled={isDisabled} hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}>
+        <TouchableOpacity testID="imageButton" style={[styles.touchable]} onPress={buttonFunction} disabled={isDisabled} hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}>
             <Image style={[styles.icon]} source={Icons[image]} resizeMode='contain'/>
         </TouchableOpacity>
     )
