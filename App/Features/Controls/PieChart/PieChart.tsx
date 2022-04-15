@@ -29,7 +29,7 @@ const PieChart = (props: PieChartProps) => {
         <View style={{flex: 1, justifyContent: 'center'}} onLayout={getDimensions}>
             {(dimensions != [0,0]) && 
                 <Svg width={dimensions[0]} height={dimensions[1]} style={{alignSelf: 'center', position: 'absolute', transform: [{scaleX: isFirstValueEqualOrBigger ? 1 : -1}]}}>
-                    <Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius} 
+                    <Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius}
                             stroke={(props.firstStatValue === 0 && props.secondStatValue === 0) ? 'gray' : (isFirstValueEqualOrBigger ? props.secondStatColor : props.firstStatColor)} strokeWidth={7}/>
                     <Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius} 
                             stroke={(props.firstStatValue === 0 && props.secondStatValue === 0) ? 'gray' : isFirstValueEqualOrBigger ? props.firstStatColor : props.secondStatColor} strokeWidth={7} 

@@ -34,7 +34,6 @@ const Dropdown = (props: DropdownProps) => {
 
     return (
         <View style={styles.container}>
-            
             <Text style={styles.headerText}>{props.headerText}</Text>
             <Pressable style={[styles.buttonContainer]} 
                        onPress={() => setShowDropdown(!showDropdown)}
@@ -43,10 +42,10 @@ const Dropdown = (props: DropdownProps) => {
                 <Text style={globalStyles.dropDownSymbol}>◣</Text>
             </Pressable>
 
-            <Modal style={styles.modal} transparent={true} visible={showDropdown}>
-                <Pressable style={globalStyles.modalBackground} onPressIn={() => setShowDropdown(false)}/>
+            <Modal style={styles.modal} transparent={true} visible={showDropdown} testID={'dropdownModal'}>
+                <Pressable testID="background" style={globalStyles.modalBackground} onPressIn={() => setShowDropdown(false)}/>
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, styles.modalView]}>
-                    <CloseButton closeFunction={() => setShowDropdown(!showDropdown)}/> 
+                    <CloseButton closeFunction={() => setShowDropdown(false)}/> 
                     <Text style={styles.titleText}>Options</Text>
                     <FlatList
                         style={styles.flatList}

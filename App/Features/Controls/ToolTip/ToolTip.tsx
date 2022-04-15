@@ -25,9 +25,9 @@ const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, distanceFromTop
         <>
             { isVisible && 
             <>
-                <TouchableOpacity style={styles.modalBackground} onPressIn={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
-                <View style={[styles.modalView, {right: distanceFromRight, top: distanceFromTop}]}>
-                    <View style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
+                <TouchableOpacity testID="background" style={styles.modalBackground} onPress={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
+                <View testID="tooltip" style={[styles.modalView, {right: distanceFromRight, top: distanceFromTop}]}>
+                    <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
                     { view }
                 </View>
             </>
@@ -43,7 +43,7 @@ export default ToolTip;
 const styles = StyleSheet.create({
 
     modalView: {
-        zIndex: 1000000,
+        zIndex: 100000,
         elevation: 100000,
         position: 'absolute',
         backgroundColor: secondaryColor,

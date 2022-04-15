@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649873452099" clover="3.2.0">
-  <project timestamp="1649873452099" name="All files">
-    <metrics statements="128" coveredstatements="103" conditionals="26" coveredconditionals="0" methods="17" coveredmethods="1" elements="171" coveredelements="104" complexity="0" loc="128" ncloc="128" packages="12" files="75" classes="75"/>
+<coverage generated="1650044710580" clover="3.2.0">
+  <project timestamp="1650044710580" name="All files">
+    <metrics statements="128" coveredstatements="113" conditionals="26" coveredconditionals="0" methods="17" coveredmethods="8" elements="171" coveredelements="121" complexity="0" loc="128" ncloc="128" packages="12" files="75" classes="75"/>
     <package name="App.Features.Controls">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.ts" path="T:\Coding\FPLApp\App\Features\Controls\index.ts">
@@ -12,9 +12,9 @@
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="CloseButton.tsx" path="T:\Coding\FPLApp\App\Features\Controls\CloseButton\CloseButton.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Controls.CustomButton">
@@ -27,24 +27,24 @@
       </file>
     </package>
     <package name="App.Features.Controls.Dropdown">
-      <metrics statements="16" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="0"/>
+      <metrics statements="16" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="7"/>
       <file name="Dropdown.tsx" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\Dropdown.tsx">
-        <metrics statements="15" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="0"/>
+        <metrics statements="15" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="7"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="54" count="12" type="stmt"/>
+        <line num="56" count="12" type="stmt"/>
       </file>
       <file name="DropdownStyles.ts" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\DropdownStyles.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

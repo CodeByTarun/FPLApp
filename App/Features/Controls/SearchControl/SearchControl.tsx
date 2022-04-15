@@ -20,7 +20,8 @@ const SearchControl = ({value, onChangeTextFunction, placeHolderText} : SearchCo
                         value={value}
                         onChangeText={onChangeTextFunction}
                         placeholder={placeHolderText} 
-                        placeholderTextColor={textSecondaryColor}/>
+                        placeholderTextColor={textSecondaryColor}
+                        testID='search'/>
         </View>
     )
 }

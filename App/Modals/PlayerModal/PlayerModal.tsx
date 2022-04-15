@@ -96,7 +96,7 @@ const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) =>
 
     return (
         <Modal animationType="fade" transparent={true} visible={true}>
-            <Pressable style={globalStyles.modalBackground} onPress={() => dispatch(closeModal())}/>
+            <Pressable style={[globalStyles.modalBackground]} onPress={() => dispatch(closeModal())}/>
                 <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
                     <CloseButton closeFunction={() => dispatch(closeModal())}/>
                     <Text style={styles.titleText}>
