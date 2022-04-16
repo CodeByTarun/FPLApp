@@ -1,0 +1,23 @@
+{
+    "code": 3,
+    "draw": 0,
+    "form": null,
+    "id": 1,
+    "loss": 0,
+    "name": "Arsenal",
+    "played": 0,
+    "points": 0,
+    "position": 0,
+    "short_name": "ARS",
+    "strength": 4,
+    "team_division": null,
+    "unavailable": false,
+    "win": 0,
+    "strength_overall_home": 1190,
+    "strength_overall_away": 1250,
+    "strength_attack_home": 1110,
+    "strength_attack_away": 1140,
+    "strength_defence_home": 1110,
+    "strength_defence_away": 1170,
+    "pulse_id": 1
+}

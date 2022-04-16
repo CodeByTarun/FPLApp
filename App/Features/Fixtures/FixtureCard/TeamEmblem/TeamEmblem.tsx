@@ -14,8 +14,8 @@ const TeamEmblem = ({team}: TeamEmblemProp) => {
     return (
         <View style={styles.teamInfoView}>
             {(team) &&
-            <><Image style={styles.emblems} source={Emblems[team.code]} resizeMode='contain' />
-              <Text style={{ fontSize: 0.025 * GlobalConstants.width, alignSelf: 'center', color: GlobalConstants.textPrimaryColor, paddingTop: 2 }}>{ team.short_name }</Text></>
+            <><Image testID="teamImage" style={styles.emblems} source={Emblems[team.code]} resizeMode='contain' />
+              <Text testID="teamText" style={{ fontSize: 0.025 * GlobalConstants.width, alignSelf: 'center', color: GlobalConstants.textPrimaryColor, paddingTop: 2 }}>{ team.short_name }</Text></>
             }
         </View>
     )
