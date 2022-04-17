@@ -11,7 +11,7 @@ jest.mock('expo-localization', () => {
     }
 });
 
-test('opening full fixture view', () => {
+test('opening full fixture view and clicking a fixture', () => {
 
     const { getByTestId, getAllByTestId } = render(<Fixtures overview={overview} fixtures={allFixtures} gameweek={liveGameweek}/>);
 
@@ -31,3 +31,6 @@ test('test if all controls are present', () => {
     expect(getByText('Gameweek')).toBeTruthy();
     expect(getByTestId('fixturesScrollView')).toBeTruthy();
 });
+
+//TODO: test clicking on a fixture card closes the full fixture view when opened,
+//TODO: To do this i need to set the store state for teaminfo to a real gameweek instead of null (need to change render function i think)
