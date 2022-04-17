@@ -177,6 +177,44 @@ export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
     }
 }
 
+export function GetPlayerScoreAndFixtureText(player: PlayerData, teamInfo: TeamInfo, fixtures: FplFixture[], overview: FplOverview) {
+
+    if ((teamInfo.teamType !== TeamTypes.Budget && teamInfo.teamType !== TeamTypes.Draft)) {
+        return GetPointTotal(player, teamInfo);
+    }
+
+    let playerFixtures = fixtures.filter(fixture => (fixture.event === teamInfo.gameweek) && ((fixture.team_a === player.overviewData.team) || (fixture.team_h === player.overviewData.team)));
+
+    if (playerFixtures.length === 0) {
+        return '-';
+    }
+
+    else if (!playerFixtures.some(fixture => (fixture.started === false))) {
+        return GetPointTotal(player, teamInfo);
+    }
+
+    else if (playerFixtures.some(fixture => (fixture.started === true))) {
+        if (playerFixtures.length === 1) {
+            return GetPointTotal(player, teamInfo);
+        }
+        else {
+            let scoreText = GetPointTotal(player, teamInfo).toString();
+            let fixtureText = playerFixtures.map(fixture => (fixture.started === false) ?  
+                                                                ((fixture.team_a === player.overviewData.team) ? 
+                                                                    " " + (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)' :
+                                                                    " " + (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)') : '')
+
+            return (scoreText + fixtureText);
+        }
+    } 
+    else {
+        return playerFixtures.map(fixture => ((fixture.team_a === player.overviewData.team) ? (overview.teams.find(team => team.id === fixture.team_h)?.short_name) + '(A)'
+                                                                                            : (overview.teams.find(team => team.id === fixture.team_a)?.short_name) + '(H)'))
+                             .join(', ');
+    }
+
+}
+
 export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: FixtureInfo) : number {
     let playerStats = playerData.gameweekData.explain.find(explain => explain.fixture === fixtureInfo.fixture?.id)?.stats;
 

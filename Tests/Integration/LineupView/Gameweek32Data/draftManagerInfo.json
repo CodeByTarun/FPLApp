@@ -1,0 +1,20 @@
+{
+    "entry": {
+        "event_points": 15,
+        "favourite_team": 20,
+        "id": 61187,
+        "league_set": [
+            651
+        ],
+        "name": "Taddu FC",
+        "overall_points": 1491,
+        "player_first_name": "Tarun",
+        "player_last_name": "Bola",
+        "region_name": "Canada",
+        "region_code_short": "CA",
+        "region_code_long": "CAN",
+        "started_event": 1,
+        "transactions_event": 0,
+        "transactions_total": 70
+    }
+}

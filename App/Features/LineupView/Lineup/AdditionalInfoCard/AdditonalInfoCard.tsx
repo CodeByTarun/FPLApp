@@ -13,17 +13,17 @@ interface AdditionalInfoCardProps {
 const AdditionalInfoCard = ({viewIndex, setViewIndex, viewIndexScenes} : AdditionalInfoCardProps) => {
 
     return (
-        <Pressable style={[styles.cardContainer, globalStyles.tabShadow]}
+        <Pressable testID="additionalInfoCardButton" style={[styles.cardContainer, globalStyles.tabShadow]}
                     onPress={() => setViewIndex((viewIndex + 1 < viewIndexScenes.length) ? viewIndex + 1 : 0)}>
             <View style={styles.textContainer}>
                 <Text style={styles.text}>{viewIndexScenes[viewIndex]}</Text>
             </View>
                 
             <View style={styles.dotsContainer}>
-                <View style={[globalStyles.dots, {backgroundColor: viewIndex === 0 ? textPrimaryColor : lightColor}]}/>
-                <View style={[globalStyles.dots, {backgroundColor: viewIndex === 1 ? textPrimaryColor : lightColor}]}/>          
-                <View style={[globalStyles.dots, {backgroundColor: viewIndex === 2 ? textPrimaryColor : lightColor}]}/>
-                <View style={[globalStyles.dots, {backgroundColor: viewIndex === 3 ? textPrimaryColor : lightColor}]}/>                            
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 0 ? textPrimaryColor : lightColor}]}/>
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 1 ? textPrimaryColor : lightColor}]}/>          
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 2 ? textPrimaryColor : lightColor}]}/>
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 3 ? textPrimaryColor : lightColor}]}/>                            
             </View>
         </Pressable>
     )

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { primaryColor, cornerRadius, smallFont, textSecondaryColor } from "../../../../Global/GlobalConstants";
+import { primaryColor, cornerRadius, smallFont, textSecondaryColor, lightColor, textPrimaryColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     cardContainer: {
@@ -34,5 +34,13 @@ export const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent:'center', 
         paddingBottom: 7
-    }
+    },
+
+    activeIndex: {
+        backgroundColor: textPrimaryColor,
+    },
+
+    inactiveIndex: {
+        backgroundColor: lightColor,
+    },    
 });

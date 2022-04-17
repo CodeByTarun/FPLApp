@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
-import { cornerRadius, height, lightColor, primaryColor, smallFont, textPrimaryColor, textSecondaryColor } from "../../../../Global/GlobalConstants";
+import { View, Text, Pressable } from "react-native";
+import { lightColor, textPrimaryColor } from "../../../../Global/GlobalConstants";
 import globalStyles from "../../../../Global/GlobalStyles";
 import { GetTeamTotalExpectedPoints, GetTeamTotalPoints } from "../../../../Helpers/FplAPIHelpers";
 import { PlayerData } from "../../../../Models/CombinedData";
 import { FplDraftUserInfo } from "../../../../Models/FplDraftUserInfo";
 import { FplManagerGameweekPicks } from "../../../../Models/FplManagerGameweekPicks";
 import { FplManagerInfo } from "../../../../Models/FplManagerInfo";
-import { BudgetInfo, DraftInfo, TeamInfo, TeamTypes } from "../../../../Store/teamSlice";
+import { BudgetInfo, DraftInfo, TeamTypes } from "../../../../Store/teamSlice";
 import { styles } from "./ManagerInfoCardStyles";
 
 interface statInfo {
@@ -126,9 +126,7 @@ const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo,
     }, [stat, teamInfo.gameweek, teamInfo.info.id])
 
     return (
-        <Pressable style={[styles.container, globalStyles.tabShadow]} onPress={(teamInfo.gameweek !== currentGameweek) ? () => {} : 
-                                                                                                                         (teamInfo.teamType === TeamTypes.Budget) ? changingBudgetStat : 
-                                                                                                                                                                    changingDraftStat}>
+        <Pressable testID="managerCardButton" style={[styles.container, globalStyles.tabShadow]} disabled={(teamInfo.gameweek !== currentGameweek)} onPress={(teamInfo.teamType === TeamTypes.Budget) ? changingBudgetStat : changingDraftStat}>
             {((((teamInfo.teamType === TeamTypes.Budget) && budgetManagerInfo) || ((teamInfo.teamType === TeamTypes.Draft) && draftManagerInfo)) && players) &&
             <>
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -142,15 +140,18 @@ const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo,
                 </View>
                 {(teamInfo.gameweek === currentGameweek) &&
                     <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 7}}>  
-                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 1 ? textPrimaryColor : lightColor}]}/>
-                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 2 ? textPrimaryColor : lightColor}]}/>
-                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 3 ? textPrimaryColor : lightColor}]}/>
-                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 4 ? textPrimaryColor : lightColor}]}/>
-                        <View style={[globalStyles.dots, {backgroundColor: stat.index === 5 ? textPrimaryColor : lightColor}]}/>
+                        { [1,2,3,4,5].map(index => {
+                            return (
+                                <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : lightColor}]}/>
+                            )
+                        }) }
                         {(teamInfo.teamType === TeamTypes.Budget) &&
                             <>  
-                                <View style={[globalStyles.dots, {backgroundColor: stat.index === 6 ? textPrimaryColor : lightColor}]}/>
-                                <View style={[globalStyles.dots, {backgroundColor: stat.index === 7 ? textPrimaryColor : lightColor}]}/>
+                                { [6,7].map(index => {
+                                    return (
+                                        <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : lightColor}]}/>
+                                    )
+                                }) }
                             </>
                         }                        
                     </View>

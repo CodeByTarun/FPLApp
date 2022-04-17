@@ -13,6 +13,7 @@ import { styles } from "./FixturesStyles";
 import { CustomButton } from "../Controls";
 import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
 import { FplGameweek } from "../../Models/FplGameweek";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 interface FixturesViewProp {
   overview: FplOverview;
@@ -97,25 +98,6 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
       if ((teamInfo.gameweek > liveGameweek) && (navigation.screenType !== ScreenTypes.Fixtures)) {
         dispatch(goToFixturesScreen());
       }
-    }, [teamInfo.gameweek]);
-
-  useEffect( function refetchLiveGameweekData() {
-      let refetchFixture: NodeJS.Timer;
-      let refetchGameweek: NodeJS.Timer;
-
-      if (teamInfo.gameweek !== undefined && fixtures !== undefined) {
-        if (teamInfo.gameweek === liveGameweek && IsThereAMatchInProgress(teamInfo.gameweek, fixtures)) {
-          refetchFixture = setInterval(() => useGetFixturesQuery().refetch(), 30000);
-          refetchGameweek = setInterval(() => useGetGameweekDataQuery(liveGameweek).refetch(), 30000);
-        }
-      }
-      
-      return function stopRefetchingLiveGameweekData() {
-        if (refetchFixture !== undefined) {
-          clearInterval(refetchFixture);
-          clearInterval(refetchGameweek);
-        }
-      };
     }, [teamInfo.gameweek]);
 
     const onInfoButtonPress = useCallback(() => {

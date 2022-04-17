@@ -1,14 +1,14 @@
 import { GetPlayerGameweekDataSortedByPosition, IsThereAMatchInProgress, GetPlayerPointsForAFixture, GetScoreForLiveFixture } from "../../../App/Helpers/FplAPIHelpers";
-import overview from "../../SampleData/fploverview.json";
 import gameweek from "../../SampleData/gameweekdata.json";
 import fixture from "../../SampleData/provisionalfinishedfixture.json";
-import liveFixtures from "../../SampleData/livefixtures.json";
 import liveDoubleGameweek from "../../SampleData/livegameweekdata_doublegameweek.json";
 import { PlayerData } from "../../../App/Models/CombinedData";
 import { TeamInfo, FixtureInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { FplOverview } from "../../../App/Models/FplOverview";
 import { FplFixture } from "../../../App/Models/FplFixtures";
 import { FplGameweek } from "../../../App/Models/FplGameweek";
+import { overview } from "../../SampleData/Overviews";
+import { liveFixtures } from "../../SampleData/Fixtures";
 
 const teamInfo: TeamInfo =  {
     teamType: TeamTypes.Fixture,

@@ -14,11 +14,11 @@ const KingsOfTheGameweekView = ({overviewData} : KingsOfTheGameweekViewProps) =>
 
     return (
         <View style={styles.kingsView}>
-            <ScrollView horizontal style={styles.kingsScrollView}>
+            <ScrollView testID="kingScrollView" horizontal style={styles.kingsScrollView}>
                 {
                     kings.map(king => 
                         
-                        <View key={king.id} style={styles.kingsCardView}>
+                        <View key={king.id} style={styles.kingsCardView} testID='kingPlayerButton'>
                             <Text style={styles.kingsText}>Gameweek {king.id}</Text>
                             <View style={{flex: 8}}>
                                 <Image style={styles.jersey} source={Jerseys[overviewData.elements.find(element => element.id === king.top_element_info!.id)!.team_code]} resizeMode="contain"/>

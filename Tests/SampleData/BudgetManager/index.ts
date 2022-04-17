@@ -5,6 +5,6 @@ import budgetLeagueData from './budgetleague.json';
 import budgetManagerPicksData from './budgetmanagerpicks.json';
 import budgetManagerData from './budgetmanagerinfo.json';
 
-const budgetLeague = budgetLeagueData as unknown as FplBudgetLeagueInfo;
-const budgetManagerInfo = budgetManagerData as FplManagerInfo;
-const budgetManagerPicks = budgetManagerPicksData as FplManagerGameweekPicks;
+export const budgetLeague = budgetLeagueData as unknown as FplBudgetLeagueInfo;
+export const budgetManagerInfo = budgetManagerData as FplManagerInfo;
+export const budgetManagerPicks = budgetManagerPicksData as FplManagerGameweekPicks;

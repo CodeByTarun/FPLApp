@@ -16,14 +16,14 @@ const BonusPointView = ({overviewData, fixturesData, teamInfo} : BonusPointViewP
     let bonusPoints = fixturesData.find(fixture => fixture.id === teamInfo.fixture?.id)?.stats.find(stat => stat.identifier === 'bps');
 
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} testID='bonusPointsViewContainer'>
             
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Bonus Point Leaders</Text>
             </View>
             
             { bonusPoints &&
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row'}} testID="bonusPointsView">
                     <View style={[styles.bonusPointsView, {borderRightWidth: 0.5,}]}>
                     {
                         bonusPoints.h.slice().sort((a, b) => b.value - a.value).slice(0,5).map( player => 

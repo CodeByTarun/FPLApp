@@ -24,7 +24,7 @@ const FixtureDifficultyDisplay = ({overview, fixtures, player, currentGameweek} 
             { fixtures.filter((fixture) => (fixture.team_a === player.overviewData.team || fixture.team_h === player.overviewData.team) && 
                                             (fixture.event && fixture.event >= currentGameweek + 1)).slice(0,5).map(fixture => {
                                                 return (
-                                                    <View style={[styles.fixtureDifficultyContainer, { backgroundColor: DifficultyColors[fixture.team_a === player.overviewData.team ? fixture.team_a_difficulty : fixture.team_h_difficulty]}]}
+                                                    <View testID="fixtureDifficultyPlayerStatsView" style={[styles.fixtureDifficultyContainer, { backgroundColor: DifficultyColors[fixture.team_a === player.overviewData.team ? fixture.team_a_difficulty : fixture.team_h_difficulty]}]}
                                                             key={fixture.id}>
                                                         <Text style={styles.fixtureViewText}>{fixture.event}</Text>
                                                         <Text style={[styles.fixtureViewText, {flex: 2}]}>{fixture.team_a === player.overviewData.team ? overview.teams.find(team => team.id === fixture.team_h)?.short_name + '(A)' : 

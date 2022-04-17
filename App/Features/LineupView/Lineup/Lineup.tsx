@@ -89,7 +89,7 @@ function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures:
     return playerStatsView;
 }
 
-const viewIndexScenes = ["Lineup", "More Info", "Points", "Fixtures"]
+const viewIndexScenes = ["Lineup", "More Info", "Points", "Fixtures"];
 
 interface LineupProps {
     overview: FplOverview;
@@ -123,13 +123,13 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                 
                     
                     {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 
-                        <View style={styles.playerContainer}>
+                        <View testID="fixtureOrDreamTeamPlayersStatsView" style={styles.playerContainer}>
                             {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}
                         </View>
                     :
                     ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                         <>
-                            <View style={styles.playerContainer}>
+                            <View testID="budgetorDraftTeamPlayersStatsView" style={styles.playerContainer}>
                                 {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}
                             </View>
                             <View style={styles.managerInfoCardContainer}>

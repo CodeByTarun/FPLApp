@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { cornerRadius, primaryColor, smallFont, textPrimaryColor, textSecondaryColor } from "../../../../Global/GlobalConstants";
+import { cornerRadius, lightColor, primaryColor, smallFont, textPrimaryColor, textSecondaryColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     container: {
@@ -32,5 +32,13 @@ export const styles = StyleSheet.create({
         color: textSecondaryColor,
         fontWeight: '500',
         alignSelf: 'center'
+    },
+
+    activeIndex: {
+        backgroundColor: textPrimaryColor,
+    },
+
+    inactiveIndex: {
+        backgroundColor: lightColor,
     },
 });
