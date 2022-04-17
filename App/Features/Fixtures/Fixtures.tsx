@@ -155,7 +155,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
           </TouchableOpacity>
           <View style={styles.buttonsContainers}>
             <View style={styles.singleButtonContainer}>
-              <CustomButton image="calendar" buttonFunction={onCalendarButtonPress} isDisabled={teamInfo.gameweek <= liveGameweek}/>
+              <CustomButton image="calendar" buttonFunction={onCalendarButtonPress} isDisabled={teamInfo.gameweek > liveGameweek}/>
             </View>
             <View style={styles.singleButtonContainer}>
               <CustomButton image="info" buttonFunction={onInfoButtonPress}/>

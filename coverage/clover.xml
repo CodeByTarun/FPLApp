@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650184082148" clover="3.2.0">
-  <project timestamp="1650184082149" name="All files">
-    <metrics statements="426" coveredstatements="265" conditionals="166" coveredconditionals="49" methods="160" coveredmethods="71" elements="752" coveredelements="385" complexity="0" loc="426" ncloc="426" packages="21" files="96" classes="96"/>
+<coverage generated="1650189715117" clover="3.2.0">
+  <project timestamp="1650189715117" name="All files">
+    <metrics statements="426" coveredstatements="189" conditionals="167" coveredconditionals="22" methods="160" coveredmethods="29" elements="753" coveredelements="240" complexity="0" loc="426" ncloc="426" packages="21" files="95" classes="95"/>
     <package name="App.Features.Controls">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\Controls\index.ts">
+      <file name="index.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/index.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
     <package name="App.Features.Controls.CloseButton">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="CloseButton.tsx" path="T:\Coding\FPLApp\App\Features\Controls\CloseButton\CloseButton.tsx">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="10" count="6" type="stmt"/>
-        <line num="12" count="11" type="stmt"/>
-        <line num="21" count="6" type="stmt"/>
+      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="CloseButton.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/CloseButton/CloseButton.tsx">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Controls.CustomButton">
       <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-      <file name="CustomButton.tsx" path="T:\Coding\FPLApp\App\Features\Controls\CustomButton\CustomButton.tsx">
+      <file name="CustomButton.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/CustomButton/CustomButton.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="13" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="10" type="stmt"/>
-        <line num="25" count="6" type="stmt"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Controls.Dropdown">
-      <metrics statements="16" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="9"/>
-      <file name="Dropdown.tsx" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\Dropdown.tsx">
-        <metrics statements="15" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="9"/>
-        <line num="18" count="6" type="stmt"/>
-        <line num="20" count="10" type="stmt"/>
-        <line num="22" count="10" type="stmt"/>
-        <line num="23" count="8" type="stmt"/>
-        <line num="26" count="10" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="30" count="10" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="35" count="10" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
+      <metrics statements="16" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="0"/>
+      <file name="Dropdown.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/Dropdown/Dropdown.tsx">
+        <metrics statements="15" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="54" count="60" type="stmt"/>
-        <line num="56" count="60" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
       </file>
-      <file name="DropdownStyles.ts" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\DropdownStyles.ts">
+      <file name="DropdownStyles.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/Dropdown/DropdownStyles.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="6" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Controls.PieChart">
       <metrics statements="9" coveredstatements="2" conditionals="20" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="PieChart.tsx" path="T:\Coding\FPLApp\App\Features\Controls\PieChart\PieChart.tsx">
+      <file name="PieChart.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/PieChart/PieChart.tsx">
         <metrics statements="9" coveredstatements="2" conditionals="20" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="15" count="6" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="20" count="0" type="stmt"/>
@@ -63,186 +63,183 @@
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="51" count="6" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Controls.SearchControl">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="SearchControl.tsx" path="T:\Coding\FPLApp\App\Features\Controls\SearchControl\SearchControl.tsx">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="31" count="6" type="stmt"/>
+      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="SearchControl.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/SearchControl/SearchControl.tsx">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Controls.ToolTip">
-      <metrics statements="4" coveredstatements="4" conditionals="5" coveredconditionals="5" methods="2" coveredmethods="2"/>
-      <file name="ToolTip.tsx" path="T:\Coding\FPLApp\App\Features\Controls\ToolTip\ToolTip.tsx">
-        <metrics statements="4" coveredstatements="4" conditionals="5" coveredconditionals="5" methods="2" coveredmethods="2"/>
-        <line num="22" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="24" count="4" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="42" count="6" type="stmt"/>
+      <metrics statements="4" coveredstatements="2" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="ToolTip.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Controls/ToolTip/ToolTip.tsx">
+        <metrics statements="4" coveredstatements="2" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="22" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Fixtures">
-      <metrics statements="59" coveredstatements="43" conditionals="38" coveredconditionals="19" methods="24" coveredmethods="17"/>
-      <file name="Fixtures.tsx" path="T:\Coding\FPLApp\App\Features\Fixtures\Fixtures.tsx">
-        <metrics statements="58" coveredstatements="42" conditionals="38" coveredconditionals="19" methods="24" coveredmethods="17"/>
-        <line num="24" count="80" type="cond" truecount="3" falsecount="1"/>
+      <metrics statements="59" coveredstatements="39" conditionals="38" coveredconditionals="16" methods="24" coveredmethods="15"/>
+      <file name="Fixtures.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/Fixtures.tsx">
+        <metrics statements="58" coveredstatements="38" conditionals="38" coveredconditionals="16" methods="24" coveredmethods="15"/>
+        <line num="24" count="9" type="cond" truecount="2" falsecount="2"/>
         <line num="25" count="0" type="stmt"/>
-        <line num="27" count="80" type="stmt"/>
+        <line num="27" count="9" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
-        <line num="32" count="4" type="stmt"/>
-        <line num="33" count="152" type="stmt"/>
-        <line num="34" count="7" type="stmt"/>
-        <line num="35" count="7" type="stmt"/>
-        <line num="37" count="4" type="stmt"/>
-        <line num="38" count="4" type="stmt"/>
-        <line num="40" count="4" type="stmt"/>
-        <line num="45" count="4" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="53" count="4" type="stmt"/>
-        <line num="54" count="3" type="stmt"/>
-        <line num="61" count="4" type="stmt"/>
-        <line num="63" count="2" type="stmt"/>
-        <line num="65" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="66" count="2" type="stmt"/>
-        <line num="68" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="38" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="65" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="74" count="2" type="stmt"/>
-        <line num="78" count="4" type="stmt"/>
-        <line num="80" count="2" type="stmt"/>
-        <line num="82" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="82" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="83" count="0" type="stmt"/>
         <line num="84" count="0" type="stmt"/>
         <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="88" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="89" count="0" type="stmt"/>
         <line num="92" count="0" type="stmt"/>
-        <line num="97" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="97" count="1" type="cond" truecount="2" falsecount="2"/>
         <line num="98" count="0" type="stmt"/>
-        <line num="102" count="4" type="stmt"/>
-        <line num="106" count="2" type="cond" truecount="2" falsecount="2"/>
-        <line num="107" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="106" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="107" count="1" type="cond" truecount="2" falsecount="2"/>
         <line num="108" count="0" type="stmt"/>
         <line num="109" count="0" type="stmt"/>
-        <line num="113" count="2" type="stmt"/>
-        <line num="114" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="113" count="1" type="stmt"/>
+        <line num="114" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="115" count="0" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
-        <line num="121" count="4" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
         <line num="122" count="0" type="stmt"/>
-        <line num="125" count="4" type="stmt"/>
-        <line num="126" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="127" count="1" type="stmt"/>
-        <line num="129" count="1" type="stmt"/>
-        <line num="134" count="4" type="stmt"/>
-        <line num="135" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="136" count="1" type="stmt"/>
-        <line num="138" count="3" type="stmt"/>
-        <line num="142" count="4" type="stmt"/>
+        <line num="125" count="1" type="stmt"/>
+        <line num="126" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="135" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="142" count="1" type="stmt"/>
         <line num="143" count="0" type="stmt"/>
-        <line num="146" count="4" type="stmt"/>
-        <line num="175" count="1520" type="stmt"/>
-        <line num="176" count="80" type="stmt"/>
-        <line num="177" count="84" type="stmt"/>
+        <line num="146" count="1" type="stmt"/>
+        <line num="175" count="380" type="stmt"/>
+        <line num="176" count="9" type="stmt"/>
+        <line num="177" count="10" type="stmt"/>
       </file>
-      <file name="FixturesStyles.ts" path="T:\Coding\FPLApp\App\Features\Fixtures\FixturesStyles.ts">
+      <file name="FixturesStyles.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/FixturesStyles.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="4" count="1" type="stmt"/>
       </file>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\Fixtures\index.ts">
+      <file name="index.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/index.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
     <package name="App.Features.Fixtures.FixtureCard">
-      <metrics statements="17" coveredstatements="14" conditionals="8" coveredconditionals="5" methods="4" coveredmethods="3"/>
-      <file name="FixtureCard.tsx" path="T:\Coding\FPLApp\App\Features\Fixtures\FixtureCard\FixtureCard.tsx">
-        <metrics statements="16" coveredstatements="13" conditionals="8" coveredconditionals="5" methods="4" coveredmethods="3"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="28" count="87" type="cond" truecount="1" falsecount="1"/>
-        <line num="29" count="87" type="cond" truecount="2" falsecount="0"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="32" count="86" type="cond" truecount="2" falsecount="0"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="37" count="85" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
-        <line num="44" count="87" type="stmt"/>
-        <line num="45" count="150" type="stmt"/>
-        <line num="47" count="87" type="stmt"/>
+      <metrics statements="17" coveredstatements="10" conditionals="8" coveredconditionals="2" methods="4" coveredmethods="3"/>
+      <file name="FixtureCard.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/FixtureCard/FixtureCard.tsx">
+        <metrics statements="16" coveredstatements="9" conditionals="8" coveredconditionals="2" methods="4" coveredmethods="3"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="10" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="44" count="10" type="stmt"/>
+        <line num="45" count="10" type="stmt"/>
+        <line num="47" count="10" type="stmt"/>
         <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="50" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
-        <line num="56" count="87" type="stmt"/>
+        <line num="56" count="10" type="stmt"/>
       </file>
-      <file name="FixtureCardStyles.ts" path="T:\Coding\FPLApp\App\Features\Fixtures\FixtureCard\FixtureCardStyles.ts">
+      <file name="FixtureCardStyles.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/FixtureCard/FixtureCardStyles.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="2" type="stmt"/>
-      </file>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\Fixtures\FixtureCard\index.ts">
-        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Features.Fixtures.FixtureCard.TeamEmblem">
       <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-      <file name="TeamEmblem.tsx" path="T:\Coding\FPLApp\App\Features\Fixtures\FixtureCard\TeamEmblem\TeamEmblem.tsx">
+      <file name="TeamEmblem.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/FixtureCard/TeamEmblem/TeamEmblem.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="14" count="176" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="20" type="stmt"/>
       </file>
-      <file name="TeamEmblemStyles.ts" path="T:\Coding\FPLApp\App\Features\Fixtures\FixtureCard\TeamEmblem\TeamEmblemStyles.ts">
+      <file name="TeamEmblemStyles.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/FixtureCard/TeamEmblem/TeamEmblemStyles.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="3" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
       </file>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\Fixtures\FixtureCard\TeamEmblem\index.ts">
+      <file name="index.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Features/Fixtures/FixtureCard/TeamEmblem/index.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
     <package name="App.Global">
       <metrics statements="26" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="GlobalConstants.tsx" path="T:\Coding\FPLApp\App\Global\GlobalConstants.tsx">
+      <file name="GlobalConstants.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Global/GlobalConstants.tsx">
         <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="8" type="stmt"/>
-        <line num="7" count="8" type="stmt"/>
-        <line num="10" count="8" type="stmt"/>
-        <line num="11" count="8" type="stmt"/>
-        <line num="13" count="8" type="stmt"/>
-        <line num="14" count="8" type="stmt"/>
-        <line num="15" count="8" type="stmt"/>
-        <line num="16" count="8" type="stmt"/>
-        <line num="17" count="8" type="stmt"/>
-        <line num="18" count="8" type="stmt"/>
-        <line num="19" count="8" type="stmt"/>
-        <line num="20" count="8" type="stmt"/>
-        <line num="21" count="8" type="stmt"/>
-        <line num="22" count="8" type="stmt"/>
-        <line num="24" count="8" type="stmt"/>
-        <line num="25" count="8" type="stmt"/>
-        <line num="26" count="8" type="stmt"/>
-        <line num="29" count="8" type="stmt"/>
-        <line num="30" count="8" type="stmt"/>
-        <line num="31" count="8" type="stmt"/>
-        <line num="37" count="8" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
       </file>
-      <file name="GlobalStyles.tsx" path="T:\Coding\FPLApp\App\Global\GlobalStyles.tsx">
+      <file name="GlobalStyles.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Global/GlobalStyles.tsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="7" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
       </file>
-      <file name="Images.ts" path="T:\Coding\FPLApp\App\Global\Images.ts">
+      <file name="Images.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Global/Images.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="8" type="stmt"/>
-        <line num="29" count="8" type="stmt"/>
-        <line num="53" count="8" type="stmt"/>
-        <line num="64" count="8" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
       </file>
     </package>
     <package name="App.Helpers">
-      <metrics statements="150" coveredstatements="54" conditionals="80" coveredconditionals="17" methods="75" coveredmethods="29"/>
-      <file name="FplAPIHelpers.tsx" path="T:\Coding\FPLApp\App\Helpers\FplAPIHelpers.tsx">
-        <metrics statements="89" coveredstatements="22" conditionals="56" coveredconditionals="5" methods="58" coveredmethods="18"/>
-        <line num="11" count="3480" type="stmt"/>
+      <metrics statements="150" coveredstatements="4" conditionals="80" coveredconditionals="1" methods="75" coveredmethods="3"/>
+      <file name="FplAPIHelpers.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Helpers/FplAPIHelpers.tsx">
+        <metrics statements="89" coveredstatements="1" conditionals="56" coveredconditionals="0" methods="58" coveredmethods="2"/>
+        <line num="11" count="400" type="stmt"/>
         <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="20" count="0" type="stmt"/>
         <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -290,27 +287,27 @@
         <line num="123" count="0" type="stmt"/>
         <line num="128" count="0" type="stmt"/>
         <line num="129" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="133" count="10" type="stmt"/>
-        <line num="134" count="2889" type="stmt"/>
-        <line num="135" count="11" type="stmt"/>
-        <line num="136" count="11" type="stmt"/>
-        <line num="138" count="1" type="stmt"/>
-        <line num="142" count="1" type="stmt"/>
-        <line num="144" count="10" type="stmt"/>
-        <line num="145" count="10" type="stmt"/>
-        <line num="147" count="1" type="stmt"/>
-        <line num="148" count="1" type="stmt"/>
-        <line num="149" count="1" type="stmt"/>
-        <line num="150" count="1" type="stmt"/>
-        <line num="152" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="153" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="155" count="1" type="stmt"/>
-        <line num="160" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="161" count="15214" type="stmt"/>
-        <line num="162" count="46" type="stmt"/>
-        <line num="163" count="52" type="stmt"/>
-        <line num="164" count="46" type="stmt"/>
-        <line num="165" count="1" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="150" count="0" type="stmt"/>
+        <line num="152" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="153" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="160" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="165" count="0" type="stmt"/>
         <line num="168" count="0" type="stmt"/>
         <line num="173" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="174" count="0" type="stmt"/>
@@ -332,46 +329,46 @@
         <line num="213" count="0" type="stmt"/>
         <line num="216" count="0" type="stmt"/>
       </file>
-      <file name="FplDataStorageService.ts" path="T:\Coding\FPLApp\App\Helpers\FplDataStorageService.ts">
-        <metrics statements="61" coveredstatements="32" conditionals="24" coveredconditionals="12" methods="17" coveredmethods="11"/>
-        <line num="12" count="14" type="stmt"/>
-        <line num="13" count="14" type="stmt"/>
-        <line num="14" count="14" type="cond" truecount="2" falsecount="0"/>
+      <file name="FplDataStorageService.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Helpers/FplDataStorageService.ts">
+        <metrics statements="61" coveredstatements="3" conditionals="24" coveredconditionals="1" methods="17" coveredmethods="1"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="21" count="3" type="stmt"/>
-        <line num="22" count="3" type="stmt"/>
-        <line num="24" count="3" type="cond" truecount="4" falsecount="0"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="28" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="41" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="58" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="60" count="2" type="stmt"/>
-        <line num="62" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="62" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
         <line num="70" count="0" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="78" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="81" count="2" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
         <line num="86" count="0" type="stmt"/>
-        <line num="91" count="6" type="stmt"/>
-        <line num="92" count="6" type="stmt"/>
-        <line num="93" count="6" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
         <line num="95" count="0" type="stmt"/>
         <line num="107" count="0" type="stmt"/>
         <line num="108" count="0" type="stmt"/>
@@ -398,13 +395,13 @@
       </file>
     </package>
     <package name="App.Store">
-      <metrics statements="56" coveredstatements="18" conditionals="12" coveredconditionals="0" methods="37" coveredmethods="5"/>
-      <file name="fplSlice.ts" path="T:\Coding\FPLApp\App\Store\fplSlice.ts">
+      <metrics statements="56" coveredstatements="17" conditionals="12" coveredconditionals="0" methods="37" coveredmethods="4"/>
+      <file name="fplSlice.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Store/fplSlice.ts">
         <metrics statements="17" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="1"/>
-        <line num="15" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
@@ -417,17 +414,17 @@
         <line num="64" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
         <line num="72" count="0" type="stmt"/>
-        <line num="79" count="2" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
       </file>
-      <file name="hooks.ts" path="T:\Coding\FPLApp\App\Store\hooks.ts">
+      <file name="hooks.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Store/hooks.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="91" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="4" count="11" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
       </file>
-      <file name="modalSlice.ts" path="T:\Coding\FPLApp\App\Store\modalSlice.ts">
+      <file name="modalSlice.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Store/modalSlice.ts">
         <metrics statements="12" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="0"/>
-        <line num="61" count="2" type="stmt"/>
-        <line num="63" count="2" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
         <line num="77" count="0" type="stmt"/>
@@ -437,27 +434,27 @@
         <line num="93" count="0" type="stmt"/>
         <line num="97" count="0" type="stmt"/>
         <line num="101" count="0" type="stmt"/>
-        <line num="107" count="2" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
       </file>
-      <file name="navigationSlice.ts" path="T:\Coding\FPLApp\App\Store\navigationSlice.ts">
-        <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+      <file name="navigationSlice.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Store/navigationSlice.ts">
+        <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
       </file>
-      <file name="store.ts" path="T:\Coding\FPLApp\App\Store\store.ts">
+      <file name="store.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Store/store.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
       </file>
-      <file name="teamSlice.ts" path="T:\Coding\FPLApp\App\Store\teamSlice.ts">
-        <metrics statements="17" coveredstatements="3" conditionals="12" coveredconditionals="0" methods="9" coveredmethods="0"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="47" count="2" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
+      <file name="teamSlice.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/App/Store/teamSlice.ts">
+        <metrics statements="17" coveredstatements="4" conditionals="12" coveredconditionals="0" methods="9" coveredmethods="1"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
         <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="60" count="0" type="stmt"/>
@@ -471,312 +468,312 @@
         <line num="86" count="0" type="stmt"/>
         <line num="90" count="0" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
-        <line num="99" count="2" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Tests.Integration">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="reduxRender.tsx" path="T:\Coding\FPLApp\Tests\Integration\reduxRender.tsx">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="5" type="stmt"/>
-        <line num="8" count="5" type="stmt"/>
-        <line num="13" count="5" type="stmt"/>
+      <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="reduxRender.tsx" path="/Users/tarunbola/Documents/GitHub/FPLApp2/Tests/Integration/reduxRender.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="7" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Tests.SampleData.Fixtures">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="T:\Coding\FPLApp\Tests\SampleData\Fixtures\index.ts">
+      <file name="index.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/Tests/SampleData/Fixtures/index.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Tests.SampleData.LiveScoreData">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="T:\Coding\FPLApp\Tests\SampleData\LiveScoreData\index.ts">
+      <file name="index.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/Tests/SampleData/LiveScoreData/index.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
     </package>
     <package name="Tests.SampleData.Overviews">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="T:\Coding\FPLApp\Tests\SampleData\Overviews\index.ts">
+      <file name="index.ts" path="/Users/tarunbola/Documents/GitHub/FPLApp2/Tests/SampleData/Overviews/index.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
     </package>
     <package name="assets.emblems">
       <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="t1.png" path="T:\Coding\FPLApp\assets\emblems\t1.png">
+      <file name="t1.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t1.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t11.png" path="T:\Coding\FPLApp\assets\emblems\t11.png">
+      <file name="t11.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t11.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t13.png" path="T:\Coding\FPLApp\assets\emblems\t13.png">
+      <file name="t13.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t13.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t14.png" path="T:\Coding\FPLApp\assets\emblems\t14.png">
+      <file name="t14.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t14.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t2.png" path="T:\Coding\FPLApp\assets\emblems\t2.png">
+      <file name="t2.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t2.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t20.png" path="T:\Coding\FPLApp\assets\emblems\t20.png">
+      <file name="t20.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t20.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t21.png" path="T:\Coding\FPLApp\assets\emblems\t21.png">
+      <file name="t21.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t21.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t3.png" path="T:\Coding\FPLApp\assets\emblems\t3.png">
+      <file name="t3.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t3.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t31.png" path="T:\Coding\FPLApp\assets\emblems\t31.png">
+      <file name="t31.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t31.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t36.png" path="T:\Coding\FPLApp\assets\emblems\t36.png">
+      <file name="t36.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t36.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t39.png" path="T:\Coding\FPLApp\assets\emblems\t39.png">
+      <file name="t39.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t39.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t4.png" path="T:\Coding\FPLApp\assets\emblems\t4.png">
+      <file name="t4.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t4.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t43.png" path="T:\Coding\FPLApp\assets\emblems\t43.png">
+      <file name="t43.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t43.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t45.png" path="T:\Coding\FPLApp\assets\emblems\t45.png">
+      <file name="t45.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t45.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t57.png" path="T:\Coding\FPLApp\assets\emblems\t57.png">
+      <file name="t57.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t57.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t6.png" path="T:\Coding\FPLApp\assets\emblems\t6.png">
+      <file name="t6.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t6.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t7.png" path="T:\Coding\FPLApp\assets\emblems\t7.png">
+      <file name="t7.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t7.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t8.png" path="T:\Coding\FPLApp\assets\emblems\t8.png">
+      <file name="t8.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t8.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t90.png" path="T:\Coding\FPLApp\assets\emblems\t90.png">
+      <file name="t90.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t90.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="t94.png" path="T:\Coding\FPLApp\assets\emblems\t94.png">
+      <file name="t94.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/emblems/t94.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
     </package>
     <package name="assets.icons">
       <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="calendar.png" path="T:\Coding\FPLApp\assets\icons\calendar.png">
+      <file name="calendar.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/calendar.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="checkmark.png" path="T:\Coding\FPLApp\assets\icons\checkmark.png">
+      <file name="checkmark.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/checkmark.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="close.png" path="T:\Coding\FPLApp\assets\icons\close.png">
+      <file name="close.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/close.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="delete.png" path="T:\Coding\FPLApp\assets\icons\delete.png">
+      <file name="delete.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/delete.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="doubtful.png" path="T:\Coding\FPLApp\assets\icons\doubtful.png">
+      <file name="doubtful.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/doubtful.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="dreamteam.png" path="T:\Coding\FPLApp\assets\icons\dreamteam.png">
+      <file name="dreamteam.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/dreamteam.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="edit.png" path="T:\Coding\FPLApp\assets\icons\edit.png">
+      <file name="edit.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/edit.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="editdisabled.png" path="T:\Coding\FPLApp\assets\icons\editdisabled.png">
+      <file name="editdisabled.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/editdisabled.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="favourite.png" path="T:\Coding\FPLApp\assets\icons\favourite.png">
+      <file name="favourite.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/favourite.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="filter.png" path="T:\Coding\FPLApp\assets\icons\filter.png">
+      <file name="filter.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/filter.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="info.png" path="T:\Coding\FPLApp\assets\icons\info.png">
+      <file name="info.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/info.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="out.png" path="T:\Coding\FPLApp\assets\icons\out.png">
+      <file name="out.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/out.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="playercomparison.png" path="T:\Coding\FPLApp\assets\icons\playercomparison.png">
+      <file name="playercomparison.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/playercomparison.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="playersearch.png" path="T:\Coding\FPLApp\assets\icons\playersearch.png">
+      <file name="playersearch.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/playersearch.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="search.png" path="T:\Coding\FPLApp\assets\icons\search.png">
+      <file name="search.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/search.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="strategy.png" path="T:\Coding\FPLApp\assets\icons\strategy.png">
+      <file name="strategy.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/strategy.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="team.png" path="T:\Coding\FPLApp\assets\icons\team.png">
+      <file name="team.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/team.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="unfavourite.png" path="T:\Coding\FPLApp\assets\icons\unfavourite.png">
+      <file name="unfavourite.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/icons/unfavourite.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
     </package>
     <package name="assets.jerseys">
       <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="1.png" path="T:\Coding\FPLApp\assets\jerseys\1.png">
+      <file name="1.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/1.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="11.png" path="T:\Coding\FPLApp\assets\jerseys\11.png">
+      <file name="11.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/11.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="13.png" path="T:\Coding\FPLApp\assets\jerseys\13.png">
+      <file name="13.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/13.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="14.png" path="T:\Coding\FPLApp\assets\jerseys\14.png">
+      <file name="14.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/14.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="2.png" path="T:\Coding\FPLApp\assets\jerseys\2.png">
+      <file name="2.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/2.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="20.png" path="T:\Coding\FPLApp\assets\jerseys\20.png">
+      <file name="20.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/20.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="21.png" path="T:\Coding\FPLApp\assets\jerseys\21.png">
+      <file name="21.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/21.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="3.png" path="T:\Coding\FPLApp\assets\jerseys\3.png">
+      <file name="3.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/3.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="31.png" path="T:\Coding\FPLApp\assets\jerseys\31.png">
+      <file name="31.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/31.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="36.png" path="T:\Coding\FPLApp\assets\jerseys\36.png">
+      <file name="36.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/36.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="39.png" path="T:\Coding\FPLApp\assets\jerseys\39.png">
+      <file name="39.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/39.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="4.png" path="T:\Coding\FPLApp\assets\jerseys\4.png">
+      <file name="4.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/4.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="43.png" path="T:\Coding\FPLApp\assets\jerseys\43.png">
+      <file name="43.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/43.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="45.png" path="T:\Coding\FPLApp\assets\jerseys\45.png">
+      <file name="45.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/45.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="57.png" path="T:\Coding\FPLApp\assets\jerseys\57.png">
+      <file name="57.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/57.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="6.png" path="T:\Coding\FPLApp\assets\jerseys\6.png">
+      <file name="6.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/6.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="7.png" path="T:\Coding\FPLApp\assets\jerseys\7.png">
+      <file name="7.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/7.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="8.png" path="T:\Coding\FPLApp\assets\jerseys\8.png">
+      <file name="8.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/8.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="90.png" path="T:\Coding\FPLApp\assets\jerseys\90.png">
+      <file name="90.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/90.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="94.png" path="T:\Coding\FPLApp\assets\jerseys\94.png">
+      <file name="94.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/jerseys/94.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
     </package>
     <package name="assets.stats">
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="assist.png" path="T:\Coding\FPLApp\assets\stats\assist.png">
+      <file name="assist.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/stats/assist.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="goal.png" path="T:\Coding\FPLApp\assets\stats\goal.png">
+      <file name="goal.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/stats/goal.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="owngoal.png" path="T:\Coding\FPLApp\assets\stats\owngoal.png">
+      <file name="owngoal.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/stats/owngoal.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="penaltysave.png" path="T:\Coding\FPLApp\assets\stats\penaltysave.png">
+      <file name="penaltysave.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/stats/penaltysave.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="redcard.png" path="T:\Coding\FPLApp\assets\stats\redcard.png">
+      <file name="redcard.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/stats/redcard.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
-      <file name="yellowcard.png" path="T:\Coding\FPLApp\assets\stats\yellowcard.png">
+      <file name="yellowcard.png" path="/Users/tarunbola/Documents/GitHub/FPLApp2/assets/stats/yellowcard.png">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
       </file>
     </package>
   </project>
