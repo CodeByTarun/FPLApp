@@ -45,7 +45,9 @@
     "ts-jest": "^27.1.2"
   },
   "resolutions": {
-    "react-devtools-core": "4.13.0"
+    "react-devtools-core": "4.13.0",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   },
   "private": true
 }

@@ -7,7 +7,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { FplFixture } from '../../../Models/FplFixtures'
 import TeamEmblem from "./TeamEmblem"
 import moment from 'moment-timezone';
-import * as Localization from 'expo-localization'
+import { timezone } from 'expo-localization'
 import { useAppDispatch, useAppSelector } from '../../../Store/hooks'
 import { changeToFixture } from '../../../Store/teamSlice'
 import { GetHighestMinForAPlayer, GetScoreForLiveFixture, GetTeamDataFromOverviewWithFixtureTeamID } from '../../../Helpers/FplAPIHelpers'
@@ -28,13 +28,13 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek) => {
     if (fixture !== undefined) {
         if (fixture.finished_provisional == true) {
            return <><Text style={styles.scoreText}>{fixture.team_h_score} - {fixture.team_a_score}</Text>
-                    <Text style={styles.fullTimeText}>FT</Text></>
+                    <Text testID='finishedFixtureText' style={styles.fullTimeText}>FT</Text></>
         } else if (fixture.started == true) {
             let score = GetScoreForLiveFixture(fixture, gameweek);
            return <><Text style={styles.scoreText}>{score[0]} - {score[1]}</Text>
-                    <Text style={styles.timeText}>{GetHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
+                    <Text testID='liveFixtureText' style={styles.timeText}>{GetHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
         } else {
-            return <Text style={[styles.scoreText, {paddingBottom: 10}]}>vs</Text>
+            return <Text testID='notStarted' style={[styles.scoreText, {paddingBottom: 10}]}>vs</Text>
         }
     }
 }
@@ -50,20 +50,17 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
             dispatch(goToMainScreen());
         }
 
-        if (fixture) {
-            dispatch(changeToFixture(fixture))
-        }
+        dispatch(changeToFixture(fixture))
     };
 
     return (
         
         <View style={[styles.container]}>
-            <TouchableOpacity style={[styles.button]} onPress={onPress} disabled={!fixture?.started}>            
-            { (fixture && overview && gameweekData) &&
+            <TouchableOpacity testID='fixtureCardButton' style={[styles.button]} onPress={onPress} disabled={!fixture?.started}>            
                 <View style={[styles.card, globalStyles.shadow]}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
-                            { moment(fixture.kickoff_time).tz(Localization.timezone).format('MMM D, H:mm z') }
+                            { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
                         </Text>
                     </View>
                     <View style={styles.scoreView}>
@@ -74,7 +71,6 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
                         <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/>
                     </View>
                 </View>
-            }
             </TouchableOpacity>
         </View>
     )

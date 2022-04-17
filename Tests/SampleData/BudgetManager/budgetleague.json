@@ -1,0 +1,249 @@
+{
+    "new_entries": {
+        "has_next": false,
+        "page": 1,
+        "results": []
+    },
+    "last_updated_data": "2022-04-16T17:53:21Z",
+    "league": {
+        "id": 2465878,
+        "name": "League 2465878",
+        "created": "2022-04-03T22:16:04.219148Z",
+        "closed": true,
+        "max_entries": null,
+        "league_type": "c",
+        "scoring": "c",
+        "admin_entry": null,
+        "start_event": 32,
+        "code_privacy": "p",
+        "has_cup": false,
+        "cup_league": null,
+        "rank": null
+    },
+    "standings": {
+        "has_next": false,
+        "page": 1,
+        "results": [
+            {
+                "id": 64679300,
+                "event_total": 20,
+                "player_name": "Abang Ayoma",
+                "rank": 1,
+                "last_rank": 1,
+                "rank_sort": 1,
+                "total": 100,
+                "entry": 9086695,
+                "entry_name": "Gheri"
+            },
+            {
+                "id": 64679951,
+                "event_total": 14,
+                "player_name": "koko koko",
+                "rank": 2,
+                "last_rank": 4,
+                "rank_sort": 2,
+                "total": 90,
+                "entry": 9045180,
+                "entry_name": "Summerset"
+            },
+            {
+                "id": 64679772,
+                "event_total": 15,
+                "player_name": "leon Govender",
+                "rank": 3,
+                "last_rank": 3,
+                "rank_sort": 3,
+                "total": 87,
+                "entry": 760315,
+                "entry_name": "mastermind"
+            },
+            {
+                "id": 64679499,
+                "event_total": 39,
+                "player_name": "khalifa Moussa",
+                "rank": 4,
+                "last_rank": 16,
+                "rank_sort": 4,
+                "total": 85,
+                "entry": 9086732,
+                "entry_name": "KM7"
+            },
+            {
+                "id": 64679356,
+                "event_total": 11,
+                "player_name": "Keabetswe Matlebyane",
+                "rank": 5,
+                "last_rank": 5,
+                "rank_sort": 5,
+                "total": 82,
+                "entry": 8764369,
+                "entry_name": "Kea Dream team"
+            },
+            {
+                "id": 64679754,
+                "event_total": 19,
+                "player_name": "Rachel Daines",
+                "rank": 6,
+                "last_rank": 7,
+                "rank_sort": 6,
+                "total": 77,
+                "entry": 668431,
+                "entry_name": "Malabar"
+            },
+            {
+                "id": 64679561,
+                "event_total": 9,
+                "player_name": "James mo",
+                "rank": 7,
+                "last_rank": 2,
+                "rank_sort": 7,
+                "total": 75,
+                "entry": 8768806,
+                "entry_name": "k"
+            },
+            {
+                "id": 64679421,
+                "event_total": 15,
+                "player_name": "Emmanuel Adeola",
+                "rank": 8,
+                "last_rank": 14,
+                "rank_sort": 8,
+                "total": 69,
+                "entry": 3507969,
+                "entry_name": "DipsMonTY FC"
+            },
+            {
+                "id": 64679663,
+                "event_total": 1,
+                "player_name": "Byte Baah",
+                "rank": 9,
+                "last_rank": 6,
+                "rank_sort": 9,
+                "total": 64,
+                "entry": 8949480,
+                "entry_name": "Byte FC"
+            },
+            {
+                "id": 64679760,
+                "event_total": 4,
+                "player_name": "Joshua Oluwatimileyin",
+                "rank": 10,
+                "last_rank": 8,
+                "rank_sort": 10,
+                "total": 62,
+                "entry": 9086765,
+                "entry_name": "GRACEMAN"
+            },
+            {
+                "id": 64679866,
+                "event_total": 6,
+                "player_name": "Ismail El hamdouni",
+                "rank": 10,
+                "last_rank": 11,
+                "rank_sort": 11,
+                "total": 62,
+                "entry": 4727364,
+                "entry_name": "Diskore fc"
+            },
+            {
+                "id": 64679368,
+                "event_total": 4,
+                "player_name": "uche shaun",
+                "rank": 12,
+                "last_rank": 11,
+                "rank_sort": 12,
+                "total": 60,
+                "entry": 9086225,
+                "entry_name": "Manchester United"
+            },
+            {
+                "id": 64679931,
+                "event_total": 2,
+                "player_name": "Muhammed Nisham",
+                "rank": 13,
+                "last_rank": 9,
+                "rank_sort": 13,
+                "total": 59,
+                "entry": 9085033,
+                "entry_name": "AMIGOS"
+            },
+            {
+                "id": 64679761,
+                "event_total": 2,
+                "player_name": "karabo mashala",
+                "rank": 14,
+                "last_rank": 11,
+                "rank_sort": 14,
+                "total": 58,
+                "entry": 9080661,
+                "entry_name": "Raccoons fc"
+            },
+            {
+                "id": 64679714,
+                "event_total": 12,
+                "player_name": "Abdelkarim Beldjenna",
+                "rank": 15,
+                "last_rank": 10,
+                "rank_sort": 15,
+                "total": 57,
+                "entry": 7492294,
+                "entry_name": "Abdo_Torino"
+            },
+            {
+                "id": 64679153,
+                "event_total": 2,
+                "player_name": "Luuk van der Steen",
+                "rank": 16,
+                "last_rank": 15,
+                "rank_sort": 16,
+                "total": 50,
+                "entry": 9086671,
+                "entry_name": "The Chosen Ones"
+            },
+            {
+                "id": 64679867,
+                "event_total": 11,
+                "player_name": "saeful imam",
+                "rank": 17,
+                "last_rank": 18,
+                "rank_sort": 17,
+                "total": 46,
+                "entry": 9086790,
+                "entry_name": "GABUT FC"
+            },
+            {
+                "id": 64679932,
+                "event_total": 1,
+                "player_name": "なべ わた",
+                "rank": 18,
+                "last_rank": 17,
+                "rank_sort": 18,
+                "total": 40,
+                "entry": 8328607,
+                "entry_name": "ryooos"
+            },
+            {
+                "id": 64679930,
+                "event_total": 2,
+                "player_name": "Kipkorir Greg",
+                "rank": 19,
+                "last_rank": 19,
+                "rank_sort": 19,
+                "total": 35,
+                "entry": 3843426,
+                "entry_name": "BREEZY"
+            },
+            {
+                "id": 64679922,
+                "event_total": 1,
+                "player_name": "Tarun Bola",
+                "rank": 20,
+                "last_rank": 20,
+                "rank_sort": 20,
+                "total": 32,
+                "entry": 8426283,
+                "entry_name": "Bola FC"
+            }
+        ]
+    }
+}

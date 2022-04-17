@@ -8,6 +8,7 @@ import { ScreenTypes } from "./Store/navigationSlice";
 import ModalNavigator from "./Modals/ModalNavigator";
 import LineupView from "./Features/LineupView";
 import PlayerStats from "./Features/PlayerStats";
+import FixturesContainer from "./Features/Fixtures/FixturesContainer";
 
 const MainPage = () => {
 
@@ -33,7 +34,7 @@ const MainPage = () => {
           {(overview.data && fixtures.data) &&
             <View style={{flex: 1}}>
               <View style={{height: '19%', width: '100%', zIndex: (navigation.screenType === ScreenTypes.Fixtures) ? 1 : 0}}>
-                <FixturesView overview={overview.data}/>
+                <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
               </View>
               <View style={styles.lineupView}>
                 <LineupView overview={overview.data} fixtures={fixtures.data}/>

@@ -33,7 +33,6 @@ const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, distanceFromTop
             </>
             }
         </>
-        
     )
 
 }

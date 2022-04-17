@@ -5,17 +5,19 @@ import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { useGetFixturesQuery, useGetGameweekDataQuery, } from '../../Store/fplSlice'
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
-import { changeGameweek, changeToBudgetTeam, changeToDraftTeam, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
+import { changeToBudgetTeam, changeToDraftTeam, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
 import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { openGameweekModal, openInfoModal } from "../../Store/modalSlice";
 import { goToFixturesScreen, goToMainScreen, ScreenTypes } from "../../Store/navigationSlice";
 import { styles } from "./FixturesStyles";
 import { CustomButton } from "../Controls";
 import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
+import { FplGameweek } from "../../Models/FplGameweek";
 
 interface FixturesViewProp {
   overview: FplOverview;
+  fixtures: FplFixture[];
+  gameweek: FplGameweek;
 }
 
 function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
@@ -25,14 +27,12 @@ function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
   return 0;
 }
 
-const Fixtures = ({overview}: FixturesViewProp) => {
+const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
   const dispatch = useAppDispatch();
   const liveGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
   const teamInfo = useAppSelector(state => state.team);
   const navigation = useAppSelector(state => state.navigation);
-  const fixtures = useGetFixturesQuery();
-  const gameweekData = useGetGameweekDataQuery((teamInfo.gameweek) ? teamInfo.gameweek : skipToken);
 
   const fixtureScrollViewRef = useRef<ScrollView>(null);
   const expandAnim = useRef(new Animated.Value(0)).current;
@@ -71,12 +71,8 @@ const Fixtures = ({overview}: FixturesViewProp) => {
         }
       }
 
-      let gameweekNumber = overview.events.find(event => event.is_current === true)?.id;
+      setTeam();
 
-      if (gameweekNumber) {
-        dispatch(changeGameweek(gameweekNumber))
-        setTeam();
-      }
     }, []);
 
   useEffect( function setSelectedFixture() {
@@ -84,8 +80,8 @@ const Fixtures = ({overview}: FixturesViewProp) => {
       fixtureScrollViewRef.current?.scrollTo({ x:0, y:0, animated:true });
 
       if(teamInfo.teamType === TeamTypes.Fixture) {
-        let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.data?.filter((fixture) => { return fixture.event == teamInfo.gameweek})
-                                                                            .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2));
+        let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.filter((fixture) => { return fixture.event == teamInfo.gameweek})
+                                                                       .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2));
       
         if (sortedGameweekFixtures !== undefined) {
 
@@ -107,10 +103,10 @@ const Fixtures = ({overview}: FixturesViewProp) => {
       let refetchFixture: NodeJS.Timer;
       let refetchGameweek: NodeJS.Timer;
 
-      if (teamInfo.gameweek !== undefined && fixtures.data !== undefined) {
-        if (teamInfo.gameweek === liveGameweek && IsThereAMatchInProgress(teamInfo.gameweek, fixtures.data)) {
-          refetchFixture = setInterval(() => fixtures.refetch(), 30000);
-          refetchGameweek = setInterval(() => gameweekData.refetch(), 30000);
+      if (teamInfo.gameweek !== undefined && fixtures !== undefined) {
+        if (teamInfo.gameweek === liveGameweek && IsThereAMatchInProgress(teamInfo.gameweek, fixtures)) {
+          refetchFixture = setInterval(() => useGetFixturesQuery().refetch(), 30000);
+          refetchGameweek = setInterval(() => useGetGameweekDataQuery(liveGameweek).refetch(), 30000);
         }
       }
       
@@ -150,41 +146,37 @@ const Fixtures = ({overview}: FixturesViewProp) => {
   return (
     <Animated.View style={[styles.animatedView, { height: heightInterpolate }]}>
       <View style={styles.controlsContainer}>
-        {overview && 
 
-          <View style={styles.innerControlsContainer}>
-            <View style={{flex: 1}}/>
-            <TouchableOpacity style={[styles.gameweekButton]} onPress={onGameweekButtonPress}>
-              <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
-              <Text style={styles.gameweekDropDownSymbol}>◣</Text>
-            </TouchableOpacity>
-            <View style={styles.buttonsContainers}>
-              { (teamInfo.gameweek <= liveGameweek) &&
-                <View style={styles.singleButtonContainer}>
-                  <CustomButton image="calendar" buttonFunction={onCalendarButtonPress}/>
-                </View>
-              }
-              <View style={styles.singleButtonContainer}>
-                <CustomButton image="info" buttonFunction={onInfoButtonPress}/>
-              </View>
+        <View style={styles.innerControlsContainer}>
+          <View style={{flex: 1}}/>
+          <TouchableOpacity style={[styles.gameweekButton]} onPress={onGameweekButtonPress}>
+            <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
+            <Text style={styles.gameweekDropDownSymbol}>◣</Text>
+          </TouchableOpacity>
+          <View style={styles.buttonsContainers}>
+            <View style={styles.singleButtonContainer}>
+              <CustomButton image="calendar" buttonFunction={onCalendarButtonPress} isDisabled={teamInfo.gameweek <= liveGameweek}/>
             </View>
-          </View>  
-        }
+            <View style={styles.singleButtonContainer}>
+              <CustomButton image="info" buttonFunction={onInfoButtonPress}/>
+            </View>
+          </View>
+        </View>  
+        
       </View>
       <View style={{flex: 1}}>
-      { (fixtures.isSuccess && gameweekData.isSuccess) &&
-          <ScrollView ref={fixtureScrollViewRef} 
-                      horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
-                      showsHorizontalScrollIndicator={false} 
-                      style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }} 
-                      contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}>
-            { 
-              fixtures.data.filter((fixture) => { return fixture.event == teamInfo.gameweek})
-                            .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                            .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweekData.data} overview={overview}/> })     
-            }
-          </ScrollView>
-      }
+        <ScrollView ref={fixtureScrollViewRef} 
+                    horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
+                    showsHorizontalScrollIndicator={false} 
+                    style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }} 
+                    contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}
+                    testID='fixturesScrollView'>
+          { 
+            fixtures.filter((fixture) => { return fixture.event == teamInfo.gameweek})
+                    .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
+                    .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
+          }
+        </ScrollView>
       </View>
     </Animated.View>
   )

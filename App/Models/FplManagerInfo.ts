@@ -17,7 +17,7 @@ export interface FplManagerInfo {
     leagues:                       Leagues;
     name:                          string;
     name_change_blocked:           boolean;
-    kit:                           string;
+    kit:                           string | null;
     last_deadline_bank:            number;
     last_deadline_value:           number;
     last_deadline_total_transfers: number;

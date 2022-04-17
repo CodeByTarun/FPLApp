@@ -1,0 +1,19 @@
+{
+    "code": 2210563,
+    "event": 30,
+    "finished": false,
+    "finished_provisional": false,
+    "id": 293,
+    "kickoff_time": "2022-03-19T15:00:00Z",
+    "minutes": 0,
+    "provisional_start_time": false,
+    "started": false,
+    "team_a": 3,
+    "team_a_score": null,
+    "team_h": 9,
+    "team_h_score": null,
+    "stats": [],
+    "team_h_difficulty": 2,
+    "team_a_difficulty": 3,
+    "pulse_id": 66634
+}
