@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.22% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/9</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">55% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>11/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.22% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/9</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -144,22 +144,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,7 +178,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,28 +211,28 @@ interface PieChartProps {
     secondStatColor: string;
 }
 &nbsp;
-const PieChart = <span class="fstat-no" title="function not covered" >(p</span>rops: PieChartProps) =&gt; {
+const PieChart = (props: PieChartProps) =&gt; {
 &nbsp;
-    const [dimensions, setDimensions] = <span class="cstat-no" title="statement not covered" >useState([0,0]);</span>
+    const [dimensions, setDimensions] = useState([0,0]);
 &nbsp;
-    const radius = <span class="cstat-no" title="statement not covered" >dimensions[0] &gt; dimensions[1] ? dimensions[1] / 2 - 10 : dimensions[0] / 2 - 10;  </span>
-    const circumference = <span class="cstat-no" title="statement not covered" >2 * Math.PI * radius;</span>
+    const radius = dimensions[0] &gt; dimensions[1] ? <span class="branch-0 cbranch-no" title="branch not covered" >dimensions[1] / 2 - 10 </span>: dimensions[0] / 2 - 10;  
+    const circumference = 2 * Math.PI * radius;
 &nbsp;
-    const isFirstValueEqualOrBigger = <span class="cstat-no" title="statement not covered" >props.firstStatValue &gt;= props.secondStatValue;</span>
+    const isFirstValueEqualOrBigger = props.firstStatValue &gt;= props.secondStatValue;
 &nbsp;
-    const getDimensions = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >(e</span>vent: LayoutChangeEvent) =&gt; {</span>
+    const getDimensions = useCallback(<span class="fstat-no" title="function not covered" >(e</span>vent: LayoutChangeEvent) =&gt; {
 <span class="cstat-no" title="statement not covered" >        setDimensions([event.nativeEvent.layout.width, event.nativeEvent.layout.height]);</span>
     }, [])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
         &lt;View style={{flex: 1, justifyContent: 'center'}} onLayout={getDimensions}&gt;
             {(dimensions != [0,0]) &amp;&amp; 
-                &lt;Svg width={dimensions[0]} height={dimensions[1]} style={{alignSelf: 'center', position: 'absolute', transform: [{scaleX: isFirstValueEqualOrBigger ? 1 : -1}]}}&gt;
+                &lt;Svg width={dimensions[0]} height={dimensions[1]} style={{alignSelf: 'center', position: 'absolute', transform: [{scaleX: isFirstValueEqualOrBigger ? 1 : <span class="branch-1 cbranch-no" title="branch not covered" >-1}</span>]}}&gt;
                     &lt;Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius}
-                            stroke={(props.firstStatValue === 0 &amp;&amp; props.secondStatValue === 0) ? 'gray' : (isFirstValueEqualOrBigger ? props.secondStatColor : props.firstStatColor)} strokeWidth={7}/&gt;
+                            stroke={(props.firstStatValue === 0 &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >props.secondStatValue === 0)</span> ? <span class="branch-0 cbranch-no" title="branch not covered" >'gray' </span>: (isFirstValueEqualOrBigger ? props.secondStatColor : <span class="branch-1 cbranch-no" title="branch not covered" >props.firstStatColor)</span>} strokeWidth={7}/&gt;
                     &lt;Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius} 
-                            stroke={(props.firstStatValue === 0 &amp;&amp; props.secondStatValue === 0) ? 'gray' : isFirstValueEqualOrBigger ? props.firstStatColor : props.secondStatColor} strokeWidth={7} 
-                            strokeDasharray={circumference * ( (isFirstValueEqualOrBigger ? props.firstStatValue : props.secondStatValue)/(props.firstStatValue + props.secondStatValue))}
+                            stroke={(props.firstStatValue === 0 &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >props.secondStatValue === 0)</span> ? <span class="branch-0 cbranch-no" title="branch not covered" >'gray' </span>: isFirstValueEqualOrBigger ? props.firstStatColor : <span class="branch-1 cbranch-no" title="branch not covered" >props.secondStatColor}</span> strokeWidth={7} 
+                            strokeDasharray={circumference * ( (isFirstValueEqualOrBigger ? props.firstStatValue : <span class="branch-1 cbranch-no" title="branch not covered" >props.secondStatValue)</span>/(props.firstStatValue + props.secondStatValue))}
                             transform={`rotate(-90, ${dimensions[0]/2}, ${dimensions[1]/2})`}/&gt;
                 &lt;/Svg&gt;
             }
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Apr 17 2022 20:14:50 GMT-0400 (Eastern Daylight Time)
+                at Mon Apr 18 2022 19:00:53 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

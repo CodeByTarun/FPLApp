@@ -1,6 +1,7 @@
 import { PlayerTableFilterState } from "../Features/PlayerStats/PlayerTable/PlayerTableFilterReducer";
 import { OverviewStats } from "../Global/EnumsAndDicts";
 import { Per90Stats } from "../Global/GlobalConstants";
+import { StatsFilterState } from "../Modals/PlayerDetailedStatsModal/StatsFilterReducer";
 import { PlayerData } from "../Models/CombinedData";
 import { FplDraftGameweekPicks } from "../Models/FplDraftGameekPicks";
 import { FplDraftLeagueInfo } from "../Models/FplDraftLeagueInfo";
@@ -10,6 +11,7 @@ import { A, FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from "../Models/FplGameweek";
 import { FplManagerGameweekPicks } from "../Models/FplManagerGameweekPicks";
 import { FplOverview, PlayerOverview, Team } from "../Models/FplOverview";
+import { FplPlayerSummary, History } from "../Models/FplPlayerSummary";
 import { FixtureInfo, TeamInfo, TeamTypes } from "../Store/teamSlice";
 import { PlayersWatchlist } from "./FplDataStorageService";
 
@@ -183,6 +185,17 @@ export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
     }
 }
 
+export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: FixtureInfo) : number {
+    let playerStats = playerData.gameweekData.explain.find(explain => explain.fixture === fixtureInfo.fixture?.id)?.stats;
+
+    if (playerStats !== undefined) {
+        let playerPoints = playerStats.reduce((points, stat) => {return points + stat.points}, 0);
+        return playerPoints;
+    }
+
+    return 0;
+}
+
 export function GetPlayerScoreAndFixtureText(player: PlayerData, teamInfo: TeamInfo, fixtures: FplFixture[], overview: FplOverview) {
 
     if ((teamInfo.teamType !== TeamTypes.Budget && teamInfo.teamType !== TeamTypes.Draft)) {
@@ -219,17 +232,6 @@ export function GetPlayerScoreAndFixtureText(player: PlayerData, teamInfo: TeamI
                              .join(', ');
     }
 
-}
-
-export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: FixtureInfo) : number {
-    let playerStats = playerData.gameweekData.explain.find(explain => explain.fixture === fixtureInfo.fixture?.id)?.stats;
-
-    if (playerStats !== undefined) {
-        let playerPoints = playerStats.reduce((points, stat) => {return points + stat.points}, 0);
-        return playerPoints;
-    }
-
-    return 0;
 }
 
 export function GetFixtureStats(player: PlayerData, fixtureInfo: FixtureInfo, identifier: string) {
@@ -305,14 +307,14 @@ export function GetStatValue(filters: PlayerTableFilterState, player: PlayerOver
     }
 }
 
-export function GetOwnedPlayersManagerShortInitials(playerId: number, overview: FplOverview, draftOverview: FplDraftOverview | undefined, 
+export function GetOwnedPlayersManagerShortInitials(budgetId: number, overview: FplOverview, draftOverview: FplDraftOverview | undefined, 
                                                     draftLeagueRosters: FplDraftLeaguePlayerStatuses | undefined, draftLeagueInfo: FplDraftLeagueInfo | undefined) {
 
     if (draftOverview && draftLeagueInfo && draftLeagueRosters) {
-        let code = draftOverview.elements.find(player => player.id === playerId)?.code;
-        let budgetPlayerId = overview.elements.find(player => player.code === code)?.id;
+        let code = overview.elements.find(player => player.id === budgetId)?.code;
+        let draftPlayerId = draftOverview.elements.find(player => player.code === code)?.id;
     
-        let player = draftLeagueRosters.element_status.find(player => player.element === budgetPlayerId);
+        let player = draftLeagueRosters.element_status.find(player => player.element === draftPlayerId);
     
         if (player && player.status === 'o') {
             
@@ -323,4 +325,29 @@ export function GetOwnedPlayersManagerShortInitials(playerId: number, overview: 
         return null
     }
 
+}
+
+export function GetStatValueForDetailedStatsView(stat: string, playerData: FplPlayerSummary, player: PlayerOverview, statsFilterState: StatsFilterState, minutesValue: number) {
+
+    let statValue: number;
+
+        if (playerData && statsFilterState.gameSpan) {
+            statValue = playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
+                                          .reduce((prev, curr) => prev + (Number(curr[stat as keyof History])), 0) 
+        } else {
+            statValue = Number(player[stat as keyof PlayerOverview]);
+        }
+
+        return ((Math.round((statsFilterState.isPer90 ? (statValue / minutesValue * 90) : statValue) * 100)) / 100).toString();
+
+}
+
+export function GetMinutesValueForDetailedStatsView(playerData: FplPlayerSummary, player: PlayerOverview, statsFilterState: StatsFilterState) {
+    
+    if (playerData && statsFilterState.gameSpan) {
+        return playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
+                                 .reduce((prev, curr) => prev + curr.minutes, 0); 
+    } else {
+        return player.minutes;
+    }
 }

@@ -20,7 +20,6 @@ const stats: {[key: string] : string } = {
     'saves' : 'S',
     'bonus' : 'B',
     'bps' : 'BPS',
-
 }
 
 interface HistoryProps {
@@ -48,7 +47,7 @@ const HistoryList = ({overview, player, playerData} : HistoryProps) => {
     
     const historyItemRender = useCallback(({item} : {item: History}) => {
         return (
-            <View style={styles.historyItemContainer}>
+            <View testID="historyListItem" style={styles.historyItemContainer}>
                 { Object.keys(stats).map((stat) => {
                     return (
                     <View key={stat} style={styles.tableTextContainer}>
@@ -68,7 +67,7 @@ const HistoryList = ({overview, player, playerData} : HistoryProps) => {
             <View style={styles.footerContainer}>
                 { Object.keys(stats).map((stat) => {
                     return (
-                    <View key={stat} style={styles.tableTextContainer}>
+                    <View testID="historyFooterItem" key={stat} style={styles.tableTextContainer}>
                         <Text  style={[styles.headerText]}>{ player[stat as keyof PlayerOverview] }</Text>
                     </View>
                     )
@@ -78,14 +77,14 @@ const HistoryList = ({overview, player, playerData} : HistoryProps) => {
     }, [player])
 
     return (
-        <View style={styles.container}>
-            <ScrollView horizontal={true}>
+        <View testID="playerDetailedStatsHistoryListView" style={styles.container}>
+            <ScrollView testID="historyListScrollView" horizontal={true}>
                 <FlatList style={{flex: 1}} contentContainerStyle={{justifyContent: 'center'}} data={playerData.history}
-                        ListHeaderComponent={historyHeader}
-                        keyExtractor={historyItemKeyExtractor}
-                        renderItem={historyItemRender}
-                        stickyHeaderIndices={[0]}
-                        ListFooterComponent={historyFooter}/>
+                          ListHeaderComponent={historyHeader}
+                          keyExtractor={historyItemKeyExtractor}
+                          renderItem={historyItemRender}
+                          stickyHeaderIndices={[0]}
+                          ListFooterComponent={historyFooter}/>
             </ScrollView>
         </View>
     )

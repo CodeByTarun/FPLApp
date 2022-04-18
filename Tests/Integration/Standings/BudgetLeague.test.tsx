@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "../reduxRender";
 import BudgetLeague from "../../../App/Features/Standings/BudgetLeague";
-import { budgetManagerInfo } from "../LineupView/Gameweek32Data";
+import { budgetManagerInfo } from "../../SampleData/Gameweek32Data";
 
 test('budget league default display renders correctly and can go to standings of a team and back to leagues', async () => {
 

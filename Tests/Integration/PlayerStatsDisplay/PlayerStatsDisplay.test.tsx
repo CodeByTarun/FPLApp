@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "../reduxRender";
 import PlayerStatsDisplay from "../../../App/Features/PlayerStatsDisplay";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../App/Helpers/FplAPIHelpers";
-import { draftLeaguePicks, gameweek, budgetManagerInfo, draftManagerInfo, budgetLeaguePicks } from "../LineupView/Gameweek32Data";
+import { draftLeaguePicks, gameweek32, budgetManagerInfo, draftManagerInfo, budgetLeaguePicks } from "../../SampleData/Gameweek32Data";
 import { BudgetInfo, DraftInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { draftOverview, overview } from "../../SampleData/Overviews";
 import { allFixtures } from "../../SampleData/Fixtures";
@@ -10,7 +10,7 @@ import { Icons } from "../../../App/Global/Images";
 
 let draftInfo: DraftInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
 
-const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
+const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
 
 test('testing all views for a draft team', () => {
@@ -64,7 +64,7 @@ test('testing captaincy when a budget team', () => {
 
     let budgetInfo: BudgetInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget }
 
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, budgetInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
+    const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, budgetInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
     const { getByTestId, queryByTestId, getAllByTestId, getByText, rerender } = render(<PlayerStatsDisplay player={players![4]} overview={overview} teamInfo={budgetInfo} fixtures={allFixtures} viewIndex={0} currentGameweek={32}/>)
 

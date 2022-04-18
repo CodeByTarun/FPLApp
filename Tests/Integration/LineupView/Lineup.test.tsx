@@ -3,7 +3,7 @@ import { render } from "../reduxRender";
 import Lineup from "../../../App/Features/LineupView/Lineup";
 import store from "../../../App/Store/store";
 import { BudgetInfo, DraftInfo, DreamTeamInfo, FixtureInfo, TeamTypes } from "../../../App/Store/teamSlice";
-import { budgetLeaguePicks, budgetManagerInfo, draftLeaguePicks, draftManagerInfo, fixtures, gameweek, gameweek32Fixture } from "./Gameweek32Data";
+import { budgetLeaguePicks, budgetManagerInfo, draftLeaguePicks, draftManagerInfo, fixtures, gameweek32, gameweek32Fixture } from "../../SampleData/Gameweek32Data";
 import { draftOverview, overview } from "../../SampleData/Overviews";
 
 let draftInfo: DraftInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft };
@@ -18,7 +18,7 @@ let gameweekGreaterThanCurrentGameweekTeamInfo: DreamTeamInfo = {gameweek: 32, t
 
 test('team type is draft', () => {
 
-    const {queryByTestId, queryAllByTestId, rerender} = render(<Lineup overview={overview} teamInfo={draftInfo} fixtures={fixtures} gameweek={gameweek}
+    const {queryByTestId, queryAllByTestId, rerender} = render(<Lineup overview={overview} teamInfo={draftInfo} fixtures={fixtures} gameweek={gameweek32}
                                                                        draftGameweekPicks={draftLeaguePicks} draftOverview={draftOverview} budgetGameweekPicks={budgetLeaguePicks}
                                                                        budgetUserInfo={budgetManagerInfo} draftUserInfo={draftManagerInfo}/>);
 
@@ -26,7 +26,7 @@ test('team type is draft', () => {
     expect(queryByTestId('managerCardButton')).toBeTruthy();
     expect(queryByTestId('additionalInfoCardButton')).toBeFalsy();
 
-    rerender(<Lineup overview={overview} teamInfo={draftInfoCurrentGameweek} fixtures={fixtures} gameweek={gameweek}
+    rerender(<Lineup overview={overview} teamInfo={draftInfoCurrentGameweek} fixtures={fixtures} gameweek={gameweek32}
                      draftGameweekPicks={draftLeaguePicks} draftOverview={draftOverview} budgetGameweekPicks={budgetLeaguePicks}
                      budgetUserInfo={budgetManagerInfo} draftUserInfo={draftManagerInfo}/>);
 
@@ -36,7 +36,7 @@ test('team type is draft', () => {
 
 test('team type is budget', () => {
 
-    const {queryByTestId, queryAllByTestId} = render(<Lineup overview={overview} teamInfo={budgetInfo} fixtures={fixtures} gameweek={gameweek}
+    const {queryByTestId, queryAllByTestId} = render(<Lineup overview={overview} teamInfo={budgetInfo} fixtures={fixtures} gameweek={gameweek32}
                                                                        draftGameweekPicks={draftLeaguePicks} draftOverview={draftOverview} budgetGameweekPicks={budgetLeaguePicks}
                                                                        budgetUserInfo={budgetManagerInfo} draftUserInfo={draftManagerInfo}/>);
 
@@ -48,7 +48,7 @@ test('team type is budget', () => {
 
 test('team type is dream team', () => {
 
-    const {queryByTestId, queryAllByTestId} = render(<Lineup overview={overview} teamInfo={dreamTeamInfo} fixtures={fixtures} gameweek={gameweek}
+    const {queryByTestId, queryAllByTestId} = render(<Lineup overview={overview} teamInfo={dreamTeamInfo} fixtures={fixtures} gameweek={gameweek32}
                                                              draftGameweekPicks={draftLeaguePicks} draftOverview={draftOverview} budgetGameweekPicks={budgetLeaguePicks}
                                                              budgetUserInfo={budgetManagerInfo} draftUserInfo={draftManagerInfo}/>);
 
@@ -58,7 +58,7 @@ test('team type is dream team', () => {
 
 test('team type is fixture', () => {
 
-    const {queryByTestId, queryAllByTestId} = render(<Lineup overview={overview} teamInfo={fixtureInfo} fixtures={fixtures} gameweek={gameweek}
+    const {queryByTestId, queryAllByTestId} = render(<Lineup overview={overview} teamInfo={fixtureInfo} fixtures={fixtures} gameweek={gameweek32}
                                                              draftGameweekPicks={draftLeaguePicks} draftOverview={draftOverview} budgetGameweekPicks={budgetLeaguePicks}
                                                              budgetUserInfo={budgetManagerInfo} draftUserInfo={draftManagerInfo}/>);
 

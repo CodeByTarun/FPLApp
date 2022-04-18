@@ -2,14 +2,14 @@ import React from "react";
 import { render } from "../reduxRender";
 import FixtureDifficultyDisplay from "../../../App/Features/PlayerStatsDisplay/FixtureDifficultyDisplay";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../App/Helpers/FplAPIHelpers";
-import { draftLeaguePicks, gameweek, budgetLeaguePicks } from "../LineupView/Gameweek32Data";
+import { draftLeaguePicks, gameweek32, budgetLeaguePicks } from "../../SampleData/Gameweek32Data";
 import { BudgetInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { draftOverview, overview } from "../../SampleData/Overviews";
 import { allFixtures } from "../../SampleData/Fixtures";
 
 let budgetInfo: BudgetInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget }
 
-const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, budgetInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
+const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, budgetInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
 test('show next five fixtures', () => {
 

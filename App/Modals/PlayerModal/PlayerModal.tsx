@@ -48,14 +48,14 @@ function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, 
 
 function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, fixture: FplFixture) {
     return (
-        <View key={fixture.id} style={styles.fixtureContainer}>
+        <View testID="fixturePlayerStatsContainer" key={fixture.id} style={styles.fixtureContainer}>
             <View style={styles.fixtureScoreView}>
                 <View style={styles.emblemView}>
-                    <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview).code]} resizeMode='contain' />
+                    <Image testID="homeJerseyFixturePlayerStatsView" style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview).code]} resizeMode='contain' />
                 </View>
-                <Text style={[styles.scoreText, {alignSelf: 'center'}]}>{fixture.team_h_score}  -  {fixture.team_a_score}</Text>
+                <Text testID="scoreFixturePlayerStatsView" style={[styles.scoreText, {alignSelf: 'center'}]}>{fixture.team_h_score}  -  {fixture.team_a_score}</Text>
                 <View style={styles.emblemView}>
-                    <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview).code]} resizeMode='contain' />
+                    <Image testID="awayJerseyFixturePlayerStatsView" style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview).code]} resizeMode='contain' />
                 </View>
                 
             </View>

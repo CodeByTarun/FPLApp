@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "../reduxRender";
 import TeamSwitch from "../../../App/Features/LineupView/TeamSwitch";
 import { changeGameweek, changeToFixture, DreamTeamInfo, FixtureInfo, TeamTypes } from "../../../App/Store/teamSlice";
-import { fixtures, gameweek, gameweek32Fixture } from "./Gameweek32Data";
+import { fixtures, gameweek, gameweek32Fixture } from "../../SampleData/Gameweek32Data";
 import { overview } from "../../SampleData/Overviews";
 import store from "../../../App/Store/store";
 

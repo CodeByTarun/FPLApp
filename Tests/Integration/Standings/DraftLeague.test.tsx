@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "../reduxRender";
 import DraftLeague from "../../../App/Features/Standings/DraftLeague";
-import { draftLeagueInfo } from "../LineupView/Gameweek32Data";
+import { draftLeagueInfo } from "../../SampleData/Gameweek32Data";
 
 test('draft league list renders and can click on a team', () => {
 

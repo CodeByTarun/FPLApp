@@ -3,7 +3,7 @@ import { render, fireEvent } from "../reduxRender";
 import ManagerInfoCard from "../../../App/Features/LineupView/Lineup/ManagerInfoCard";
 import { BudgetInfo, changeGameweek, changeToBudgetTeam, changeToDraftTeam, DraftInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../App/Helpers/FplAPIHelpers";
-import { budgetLeaguePicks, budgetManagerInfo, draftLeaguePicks, draftManagerInfo, gameweek } from "./Gameweek32Data";
+import { budgetLeaguePicks, budgetManagerInfo, draftLeaguePicks, draftManagerInfo, gameweek32 } from "../../SampleData/Gameweek32Data";
 import { draftOverview, overview } from "../../SampleData/Overviews";
 import store from "../../../App/Store/store";
 import { PlayerData } from "../../../App/Models/CombinedData";
@@ -16,7 +16,7 @@ let draftInfo: DraftInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true,
 
 test('draft league manager card shows the right info', () => {
 
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
+    const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
     const customStore = store;
     store.dispatch(changeToDraftTeam({ id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }));
@@ -70,7 +70,7 @@ let budgetInfo: BudgetInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: 
 
 test('budget league manager card shows the right info', () => {
 
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, budgetInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
+    const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, budgetInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
     const customStore = store;
     store.dispatch(changeToBudgetTeam({ id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }));
@@ -137,7 +137,7 @@ test('budget league manager card shows the right info', () => {
 
 test('only show gameweek points when on a past gameweek', () => {
 
-    const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
+    const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
     const customStore = store;
     store.dispatch(changeToDraftTeam({ id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }));

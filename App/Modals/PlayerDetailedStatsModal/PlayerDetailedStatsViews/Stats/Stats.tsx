@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import { View, Text } from "react-native";
 import { PieChart } from "../../../../Features/Controls";
 import { lightColor } from "../../../../Global/GlobalConstants";
+import { GetMinutesValueForDetailedStatsView, GetStatValueForDetailedStatsView } from "../../../../Helpers/FplAPIHelpers";
 import { PlayerOverview } from "../../../../Models/FplOverview";
 import { FplPlayerSummary, History } from "../../../../Models/FplPlayerSummary";
 import { StatsFilterState } from "../../StatsFilterReducer";
@@ -34,52 +35,40 @@ interface StatsProps {
 const Stats = ({statsFilterState, player, playerData, currentGameweek} : StatsProps) => {
 
     const getMinutes = useCallback(() => {
-        if (playerData && statsFilterState.gameSpan) {
-            return playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
-                                     .reduce((prev, curr) => prev + curr.minutes, 0); 
-        } else {
-            return player.minutes;
-        }
+        
+        return GetMinutesValueForDetailedStatsView(playerData, player, statsFilterState);
+
     }, [statsFilterState.isPer90, statsFilterState.gameSpan, player, playerData])
 
     const minutesValue = useMemo(() => getMinutes(), [player, playerData, statsFilterState.gameSpan, statsFilterState.isPer90])
 
     const getStatValue = useCallback((stat: string): string => {
 
-        let statValue: number;
-
-        if (playerData && statsFilterState.gameSpan) {
-            statValue = playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
-                                          .reduce((prev, curr) => prev + (Number(curr[stat as keyof History])), 0) 
-        } else {
-            statValue = Number(player[stat as keyof PlayerOverview]);
-        }
-
-        return ((Math.round((statsFilterState.isPer90 ? (statValue / minutesValue * 90) : statValue) * 100)) / 100).toString();
+        return GetStatValueForDetailedStatsView(stat, playerData, player, statsFilterState, minutesValue);
 
     }, [statsFilterState.isPer90, statsFilterState.gameSpan, player, playerData]);
 
     return (
-        <View style={styles.container}>
+        <View testID="playerDetailedStatsStatsView" style={styles.container}>
             <View style={[styles.sectionBorder, styles.topSection]}>
                 <Text style={styles.sectionHeaderText}>
                     {statsFilterState.isPer90 ? " Per 90 " : " Totals "}
                 </Text>
 
-                <Text style={styles.pointsHeaderText}>
+                <Text testID="ptsView" style={styles.pointsHeaderText}>
                     {getStatValue('total_points') + "pts "}
                 </Text>
 
                 <View style={styles.pieChartContainer}>
                         <PieChart firstStatName="G" secondStatName="A" 
-                            firstStatColor={'white'} secondStatColor={lightColor} 
-                            firstStatValue={Number(getStatValue('goals_scored'))} 
-                            secondStatValue={Number(getStatValue('assists'))}/>                    
+                                  firstStatColor={'white'} secondStatColor={lightColor} 
+                                  firstStatValue={Number(getStatValue('goals_scored'))} 
+                                  secondStatValue={Number(getStatValue('assists'))}/>                    
                 </View>
                 <View style={styles.rightSideStatsContainer}>
                     {Object.keys(PlayerDetailedStatsRightSide).map((key) => {
                         return (
-                            <View key={key} style={{flex: 1, flexDirection: 'row'}}>
+                            <View testID="playerDetailedStatsRightSideItems" key={key} style={{flex: 1, flexDirection: 'row'}}>
                                 <Text style={styles.gameweekSectionText}>{PlayerDetailedStatsRightSide[key]}</Text>
                                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                                     <Text style={[styles.gameweekSectionText, {alignSelf: 'flex-end'}]}>{getStatValue(key)}</Text>
@@ -98,7 +87,7 @@ const Stats = ({statsFilterState, player, playerData, currentGameweek} : StatsPr
 
                 {Object.keys(PlayerDetailedStatsBottom).map((key) => {
                     return (
-                        <View key={key} style={{flex: PlayerDetailedStatsBottom[key][1]}}>
+                        <View testID="bottommStatsItem" key={key} style={{flex: PlayerDetailedStatsBottom[key][1]}}>
                             <Text style={styles.gameweekSectionText}>{PlayerDetailedStatsBottom[key][0]}</Text>
                             <Text style={styles.gameweekSectionText}>{player[key as keyof PlayerOverview]}</Text>
                         </View>

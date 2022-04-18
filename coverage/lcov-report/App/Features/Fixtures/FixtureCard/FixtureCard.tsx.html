@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.82% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/17</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">75% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.25% </span>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>4/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -166,37 +166,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">117x</span>
+<span class="cline-any cline-yes">117x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">86x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">85x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">117x</span>
+<span class="cline-any cline-yes">210x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">117x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">117x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,12 +250,12 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek) =&gt; {
         if (fixture.finished_provisional == true) {
            return &lt;&gt;&lt;Text style={styles.scoreText}&gt;{fixture.team_h_score} - {fixture.team_a_score}&lt;/Text&gt;
                     &lt;Text testID='finishedFixtureText' style={styles.fullTimeText}&gt;FT&lt;/Text&gt;&lt;/&gt;
-        } else <span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>if (fixture.started == true) {</span>
-            let score = <span class="cstat-no" title="statement not covered" >GetScoreForLiveFixture(fixture, gameweek);</span>
-<span class="cstat-no" title="statement not covered" >           return &lt;&gt;&lt;Text style={styles.scoreText}&gt;{score[0]} - {score[1]}&lt;/Text&gt;</span>
+        } else if (fixture.started == true) {
+            let score = GetScoreForLiveFixture(fixture, gameweek);
+           return &lt;&gt;&lt;Text style={styles.scoreText}&gt;{score[0]} - {score[1]}&lt;/Text&gt;
                     &lt;Text testID='liveFixtureText' style={styles.timeText}&gt;{GetHighestMinForAPlayer(fixture, gameweek) + "'"}&lt;/Text&gt;&lt;/&gt;
         } else {
-<span class="cstat-no" title="statement not covered" >            return &lt;Text testID='notStarted' style={[styles.scoreText, {paddingBottom: 10}]}&gt;vs&lt;/Text&gt;</span>
+            return &lt;Text testID='notStarted' style={[styles.scoreText, {paddingBottom: 10}]}&gt;vs&lt;/Text&gt;
         }
     }
 }
@@ -265,13 +265,13 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) =&gt; 
     const dispatch = useAppDispatch();
     const navigation = useAppSelector(state =&gt; state.navigation);
 &nbsp;
-    const onPress = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const onPress = () =&gt; {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if (navigation.screenType === ScreenTypes.Fixtures) {</span>
-<span class="cstat-no" title="statement not covered" >            dispatch(goToMainScreen());</span>
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (navigation.screenType === ScreenTypes.Fixtures) {
+            dispatch(goToMainScreen());
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        dispatch(changeToFixture(fixture))</span>
+        dispatch(changeToFixture(fixture))
     };
 &nbsp;
     return (
@@ -304,7 +304,7 @@ export default FixtureCard;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Apr 17 2022 06:01:54 GMT-0400 (Eastern Daylight Time)
+                at Mon Apr 18 2022 19:00:53 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

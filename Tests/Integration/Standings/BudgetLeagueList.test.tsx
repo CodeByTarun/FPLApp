@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "../reduxRender";
 import BudgetLeagueList from "../../../App/Features/Standings/BudgetLeague/LeagueList/BudgetLeagueList";
-import { budgetManagerInfo } from '../LineupView/Gameweek32Data';
+import { budgetManagerInfo } from '../../SampleData/Gameweek32Data';
 
 test('shows leagues info and can press on leagues', () => {
 

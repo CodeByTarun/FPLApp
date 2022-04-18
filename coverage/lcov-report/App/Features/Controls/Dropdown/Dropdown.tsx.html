@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/15</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -148,28 +148,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,15 +178,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">60x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -216,28 +216,28 @@ interface DropdownProps {
     setValue: (value: string) =&gt; void;
 }
 &nbsp;
-const Dropdown = <span class="fstat-no" title="function not covered" >(p</span>rops: DropdownProps) =&gt; {
+const Dropdown = (props: DropdownProps) =&gt; {
     
-    const [showDropdown, setShowDropdown] = <span class="cstat-no" title="statement not covered" >useState(false);</span>
+    const [showDropdown, setShowDropdown] = useState(false);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        Keyboard.dismiss();</span>
+    useEffect(() =&gt; {
+        Keyboard.dismiss();
     }, [showDropdown])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    useEffect(function <span class="fstat-no" title="function not covered" >optionSelected(</span>) {</span>
-<span class="cstat-no" title="statement not covered" >        setShowDropdown(false);</span>
+    useEffect(function optionSelected() {
+        setShowDropdown(false);
     }, [props.value])
 &nbsp;
-    const clearValue = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        props.setValue(props.defaultValue);</span>
-<span class="cstat-no" title="statement not covered" >        setShowDropdown(false);</span>
+    const clearValue = useCallback(() =&gt; {
+        props.setValue(props.defaultValue);
+        setShowDropdown(false);
     }, [])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
         &lt;View style={styles.container}&gt;
             &lt;Text style={styles.headerText}&gt;{props.headerText}&lt;/Text&gt;
             &lt;Pressable style={[styles.buttonContainer]} 
-                       onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setShowDropdown(!showDropdown)}</span>
+                       onPress={() =&gt; setShowDropdown(!showDropdown)}
                        hitSlop={5}&gt;
                 &lt;Text numberOfLines={1} style={styles.selectedValueText}&gt;{props.value}  &lt;/Text&gt;
                 &lt;Text style={globalStyles.dropDownSymbol}&gt;◣&lt;/Text&gt;
@@ -246,15 +246,15 @@ const Dropdown = <span class="fstat-no" title="function not covered" >(p</span>r
             &lt;Modal style={styles.modal} transparent={true} visible={showDropdown} testID={'dropdownModal'}&gt;
                 &lt;Pressable testID="background" style={globalStyles.modalBackground} onPressIn={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setShowDropdown(false)}</span>/&gt;
                 &lt;View style={[globalStyles.modalView, globalStyles.modalShadow, styles.modalView]}&gt;
-                    &lt;CloseButton closeFunction={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setShowDropdown(false)}</span>/&gt; 
+                    &lt;CloseButton closeFunction={() =&gt; setShowDropdown(false)}/&gt; 
                     &lt;Text style={styles.titleText}&gt;Options&lt;/Text&gt;
                     &lt;FlatList
                         style={styles.flatList}
                         ListHeaderComponentStyle = {styles.flatListHeader}
                         data={props.options}
-                        keyExtractor={<span class="fstat-no" title="function not covered" >it</span>em =&gt; <span class="cstat-no" title="statement not covered" >item}</span>
-                        renderItem={<span class="fstat-no" title="function not covered" >({</span>item}) =&gt; 
-<span class="cstat-no" title="statement not covered" >                            &lt;Pressable style={styles.itemView} onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >props.setValue(item)}</span>&gt;</span>
+                        keyExtractor={item =&gt; item}
+                        renderItem={({item}) =&gt; 
+                            &lt;Pressable style={styles.itemView} onPress={() =&gt; props.setValue(item)}&gt;
                                 &lt;Text style={styles.itemText}&gt;{item}&lt;/Text&gt;
                             &lt;/Pressable&gt;
                         }/&gt;
@@ -274,7 +274,7 @@ export default Dropdown;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Apr 17 2022 20:14:50 GMT-0400 (Eastern Daylight Time)
+                at Mon Apr 18 2022 19:00:53 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
