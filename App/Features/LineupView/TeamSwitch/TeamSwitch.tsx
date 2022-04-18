@@ -70,10 +70,10 @@ const TeamSwitch = ({overview, fixtures, gameweek}: TeamSwitchProps) => {
         <View style={styles.container} onLayout={(event) => getViewWidth(event)}>
             { (teamInfo.teamType === TeamTypes.Fixture && teamInfo.fixture !== null && overview !== undefined) &&
             
-            <TouchableWithoutFeedback style={{flex: 1, flexDirection: 'row'}} onPress={switchTeam}>
+            <TouchableWithoutFeedback testID="teamSwitchButton" style={{flex: 1, flexDirection: 'row'}} onPress={switchTeam}>
             
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Animated.View style={[styles.highlight, { transform: [{translateX: translateAnim}] }, globalStyles.shadow, {shadowOpacity: 0.2, shadowRadius: 5 }]}/>
+                <Animated.View testID='animatedViewTeamSwitch' style={[styles.highlight, { transform: [{translateX: translateAnim}] }, globalStyles.shadow, {shadowOpacity: 0.2, shadowRadius: 5 }]}/>
                     <View style={[styles.buttonContainer]}>
                         <View style={{ flex: 1 }}>
                             <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview).code]} resizeMode='contain'/>

@@ -121,7 +121,6 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
             <View style={{flex: 4}}>
                 <Image style={styles.field} source={require('../../../../assets/threequartersfield.jpg')}/>
                 
-                    
                     {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 
                         <View testID="fixtureOrDreamTeamPlayersStatsView" style={styles.playerContainer}>
                             {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}

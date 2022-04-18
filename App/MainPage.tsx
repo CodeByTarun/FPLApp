@@ -6,7 +6,7 @@ import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
 import { useAppSelector } from "./Store/hooks";
 import { ScreenTypes } from "./Store/navigationSlice";
 import ModalNavigator from "./Modals/ModalNavigator";
-import LineupView from "./Features/LineupView";
+import { LineupViewQueriesContainer } from "./Features/LineupView";
 import PlayerStats from "./Features/PlayerStats";
 import FixturesContainer from "./Features/Fixtures/FixturesContainer";
 
@@ -37,7 +37,7 @@ const MainPage = () => {
                 <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
               </View>
               <View style={styles.lineupView}>
-                <LineupView overview={overview.data} fixtures={fixtures.data}/>
+                <LineupViewQueriesContainer overview={overview.data} fixtures={fixtures.data}/>
               </View>
               <PlayerStats overview={overview.data} fixtures={fixtures.data}/>
             </View>

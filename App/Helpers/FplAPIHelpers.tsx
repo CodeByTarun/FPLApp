@@ -1,11 +1,17 @@
+import { PlayerTableFilterState } from "../Features/PlayerStats/PlayerTable/PlayerTableFilterReducer";
+import { OverviewStats } from "../Global/EnumsAndDicts";
+import { Per90Stats } from "../Global/GlobalConstants";
 import { PlayerData } from "../Models/CombinedData";
 import { FplDraftGameweekPicks } from "../Models/FplDraftGameekPicks";
+import { FplDraftLeagueInfo } from "../Models/FplDraftLeagueInfo";
+import { FplDraftLeaguePlayerStatuses } from "../Models/FplDraftLeaguePlayerStatuses";
 import { FplDraftOverview } from "../Models/FplDraftOverview";
 import { A, FplFixture } from "../Models/FplFixtures";
 import { FplGameweek } from "../Models/FplGameweek";
 import { FplManagerGameweekPicks } from "../Models/FplManagerGameweekPicks";
-import { FplOverview, Team } from "../Models/FplOverview";
+import { FplOverview, PlayerOverview, Team } from "../Models/FplOverview";
 import { FixtureInfo, TeamInfo, TeamTypes } from "../Store/teamSlice";
+import { PlayersWatchlist } from "./FplDataStorageService";
 
 export function GetTeamDataFromOverviewWithFixtureTeamID(teamNumber : number, overview: FplOverview): Team {
     return overview.teams.filter(team => team.id == teamNumber)[0]
@@ -252,4 +258,69 @@ export function GetTeamTotalExpectedPoints(teamInfo: TeamInfo, players: PlayerDa
     }   
     
     return 0;
+}
+
+export function FilterPlayerListPlayers(filters: PlayerTableFilterState, player: PlayerOverview, 
+                                        overview: FplOverview, watchlist: PlayersWatchlist | undefined) {
+    return (
+        player.web_name.startsWith(filters.playerSearchText) && 
+        (!filters.isInWatchlist || watchlist?.playerIds.includes(player.id)) &&
+        (filters.teamFilter === 'All Teams' || player.team_code === overview.teams.find(team => team.name === filters.teamFilter)?.code) &&
+        (filters.positionFilter === 'All Positions' || player.element_type === overview.element_types.find(element => element.plural_name === filters.positionFilter)?.id) &&
+        (player.now_cost >= filters.priceRange[0] && player.now_cost <= filters.priceRange[1]) &&
+        (getNum(player.minutes) >= filters.minutesRange[0] && getNum(player.minutes) <= filters.minutesRange[1])
+    );
+}
+
+function getNum(val: number) {
+    if (isNaN(val)) {
+        return 0;
+    }
+    return val;
+}
+
+export function SortPlayerListPlayers(filters: PlayerTableFilterState, playerA: PlayerOverview, playerB: PlayerOverview) {
+
+    let stat = Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview;
+        
+        if (filters.isPer90 && Per90Stats.includes(filters.statFilter)) {
+            return (getNum(playerB[stat] as number / playerB.minutes * 90)) - getNum((playerA[stat] as number / playerA.minutes * 90));
+        } else {
+            return (playerB[stat] as number) - (playerA[stat] as number);
+        }
+}
+
+export function GetStatValue(filters: PlayerTableFilterState, player: PlayerOverview) {
+    if (filters.statFilter !== 'Cost') {
+            
+        if (filters.isPer90 && Per90Stats.includes(filters.statFilter)) {
+    
+            return (getNum(player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / player.minutes * 90)).toFixed(2)
+        } else {
+            return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview])
+        }
+    }
+    else {
+        return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
+    }
+}
+
+export function GetOwnedPlayersManagerShortInitials(playerId: number, overview: FplOverview, draftOverview: FplDraftOverview | undefined, 
+                                                    draftLeagueRosters: FplDraftLeaguePlayerStatuses | undefined, draftLeagueInfo: FplDraftLeagueInfo | undefined) {
+
+    if (draftOverview && draftLeagueInfo && draftLeagueRosters) {
+        let code = draftOverview.elements.find(player => player.id === playerId)?.code;
+        let budgetPlayerId = overview.elements.find(player => player.code === code)?.id;
+    
+        let player = draftLeagueRosters.element_status.find(player => player.element === budgetPlayerId);
+    
+        if (player && player.status === 'o') {
+            
+            return draftLeagueInfo.league_entries.find(entry => entry.entry_id === player?.owner)?.short_name;
+        } 
+    }    
+    else {
+        return null
+    }
+
 }

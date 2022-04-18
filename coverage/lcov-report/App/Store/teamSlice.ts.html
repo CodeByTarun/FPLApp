@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.41% </span>
+                <span class="strong">17.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/17</span>
+                <span class='fraction'>3/17</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.22% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.41% </span>
+                <span class="strong">17.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/17</span>
+                <span class='fraction'>3/17</span>
             </div>
         
             
@@ -213,18 +213,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -232,6 +220,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -248,10 +242,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -311,8 +311,8 @@ const teamSlice = createSlice({
     name: 'team',
     initialState,
     reducers: {
-        changeGameweek(state: TeamInfo, action: PayloadAction&lt;number&gt;): void {
-            state.gameweek = action.payload;
+<span class="fstat-no" title="function not covered" >        ch</span>angeGameweek(state: TeamInfo, action: PayloadAction&lt;number&gt;): void {
+<span class="cstat-no" title="statement not covered" >            state.gameweek = action.payload;</span>
         },
 &nbsp;
 <span class="fstat-no" title="function not covered" >        ch</span>angingFixtureWhenGameweekChanged(state: TeamInfo, action: PayloadAction&lt;FplFixture|null&gt;): TeamInfo {
@@ -349,8 +349,8 @@ const teamSlice = createSlice({
 <span class="cstat-no" title="statement not covered" >            return {teamType: TeamTypes.Dream, gameweek: state.gameweek}</span>
         },
 &nbsp;
-        changeToDraftTeam(state: TeamInfo, action: PayloadAction&lt;UserTeamInfo&gt;): DraftInfo {
-            return { teamType: TeamTypes.Draft, gameweek: state.gameweek, info: action.payload }
+<span class="fstat-no" title="function not covered" >        ch</span>angeToDraftTeam(state: TeamInfo, action: PayloadAction&lt;UserTeamInfo&gt;): DraftInfo {
+<span class="cstat-no" title="statement not covered" >            return { teamType: TeamTypes.Draft, gameweek: state.gameweek, info: action.payload }</span>
         },
 &nbsp;
 <span class="fstat-no" title="function not covered" >        ch</span>angeToBudgetTeam(state: TeamInfo, action: PayloadAction&lt;UserTeamInfo&gt;): BudgetInfo {
@@ -367,7 +367,7 @@ export default teamSlice.reducer;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Apr 17 2022 09:34:23 GMT-0400 (Eastern Daylight Time)
+                at Sun Apr 17 2022 20:14:50 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

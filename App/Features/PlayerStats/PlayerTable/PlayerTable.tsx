@@ -145,7 +145,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                     <Text style={[styles.filterText, {fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[0] / 10}</Text>
                                     <Text style={[styles.filterText, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[1] / 10}</Text>
                                 </View>
-                                <Slider value={ playerTableFilterState.priceRange } 
+                                <Slider value={ playerTableFilterState.priceRange }
                                         onValueChange={value => playerTableFilterDispatch({type: 'ChangePriceRange', range: value as number[]})}
                                         minimumValue={initialPriceRange[0]}
                                         maximumValue={initialPriceRange[1]}

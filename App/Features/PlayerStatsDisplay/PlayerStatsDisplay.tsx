@@ -106,7 +106,7 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex, cu
                 </View> 
             </View>
 
-            <View testID="scoreAndNameContainer" style={[styles.scoreAndNameContainer, {width: (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) ? '130%' : '95%'}]}>
+            <View testID="scoreAndNameContainer" style={[styles.scoreAndNameContainer, {width: (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) ? '115%' : '95%'}]}>
                 <View style={styles.nameContainer}>
                     <Text numberOfLines={1} style={[styles.text, styles.nameText]}>{player.overviewData.web_name}</Text>
                 </View>

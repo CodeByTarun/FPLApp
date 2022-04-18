@@ -6,7 +6,7 @@ import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch/TeamSwitch";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
-import { changeToDreamTeam, TeamTypes } from "../../Store/teamSlice";
+import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import { openGameweekOverviewModal, openTeamModal } from "../../Store/modalSlice";
@@ -18,25 +18,30 @@ import { useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetBudgetGa
 import Standings from "../Standings";
 import { styles } from "./LineupViewStyles";
 import {CustomButton, ToolTip} from "../Controls";
+import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
+import { FplDraftOverview } from "../../Models/FplDraftOverview";
+import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";
+import { FplGameweek } from "../../Models/FplGameweek";
+import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
+import { FplManagerInfo } from "../../Models/FplManagerInfo";
+import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
 
 interface LineupViewProps {
     overview: FplOverview,
     fixtures: FplFixture[],
+    gameweek: FplGameweek;
+    teamInfo: TeamInfo;
+    draftGameweekPicks? : FplDraftGameweekPicks;
+    draftOverview? : FplDraftOverview;
+    draftLeagueInfo? : FplDraftLeagueInfo;
+    budgetGameweekPicks? : FplManagerGameweekPicks;
+    draftUserInfo? : FplDraftUserInfo;
+    budgetUserInfo? : FplManagerInfo;
 }
 
-const LineupView = ({overview, fixtures}: LineupViewProps) => {
+const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks, draftOverview, draftUserInfo, draftLeagueInfo, budgetUserInfo, budgetGameweekPicks}: LineupViewProps) => {
 
-    const teamInfo = useAppSelector((state) => state.team);
     const dispatch = useAppDispatch();
-    const gameweek = useGetGameweekDataQuery((teamInfo.teamType !== TeamTypes.Empty) ? teamInfo.gameweek : skipToken);
-    
-    const draftGameweek = useGetDraftGameweekPicksQuery((teamInfo.teamType === TeamTypes.Draft) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
-    const draftOverview = useGetDraftOverviewQuery((teamInfo.teamType === TeamTypes.Draft) ? undefined : skipToken );
-    const draftUserInfo = useGetDraftUserInfoQuery((teamInfo.teamType === TeamTypes.Draft) ? teamInfo.info.id : skipToken );
-    const draftLeagueInfo = useGetDraftLeagueInfoQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
-
-    const budgetGameweek = useGetBudgetGameweekPicksQuery((teamInfo.teamType === TeamTypes.Budget) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
-    const budgetUserInfo = useGetBudgetUserInfoQuery((teamInfo.teamType === TeamTypes.Budget) ? teamInfo.info.id : skipToken);
 
     const [isStandingsModalVisible, setIsStandingsModalVisible] = useState(false); 
 
@@ -72,14 +77,14 @@ const LineupView = ({overview, fixtures}: LineupViewProps) => {
 
                     <View style={styles.lineupHeaderContainer}>
                         {
-                            (teamInfo.teamType === TeamTypes.Fixture && gameweek.isSuccess) ?
-                                <View style={styles.teamSwitchContainer}>
-                                    <TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek.data}/>
+                            (teamInfo.teamType === TeamTypes.Fixture && gameweek) ?
+                                <View testID="teamSwitchContainer" style={styles.teamSwitchContainer}>
+                                    <TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek}/>
                                 </View> :
                             (teamInfo.teamType === TeamTypes.Dream) ?
                                 <Text style={styles.text}>Dream Team</Text> :
                             (teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Budget) ?
-                                <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => setIsStandingsModalVisible(!isStandingsModalVisible)}>
+                                <TouchableOpacity testID="managerTeamDropDownButton" style={{flexDirection: 'row'}} onPress={() => setIsStandingsModalVisible(!isStandingsModalVisible)}>
                                     <Text style={styles.text}>{teamInfo.info.name}  </Text> 
                                     <Text style={globalStyles.dropDownSymbol}>◣</Text>
                                 </TouchableOpacity> :
@@ -99,22 +104,22 @@ const LineupView = ({overview, fixtures}: LineupViewProps) => {
                 </View>
             </View>
             <View style={styles.middle}>
-                {(teamInfo.teamType === TeamTypes.Budget && budgetGameweek.data && budgetUserInfo.data && gameweek.data) ?
-                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek.data} 
-                            budgetGameweekPicks={budgetGameweek.data} budgetUserInfo={budgetUserInfo.data}/> : 
+                {(teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks && budgetUserInfo && gameweek) ?
+                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} 
+                            budgetGameweekPicks={budgetGameweekPicks} budgetUserInfo={budgetUserInfo}/> : 
 
-                 (teamInfo.teamType === TeamTypes.Draft && draftGameweek.data && draftUserInfo.data && gameweek.data) ?
-                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek.data} 
-                            draftGameweekPicks={draftGameweek.data} draftUserInfo={draftUserInfo.data} draftOverview={draftOverview.data}/> : 
+                 ((teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftUserInfo && gameweek) ?
+                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} 
+                            draftGameweekPicks={draftGameweekPicks} draftUserInfo={draftUserInfo} draftOverview={draftOverview}/> : 
 
-                 (teamInfo.teamType !== TeamTypes.Draft && teamInfo.teamType !== TeamTypes.Budget && gameweek.data) ?
-                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek.data} /> : 
+                 ((teamInfo.teamType !== TeamTypes.Draft && teamInfo.teamType !== TeamTypes.Budget && teamInfo.teamType !== TeamTypes.Empty && gameweek) ?
+                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} /> : 
                 
                     <View style={{flex: 1, alignContent: 'center', justifyContent: 'center'}}>
-                        <TouchableOpacity style={styles.button} onPress={() => dispatch(openTeamModal())}>
+                        <TouchableOpacity testID="noTeamsFoundButton" style={styles.button} onPress={() => dispatch(openTeamModal())}>
                             <Text style={styles.buttonText}>Add your fantasy team</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View>))
             
                 }
                 
@@ -126,7 +131,7 @@ const LineupView = ({overview, fixtures}: LineupViewProps) => {
                         setIsVisible={setIsStandingsModalVisible} 
                         view={
                             <View style={[styles.leagueContainer, globalStyles.shadow]}>
-                                <Standings teamInfo={teamInfo} setModalVisibility={setIsStandingsModalVisible} budgetUserInfo={budgetUserInfo.data} draftLeagueInfo={draftLeagueInfo.data}/>
+                                <Standings teamInfo={teamInfo} setModalVisibility={setIsStandingsModalVisible} budgetUserInfo={budgetUserInfo} draftLeagueInfo={draftLeagueInfo}/>
                             </View>
                         }>
 

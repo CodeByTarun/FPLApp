@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, View, Text } from "react-native";
 import { OverviewStats } from "../../../Global/EnumsAndDicts";
 import { height, Per90Stats } from "../../../Global/GlobalConstants";
+import { FilterPlayerListPlayers, GetOwnedPlayersManagerShortInitials, GetStatValue, SortPlayerListPlayers } from "../../../Helpers/FplAPIHelpers";
 import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../../Helpers/FplDataStorageService";
 import TeamModal from "../../../Modals/TeamModal";
 import { FplFixture } from "../../../Models/FplFixtures";
@@ -44,22 +45,6 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
     const draftUserInfo = useGetDraftUserInfoQuery((teamInfo.teamType === TeamTypes.Draft) ? teamInfo.info.id : skipToken );
     const draftLeagueInfo = useGetDraftLeagueInfoQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
     const draftLeagueRosters =  useGetDraftLeaguePlayerStatusesQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
-
-    const getOwnedPlayersMangerShortInitialsIfOwned = (playerId : number) => {
-
-        let code = draftOverview.data?.elements.find(player => player.id === playerId)?.code;
-        let budgetPlayerId = overview.elements.find(player => player.code === code)?.id;
-
-        let player = draftLeagueRosters.data?.element_status.find(player => player.element === budgetPlayerId);
-
-        if (player && player.status === 'o') {
-            
-            return draftLeagueInfo.data?.league_entries.find(entry => entry.entry_id === player?.owner)?.short_name;
-        } 
-        else {
-            return null
-        }
-    }
 
     //#endregion
 
@@ -114,46 +99,18 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
     }
 
     const filterPlayers = useCallback((player: PlayerOverview) => {
-
-            return (
-                player.web_name.startsWith(filters.playerSearchText) && 
-                (!filters.isInWatchlist || watchlist?.playerIds.includes(player.id)) &&
-                (filters.teamFilter === 'All Teams' || player.team_code === overview.teams.find(team => team.name === filters.teamFilter)?.code) &&
-                (filters.positionFilter === 'All Positions' || player.element_type === overview.element_types.find(element => element.plural_name === filters.positionFilter)?.id) &&
-                (player.now_cost >= filters.priceRange[0] && player.now_cost <= filters.priceRange[1]) &&
-                (getNum(player.minutes) >= filters.minutesRange[0] && getNum(player.minutes) <= filters.minutesRange[1])
-            );
+        return FilterPlayerListPlayers(filters, player, overview, watchlist);
     }, [filters])
 
     const sortPlayers = useCallback((playerA: PlayerOverview, playerB: PlayerOverview) => {
-        
-        let stat = Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview;
-        
-        if (filters.isPer90 && Per90Stats.includes(filters.statFilter)) {
-            return (getNum(playerB[stat] as number / playerB.minutes * 90)) - getNum((playerA[stat] as number / playerA.minutes * 90));
-        } else {
-            return (playerB[stat] as number) - (playerA[stat] as number);
-        }
-
+        return SortPlayerListPlayers(filters, playerA, playerB);
     }, [filters.statFilter, filters.isPer90]);
 
     //#endregion
 
     //#region Flatlist Functions
     const getStatValue = useCallback((player : PlayerOverview) => {
-
-        if (filters.statFilter !== 'Cost') {
-            
-            if (filters.isPer90 && Per90Stats.includes(filters.statFilter)) {
-        
-                return (getNum(player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / player.minutes * 90)).toFixed(2)
-            } else {
-                return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview])
-            }
-        }
-        else {
-            return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
-        }
+        return GetStatValue(filters, player);
     }, [filters.statFilter, filters.isPer90]);
 
     const renderPlayerItem = ({item}: {item: PlayerOverview}) => {
@@ -162,11 +119,13 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
         return (
         <Pressable key={item.id} style={styles.tableView} onPress={() => dispatch(openPlayerDetailedStatsModal(item))}>
-            <View style={{flex: 0.60, justifyContent: 'center', opacity: isInWatchList ? 1 : 0.5}}>
+            <View testID="watchlistButtonContainer" style={{flex: 0.60, justifyContent: 'center', opacity: isInWatchList ? 1 : 0.5}}>
                 <CustomButton image={isInWatchList ? "favourite" : "unfavourite"} buttonFunction={isInWatchList ? () => removeFromWatchlist(item.id) : () => addToWatchlist(item.id)}/>
             </View>
             <View style={{ flex: 3, height: height * 0.05 }}>
-                <PlayerListInfo overview={overview} player={item} owner={(teamInfo.teamType === TeamTypes.Draft) ? getOwnedPlayersMangerShortInitialsIfOwned(item.id) : null}/>
+                <PlayerListInfo overview={overview} player={item} owner={(teamInfo.teamType === TeamTypes.Draft) ? 
+                                                                        GetOwnedPlayersManagerShortInitials(item.id, overview, draftOverview.data, draftLeagueRosters.data, draftLeagueInfo.data) : 
+                                                                        null}/>
             </View>
 
             <View style={{ flex: 3 }}>

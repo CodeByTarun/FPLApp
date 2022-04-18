@@ -2,11 +2,10 @@ import React from "react";
 import { render } from "../reduxRender";
 import FixtureDifficultyDisplay from "../../../App/Features/PlayerStatsDisplay/FixtureDifficultyDisplay";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../App/Helpers/FplAPIHelpers";
-import { draftLeaguePicks, gameweek, budgetManagerInfo, draftManagerInfo, budgetLeaguePicks } from "../LineupView/Gameweek32Data";
+import { draftLeaguePicks, gameweek, budgetLeaguePicks } from "../LineupView/Gameweek32Data";
 import { BudgetInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { draftOverview, overview } from "../../SampleData/Overviews";
 import { allFixtures } from "../../SampleData/Fixtures";
-import { PlayerData } from "../../../App/Models/CombinedData";
 
 let budgetInfo: BudgetInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget }
 

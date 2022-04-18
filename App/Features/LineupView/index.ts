@@ -1,3 +1,4 @@
 import LineupView from "./LineupView";
+import LineupViewQueriesContainer from "./LineupViewQueriesContainer";
 
-export default LineupView;
+export { LineupView, LineupViewQueriesContainer};

@@ -15,20 +15,20 @@ const PlayerListInfo = React.memo(({overview, player, owner} : PlayerListInfoPro
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{ flex: 1}}>
-                <Image style={styles.image} source={Jerseys[player.team_code]} resizeMode="contain"/>
+                <Image testID="jerseyPlayerListInfo" style={styles.image} source={Jerseys[player.team_code]} resizeMode="contain"/>
 
                 { (player.status !== 'a') && 
-                    <View style={styles.imageContainer}>
+                    <View testID="notAvailableIndicatorContainer" style={styles.imageContainer}>
                         <Image style={styles.image} source={(player.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
                     </View>
                 }
 
             </View>
             
-            <View style={{flex: 3, justifyContent: 'center'}}> 
+            <View testID="playerListInfoDetailsContainer" style={{flex: 3, justifyContent: 'center'}}> 
                 <View style={{flexDirection: 'row'}}>
                     { owner && 
-                        <Text style={styles.ownerText}>{owner}</Text>
+                        <Text testID="ownerText" style={styles.ownerText}>{owner}</Text>
                     }
                     <Text numberOfLines={1} style={[styles.tableText, {flex: 1}]}>{player.web_name}</Text>
                     
