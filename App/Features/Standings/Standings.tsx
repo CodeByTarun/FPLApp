@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { FplBudgetLeagueInfo } from "../../Models/FplBudgetLeagueInfo";
 import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
 import { FplManagerInfo } from "../../Models/FplManagerInfo";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";

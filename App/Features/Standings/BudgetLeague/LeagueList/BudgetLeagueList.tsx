@@ -24,7 +24,7 @@ const BudgetLeagueList = ({budgetUserInfo, setLeagueToShow} : BudgetLeagueListPr
 
     const renderLeagueItem = useCallback(({item}: {item: Classic}) => {
         return (
-            <TouchableOpacity style={{flex: 1, flexDirection: 'row', paddingTop: 15, paddingBottom: 15}} onPress={() => onLeagueItemPress(item.id)}>
+            <TouchableOpacity testID="leagueItemButton" style={{flex: 1, flexDirection: 'row', paddingTop: 15, paddingBottom: 15}} onPress={() => onLeagueItemPress(item.id)}>
                 <Text style={[styles.teamNameText, {paddingLeft: 5}]}>{item.name}</Text>
                 <Text style={[styles.leagueText, {width: '30%'}]}>{item.entry_rank}</Text>
             </TouchableOpacity>
@@ -35,6 +35,7 @@ const BudgetLeagueList = ({budgetUserInfo, setLeagueToShow} : BudgetLeagueListPr
                     stickyHeaderIndices={[0]}
                     ItemSeparatorComponent={ seperator }
                     keyExtractor={item => item.id.toString()}
+                    testID='budgetLeagueList'
                     ListHeaderComponent={
                     <View style={styles.headerContainer}>
                         <Text style={[styles.leagueHeaderText, {flex: 1, textAlign: 'left', paddingLeft: 5}]}>League Name</Text>

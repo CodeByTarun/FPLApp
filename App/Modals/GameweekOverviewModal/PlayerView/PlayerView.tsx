@@ -28,12 +28,12 @@ const PlayerView = ({overview, header, id} : PlayerViewProps) => {
     return (
         <View style={styles.playerContainer}>
             { id &&
-                <TouchableOpacity style={[styles.playerButton, globalStyles.shadow]} onPress={() => openPlayerStatsModal(id)}>
+                <TouchableOpacity testID="playerViewButton" style={[styles.playerButton, globalStyles.shadow]} onPress={() => openPlayerStatsModal(id)}>
                     <View style={styles.headerView}>
                         <Text style={styles.playerHeaderText}>{header}</Text>
                     </View>
                     <View style={styles.jerseyContainer}>
-                        <Image style={styles.jerseyImage} source={Jerseys[overview.elements.find(player => player.id === id)!.team_code]} resizeMode="contain"/>
+                        <Image testID="playerViewJersey" style={styles.jerseyImage} source={Jerseys[overview.elements.find(player => player.id === id)!.team_code]} resizeMode="contain"/>
                     </View>
                     <Text numberOfLines={1} style={styles.playerHeaderText}>{overview.elements.find(player => player.id === id)?.web_name}</Text> 
                     <Text style={styles.playerHeaderText}>{overview.elements.find(player => player.id === id)?.event_points} Points</Text>

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import { View, StyleSheet, Modal, Pressable, ScrollView, Text, Platform } from "react-native";
+import { View, Modal, Pressable, ScrollView, Text, Platform } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
-import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { closeModal } from "../../Store/modalSlice";
@@ -12,7 +11,6 @@ import { styles } from "./GameweekModalStyles";
 
 interface GameweekModalProps {
     overview: FplOverview,
-    fixtures: FplFixture[],
     isVisible: boolean,
 }
 
@@ -52,7 +50,7 @@ const GameweekModal = ({overview, isVisible} : GameweekModalProps) => {
                     <View style={styles.listContainer}>
                         <ScrollView ref={gameweekScrollViewRef} style={{ flex: 1}}>
                             { overview.events.map((event) => {return (
-                                <Pressable key={event.id} style={[styles.gameweekItem, {backgroundColor: (teamInfo.gameweek === event.id) ? GlobalConstants.secondaryColor : GlobalConstants.primaryColor }]} onPress={() => onGameweekButtonPress(event.id)}>
+                                <Pressable testID="gameweeksItem" key={event.id} style={[styles.gameweekItem, {backgroundColor: (teamInfo.gameweek === event.id) ? GlobalConstants.secondaryColor : GlobalConstants.primaryColor }]} onPress={() => onGameweekButtonPress(event.id)}>
                                     <Text style={styles.text}>{event.name}</Text>
                                 </Pressable>
                             )})}

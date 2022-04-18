@@ -24,7 +24,7 @@ const BudgetLeagueStandings = ({budgetLeagueInfo, setModalVisibility} : BudgetLe
 
     const renderLeagueEntryItem = useCallback(({item}: {item: Result}) => {
         return (
-            <TouchableOpacity style={styles.standingsButtonContainer} onPress={() => onLeagueEntryItemPress(item.entry, item.entry_name)}>
+            <TouchableOpacity testID="leagueEntryItemButton" style={styles.standingsButtonContainer} onPress={() => onLeagueEntryItemPress(item.entry, item.entry_name)}>
                 <Text style={[styles.leagueText, {flex: 1}]}>{item.rank}</Text>
                 <View style={{flex: 3, paddingLeft: 5}}>
                     <Text numberOfLines={1} style={styles.teamNameText}>{item.entry_name}</Text>
@@ -38,11 +38,12 @@ const BudgetLeagueStandings = ({budgetLeagueInfo, setModalVisibility} : BudgetLe
 
     return(
         <FlatList data={budgetLeagueInfo.standings.results}
-                              stickyHeaderIndices={[0]}
-                              ItemSeparatorComponent={ seperator }
-                              keyExtractor={item => item.id.toString()}
-                              ListHeaderComponent={ StandingsHeader }
-                              renderItem={renderLeagueEntryItem}/>
+                  stickyHeaderIndices={[0]}
+                  ItemSeparatorComponent={ seperator }
+                  keyExtractor={item => item.id.toString()}
+                  ListHeaderComponent={ StandingsHeader }
+                  renderItem={renderLeagueEntryItem}
+                  testID='budgetLeagueStandingsList'/>
     )
 
 }

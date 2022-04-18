@@ -30,6 +30,7 @@ const DraftLeague = ({ draftLeagueInfo, setModalVisibility } : DraftLeagueStandi
 
         return (
             <TouchableOpacity style={styles.standingsButtonContainer}
+                              testID='draftLeagueEntryItemButton'
                               onPress={() => openDraftTeamFromStandings(leagueEntry)}>
                 <Text style={[styles.leagueText, {flex: 1}]}>{item.rank}</Text>
                 <View style={{flex: 3, paddingLeft: 5}}>
@@ -46,11 +47,12 @@ const DraftLeague = ({ draftLeagueInfo, setModalVisibility } : DraftLeagueStandi
     <>  
         <Text style={styles.titleText} numberOfLines={1}>{draftLeagueInfo.league.name}</Text>
         <FlatList data={draftLeagueInfo.standings}
-                stickyHeaderIndices={[0]}
-                ItemSeparatorComponent={ seperator }
-                keyExtractor={item => item.league_entry.toString()}
-                ListHeaderComponent={ StandingsHeader }
-                renderItem={renderLeagueEntryItem}/>
+                  stickyHeaderIndices={[0]}
+                  ItemSeparatorComponent={ seperator }
+                  keyExtractor={item => item.league_entry.toString()}
+                  ListHeaderComponent={ StandingsHeader }
+                  renderItem={renderLeagueEntryItem}
+                  testID='draftLeagueStandingsList'/>
     </>
     )
 }
