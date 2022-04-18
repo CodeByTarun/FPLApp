@@ -3,9 +3,13 @@ import { render, fireEvent } from "../reduxRender";
 import PlayerTable from "../../../App/Features/PlayerStats/PlayerTable";
 import { overview } from "../../SampleData/Overviews";
 import { allFixtures } from "../../SampleData/Fixtures";
-import { View } from "react-native";
+import { Text } from "react-native";
+import Checkbox from "expo-checkbox";
+import { Slider } from "@miblanchard/react-native-slider";
 
-jest.mock('expo-checkbox', () => <View></View>);
+jest.mock('expo-checkbox', () => jest.fn(() => null));
+
+jest.mock('@miblanchard/react-native-slider', () => jest.fn(() => null));
 
 test('filter button opens tooltip and the tooltip works properly', () => {
 
