@@ -36,7 +36,7 @@ const MainPage = () => {
       { isSplashScreenVisible ? 
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Image style={styles.splashScreenImage} source={require('../assets/splashscreen.png')}/>
-          <View style={{height: '15%', aspectRatio: 1, alignSelf: 'center'}}>
+          <View style={{height: '11%', aspectRatio: 1, alignSelf: 'center'}}>
             <LoadingIndicator/>
           </View>
         </View> 

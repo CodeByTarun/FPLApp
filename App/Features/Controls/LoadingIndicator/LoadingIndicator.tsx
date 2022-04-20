@@ -1,7 +1,7 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Animated, LayoutChangeEvent, View } from "react-native";
-import Svg, { Circle } from "react-native-svg";
-import { aLittleLighterColor, lightColor, secondaryColor } from "../../../Global/GlobalConstants";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Animated, Easing, LayoutChangeEvent, View } from "react-native";
+import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
+import { aLittleLighterColor, lightColor, primaryColor, secondaryColor } from "../../../Global/GlobalConstants";
 
 const LoadingIndicator = () => {
 
@@ -9,21 +9,41 @@ const LoadingIndicator = () => {
     const radius = dimensions[0] > dimensions[1] ? dimensions[1] / 2 - 10 : dimensions[0] / 2 - 10;  
     const circumference = 2 * Math.PI * radius;
 
-    const rotateAnim = useRef(new Animated.Value(0)).current;
-
     const getDimensions = useCallback((event: LayoutChangeEvent) => {
         setDimensions([event.nativeEvent.layout.width, event.nativeEvent.layout.height]);
     }, [])
 
+    const rotateAnimValue = useRef(new Animated.Value(0)).current;
+    const spin = rotateAnimValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg']
+    });
+
+    Animated.loop(Animated.timing(rotateAnimValue,
+        {
+            toValue: 1, 
+            duration: 1000,
+            easing: Easing.linear,
+            useNativeDriver: false,
+        })).start()
+
     return(
-        <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'red'}} onLayout={getDimensions}>
+        <Animated.View style={{flex: 1, justifyContent: 'center', transform: [{ rotate: spin }]}} onLayout={getDimensions}>
             {(dimensions != [0,0]) && 
             <Svg style={{flex: 1}}>
+                <Defs>
+                    <LinearGradient id="opacity">
+                        <Stop offset={'0%'} stopOpacity={1.0} stopColor={lightColor}/>
+                        <Stop offset={'60%'} stopOpacity={0.1} stopColor={lightColor}/>
+                        <Stop offset={'100%'} stopOpacity={0} stopColor={primaryColor}/>
+                    </LinearGradient>
+                </Defs>
                 <Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius}
-                        stroke={lightColor} strokeWidth={10}/>
+                        stroke={"url(#opacity)"} strokeWidth={10} strokeDasharray={circumference * 0.5}
+                        strokeLinecap={"round"}/>
             </Svg>
             }
-        </View>
+        </Animated.View>
     )
 }
 
