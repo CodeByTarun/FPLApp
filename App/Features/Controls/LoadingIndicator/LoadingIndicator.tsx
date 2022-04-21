@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Animated, Easing, LayoutChangeEvent, View } from "react-native";
+import React, { useCallback, useRef, useState } from "react";
+import { Animated, Easing, LayoutChangeEvent } from "react-native";
 import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
-import { aLittleLighterColor, lightColor, primaryColor, secondaryColor } from "../../../Global/GlobalConstants";
+import { lightColor, primaryColor } from "../../../Global/GlobalConstants";
 
 const LoadingIndicator = () => {
 
@@ -19,13 +19,14 @@ const LoadingIndicator = () => {
         outputRange: ['0deg', '360deg']
     });
 
-    Animated.loop(Animated.timing(rotateAnimValue,
-        {
+    Animated.loop(
+        Animated.timing(rotateAnimValue, {
             toValue: 1, 
-            duration: 1000,
+            duration: 1500,
             easing: Easing.linear,
             useNativeDriver: false,
-        })).start()
+        })
+    ).start()
 
     return(
         <Animated.View style={{flex: 1, justifyContent: 'center', transform: [{ rotate: spin }]}} onLayout={getDimensions}>
@@ -34,7 +35,7 @@ const LoadingIndicator = () => {
                 <Defs>
                     <LinearGradient id="opacity">
                         <Stop offset={'0%'} stopOpacity={1.0} stopColor={lightColor}/>
-                        <Stop offset={'60%'} stopOpacity={0.1} stopColor={lightColor}/>
+                        <Stop offset={'60%'} stopOpacity={0.2} stopColor={lightColor}/>
                         <Stop offset={'100%'} stopOpacity={0} stopColor={primaryColor}/>
                     </LinearGradient>
                 </Defs>

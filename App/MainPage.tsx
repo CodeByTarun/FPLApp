@@ -10,6 +10,7 @@ import { LineupViewQueriesContainer } from "./Features/LineupView";
 import PlayerStats from "./Features/PlayerStats";
 import FixturesContainer from "./Features/Fixtures/FixturesContainer";
 import LoadingIndicator from "./Features/Controls/LoadingIndicator";
+import BottomTabs from "./Features/BottomTabs";
 
 const MainPage = () => {
 
@@ -23,24 +24,34 @@ const MainPage = () => {
     if (fixtures.isError) {
       setTimeout(() => { fixtures.refetch() }, 30000);
     }
-  }, [fixtures.isError])
+  }, [fixtures.isError]);
 
   useEffect( function refetchOverview() {
     if (overview.isError) {
       setTimeout(() => { overview.refetch() }, 30000);
     }
-  }, [overview.isError])
+  }, [overview.isError]);
+
+  useEffect( function removeSplashScreen() {
+
+    const setSplashScreenVisibleToFalse = () => setTimeout(() => setIsSplashScreenVisible(false), 3000);
+
+    if (fixtures.isSuccess && overview.isSuccess) {
+      setSplashScreenVisibleToFalse();
+    }
+
+  }, [fixtures.isSuccess, overview.isSuccess]);
 
   return (
     <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>
-      { isSplashScreenVisible ? 
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      { isSplashScreenVisible && 
+        <View style={styles.splashScreenContainer}>
           <Image style={styles.splashScreenImage} source={require('../assets/splashscreen.png')}/>
           <View style={{height: '11%', aspectRatio: 1, alignSelf: 'center'}}>
             <LoadingIndicator/>
           </View>
         </View> 
-        : 
+      }
         <>
           <SafeAreaView style={styles.safeArea}>
               {(overview.data && fixtures.data) &&
@@ -52,6 +63,9 @@ const MainPage = () => {
                     <LineupViewQueriesContainer overview={overview.data} fixtures={fixtures.data}/>
                   </View>
                   <PlayerStats overview={overview.data} fixtures={fixtures.data}/>
+                  <View style={{width: '100%', height: 50}}>
+                    <BottomTabs/>
+                  </View>
                 </View>
               }
 
@@ -68,7 +82,6 @@ const MainPage = () => {
             <ModalNavigator overview={overview.data} fixtures={fixtures.data}/>
           }
         </>
-      }
     </View>
   )
 }
@@ -85,6 +98,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   
+  splashScreenContainer: {
+    height: '100%', 
+    width: '100%', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    position: 'absolute', 
+    zIndex: 1, 
+    elevation: 1,  
+    backgroundColor: GlobalConstants.primaryColor
+  },
+
   splashScreenImage: {
     position: 'absolute', 
     height: '93%',
