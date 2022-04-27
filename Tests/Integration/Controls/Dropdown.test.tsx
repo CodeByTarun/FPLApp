@@ -22,9 +22,9 @@ const options = [
 test('header from props is shown and opening dropdown and closing using close button', () => {
 
     const mockSetFn = jest.fn();
-    const {getByText, getByTestId}  = render(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={'1'} setValue={ mockSetFn }/>);
+    const {queryAllByText, getByText, getByTestId}  = render(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={'1'} setValue={ mockSetFn }/>);
          
-    expect(getByText('Header')).toBeDefined();    
+    expect(queryAllByText('Header')).toHaveLength(2);    
     expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
 
     fireEvent.press(getByText('◣'));
@@ -38,9 +38,9 @@ test('selected an option and then clear', () => {
 
     let value = '1';
     const mockSetFn = jest.fn((newValue) => value = newValue);
-    const {getByText, getByTestId, rerender }  = render(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={value} setValue={ mockSetFn }/>);
+    const {getByText, getByTestId, queryAllByText, rerender }  = render(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={value} setValue={ mockSetFn }/>);
          
-    expect(getByText('Header')).toBeDefined();    
+    expect(queryAllByText('Header')).toHaveLength(2);    
     expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
 
     fireEvent.press(getByText('◣'));

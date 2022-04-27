@@ -1,7 +1,7 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useCallback, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import { seperator } from "../../../../Global/GlobalComponents";
+import { Seperator } from "../../../../Global/GlobalComponents";
 import { aLittleLighterColor, largeFont, smallFont, textPrimaryColor } from "../../../../Global/GlobalConstants";
 import { Result } from "../../../../Models/FplBudgetLeagueInfo";
 import { Classic, FplManagerInfo } from "../../../../Models/FplManagerInfo";
@@ -33,7 +33,7 @@ const BudgetLeagueList = ({budgetUserInfo, setLeagueToShow} : BudgetLeagueListPr
     return (
         <FlatList data={budgetUserInfo.leagues.classic.concat(budgetUserInfo.leagues.h2h)}
                     stickyHeaderIndices={[0]}
-                    ItemSeparatorComponent={ seperator }
+                    ItemSeparatorComponent={ Seperator }
                     keyExtractor={item => item.id.toString()}
                     testID='budgetLeagueList'
                     ListHeaderComponent={

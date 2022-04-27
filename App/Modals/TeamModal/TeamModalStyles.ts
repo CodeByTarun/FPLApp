@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import { secondaryColor, modalTextColor, largeFont, mediumFont, modalButtonColor, cornerRadius, fieldColor, width } from "../../Global/GlobalConstants"
+import { secondaryColor, modalTextColor, largeFont, mediumFont, modalButtonColor, cornerRadius, fieldColor, width, textSecondaryColor, textPrimaryColor } from "../../Global/GlobalConstants"
 
 export const styles = StyleSheet.create(
     {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create(
 
         titleText: {
             alignSelf: 'center',
-            color: modalTextColor,
+            color: textPrimaryColor,
             fontSize: largeFont,
             fontWeight: 'bold',
             marginTop: 12, 
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create(
         },
 
         text: {
-            color: modalTextColor,
+            color: textPrimaryColor,
             fontSize: mediumFont,
         },
 
@@ -72,7 +72,7 @@ export const styles = StyleSheet.create(
 
         modalListRow: {
             flexDirection: 'row',
-            padding: 2,
+            padding: 10,
             flex: 1,
             alignItems: 'center',
         },
@@ -91,6 +91,7 @@ export const styles = StyleSheet.create(
         modalTeamList: {
             flex: 1,
             margin: 5,
+            paddingTop: 10,
         },        
 
         addButton: {

@@ -4,14 +4,14 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { ToolTip } from "../../../App/Features/Controls";
 import '@testing-library/jest-native';
 
-test('if isVisible is false, the component should be empty', () => {
+test('if isVisible is false', () => {
 
     const mockSetIsVisibleFn = jest.fn();
 
     const { queryByTestId } = render(<ToolTip distanceFromRight={0} distanceFromTop={0} distanceForArrowFromRight={0} isVisible={false} setIsVisible={mockSetIsVisibleFn} view={<></>}/>)
 
-    expect(queryByTestId('background')).toBeNull();
-    expect(queryByTestId('tooltip')).toBeNull();
+    expect(queryByTestId('background')).toBeDefined();
+    expect(queryByTestId('tooltip')).toBeDefined();
 
 });
 

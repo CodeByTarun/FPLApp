@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { textSecondaryColor, smallFont, textPrimaryColor, mediumFont, secondaryColor, largeFont } from "../../Global/GlobalConstants";
+import { textSecondaryColor, smallFont, textPrimaryColor, mediumFont, secondaryColor, largeFont, primaryColor, lightColor } from "../../Global/GlobalConstants";
 
 
 export const styles = StyleSheet.create({
@@ -8,13 +8,13 @@ export const styles = StyleSheet.create({
         textAlign: 'center', 
         color: textPrimaryColor, 
         fontWeight: '700', 
-        marginBottom: 15, 
-        marginTop: 15, 
+        marginBottom: 20, 
+        marginTop: 20, 
         fontSize: largeFont
     },
 
     leagueHeaderText: {
-        color: textSecondaryColor,
+        color: textPrimaryColor,
         fontSize: smallFont * 1.3,
         alignSelf: 'center',
         textAlign: 'center',
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     teamNameText: {
         textAlign: 'left', 
         flex: 1, 
-        color: textPrimaryColor, 
+        color: textPrimaryColor,
         fontSize: smallFont * 1.4, 
         fontWeight: '600'
     },
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     managerNameText: {
         textAlign: 'left', 
         flex: 1, 
-        color: textPrimaryColor, 
+        color: textSecondaryColor, 
         fontSize: smallFont * 1.1,
     },
 
@@ -61,8 +61,8 @@ export const styles = StyleSheet.create({
         flex: 1, 
         flexDirection: 'row', 
         paddingBottom: 7, 
-        borderBottomColor: textSecondaryColor, 
+        borderBottomColor: lightColor, 
         borderBottomWidth: 1.5, 
-        backgroundColor: secondaryColor
+        backgroundColor: primaryColor
     },
 });

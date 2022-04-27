@@ -2,7 +2,7 @@
 // add a dropdown to show the bps for that match, this will happen when clicked on??? idk how 
 // to incorporate this yet
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { FplFixture } from '../../../Models/FplFixtures'
 import TeamEmblem from "./TeamEmblem"
@@ -43,19 +43,18 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
 
     const dispatch = useAppDispatch();
     const navigation = useAppSelector(state => state.navigation);
-
+    
     const onPress = () => {
 
         if (navigation.screenType === ScreenTypes.Fixtures) {
-            dispatch(goToMainScreen());
+            dispatch(goToMainScreen());   
         }
-
-        dispatch(changeToFixture(fixture))
+        dispatch(changeToFixture(fixture));
     };
 
     return (
         
-        <View style={[styles.container]}>
+        <View style={[styles.fixtureViewContainer]}>
             <TouchableOpacity testID='fixtureCardButton' style={[styles.button]} onPress={onPress} disabled={!fixture?.started}>            
                 <View style={[styles.card, globalStyles.shadow]}>
                     <View style={styles.topbar}>

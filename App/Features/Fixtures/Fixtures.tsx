@@ -1,19 +1,19 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Animated } from "react-native";
 import FixtureCard from './FixtureCard/FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { useGetFixturesQuery, useGetGameweekDataQuery, } from '../../Store/fplSlice'
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import { changeToBudgetTeam, changeToDraftTeam, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
-import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
-import { openGameweekModal, openInfoModal } from "../../Store/modalSlice";
+import { openInfoModal } from "../../Store/modalSlice";
 import { goToFixturesScreen, goToMainScreen, ScreenTypes } from "../../Store/navigationSlice";
 import { styles } from "./FixturesStyles";
-import { CustomButton } from "../Controls";
+import { CustomButton, ToolTip } from "../Controls";
 import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
 import { FplGameweek } from "../../Models/FplGameweek";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
+import globalStyles from "../../Global/GlobalStyles";
+import GameweekView from "./GameweekView";
+import { height, width } from "../../Global/GlobalConstants";
 
 interface FixturesViewProp {
   overview: FplOverview;
@@ -35,12 +35,15 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const teamInfo = useAppSelector(state => state.team);
   const navigation = useAppSelector(state => state.navigation);
 
+  const [isCloseButtonVisible, setIsCloseButtonVisible] = useState(false);
+  const [isGameweekViewVisible, setIsGameweekViewVisible] = useState(false);
+
   const fixtureScrollViewRef = useRef<ScrollView>(null);
   const expandAnim = useRef(new Animated.Value(0)).current;
   
   const heightInterpolate = expandAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ['100%', (100 / 19 * 100).toString() + '%']
+    outputRange: ['100%', (100 / 17.5 * 100).toString() + '%']
   });
 
   const Expand = useCallback(() => {
@@ -48,7 +51,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         toValue: 1,
         friction: 8,
         useNativeDriver: false
-    }).start();
+    }).start(() => setIsCloseButtonVisible(true));
   }, []);
 
   const Minimize = useCallback(() => {
@@ -117,33 +120,27 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
       if (navigation.screenType === ScreenTypes.Fixtures) {
         Expand();
       } else {
+        setIsCloseButtonVisible(false)
         Minimize();
       }
     }, [navigation]);
-
-    const onGameweekButtonPress = useCallback(() => {
-      dispatch(openGameweekModal());
-    }, []);
 
   return (
     <Animated.View style={[styles.animatedView, { height: heightInterpolate }]}>
       <View style={styles.controlsContainer}>
 
-        <View style={styles.innerControlsContainer}>
-          <View style={{flex: 1}}/>
-          <TouchableOpacity style={[styles.gameweekButton]} onPress={onGameweekButtonPress}>
-            <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
-            <Text style={styles.gameweekDropDownSymbol}>◣</Text>
-          </TouchableOpacity>
-          <View style={styles.buttonsContainers}>
-            <View style={styles.singleButtonContainer}>
-              <CustomButton image="calendar" buttonFunction={onCalendarButtonPress} isDisabled={teamInfo.gameweek > liveGameweek}/>
-            </View>
-            <View style={styles.singleButtonContainer}>
-              <CustomButton image="info" buttonFunction={onInfoButtonPress}/>
-            </View>
+      <View style={styles.innerControlsContainer}>
+        <View style={{flex: 1}}/>
+        <TouchableOpacity style={[styles.gameweekButton]} onPress={() => setIsGameweekViewVisible(true)}>
+          <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
+          <Text style={styles.gameweekDropDownSymbol}>◣</Text>
+        </TouchableOpacity>
+        <View style={styles.buttonsContainers}>
+          <View style={styles.singleButtonContainer}>
+            <CustomButton image="info" buttonFunction={onInfoButtonPress}/>
           </View>
-        </View>  
+        </View>
+      </View>  
         
       </View>
       <View style={{flex: 1}}>
@@ -159,9 +156,24 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                     .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
           }
         </ScrollView>
+        { (isCloseButtonVisible && (teamInfo.gameweek <= liveGameweek)) &&
+          <TouchableOpacity style={[styles.closeFixtureViewButtonContainer, globalStyles.modalShadow]} 
+                            onPress={onCalendarButtonPress}>
+            <Text style={styles.closeFixtureViewButtonText}>Close</Text>
+          </TouchableOpacity>
+        }
       </View>
+      <ToolTip distanceFromRight={width * 0.15} distanceFromTop={height * 0.1} 
+               distanceForArrowFromRight={width * 0.3} isVisible={isGameweekViewVisible} 
+               setIsVisible={setIsGameweekViewVisible} 
+               view={
+               <View style={styles.gameweekViewContainer}>
+                 <GameweekView isVisible={isGameweekViewVisible}/>
+               </View>}/>
     </Animated.View>
   )
 }
 
 export default Fixtures;
+
+// <

@@ -1,10 +1,18 @@
 import { StyleSheet } from "react-native";
-import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor } from "../../../Global/GlobalConstants";
+import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor, secondaryColor, aLittleDarkerColor, aLittleLighterColor, textSecondaryColor, testColor } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     //#region main layout
-    container: {
+    fixtureViewContainer: {
         height: height * 0.11,
+        width: width * 0.3288,
+        paddingTop: 2,
+        paddingBottom: 2,
+    },
+
+    normalContainer: {
+        alignSelf: 'center',
+        height: "95%",
         width: width * 0.3288,
     },
 
@@ -13,13 +21,11 @@ export const styles = StyleSheet.create({
     },
 
     card: {
-        backgroundColor: primaryColor,
+        backgroundColor: testColor,
         flex: 1,
         flexDirection: 'column',
-        marginTop: 3,
         marginLeft: 3,
         marginRight: 3,
-        marginBottom: 3,
         padding: 5,
         borderRadius: cornerRadius,
     },

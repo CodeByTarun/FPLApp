@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
         width: '85%',
         padding: 10,
         paddingTop: 20,
-        top: '10%'
     },
     
     titleText: {
@@ -27,11 +26,12 @@ export const styles = StyleSheet.create({
     },
 
     controlsOuterContainers: {
-        marginBottom: 30,
+        marginBottom: 20,
     },
 
     controlContainer: {
         width: '60%',
+        height: height * 0.05,
         flexDirection: 'row',
         alignSelf: 'center',
         backgroundColor: secondaryColor,
@@ -50,14 +50,12 @@ export const styles = StyleSheet.create({
     controlButtons: {
         flex: 1,
         zIndex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     controlText: {
-        flex: 1,
         textAlign: 'center',
-        padding: 5,
-        paddingTop: 8,
-        paddingBottom: 8,
         color: textSecondaryColor,
         fontWeight: '600',
         fontSize: mediumFont * 0.9,
@@ -72,6 +70,7 @@ export const styles = StyleSheet.create({
         borderRadius: cornerRadius,
         marginBottom: 5,
         marginTop: 15,
+        padding: 10,
         alignSelf: 'center'
     },
 

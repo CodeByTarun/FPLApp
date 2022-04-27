@@ -5,16 +5,12 @@ import { View, Text, TouchableOpacity } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch/TeamSwitch";
-import { useAppSelector, useAppDispatch } from "../../Store/hooks";
-import { changeToDreamTeam, TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import { useAppDispatch } from "../../Store/hooks";
+import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
-import { openGameweekOverviewModal, openTeamModal } from "../../Store/modalSlice";
-import { goToPlayerStatsScreen } from "../../Store/navigationSlice";
+import { openTeamModal } from "../../Store/modalSlice";
 import globalStyles from "../../Global/GlobalStyles";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
-import { useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetBudgetGameweekPicksQuery, useGetDraftUserInfoQuery, 
-         useGetBudgetUserInfoQuery, useGetGameweekDataQuery, useGetDraftLeagueInfoQuery } from "../../Store/fplSlice";
 import Standings from "../Standings";
 import { styles } from "./LineupViewStyles";
 import {CustomButton, ToolTip} from "../Controls";
@@ -25,6 +21,7 @@ import { FplGameweek } from "../../Models/FplGameweek";
 import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
 import { FplManagerInfo } from "../../Models/FplManagerInfo";
 import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
+import TeamListView from "./TeamListView";
 
 interface LineupViewProps {
     overview: FplOverview,
@@ -44,22 +41,11 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
     const dispatch = useAppDispatch();
 
     const [isStandingsModalVisible, setIsStandingsModalVisible] = useState(false); 
+    const [isTeamsListVisible, setIsTeamsListVisible] = useState(false);
 
     const onMyTeamButtonPress = useCallback(() => {
-        dispatch(openTeamModal());
+        setIsTeamsListVisible(true);
     }, []);
-    
-    const onDreamTeamPress = useCallback(() => {
-        dispatch(changeToDreamTeam());
-    }, []);
-
-    const onPlayerSearchPress = useCallback(() => {
-        dispatch(goToPlayerStatsScreen());
-    }, [])
-
-    const onStrategyButtonPress = useCallback(() => {
-        dispatch(openGameweekOverviewModal());
-    }, [])
 
     return (
         <View style={styles.container}>
@@ -67,12 +53,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                 <View style={[styles.controlsContainer, globalStyles.bottomShadow]}>
 
                     <View style={styles.leftButtonsContainer}>
-                        <View style={styles.buttonContainer}>
-                            <CustomButton image={'dreamteam'} buttonFunction={onDreamTeamPress}/>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <CustomButton image={'strategy'} buttonFunction={onStrategyButtonPress}/>
-                        </View>
+
                     </View>
 
                     <View style={styles.lineupHeaderContainer}>
@@ -93,9 +74,6 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     </View>
 
                     <View style={styles.rightButtonsContainers}>
-                        <View style={styles.playerSearchButtonContainer}>
-                            <CustomButton image={'playersearch'} buttonFunction={onPlayerSearchPress}/>
-                        </View>
                         <View style={styles.buttonContainer}>
                             <CustomButton image={'team'} buttonFunction={onMyTeamButtonPress}/>
                         </View>
@@ -125,7 +103,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                 
             </View>
                 <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
-                        distanceFromTop={55} 
+                        distanceFromTop={70 + (GlobalConstants.height * 0.175)} 
                         distanceForArrowFromRight={GlobalConstants.width*0.36} 
                         isVisible={isStandingsModalVisible} 
                         setIsVisible={setIsStandingsModalVisible} 
@@ -133,9 +111,11 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                             <View style={[styles.leagueContainer, globalStyles.shadow]}>
                                 <Standings teamInfo={teamInfo} setModalVisibility={setIsStandingsModalVisible} budgetUserInfo={budgetUserInfo} draftLeagueInfo={draftLeagueInfo}/>
                             </View>
-                        }>
+                        }/>
 
-                </ToolTip>
+                <ToolTip distanceFromRight={4} distanceFromTop={GlobalConstants.height * 0.175 + 70} distanceForArrowFromRight={7} 
+                         isVisible={isTeamsListVisible} setIsVisible={setIsTeamsListVisible} 
+                         view={<TeamListView/>}/>
         </View>
     )
 }

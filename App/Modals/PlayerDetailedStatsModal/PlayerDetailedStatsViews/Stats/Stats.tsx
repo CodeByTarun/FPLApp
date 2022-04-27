@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import { View, Text } from "react-native";
 import { PieChart } from "../../../../Features/Controls";
-import { lightColor } from "../../../../Global/GlobalConstants";
+import { aLittleLighterColor, lightColor, textSecondaryColor } from "../../../../Global/GlobalConstants";
 import { GetMinutesValueForDetailedStatsView, GetStatValueForDetailedStatsView } from "../../../../Helpers/FplAPIHelpers";
 import { PlayerOverview } from "../../../../Models/FplOverview";
 import { FplPlayerSummary, History } from "../../../../Models/FplPlayerSummary";
@@ -61,7 +61,7 @@ const Stats = ({statsFilterState, player, playerData, currentGameweek} : StatsPr
 
                 <View style={styles.pieChartContainer}>
                         <PieChart firstStatName="G" secondStatName="A" 
-                                  firstStatColor={'white'} secondStatColor={lightColor} 
+                                  firstStatColor={textSecondaryColor} secondStatColor={aLittleLighterColor} 
                                   firstStatValue={Number(getStatValue('goals_scored'))} 
                                   secondStatValue={Number(getStatValue('assists'))}/>                    
                 </View>

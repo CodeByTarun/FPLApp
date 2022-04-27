@@ -56,7 +56,7 @@ const MainPage = () => {
           <SafeAreaView style={styles.safeArea}>
               {(overview.data && fixtures.data) &&
                 <View style={{flex: 1}}>
-                  <View style={{height: '19%', width: '100%', zIndex: (navigation.screenType === ScreenTypes.Fixtures) ? 1 : 0}}>
+                  <View style={{height: '17.5%', width: '100%', zIndex: (navigation.screenType === ScreenTypes.Fixtures) ? 1 : 0}}>
                     <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
                   </View>
                   <View style={styles.lineupView}>

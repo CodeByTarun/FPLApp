@@ -33,7 +33,7 @@ export const styles = StyleSheet.create(
 
         managerInfoCardContainer: {
             position: 'absolute', 
-            height: '20%', 
+            height: '22%', 
             aspectRatio: 1, 
             right: 0, 
             zIndex: 0

@@ -3,6 +3,10 @@ import { modalTextColor, mediumFont, height, largeFont, textPrimaryColor, second
 
 export const styles = StyleSheet.create({
 
+    container: {
+        maxHeight: height * 0.6,
+    },
+
     titleText: {
         fontSize: largeFont, 
         color: textPrimaryColor, 

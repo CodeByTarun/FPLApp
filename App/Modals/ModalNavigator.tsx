@@ -8,7 +8,6 @@ import { FplFixture } from "../Models/FplFixtures";
 import { FplOverview } from "../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
 import { closeModal, ModalTypes } from "../Store/modalSlice";
-import GameweekModal from "./GameweekModal";
 import GameweekOverviewModal from "./GameweekOverviewModal";
 import InfoModal from "./InfoModal";
 import PlayerComparisonModal from "./PlayerComparisonModal";
@@ -38,10 +37,6 @@ const ModalNavigator = ({overview, fixtures} : ModalNavigatorProps) => {
                 <PlayerDetailedStatsModal overview={overview} fixtures={fixtures} player={modalInfo.player}/>
             }
 
-            {(modalInfo.modalType === ModalTypes.GameweekOverviewModal) &&
-                <GameweekOverviewModal overview={overview}/>
-            }
-
             {(modalInfo.modalType === ModalTypes.PlayerComparisonModal) && 
                 <PlayerComparisonModal overview={overview} fixtures={fixtures} playerOverview={modalInfo.playerOverview} playerSummary={modalInfo.playerSummary}/>
             }
@@ -51,7 +46,6 @@ const ModalNavigator = ({overview, fixtures} : ModalNavigatorProps) => {
             }
             
             <TeamModal modalInfo={modalInfo}/>
-            <GameweekModal overview={overview} fixtures={fixtures} isVisible={(modalInfo.modalType === ModalTypes.GameweekModal)}/>
         </>
     )
 }

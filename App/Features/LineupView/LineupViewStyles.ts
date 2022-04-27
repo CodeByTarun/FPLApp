@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         height: 50,
         backgroundColor: primaryColor,
         zIndex: 1,
-    },
+    },  
 
     middle: {
         flex: 9,
@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
         width: width * 0.8,
         borderRadius: cornerRadius,
         padding: 5,
-        backgroundColor: secondaryColor
+        backgroundColor: primaryColor
     },
 
     button: {

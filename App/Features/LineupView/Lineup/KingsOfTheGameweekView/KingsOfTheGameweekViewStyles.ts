@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { width, primaryColor, smallFont, textSecondaryColor } from "../../../../Global/GlobalConstants";
+import { width, primaryColor, smallFont, textSecondaryColor, secondaryColor, textPrimaryColor, mediumFont, largeFont, aLittleDarkerColor, aLittleLighterColor, lightColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     kingsView: {
@@ -27,33 +27,51 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         height: '90%',
         width: '70%',
-        marginTop: 3,
-        flex: 9,
+    },
+
+    textContainer: {
+        flex: 5,
+        backgroundColor: secondaryColor,
+        marginBottom: 0,
+        width: '90%'
+    },
+    
+    gameweekAndScoreContainer: {
+        flexDirection: 'row', 
+        backgroundColor: aLittleDarkerColor,
+        flex: 1,
+        alignItems: 'center', 
+        justifyContent: 'center'
     },
 
     kingsText: {
-        flex: 1,
         color: 'white',
         fontSize: smallFont,
-        padding: 5,
+        fontWeight: '500',
+        flex: 1,
+        alignSelf: 'center',
+        textAlign: 'center',
+        paddingTop: 2
+    },
+
+    gameweekText: {
+        color: 'white',
+        fontSize: smallFont,
+        fontWeight: '500',
+        flex: 2,
+        alignSelf: 'center',
+        textAlign: 'center',
+        paddingTop: 2
     },
 
     scoreText: {
-        fontSize: width*0.03,
-        position: "absolute",
-        overflow: 'hidden',
-    },
-
-    scoreContainer: {
-        height: width/24,
-        width: width/24,
-        borderRadius: width/24/2,
-        backgroundColor: primaryColor,
-        color: textSecondaryColor,
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        bottom: 0,
-        left: width*0.19*0.15,
+        fontSize: smallFont,
+        fontWeight: '500',
+        color: textPrimaryColor,
+        flex: 1,
+        alignSelf:'center',
+        textAlign: 'center',
+        paddingTop: 2,
+        backgroundColor: aLittleLighterColor
     },
 });

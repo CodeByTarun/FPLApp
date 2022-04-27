@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { width, textPrimaryColor, mediumFont, lightColor, secondaryColor, aLittleLighterColor } from "../../../../Global/GlobalConstants";
+import { width, textPrimaryColor, mediumFont, lightColor, secondaryColor, aLittleLighterColor, primaryColor, textSecondaryColor, cornerRadius } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
@@ -7,9 +7,12 @@ export const styles = StyleSheet.create({
         flex: 1, 
         paddingBottom: 5,
         marginBottom: 5, 
-        backgroundColor: secondaryColor, 
+        backgroundColor: primaryColor, 
         paddingLeft: 5, 
-        paddingRight: 5
+        paddingRight: 5,
+        borderWidth: 2,
+        borderColor: aLittleLighterColor,
+        borderRadius: cornerRadius,
     },
 
     tableTextContainer: {
@@ -27,15 +30,15 @@ export const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row', 
         alignItems: 'center',  
-        flex: 1, 
+        width: '100%',
         borderBottomColor: lightColor, 
         borderBottomWidth: 1,
-        paddingBottom: 5, paddingTop: 10,
-        backgroundColor: secondaryColor
+        paddingBottom: 5, 
+        paddingTop: 10,
+        backgroundColor: primaryColor
     },
 
     historyItemContainer: {
-        flex: 1, 
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent: 'center', 
@@ -46,6 +49,7 @@ export const styles = StyleSheet.create({
     },
 
     footerContainer: {
+        backgroundColor: primaryColor,
         flexDirection: 'row', 
         borderTopColor: lightColor, 
         borderTopWidth: 1, 

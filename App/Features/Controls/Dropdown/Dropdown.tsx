@@ -1,9 +1,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
-import { FlatList, Image, Keyboard, Modal, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import * as GlobalConstants from "../../../Global/GlobalConstants";
+import { FlatList, Keyboard, Modal, Pressable, Text, View } from "react-native";
 import globalStyles from "../../../Global/GlobalStyles";
-import { Icons } from "../../../Global/Images";
 import CloseButton from "../CloseButton/CloseButton";
 import { styles } from "./DropdownStyles";
 
@@ -32,6 +30,8 @@ const Dropdown = (props: DropdownProps) => {
         setShowDropdown(false);
     }, [])
 
+
+
     return (
         <View style={styles.container}>
             <Text style={styles.headerText}>{props.headerText}</Text>
@@ -43,24 +43,30 @@ const Dropdown = (props: DropdownProps) => {
             </Pressable>
 
             <Modal style={styles.modal} transparent={true} visible={showDropdown} testID={'dropdownModal'}>
-                <Pressable testID="background" style={globalStyles.modalBackground} onPressIn={() => setShowDropdown(false)}/>
-                <View style={[globalStyles.modalView, globalStyles.modalShadow, styles.modalView]}>
-                    <CloseButton closeFunction={() => setShowDropdown(false)}/> 
-                    <Text style={styles.titleText}>Options</Text>
-                    <FlatList
-                        style={styles.flatList}
-                        ListHeaderComponentStyle = {styles.flatListHeader}
-                        data={props.options}
-                        keyExtractor={item => item}
-                        renderItem={({item}) => 
-                            <Pressable style={styles.itemView} onPress={() => props.setValue(item)}>
-                                <Text style={styles.itemText}>{item}</Text>
+                <Pressable testID="background" style={[styles.modalBackground]} onPress={() => setShowDropdown(false)}>
+                    <View style={[globalStyles.modalShadow, styles.modalView]}>
+                        <CloseButton closeFunction={() => setShowDropdown(false)}/> 
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.titleText}>{props.headerText}</Text>
+                        </View>
+
+                        <FlatList
+                            style={styles.flatList}
+                            ListHeaderComponentStyle = {styles.flatListHeader}
+                            data={props.options}
+                            keyExtractor={item => item}
+                            renderItem={({item}) => 
+                                <Pressable style={styles.itemView} onPress={() => props.setValue(item)}>
+                                    <Text style={styles.itemText}>{item}</Text>
+                                </Pressable>
+                            }/>
+                        <View style={styles.resetContainer}>
+                            <Pressable style={styles.clearButton} onPress={clearValue}>
+                                <Text style={styles.resetText}>Reset</Text>
                             </Pressable>
-                        }/>
-                    <Pressable style={styles.clearButton} onPress={clearValue}>
-                        <Text style={styles.resetText}>Reset</Text>
-                    </Pressable>
-                </View>
+                        </View>
+                    </View>
+                </Pressable>
             </Modal>
         </View>
     )

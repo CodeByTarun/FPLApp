@@ -21,7 +21,8 @@ const CloseButton = ({closeFunction}: CloseButtonProps) => {
 const styles = StyleSheet.create({
     closeButton: {
         position: 'absolute',
-        zIndex: -1,
+        zIndex: 10,
+        elevation: 1,
         right: -7,
         top: -7,
         height: 25,

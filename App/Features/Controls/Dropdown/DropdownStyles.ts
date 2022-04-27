@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { textSecondaryColor, mediumFont, textPrimaryColor, modalTextColor, largeFont, redColor, cornerRadius, height } from "../../../Global/GlobalConstants";
+import { textSecondaryColor, mediumFont, textPrimaryColor, modalTextColor, largeFont, redColor, cornerRadius, height, lightColor, aLittleLighterColor, secondaryColor, primaryColor, width } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     container: {
@@ -43,19 +43,36 @@ export const styles = StyleSheet.create({
 
     modalView: {
         maxHeight: height * 0.6, 
-        minHeight: height * 0.5 
+        minHeight: height * 0.5,
+        backgroundColor: primaryColor,
+        width: width * 0.7,
+        borderRadius: cornerRadius,
+    },
+
+    modalBackground: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+        top: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    titleContainer: {
+        padding: 15,
+        borderBottomColor: secondaryColor,
+        borderBottomWidth: 2,
     },
 
     titleText: {
-        color: modalTextColor,
+        color: textPrimaryColor,
         alignSelf: 'center',
-        marginTop: 15,
-        fontSize: largeFont,
-        fontWeight: 'bold'
+        fontSize: largeFont * 1,
+        fontWeight: 'bold',
     },
 
     flatList: {
-        margin: 10
     },
 
     flatListHeader: {
@@ -64,14 +81,15 @@ export const styles = StyleSheet.create({
     },
 
     itemView: {
-        borderBottomColor: 'lightgray',
+        borderBottomColor: secondaryColor,
         borderBottomWidth: 1,
     },
 
     itemText: {
-        color: modalTextColor,
+        color: textSecondaryColor,
         paddingBottom: 15,
         paddingTop: 15,
+        paddingLeft: 10,
     },
 
     clearButton: {
@@ -82,11 +100,16 @@ export const styles = StyleSheet.create({
         width: '40%',
         alignSelf: 'center',
         padding: 10,
-        margin: 10,
     },
 
     resetText: {
         fontSize: mediumFont, 
         color: textPrimaryColor,
+    },
+
+    resetContainer: {
+        padding: 15,
+        borderTopColor: secondaryColor,
+        borderTopWidth: 2,
     },
 })

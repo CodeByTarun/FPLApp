@@ -12,7 +12,7 @@ interface SearchControlProps {
 
 const SearchControl = ({value, onChangeTextFunction, placeHolderText} : SearchControlProps) => {
     return (
-        <View style={[styles.searchBoxContainer, globalStyles.shadow]}>
+        <View style={[styles.searchBoxContainer, styles.shadow]}>
             <View style={{height: '100%', width: 20, marginRight: 10, marginLeft: 5, justifyContent: 'center', alignSelf: 'center', flexDirection:'row'}}>
                 <Image style={{height: 18, width: '100%', alignSelf: 'center'}} resizeMode="contain" source={Icons['search']}/>
             </View>
@@ -43,5 +43,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'center',
         color: textPrimaryColor,
+    },
+
+    shadow: {
+        shadowOffset: {
+            height: 0,
+            width: 0,
+        },
+        shadowColor: 'black',
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 1,
     },
 });

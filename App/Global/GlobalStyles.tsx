@@ -21,8 +21,6 @@ export const globalStyles = StyleSheet.create(
        },
 
        modalView: {
-            position: 'absolute',
-            top: GlobalConstants.height * 0.23,
             width: '75%',
             backgroundColor: GlobalConstants.modalBackgroundColor,
             alignSelf: 'center',
@@ -76,17 +74,25 @@ export const globalStyles = StyleSheet.create(
         // Make the parent elements overflow: hidden to make this work for only the bottom!
         bottomShadow: {
             shadowColor: 'black',
-            shadowOffset: {width: 0, height: 10},
-            shadowRadius: 5,
-            shadowOpacity: 0.05,
+            shadowOffset: {width: 0, height: 2},
+            shadowRadius: 2,
+            shadowOpacity: 0.15,
+            elevation: 3,
+        },
+
+        topShadow: {
+            shadowColor: 'black',
+            shadowOffset: {width: 0, height: -2},
+            shadowRadius: 2,
+            shadowOpacity: 0.15,
             elevation: 3,
         },
         
         shadow: {
             shadowColor: 'black',
             shadowOffset: {width: 0, height: 0},
-            shadowRadius: 2,
-            shadowOpacity: 0.35,
+            shadowRadius: 1.5,
+            shadowOpacity: 0.6,
             elevation: 1,
         },
 

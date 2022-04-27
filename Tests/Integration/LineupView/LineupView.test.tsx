@@ -14,7 +14,7 @@ test('team type is empty', () => {
                                                              budgetGameweekPicks={budgetLeaguePicks} budgetUserInfo={budgetManagerInfo}/>); 
 
     expect(getByText('Add your fantasy team')).toBeTruthy();
-    expect(getAllByTestId('imageButton')).toHaveLength(4);
+    expect(getAllByTestId('imageButton')).toHaveLength(1);
 });
 
 test('team type is dream', () => {
@@ -26,7 +26,7 @@ test('team type is dream', () => {
                                                              budgetGameweekPicks={budgetLeaguePicks} budgetUserInfo={budgetManagerInfo}/>); 
 
     expect(getAllByTestId('playerStatsDisplayButton')).toHaveLength(11);
-    expect(getAllByTestId('imageButton')).toHaveLength(4);
+    expect(getAllByTestId('imageButton')).toHaveLength(1);
     expect(getByText('Dream Team')).toBeTruthy();
 });
 
@@ -39,7 +39,7 @@ test('team type is draft team', () => {
                                                              budgetGameweekPicks={budgetLeaguePicks} budgetUserInfo={budgetManagerInfo}/>);
 
     expect(getAllByTestId('playerStatsDisplayButton')).toHaveLength(15);
-    expect(getAllByTestId('imageButton')).toHaveLength(4);
+    expect(getAllByTestId('imageButton')).toHaveLength(1);
     expect(getByTestId('managerTeamDropDownButton')).toBeTruthy();
 
 });
@@ -54,6 +54,6 @@ test('team type is fixture', () => {
                                                                           budgetGameweekPicks={budgetLeaguePicks} budgetUserInfo={budgetManagerInfo}/>);
     
     expect(getAllByTestId('playerStatsDisplayButton')).toHaveLength(14);
-    expect(getAllByTestId('imageButton')).toHaveLength(4);
+    expect(getAllByTestId('imageButton')).toHaveLength(1);
     expect(getByTestId('teamSwitchContainer')).toBeTruthy();
 });

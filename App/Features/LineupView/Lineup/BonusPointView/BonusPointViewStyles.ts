@@ -3,13 +3,20 @@ import { primaryColor, aLittleLighterColor, textPrimaryColor, width } from "../.
 
 export const styles = StyleSheet.create({
     
+    container:{ 
+        width: '60%', 
+        height: '95%', 
+        backgroundColor: primaryColor, 
+        alignSelf: 'flex-end', 
+        paddingBottom: 10
+    },
+
     bonusPointsView: {
-        width: '30%',
+        flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
         backgroundColor: primaryColor, 
         borderColor: aLittleLighterColor,
-        paddingBottom: 3,
     },
 
     bonusPointsText: {
@@ -19,11 +26,11 @@ export const styles = StyleSheet.create({
     },
 
     titleContainer: {
-        width: '60%', 
+        width: '100%', 
         justifyContent: 'center', 
-        alignItems: 'center', 
-        backgroundColor: primaryColor, 
-        marginTop: 5,
+        alignItems: 'center',  
+        paddingBottom: 5,
+        backgroundColor: primaryColor
     },
 
     titleText: {
@@ -32,7 +39,6 @@ export const styles = StyleSheet.create({
         fontSize: width*0.035,
         fontWeight: 'bold',
         padding: 5,
-        marginTop: 2,
         backgroundColor: primaryColor
     },
 });

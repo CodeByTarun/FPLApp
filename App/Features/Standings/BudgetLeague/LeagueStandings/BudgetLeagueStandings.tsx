@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { FlatList, TouchableOpacity, View, Text } from "react-native";
-import { seperator } from "../../../../Global/GlobalComponents";
+import { Seperator } from "../../../../Global/GlobalComponents";
 import { textPrimaryColor, smallFont } from "../../../../Global/GlobalConstants";
 import { FplBudgetLeagueInfo, Result } from "../../../../Models/FplBudgetLeagueInfo";
 import { useAppDispatch } from "../../../../Store/hooks";
@@ -39,7 +39,7 @@ const BudgetLeagueStandings = ({budgetLeagueInfo, setModalVisibility} : BudgetLe
     return(
         <FlatList data={budgetLeagueInfo.standings.results}
                   stickyHeaderIndices={[0]}
-                  ItemSeparatorComponent={ seperator }
+                  ItemSeparatorComponent={ Seperator }
                   keyExtractor={item => item.id.toString()}
                   ListHeaderComponent={ StandingsHeader }
                   renderItem={renderLeagueEntryItem}

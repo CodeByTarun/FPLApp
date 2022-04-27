@@ -16,7 +16,7 @@ import { Icons } from "../../../Global/Images";
 import globalStyles from "../../../Global/GlobalStyles";
 import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
 import { styles } from "./PlayerTableStyles";
-import { Dropdown, ToolTip, CustomButton } from "../../Controls";
+import { Dropdown, ToolTip, CustomButton, SearchControl } from "../../Controls";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -69,16 +69,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
         <View style={{flex: 1, zIndex: -1}}>
             <View style={[styles.topBarContainer, globalStyles.bottomShadow]}>
                 <View style={styles.firstRowTopBarContainer}>
-                    <View style={[styles.searchBoxContainer, globalStyles.shadow]}>
-                        <View style={{height: '100%', width: 20, marginRight: 10, marginLeft: 5, justifyContent: 'center', alignSelf: 'center', flexDirection:'row'}}>
-                            <Image style={{height: 18, width: '100%', alignSelf: 'center'}} resizeMode="contain" source={Icons['search']}/>
-                        </View>
-                        <TextInput style={styles.searchbox} 
-                                    value={playerTableFilterState.playerSearchText}
-                                    onChangeText={text => playerTableFilterDispatch({type: 'PlayerSearchTextChange', filterValue: text})}
-                                    placeholder="Search" 
-                                    placeholderTextColor={GlobalConstants.textPrimaryColor}/>
-                    </View>
+                    <SearchControl placeHolderText="Search" value={playerTableFilterState.playerSearchText} onChangeTextFunction={text => playerTableFilterDispatch({type: 'PlayerSearchTextChange', filterValue: text})}/>
                     
                     <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', flex: 1.5, marginRight: 2.5}} onPress={closePlayerSearch}>
                         <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>  Close</Text>
@@ -122,7 +113,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
             </View>
             <ToolTip distanceFromRight={5} 
                      distanceForArrowFromRight={9}
-                     distanceFromTop={109}
+                     distanceFromTop={130}
                      isVisible={isFilterModalVisible}
                      setIsVisible={setIsFilterModalVisible}
                      view={
@@ -130,13 +121,13 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                             <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
                                 <Text style={styles.filterText}>Per 90 (if applicable):</Text>
                                 <Checkbox value={ playerTableFilterState.isPer90 } 
-                                        color={playerTableFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
+                                        color={playerTableFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
                                         onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsPer90'})}/>
                             </View>
                             <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
                                 <Text style={styles.filterText}>On Watchlist:</Text>
                                 <Checkbox value={ playerTableFilterState.isInWatchlist } 
-                                        color={playerTableFilterState.isInWatchlist ? GlobalConstants.fieldColor : GlobalConstants.primaryColor}
+                                        color={playerTableFilterState.isInWatchlist ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
                                         onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsInWatchlist'})}/>
                             </View>
                             <View style={{flex: 2, padding: 5}}>
@@ -150,9 +141,9 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                         minimumValue={initialPriceRange[0]}
                                         maximumValue={initialPriceRange[1]}
                                         step={1}
-                                        thumbTintColor={GlobalConstants.primaryColor}
-                                        maximumTrackTintColor={'white'}
-                                        minimumTrackTintColor={GlobalConstants.primaryColor}/>
+                                        thumbTintColor={GlobalConstants.lightColor}
+                                        maximumTrackTintColor={GlobalConstants.secondaryColor}
+                                        minimumTrackTintColor={GlobalConstants.lightColor}/>
                             </View>
                             <View style={{flex: 2, padding: 5}}>
                                 <Text style={styles.filterText}>Minutes Per Game Range:</Text>
@@ -165,12 +156,12 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                         minimumValue={0}
                                         maximumValue={(90 * 38)}
                                         step={1}
-                                        thumbTintColor={GlobalConstants.primaryColor}
-                                        maximumTrackTintColor={'white'}
-                                        minimumTrackTintColor={GlobalConstants.primaryColor}/>
+                                        thumbTintColor={GlobalConstants.lightColor}
+                                        maximumTrackTintColor={GlobalConstants.secondaryColor}
+                                        minimumTrackTintColor={GlobalConstants.lightColor}/>
                             </View>
                             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: 10}}>
-                                <Pressable style={[globalStyles.baseButton, globalStyles.shadow, {backgroundColor: GlobalConstants.primaryColor}]}
+                                <Pressable style={[globalStyles.baseButton]}
                                            onPress={() => playerTableFilterDispatch({type: 'Reset', range: initialPriceRange})}>
                                     <Text style={{color: GlobalConstants.textPrimaryColor, fontWeight: '500'}}>Clear Filters</Text>
                                 </Pressable>

@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { cornerRadius, height, secondaryColor, width } from "../../../Global/GlobalConstants";
+import { StyleSheet, View, TouchableOpacity, Modal } from "react-native";
+import { cornerRadius, height, primaryColor, secondaryColor, width } from "../../../Global/GlobalConstants";
 
 interface dimensions {
     x: number;
@@ -22,17 +22,13 @@ interface toolTipProps {
 const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, distanceFromTop, view, isVisible, setIsVisible, isArrowAbove = true }: React.PropsWithChildren<toolTipProps>) => {
 
     return (
-        <>
-            { isVisible && 
-            <>
-                <TouchableOpacity testID="background" style={styles.modalBackground} onPress={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
-                <View testID="tooltip" style={[styles.modalView, {right: distanceFromRight, top: distanceFromTop}]}>
-                    <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
-                    { view }
-                </View>
-            </>
-            }
-        </>
+        <Modal visible={isVisible} transparent={true}>
+            <TouchableOpacity testID="background" style={styles.modalBackground} onPress={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
+            <View testID="tooltip" style={[styles.modalView, {right: distanceFromRight, top: distanceFromTop}]}>
+                <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
+                { view }
+            </View>
+        </Modal>
     )
 
 }
@@ -42,10 +38,10 @@ export default ToolTip;
 const styles = StyleSheet.create({
 
     modalView: {
-        zIndex: 100000,
-        elevation: 100000,
+        zIndex: 2,
+        elevation: 2,
         position: 'absolute',
-        backgroundColor: secondaryColor,
+        backgroundColor: primaryColor,
         borderRadius: cornerRadius,
         
     },
@@ -58,8 +54,8 @@ const styles = StyleSheet.create({
         left: -width,
         opacity: 0.5,
         backgroundColor: 'black',
-        zIndex: 10000, 
-        elevation: 10000, 
+        zIndex: 1, 
+        elevation: 1, 
     },
 
     arrow: {
@@ -73,7 +69,7 @@ const styles = StyleSheet.create({
         borderRightWidth:15,
         borderRightColor:"transparent",
         borderBottomWidth:15,
-        borderBottomColor: secondaryColor,
+        borderBottomColor: primaryColor,
     },
 
     above: {

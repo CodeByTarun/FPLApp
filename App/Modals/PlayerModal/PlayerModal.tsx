@@ -14,7 +14,7 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { useAppDispatch } from "../../Store/hooks";
 import { closeModal, openPlayerDetailedStatsModal } from "../../Store/modalSlice";
-import { CloseButton } from "../../Features/Controls";
+import { CloseButton, ModalWrapper } from "../../Features/Controls";
 import { styles } from "./PlayerModalStyles";
 
 interface PlayerCardProps {
@@ -48,7 +48,7 @@ function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, 
 
 function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, fixture: FplFixture) {
     return (
-        <View testID="fixturePlayerStatsContainer" key={fixture.id} style={styles.fixtureContainer}>
+        <View testID="fixturePlayerStatsContainer" key={fixture.id} style={styles.fixtureContainer} onStartShouldSetResponder={() => true}>
             <View style={styles.fixtureScoreView}>
                 <View style={styles.emblemView}>
                     <Image testID="homeJerseyFixturePlayerStatsView" style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview).code]} resizeMode='contain' />
@@ -95,22 +95,21 @@ const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) =>
     }
 
     return (
-        <Modal animationType="fade" transparent={true} visible={true}>
-            <Pressable style={[globalStyles.modalBackground]} onPress={() => dispatch(closeModal())}/>
-                <View style={[globalStyles.modalView, globalStyles.modalShadow, { maxHeight: GlobalConstants.height * 0.5 }]}>
-                    <CloseButton closeFunction={() => dispatch(closeModal())}/>
-                    <Text style={styles.titleText}>
-                        {player.overviewData.first_name + " " + player.overviewData.second_name}
-                    </Text>
-                    <ScrollView style={{ flex: 1 }}>
-                        { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
-                    </ScrollView>
-                    <TouchableOpacity style={[styles.button, globalStyles.shadow]}
-                                      onPress={onMoreInfoPress}>
-                        <Text style={styles.buttonText}>More Info</Text>
-                    </TouchableOpacity>
-                </View>        
-        </Modal>
+        <ModalWrapper isVisible={true} closeFn={() => dispatch(closeModal())}>
+            <View style={[globalStyles.modalView, globalStyles.modalShadow, styles.container]}>
+                <CloseButton closeFunction={() => dispatch(closeModal())}/>
+                <Text style={styles.titleText}>
+                    {player.overviewData.first_name + " " + player.overviewData.second_name}
+                </Text>
+                <ScrollView style={{ }}>
+                    { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
+                </ScrollView>
+                <TouchableOpacity style={[styles.button]}
+                                    onPress={onMoreInfoPress}>
+                    <Text style={styles.buttonText}>More Info</Text>
+                </TouchableOpacity>
+            </View>        
+        </ModalWrapper>
     )
 }
 

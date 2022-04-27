@@ -1,18 +1,17 @@
 import { StyleSheet } from "react-native";
-import { secondaryColor, height, textPrimaryColor, mediumFont, cornerRadius, largeFont } from "../../Global/GlobalConstants";
+import { height, width, largeFont, textPrimaryColor, secondaryColor, mediumFont, cornerRadius } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
-
-    modalViewLayout: {
-        height: height * 0.6,
-        top: height * 0.4 / 3
+    
+    container: {
+        flex: 1,
     },
 
     titleText: {
         fontSize: largeFont, 
         color: textPrimaryColor, 
         alignSelf: 'center', 
-        padding: 10, 
+        marginTop: 10, 
         fontWeight: '700', 
         textAlign: 'center'
     },
@@ -20,8 +19,6 @@ export const styles = StyleSheet.create({
     listContainer: {
         flex: 4, 
         marginTop: 10, 
-        marginLeft: -10, 
-        marginRight: -10, 
         borderTopWidth: 1, 
         borderBottomWidth: 1, 
         borderColor: secondaryColor
@@ -46,5 +43,5 @@ export const styles = StyleSheet.create({
         borderRadius: cornerRadius,
         padding: 10
     }
-
+    
 });

@@ -83,6 +83,7 @@ const PlayerComparisonView = ({overview, fixtures, playerOverview, playerSummary
             </View>
         )
     }
+
     return (
         <View style={styles.sectionBorder}>
             { playerList.length > 1 &&
@@ -110,7 +111,7 @@ const PlayerComparisonView = ({overview, fixtures, playerOverview, playerSummary
                         )})}
                     </ScrollView> 
                 :
-                <View style={{padding: 10}}>
+                <View style={{margin: 5, height: 40}}>
                     <FixtureDifficultyList team={playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} currentGameweek={currentGameweek}/>
                 </View>
             )}

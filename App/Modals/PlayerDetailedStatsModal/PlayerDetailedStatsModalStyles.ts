@@ -4,12 +4,29 @@ import { height, largeFont, textPrimaryColor, mediumFont, width, aLittleLighterC
 export const styles = StyleSheet.create({
 
     header: {
+
+    },
+
+    headerRow: {
+        flexDirection: 'row',
     },
 
     controlsContainer: {
-        height: height*0.05,
+        height: width*0.1,
         flexDirection: 'row',
         marginTop: 10,
+        marginBottom: 5,
+    },
+
+    statHistoryToggle: {
+        flex: 2, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row', 
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: secondaryColor,
+        marginTop: 5,
         marginBottom: 5,
     },
 
@@ -24,7 +41,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'center',
         backgroundColor:'red',
-        padding: 5,
+        height: '100%'
     },
 
     text: {

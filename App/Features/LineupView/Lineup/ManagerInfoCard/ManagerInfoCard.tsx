@@ -136,7 +136,7 @@ const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo,
                     <Text numberOfLines={1} adjustsFontSizeToFit={true} style={stat.stat === 'rank' ? styles.rankText : styles.statText}>{stat.value}</Text>
                 </View>
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                    <Text style={styles.text}>{stat.stat}</Text>
+                    <Text numberOfLines={1} style={styles.text}>{stat.stat}</Text>
                 </View>
                 {(teamInfo.gameweek === currentGameweek) &&
                     <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 7}}>  

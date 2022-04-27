@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { height, largeFont, mediumFont, primaryColor, textPrimaryColor } from "../../Global/GlobalConstants";
+import { height, largeFont, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     animatedView: {
@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     },
 
     controlsContainer: {
-        height: height * 0.075, 
+        height: 40, 
         width: '100%' 
     },
 
@@ -63,5 +63,27 @@ export const styles = StyleSheet.create({
         flex: 1, 
         marginLeft: 2.5, 
         marginRight: 2.5
+      },
+
+      closeFixtureViewButtonContainer: {
+        position: 'absolute',
+        bottom: 20,
+        right: 20, 
+        borderRadius: 100,
+        backgroundColor: secondaryColor,
+        padding: 15,
+      },
+
+      closeFixtureViewButtonText: {
+        fontSize: mediumFont,
+        fontWeight: '500',
+        color: textSecondaryColor,
+        alignSelf: 'center',
+        textAlign: 'center'
+      },
+
+      gameweekViewContainer: {
+        height: height * 0.6,
+        width: width * 0.7,
       },
 });

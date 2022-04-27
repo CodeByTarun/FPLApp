@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { FlatList, View, Text, TouchableOpacity } from "react-native";
 import { CloseButton, SearchControl } from "../../../Features/Controls";
-import { seperator } from "../../../Global/GlobalComponents";
+import { Seperator } from "../../../Global/GlobalComponents";
 import { width, height } from "../../../Global/GlobalConstants";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { styles } from "./AddPlayerModalStyles";
@@ -56,7 +56,7 @@ const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayer
             <View style={styles.listContainer}>
                 <FlatList data={playerList}
                           renderItem={renderPlayerItem}
-                          ItemSeparatorComponent={seperator}
+                          ItemSeparatorComponent={Seperator}
                           keyExtractor={keyExtractor}/>
             </View>
             

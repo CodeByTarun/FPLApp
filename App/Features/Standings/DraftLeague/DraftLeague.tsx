@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { View, Text, ScrollView, TouchableOpacity, FlatList } from "react-native";
-import { seperator } from "../../../Global/GlobalComponents";
+import { Seperator } from "../../../Global/GlobalComponents";
 import { textPrimaryColor, largeFont, textSecondaryColor, aLittleLighterColor, smallFont } from "../../../Global/GlobalConstants";
 import { FplDraftLeagueInfo, LeagueEntry, Standing } from "../../../Models/FplDraftLeagueInfo";
 import { useAppDispatch } from "../../../Store/hooks";
@@ -48,7 +48,7 @@ const DraftLeague = ({ draftLeagueInfo, setModalVisibility } : DraftLeagueStandi
         <Text style={styles.titleText} numberOfLines={1}>{draftLeagueInfo.league.name}</Text>
         <FlatList data={draftLeagueInfo.standings}
                   stickyHeaderIndices={[0]}
-                  ItemSeparatorComponent={ seperator }
+                  ItemSeparatorComponent={ Seperator }
                   keyExtractor={item => item.league_entry.toString()}
                   ListHeaderComponent={ StandingsHeader }
                   renderItem={renderLeagueEntryItem}

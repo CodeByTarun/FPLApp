@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 export const {width, height} = Dimensions.get('window');
 
 // Styling
-export const cornerRadius = 8;
+export const cornerRadius = 12;
 
 // Color Scheme
 export const fieldColor = '#629512';
@@ -21,6 +21,8 @@ export const tertiaryColor = 'white';
 export const textPrimaryColor = '#ece7f4';
 export const textSecondaryColor = '#c7b8df';
 
+export const testColor = '#451295';
+
 export const modalTextColor = 'white';
 export const modalBackgroundColor = primaryColor;
 export const modalButtonColor = secondaryColor;
@@ -35,7 +37,7 @@ export const largeFont = width*0.045;
 
 
 export const Per90Stats = ["Total Points", "Goals Scored", "Assists", 
-                    "Clean Sheets", "Goals Conceded", "Own Goals",
-                    "Yellow Cards", "Red Cards", "Saves", "Bonus",
-                    "Bonus Points Total", "Influence", "Creativity",
-                    "Threat", "ICT Index"];
+                            "Clean Sheets", "Goals Conceded", "Own Goals",
+                            "Yellow Cards", "Red Cards", "Saves", "Bonus",
+                            "Bonus Points Total", "Influence", "Creativity",
+                            "Threat", "ICT Index"];

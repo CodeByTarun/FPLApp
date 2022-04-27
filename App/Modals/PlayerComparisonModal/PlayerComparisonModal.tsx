@@ -2,7 +2,7 @@ import Checkbox from "expo-checkbox";
 import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { Modal, Pressable, View, Text, TouchableOpacity, Animated, ScrollView } from "react-native";
 import { Slider } from "@miblanchard/react-native-slider";
-import { CloseButton, CustomButton, ToolTip } from "../../Features/Controls";
+import { CloseButton, CustomButton, ModalWrapper, ToolTip } from "../../Features/Controls";
 import { fieldColor, height, lightColor, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
@@ -75,8 +75,6 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
         error => {
             return
         })
-
-        console.log(playersToCompare.length);
     }
 
     const removePlayer = (playerToRemove: PlayerOverview) => {
@@ -85,80 +83,82 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
     //#endregion
 
     return (
-        <Modal animationType="fade" transparent={true} visible={true}>
+        <ModalWrapper isVisible={true} closeFn={() => dispatch(closeModal())}>
             <View style={[globalStyles.modalView, globalStyles.shadow, styles.modalContainer]}>
                 <CloseButton closeFunction={() => dispatch(closeModal())}/>
-                <Text style={styles.titleText}>Player Comparison</Text>
-                <View style={styles.controlsOuterContainers}>
-                    <View style={styles.controlContainer}>
-                        <Animated.View style={[styles.switch, globalStyles.shadow, {transform: [{translateX: translateInterpolate}]}]}/>
+                <View style={{flex: 1}}>
+                    <Text style={styles.titleText}>Player Comparison</Text>
+                    <View style={[styles.controlsOuterContainers]}>
+                        <View style={styles.controlContainer}>
+                            <Animated.View style={[styles.switch, globalStyles.shadow, {transform: [{translateX: translateInterpolate}]}]}/>
 
-                        { views.map( (name, index) =>
-                            <TouchableOpacity key={index} style={styles.controlButtons} onPress={() => setViewIndex(index)}>
-                                <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
-                            </TouchableOpacity>
-                        )}
-                    </View>
-                    {viewIndex === 1 &&
-                        <View style={{position: 'absolute', right: 0, height: '100%', width: '15%'}}>
-                            <CustomButton image={"filter"} buttonFunction={() => setIsFilterModalVisible(true)}/>
+                            { views.map( (name, index) =>
+                                <TouchableOpacity key={index} style={styles.controlButtons} onPress={() => setViewIndex(index)}>
+                                    <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
-                    }
+                        {viewIndex === 1 &&
+                            <View style={{position: 'absolute', right: 0, height: '100%', width: '15%'}}>
+                                <CustomButton image={"filter"} buttonFunction={() => setIsFilterModalVisible(true)}/>
+                            </View>
+                        }
+                    </View>
+                    <ScrollView style={{paddingBottom: 15, flex: 1, paddingTop: 15}}>
+                        { playersToCompare.map(player => { return(
+                            <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
+                                                playerOverview={player.playerOverview} playerSummary={player.playerSummary} 
+                                                playerList={playersToCompare}
+                                                viewIndex={viewIndex} statsFilterState={statsFilterState} 
+                                                currentGameweek={currentGameweek} removePlayerFunction={removePlayer}/>
+                        )})}
+
+                    </ScrollView>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]} onPress={() => setIsAddPlayerModalVisible(true)} disabled={playersToCompare.length >= 5}>
+                        <Text style={styles.buttonText}>Add Player</Text>
+                    </TouchableOpacity>
                 </View>
-                <ScrollView style={{paddingBottom: 15, flex: 1, paddingTop: 15}}>
-                    { playersToCompare.map(player => { return(
-                        <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
-                                              playerOverview={player.playerOverview} playerSummary={player.playerSummary} 
-                                              playerList={playersToCompare}
-                                              viewIndex={viewIndex} statsFilterState={statsFilterState} 
-                                              currentGameweek={currentGameweek} removePlayerFunction={removePlayer}/>
-                    )})}
-
-                </ScrollView>
-                <TouchableOpacity style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]} onPress={() => setIsAddPlayerModalVisible(true)} disabled={playersToCompare.length >= 5}>
-                    <Text style={styles.buttonText}>Add Player</Text>
-                </TouchableOpacity>
-            </View>
-            <ToolTip distanceFromRight={width* 0.8 * 0.09} distanceForArrowFromRight={18}
-                     distanceFromTop={height * 0.28}
-                     isVisible={isFilterModalVisible} 
-                     setIsVisible={setIsFilterModalVisible}
-                     isArrowAbove={true}
-                     view={<View style={{ width: width * 0.65, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
-                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                <Text style={[styles.text, { flex: 1 }]}>Per 90 Stats?</Text>
-                                <Checkbox value={statsFilterState.isPer90}
-                                    color={statsFilterState.isPer90 ? fieldColor : primaryColor}
-                                    onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
-                            </View>
-                            <View style={{ marginTop: 10 }}>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={[styles.text, { flex: 1, alignSelf: 'flex-start', paddingBottom: 5 }]}>Gameweeks:</Text>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    <Text style={[styles.text, {flex: 1}]}>{statsFilterState.gameSpan[0]}</Text>
-                                    <Text style={[styles.text]}>{statsFilterState.gameSpan[1]}</Text>
-                                    </View>
+                <ToolTip distanceFromRight={width * 0.15 * 0.5 + 10} distanceForArrowFromRight={7.5}
+                        distanceFromTop={height * 0.28}
+                        isVisible={isFilterModalVisible} 
+                        setIsVisible={setIsFilterModalVisible}
+                        isArrowAbove={true}
+                        view={<View style={{ width: width * 0.65, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
+                                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                    <Text style={[styles.text, { flex: 1 }]}>Per 90 Stats?</Text>
+                                    <Checkbox value={statsFilterState.isPer90}
+                                        color={statsFilterState.isPer90 ? fieldColor : lightColor}
+                                        onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
                                 </View>
+                                <View style={{ marginTop: 10 }}>
+                                    <View style={{ alignItems: 'center' }}>
+                                        <Text style={[styles.text, { flex: 1, alignSelf: 'flex-start', paddingBottom: 5 }]}>Gameweeks:</Text>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <Text style={[styles.text, {flex: 1}]}>{statsFilterState.gameSpan[0]}</Text>
+                                        <Text style={[styles.text]}>{statsFilterState.gameSpan[1]}</Text>
+                                        </View>
+                                    </View>
 
-                                <Slider value={statsFilterState.gameSpan}
-                                        onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number[] })}
-                                        minimumValue={1}
-                                        maximumValue={currentGameweek}
-                                        step={1}
-                                        thumbTintColor={primaryColor}
-                                        maximumTrackTintColor={'white'}
-                                        minimumTrackTintColor={primaryColor}/>
-                            </View>
-                        </View>}/>
-            <ToolTip distanceFromRight={width * 0.15} distanceForArrowFromRight={-width}
-                     distanceFromTop={height * 0.15}
-                     isVisible={isAddPlayerModalVisible} 
-                     setIsVisible={setIsAddPlayerModalVisible}
-                     isArrowAbove={true}
-                     view={<AddPlayerModal overview={overview} 
-                                           closeFunction={() => setIsAddPlayerModalVisible(false)}
-                                           addPlayerFunction={addPlayer}/>}/>
-        </Modal>
+                                    <Slider value={statsFilterState.gameSpan}
+                                            onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number[] })}
+                                            minimumValue={1}
+                                            maximumValue={currentGameweek}
+                                            step={1}
+                                            thumbTintColor={lightColor}
+                                            maximumTrackTintColor={secondaryColor}
+                                            minimumTrackTintColor={lightColor}/>
+                                </View>
+                            </View>}/>
+                <ToolTip distanceFromRight={width * 0.15} distanceForArrowFromRight={-width}
+                        distanceFromTop={height * 0.15}
+                        isVisible={isAddPlayerModalVisible} 
+                        setIsVisible={setIsAddPlayerModalVisible}
+                        isArrowAbove={true}
+                        view={<AddPlayerModal overview={overview} 
+                                            closeFunction={() => setIsAddPlayerModalVisible(false)}
+                                            addPlayerFunction={addPlayer}/>}/>
+            </View>
+        </ModalWrapper>
     )
 }
 

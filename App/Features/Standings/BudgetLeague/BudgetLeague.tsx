@@ -19,7 +19,7 @@ const BudgetLeague = ({budgetUserInfo, setModalVisibility} : BudgetLeagueProps) 
     const budgetLeagueInfo = useGetBudgetLeagueInfoQuery(leagueToShow ? leagueToShow : skipToken);
 
     return (
-        <View style={{flex: 1, padding: 5, paddingTop: 10, paddingBottom: 10}}>
+        <View style={{flex: 1, padding: 5}}>
             <Text style={styles.titleText} numberOfLines={1}>{leagueToShow ? (budgetLeagueInfo.isSuccess ? budgetLeagueInfo.data.league.name : "")  : 'Leagues'}</Text>
             { leagueToShow && 
                 <TouchableOpacity testID="backButtonStandings" style={{position: 'absolute', left: 10, top: 10}} onPress={() => setLeagueToShow(null)}>

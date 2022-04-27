@@ -3,7 +3,6 @@ import { secondaryColor, cornerRadius, primaryColor, textPrimaryColor, mediumFon
 
 export const styles = StyleSheet.create({
     container: {
-            
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',

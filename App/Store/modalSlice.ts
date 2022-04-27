@@ -7,7 +7,6 @@ export enum ModalTypes {
     PlayerModal, 
     DetailedPlayerModal,
     TeamModal,
-    GameweekModal,
     GameweekOverviewModal,
     PlayerComparisonModal,
     InfoModal,
@@ -27,10 +26,6 @@ export interface DetailedPlayerModalInfo {
 
 export interface TeamModalInfo {
     modalType: ModalTypes.TeamModal,
-}
-
-export interface GameweekModalInfo {
-    modalType: ModalTypes.GameweekModal,
 }
 
 export interface GameweekOverviewModalInfo {
@@ -55,8 +50,7 @@ export interface ClosedInfo {
 }
 
 export type ModalInfo = PlayerModalInfo | DetailedPlayerModalInfo | PlayerComparisonModalInfo | TeamModalInfo | 
-                        GameweekModalInfo | GameweekOverviewModalInfo | InfoModalInfo |
-                        BackgroundOnlyInfo | ClosedInfo;
+                        GameweekOverviewModalInfo | InfoModalInfo | BackgroundOnlyInfo | ClosedInfo;
 
 const initialState = {modalType: ModalTypes.Closed} as ModalInfo;
 
@@ -81,10 +75,6 @@ const modalSlice = createSlice({
             return { modalType: ModalTypes.TeamModal };
         },
 
-        openGameweekModal(state: ModalInfo): ModalInfo {
-            return { modalType: ModalTypes.GameweekModal }
-        },
-
         openGameweekOverviewModal(state: ModalInfo): ModalInfo {
             return { modalType: ModalTypes.GameweekOverviewModal }
         },
@@ -104,5 +94,5 @@ const modalSlice = createSlice({
 });
 
 export const { openPlayerModal, openPlayerDetailedStatsModal, openPlayerComparisonModal, openTeamModal, 
-               openGameweekModal, openGameweekOverviewModal, openInfoModal, closeModal, showModalBackground } =  modalSlice.actions;
+               openGameweekOverviewModal, openInfoModal, closeModal, showModalBackground } =  modalSlice.actions;
 export default modalSlice.reducer;

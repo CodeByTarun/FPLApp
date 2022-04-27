@@ -4,7 +4,8 @@ import { smallFont, textSecondaryColor } from "../../../Global/GlobalConstants";
 export const styles = StyleSheet.create({
 
     container: {
-        flex: 1, 
+        height: '20%',
+        width: '100%',
         flexDirection: 'row',
         paddingBottom: 3,
     },
@@ -24,6 +25,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         flexDirection:'row', 
         marginTop: -1,
+        maxHeight: '20%',
     },
 
     fixtureViewText: {
