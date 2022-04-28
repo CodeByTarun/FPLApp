@@ -115,7 +115,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
 
                 <ToolTip distanceFromRight={4} distanceFromTop={GlobalConstants.height * 0.175 + 70} distanceForArrowFromRight={7} 
                          isVisible={isTeamsListVisible} setIsVisible={setIsTeamsListVisible} 
-                         view={<TeamListView/>}/>
+                         view={<TeamListView setIsVisible={setIsTeamsListVisible}/>}/>
         </View>
     )
 }

@@ -1,10 +1,10 @@
 import React from "react"
 import { View } from "react-native"
-import { aLittleLighterColor } from "./GlobalConstants"
+import { aLittleLighterColor, lightColor, secondaryColor } from "./GlobalConstants"
 
 export const Seperator = () => {
     return (
-        <View style={{borderBottomWidth: 1, borderBottomColor: aLittleLighterColor}}/>
+        <View style={{borderBottomWidth: 1, borderBottomColor: secondaryColor }}/>
     )
 }
 
