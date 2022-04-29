@@ -89,6 +89,7 @@ function GetDraftOrBudgetPlayerData(gameweekData: FplGameweek, overviewData: Fpl
                         overviewData: overviewData.elements.find(player => player.id === pick.element),
                         isCaptain: pick.is_captain,
                         isViceCaptain: pick.is_vice_captain,
+                        multiplier: pick.multiplier,
                     } as PlayerData)
                 })
             
@@ -180,7 +181,11 @@ export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
     
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return GetPlayerPointsForAFixture(player, teamInfo);
-    } else {
+    } 
+    else if (teamInfo.teamType === TeamTypes.Budget) {
+        return player.gameweekData.stats.total_points * player.multiplier;
+    }
+    else {
         return player.gameweekData.stats.total_points;
     }
 }

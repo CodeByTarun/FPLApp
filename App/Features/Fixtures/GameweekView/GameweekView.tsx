@@ -1,27 +1,28 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { View, Text, ScrollView, Pressable, Platform } from "react-native";
-import { overview } from "../../../../Tests/SampleData/Overviews";
 import { height, primaryColor, secondaryColor } from "../../../Global/GlobalConstants";
+import { FplOverview } from "../../../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
-import { closeModal } from "../../../Store/modalSlice";
 import { changeGameweek } from "../../../Store/teamSlice";
 import { styles } from "./GameweekViewStyles";
 
 
 interface GameweekViewProps {
     isVisible: boolean;
+    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    liveGameweek: number;
+    overview: FplOverview;
 }
 
-const GameweekView = ({isVisible} : GameweekViewProps) => {
+const GameweekView = ({isVisible, setIsVisible, liveGameweek, overview} : GameweekViewProps) => {
 
     const dispatch = useAppDispatch();
-    const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
     const teamInfo = useAppSelector(state => state.team);
     const gameweekScrollViewRef = useRef<ScrollView>(null);
 
     const onGameweekButtonPress = useCallback((gameweekNumber: number) => {
         dispatch(changeGameweek(gameweekNumber));
-        dispatch(closeModal());
+        setIsVisible(false);
     },[])
 
     useEffect( function scrollToCurrentlySelectedGameweek() {
@@ -53,7 +54,7 @@ const GameweekView = ({isVisible} : GameweekViewProps) => {
             </View>
             
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Pressable style={[styles.currentGameweekButton]} onPress={() => onGameweekButtonPress(currentGameweek)}>
+                <Pressable style={[styles.currentGameweekButton]} onPress={() => onGameweekButtonPress(liveGameweek)}>
                     <Text style={[styles.text, {fontWeight: '600'}]}>Current Gameweek</Text>
                 </Pressable>
             </View>

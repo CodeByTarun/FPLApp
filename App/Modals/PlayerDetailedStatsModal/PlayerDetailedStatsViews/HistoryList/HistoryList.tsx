@@ -29,19 +29,6 @@ interface HistoryProps {
     playerData: FplPlayerSummary;
 }
 
-const HistoryHeader = (playerHistory : History[]) => {
-    return (
-        <View style={styles.headerContainer}>
-            { Object.values(stats).map((stat) => {
-                return (
-                    <View key={stat} style={styles.tableTextContainer}>
-                        <Text key={stat} style={[[styles.headerText, {fontWeight: '700'}]]}>{ stat }</Text>
-                    </View>
-                )})}
-        </View>
-    )
-}
-
 const HistoryFooter = (player: PlayerOverview) => {
     return (
         <View style={styles.footerContainer}>
@@ -58,42 +45,48 @@ const HistoryFooter = (player: PlayerOverview) => {
 
 const HistoryList = ({overview, player, playerData} : HistoryProps) => {
 
-    const scrollViewRef = useRef<ScrollView>(null);
-    
-    useEffect(() => {
-        scrollViewRef.current?.scrollToEnd({animated: false});
-    }, [])
+    const historyItemKeyExtractor = useCallback((history: History) => history.fixture.toString(), []);
 
-    const historyItemRender = useCallback((game: History) => {
+    const historyItemRender = useCallback(({item} : {item: History})=> {
         return (
-            <View key={game.fixture.toString()} testID="historyListItem" style={styles.historyItemContainer}>
+            <View key={item.fixture.toString()} testID="historyListItem" style={styles.historyItemContainer} onStartShouldSetResponder={() => true}>
                 { Object.keys(stats).map((stat) => {
                     return (
                     <View key={stat} style={styles.tableTextContainer}>
                         {(stat !== 'opponent_team') ? 
-                            <Text style={[styles.headerText]}>{ game[stat as keyof History] }</Text>
+                            <Text style={[styles.headerText]}>{ item[stat as keyof History] }</Text>
                             :
-                            <Text style={[styles.headerText]}>{ overview.teams.find(team => team.id === game[stat as keyof History])?.short_name }</Text>
+                            <Text style={[styles.headerText]}>{ overview.teams.find(team => team.id === item[stat as keyof History])?.short_name }</Text>
                         }
                     </View>
                     )
                 })}
             </View>
-        )}, [overview])
+        )}, [overview]);
+
+    const historyHeader = useCallback(({item}: {item: History}) => {
+        return (
+            <View style={styles.headerContainer}>
+                { Object.values(stats).map((stat) => {
+                    return (
+                        <View key={stat} style={styles.tableTextContainer}>
+                            <Text key={stat} style={[[styles.headerText, {fontWeight: '700'}]]}>{ stat }</Text>
+                        </View>
+                    )})}
+            </View>
+        )
+    }, []);
 
     return (
         <View testID="playerDetailedStatsHistoryListView" style={[styles.container]}>
             <ScrollView style={{flex: 1}} testID="historyListScrollView" horizontal={true}>
                 <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
-                    { HistoryHeader(playerData.history) }
-                    <ScrollView ref={scrollViewRef} style={{flex: 1}}>
-                        <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
-                            { playerData.history.map(game => 
-                                historyItemRender(game)    
-                            )}
-                        </View>
-                    </ScrollView>
-                    { HistoryFooter(player) }
+                    <FlatList style={{flex: 1}} contentContainerStyle={{justifyContent: 'center'}} data={playerData.history}
+                            ListHeaderComponent={historyHeader}
+                            keyExtractor={historyItemKeyExtractor}
+                            renderItem={historyItemRender}
+                            stickyHeaderIndices={[0]}/>
+                    { HistoryFooter(player )}
                 </View>
             </ScrollView>
         </View>

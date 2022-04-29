@@ -48,12 +48,12 @@ const TeamListView = ({setIsVisible} : TeamListViewProps) => {
                     <Text style={styles.titleText}>Teams</Text>
                     <ScrollView> 
                         {userTeams.map(team => 
-                        <>
-                            <TouchableOpacity key={team.id} style={styles.button} onPress={() => selectedATeam(team)}>
+                        <View key={team.id}>
+                            <TouchableOpacity style={styles.button} onPress={() => selectedATeam(team)}>
                                 <Text numberOfLines={1} style={styles.buttonText}>{team.name}</Text>
                             </TouchableOpacity> 
-                        <Seperator/>
-                        </>)}  
+                            <Seperator/>
+                        </View>)}  
                     </ScrollView>
                 </>
                 :

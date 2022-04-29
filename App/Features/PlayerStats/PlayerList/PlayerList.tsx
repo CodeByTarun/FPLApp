@@ -18,13 +18,6 @@ import FixtureDifficultyList from "./FixtureDifficultyList";
 import PlayerListInfo from "./PlayerListInfo/PlayerListInfo";
 import { styles } from "./PlayerListStyles";
 
-function getNum(val: number) {
-    if (isNaN(val)) {
-        return 0;
-    }
-    return val;
-}
-
 interface PlayerListProps {
     overview: FplOverview,
     fixtures: FplFixture[],
@@ -71,7 +64,6 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
     //#region Filter Effects
     useEffect(function FilterPlayerList() {   
         filteringPlayerList(); 
-        
     }, [filters.teamFilter, filters.positionFilter, filters.statFilter, filters.isPer90, filters.isInWatchlist, watchlist]);
 
     useEffect(function debouncedFilterPlayerListPriceRange() {
@@ -113,7 +105,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
         return GetStatValue(filters, player);
     }, [filters.statFilter, filters.isPer90]);
 
-    const renderPlayerItem = ({item}: {item: PlayerOverview}) => {
+    const renderPlayerItem = useCallback(({item}: {item: PlayerOverview}) => {
 
         let isInWatchList = watchlist?.playerIds.includes(item.id);
 
@@ -136,7 +128,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
         </Pressable>)
-    }
+    }, [])
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion

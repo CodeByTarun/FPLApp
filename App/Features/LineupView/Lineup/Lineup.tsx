@@ -22,7 +22,6 @@ import PlayerStatsDisplay from "../../PlayerStatsDisplay";
 import AdditionalInfoCard from "./AdditionalInfoCard";
 import BonusPointView from "./BonusPointView";
 import KingsOfTheGameweekView from "./KingsOfTheGameweekView";
-import { cornerRadius, secondaryColor } from "../../../Global/GlobalConstants";
 
 function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number, currentGameweek: number) {
 

@@ -92,9 +92,14 @@ const teamSlice = createSlice({
 
         changeToBudgetTeam(state: TeamInfo, action: PayloadAction<UserTeamInfo>): BudgetInfo {
             return { teamType: TeamTypes.Budget, gameweek: state.gameweek, info: action.payload }
-        }
+        },
+
+        changeToEmpty(state: TeamInfo) : EmptyTeam {
+            return { teamType: TeamTypes.Empty, gameweek: state.gameweek }
+        },
     }
 });
 
-export const { changeGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam, changeToDraftTeam, changeToBudgetTeam, changingFixtureWhenGameweekChanged } = teamSlice.actions;
+export const { changeGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam, 
+               changeToDraftTeam, changeToBudgetTeam, changingFixtureWhenGameweekChanged, changeToEmpty } = teamSlice.actions;
 export default teamSlice.reducer;

@@ -4,7 +4,7 @@ import FixtureCard from './FixtureCard/FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
-import { changeToBudgetTeam, changeToDraftTeam, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
+import { changeToBudgetTeam, changeToDraftTeam, changeToEmpty, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
 import { openInfoModal } from "../../Store/modalSlice";
 import { goToFixturesScreen, goToMainScreen, ScreenTypes } from "../../Store/navigationSlice";
 import { styles } from "./FixturesStyles";
@@ -62,20 +62,25 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
       }).start();
   },[]);
 
-  useEffect( function setInitialData() {
-      async function setTeam() {
-        let teams = await getAllUserTeamInfo();
+  const setTeam = async() => {
+    let teams = await getAllUserTeamInfo();
         
-        if (teams) {
-          let favouriteTeam = teams.find(team => team.isFavourite === true);
+    if (teams) {
+      let favouriteTeam = teams.find(team => team.isFavourite === true);
 
-          if (favouriteTeam) {
-            dispatch(favouriteTeam?.isDraftTeam ? changeToDraftTeam(favouriteTeam) : changeToBudgetTeam(favouriteTeam))
-          }
-        }
+      if (favouriteTeam) {
+        dispatch(favouriteTeam?.isDraftTeam ? changeToDraftTeam(favouriteTeam) : changeToBudgetTeam(favouriteTeam))
       }
+    } else {
+      dispatch(changeToEmpty());
+    }
+  }
 
-      setTeam();
+  useEffect( function setInitialData() {
+
+      if (teamInfo.teamType === TeamTypes.Empty) {
+        setTeam();
+      }
 
     }, []);
 
@@ -93,7 +98,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
             dispatch(changingFixtureWhenGameweekChanged(sortedGameweekFixtures[0]));
           } 
           else {
-            dispatch(removeFixture());
+            setTeam();
           }                              
         }
       }
@@ -168,7 +173,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                setIsVisible={setIsGameweekViewVisible} 
                view={
                <View style={styles.gameweekViewContainer}>
-                 <GameweekView isVisible={isGameweekViewVisible}/>
+                 <GameweekView isVisible={isGameweekViewVisible} setIsVisible={setIsGameweekViewVisible} liveGameweek={liveGameweek} overview={overview}/>
                </View>}/>
     </Animated.View>
   )

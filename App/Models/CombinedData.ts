@@ -6,4 +6,5 @@ export interface PlayerData {
     overviewData: PlayerOverview,
     isCaptain: boolean,
     isViceCaptain: boolean,
+    multiplier: number,
 }

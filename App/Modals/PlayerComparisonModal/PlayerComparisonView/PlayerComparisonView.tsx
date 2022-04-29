@@ -24,6 +24,10 @@ const stats: {[key: string] : string } = {
     'saves' : 'S',
     'bonus' : 'B',
     'bps' : 'BPS',
+    'influence' : 'I',
+    'creativity' : 'C',
+    'threat' : 'T',
+    'ict_index' : 'ICT',
 }
 
 interface PlayerComparisonViewProps {
@@ -93,28 +97,34 @@ const PlayerComparisonView = ({overview, fixtures, playerOverview, playerSummary
             }
             <Text numberOfLines={1} style={styles.sectionNameText}>{playerOverview.web_name}</Text>
             <Text style={styles.sectionCostText}>£{(playerOverview.now_cost / 10).toFixed(1)}</Text>
+            <View onStartShouldSetResponder={() => true}>
             {(viewIndex === 0 ?
-                    <ScrollView horizontal>
+                <ScrollView horizontal>
+                    <View style={{flexDirection: 'row'}} onStartShouldSetResponder={() => true}>
                         {StatView('Form', playerOverview.form)}
                         {StatView('Sel.', playerOverview.selected_by_percent + '%')}
                         {StatView('Points', playerOverview.event_points)}
                         {StatView('xPoints', playerOverview.ep_this)}
                         {StatView('Transfers In', playerOverview.transfers_in_event)}
                         {StatView('Transfers Out', playerOverview.transfers_out_event)}
-                    </ScrollView> 
+                    </View>
+                </ScrollView> 
                 :
 
                 (viewIndex === 1) ?
                     <ScrollView horizontal>
-                        {Object.keys(stats).map(key => { return (
-                            StatView(stats[key], key)
-                        )})}
+                        <View style={{flexDirection: 'row'}} onStartShouldSetResponder={() => true}>
+                            {Object.keys(stats).map(key => { return (
+                                StatView(stats[key], key)
+                            )})}
+                        </View>
                     </ScrollView> 
                 :
-                <View style={{margin: 5, height: 40}}>
+                <View style={{margin: 5, height: 40}} onStartShouldSetResponder={() => true}>
                     <FixtureDifficultyList team={playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} currentGameweek={currentGameweek}/>
                 </View>
             )}
+            </View>
         </View>
     )
 }

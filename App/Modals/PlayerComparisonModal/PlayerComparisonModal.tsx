@@ -104,6 +104,8 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
                             </View>
                         }
                     </View>
+                    <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
+                        
                     <ScrollView style={{paddingBottom: 15, flex: 1, paddingTop: 15}}>
                         { playersToCompare.map(player => { return(
                             <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
@@ -114,6 +116,8 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
                         )})}
 
                     </ScrollView>
+                    </View>
+
                     <TouchableOpacity style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]} onPress={() => setIsAddPlayerModalVisible(true)} disabled={playersToCompare.length >= 5}>
                         <Text style={styles.buttonText}>Add Player</Text>
                     </TouchableOpacity>

@@ -44,25 +44,28 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
     const [playerTableFilterState, playerTableFilterDispatch] = useReducer(playerTableFilterReducer, initialPlayerTableFilterState);   
     const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
 
+    const [pricePreviewValue, setPricePreviewValue] = useState(initialPriceRange);
+    const [minutesPreviewValue, setMinutesPreviewValue] = useState([0, (90 * 38)]);
+
     //#region Dispatch calls
 
     const dispatch = useAppDispatch();
 
     const closePlayerSearch = useCallback(() => {
         dispatch(goToMainScreen());
-    }, [])
+    }, []);
 
     const teamFilterDispatch = useCallback((value: string) => {
         playerTableFilterDispatch({type: 'TeamFilterChange', filterValue: value})
-    }, [])
+    }, []);
 
     const positionFilterDispatch = useCallback((value: string) => {
         playerTableFilterDispatch({type: 'PositionFilterChange', filterValue: value})
-    }, [])
+    }, []);
 
     const statFilterDispatch = useCallback((value: string) => {
         playerTableFilterDispatch({type: 'StatFilterChange', filterValue: value})
-    }, [])
+    }, []);
     //#endregion
 
     return (
