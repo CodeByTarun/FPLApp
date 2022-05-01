@@ -9,7 +9,7 @@ interface dimensions {
     height: number;
 }
 
-interface toolTipProps {
+interface ToolTipProps {
     distanceFromRight: number,
     distanceFromTop: number,
     distanceForArrowFromRight: number,
@@ -19,12 +19,12 @@ interface toolTipProps {
     isArrowAbove?: boolean;
 }
 
-const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, distanceFromTop, view, isVisible, setIsVisible, isArrowAbove = true }: React.PropsWithChildren<toolTipProps>) => {
+const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, distanceFromTop, view, isVisible, setIsVisible, isArrowAbove = true }: ToolTipProps) => {
 
     return (
         <Modal visible={isVisible} transparent={true}>
             <TouchableOpacity testID="background" style={styles.modalBackground} onPress={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
-            <View testID="tooltip" style={[styles.modalView, {right: distanceFromRight, top: distanceFromTop}]}>
+            <View testID="tooltip" style={[styles.modalView, isArrowAbove ? {right: distanceFromRight, top: distanceFromTop} : {right: distanceFromRight, bottom: distanceFromTop}]}>
                 <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
                 { view }
             </View>
@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
     },
 
     above: {
-        top: -14,
+        top: -13,
     },
 
     below: {
-        bottom: -14,
+        bottom: -13,
         transform: [{rotate: "180deg"}]
     },
 

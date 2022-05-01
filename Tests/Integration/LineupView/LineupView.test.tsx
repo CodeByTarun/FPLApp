@@ -4,7 +4,7 @@ import { LineupView } from "../../../App/Features/LineupView";
 import { budgetLeaguePicks, budgetManagerInfo, draftLeaguePicks, draftManagerInfo, gameweek32, draftLeagueInfo, gameweek32Fixture } from "../../SampleData/Gameweek32Data";
 import { draftOverview, overview } from "../../SampleData/Overviews";
 import { allFixtures } from "../../SampleData/Fixtures";
-import { DraftInfo, EmptyTeam, TeamInfo, TeamTypes } from "../../../App/Store/teamSlice";
+import { TeamInfo, TeamTypes } from "../../../App/Store/teamSlice";
 
 test('team type is empty', () => {
     const emptyTeam: TeamInfo = {gameweek: 32, teamType: TeamTypes.Empty};

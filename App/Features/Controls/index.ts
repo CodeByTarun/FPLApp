@@ -5,5 +5,7 @@ import PieChart from "./PieChart/PieChart";
 import ToolTip from "./ToolTip/ToolTip";
 import SearchControl from "./SearchControl/SearchControl";
 import ModalWrapper from "./ModalWrapper/ModalWrapper";
+import FilterButton from "./FilterButton/FilterButton";
+import LoadingIndicator from "./LoadingIndicator/LoadingIndicator";
 
-export {CloseButton, CustomButton, Dropdown, PieChart, ToolTip, SearchControl, ModalWrapper}
+export {CloseButton, CustomButton, Dropdown, PieChart, ToolTip, SearchControl, ModalWrapper, FilterButton, LoadingIndicator}

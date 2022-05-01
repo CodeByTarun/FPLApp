@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
-import { Animated, Easing, LayoutChangeEvent } from "react-native";
+import { Animated, Easing, LayoutChangeEvent, View } from "react-native";
 import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
 import { lightColor, primaryColor } from "../../../Global/GlobalConstants";
 

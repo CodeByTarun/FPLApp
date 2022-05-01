@@ -52,11 +52,11 @@ describe('testing if the right style is applied to the arrow based on the prop i
 const styles = StyleSheet.create({
 
     above: {
-        top: -14,
+        top: -13,
     },
 
     below: {
-        bottom: -14,
+        bottom: -13,
         transform: [{rotate: "180deg"}]
     },
 
