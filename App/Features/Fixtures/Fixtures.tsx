@@ -14,6 +14,9 @@ import { FplGameweek } from "../../Models/FplGameweek";
 import globalStyles from "../../Global/GlobalStyles";
 import GameweekView from "./GameweekView";
 import { height, width } from "../../Global/GlobalConstants";
+import { animated, useSpring } from "@react-spring/native";
+
+const AnimatedView = animated(View);
 
 interface FixturesViewProp {
   overview: FplOverview;
@@ -39,28 +42,8 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const [isGameweekViewVisible, setIsGameweekViewVisible] = useState(false);
 
   const fixtureScrollViewRef = useRef<ScrollView>(null);
-  const expandAnim = useRef(new Animated.Value(0)).current;
-  
-  const heightInterpolate = expandAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['100%', (100 / 17.5 * 100).toString() + '%']
-  });
 
-  const Expand = useCallback(() => {
-    Animated.spring(expandAnim, {
-        toValue: 1,
-        friction: 8,
-        useNativeDriver: false
-    }).start(() => setIsCloseButtonVisible(true));
-  }, []);
-
-  const Minimize = useCallback(() => {
-      Animated.spring(expandAnim, {
-          toValue: 0,
-          friction: 10,
-          useNativeDriver: false
-      }).start();
-  },[]);
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '100%' : `${(100 / 17.5) * 100}%`});
 
   const setTeam = async() => {
     let teams = await getAllUserTeamInfo();
@@ -117,21 +100,19 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         dispatch(goToMainScreen());
       } else {
         dispatch(goToFixturesScreen());
-      }
-      
+      } 
     }, [navigation])
 
     useEffect( function openAndCloseFixtureView() {
-      if (navigation.screenType === ScreenTypes.Fixtures) {
-        Expand();
+      if (navigation.screenType !== ScreenTypes.Fixtures) {
+        setIsCloseButtonVisible(false);
       } else {
-        setIsCloseButtonVisible(false)
-        Minimize();
+        setIsCloseButtonVisible(true);
       }
     }, [navigation]);
 
   return (
-    <Animated.View style={[styles.animatedView, { height: heightInterpolate }]}>
+    <AnimatedView style={[styles.animatedView, { height: expandSpring.height }]}>
       <View style={styles.controlsContainer}>
 
       <View style={styles.innerControlsContainer}>
@@ -175,7 +156,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                <View style={styles.gameweekViewContainer}>
                  <GameweekView isVisible={isGameweekViewVisible} setIsVisible={setIsGameweekViewVisible} liveGameweek={liveGameweek} overview={overview}/>
                </View>}/>
-    </Animated.View>
+    </AnimatedView>
   )
 }
 

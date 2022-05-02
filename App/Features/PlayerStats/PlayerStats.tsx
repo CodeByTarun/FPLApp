@@ -2,8 +2,9 @@
 // When one of the players names are clicked on a player card will open showing there stats
 //TODO: think about adding a compare feature between two players?
 
+import { animated, config, useSpring } from "@react-spring/native";
 import React, { useCallback, useEffect, useRef } from "react";
-import { StyleSheet, Keyboard, Animated } from "react-native";
+import { StyleSheet, Keyboard, Animated, View } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
@@ -11,6 +12,7 @@ import { useAppSelector } from "../../Store/hooks";
 import { ScreenTypes } from "../../Store/navigationSlice";
 import PlayerTable from "./PlayerTable/PlayerTable";
    
+const AnimatedView = animated(View);
 
 interface PlayerSearchProps {
     overview: FplOverview;
@@ -20,52 +22,13 @@ interface PlayerSearchProps {
 const PlayerStats = (props: PlayerSearchProps) => {
 
     const navigation = useAppSelector(state => state.navigation);
-    const expandAnim = useRef(new Animated.Value(0)).current;
 
-    const bottomInterpolate = expandAnim.interpolate({
-        inputRange: [0, 1],
-        outputRange:[(GlobalConstants.height * -1) - 100, 0]
-    })
-
-    const OpenPlayerSearchView = useCallback(() => {
-        Expand();
-    }, [])
-
-    const ClosePlayerSearchView = useCallback(() => {
-        Keyboard.dismiss();
-        Minimize();
-    }, [])
-
-    const Expand = useCallback(() => {
-        Animated.spring(expandAnim, {
-            toValue: 1,
-            friction: 100,
-            tension: 70,
-            useNativeDriver: false,
-        }).start();
-    }, [])
-    
-    const Minimize = useCallback(() => {
-        Animated.spring(expandAnim, {
-            toValue: 0,
-            friction: 100,
-            tension: 70,
-            useNativeDriver: false,
-        }).start();
-    },[])
-
-    useEffect( function openAndClosePlayerSearch() {
-        if (navigation.screenType === ScreenTypes.PlayerStats) {
-            OpenPlayerSearchView();
-        } else {
-            ClosePlayerSearchView();
-        }
-    }, [navigation])
+    const popupSpring = useSpring({top: (navigation.screenType === ScreenTypes.PlayerStats) ? '0%' : '100%', config: { friction: 26, mass: 0.5 }});
 
     return (
-        <Animated.View style={[styles.container, { height: '100%', bottom: bottomInterpolate }]}>
+        <AnimatedView style={[styles.container, { height: '100%', top: popupSpring.top }]}>
             <PlayerTable overview={props.overview} fixtures={props.fixtures}/>
-        </Animated.View>
+        </AnimatedView>
     )
 }
 
