@@ -14,9 +14,10 @@ import { FplGameweek } from "../../Models/FplGameweek";
 import globalStyles from "../../Global/GlobalStyles";
 import GameweekView from "./GameweekView";
 import { height, width } from "../../Global/GlobalConstants";
-import { animated, useSpring } from "@react-spring/native";
+import { animated, config, useChain, useSpring, useSpringRef } from "@react-spring/native";
 
 const AnimatedView = animated(View);
+const AnimatedTouchable = animated(TouchableOpacity);
 
 interface FixturesViewProp {
   overview: FplOverview;
@@ -38,12 +39,18 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const teamInfo = useAppSelector(state => state.team);
   const navigation = useAppSelector(state => state.navigation);
 
-  const [isCloseButtonVisible, setIsCloseButtonVisible] = useState(false);
   const [isGameweekViewVisible, setIsGameweekViewVisible] = useState(false);
 
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '100%' : `${(100 / 17.5) * 100}%`});
+  const expandRef = useSpringRef();
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '17.5%' : "100%", ref: expandRef });
+
+  const showButtonRef = useSpringRef();
+  const showButtonSpring = useSpring({ scale:  ((navigation.screenType !== ScreenTypes.Fixtures) && (teamInfo.gameweek <= liveGameweek)) ? 0 : 1,
+                                         ref: showButtonRef, config: config.stiff});
+
+  useChain([expandRef, showButtonRef]);
 
   const setTeam = async() => {
     let teams = await getAllUserTeamInfo();
@@ -103,14 +110,6 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
       } 
     }, [navigation])
 
-    useEffect( function openAndCloseFixtureView() {
-      if (navigation.screenType !== ScreenTypes.Fixtures) {
-        setIsCloseButtonVisible(false);
-      } else {
-        setIsCloseButtonVisible(true);
-      }
-    }, [navigation]);
-
   return (
     <AnimatedView style={[styles.animatedView, { height: expandSpring.height }]}>
       <View style={styles.controlsContainer}>
@@ -142,11 +141,11 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                     .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
           }
         </ScrollView>
-        { (isCloseButtonVisible && (teamInfo.gameweek <= liveGameweek)) &&
-          <TouchableOpacity style={[styles.closeFixtureViewButtonContainer, globalStyles.modalShadow]} 
+        {  ((navigation.screenType === ScreenTypes.Fixtures) && (teamInfo.gameweek <= liveGameweek)) &&
+          <AnimatedTouchable style={[styles.closeFixtureViewButtonContainer, globalStyles.modalShadow, {transform: [{scale: showButtonSpring.scale}]}]} 
                             onPress={onCalendarButtonPress}>
             <Text style={styles.closeFixtureViewButtonText}>Close</Text>
-          </TouchableOpacity>
+          </AnimatedTouchable>
         }
       </View>
       <ToolTip distanceFromRight={width * 0.15} distanceFromTop={height * 0.1} 

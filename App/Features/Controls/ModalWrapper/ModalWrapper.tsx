@@ -1,6 +1,6 @@
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+import { animated, config, useSpring } from "@react-spring/native";
 import React from "react";
-import { Modal, Pressable, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import { Modal, Pressable, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import globalStyles from "../../../Global/GlobalStyles";
 
 interface ModalWrapperProps {
@@ -9,16 +9,26 @@ interface ModalWrapperProps {
     children: React.ReactNode,
 }
 
+const AnimatedPressable = animated(Pressable);
+const AnimatedView = animated(View);
+
 const ModalWrapper = ({ isVisible, closeFn, children } : ModalWrapperProps) => {
 
+    const backgroundSpring = useSpring({backgroundColor: isVisible ? 'rgba(0,0,0, 0.5)' : 'rgba(52, 52, 52, 0)', config: config.molasses});
+    const viewSpring = useSpring({scale: isVisible ? 2 : 0, delay: 2000});
+
     return(
-        <Modal style={styles.modal} transparent={true} visible={isVisible} testID='modalWrapper'>
-            <Pressable testID="background" style={[styles.modalBackground, globalStyles.modalShadow]} onPress={() => closeFn()}>
-                <TouchableWithoutFeedback>
-                    { children }
-                </TouchableWithoutFeedback>
-            </Pressable>
-        </Modal> 
+        <>
+        { isVisible &&
+            <Modal style={styles.modal} transparent={true} visible={true} testID='modalWrapper'>
+                <AnimatedPressable testID="background" style={[styles.modalBackground, globalStyles.modalShadow, backgroundSpring]} onPress={() => closeFn()}>
+                    <TouchableWithoutFeedback style={{}}>
+                        { children }
+                    </TouchableWithoutFeedback>
+                </AnimatedPressable>
+            </Modal> 
+        }
+        </>
     )
 }
 

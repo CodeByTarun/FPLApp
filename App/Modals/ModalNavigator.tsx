@@ -19,15 +19,12 @@ interface ModalNavigatorProps {
 
 const ModalNavigator = ({overview, fixtures} : ModalNavigatorProps) => {
 
-    const dispatch = useAppDispatch();
     const modalInfo = useAppSelector(state => state.modal);
     const teamInfo = useAppSelector(state => state.team);
 
     return (
         <>
-            {(modalInfo.modalType !== ModalTypes.Closed) &&
-                <Pressable style={[globalStyles.modalBackground, {backgroundColor: 'black'}]} onPress={() => dispatch(closeModal())}/>
-            }
+            
 
             {(modalInfo.modalType === ModalTypes.PlayerModal) &&
                 <PlayerModal overview={overview} fixtures={fixtures} player={modalInfo.player} teamInfo={teamInfo}/>

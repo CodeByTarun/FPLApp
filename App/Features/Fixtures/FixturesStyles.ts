@@ -4,7 +4,9 @@ import { height, largeFont, mediumFont, primaryColor, secondaryColor, textPrimar
 export const styles = StyleSheet.create({
     animatedView: {
         backgroundColor: primaryColor, 
-        zIndex: 2
+        zIndex: 1,
+        width: '100%',
+        position: 'absolute',
     },
 
     controlsContainer: {
