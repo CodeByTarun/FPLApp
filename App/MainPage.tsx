@@ -9,8 +9,8 @@ import ModalNavigator from "./Modals/ModalNavigator";
 import { LineupViewQueriesContainer } from "./Features/LineupView";
 import PlayerStats from "./Features/PlayerStats";
 import FixturesContainer from "./Features/Fixtures/FixturesContainer";
-import LoadingIndicator from "./Features/Controls/LoadingIndicator";
 import BottomTabs from "./Features/BottomTabs";
+import { LoadingIndicator } from "./Features/Controls";
 
 const MainPage = () => {
 
