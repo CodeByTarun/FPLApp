@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { View, StyleSheet, Image, Text, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
 import { FixtureInfo, TeamInfo, TeamTypes, toggleTeamShown } from "../../../Store/teamSlice";
 import { useGetOverviewQuery } from "../../../Store/fplSlice";
@@ -11,17 +11,14 @@ import { FplOverview } from "../../../Models/FplOverview";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { styles } from "./TeamSwitchStyles";
 import { FplGameweek } from "../../../Models/FplGameweek";
+import { animated, config, useSpring } from "@react-spring/native";
 
 // This is going to be a switch selector control
 // First i need a background,
 // Place the colored blurb over the left team
 // Put the text for the team names and the touchable opacity at the top level
 
-var viewWidth: number;
-
-const getViewWidth= (event: LayoutChangeEvent) => {
-    viewWidth = event.nativeEvent.layout.width;
-}
+const AnimatedView = animated(View);
 
 interface TeamSwitchProps {
     overview: FplOverview,
@@ -51,45 +48,35 @@ const TeamSwitch = ({overview, fixtures, gameweek}: TeamSwitchProps) => {
     const teamInfo: TeamInfo = useAppSelector((state) => state.team);
     const dispatch = useAppDispatch();
 
-    const translateAnim = useRef(new Animated.Value(0)).current; 
+    const slideSpring = useSpring({ left: ((teamInfo.teamType === TeamTypes.Fixture) && teamInfo.isHome) ? '0%' : '50%', config: { clamp: true, mass: 3, tension: 250 } })
     
     const switchTeam = () => {
-        if (teamInfo.teamType === TeamTypes.Fixture) {
-
-            Animated.spring(translateAnim, {
-                toValue: teamInfo.isHome ? viewWidth / 2 + 2 : 0,
-                friction: 10,
-                useNativeDriver: true
-            }).start();
-
-            dispatch(toggleTeamShown());
-        }
+        dispatch(toggleTeamShown());
     }
 
+
     return (
-        <View style={[styles.container]} onLayout={(event) => getViewWidth(event)}>
+        <View style={[styles.container]}>
             { (teamInfo.teamType === TeamTypes.Fixture && teamInfo.fixture !== null && overview !== undefined) &&
-            
-            <TouchableWithoutFeedback testID="teamSwitchButton" style={{flex: 1, flexDirection: 'row'}} onPress={switchTeam}>
-            
-                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                <Animated.View testID='animatedViewTeamSwitch' style={[styles.highlight, { transform: [{translateX: translateAnim}] }, globalStyles.shadow]}/>
-                    <View style={[styles.buttonContainer]}>
-                        <View style={{ flex: 1 }}>
-                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview).code]} resizeMode='contain'/>
+                <TouchableWithoutFeedback testID="teamSwitchButton" style={{flex: 1, flexDirection: 'row'}} onPress={switchTeam}>
+                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    <AnimatedView testID='animatedViewTeamSwitch' style={[styles.highlight, { left: slideSpring.left }, globalStyles.shadow]} children={undefined}/>
+                        <View style={[styles.buttonContainer]}>
+                            <View style={{ flex: 1 }}>
+                                <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview).code]} resizeMode='contain'/>
+                            </View>
+                            <Text style={[styles.scoreText]}>{getTeamScore(fixtures, gameweek, teamInfo, true)}</Text>
                         </View>
-                        <Text style={[styles.scoreText]}>{getTeamScore(fixtures, gameweek, teamInfo, true)}</Text>
-                    </View>
-                    <Text> </Text>
-                    <View style={styles.buttonContainer}>
-                        <Text style={[styles.scoreText]}>{getTeamScore(fixtures, gameweek, teamInfo, false)}</Text>
-                        <View style={{ flex: 1 }}>
-                            <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview).code]} resizeMode='contain'/>
+                        <Text> </Text>
+                        <View style={styles.buttonContainer}>
+                            <Text style={[styles.scoreText]}>{getTeamScore(fixtures, gameweek, teamInfo, false)}</Text>
+                            <View style={{ flex: 1 }}>
+                                <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview).code]} resizeMode='contain'/>
+                            </View>
                         </View>
+                        
                     </View>
-                    
-                </View>
-            </TouchableWithoutFeedback>
+                </TouchableWithoutFeedback>
             }
         </View>
     )

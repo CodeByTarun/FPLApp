@@ -14,6 +14,7 @@ import { StatsFilterActionKind, statsFilterReducer } from "../PlayerDetailedStat
 import { styles } from "./PlayerComparisonModalStyles";
 import AddPlayerModal from "./AddPlayerModal";
 import PlayerComparisonView from "./PlayerComparisonView";
+import { animated } from "@react-spring/native";
 
 
 export interface CombinedPlayerData {
@@ -37,7 +38,6 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
 
     const [viewIndex, setViewIndex] = useState(0);
     const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, currentGameweek], isPer90: false });
-    const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
     const [isAddPlayerModalVisible, setIsAddPlayerModalVisible] = useState(false);
     const [playersToCompare, setPlayersToCompare] = useState([{playerOverview: playerOverview, playerSummary: playerSummary}] as CombinedPlayerData[]);
 
