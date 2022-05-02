@@ -23,8 +23,8 @@ test('switch from home to away team back to home team when a fixture team', () =
 
     const { queryByTestId } = render(<TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek32}/>, customStore);
 
-    expect(queryByTestId('animatedViewTeamSwitch')).toHaveStyle({ transform: [{translateX: 0}] });
+    expect(queryByTestId('animatedViewTeamSwitch')).toHaveStyle({ left: '0%' });
     
     fireEvent.press(queryByTestId('teamSwitchButton'));
-    expect(queryByTestId('animatedViewTeamSwitch')).not.toHaveStyle({ transform: [{translateX: 0}] });
+    expect(queryByTestId('animatedViewTeamSwitch')).toHaveStyle({ left: '50%' });
 });

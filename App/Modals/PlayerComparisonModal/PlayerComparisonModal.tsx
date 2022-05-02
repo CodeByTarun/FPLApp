@@ -14,8 +14,7 @@ import { StatsFilterActionKind, statsFilterReducer } from "../PlayerDetailedStat
 import { styles } from "./PlayerComparisonModalStyles";
 import AddPlayerModal from "./AddPlayerModal";
 import PlayerComparisonView from "./PlayerComparisonView";
-import { animated } from "@react-spring/native";
-
+import { animated, useSpring } from "@react-spring/native";
 
 export interface CombinedPlayerData {
     playerOverview: PlayerOverview;
@@ -28,10 +27,11 @@ interface PlayerComparisonModalProps {
     playerSummary: FplPlayerSummary,
 }
 
+const AnimatedView = animated(View);
+
 const views = ['GW', 'Stats', 'FDR'];
 
 const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummary} : PlayerComparisonModalProps) => {
-
 
     const dispatch = useAppDispatch();
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
@@ -42,24 +42,8 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
     const [playersToCompare, setPlayersToCompare] = useState([{playerOverview: playerOverview, playerSummary: playerSummary}] as CombinedPlayerData[]);
 
     //#region  Control Animation
-    const translateAnim = useRef(new Animated.Value(0)).current;
+    const slideSpring = useSpring({left: `${viewIndex * (100 / 3)}%`});
 
-    const translateInterpolate = translateAnim.interpolate({
-        inputRange: [0, 100],
-        outputRange: [0, ((width * 0.85) - 20) * 0.60],
-    });
-
-    const translateAnimation = useCallback(() => {
-        Animated.spring(translateAnim, {
-            toValue: (viewIndex * 33.3333),
-            friction: 10,
-            useNativeDriver: true,
-        }).start();
-    }, [viewIndex, translateAnim])
-    
-    useEffect( function changeView() {
-        translateAnimation();
-    }, [viewIndex]);
     //#endregion
 
     //#region Players to compare functions
@@ -90,7 +74,7 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
                     <Text style={styles.titleText}>Player Comparison</Text>
                     <View style={[styles.controlsOuterContainers]}>
                         <View style={styles.controlContainer}>
-                            <Animated.View style={[styles.switch, globalStyles.shadow, {transform: [{translateX: translateInterpolate}]}]}/>
+                            <AnimatedView style={[styles.switch, globalStyles.shadow, { left: slideSpring.left }]} children={undefined}/>
 
                             { views.map( (name, index) =>
                                 <TouchableOpacity key={index} style={styles.controlButtons} onPress={() => setViewIndex(index)}>
