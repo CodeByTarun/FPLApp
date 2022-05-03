@@ -16,7 +16,6 @@ const MainPage = () => {
 
   const overview = useGetOverviewQuery();
   const fixtures = useGetFixturesQuery();
-  const navigation = useAppSelector(state => state.navigation);
 
   const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
 

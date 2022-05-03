@@ -9,7 +9,7 @@ import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
 import { useAppDispatch } from "../../Store/hooks";
-import { closeModal } from "../../Store/modalSlice";
+import { closeModal, ModalInfo, ModalTypes } from "../../Store/modalSlice";
 import { StatsFilterActionKind, statsFilterReducer } from "../PlayerDetailedStatsModal/StatsFilterReducer";
 import { styles } from "./PlayerComparisonModalStyles";
 import AddPlayerModal from "./AddPlayerModal";
@@ -23,15 +23,14 @@ export interface CombinedPlayerData {
 interface PlayerComparisonModalProps {
     overview: FplOverview,
     fixtures: FplFixture[],
-    playerOverview: PlayerOverview,
-    playerSummary: FplPlayerSummary,
+    modalInfo: ModalInfo,
 }
 
 const AnimatedView = animated(View);
 
 const views = ['GW', 'Stats', 'FDR'];
 
-const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummary} : PlayerComparisonModalProps) => {
+const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerComparisonModalProps) => {
 
     const dispatch = useAppDispatch();
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
@@ -39,12 +38,17 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
     const [viewIndex, setViewIndex] = useState(0);
     const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, currentGameweek], isPer90: false });
     const [isAddPlayerModalVisible, setIsAddPlayerModalVisible] = useState(false);
-    const [playersToCompare, setPlayersToCompare] = useState([{playerOverview: playerOverview, playerSummary: playerSummary}] as CombinedPlayerData[]);
+    const [playersToCompare, setPlayersToCompare] = useState([] as CombinedPlayerData[]);
 
     //#region  Control Animation
     const slideSpring = useSpring({left: `${viewIndex * (100 / 3)}%`});
 
     //#endregion
+    useEffect(() => {
+        if (modalInfo.modalType === ModalTypes.PlayerComparisonModal) {
+            setPlayersToCompare([{playerOverview: modalInfo.playerOverview, playerSummary: modalInfo.playerSummary}]);
+        }
+    }, [modalInfo.modalType])
 
     //#region Players to compare functions
     const addPlayer = (playerToAdd: PlayerOverview) => {
@@ -67,9 +71,8 @@ const PlayerComparisonModal = ({overview, fixtures, playerOverview, playerSummar
     //#endregion
 
     return (
-        <ModalWrapper isVisible={true} closeFn={() => dispatch(closeModal())}>
-            <View style={[globalStyles.modalView, globalStyles.shadow, styles.modalContainer]}>
-                <CloseButton closeFunction={() => dispatch(closeModal())}/>
+        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.PlayerComparisonModal} closeFn={() => dispatch(closeModal())} modalHeight={'80%'} modalWidth={'85%'}>
+            <View style={styles.modalContainer}>
                 <View style={{flex: 1}}>
                     <Text style={styles.titleText}>Player Comparison</Text>
                     <View style={[styles.controlsOuterContainers]}>

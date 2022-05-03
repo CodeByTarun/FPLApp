@@ -54,7 +54,7 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
 
     return (
         
-        <View style={[styles.fixtureViewContainer]}>
+        <View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? 5 : 0 }]}>
             <TouchableOpacity testID='fixtureCardButton' style={[styles.button]} onPress={onPress} disabled={!fixture?.started}>            
                 <View style={[styles.card, globalStyles.shadow]}>
                     <View style={styles.topbar}>

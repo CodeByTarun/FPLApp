@@ -106,9 +106,8 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
     }, [])
 
     return (
-        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.TeamModal} closeFn={() => dispatch(closeModal())}>
-            <View style={[globalStyles.modalView, globalStyles.modalShadow, {height: '50%'}]}>
-                <CloseButton closeFunction={() => dispatch(closeModal())}/>
+        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.TeamModal} closeFn={() => dispatch(closeModal())}  modalHeight={"50%"} modalWidth={"75%"}>
+            <>
                 <Text style={[styles.titleText]}>{(teamFormOpen) ? (userTeamState.teamEditing) ? "Edit Team" : "Add Team" : "My Teams"}</Text>
 
                 { (teamFormOpen) ?
@@ -192,7 +191,7 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
                         <Text style={[styles.text, styles.buttonText]}>Add Team</Text>
                     </Pressable></>
                 }
-            </View>
+            </>
         </ModalWrapper>
     )
 }

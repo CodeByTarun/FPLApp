@@ -24,28 +24,11 @@ const ModalNavigator = ({overview, fixtures} : ModalNavigatorProps) => {
 
     return (
         <>
-            
-
-            {(modalInfo.modalType === ModalTypes.PlayerModal) &&
-                <PlayerModal overview={overview} fixtures={fixtures} player={modalInfo.player} teamInfo={teamInfo}/>
-            }
-
-            {(modalInfo.modalType === ModalTypes.DetailedPlayerModal) &&
-                <PlayerDetailedStatsModal overview={overview} fixtures={fixtures} player={modalInfo.player}/>
-            }
-
-            {(modalInfo.modalType === ModalTypes.PlayerComparisonModal) && 
-                <PlayerComparisonModal overview={overview} fixtures={fixtures} playerOverview={modalInfo.playerOverview} playerSummary={modalInfo.playerSummary}/>
-            }
-
-            {(modalInfo.modalType === ModalTypes.GameweekOverviewModal) &&
-                <GameweekOverviewModal overview={overview}/>
-            }
-
-            {(modalInfo.modalType === ModalTypes.InfoModal) &&
-                <InfoModal/>
-            }
-            
+            <PlayerModal overview={overview} fixtures={fixtures} teamInfo={teamInfo} modalInfo={modalInfo}/>
+            <PlayerDetailedStatsModal overview={overview} fixtures={fixtures} modalInfo={modalInfo}/>
+            <PlayerComparisonModal overview={overview} fixtures={fixtures} modalInfo={modalInfo}/>
+            <GameweekOverviewModal overview={overview} modalInfo={modalInfo}/>
+            <InfoModal modalInfo={modalInfo}/>
             <TeamModal modalInfo={modalInfo}/>
         </>
     )

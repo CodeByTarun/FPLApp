@@ -23,7 +23,7 @@ const PlayerStats = (props: PlayerSearchProps) => {
 
     const navigation = useAppSelector(state => state.navigation);
 
-    const popupSpring = useSpring({top: (navigation.screenType === ScreenTypes.PlayerStats) ? '0%' : '100%', config: { friction: 26, mass: 0.5 }});
+    const popupSpring = useSpring({top: (navigation.screenType === ScreenTypes.PlayerStats) ? '0%' : '100%', config: { friction: 18, mass: 0.5 }});
 
     return (
         <AnimatedView style={[styles.container, { height: '100%', top: popupSpring.top }]}>

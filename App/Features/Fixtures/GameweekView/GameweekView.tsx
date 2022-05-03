@@ -23,7 +23,7 @@ const GameweekView = ({isVisible, setIsVisible, liveGameweek, overview} : Gamewe
     const onGameweekButtonPress = useCallback((gameweekNumber: number) => {
         dispatch(changeGameweek(gameweekNumber));
         setIsVisible(false);
-    },[])
+    }, [])
 
     useEffect( function scrollToCurrentlySelectedGameweek() {
 

@@ -4,8 +4,7 @@ import { aLittleLighterColor, cornerRadius, height, largeFont, mediumFont, prima
 export const styles = StyleSheet.create({
     
     modalContainer: {
-        height: height * 0.80,
-        width: '85%',
+        flex: 1,
         padding: 10,
         paddingTop: 20,
     },

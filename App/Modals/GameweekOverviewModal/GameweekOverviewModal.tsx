@@ -1,21 +1,22 @@
 import React from "react";
 import { Modal, Pressable, View, Text, TouchableOpacity } from "react-native";
-import { CloseButton } from "../../Features/Controls";
+import { CloseButton, ModalWrapper } from "../../Features/Controls";
 import { cornerRadius, secondaryColor } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import UserTeamInfo from "../../Helpers/FplDataStorageService";
 import { FplOverview } from "../../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { closeModal } from "../../Store/modalSlice";
+import { closeModal, ModalInfo, ModalTypes } from "../../Store/modalSlice";
 import { changeToBudgetTeam } from "../../Store/teamSlice";
 import { styles } from "./GameweekOverviewModalStyles";
 import PlayerView from "./PlayerView";
 
 interface GameweekOverviewModalProps {
     overview: FplOverview;
+    modalInfo: ModalInfo;
 }
 
-const GameweekOverviewModal = ({overview} : GameweekOverviewModalProps) => {
+const GameweekOverviewModal = ({overview, modalInfo} : GameweekOverviewModalProps) => {
 
     const dispatch = useAppDispatch();
     const teamInfo = useAppSelector(state => state.team);
@@ -27,10 +28,8 @@ const GameweekOverviewModal = ({overview} : GameweekOverviewModalProps) => {
 
     return (
 
-        <Modal animationType="fade" transparent={true} visible={true}>
-            <Pressable style={globalStyles.modalBackground} onPressIn={() => dispatch(closeModal())}/>       
+        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.GameweekOverviewModal} closeFn={() => dispatch(closeModal())} modalHeight={'60%'} modalWidth={'70%'}>
             <View style={styles.modalView}>
-                <CloseButton closeFunction={() => dispatch(closeModal())}/>
 
                 <Text style={styles.titleText}>Gameweek {teamInfo.gameweek} Summary</Text>
 
@@ -61,7 +60,7 @@ const GameweekOverviewModal = ({overview} : GameweekOverviewModalProps) => {
                     </View>
                 </View>
             </View>
-        </Modal>        
+        </ModalWrapper>        
     )
 }
 

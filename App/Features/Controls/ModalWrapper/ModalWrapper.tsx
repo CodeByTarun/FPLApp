@@ -1,34 +1,50 @@
-import { animated, config, useSpring } from "@react-spring/native";
-import React from "react";
+import { animated, config, easings, useSpring, useTransition } from "@react-spring/native";
+import React, { useState } from "react";
 import { Modal, Pressable, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import globalStyles from "../../../Global/GlobalStyles";
+import { useAppDispatch } from "../../../Store/hooks";
+import { closeModal } from "../../../Store/modalSlice";
+import CloseButton from "../CloseButton/CloseButton";
 
 interface ModalWrapperProps {
     isVisible: boolean,
     closeFn: () => void,
     children: React.ReactNode,
+    modalHeight?: string;
+    modalWidth?: string;
 }
 
 const AnimatedPressable = animated(Pressable);
 const AnimatedView = animated(View);
 
-const ModalWrapper = ({ isVisible, closeFn, children } : ModalWrapperProps) => {
+const ModalWrapper = ({ isVisible, closeFn, children, modalHeight, modalWidth } : ModalWrapperProps) => {
 
-    const backgroundSpring = useSpring({backgroundColor: isVisible ? 'rgba(0,0,0, 0.5)' : 'rgba(52, 52, 52, 0)', config: config.molasses});
-    const viewSpring = useSpring({scale: isVisible ? 2 : 0, delay: 2000});
+
+    const dispatch = useAppDispatch();
+
+    const transitions = useTransition(isVisible, {
+        from: { backgroundColor: 'rgba(0, 0, 0, 0.1)', top: '100%' },
+        enter: { backgroundColor: 'rgba(0, 0, 0, 0.5)', top: '0%' },
+        leave: { backgroundColor: 'rgba(0, 0, 0, 0.1)', top: '100%' },
+        config: {
+            duration: 250,
+            easing: easings.easeInQuart,
+        },
+    })
 
     return(
-        <>
-        { isVisible &&
-            <Modal style={styles.modal} transparent={true} visible={true} testID='modalWrapper'>
-                <AnimatedPressable testID="background" style={[styles.modalBackground, globalStyles.modalShadow, backgroundSpring]} onPress={() => closeFn()}>
+        transitions((styling, show) => show && 
+                <AnimatedPressable testID="background" style={[styles.modalBackground, globalStyles.modalShadow, {backgroundColor: styling.backgroundColor}]} onPress={closeFn}>
                     <TouchableWithoutFeedback style={{}}>
-                        { children }
+                        <AnimatedView style={[globalStyles.modalView, globalStyles.modalShadow, 
+                                              modalHeight ? {height: modalHeight} : {}, 
+                                              modalWidth ? {width: modalWidth} : {}, 
+                                              {top: styling.top}]}>
+                            <CloseButton closeFunction={() => dispatch(closeModal())}/>
+                            { children }
+                        </AnimatedView>
                     </TouchableWithoutFeedback>
-                </AnimatedPressable>
-            </Modal> 
-        }
-        </>
+                </AnimatedPressable>)
     )
 }
 

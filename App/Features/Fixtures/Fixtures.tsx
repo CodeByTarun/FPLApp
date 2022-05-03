@@ -44,7 +44,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
   const expandRef = useSpringRef();
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '17.5%' : "100%", ref: expandRef });
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '17.5%' : "100%", ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
   const showButtonRef = useSpringRef();
   const showButtonSpring = useSpring({ scale:  ((navigation.screenType !== ScreenTypes.Fixtures) && (teamInfo.gameweek <= liveGameweek)) ? 0 : 1,

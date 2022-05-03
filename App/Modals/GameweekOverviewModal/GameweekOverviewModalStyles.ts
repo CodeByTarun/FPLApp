@@ -4,12 +4,8 @@ import { largeFont, textPrimaryColor, mediumFont, textSecondaryColor, width, sec
 export const styles = StyleSheet.create({
 
     modalView: {
-        height: '60%', 
-        width: '70%', 
         backgroundColor: primaryColor, 
         alignSelf: 'center',
-        position: 'absolute', 
-        top: height * 0.2,
         borderRadius: cornerRadius
     },
 

@@ -1,10 +1,10 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { Modal, Pressable, View, Image, Text } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { useAppDispatch } from "../../Store/hooks";
-import { closeModal, openPlayerComparisonModal } from "../../Store/modalSlice";
+import { closeModal, ModalInfo, ModalTypes, openPlayerComparisonModal } from "../../Store/modalSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Slider } from "@miblanchard/react-native-slider";
 import Checkbox from "expo-checkbox";
@@ -16,36 +16,42 @@ import { CloseButton, CustomButton, FilterButton, ModalWrapper, ToolTip } from "
 import { styles } from "./PlayerDetailedStatsModalStyles";
 import { statsFilterReducer, StatsFilterActionKind } from "./StatsFilterReducer";
 import { HistoryList, Stats } from "./PlayerDetailedStatsViews";
+import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
 
 interface PlayerDetailedStatsModalProps {
     overview: FplOverview;
     fixtures: FplFixture[];
-    player: PlayerOverview;
+    modalInfo: ModalInfo;
 }
 
-const PlayerDetailedStatsModal = ({overview, fixtures, player}: PlayerDetailedStatsModalProps) => {
+const PlayerDetailedStatsModal = ({overview, fixtures, modalInfo}: PlayerDetailedStatsModalProps) => {
 
     const dispatch = useAppDispatch();
-    const playerData = useGetPlayerSummaryQuery(player ? player.id : skipToken);
+    const playerDataQuery = useGetPlayerSummaryQuery((modalInfo.modalType === ModalTypes.DetailedPlayerModal) ? modalInfo.player.id : skipToken);
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
+
+    const playerRef = useRef(false as PlayerOverview | false);
+    playerRef.current = (modalInfo.modalType === ModalTypes.DetailedPlayerModal) ? modalInfo.player : playerRef.current;
+    const player = playerRef.current as PlayerOverview | false;
+
+    const playerDataRef = useRef(false as FplPlayerSummary | false);
+    playerDataRef.current = (playerDataQuery.isSuccess) ? playerDataQuery.data : playerDataRef.current;
+    const playerData = playerDataRef.current as FplPlayerSummary | false;
 
     const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
     const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, currentGameweek], isPer90: false });
-    const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
 
     useEffect( function ModalClosed() {
         statsFilterDispatch({ type: StatsFilterActionKind.Reset, value: [1, currentGameweek] });
         setIsStatViewShowing(true);
-    }, [player]);
+    }, [modalInfo.modalType]);
 
     return (
         <>
         { (player) && 
-            <ModalWrapper isVisible={player ? true : false} closeFn={() => dispatch(closeModal())}>    
-                <View style={[globalStyles.modalView, globalStyles.modalShadow, { height: GlobalConstants.height * 0.65, 
-                                                                                  width: GlobalConstants.width* 0.8, padding: 15 }]}>
-                    <CloseButton closeFunction={() => dispatch(closeModal())}/> 
-                    { playerData.isSuccess && 
+            <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.DetailedPlayerModal} closeFn={() => dispatch(closeModal())} modalHeight={'65%'} modalWidth={'80%'}>    
+                <View style={{ padding: 5, flex: 1 }}>
+                    { playerData && 
                         <View style={{flex: 1}}>
                             <View style={{flex: 10}}>
                                 <View style={styles.header}>
@@ -80,7 +86,7 @@ const PlayerDetailedStatsModal = ({overview, fixtures, player}: PlayerDetailedSt
 
                                 <View style={styles.controlsContainer}>
                                     <View style={{flex: 1, height: '85%', alignSelf: 'center'}}>
-                                        <CustomButton image="playercomparison" buttonFunction={() => dispatch(openPlayerComparisonModal({playerOverview: player, playerSummary: playerData.data}))}/>
+                                        <CustomButton image="playercomparison" buttonFunction={() => dispatch(openPlayerComparisonModal({playerOverview: player, playerSummary: playerData}))}/>
                                     </View>
                                     <Pressable style={styles.statHistoryToggle} onPress={() => setIsStatViewShowing(!isStatsViewShowing)}>
                                         <View style={[styles.viewToggleStyle, {backgroundColor: isStatsViewShowing ? GlobalConstants.primaryColor : GlobalConstants.secondaryColor,
@@ -132,8 +138,8 @@ const PlayerDetailedStatsModal = ({overview, fixtures, player}: PlayerDetailedSt
                                 </View>
 
                                 { isStatsViewShowing ?
-                                    <Stats statsFilterState={statsFilterState} player={player} playerData={playerData.data} currentGameweek={currentGameweek}/> :  
-                                    <HistoryList overview={overview} player={player} playerData={playerData.data}/>
+                                    <Stats statsFilterState={statsFilterState} player={player} playerData={playerData} currentGameweek={currentGameweek}/> :  
+                                    <HistoryList overview={overview} player={player} playerData={playerData}/>
                                 }
 
                             </View>

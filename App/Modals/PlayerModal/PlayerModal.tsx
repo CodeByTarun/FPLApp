@@ -1,7 +1,7 @@
 // This will contain understat and fpl data combined in a nice playercard that will help
 // ppl see how a player is performing recently as well as on the overall season
 
-import React from "react";
+import React, { useRef } from "react";
 import { Modal, Pressable, View, Image, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
 import { StatNames } from "../../Global/EnumsAndDicts";
 import globalStyles from "../../Global/GlobalStyles";
@@ -11,16 +11,16 @@ import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
-import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
+import { GetScoreForLiveFixture, GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { useAppDispatch } from "../../Store/hooks";
-import { closeModal, openPlayerDetailedStatsModal } from "../../Store/modalSlice";
+import { closeModal, ModalInfo, ModalTypes, openPlayerDetailedStatsModal } from "../../Store/modalSlice";
 import { CloseButton, ModalWrapper } from "../../Features/Controls";
 import { styles } from "./PlayerModalStyles";
 
 interface PlayerCardProps {
     overview: FplOverview;
     fixtures: FplFixture[];
-    player: PlayerData;
+    modalInfo: ModalInfo;
     teamInfo: TeamInfo;
 }
 
@@ -47,6 +47,7 @@ function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, 
 }
 
 function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, fixture: FplFixture) {
+
     return (
         <View testID="fixturePlayerStatsContainer" key={fixture.id} style={styles.fixtureContainer} onStartShouldSetResponder={() => true}>
             <View style={styles.fixtureScoreView}>
@@ -80,34 +81,43 @@ function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, f
                                 <Text style={styles.statText}>{stat.points}</Text>
                             </View>
                         </View>
-                    )
+                )
             }
         </View>
     )
 }
 
-const PlayerModal = ({overview, fixtures, player, teamInfo}: PlayerCardProps) => {
+const PlayerModal = ({overview, fixtures, teamInfo, modalInfo}: PlayerCardProps) => {
 
     const dispatch = useAppDispatch();
 
+    const playerRef = useRef(false as PlayerData | false);
+    playerRef.current = (modalInfo.modalType === ModalTypes.PlayerModal) ? modalInfo.player : playerRef.current;
+    const player = playerRef.current;
+
     const onMoreInfoPress = () => {
-        dispatch(openPlayerDetailedStatsModal(player.overviewData))
+        if (player) {
+            dispatch(openPlayerDetailedStatsModal(player.overviewData))
+        }
     }
 
     return (
-        <ModalWrapper isVisible={true} closeFn={() => dispatch(closeModal())}>
-            <View style={[globalStyles.modalView, globalStyles.modalShadow, styles.container]}>
-                <CloseButton closeFunction={() => dispatch(closeModal())}/>
-                <Text style={styles.titleText}>
-                    {player.overviewData.first_name + " " + player.overviewData.second_name}
-                </Text>
-                <ScrollView style={{ }}>
-                    { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
-                </ScrollView>
-                <TouchableOpacity style={[styles.button]}
-                                    onPress={onMoreInfoPress}>
-                    <Text style={styles.buttonText}>More Info</Text>
-                </TouchableOpacity>
+        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.PlayerModal} closeFn={() => dispatch(closeModal())} modalWidth={"75%"}>
+            <View style={[styles.container]}>
+                { player &&
+                <>
+                    <Text style={styles.titleText}>
+                        {player.overviewData.first_name + " " + player.overviewData.second_name}
+                    </Text>
+                    <ScrollView style={{ }}>
+                        { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
+                    </ScrollView>
+                    <TouchableOpacity style={[styles.button]}
+                                        onPress={onMoreInfoPress}>
+                        <Text style={styles.buttonText}>More Info</Text>
+                    </TouchableOpacity>
+                </>
+                }
             </View>        
         </ModalWrapper>
     )
