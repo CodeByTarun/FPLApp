@@ -1,3 +1,4 @@
+import { animated } from "@react-spring/native";
 import React, { useCallback, useEffect, useRef } from "react";
 import { View, Text, ScrollView, Pressable, Platform } from "react-native";
 import { height, primaryColor, secondaryColor } from "../../../Global/GlobalConstants";
@@ -6,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
 import { changeGameweek } from "../../../Store/teamSlice";
 import { styles } from "./GameweekViewStyles";
 
+const AnimatedPressable = animated(Pressable);
 
 interface GameweekViewProps {
     isVisible: boolean;
