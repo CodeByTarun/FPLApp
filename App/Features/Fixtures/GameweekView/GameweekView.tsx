@@ -5,9 +5,8 @@ import { height, primaryColor, secondaryColor } from "../../../Global/GlobalCons
 import { FplOverview } from "../../../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
 import { changeGameweek } from "../../../Store/teamSlice";
+import { AnimatedButton } from "../../Controls";
 import { styles } from "./GameweekViewStyles";
-
-const AnimatedPressable = animated(Pressable);
 
 interface GameweekViewProps {
     isVisible: boolean;
@@ -48,9 +47,11 @@ const GameweekView = ({isVisible, setIsVisible, liveGameweek, overview} : Gamewe
             <View style={styles.listContainer}>
                 <ScrollView ref={gameweekScrollViewRef} style={{ flex: 1}}>
                     { overview.events.map((event) => {return (
-                        <Pressable testID="gameweeksItem" key={event.id} style={[styles.gameweekItem, {backgroundColor: (teamInfo.gameweek === event.id) ? secondaryColor : primaryColor }]} onPress={() => onGameweekButtonPress(event.id)}>
-                            <Text style={styles.text}>{event.name}</Text>
-                        </Pressable>
+                        <AnimatedButton key={event.id} buttonFn={() => onGameweekButtonPress(event.id)}>
+                            <View testID="gameweeksItem" style={[styles.gameweekItem, {backgroundColor: (teamInfo.gameweek === event.id) ? secondaryColor : primaryColor }]}>
+                                <Text style={styles.text}>{event.name}</Text>
+                            </View>
+                        </AnimatedButton>
                     )})}
                 </ScrollView>
             </View>

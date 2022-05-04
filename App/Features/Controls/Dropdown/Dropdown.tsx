@@ -34,17 +34,6 @@ const Dropdown = (props: DropdownProps) => {
         setShowDropdown(false);
     }, [])
 
-
-    const transitions = useTransition(showDropdown, {
-        from: { backgroundColor: 'rgba(0, 0, 0, 0.1)', top: '100%' },
-        enter: { backgroundColor: 'rgba(0, 0, 0, 0.5)', top: '0%' },
-        leave: { backgroundColor: 'rgba(0, 0, 0, 0.1)', top: '100%' },
-        config: {
-            duration: 250,
-            easing: easings.easeInQuart,
-        },
-    });
-
     const [animatedStyle, api] = useSpring(() => ({ backgroundColor: 'rgba(0, 0, 0, 0)', top: '100%', scale: 1 }));
 
     useEffect( function openDropdownAnimation() {

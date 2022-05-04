@@ -13,7 +13,7 @@ import { openTeamModal } from "../../Store/modalSlice";
 import globalStyles from "../../Global/GlobalStyles";
 import Standings from "../Standings";
 import { styles } from "./LineupViewStyles";
-import {CustomButton, ToolTip} from "../Controls";
+import {AnimatedButton, CustomButton, ToolTip} from "../Controls";
 import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
 import { FplDraftOverview } from "../../Models/FplDraftOverview";
 import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";
@@ -65,10 +65,12 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                             (teamInfo.teamType === TeamTypes.Dream) ?
                                 <Text style={styles.text}>Dream Team</Text> :
                             (teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Budget) ?
-                                <TouchableOpacity testID="managerTeamDropDownButton" style={{flexDirection: 'row'}} onPress={() => setIsStandingsModalVisible(!isStandingsModalVisible)}>
-                                    <Text style={styles.text}>{teamInfo.info.name}  </Text> 
-                                    <Text style={globalStyles.dropDownSymbol}>◣</Text>
-                                </TouchableOpacity> :
+                                <AnimatedButton buttonFn={() => setIsStandingsModalVisible(!isStandingsModalVisible)}>
+                                    <View testID="managerTeamDropDownButton" style={{flexDirection: 'row'}}>
+                                        <Text style={styles.text}>{teamInfo.info.name}  </Text> 
+                                        <Text style={globalStyles.dropDownSymbol}>◣</Text>
+                                    </View>
+                                </AnimatedButton> :
                                 <></>
                         }
                     </View>
