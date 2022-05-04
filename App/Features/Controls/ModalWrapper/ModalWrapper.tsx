@@ -27,10 +27,10 @@ const ModalWrapper = ({ isVisible, closeFn, children, modalHeight, modalWidth } 
         enter: { backgroundColor: 'rgba(0, 0, 0, 0.5)', top: '0%' },
         leave: { backgroundColor: 'rgba(0, 0, 0, 0.1)', top: '100%' },
         config: {
-            duration: 250,
+            duration: isVisible ? 200 : 100,
             easing: easings.easeInQuart,
         },
-    })
+    });
 
     return(
         transitions((styling, show) => show && 

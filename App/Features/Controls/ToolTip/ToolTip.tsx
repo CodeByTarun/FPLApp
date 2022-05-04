@@ -1,6 +1,11 @@
-import React from "react";
-import { StyleSheet, View, TouchableOpacity, Modal } from "react-native";
+import { animated, easings, useSpring, useTransition } from "@react-spring/native";
+import React, { useEffect } from "react";
+import { StyleSheet, View, TouchableOpacity, Modal, Pressable } from "react-native";
 import { cornerRadius, height, primaryColor, secondaryColor, width } from "../../../Global/GlobalConstants";
+import globalStyles from "../../../Global/GlobalStyles";
+
+const AnimatedView = animated(View);
+const AnimatedPressable = animated(Pressable);
 
 interface dimensions {
     x: number;
@@ -20,14 +25,28 @@ interface ToolTipProps {
 }
 
 const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, distanceFromTop, view, isVisible, setIsVisible, isArrowAbove = true }: ToolTipProps) => {
+    
+    const transitions = useTransition(isVisible, {
+        from: { backgroundColor: 'rgba(0, 0, 0, 0)', opacity: 0 },
+        enter: { backgroundColor: 'rgba(0, 0, 0, 0.5)', opacity: 1 },
+        leave: { backgroundColor: 'rgba(0, 0, 0, 0)', opacity: 0 },
+        config: {
+            duration: 100,
+            easing: easings.easeInQuart,
+        },
+    })
 
     return (
         <Modal visible={isVisible} transparent={true}>
-            <TouchableOpacity testID="background" style={styles.modalBackground} onPress={() => {setIsVisible(false)}} hitSlop={{top: 10, left: 10, right: 10, bottom: 10}}/>
-            <View testID="tooltip" style={[styles.modalView, isArrowAbove ? {right: distanceFromRight, top: distanceFromTop} : {right: distanceFromRight, bottom: distanceFromTop}]}>
-                <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
-                { view }
-            </View>
+            { transitions((animatedStyle, show) => show &&
+            <>
+                <AnimatedPressable testID="background" style={[styles.modalBackground, {backgroundColor: animatedStyle.backgroundColor}]} onPress={() => { setIsVisible(false); } } hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }} children={undefined}/>
+                <AnimatedView testID="tooltip" style={[styles.modalView, globalStyles.modalShadow, {opacity: animatedStyle.opacity}, isArrowAbove ? {right: distanceFromRight, top: distanceFromTop} : {right: distanceFromRight, bottom: distanceFromTop}]}>
+                    <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
+                    { view }
+                </AnimatedView> 
+            </>
+            )}
         </Modal>
     )
 

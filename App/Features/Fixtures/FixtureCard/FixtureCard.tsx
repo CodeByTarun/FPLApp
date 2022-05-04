@@ -3,7 +3,7 @@
 // to incorporate this yet
 
 import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Pressable } from 'react-native'
 import { FplFixture } from '../../../Models/FplFixtures'
 import TeamEmblem from "./TeamEmblem"
 import moment from 'moment-timezone';
@@ -16,6 +16,9 @@ import { FplOverview } from '../../../Models/FplOverview'
 import globalStyles from '../../../Global/GlobalStyles'
 import { goToMainScreen, ScreenTypes } from '../../../Store/navigationSlice'
 import { styles } from './FixtureCardStyles'
+import { animated, useSpring } from '@react-spring/native';
+
+const AnimatedPressable = animated(Pressable);
 
 interface FixtureCardProp {
     overview: FplOverview;
@@ -44,18 +47,31 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
     const dispatch = useAppDispatch();
     const navigation = useAppSelector(state => state.navigation);
     
+    const [animatedStyle, api] = useSpring(() => ({ scale: 1 }));
+
     const onPress = () => {
 
+        api.start({
+            to: [
+                { scale: 0.99 },
+                { scale: 1 }
+              ],
+              config: {duration: 10},
+              onRest: showFixture,
+        });
+    };
+
+    const showFixture = () => {
         if (navigation.screenType === ScreenTypes.Fixtures) {
             dispatch(goToMainScreen());   
         }
         dispatch(changeToFixture(fixture));
-    };
+    }
 
     return (
         
         <View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? 5 : 0 }]}>
-            <TouchableOpacity testID='fixtureCardButton' style={[styles.button]} onPress={onPress} disabled={!fixture?.started}>            
+            <AnimatedPressable testID='fixtureCardButton' style={[styles.button, { transform: [{scale: animatedStyle.scale}] }]} onPress={onPress} disabled={!fixture?.started}>            
                 <View style={[styles.card, globalStyles.shadow]}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
@@ -70,7 +86,7 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
                         <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/>
                     </View>
                 </View>
-            </TouchableOpacity>
+            </AnimatedPressable>
         </View>
     )
 }

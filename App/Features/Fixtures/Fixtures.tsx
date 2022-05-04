@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, Animated } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Animated, Pressable } from "react-native";
 import FixtureCard from './FixtureCard/FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
@@ -18,6 +18,7 @@ import { animated, config, useChain, useSpring, useSpringRef } from "@react-spri
 
 const AnimatedView = animated(View);
 const AnimatedTouchable = animated(TouchableOpacity);
+const AnimatedPressable = animated(Pressable);
 
 interface FixturesViewProp {
   overview: FplOverview;
@@ -51,6 +52,19 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                                          ref: showButtonRef, config: config.stiff});
 
   useChain([expandRef, showButtonRef]);
+
+  const [gameweekButtonAnimatedStyle, gameweekButtonAnimatedApi] = useSpring(() => ({ scale: 1 }));
+  
+  const onGamweekButtonPress = () => {
+    gameweekButtonAnimatedApi.start({
+      to: [
+        { scale: 0.95 },
+        { scale: 1 }
+      ],
+      config: {duration: 10},
+      onRest: () => setIsGameweekViewVisible(true),
+    });
+  }
 
   const setTeam = async() => {
     let teams = await getAllUserTeamInfo();
@@ -116,10 +130,10 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
       <View style={styles.innerControlsContainer}>
         <View style={{flex: 1}}/>
-        <TouchableOpacity style={[styles.gameweekButton]} onPress={() => setIsGameweekViewVisible(true)}>
+        <AnimatedPressable style={[styles.gameweekButton, { transform: [{ scale: gameweekButtonAnimatedStyle.scale }]}]} onPress={onGamweekButtonPress}>
           <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
           <Text style={styles.gameweekDropDownSymbol}>◣</Text>
-        </TouchableOpacity>
+        </AnimatedPressable>
         <View style={styles.buttonsContainers}>
           <View style={styles.singleButtonContainer}>
             <CustomButton image="info" buttonFunction={onInfoButtonPress}/>

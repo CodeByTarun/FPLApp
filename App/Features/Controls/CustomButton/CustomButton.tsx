@@ -1,8 +1,11 @@
+import { animated, useSpring } from "@react-spring/native";
 import React from "react";
-import { TouchableOpacity, StyleSheet, Image } from "react-native";
+import { TouchableOpacity, StyleSheet, Image, Pressable } from "react-native";
 import { cornerRadius, primaryColor, secondaryColor } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
 import { Icons } from "../../../Global/Images";
+
+const AnimatedPressable = animated(Pressable);
 
 interface ButtonProps {
     image: string,
@@ -12,11 +15,23 @@ interface ButtonProps {
 
 const CustomButton = ({image, buttonFunction, isDisabled = false} : ButtonProps) => {
 
+    const [animatedStyles, api] = useSpring(() => ({scale: 1}))
+
+    const onPressFn = () => {
+        api.start({
+            to: [
+                {scale: 0.95},
+                {scale: 1}
+            ],
+            config: {duration: 10},
+            onRest: buttonFunction
+        });
+    }
 
     return (
-        <TouchableOpacity testID="imageButton" style={[styles.touchable]} onPress={buttonFunction} disabled={isDisabled} hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}>
+        <AnimatedPressable testID="imageButton" style={[styles.touchable, { transform: [{ scale: animatedStyles.scale }] }]} onPress={onPressFn} disabled={isDisabled} hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}>
             <Image style={[styles.icon]} source={Icons[image]} resizeMode='contain'/>
-        </TouchableOpacity>
+        </AnimatedPressable>
     )
 }
 

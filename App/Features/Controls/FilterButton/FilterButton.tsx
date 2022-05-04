@@ -1,8 +1,11 @@
+import { animated, useSpring } from "@react-spring/native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { StyleSheet, TouchableOpacity, Image, View, GestureResponderEvent } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, View, GestureResponderEvent, Pressable } from "react-native";
 import * as GlobalConstants from "../../../Global/GlobalConstants";
 import { Icons } from "../../../Global/Images";
 import ToolTip from "../ToolTip/ToolTip";
+
+const AnimatedPressable = animated(Pressable);
 
 interface FilterButtonProps {
     view: JSX.Element;
@@ -25,6 +28,19 @@ const FilterButton = ({ view, isArrowAbove } : FilterButtonProps) => {
         setPosition();
     }, [])
 
+    const [animatedStyles, api] = useSpring(() => ({scale: 1}))
+
+    const onPressFn = () => {
+        api.start({
+            to: [
+                {scale: 0.90},
+                {scale: 1}
+            ],
+            config: {duration: 50},
+            onRest: buttonFunction
+        });
+    }
+
     const buttonFunction = useCallback(() => {
 
         if (buttonRef) {
@@ -43,9 +59,9 @@ const FilterButton = ({ view, isArrowAbove } : FilterButtonProps) => {
 
     return (
         <View style={{flex: 1}}>
-            <TouchableOpacity ref={buttonRef} testID="imageButton" style={[styles.touchable]} onPress={buttonFunction} hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}>
+            <AnimatedPressable ref={buttonRef} testID="imageButton" style={[styles.touchable, { transform: [{scale: animatedStyles.scale}] }]} onPress={onPressFn} hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}>
                 <Image style={[styles.icon]} source={Icons['filter']} resizeMode='contain'/>
-            </TouchableOpacity>
+            </AnimatedPressable>
             <ToolTip distanceFromRight={toolTipInfo.x} distanceFromTop={toolTipInfo.y} distanceForArrowFromRight={toolTipInfo.arrowDistance} isArrowAbove={isArrowAbove}
                      isVisible={isToolTipVisible} setIsVisible={setIsToolTipVisible} view={view}/>
         </View>
