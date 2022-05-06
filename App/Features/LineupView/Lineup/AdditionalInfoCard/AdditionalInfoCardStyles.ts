@@ -3,10 +3,7 @@ import { primaryColor, cornerRadius, smallFont, textSecondaryColor, lightColor, 
 
 export const styles = StyleSheet.create({
     cardContainer: {
-        position: 'absolute', 
-        left: 7, 
-        height: '12%', 
-        aspectRatio: 1.2, 
+        flex: 1,
         alignContent:'center', 
         justifyContent: 'center',
         backgroundColor: primaryColor, 

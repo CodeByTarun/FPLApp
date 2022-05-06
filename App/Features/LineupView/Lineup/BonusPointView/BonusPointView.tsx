@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { primaryColor } from "../../../../Global/GlobalConstants";
 import globalStyles from "../../../../Global/GlobalStyles";
 import { FplFixture } from "../../../../Models/FplFixtures";
 import { FplOverview } from "../../../../Models/FplOverview";

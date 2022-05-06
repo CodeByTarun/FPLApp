@@ -1,7 +1,7 @@
 
-import { animated, easings, useSpring, useTransition } from "@react-spring/native";
+import { animated, useSpring } from "@react-spring/native";
 import React, { useCallback, useEffect, useState } from "react";
-import { Animated, FlatList, Keyboard, Modal, Pressable, Text, View } from "react-native";
+import { FlatList, Keyboard, Modal, Pressable, Text, View } from "react-native";
 import globalStyles from "../../../Global/GlobalStyles";
 import CloseButton from "../CloseButton/CloseButton";
 import { styles } from "./DropdownStyles";
