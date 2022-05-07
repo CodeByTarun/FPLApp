@@ -11,6 +11,7 @@ import PlayerStats from "./Features/PlayerStats";
 import FixturesContainer from "./Features/Fixtures/FixturesContainer";
 import BottomTabs from "./Features/BottomTabs";
 import { LoadingIndicator } from "./Features/Controls";
+import globalStyles from "./Global/GlobalStyles";
 
 const MainPage = () => {
 
@@ -49,13 +50,21 @@ const MainPage = () => {
           <View style={{height: '11%', aspectRatio: 1, alignSelf: 'center'}}>
             <LoadingIndicator/>
           </View>
+          { (fixtures.isError || overview.isError) &&
+              <View style={[{backgroundColor: GlobalConstants.secondaryColor, position: 'absolute', top: '60%'}, globalStyles.shadow]}>
+                <Text style={{ alignSelf: 'center', textAlign: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.largeFont, fontWeight: '600' }}> 
+                    There has been an error retrieving data from the FPL API. Try reopening the app later.
+                </Text>
+              </View>
+
+          }
         </View> 
       }
+      { (fixtures.isSuccess && overview.isSuccess) &&
         <>
           <SafeAreaView style={styles.safeArea}>
-              {(overview.data && fixtures.data) &&
                 <View style={{flex: 1}}>
-                  <View style={{height: '17.5%', width: '100%'}}/>
+                  <View style={{height: '18%', width: '100%'}}/>
                   <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
                   <View style={styles.lineupView}>
                     <LineupViewQueriesContainer overview={overview.data} fixtures={fixtures.data}/>
@@ -65,21 +74,13 @@ const MainPage = () => {
                     <BottomTabs/>
                   </View>
                 </View>
-              }
-
-              {(fixtures.isError || overview.isError) && 
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30}}> 
-                  <Text style={{ alignSelf: 'center', textAlign: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.largeFont, fontWeight: '600' }}> 
-                    Please reopen the app once the gameweek has been processed by the FPL API. 
-                  </Text>
-                </View>
-              }
           </SafeAreaView>
 
           {(overview.data && fixtures.data) &&
             <ModalNavigator overview={overview.data} fixtures={fixtures.data}/>
           }
         </>
+      }
     </View>
   )
 }

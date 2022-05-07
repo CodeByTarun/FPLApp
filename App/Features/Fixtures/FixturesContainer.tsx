@@ -47,11 +47,7 @@ const FixturesContainer = ({ overview, fixtures } : FixturesContainerProps) => {
       }, [teamInfo.gameweek]);
 
     return (
-        <>
-        {(gameweekData.isSuccess && fixturesData.isSuccess) &&
-            <Fixtures overview={overview} fixtures={fixturesData.data} gameweek={gameweekData.data}/>
-        }
-        </>
+      <Fixtures overview={overview} fixtures={fixturesData.data} gameweek={gameweekData.data}/>
     )
 }
 

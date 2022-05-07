@@ -34,12 +34,10 @@ const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo,
                                       index: 1 } as statInfo);
 
     useEffect(function setGameweekPointsWhenGameweekChanged() {
-
-        setStat({title: "Gameweek", 
-                value: (teamInfo.teamType === TeamTypes.Budget) ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : GetTeamTotalPoints(teamInfo, players) , 
-                stat: 'Points',
-                index: 1});
- 
+            setStat({title: "Gameweek", 
+                    value: (teamInfo.teamType === TeamTypes.Budget) ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : GetTeamTotalPoints(teamInfo, players) , 
+                    stat: 'Points',
+                    index: 1});
     }, [players]);
 
     const changingBudgetStat = useCallback(() => {

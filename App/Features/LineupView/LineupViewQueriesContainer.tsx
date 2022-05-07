@@ -27,13 +27,9 @@ const LineupViewQueriesContainer = ({overview, fixtures} : LineupViewQueriesCont
     const budgetUserInfo = useGetBudgetUserInfoQuery((teamInfo.teamType === TeamTypes.Budget) ? teamInfo.info.id : skipToken);
 
     return (
-        <>
-            { gameweek.isSuccess &&
-                <LineupView overview={overview} fixtures={fixtures} gameweek={gameweek.data} teamInfo={teamInfo} draftGameweekPicks={draftGameweek.data}
-                            draftOverview={draftOverview.data} draftUserInfo={draftUserInfo.data} draftLeagueInfo={draftLeagueInfo.data} 
-                            budgetGameweekPicks={budgetGameweek.data} budgetUserInfo={budgetUserInfo.data}/>
-            }
-        </>
+        <LineupView overview={overview} fixtures={fixtures} gameweek={gameweek.data} teamInfo={teamInfo} draftGameweekPicks={draftGameweek.data}
+                    draftOverview={draftOverview.data} draftUserInfo={draftUserInfo.data} draftLeagueInfo={draftLeagueInfo.data} 
+                    budgetGameweekPicks={budgetGameweek.data} budgetUserInfo={budgetUserInfo.data}/>
     )
 }
 

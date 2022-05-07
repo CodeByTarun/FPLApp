@@ -13,7 +13,7 @@ import { openTeamModal } from "../../Store/modalSlice";
 import globalStyles from "../../Global/GlobalStyles";
 import Standings from "../Standings";
 import { styles } from "./LineupViewStyles";
-import {AnimatedButton, CustomButton, ToolTip} from "../Controls";
+import {AnimatedButton, CustomButton, LoadingIndicator, ToolTip} from "../Controls";
 import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
 import { FplDraftOverview } from "../../Models/FplDraftOverview";
 import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";
@@ -26,7 +26,7 @@ import TeamListView from "./TeamListView";
 interface LineupViewProps {
     overview: FplOverview,
     fixtures: FplFixture[],
-    gameweek: FplGameweek;
+    gameweek: FplGameweek | undefined;
     teamInfo: TeamInfo;
     draftGameweekPicks? : FplDraftGameweekPicks;
     draftOverview? : FplDraftOverview;
@@ -88,21 +88,27 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} 
                             budgetGameweekPicks={budgetGameweekPicks} budgetUserInfo={budgetUserInfo}/> : 
 
-                 ((teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftUserInfo && gameweek) ?
+                 (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftUserInfo && gameweek) ?
                     <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} 
                             draftGameweekPicks={draftGameweekPicks} draftUserInfo={draftUserInfo} draftOverview={draftOverview}/> : 
 
-                 ((teamInfo.teamType !== TeamTypes.Draft && teamInfo.teamType !== TeamTypes.Budget && teamInfo.teamType !== TeamTypes.Empty && gameweek) ?
+                 (teamInfo.teamType !== TeamTypes.Draft && teamInfo.teamType !== TeamTypes.Budget && teamInfo.teamType !== TeamTypes.Empty && gameweek) ?
                     <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} /> : 
                 
+                 (teamInfo.teamType === TeamTypes.Empty) ?
                     <View style={{flex: 1, alignContent: 'center', justifyContent: 'center'}}>
                         <TouchableOpacity testID="noTeamsFoundButton" style={styles.button} onPress={() => dispatch(openTeamModal())}>
                             <Text style={styles.buttonText}>Add your fantasy team</Text>
                         </TouchableOpacity>
-                    </View>))
+                    </View> : 
+                    
+                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                        <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>
+                        <LoadingIndicator/>
+                        </View>
+                    </View>
             
-                }
-                
+                }                
             </View>
                 <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
                         distanceFromTop={70 + (GlobalConstants.height * 0.175)} 

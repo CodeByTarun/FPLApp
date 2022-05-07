@@ -15,6 +15,7 @@ import globalStyles from "../../Global/GlobalStyles";
 import GameweekView from "./GameweekView";
 import { height, width } from "../../Global/GlobalConstants";
 import { animated, config, useChain, useSpring, useSpringRef } from "@react-spring/native";
+import FixtureCardLoading from "./FixtureCardLoading";
 
 const AnimatedView = animated(View);
 const AnimatedTouchable = animated(TouchableOpacity);
@@ -22,8 +23,8 @@ const AnimatedPressable = animated(Pressable);
 
 interface FixturesViewProp {
   overview: FplOverview;
-  fixtures: FplFixture[];
-  gameweek: FplGameweek;
+  fixtures: FplFixture[] | undefined;
+  gameweek: FplGameweek | undefined;
 }
 
 function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
@@ -45,7 +46,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
   const expandRef = useSpringRef();
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '17.5%' : "100%", ref: expandRef, config: { friction: 18, mass: 0.5 }});
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '18%' : "100%", ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
   const showButtonRef = useSpringRef();
   const showButtonSpring = useSpring({ scale:  ((navigation.screenType !== ScreenTypes.Fixtures) && (teamInfo.gameweek <= liveGameweek)) ? 0 : 1,
@@ -92,7 +93,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
       fixtureScrollViewRef.current?.scrollTo({ x:0, y:0, animated:true });
 
-      if(teamInfo.teamType === TeamTypes.Fixture) {
+      if(teamInfo.teamType === TeamTypes.Fixture && fixtures) {
         let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.filter((fixture) => { return fixture.event == teamInfo.gameweek})
                                                                        .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2));
       
@@ -143,18 +144,25 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         
       </View>
       <View style={{flex: 1}}>
-        <ScrollView ref={fixtureScrollViewRef} 
-                    horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
-                    showsHorizontalScrollIndicator={false} 
-                    style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }} 
-                    contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}
-                    testID='fixturesScrollView'>
-          { 
-            fixtures.filter((fixture) => { return fixture.event == teamInfo.gameweek})
-                    .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
-                    .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
-          }
-        </ScrollView>
+        { (fixtures && gameweek) ?
+          <ScrollView ref={fixtureScrollViewRef} 
+                      horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
+                      showsHorizontalScrollIndicator={false} 
+                      style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }} 
+                      contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}
+                      testID='fixturesScrollView'>
+            { 
+              fixtures.filter((fixture) => { return fixture.event == teamInfo.gameweek})
+                      .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
+                      .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
+            }
+          </ScrollView> :
+          <View style={{flexDirection: 'row', flex: 1, marginLeft: 2.5, marginRight: 2.5}}>
+            <FixtureCardLoading/>
+            <FixtureCardLoading/>
+            <FixtureCardLoading/>
+          </View>
+        }
         {  ((navigation.screenType === ScreenTypes.Fixtures) && (teamInfo.gameweek <= liveGameweek)) &&
           <AnimatedTouchable style={[styles.closeFixtureViewButtonContainer, globalStyles.modalShadow, {transform: [{scale: showButtonSpring.scale}]}]} 
                             onPress={onCalendarButtonPress}>

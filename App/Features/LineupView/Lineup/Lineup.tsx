@@ -109,7 +109,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
 
     const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftGameweekPicks, budgetGameweekPicks);
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
-    
+
     const [viewIndex, setViewIndex] = useState(0); 
 
     useEffect(function gameweekChanged() {
@@ -128,7 +128,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
 
     return (
         <>
-        {(teamInfo.teamType !== TeamTypes.Empty && players && teamInfo.gameweek <= currentGameweek) &&
+        {(teamInfo.teamType !== TeamTypes.Empty && players && teamInfo.gameweek <= currentGameweek && gameweek) &&
         <View style={{flex: 1}}>
             <View style={{flex: 4}}>
                 <Image style={styles.field} source={require('../../../../assets/threequartersfield.jpg')}/>
@@ -169,12 +169,12 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
             </View>
             <View style={styles.bottomContainer}> 
     
-                { bottomViewTransition((animatedStyles, show) => (teamInfo.teamType === TeamTypes.Fixture)  && 
+                { bottomViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Fixture)  && 
                     <AnimatedView style={[{height: '100%', width: '100%', top: animatedStyles.top}]}>
                         <BonusPointView overviewData={overview} fixturesData={fixtures} teamInfo={teamInfo}/>  
                     </AnimatedView>
                 )} 
-                { bottomViewTransition((animatedStyles, show) => (teamInfo.teamType === TeamTypes.Dream) && 
+                { bottomViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Dream) && 
                     <AnimatedView style={[{height: '100%', width: '100%', top: animatedStyles.top}]}>
                         <KingsOfTheGameweekView overviewData={overview}/>
                     </AnimatedView>
@@ -193,9 +193,3 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
 }
 
 export default Lineup;
-
-
-
-
-
-

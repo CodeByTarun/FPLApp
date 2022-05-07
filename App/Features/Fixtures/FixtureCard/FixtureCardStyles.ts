@@ -4,16 +4,10 @@ import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor
 export const styles = StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
-        height: height * 0.11,
+        aspectRatio: 1.6,
         width: width * 0.3288,
         paddingTop: 2,
         paddingBottom: 2,
-    },
-
-    normalContainer: {
-        alignSelf: 'center',
-        height: "95%",
-        width: width * 0.3288,
     },
 
     button: {
@@ -21,7 +15,7 @@ export const styles = StyleSheet.create({
     },
 
     card: {
-        backgroundColor: testColor,
+        backgroundColor: primaryColor,
         flex: 1,
         flexDirection: 'column',
         marginLeft: 3,
