@@ -68,7 +68,7 @@ function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fix
 
     // Adds another row if no forwards have played for the team
     if (playerStatsView.length === 3) {
-        playerStatsView.push(<View style={{flex: 1}}/>);
+        playerStatsView.push(<View key={4} style={{flex: 1}}/>);
     }
 
     return playerStatsView;
