@@ -98,7 +98,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>
-                        <LoadingIndicator/>
+                            <LoadingIndicator/>
                         </View>
                     </View>
                 }                

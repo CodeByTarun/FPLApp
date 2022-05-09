@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Pressable, View, Text, TouchableOpacity } from "react-native";
-import { CloseButton, ModalWrapper } from "../../Features/Controls";
+import { AnimatedButton, CloseButton, ModalWrapper } from "../../Features/Controls";
 import { cornerRadius, secondaryColor } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import UserTeamInfo from "../../Helpers/FplDataStorageService";
@@ -39,11 +39,12 @@ const GameweekOverviewModal = ({overview, modalInfo} : GameweekOverviewModalProp
                         <Text style={styles.scoreText}>{overview.events.find(event => event.id === teamInfo.gameweek)?.average_entry_score}</Text>
                     </View>
                     <View style={styles.pointsContainer}>
-                        <TouchableOpacity style={[{backgroundColor: secondaryColor, padding: 7, borderRadius: cornerRadius}, globalStyles.shadow]}
-                                          onPress={openHighestScoringTeam}>
-                            <Text style={styles.headerText}>Highest Points</Text>
-                            <Text style={styles.scoreText}>{overview.events.find(event => event.id === teamInfo.gameweek)?.highest_score}</Text>
-                        </TouchableOpacity>
+                        <AnimatedButton buttonFn={openHighestScoringTeam}>
+                            <View style={[styles.highestPointsButton, globalStyles.shadow]}>
+                                <Text style={styles.headerText}>Highest Points</Text>
+                                <Text style={styles.scoreText}>{overview.events.find(event => event.id === teamInfo.gameweek)?.highest_score}</Text>
+                            </View>
+                        </AnimatedButton>
                     </View>
                 </View>
                 

@@ -7,9 +7,10 @@ const AnimatedPressable = animated(Pressable);
 
 interface AnimatedButtonProps {
     buttonFn: () => void;
+    disabled?: boolean;
 }
 
-const AnimatedButton = ({ buttonFn, children } : PropsWithChildren<AnimatedButtonProps>) => {
+const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChildren<AnimatedButtonProps>) => {
 
     const [animatedStyle, api] = useSpring(() => ({ scale: 1 }));
 
@@ -27,7 +28,7 @@ const AnimatedButton = ({ buttonFn, children } : PropsWithChildren<AnimatedButto
     }
 
     return (
-        <AnimatedPressable style={{transform: [{scale: animatedStyle.scale}]}} onPress={onButtonPress}>
+        <AnimatedPressable style={{transform: [{scale: animatedStyle.scale}]}} onPress={onButtonPress} disabled={disabled}>
             { children }
         </AnimatedPressable>
     )

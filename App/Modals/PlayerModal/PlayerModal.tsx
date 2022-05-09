@@ -14,7 +14,7 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import { GetScoreForLiveFixture, GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { useAppDispatch } from "../../Store/hooks";
 import { closeModal, ModalInfo, ModalTypes, openPlayerDetailedStatsModal } from "../../Store/modalSlice";
-import { CloseButton, ModalWrapper } from "../../Features/Controls";
+import { AnimatedButton, CloseButton, ModalWrapper } from "../../Features/Controls";
 import { styles } from "./PlayerModalStyles";
 
 interface PlayerCardProps {
@@ -112,10 +112,11 @@ const PlayerModal = ({overview, fixtures, teamInfo, modalInfo}: PlayerCardProps)
                     <ScrollView style={{ }}>
                         { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
                     </ScrollView>
-                    <TouchableOpacity style={[styles.button]}
-                                        onPress={onMoreInfoPress}>
-                        <Text style={styles.buttonText}>More Info</Text>
-                    </TouchableOpacity>
+                    <AnimatedButton buttonFn={onMoreInfoPress}>
+                        <View style={[styles.button]}>
+                            <Text style={styles.buttonText}>More Info</Text>
+                        </View>
+                    </AnimatedButton>
                 </>
                 }
             </View>        

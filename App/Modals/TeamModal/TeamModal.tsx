@@ -8,7 +8,7 @@ import { useAppDispatch } from "../../Store/hooks";
 import { changeToBudgetTeam, changeToDraftTeam } from "../../Store/teamSlice";
 import Checkbox from "expo-checkbox";
 import { closeModal, ModalInfo, ModalTypes } from "../../Store/modalSlice";
-import { CloseButton, ModalWrapper } from "../../Features/Controls";
+import { AnimatedButton, CloseButton, ModalWrapper } from "../../Features/Controls";
 import { styles } from "./TeamModalStyles";
 import { userTeamReducer, userTeamInitialState, UserTeamActionKind } from "./UserTeamReducer";
 import { Seperator } from "../../Global/GlobalComponents";
@@ -148,18 +148,19 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
                         <View style={{flexDirection: 'row'}}>
 
                             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Pressable style={[styles.formButton, {backgroundColor: (userTeamState.teamEditing) ? GlobalConstants.redColor : 'grey' }]}
-                                        onPress={(userTeamState.teamEditing) ? removeATeam : closeForm}>
-                                    <Text style={{alignSelf:'center'}}>{(userTeamState.teamEditing) ? 'Delete' : 'Back'}</Text>
-                                </Pressable>
+                                <AnimatedButton buttonFn={(userTeamState.teamEditing) ? removeATeam : closeForm}>
+                                    <View style={[styles.formButton, {backgroundColor: (userTeamState.teamEditing) ? GlobalConstants.redColor : 'grey' }]}>
+                                        <Text style={{alignSelf:'center'}}>{(userTeamState.teamEditing) ? 'Delete' : 'Back'}</Text>
+                                    </View>
+                                </AnimatedButton>
                             </View>                         
 
                             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <Pressable style={[styles.formButton, {opacity: confirmIsDisabled ? 0.5 : 1}]}
-                                        disabled={confirmIsDisabled}
-                                        onPress={(userTeamState.teamEditing) ? editTeam : addTeam}>
-                                    <Text style={{alignSelf:'center'}}>Confirm</Text>
-                                </Pressable>
+                                <AnimatedButton buttonFn={(userTeamState.teamEditing) ? editTeam : addTeam} disabled={confirmIsDisabled}>
+                                    <View style={[styles.formButton, {opacity: confirmIsDisabled ? 0.5 : 1}]}>
+                                        <Text style={{alignSelf:'center'}}>Confirm</Text>
+                                    </View>
+                                </AnimatedButton>
                             </View>
                         </View>
                     </View> : 
@@ -171,15 +172,25 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
                                 userTeams.map((team) => 
                                     <View key={team.id}>
                                         <View style={styles.modalListRow}>
-                                            <Pressable style={styles.favouriteButton} onPress={() => { favouriteATeam(team) }}>
-                                                <Image style={styles.icon} source={team.isFavourite ? Icons['favourite'] : Icons['unfavourite']} resizeMode="contain"/>
-                                            </Pressable>
-                                            <Pressable style={styles.teamButton} onPress={() => selectedATeam(team)}>
-                                                <Text style={styles.text}>{team.name}</Text>
-                                            </Pressable>
-                                            <Pressable style={styles.editButton} onPress={() => openEditTeam(team)}> 
-                                                <Image style={styles.icon} source={Icons['edit']} resizeMode="contain"/>
-                                            </Pressable>
+                                            <View style={styles.favouriteButton}>
+                                                <AnimatedButton buttonFn={() => { favouriteATeam(team) }}>
+                                                    <View style={styles.favouriteButton}>
+                                                        <Image style={styles.icon} source={team.isFavourite ? Icons['favourite'] : Icons['unfavourite']} resizeMode="contain"/>
+                                                    </View>
+                                                </AnimatedButton>
+                                            </View>
+                                            <View style={styles.teamButton}>
+                                                <AnimatedButton buttonFn={() => selectedATeam(team)}>
+                                                    <Text style={styles.text}>{team.name}</Text>
+                                                </AnimatedButton>
+                                            </View>
+                                            <View style={styles.editButton}> 
+                                                <AnimatedButton buttonFn={() => openEditTeam(team)}>
+                                                    <View style={styles.editButton}>
+                                                        <Image style={styles.icon} source={Icons['edit']} resizeMode="contain"/>
+                                                    </View>
+                                                </AnimatedButton>
+                                            </View>
                                         </View> 
                                         <Seperator/>
                                     </View>
@@ -187,9 +198,12 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
                             }
                         </View>
                     </ScrollView>
-                    <Pressable style={styles.addButton} onPress={() => {setTeamFormOpen(true)}}>
-                        <Text style={[styles.text, styles.buttonText]}>Add Team</Text>
-                    </Pressable></>
+                    <View style={styles.addButton}>
+                        <AnimatedButton buttonFn={() => {setTeamFormOpen(true)}}>
+                            <Text style={[styles.text, styles.buttonText]}>Add Team</Text>
+                        </AnimatedButton>
+                    </View>
+                    </>
                 }
             </>
         </ModalWrapper>

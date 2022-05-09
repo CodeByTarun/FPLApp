@@ -30,6 +30,12 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    highestPointsButton :{
+        backgroundColor: primaryColor, 
+        padding: 7, 
+        borderRadius: cornerRadius
+    },
+
     headerText: {
         fontSize: mediumFont * 0.8,
         color: textSecondaryColor,

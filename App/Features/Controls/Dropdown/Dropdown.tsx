@@ -3,6 +3,7 @@ import { animated, useSpring } from "@react-spring/native";
 import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Keyboard, Modal, Pressable, Text, View } from "react-native";
 import globalStyles from "../../../Global/GlobalStyles";
+import AnimatedButton from "../AnimatedButton/AnimatedButton";
 import CloseButton from "../CloseButton/CloseButton";
 import { styles } from "./DropdownStyles";
 
@@ -87,14 +88,18 @@ const Dropdown = (props: DropdownProps) => {
                                 data={props.options}
                                 keyExtractor={item => item}
                                 renderItem={({item}) => 
-                                    <Pressable style={styles.itemView} onPress={() => props.setValue(item)}>
-                                        <Text style={styles.itemText}>{item}</Text>
-                                    </Pressable>
+                                    <AnimatedButton buttonFn={() => props.setValue(item)}>
+                                        <View style={styles.itemView}>
+                                            <Text style={styles.itemText}>{item}</Text>
+                                        </View>
+                                    </AnimatedButton>
                                 }/>
                             <View style={styles.resetContainer}>
-                                <Pressable style={styles.clearButton} onPress={clearValue}>
-                                    <Text style={styles.resetText}>Reset</Text>
-                                </Pressable>
+                                <AnimatedButton buttonFn={clearValue}>
+                                    <View style={styles.clearButton}>
+                                        <Text style={styles.resetText}>Reset</Text>
+                                    </View>
+                                </AnimatedButton>
                             </View>
                         </AnimatedView>
                     </AnimatedPressable>

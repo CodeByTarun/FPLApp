@@ -12,7 +12,7 @@ import { useGetDraftLeagueInfoQuery, useGetDraftLeaguePlayerStatusesQuery, useGe
 import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
 import { openPlayerDetailedStatsModal } from "../../../Store/modalSlice";
 import { TeamTypes } from "../../../Store/teamSlice";
-import { CustomButton } from "../../Controls";
+import { CustomButton, LoadingIndicator } from "../../Controls";
 import { PlayerTableFilterState } from "../PlayerTable/PlayerTableFilterReducer";
 import FixtureDifficultyList from "./FixtureDifficultyList";
 import PlayerListInfo from "./PlayerListInfo/PlayerListInfo";
@@ -28,12 +28,23 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     const [playerList, setPlayerList] = useState([] as PlayerOverview[]);
     const [watchlist, setWatchlist] = useState({playerIds: []} as PlayersWatchlist | undefined);
+    const teamInfo = useAppSelector(state => state.team);
 
     const dispatch = useAppDispatch();
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
+
+    const [isListDoneFiltering, setIsListDoneFiltering] = useState(true);
+    const [isDraftTeam, setIsDraftTeam] = useState(null as number | null);
+    useEffect(() => {
+        if (teamInfo.teamType === TeamTypes.Draft) {
+            setIsDraftTeam(teamInfo.info.id);
+        } else {
+            setIsDraftTeam(null);
+        }
+    }, [teamInfo.teamType]);
+
     //#region Draft League info to add if in draft league 
-    const teamInfo = useAppSelector(state => state.team);
     const draftOverview = useGetDraftOverviewQuery((teamInfo.teamType === TeamTypes.Draft) ? undefined : skipToken );
     const draftUserInfo = useGetDraftUserInfoQuery((teamInfo.teamType === TeamTypes.Draft) ? teamInfo.info.id : skipToken );
     const draftLeagueInfo = useGetDraftLeagueInfoQuery(((teamInfo.teamType === TeamTypes.Draft) && draftUserInfo.data) ? draftUserInfo.data.entry.league_set[0] : skipToken)
@@ -86,9 +97,15 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     //#region Filter Functions
     const filteringPlayerList = () => {
+        setIsListDoneFiltering(false);
+
         setPlayerList(overview.elements.filter(filterPlayers)
-                                       .sort(sortPlayers));
+                                       .sort(sortPlayers))
     }
+
+    useEffect(() => {
+        setIsListDoneFiltering(true);
+    }, [playerList])
 
     const filterPlayers = useCallback((player: PlayerOverview) => {
         return FilterPlayerListPlayers(filters, player, overview, watchlist);
@@ -128,21 +145,26 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
         </Pressable>)
-    }, [])
+    }, [filters, watchlist, isDraftTeam])
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion
     
     return(
         <>
-        {((teamInfo.teamType !== TeamTypes.Draft) || (draftUserInfo.data && draftLeagueInfo.data && draftLeagueRosters.data)) &&
+        {((teamInfo.teamType !== TeamTypes.Draft) || (draftUserInfo.data && draftLeagueInfo.data && draftLeagueRosters.data)) && isListDoneFiltering ?
         <FlatList
             data={playerList}
             renderItem={renderPlayerItem}
             keyExtractor={keyExtractor}
             removeClippedSubviews={true}
             initialNumToRender={15}
-            maxToRenderPerBatch={40}/>
+            maxToRenderPerBatch={40}/> :
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>
+                    <LoadingIndicator/>
+                </View>
+            </View>
         }
         </>
     )

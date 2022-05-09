@@ -1,8 +1,9 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { FplManagerInfo } from "../../../Models/FplManagerInfo";
 import { useGetBudgetLeagueInfoQuery } from "../../../Store/fplSlice";
+import { AnimatedButton } from "../../Controls";
 import { styles } from "../StandingsStyles";
 import BudgetLeagueList from "./LeagueList/BudgetLeagueList";
 import BudgetLeagueStandings from "./LeagueStandings/BudgetLeagueStandings";
@@ -22,9 +23,11 @@ const BudgetLeague = ({budgetUserInfo, setModalVisibility} : BudgetLeagueProps) 
         <View style={{flex: 1, padding: 5}}>
             <Text style={styles.titleText} numberOfLines={1}>{leagueToShow ? (budgetLeagueInfo.isSuccess ? budgetLeagueInfo.data.league.name : "")  : 'Leagues'}</Text>
             { leagueToShow && 
-                <TouchableOpacity testID="backButtonStandings" style={{position: 'absolute', left: 10, top: 10}} onPress={() => setLeagueToShow(null)}>
-                    <Text style={styles.backButtonText}>Go Back</Text>
-                </TouchableOpacity>
+                <View testID="backButtonStandings" style={{position: 'absolute', left: 10, top: 10}}>
+                    <AnimatedButton buttonFn={() => setLeagueToShow(null)}>
+                        <Text style={styles.backButtonText}>Go Back</Text>
+                    </AnimatedButton>
+                </View>
             }
             { leagueToShow === null ? 
                 <BudgetLeagueList budgetUserInfo={budgetUserInfo} setLeagueToShow={setLeagueToShow}/>

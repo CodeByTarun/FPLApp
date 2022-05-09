@@ -42,10 +42,6 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
     }
 
     const [playerTableFilterState, playerTableFilterDispatch] = useReducer(playerTableFilterReducer, initialPlayerTableFilterState);   
-    const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
-
-    const [pricePreviewValue, setPricePreviewValue] = useState(initialPriceRange);
-    const [minutesPreviewValue, setMinutesPreviewValue] = useState([0, (90 * 38)]);
 
     //#region Dispatch calls
 
@@ -69,7 +65,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
     //#endregion
 
     return (
-        <View style={{flex: 1, zIndex: -1}}>
+        <View style={{flex: 1}}>
             <View style={[styles.topBarContainer, globalStyles.bottomShadow]}>
                 <View style={styles.firstRowTopBarContainer}>
                     <SearchControl placeHolderText="Search" value={playerTableFilterState.playerSearchText} onChangeTextFunction={text => playerTableFilterDispatch({type: 'PlayerSearchTextChange', filterValue: text})}/>
@@ -163,7 +159,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                 </View>
             </View>
 
-            <View style={{ flex: 11, zIndex: -1 }}>
+            <View style={{ flex: 11, zIndex: 0}}>
                 <PlayerList overview={overview} fixtures={fixtures} filters={playerTableFilterState}/>
             </View>
         </View>

@@ -1,13 +1,8 @@
-import { skipToken } from "@reduxjs/toolkit/dist/query";
-import React, { useCallback, useState } from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import React, { useCallback } from "react";
+import { View, Text, FlatList } from "react-native";
 import { Seperator } from "../../../../Global/GlobalComponents";
-import { aLittleLighterColor, largeFont, smallFont, textPrimaryColor } from "../../../../Global/GlobalConstants";
-import { Result } from "../../../../Models/FplBudgetLeagueInfo";
 import { Classic, FplManagerInfo } from "../../../../Models/FplManagerInfo";
-import { useGetBudgetLeagueInfoQuery } from "../../../../Store/fplSlice";
-import { useAppDispatch } from "../../../../Store/hooks";
-import { changeToBudgetTeam } from "../../../../Store/teamSlice";
+import { AnimatedButton } from "../../../Controls";
 import { styles } from "../../StandingsStyles";
 
 interface BudgetLeagueListProps {
@@ -24,10 +19,12 @@ const BudgetLeagueList = ({budgetUserInfo, setLeagueToShow} : BudgetLeagueListPr
 
     const renderLeagueItem = useCallback(({item}: {item: Classic}) => {
         return (
-            <TouchableOpacity testID="leagueItemButton" style={{flex: 1, flexDirection: 'row', paddingTop: 15, paddingBottom: 15}} onPress={() => onLeagueItemPress(item.id)}>
-                <Text style={[styles.teamNameText, {paddingLeft: 5}]}>{item.name}</Text>
-                <Text style={[styles.leagueText, {width: '30%'}]}>{item.entry_rank}</Text>
-            </TouchableOpacity>
+            <AnimatedButton buttonFn={() => onLeagueItemPress(item.id)}>
+                <View testID="leagueItemButton" style={{flex: 1, flexDirection: 'row', paddingTop: 15, paddingBottom: 15}}>
+                    <Text style={[styles.teamNameText, {paddingLeft: 5}]}>{item.name}</Text>
+                    <Text style={[styles.leagueText, {width: '30%'}]}>{item.entry_rank}</Text>
+                </View>
+            </AnimatedButton>
         )}, []);
 
     return (

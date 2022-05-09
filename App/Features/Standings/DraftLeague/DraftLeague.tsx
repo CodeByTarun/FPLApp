@@ -5,6 +5,7 @@ import { textPrimaryColor, largeFont, textSecondaryColor, aLittleLighterColor, s
 import { FplDraftLeagueInfo, LeagueEntry, Standing } from "../../../Models/FplDraftLeagueInfo";
 import { useAppDispatch } from "../../../Store/hooks";
 import { changeToDraftTeam } from "../../../Store/teamSlice";
+import { AnimatedButton } from "../../Controls";
 import StandingsHeader from "../StandingsHeader";
 import { styles } from "../StandingsStyles";
 
@@ -29,17 +30,17 @@ const DraftLeague = ({ draftLeagueInfo, setModalVisibility } : DraftLeagueStandi
         let leagueEntry = draftLeagueInfo.league_entries.find(entry => entry.id === item.league_entry);
 
         return (
-            <TouchableOpacity style={styles.standingsButtonContainer}
-                              testID='draftLeagueEntryItemButton'
-                              onPress={() => openDraftTeamFromStandings(leagueEntry)}>
-                <Text style={[styles.leagueText, {flex: 1}]}>{item.rank}</Text>
-                <View style={{flex: 3, paddingLeft: 5}}>
-                    <Text numberOfLines={1} style={styles.teamNameText}>{leagueEntry?.entry_name}</Text>
-                    <Text numberOfLines={1} style={styles.managerNameText}>{leagueEntry?.player_first_name + " " + leagueEntry?.player_last_name}</Text>
+            <AnimatedButton buttonFn={() => openDraftTeamFromStandings(leagueEntry)}>
+                <View style={styles.standingsButtonContainer} testID='draftLeagueEntryItemButton'>
+                    <Text style={[styles.leagueText, {flex: 1}]}>{item.rank}</Text>
+                    <View style={{flex: 3, paddingLeft: 5}}>
+                        <Text numberOfLines={1} style={styles.teamNameText}>{leagueEntry?.entry_name}</Text>
+                        <Text numberOfLines={1} style={styles.managerNameText}>{leagueEntry?.player_first_name + " " + leagueEntry?.player_last_name}</Text>
+                    </View>
+                    <Text style={[styles.leagueText, {flex: 1}]}>{item.event_total}</Text>
+                    <Text style={[styles.leagueText, {flex: 1}]}>{item.total}</Text> 
                 </View>
-                <Text style={[styles.leagueText, {flex: 1}]}>{item.event_total}</Text>
-                <Text style={[styles.leagueText, {flex: 1}]}>{item.total}</Text> 
-            </TouchableOpacity>
+            </AnimatedButton>
         )
     }, [])
 

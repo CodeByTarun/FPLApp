@@ -1,6 +1,5 @@
 // This is going to show a table of players when clicked on that will be filtered as the user types in it
 // When one of the players names are clicked on a player card will open showing there stats
-//TODO: think about adding a compare feature between two players?
 
 import { animated, config, useSpring } from "@react-spring/native";
 import React, { useCallback, useEffect, useRef } from "react";

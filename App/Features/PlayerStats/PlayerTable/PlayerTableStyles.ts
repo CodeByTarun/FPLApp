@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
         backgroundColor: primaryColor,
         paddingLeft: 5,
         paddingRight: 5,
+        zIndex: 1,
     },
 
     firstRowTopBarContainer: {

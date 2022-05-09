@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { cornerRadius, mediumFont, secondaryColor, textSecondaryColor, width } from "../../../Global/GlobalConstants";
+import { cornerRadius, mediumFont, primaryColor, secondaryColor, textSecondaryColor, width } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     playerButton: {
         width: width * 0.18,
         height: '100%',
-        backgroundColor: secondaryColor,
+        backgroundColor: primaryColor,
         borderRadius: cornerRadius,
         padding: 3,
     },

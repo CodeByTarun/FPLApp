@@ -10,8 +10,6 @@ import { PlayerData } from "../../../App/Models/CombinedData";
 import { StyleSheet } from "react-native";
 import { textPrimaryColor, lightColor } from "../../../App/Global/GlobalConstants";
 
-//TODO: need to test when its a budget team and when its a draft team
-
 let draftInfo: DraftInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
 
 test('draft league manager card shows the right info', () => {

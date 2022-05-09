@@ -13,6 +13,7 @@ import { openPlayerModal } from "../../Store/modalSlice";
 import globalStyles from "../../Global/GlobalStyles";
 import { styles } from "./PlayerStatsDisplayStyles";
 import FixtureDifficultyDisplay from "./FixtureDifficultyDisplay";
+import { AnimatedButton } from "../Controls";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
@@ -72,78 +73,80 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex, cu
     return (
         <>
         {(player.gameweekData && teamInfo.teamType !== TeamTypes.Empty) &&
-        <TouchableOpacity testID="playerStatsDisplayButton" style={styles.container} onPress={() => dispatch(openPlayerModal(player))}>
-            { viewIndex === 0 &&
-            <>
-            <View testID="statsViewContainer" style={styles.imagesContainer}>
-                <Image testID="playerStatsJersey" style={styles.jerseyImage} source={Jerseys[player.overviewData.team_code]} resizeMode="contain"/>
+        <AnimatedButton buttonFn={() => dispatch(openPlayerModal(player))}>
+            <View testID="playerStatsDisplayButton" style={styles.container} >
+                { viewIndex === 0 &&
+                <>
+                <View testID="statsViewContainer" style={styles.imagesContainer}>
+                    <Image testID="playerStatsJersey" style={styles.jerseyImage} source={Jerseys[player.overviewData.team_code]} resizeMode="contain"/>
 
-                <View style={styles.allStatsContainer}>
-                    { StatView(player, teamInfo, Identifier.GoalsScored) }
-                    { StatView(player, teamInfo, Identifier.Assists) }
-                    { StatView(player, teamInfo, Identifier.Saves) }
-                    { StatView(player, teamInfo, Identifier.OwnGoals) }
-                    <View style={styles.cardsContainer}>
-                        { StatView(player, teamInfo, Identifier.YellowCards) }
-                        { StatView(player, teamInfo, Identifier.RedCards) }
-                    </View> 
-                    {(player.gameweekData.stats.in_dreamteam && teamInfo.teamType !== TeamTypes.Dream) &&
-                        <View testID="dreamTeamPlayerStats" style={styles.dreamTeamContainer}>
-                            <Image testID="dreamTeamIconPlayerStats" style={styles.dreamTeamImage} source={Icons['dreamteam']} resizeMode="contain"/>
+                    <View style={styles.allStatsContainer}>
+                        { StatView(player, teamInfo, Identifier.GoalsScored) }
+                        { StatView(player, teamInfo, Identifier.Assists) }
+                        { StatView(player, teamInfo, Identifier.Saves) }
+                        { StatView(player, teamInfo, Identifier.OwnGoals) }
+                        <View style={styles.cardsContainer}>
+                            { StatView(player, teamInfo, Identifier.YellowCards) }
+                            { StatView(player, teamInfo, Identifier.RedCards) }
+                        </View> 
+                        {(player.gameweekData.stats.in_dreamteam && teamInfo.teamType !== TeamTypes.Dream) &&
+                            <View testID="dreamTeamPlayerStats" style={styles.dreamTeamContainer}>
+                                <Image testID="dreamTeamIconPlayerStats" style={styles.dreamTeamImage} source={Icons['dreamteam']} resizeMode="contain"/>
+                            </View>
+                        }
+                        {((teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) && player.overviewData.status !== 'a') &&
+                        <View testID="injuryIndicatorPlayerStats" style={styles.injuredContainer}>
+                            <Image style={styles.injuredImage} resizeMode="contain" testID="injuryIndicatorImagePlayerStats"
+                                source={(player.overviewData.status === 'd') ? Icons['doubtful'] : Icons['out']}/>
                         </View>
-                    }
-                    {((teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) && player.overviewData.status !== 'a') &&
-                    <View testID="injuryIndicatorPlayerStats" style={styles.injuredContainer}>
-                        <Image style={styles.injuredImage} resizeMode="contain" testID="injuryIndicatorImagePlayerStats"
-                               source={(player.overviewData.status === 'd') ? Icons['doubtful'] : Icons['out']}/>
-                    </View>
-                    }
-                    { ((teamInfo.teamType === TeamTypes.Budget) && (player.isCaptain || player.isViceCaptain)) &&
-                    <View testID="captainAndViceCaptainPlayerStats" style={styles.captainAndViceCaptainContainer}>
-                        <Text style={styles.captainAndViceCaptainText}>{player.isCaptain ? "C" : "V"}</Text>
-                    </View>
-                    }
-                </View> 
-            </View>
+                        }
+                        { ((teamInfo.teamType === TeamTypes.Budget) && (player.isCaptain || player.isViceCaptain)) &&
+                        <View testID="captainAndViceCaptainPlayerStats" style={styles.captainAndViceCaptainContainer}>
+                            <Text style={styles.captainAndViceCaptainText}>{player.isCaptain ? "C" : "V"}</Text>
+                        </View>
+                        }
+                    </View> 
+                </View>
 
-            <View testID="scoreAndNameContainer" style={[styles.scoreAndNameContainer, {width: (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) ? '115%' : '95%'}]}>
-                <View style={styles.nameContainer}>
-                    <Text numberOfLines={1} style={[styles.text, styles.nameText]}>{player.overviewData.web_name}</Text>
+                <View testID="scoreAndNameContainer" style={[styles.scoreAndNameContainer, {width: (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) ? '115%' : '95%'}]}>
+                    <View style={styles.nameContainer}>
+                        <Text numberOfLines={1} style={[styles.text, styles.nameText]}>{player.overviewData.web_name}</Text>
+                    </View>
+                    <View style={styles.scoreContainer}>
+                        <Text style={styles.text}>{GetPlayerScoreAndFixtureText(player, teamInfo, fixtures, overview)}</Text>
+                    </View>
                 </View>
-                <View style={styles.scoreContainer}>
-                    <Text style={styles.text}>{GetPlayerScoreAndFixtureText(player, teamInfo, fixtures, overview)}</Text>
-                </View>
+                </>
+                }
+                { (viewIndex !== 0) &&
+                    <View style={[styles.playerInfoCardContainer, globalStyles.tabShadow]}>
+                        <View testID="infoCardContainerPlayerStats" style={styles.infoCardContainer}>
+                            {(viewIndex === 1) && 
+                            <>
+                                {singleStatView('Cost', '£' + (player.overviewData.now_cost / 10).toFixed(1))}
+                                {singleStatView('Sel.', player.overviewData.selected_by_percent + '%')}
+                                {singleStatView('Form', player.overviewData.form)}
+                            </>
+                            }
+                            { (viewIndex === 2) && 
+                            <>
+                                {singleStatView('PTS', player.overviewData.event_points)}
+                                {singleStatView('xPTS', player.overviewData.ep_this)}
+                                <Text style={styles.nextWeekText}>Next Week</Text>
+                                {singleStatView('xPTS', player.overviewData.ep_next)}
+                            </>
+                            }
+                            { (viewIndex === 3) && 
+                                <FixtureDifficultyDisplay overview={overview} fixtures={fixtures} player={player} currentGameweek={currentGameweek}/>
+                            }
+                        </View>
+                        <View testID="infoCardNamePlayerStats" style={styles.infoCardNameContainer}>
+                            <Text numberOfLines={1} style={styles.infoCardNameText}>{player.overviewData.web_name}</Text>
+                        </View>
+                    </View>
+                }
             </View>
-            </>
-            }
-            { (viewIndex !== 0) &&
-                <View style={[styles.playerInfoCardContainer, globalStyles.tabShadow]}>
-                    <View testID="infoCardContainerPlayerStats" style={styles.infoCardContainer}>
-                        {(viewIndex === 1) && 
-                        <>
-                            {singleStatView('Cost', '£' + (player.overviewData.now_cost / 10).toFixed(1))}
-                            {singleStatView('Sel.', player.overviewData.selected_by_percent + '%')}
-                            {singleStatView('Form', player.overviewData.form)}
-                        </>
-                        }
-                        { (viewIndex === 2) && 
-                        <>
-                            {singleStatView('PTS', player.overviewData.event_points)}
-                            {singleStatView('xPTS', player.overviewData.ep_this)}
-                            <Text style={styles.nextWeekText}>Next Week</Text>
-                            {singleStatView('xPTS', player.overviewData.ep_next)}
-                        </>
-                        }
-                        { (viewIndex === 3) && 
-                            <FixtureDifficultyDisplay overview={overview} fixtures={fixtures} player={player} currentGameweek={currentGameweek}/>
-                        }
-                    </View>
-                    <View testID="infoCardNamePlayerStats" style={styles.infoCardNameContainer}>
-                        <Text numberOfLines={1} style={styles.infoCardNameText}>{player.overviewData.web_name}</Text>
-                    </View>
-                </View>
-            }
-        </TouchableOpacity>
+        </AnimatedButton>
 }
         </>
     )
