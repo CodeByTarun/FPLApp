@@ -28,67 +28,77 @@ const AnimatedView = animated(View);
 
 function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number, currentGameweek: number) {
 
-    const playerStatsView = [];
+    try {
+        const playerStatsView = [];
 
-    if (players !== null) {
-        let i = 0;
-        let elementType = 1;
-        let remainder = 0;
-        const numberOfPlayersAllowedInARow = 6;
-        let lineupPlayers = players;
+        if (players) {
+            let i = 0;
+            let elementType = 1;
+            let remainder = 0;
+            const numberOfPlayersAllowedInARow = 6;
+            let lineupPlayers = players;
 
-        if (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) {
-            lineupPlayers = players.slice(0, 11);
-        }
-
-        while (i < lineupPlayers.length) {
-
-            let positionCount = lineupPlayers.filter(player => player.overviewData.element_type == elementType).length;
-            
-            if (positionCount + remainder > numberOfPlayersAllowedInARow) {
-                remainder = remainder + (positionCount - numberOfPlayersAllowedInARow);
-                positionCount = numberOfPlayersAllowedInARow;
-            } else {
-                positionCount = positionCount + remainder;
-                remainder = 0;
+            if (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) {
+                lineupPlayers = players.slice(0, 11);
             }
 
-            playerStatsView.push(
-                <View style={styles.playerRowContainer} key={elementType}>
-                    { lineupPlayers.slice(i, i + positionCount).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
-                                                                                                           fixtures={fixtures} teamInfo={teamInfo}
-                                                                                                           viewIndex={viewIndex} currentGameweek={currentGameweek}/> })}
-                </View>
-            )
+            while (i < lineupPlayers.length) {
 
-            i += positionCount;
-            elementType += 1;
+                let positionCount = lineupPlayers.filter(player => player.overviewData.element_type == elementType).length;
+                
+                if (positionCount + remainder > numberOfPlayersAllowedInARow) {
+                    remainder = remainder + (positionCount - numberOfPlayersAllowedInARow);
+                    positionCount = numberOfPlayersAllowedInARow;
+                } else {
+                    positionCount = positionCount + remainder;
+                    remainder = 0;
+                }
+
+                playerStatsView.push(
+                    <View style={styles.playerRowContainer} key={elementType}>
+                        { lineupPlayers.slice(i, i + positionCount).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
+                                                                                                            fixtures={fixtures} teamInfo={teamInfo}
+                                                                                                                viewIndex={viewIndex} currentGameweek={currentGameweek}/> })}
+                    </View>
+                )
+
+                i += positionCount;
+                elementType += 1;
+            }
         }
-    }
 
-    // Adds another row if no forwards have played for the team
-    if (playerStatsView.length === 3) {
-        playerStatsView.push(<View key={4} style={{flex: 1}}/>);
-    }
+        // Adds another row if no forwards have played for the team
+        if (playerStatsView.length === 3) {
+            playerStatsView.push(<View key={4} style={{flex: 1}}/>);
+        }
 
-    return playerStatsView;
+        return playerStatsView;
+    } 
+    catch (error) {
+        return <></>
+    }
 }
 
 function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, viewIndex: number, currentGameweek: number) {
 
-    const playerStatsView = [];
-    
-    if (players) {
-        playerStatsView.push(
-            <View style={styles.playerRowContainer} key={5}>
-                { players.slice(11, 15).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
-                                                                                   fixtures={fixtures} teamInfo={teamInfo}
-                                                                                   viewIndex={viewIndex} currentGameweek={currentGameweek}/> })}
-            </View>
-        )
-    }
+    try {
+        const playerStatsView = [];
+        
+        if (players) {
+            playerStatsView.push(
+                <View style={styles.playerRowContainer} key={5}>
+                    { players.slice(11, 15).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
+                                                                                    fixtures={fixtures} teamInfo={teamInfo}
+                                                                                    viewIndex={viewIndex} currentGameweek={currentGameweek}/> })}
+                </View>
+            )
+        }
 
-    return playerStatsView;
+        return playerStatsView;
+    }
+    catch (error) {
+        return <></>
+    }
 }
 
 const viewIndexScenes = ["Lineup", "More Info", "Points", "Fixtures"];
@@ -108,6 +118,7 @@ interface LineupProps {
 const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, draftOverview, budgetGameweekPicks, budgetUserInfo, draftUserInfo} : LineupProps) => {
 
     const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftGameweekPicks, budgetGameweekPicks);
+    console.table(players);
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     const [viewIndex, setViewIndex] = useState(0); 
@@ -132,17 +143,13 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
         <View style={{flex: 1}}>
             <View style={{flex: 4}}>
                 <Image style={styles.field} source={require('../../../../assets/threequartersfield.jpg')}/>
-                
-                    {(teamInfo.teamType === TeamTypes.Fixture || teamInfo.teamType === TeamTypes.Dream) ? 
+                    { players &&
                         <View testID="fixtureOrDreamTeamPlayersStatsView" style={styles.playerContainer}>
                             {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}
                         </View>
-                    :
-                    ((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
+                    }
+                    {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                         <>
-                            <View testID="budgetorDraftTeamPlayersStatsView" style={styles.playerContainer}>
-                                {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}
-                            </View>
                             <View style={styles.managerInfoCardContainer}>
                             { cardTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Budget) &&
                                 <AnimatedView style={[{height: '100%', width: '100%', bottom: animatedStyles.bottom}]}>
@@ -179,7 +186,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                         <KingsOfTheGameweekView overviewData={overview}/>
                     </AnimatedView>
                 )}
-                {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
+                {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) && players &&
                     <>
                     { CreateBenchView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek) }
                     </>

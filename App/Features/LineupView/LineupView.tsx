@@ -84,16 +84,10 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                 </View>
             </View>
             <View style={styles.middle}>
-                {(teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks && budgetUserInfo && gameweek) ?
+                { (teamInfo.teamType !== TeamTypes.Empty) && gameweek ?
                     <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} 
+                            draftGameweekPicks={draftGameweekPicks} draftUserInfo={draftUserInfo} draftOverview={draftOverview}
                             budgetGameweekPicks={budgetGameweekPicks} budgetUserInfo={budgetUserInfo}/> : 
-
-                 (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftUserInfo && gameweek) ?
-                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} 
-                            draftGameweekPicks={draftGameweekPicks} draftUserInfo={draftUserInfo} draftOverview={draftOverview}/> : 
-
-                 (teamInfo.teamType !== TeamTypes.Draft && teamInfo.teamType !== TeamTypes.Budget && teamInfo.teamType !== TeamTypes.Empty && gameweek) ?
-                    <Lineup overview={overview} fixtures={fixtures} teamInfo={teamInfo} gameweek={gameweek} /> : 
                 
                  (teamInfo.teamType === TeamTypes.Empty) ?
                     <View style={{flex: 1, alignContent: 'center', justifyContent: 'center'}}>
@@ -107,7 +101,6 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                         <LoadingIndicator/>
                         </View>
                     </View>
-            
                 }                
             </View>
                 <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
