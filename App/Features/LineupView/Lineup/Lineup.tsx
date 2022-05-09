@@ -118,23 +118,31 @@ interface LineupProps {
 const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, draftOverview, budgetGameweekPicks, budgetUserInfo, draftUserInfo} : LineupProps) => {
 
     const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftGameweekPicks, budgetGameweekPicks);
-    console.table(players);
+
     const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
 
     const [viewIndex, setViewIndex] = useState(0); 
 
     useEffect(function gameweekChanged() {
-        setViewIndex(0);
+        if (viewIndex !== 0) {
+            setViewIndex(0);
+        }
     }, [teamInfo.gameweek, teamInfo.teamType])
 
-    const bottomViewTransition = useTransition((teamInfo.teamType === TeamTypes.Dream), {
+    const bonusPointsViewTransition = useTransition((teamInfo.teamType === TeamTypes.Fixture), {
         from: { top: '100%' },
         enter: { top: '0%' },
     });
 
-    const cardTransition = useTransition((teamInfo.teamType === TeamTypes.Budget), {
+    const kingsOfTheGameweekViewTransition = useTransition((teamInfo.teamType === TeamTypes.Dream), {
+        from: { top: '100%' },
+        enter: { top: '0%' },
+    });
+
+    const cardTransition = useTransition(((teamInfo.teamType === TeamTypes.Budget) || (teamInfo.teamType === TeamTypes.Draft)), {
         from: { bottom: '100%' },
         enter: { bottom: '0%' },
+        initial: {bottom: '100%'}
     });
 
     return (
@@ -151,16 +159,16 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                     {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
                         <>
                             <View style={styles.managerInfoCardContainer}>
-                            { cardTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Budget) &&
-                                <AnimatedView style={[{height: '100%', width: '100%', bottom: animatedStyles.bottom}]}>
-                                    <ManagerInfoCard teamInfo={teamInfo} players={players} currentGameweek={currentGameweek} budgetGameweekPicks={budgetGameweekPicks} budgetManagerInfo={budgetUserInfo}/>
-                                </AnimatedView>
-                            )}
-                            { cardTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Draft) &&
-                                <AnimatedView style={[{height: '100%', width: '100%', bottom: animatedStyles.bottom}]}>
-                                    <ManagerInfoCard teamInfo={teamInfo} players={players} currentGameweek={currentGameweek} draftManagerInfo={draftUserInfo}/>
-                                </AnimatedView>
-                            )}
+                                { cardTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Budget) &&
+                                    <AnimatedView style={[{height: '100%', width: '100%', bottom: animatedStyles.bottom}]}>
+                                        <ManagerInfoCard teamInfo={teamInfo} players={players} currentGameweek={currentGameweek} budgetGameweekPicks={budgetGameweekPicks} budgetManagerInfo={budgetUserInfo}/>
+                                    </AnimatedView>
+                                )}
+                                { cardTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Draft) &&
+                                    <AnimatedView style={[{height: '100%', width: '100%', bottom: animatedStyles.bottom}]}>
+                                        <ManagerInfoCard teamInfo={teamInfo} players={players} currentGameweek={currentGameweek} draftManagerInfo={draftUserInfo}/>
+                                    </AnimatedView>
+                                )}
                             </View>
                             <View style={{ position: 'absolute', left: 7, height: '12%', aspectRatio: 1.2}}>
                             { cardTransition((animatedStyles) => (teamInfo.gameweek === currentGameweek) &&
@@ -176,12 +184,12 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
             </View>
             <View style={styles.bottomContainer}> 
     
-                { bottomViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Fixture)  && 
+                { bonusPointsViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Fixture)  && 
                     <AnimatedView style={[{height: '100%', width: '100%', top: animatedStyles.top}]}>
                         <BonusPointView overviewData={overview} fixturesData={fixtures} teamInfo={teamInfo}/>  
                     </AnimatedView>
                 )} 
-                { bottomViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Dream) && 
+                { kingsOfTheGameweekViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Dream) && 
                     <AnimatedView style={[{height: '100%', width: '100%', top: animatedStyles.top}]}>
                         <KingsOfTheGameweekView overviewData={overview}/>
                     </AnimatedView>
