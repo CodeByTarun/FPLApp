@@ -24,10 +24,9 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row', 
         borderRadius: 5,
-        borderWidth: 1,
-        borderColor: secondaryColor,
         marginTop: 5,
         marginBottom: 5,
+        backgroundColor: secondaryColor
     },
 
     titleText: {
@@ -40,8 +39,17 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent:'center',
-        backgroundColor:'red',
-        height: '100%'
+        height: '100%',
+        zIndex: 2,
+    },
+
+    viewToggleIndiciator: {
+        height: '100%',
+        width: '50%',
+        position: 'absolute',
+        backgroundColor: primaryColor,
+        borderRadius: 5,
+        zIndex: 1,
     },
 
     text: {

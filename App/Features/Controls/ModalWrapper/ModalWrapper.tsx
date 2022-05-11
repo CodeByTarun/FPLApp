@@ -1,6 +1,6 @@
-import { animated, config, easings, useSpring, useTransition } from "@react-spring/native";
+import { animated, easings, useTransition } from "@react-spring/native";
 import React, { useState } from "react";
-import { Modal, Pressable, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { Pressable, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import globalStyles from "../../../Global/GlobalStyles";
 import { useAppDispatch } from "../../../Store/hooks";
 import { closeModal } from "../../../Store/modalSlice";
@@ -18,7 +18,6 @@ const AnimatedPressable = animated(Pressable);
 const AnimatedView = animated(View);
 
 const ModalWrapper = ({ isVisible, closeFn, children, modalHeight, modalWidth } : ModalWrapperProps) => {
-
 
     const dispatch = useAppDispatch();
 
@@ -40,8 +39,8 @@ const ModalWrapper = ({ isVisible, closeFn, children, modalHeight, modalWidth } 
                                               modalHeight ? {height: modalHeight} : {}, 
                                               modalWidth ? {width: modalWidth} : {}, 
                                               {top: styling.top}]}>
-                            <CloseButton closeFunction={() => dispatch(closeModal())}/>
-                            { children }
+                            <CloseButton closeFunction={() => dispatch(closeModal())}/> 
+                                { children }
                         </AnimatedView>
                     </TouchableWithoutFeedback>
                 </AnimatedPressable>)

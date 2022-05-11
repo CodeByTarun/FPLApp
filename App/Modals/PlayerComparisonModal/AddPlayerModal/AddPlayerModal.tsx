@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { FlatList, View, Text, TouchableOpacity } from "react-native";
-import { CloseButton, SearchControl } from "../../../Features/Controls";
+import { AnimatedButton, CloseButton, SearchControl } from "../../../Features/Controls";
 import { Seperator } from "../../../Global/GlobalComponents";
 import { width, height } from "../../../Global/GlobalConstants";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
@@ -33,9 +33,11 @@ const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayer
 
     const renderPlayerItem = ({item} : {item:PlayerOverview}) => {
         return (
-            <TouchableOpacity style={styles.playerItemContainer} onPress={() => addPlayer(item)}>
-                <Text style={styles.playerText}>{item.first_name + " " + item.second_name}</Text>
-            </TouchableOpacity>
+            <AnimatedButton buttonFn={() => addPlayer(item)}>
+                <View style={styles.playerItemContainer}>
+                    <Text style={styles.playerText}>{item.first_name + " " + item.second_name}</Text>
+                </View>
+            </AnimatedButton>
         )
     }
 

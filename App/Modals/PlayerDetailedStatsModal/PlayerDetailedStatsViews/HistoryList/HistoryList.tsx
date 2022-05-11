@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { View, ScrollView, FlatList, Text, TouchableWithoutFeedback } from "react-native";
 import globalStyles from "../../../../Global/GlobalStyles";
 import { FplOverview, PlayerOverview } from "../../../../Models/FplOverview";
@@ -29,42 +29,32 @@ interface HistoryProps {
     playerData: FplPlayerSummary;
 }
 
-const HistoryFooter = (player: PlayerOverview) => {
-    return (
-        <View style={styles.footerContainer}>
-            { Object.keys(stats).map((stat) => {
-                return (
-                <View testID="historyFooterItem" key={stat} style={styles.tableTextContainer}>
-                    <Text  style={[styles.headerText]}>{ player[stat as keyof PlayerOverview] }</Text>
-                </View>
-                )
-            })}
-        </View>
-    )
-}
-
 const HistoryList = ({overview, player, playerData} : HistoryProps) => {
 
-    const historyItemKeyExtractor = useCallback((history: History) => history.fixture.toString(), []);
+    const [isHidden, setIsHidden] = useState(false);
 
-    const historyItemRender = useCallback(({item} : {item: History})=> {
+    useEffect(() => {
+        setTimeout(() => setIsHidden(true), 500);
+    });
+
+    const historyItemRender = useCallback((history: History) => {
         return (
-            <View key={item.fixture.toString()} testID="historyListItem" style={styles.historyItemContainer} onStartShouldSetResponder={() => true}>
+            <View key={history.fixture.toString()} testID="historyListItem" style={styles.historyItemContainer} onStartShouldSetResponder={() => true}>
                 { Object.keys(stats).map((stat) => {
                     return (
                     <View key={stat} style={styles.tableTextContainer}>
                         {(stat !== 'opponent_team') ? 
-                            <Text style={[styles.headerText]}>{ item[stat as keyof History] }</Text>
+                            <Text style={[styles.headerText]}>{ history[stat as keyof History] }</Text>
                             :
-                            <Text style={[styles.headerText]}>{ overview.teams.find(team => team.id === item[stat as keyof History])?.short_name }</Text>
+                            <Text style={[styles.headerText]}>{ overview.teams.find(team => team.id === history[stat as keyof History])?.short_name }</Text>
                         }
                     </View>
                     )
                 })}
             </View>
-        )}, [overview]);
+        )}, [overview, player]);
 
-    const historyHeader = useCallback(({item}: {item: History}) => {
+    const HistoryHeader = useCallback(() => {
         return (
             <View style={styles.headerContainer}>
                 { Object.values(stats).map((stat) => {
@@ -77,20 +67,36 @@ const HistoryList = ({overview, player, playerData} : HistoryProps) => {
         )
     }, []);
 
+    const HistoryFooter = useCallback((player: PlayerOverview) => {
+        return (
+            <View style={styles.footerContainer}>
+                { Object.keys(stats).map((stat) => {
+                    return (
+                    <View testID="historyFooterItem" key={stat} style={styles.tableTextContainer}>
+                        <Text  style={[styles.headerText]}>{ player[stat as keyof PlayerOverview] }</Text>
+                    </View>
+                    )
+                })}
+            </View>
+        )
+    }, []);
+
     return (
         <View testID="playerDetailedStatsHistoryListView" style={[styles.container]}>
-            <ScrollView style={{flex: 1}} testID="historyListScrollView" horizontal={true}>
-                <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
-                    <FlatList style={{flex: 1}} contentContainerStyle={{justifyContent: 'center'}} data={playerData.history}
-                            ListHeaderComponent={historyHeader}
-                            keyExtractor={historyItemKeyExtractor}
-                            renderItem={historyItemRender}
-                            stickyHeaderIndices={[0]}/>
-                    { HistoryFooter(player )}
-                </View>
-            </ScrollView>
+            { isHidden &&
+                <ScrollView style={{flex: 1}} testID="historyListScrollView" horizontal={true}>
+                    <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
+                        { HistoryHeader() }
+                        <ScrollView style={{flex: 1}}>
+                        { playerData.history.map(history => {
+                            return ( historyItemRender(history) )
+                        })}
+                        </ScrollView>
+                        { HistoryFooter( player )}
+                    </View>
+                </ScrollView>}
         </View>
     )
 }
 
-export default HistoryList;
+export default React.memo(HistoryList);

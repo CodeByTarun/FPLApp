@@ -2,7 +2,7 @@ import Checkbox from "expo-checkbox";
 import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { Modal, Pressable, View, Text, TouchableOpacity, Animated, ScrollView } from "react-native";
 import { Slider } from "@miblanchard/react-native-slider";
-import { CloseButton, CustomButton, FilterButton, ModalWrapper, ToolTip } from "../../Features/Controls";
+import { AnimatedButton, CloseButton, CustomButton, FilterButton, ModalWrapper, ToolTip } from "../../Features/Controls";
 import { fieldColor, height, lightColor, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
@@ -132,10 +132,11 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
 
                     </ScrollView>
                     </View>
-
-                    <TouchableOpacity style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]} onPress={() => setIsAddPlayerModalVisible(true)} disabled={playersToCompare.length >= 5}>
-                        <Text style={styles.buttonText}>Add Player</Text>
-                    </TouchableOpacity>
+                    <AnimatedButton buttonFn={() => setIsAddPlayerModalVisible(true)} disabled={playersToCompare.length >= 5}>                
+                        <View style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]}>
+                            <Text style={styles.buttonText}>Add Player</Text>
+                        </View>
+                    </AnimatedButton>
                 </View>
                 <ToolTip distanceFromRight={width * 0.15} distanceForArrowFromRight={-width}
                         distanceFromTop={height * 0.15}

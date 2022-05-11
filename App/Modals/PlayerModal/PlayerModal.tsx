@@ -97,7 +97,7 @@ const PlayerModal = ({overview, fixtures, teamInfo, modalInfo}: PlayerCardProps)
 
     const onMoreInfoPress = () => {
         if (player) {
-            dispatch(openPlayerDetailedStatsModal(player.overviewData))
+            dispatch(openPlayerDetailedStatsModal(player.overviewData));
         }
     }
 
