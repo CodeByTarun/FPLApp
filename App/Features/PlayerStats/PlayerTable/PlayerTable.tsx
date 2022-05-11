@@ -12,7 +12,6 @@ import { Slider } from "@miblanchard/react-native-slider";
 import PlayerList from "../PlayerList/PlayerList";
 import { useAppDispatch } from "../../../Store/hooks";
 import { goToMainScreen } from "../../../Store/navigationSlice";
-import { Icons } from "../../../Global/Images";
 import globalStyles from "../../../Global/GlobalStyles";
 import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
 import { styles } from "./PlayerTableStyles";

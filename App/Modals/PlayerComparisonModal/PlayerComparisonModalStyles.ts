@@ -26,11 +26,12 @@ export const styles = StyleSheet.create({
 
     controlsOuterContainers: {
         marginBottom: 20,
+        marginTop: 10,
     },
 
     controlContainer: {
         width: '60%',
-        height: height * 0.05,
+        height: 40,
         flexDirection: 'row',
         alignSelf: 'center',
         backgroundColor: secondaryColor,
@@ -58,6 +59,14 @@ export const styles = StyleSheet.create({
         color: textSecondaryColor,
         fontWeight: '600',
         fontSize: mediumFont * 0.9,
+    },
+
+    filterButtonContainer: {
+        position: 'absolute', 
+        right: 0, 
+        top: '5%', 
+        height: '90%', 
+        width: '15%',
     },
 
     button: {
