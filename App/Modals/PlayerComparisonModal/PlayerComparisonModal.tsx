@@ -15,6 +15,7 @@ import { styles } from "./PlayerComparisonModalStyles";
 import AddPlayerModal from "./AddPlayerModal";
 import PlayerComparisonView from "./PlayerComparisonView";
 import { animated, useSpring } from "@react-spring/native";
+import CustomSlider from "../../Features/Controls/Slider";
 
 export interface CombinedPlayerData {
     playerOverview: PlayerOverview;
@@ -97,22 +98,9 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
                                                             onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
                                                     </View>
                                                     <View style={{ marginTop: 10 }}>
-                                                        <View style={{ alignItems: 'center' }}>
-                                                            <Text style={[styles.text, { flex: 1, alignSelf: 'flex-start', paddingBottom: 5 }]}>Gameweeks:</Text>
-                                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                            <Text style={[styles.text, {flex: 1}]}>{statsFilterState.gameSpan[0]}</Text>
-                                                            <Text style={[styles.text]}>{statsFilterState.gameSpan[1]}</Text>
-                                                            </View>
-                                                        </View>
-                    
-                                                        <Slider value={statsFilterState.gameSpan}
-                                                                onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value as number[] })}
-                                                                minimumValue={1}
-                                                                maximumValue={currentGameweek}
-                                                                step={1}
-                                                                thumbTintColor={lightColor}
-                                                                maximumTrackTintColor={secondaryColor}
-                                                                minimumTrackTintColor={lightColor}/>
+                                                        <CustomSlider header={"Gameweeks:"} minValue={1} maxValue={currentGameweek} 
+                                                                      step={1} initialRange={statsFilterState.gameSpan}
+                                                                      onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value })}/>
                                                     </View>
                                                 </View>
                                               }/>

@@ -17,6 +17,7 @@ import globalStyles from "../../../Global/GlobalStyles";
 import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
 import { styles } from "./PlayerTableStyles";
 import { Dropdown, ToolTip, CustomButton, SearchControl, FilterButton } from "../../Controls";
+import CustomSlider from "../../Controls/Slider";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -118,34 +119,14 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                                     onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsInWatchlist'})}/>
                                         </View>
                                         <View style={{flex: 2, padding: 5}}>
-                                            <Text style={styles.filterText}>Price Range:</Text>
-                                            <View style={{ flexDirection: 'row', paddingTop: 10}}>
-                                                <Text style={[styles.filterText, {fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[0] / 10}</Text>
-                                                <Text style={[styles.filterText, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.priceRange[1] / 10}</Text>
-                                            </View>
-                                            <Slider value={ playerTableFilterState.priceRange }
-                                                    onValueChange={value => playerTableFilterDispatch({type: 'ChangePriceRange', range: value as number[]})}
-                                                    minimumValue={initialPriceRange[0]}
-                                                    maximumValue={initialPriceRange[1]}
-                                                    step={1}
-                                                    thumbTintColor={GlobalConstants.lightColor}
-                                                    maximumTrackTintColor={GlobalConstants.secondaryColor}
-                                                    minimumTrackTintColor={GlobalConstants.lightColor}/>
+                                            <CustomSlider header={"Price Range:"} minValue={initialPriceRange[0]} maxValue={initialPriceRange[1]} 
+                                                          step={1} isPrice={true} initialRange={playerTableFilterState.priceRange} debounceValue={400}
+                                                          onValueChange={value => playerTableFilterDispatch({type: 'ChangePriceRange', range: value})}/>
                                         </View>
                                         <View style={{flex: 2, padding: 5}}>
-                                            <Text style={styles.filterText}>Minutes Per Game Range:</Text>
-                                            <View style={{ flexDirection: 'row', paddingTop: 10}}>
-                                                <Text style={[styles.filterText, {fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.minutesRange[0]}</Text>
-                                                <Text style={[styles.filterText, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{playerTableFilterState.minutesRange[1]}</Text>
-                                            </View>
-                                            <Slider value={ playerTableFilterState.minutesRange } 
-                                                    onValueChange={value => playerTableFilterDispatch({type: 'ChangeMinutesRange', range: value as number[]})}
-                                                    minimumValue={0}
-                                                    maximumValue={(90 * 38)}
-                                                    step={1}
-                                                    thumbTintColor={GlobalConstants.lightColor}
-                                                    maximumTrackTintColor={GlobalConstants.secondaryColor}
-                                                    minimumTrackTintColor={GlobalConstants.lightColor}/>
+                                            <CustomSlider header={"Minutes Per Game Range:"} minValue={0} maxValue={90 * 38} 
+                                                          step={1} initialRange={playerTableFilterState.minutesRange} debounceValue={400}
+                                                          onValueChange={ value => playerTableFilterDispatch({type: 'ChangeMinutesRange', range: value}) }/>
                                         </View>
                                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: 10}}>
                                             <Pressable style={[globalStyles.baseButton]}
