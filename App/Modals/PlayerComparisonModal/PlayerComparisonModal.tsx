@@ -80,13 +80,15 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
                             <AnimatedView style={[styles.switch, globalStyles.shadow, { left: slideSpring.left }]} children={undefined}/>
 
                             { views.map( (name, index) =>
-                                <TouchableOpacity key={index} style={styles.controlButtons} onPress={() => setViewIndex(index)}>
-                                    <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
-                                </TouchableOpacity>
+                                <View key={index} style={styles.controlButtons}>
+                                    <AnimatedButton buttonFn={() => setViewIndex(index)}>
+                                        <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
+                                    </AnimatedButton>
+                                </View>
                             )}
                         </View>
                         {viewIndex === 1 &&
-                            <View style={{position: 'absolute', right: 0, height: '100%', width: '15%'}}>
+                            <View style={styles.filterButtonContainer}>
                                 <FilterButton isArrowAbove={true}
                                               view={
                                                 <View style={{ width: width * 0.65, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
