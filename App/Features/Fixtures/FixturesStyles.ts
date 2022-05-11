@@ -71,6 +71,10 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 20,
         right: 20, 
+      },
+
+      closeFixtureViewButton: {
+        flex: 1,
         borderRadius: 100,
         backgroundColor: secondaryColor,
         padding: 15,
@@ -82,6 +86,32 @@ export const styles = StyleSheet.create({
         color: textSecondaryColor,
         alignSelf: 'center',
         textAlign: 'center'
+      },
+
+      previousGameweekButtonContainer: {
+        position: 'absolute',
+        bottom: 20,
+        left: '32%',
+      },
+
+      previousGamweekButton: {
+        flex: 1,
+        borderRadius: 100,
+        backgroundColor: secondaryColor,
+        padding: 15,
+      },
+
+      nextGameweekButtonContainer: {
+        position: 'absolute',
+        bottom: 20,
+        right: '32%',
+      }, 
+
+      nextGamweekButton: {
+        flex: 1,
+        borderRadius: 100,
+        backgroundColor: secondaryColor,
+        padding: 15,
       },
 
       gameweekViewContainer: {

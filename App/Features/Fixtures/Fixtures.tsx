@@ -4,7 +4,7 @@ import FixtureCard from './FixtureCard/FixtureCard'
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
-import { changeToBudgetTeam, changeToDraftTeam, changeToEmpty, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
+import { changeGameweek, changeToBudgetTeam, changeToDraftTeam, changeToEmpty, changingFixtureWhenGameweekChanged, removeFixture, TeamTypes } from "../../Store/teamSlice";
 import { openInfoModal } from "../../Store/modalSlice";
 import { goToFixturesScreen, goToMainScreen, ScreenTypes } from "../../Store/navigationSlice";
 import { styles } from "./FixturesStyles";
@@ -16,6 +16,7 @@ import GameweekView from "./GameweekView";
 import { height, width } from "../../Global/GlobalConstants";
 import { animated, config, useChain, useSpring, useSpringRef } from "@react-spring/native";
 import FixtureCardLoading from "./FixtureCardLoading";
+import FixturesViewButton from "./FixturesViewButton";
 
 const AnimatedView = animated(View);
 const AnimatedTouchable = animated(TouchableOpacity);
@@ -48,11 +49,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const expandRef = useSpringRef();
   const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '18%' : "100%", ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
-  const showButtonRef = useSpringRef();
-  const showButtonSpring = useSpring({ scale:  ((navigation.screenType !== ScreenTypes.Fixtures) && (teamInfo.gameweek <= liveGameweek)) ? 0 : 1,
-                                         ref: showButtonRef, config: config.stiff});
-
-  useChain([expandRef, showButtonRef]);
+  useChain([expandRef]);
 
   const [gameweekButtonAnimatedStyle, gameweekButtonAnimatedApi] = useSpring(() => ({ scale: 1 }));
   
@@ -163,12 +160,34 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
             <FixtureCardLoading/>
           </View>
         }
-        {  ((navigation.screenType === ScreenTypes.Fixtures) && (teamInfo.gameweek <= liveGameweek)) &&
-          <AnimatedTouchable style={[styles.closeFixtureViewButtonContainer, globalStyles.modalShadow, {transform: [{scale: showButtonSpring.scale}]}]} 
-                            onPress={onCalendarButtonPress}>
-            <Text style={styles.closeFixtureViewButtonText}>Close</Text>
-          </AnimatedTouchable>
+        { (navigation.screenType === ScreenTypes.Fixtures) && 
+          <>
+            <View style={styles.closeFixtureViewButtonContainer}>
+              <FixturesViewButton buttonFn={onCalendarButtonPress} isVisible={(teamInfo.gameweek <= liveGameweek)}>
+                <View style={[styles.closeFixtureViewButton, globalStyles.modalShadow]}>
+                  <Text style={styles.closeFixtureViewButtonText}>Close</Text>
+                </View>
+              </FixturesViewButton>
+            </View>
+
+            <View style={styles.previousGameweekButtonContainer}>
+              <FixturesViewButton buttonFn={() => dispatch(changeGameweek(teamInfo.gameweek - 1))} isVisible={(teamInfo.gameweek > 1)}>
+                <View style={[styles.previousGamweekButton, globalStyles.modalShadow]}>
+                  <Text style={styles.closeFixtureViewButtonText}>Prev</Text>
+                </View>
+              </FixturesViewButton>
+            </View>
+
+            <View style={styles.nextGameweekButtonContainer}>
+              <FixturesViewButton buttonFn={() => dispatch(changeGameweek(teamInfo.gameweek + 1))} isVisible={(teamInfo.gameweek < 38)}>
+                <View style={[styles.nextGamweekButton, globalStyles.modalShadow]}>
+                  <Text style={styles.closeFixtureViewButtonText}>Next</Text>
+                </View>
+              </FixturesViewButton>
+            </View>
+          </>
         }
+
       </View>
       <ToolTip distanceFromRight={width * 0.15} distanceFromTop={height * 0.1} 
                distanceForArrowFromRight={width * 0.3} isVisible={isGameweekViewVisible} 

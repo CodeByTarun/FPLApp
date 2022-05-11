@@ -64,8 +64,8 @@ export const styles = StyleSheet.create({
     filterButtonContainer: {
         position: 'absolute', 
         right: 0, 
-        top: '5%', 
-        height: '90%', 
+        top: '10%', 
+        height: '80%', 
         width: '15%',
     },
 

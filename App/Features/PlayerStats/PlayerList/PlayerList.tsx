@@ -36,6 +36,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     const [isListDoneFiltering, setIsListDoneFiltering] = useState(true);
     const [isDraftTeam, setIsDraftTeam] = useState(null as number | null);
+    
     useEffect(() => {
         if (teamInfo.teamType === TeamTypes.Draft) {
             setIsDraftTeam(teamInfo.info.id);
@@ -145,7 +146,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
         </Pressable>)
-    }, [filters, watchlist, isDraftTeam])
+    }, [filters, watchlist, draftLeagueRosters.isSuccess, isDraftTeam])
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion
