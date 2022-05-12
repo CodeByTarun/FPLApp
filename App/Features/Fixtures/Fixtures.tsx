@@ -13,7 +13,7 @@ import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
 import { FplGameweek } from "../../Models/FplGameweek";
 import globalStyles from "../../Global/GlobalStyles";
 import GameweekView from "./GameweekView";
-import { height, width } from "../../Global/GlobalConstants";
+import { FIXTURES_VIEW_HEIGHT, height, width } from "../../Global/GlobalConstants";
 import { animated, config, useChain, useSpring, useSpringRef } from "@react-spring/native";
 import FixtureCardLoading from "./FixtureCardLoading";
 import FixturesViewButton from "./FixturesViewButton";
@@ -47,7 +47,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
   const expandRef = useSpringRef();
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? '18%' : "100%", ref: expandRef, config: { friction: 18, mass: 0.5 }});
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? FIXTURES_VIEW_HEIGHT : "100%", ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
   useChain([expandRef]);
 

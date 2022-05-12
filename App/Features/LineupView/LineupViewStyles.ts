@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         margin: 0,
+        overflow: 'hidden'
     },
 
     top: {

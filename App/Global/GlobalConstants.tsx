@@ -3,6 +3,8 @@ import { Dimensions } from "react-native";
 // Dimensions
 export const {width, height} = Dimensions.get('window');
 
+export const FIXTURES_VIEW_HEIGHT = `${((44 + ((0.3288 / 1.6) * width)) /  height) * 100}%`
+
 // Styling
 export const cornerRadius = 12;
 

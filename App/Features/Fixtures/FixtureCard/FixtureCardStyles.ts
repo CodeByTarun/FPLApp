@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     fixtureViewContainer: {
         aspectRatio: 1.6,
         width: width * 0.3288,
-        paddingTop: 2,
         paddingBottom: 2,
     },
 

@@ -64,7 +64,7 @@ const MainPage = () => {
         <>
           <SafeAreaView style={styles.safeArea}>
                 <View style={{flex: 1}}>
-                  <View style={{height: '18%', width: '100%'}}/>
+                  <View style={{height: GlobalConstants.FIXTURES_VIEW_HEIGHT, width: '100%'}}/>
                   <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
                   <View style={styles.lineupView}>
                     <LineupViewQueriesContainer overview={overview.data} fixtures={fixtures.data}/>
