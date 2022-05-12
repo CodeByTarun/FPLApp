@@ -19,7 +19,6 @@ import FixtureCardLoading from "./FixtureCardLoading";
 import FixturesViewButton from "./FixturesViewButton";
 
 const AnimatedView = animated(View);
-const AnimatedTouchable = animated(TouchableOpacity);
 const AnimatedPressable = animated(Pressable);
 
 interface FixturesViewProp {

@@ -146,7 +146,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
         </Pressable>)
-    }, [filters, watchlist, draftLeagueRosters.isSuccess, isDraftTeam])
+    }, [filters, watchlist, draftLeagueRosters.isSuccess, draftUserInfo.isSuccess, draftLeagueInfo.isSuccess, isDraftTeam])
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion

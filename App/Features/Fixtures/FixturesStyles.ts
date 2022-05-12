@@ -3,7 +3,7 @@ import { height, largeFont, mediumFont, primaryColor, secondaryColor, textPrimar
 
 export const styles = StyleSheet.create({
     animatedView: {
-        backgroundColor: 'red', 
+        backgroundColor: 'gray', 
         zIndex: 1,
         width: '100%',
         position: 'absolute',
@@ -19,8 +19,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        paddingLeft: 10, 
-        paddingRight: 10
+        paddingRight: 10,
     },
 
     gameweekButton: {
