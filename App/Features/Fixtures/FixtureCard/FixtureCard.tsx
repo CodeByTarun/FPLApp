@@ -70,7 +70,7 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
 
     return (
         
-        <View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? 5 : 0 }]}>
+        <View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? -2.5 : 0 }]}>
             <AnimatedPressable testID='fixtureCardButton' style={[styles.button, { transform: [{scale: animatedStyle.scale}] }]} onPress={onPress} disabled={!fixture?.started}>            
                 <View style={[styles.card, globalStyles.shadow]}>
                     <View style={styles.topbar}>

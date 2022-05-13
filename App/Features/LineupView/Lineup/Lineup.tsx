@@ -156,7 +156,9 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                             {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, currentGameweek)}
                         </View>
                     }
-                    {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) &&
+                    {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || 
+                      (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) && 
+                       players &&
                         <>
                             <View style={styles.managerInfoCardContainer}>
                                 { cardTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Budget) &&

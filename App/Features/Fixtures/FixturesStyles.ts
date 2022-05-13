@@ -3,23 +3,24 @@ import { height, largeFont, mediumFont, primaryColor, secondaryColor, textPrimar
 
 export const styles = StyleSheet.create({
     animatedView: {
-        backgroundColor: 'gray', 
+        backgroundColor: primaryColor,
         zIndex: 1,
         width: '100%',
         position: 'absolute',
+        flexDirection: 'column',
     },
 
     controlsContainer: {
         height: 40, 
-        width: '100%' 
-    },
-
-    innerControlsContainer: {
-        flex: 1, 
+        width: '100%',
         flexDirection: 'row', 
         justifyContent: 'center', 
         alignItems: 'center', 
         paddingRight: 10,
+    },
+
+    fixturesListContainer: {
+      flex: 1,
     },
 
     gameweekButton: {
@@ -63,12 +64,12 @@ export const styles = StyleSheet.create({
       fixturesScrollView: {
         flex: 1, 
         marginLeft: 2.5, 
-        marginRight: 2.5
+        marginRight: 2.5,
       },
 
       closeFixtureViewButtonContainer: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 40,
         right: 20, 
       },
 
@@ -89,7 +90,7 @@ export const styles = StyleSheet.create({
 
       previousGameweekButtonContainer: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 40,
         left: '32%',
       },
 
@@ -102,7 +103,7 @@ export const styles = StyleSheet.create({
 
       nextGameweekButtonContainer: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 40,
         right: '32%',
       }, 
 

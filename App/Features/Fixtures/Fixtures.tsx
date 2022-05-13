@@ -46,7 +46,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
   const expandRef = useSpringRef();
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? FIXTURES_VIEW_HEIGHT : "100%", ref: expandRef, config: { friction: 18, mass: 0.5 }});
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? 120 : height, ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
   useChain([expandRef]);
 
@@ -124,22 +124,18 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   return (
     <AnimatedView style={[styles.animatedView, { height: expandSpring.height }]}>
       <View style={styles.controlsContainer}>
-
-      <View style={styles.innerControlsContainer}>
-        <View style={{flex: 1}}/>
-        <AnimatedPressable style={[styles.gameweekButton, { transform: [{ scale: gameweekButtonAnimatedStyle.scale }]}]} onPress={onGamweekButtonPress}>
-          <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
-          <Text style={styles.gameweekDropDownSymbol}>◣</Text>
-        </AnimatedPressable>
-        <View style={styles.buttonsContainers}>
-          <View style={styles.singleButtonContainer}>
-            <CustomButton image="info" buttonFunction={onInfoButtonPress}/>
+          <View style={{flex: 1}}/>
+          <AnimatedPressable style={[styles.gameweekButton, { transform: [{ scale: gameweekButtonAnimatedStyle.scale }]}]} onPress={onGamweekButtonPress}>
+            <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
+            <Text style={styles.gameweekDropDownSymbol}>◣</Text>
+          </AnimatedPressable>
+          <View style={styles.buttonsContainers}>
+            <View style={styles.singleButtonContainer}>
+              <CustomButton image="info" buttonFunction={onInfoButtonPress}/>
+            </View>
           </View>
-        </View>
       </View>  
-        
-      </View>
-      <View style={{flex: 1}}>
+      <View style={styles.fixturesListContainer}>
         { (fixtures && gameweek) ?
           <ScrollView ref={fixtureScrollViewRef} 
                       horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 

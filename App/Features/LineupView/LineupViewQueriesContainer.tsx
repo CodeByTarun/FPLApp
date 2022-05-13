@@ -1,5 +1,7 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
-import React from "react";
+import React, { useEffect } from "react";
+import { View, Text } from "react-native";
+import { mediumFont, secondaryColor, textPrimaryColor } from "../../Global/GlobalConstants";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
 import { useGetGameweekDataQuery, useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetDraftUserInfoQuery, useGetDraftLeagueInfoQuery, useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery } from "../../Store/fplSlice";
@@ -27,9 +29,17 @@ const LineupViewQueriesContainer = ({overview, fixtures} : LineupViewQueriesCont
     const budgetUserInfo = useGetBudgetUserInfoQuery((teamInfo.teamType === TeamTypes.Budget) ? teamInfo.info.id : skipToken);
 
     return (
+        <>
+        { ((teamInfo.teamType === TeamTypes.Draft && draftGameweek.isError) || (teamInfo.teamType === TeamTypes.Budget && budgetGameweek.isError)) ?
+        <View style={{flex: 1, justifyContent: 'center' }}>
+            <Text style={{alignSelf: 'center', fontSize: mediumFont, color: textPrimaryColor, width: '60%', textAlign: 'center'}}>This team does not exist or has no gameweek data.</Text>
+        </View> 
+        :
         <LineupView overview={overview} fixtures={fixtures} gameweek={gameweek.data} teamInfo={teamInfo} draftGameweekPicks={draftGameweek.data}
                     draftOverview={draftOverview.data} draftUserInfo={draftUserInfo.data} draftLeagueInfo={draftLeagueInfo.data} 
                     budgetGameweekPicks={budgetGameweek.data} budgetUserInfo={budgetUserInfo.data}/>
+        }
+        </>
     )
 }
 

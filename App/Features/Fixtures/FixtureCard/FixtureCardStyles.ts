@@ -4,9 +4,9 @@ import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor
 export const styles = StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
-        aspectRatio: 1.6,
-        width: width * 0.3288,
-        paddingBottom: 2,
+        height: 80,
+        width: width* 0.3288,
+        paddingTop: 5, paddingBottom: 5,
     },
 
     button: {
@@ -17,8 +17,8 @@ export const styles = StyleSheet.create({
         backgroundColor: primaryColor,
         flex: 1,
         flexDirection: 'column',
-        marginLeft: 3,
-        marginRight: 3,
+        marginLeft: 2.5,
+        marginRight: 2.5,
         padding: 5,
         borderRadius: cornerRadius,
     },
