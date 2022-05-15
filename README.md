@@ -50,7 +50,7 @@ Upon starting up the app, it fetches data from the FPL API. If there is an error
 
 Example: 
 When on the points tab on the browser the URL will container your team ID: 
-https://fantasy.premierleague.com/entry/<mark>8423283<mark>/event/36
+https://fantasy.premierleague.com/entry/***8423283***/event/36
 
 Once your team it will be set as your favourite team and will open automatically when the app is opened. If you click on your team’s name, the standings will open for draft leagues and a list of leagues will open for budget leagues. You can navigate to any league and click on any team to view how they are doing. 
 
