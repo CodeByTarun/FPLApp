@@ -87,7 +87,10 @@ Project Link: [https://github.com/TarunBola/FPLApp](https://github.com/TarunBola
 
 ## Acknowledgments
 * [React Native Async Storage](https://github.com/react-native-async-storage/async-storage)
-* [React Native Picker Select](https://github.com/lawnstarter/react-native-picker-select)
+* [React Testing Library](https://github.com/testing-library/react-testing-library)
+* [React Native Slider](https://github.com/miblanchard/react-native-slider)
+* [React Spring](https://github.com/pmndrs/react-spring)
+* [React Native SVG](https://github.com/react-native-svg/react-native-svg)
 * [Moment Timezone](https://momentjs.com/timezone/)
 * [flaticon](https://www.flaticon.com/free-icons/soccer)
 
