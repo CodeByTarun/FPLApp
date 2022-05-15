@@ -21,14 +21,15 @@ const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChil
                 {scale: 0.95},
                 {scale: 1}
             ],
-            onRest: buttonFn,
-            config: {easing: easings.easeInQuint, duration: 10}
-        })
+            config: {easing: easings.easeInQuint, duration: 100}
+        });
+
+        buttonFn();
 
     }
 
     return (
-        <AnimatedPressable style={{transform: [{scale: animatedStyle.scale}]}} onPress={onButtonPress} disabled={disabled}>
+        <AnimatedPressable testID={'animatedButton'} style={{transform: [{scale: animatedStyle.scale}]}} onPress={onButtonPress} disabled={disabled}>
             { children }
         </AnimatedPressable>
     )

@@ -12,13 +12,12 @@ import FixturesContainer from "./Features/Fixtures/FixturesContainer";
 import BottomTabs from "./Features/BottomTabs";
 import { LoadingIndicator } from "./Features/Controls";
 import globalStyles from "./Global/GlobalStyles";
+import * as SplashScreen from "expo-splash-screen";
 
 const MainPage = () => {
 
   const overview = useGetOverviewQuery();
   const fixtures = useGetFixturesQuery();
-
-  const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
 
   useEffect( function refetchFixtures() {
     if (fixtures.isError) {
@@ -32,35 +31,21 @@ const MainPage = () => {
     }
   }, [overview.isError]);
 
+  useEffect( function showSplashScreenWhileFetchingData() {
+    SplashScreen.preventAutoHideAsync();
+  }, [])
+
   useEffect( function removeSplashScreen() {
 
-    const setSplashScreenVisibleToFalse = () => setTimeout(() => setIsSplashScreenVisible(false), 3000);
-
     if (fixtures.isSuccess && overview.isSuccess) {
-      setSplashScreenVisibleToFalse();
+      setTimeout(() => SplashScreen.hideAsync(), 2000);
     }
 
   }, [fixtures.isSuccess, overview.isSuccess]);
 
   return (
     <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>
-      { isSplashScreenVisible && 
-        <View style={styles.splashScreenContainer}>
-          <Image style={styles.splashScreenImage} source={require('../assets/splashscreen.png')}/>
-          <View style={{height: '11%', aspectRatio: 1, alignSelf: 'center'}}>
-            <LoadingIndicator/>
-          </View>
-          { (fixtures.isError || overview.isError) &&
-              <View style={[{backgroundColor: GlobalConstants.secondaryColor, position: 'absolute', top: '60%'}, globalStyles.shadow]}>
-                <Text style={{ alignSelf: 'center', textAlign: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.largeFont, fontWeight: '600' }}> 
-                    There has been an error retrieving data from the FPL API. Try reopening the app later.
-                </Text>
-              </View>
-
-          }
-        </View> 
-      }
-      { (fixtures.isSuccess && overview.isSuccess) &&
+      { (fixtures.isSuccess && overview.isSuccess) ?
         <>
           <SafeAreaView style={styles.safeArea}>
                 <View style={{flex: 1}}>
@@ -79,7 +64,15 @@ const MainPage = () => {
           {(overview.data && fixtures.data) &&
             <ModalNavigator overview={overview.data} fixtures={fixtures.data}/>
           }
-        </>
+        </> :
+        <View style={styles.splashScreenContainer}>
+          <Image style={styles.splashScreenImage} source={require('../assets/splash.png')} resizeMode={'contain'}/>
+              <View style={[{backgroundColor: GlobalConstants.secondaryColor, position: 'absolute', top: '62%', padding: 5, width: '80%'}, globalStyles.shadow]}>
+                <Text style={{ alignSelf: 'center', textAlign: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.largeFont, fontWeight: '600' }}> 
+                    There has been an error retrieving data from the FPL API. Try reopening the app later.
+                </Text>
+              </View>
+        </View> 
       }
     </View>
   )

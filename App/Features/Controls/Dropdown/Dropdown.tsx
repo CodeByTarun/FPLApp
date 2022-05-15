@@ -50,8 +50,9 @@ const Dropdown = (props: DropdownProps) => {
         api.start({
             to: { backgroundColor: 'rgba(0, 0, 0, 0)', top: '100%' },
             config: { duration: 100 },
-            onRest: () => setShowDropdown(false),
         });
+
+        setTimeout(() => setShowDropdown(false), 100);
     }
 
     const openDropdown = () => {
@@ -60,9 +61,10 @@ const Dropdown = (props: DropdownProps) => {
                 { scale: 0.95 },
                 { scale: 1 },
             ],
-            config: { duration: 10 },
-            onRest: () => setShowDropdown(true),
+            config: { duration: 100 },
         });
+
+       setTimeout(() => setShowDropdown(true), 100);
     }
 
     return (

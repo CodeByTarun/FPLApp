@@ -31,7 +31,7 @@ const DraftLeague = ({ draftLeagueInfo, setModalVisibility } : DraftLeagueStandi
 
         return (
             <AnimatedButton buttonFn={() => openDraftTeamFromStandings(leagueEntry)}>
-                <View style={styles.standingsButtonContainer} testID='draftLeagueEntryItemButton'>
+                <View style={styles.standingsButtonContainer}>
                     <Text style={[styles.leagueText, {flex: 1}]}>{item.rank}</Text>
                     <View style={{flex: 3, paddingLeft: 5}}>
                         <Text numberOfLines={1} style={styles.teamNameText}>{leagueEntry?.entry_name}</Text>

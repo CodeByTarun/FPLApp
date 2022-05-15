@@ -6,9 +6,10 @@
 // test background
 
 import React from "react";
-import { render, fireEvent, cleanup } from "@testing-library/react-native";
+import { render, fireEvent, cleanup, waitFor } from "@testing-library/react-native";
 import { Dropdown } from "../../../App/Features/Controls";
 import "@testing-library/jest-native";
+import { Globals } from "@react-spring/native";
 
 const options = [
     '1',
@@ -18,8 +19,11 @@ const options = [
     '5',
     '6',
 ]
+Globals.assign({
+    skipAnimation: true,
+})
 
-test('header from props is shown and opening dropdown and closing using close button', () => {
+test('header from props is shown and opening dropdown and closing using close button', async () => {
 
     const mockSetFn = jest.fn();
     const {queryAllByText, getByText, getByTestId}  = render(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={'1'} setValue={ mockSetFn }/>);
@@ -28,13 +32,13 @@ test('header from props is shown and opening dropdown and closing using close bu
     expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
 
     fireEvent.press(getByText('◣'));
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', true);
+    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', true));
 
     fireEvent.press(getByTestId('closeButton'));
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
+    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', false));
 })
 
-test('selected an option and then clear', () => {
+test('selected an option and then clear', async () => {
 
     let value = '1';
     const mockSetFn = jest.fn((newValue) => value = newValue);
@@ -44,21 +48,22 @@ test('selected an option and then clear', () => {
     expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
 
     fireEvent.press(getByText('◣'));
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', true);
+    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', true));
 
     fireEvent.press(getByText('2'));
-    expect(value).toBe('2'); 
-    expect(mockSetFn).toBeCalledTimes(1);
+    await waitFor(() => expect(mockSetFn).toBeCalledTimes(1));
+
+    await waitFor(() => expect(value).toBe('2')); 
 
     rerender(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={value} setValue={ mockSetFn }/>);
     expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
 
     fireEvent.press(getByText('◣'));
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', true);
+    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', true));
 
     fireEvent.press(getByText('Reset'));
-    expect(value).toBe('1');
-    expect(mockSetFn).toBeCalledTimes(2);
+    await waitFor(() => expect(value).toBe('1')); 
+    await waitFor(() => expect(mockSetFn).toBeCalledTimes(2));
 
     rerender(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={value} setValue={ mockSetFn }/>);
     expect(getByTestId('dropdownModal')).toHaveProp('visible', false);

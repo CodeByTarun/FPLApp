@@ -1,15 +1,15 @@
 import React from "react";
-import { render } from "../../reduxRender";
+import { render, waitFor } from "../../reduxRender";
 import { HistoryList } from "../../../../App/Modals/PlayerDetailedStatsModal/PlayerDetailedStatsViews";
 import { overview } from "../../../SampleData/Overviews";
 import { playerOverview, playerSummary } from "./PlayerData";
 
-test('everything renders', () => {
+test('everything renders', async () => {
 
     const { queryByTestId, queryByText, queryAllByTestId } = render(<HistoryList overview={overview} player={playerOverview} playerData={playerSummary}/>)
 
     expect(queryByTestId('playerDetailedStatsHistoryListView')).toBeTruthy();
-    expect(queryByTestId('historyListScrollView')).toHaveProp('horizontal', true);
+    await waitFor(() => expect(queryByTestId('historyListScrollView')).toHaveProp('horizontal', true));
     expect(queryAllByTestId('historyListItem')).toBeTruthy();
     expect(queryAllByTestId('historyFooterItem')).toHaveLength(15);
 

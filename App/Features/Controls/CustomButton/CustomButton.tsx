@@ -24,8 +24,9 @@ const CustomButton = ({image, buttonFunction, isDisabled = false} : ButtonProps)
                 {scale: 1}
             ],
             config: {duration: 10},
-            onRest: buttonFunction
         });
+
+        buttonFunction();
     }
 
     return (

@@ -7,6 +7,7 @@ import { budgetLeaguePicks, draftLeaguePicks, fixtures, gameweek32 } from "../..
 import { TeamInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { Emblems } from "../../../App/Global/Images";
 import { doubleGameweek32, doubleGameweek32DraftPicks, singleFixtureForDoubleGWPlayer } from "../../SampleData/DoubleGW32Data";
+import { ModalTypes } from "../../../App/Store/modalSlice";
 
 let draftInfo: TeamInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
 
@@ -14,7 +15,7 @@ test('one fixture modal renders correctly', () => {
 
     let players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
-    const { queryByTestId, queryByText } = render(<PlayerModal overview={overview} fixtures={fixtures} player={players![0]} teamInfo={draftInfo}/>);
+    const { queryByTestId, queryByText } = render(<PlayerModal overview={overview} fixtures={fixtures} modalInfo={{modalType: ModalTypes.PlayerModal, player:players![0]}} teamInfo={draftInfo}/>);
 
     expect(queryByTestId('closeButton')).toBeTruthy();
 
@@ -49,7 +50,7 @@ test('two fixtures modal renders correctly', () => {
 
     let players = GetPlayerGameweekDataSortedByPosition(doubleGameweek32, overview, draftInfo, draftOverview, doubleGameweek32DraftPicks, budgetLeaguePicks);
 
-    const { queryAllByTestId, queryByText } = render(<PlayerModal overview={overview} fixtures={fixtures} player={players![9]} teamInfo={draftInfo}/>);
+    const { queryAllByTestId, queryByText } = render(<PlayerModal overview={overview} fixtures={fixtures} modalInfo={{modalType: ModalTypes.PlayerModal, player:players![9]}} teamInfo={draftInfo}/>);
 
     expect(queryByText('Dominic Calvert-Lewin')).toBeTruthy();
     
@@ -63,7 +64,7 @@ test('if two fixtures but team type is fixure only show the stats for that game'
 
     let players = GetPlayerGameweekDataSortedByPosition(doubleGameweek32, overview, draftInfo, draftOverview, doubleGameweek32DraftPicks, budgetLeaguePicks);
 
-    const { queryAllByTestId } = render(<PlayerModal overview={overview} fixtures={fixtures} player={players![9]} teamInfo={fixtureInfo}/>);
+    const { queryAllByTestId } = render(<PlayerModal overview={overview} fixtures={fixtures} modalInfo={{modalType: ModalTypes.PlayerModal, player:players![9]}} teamInfo={fixtureInfo}/>);
 
     expect(queryAllByTestId('fixturePlayerStatsContainer')).toHaveLength(1);
 });

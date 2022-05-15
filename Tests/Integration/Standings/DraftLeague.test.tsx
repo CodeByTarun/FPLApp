@@ -18,7 +18,7 @@ test('draft league list renders and can click on a team', () => {
     expect(queryByText('30')).toBeTruthy();
     expect(queryByText('1568')).toBeTruthy();
 
-    fireEvent.press(queryAllByTestId('draftLeagueEntryItemButton')[0]);
+    fireEvent.press(queryAllByTestId('animatedButton')[0]);
 
     expect(mockFn).toBeCalledTimes(1);
     expect(mockFn).toBeCalledWith(false);

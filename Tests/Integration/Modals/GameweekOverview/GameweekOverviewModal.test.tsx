@@ -4,13 +4,14 @@ import GameweekOverviewModal from "../../../../App/Modals/GameweekOverviewModal"
 import { overview } from "../../../SampleData/Overviews";
 import store from "../../../../App/Store/store";
 import { changeGameweek } from "../../../../App/Store/teamSlice";
+import { ModalTypes } from "../../../../App/Store/modalSlice";
 
 test('gameweek overview modal renders correctly', () => {
 
     const customStore = store;
     store.dispatch(changeGameweek(32));
 
-    const { queryAllByTestId, queryByTestId, queryByText } = render(<GameweekOverviewModal overview={overview}/>, customStore)
+    const { queryAllByTestId, queryByTestId, queryByText } = render(<GameweekOverviewModal overview={overview} modalInfo={{modalType: ModalTypes.GameweekOverviewModal}}/>, customStore)
 
     expect(queryByTestId('closeButton')).toBeTruthy();
     
