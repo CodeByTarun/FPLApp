@@ -144,7 +144,14 @@ export function GetHighestMinForAPlayer(fixture: FplFixture, gameweek: FplGamewe
                                                                .find(game => game.fixture === fixture.id)?.stats
                                                                .find(stat => stat.identifier === 'minutes')?.value as number);
 
-    return Math.max(...minutes)               
+    let minute = Math.max(...minutes);
+    
+    if (minute === -Infinity) {
+        return 0;
+    }
+    else {
+        return minute;
+    }
 }
 
 export function GetScoreForLiveFixture(fixture: FplFixture, gameweek:FplGameweek) : number[] {

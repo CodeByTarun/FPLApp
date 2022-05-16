@@ -23,10 +23,10 @@ const CustomButton = ({image, buttonFunction, isDisabled = false} : ButtonProps)
                 {scale: 0.95},
                 {scale: 1}
             ],
-            config: {duration: 10},
+            config: {duration: 100},
         });
 
-        buttonFunction();
+        setTimeout(() => buttonFunction(), 100);
     }
 
     return (

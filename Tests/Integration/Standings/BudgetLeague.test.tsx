@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "../reduxRender";
+import { render, fireEvent, waitFor } from "../reduxRender";
 import BudgetLeague from "../../../App/Features/Standings/BudgetLeague";
 import { budgetManagerInfo } from "../../SampleData/Gameweek32Data";
 
@@ -25,7 +25,7 @@ test('budget league default display renders correctly and can go to standings of
 
     fireEvent.press(queryByText('Go Back'));
 
-    expect(queryByText('Leagues')).toBeTruthy();
+    await waitFor(() => expect(queryByText('Leagues')).toBeTruthy());
     expect(queryByText('Go Back')).toBeFalsy();
     expect(queryByTestId('backButtonStandings')).toBeFalsy();
     expect(queryByTestId('budgetLeagueList')).toBeTruthy();

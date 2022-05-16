@@ -1,9 +1,9 @@
 import { trackForMutations } from "@reduxjs/toolkit/dist/immutableStateInvariantMiddleware";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import React from "react";
 import { CustomButton } from "../../../App/Features/Controls";
 
-test('enabled button pressed triggers button function', () => {
+test('enabled button pressed triggers button function', async () => {
 
     let mockFn = jest.fn();
 
@@ -11,7 +11,7 @@ test('enabled button pressed triggers button function', () => {
 
     fireEvent.press((getByTestId('imageButton')));
 
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(mockFn).toHaveBeenCalledTimes(1));
 });
 
 test('disabled button pressed does not trigger function', () => {

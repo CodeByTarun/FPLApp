@@ -93,7 +93,7 @@ export const globalStyles = StyleSheet.create(
             shadowOffset: {width: 0, height: 0},
             shadowRadius: 1.5,
             shadowOpacity: 0.6,
-            elevation: 1,
+            elevation: 10,
         },
 
         dots: {

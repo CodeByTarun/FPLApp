@@ -20,6 +20,12 @@ export type PlayerTableFilterAction = {
     type: 'TeamFilterChange' | 'PositionFilterChange' | 'StatFilterChange' | 'PlayerSearchTextChange';
     filterValue: string;
 } | {
+    type: 'FilterPopupChange';
+    priceRange: number[];
+    minuteRange: number[];
+    per90Value: boolean;
+    isInWatchlistValue: boolean;
+} | {
     type: "Reset";
     range: number[];
 }
@@ -74,6 +80,15 @@ export function playerTableFilterReducer(state: PlayerTableFilterState, action: 
                 minutesRange: action.range,
             }
         }
+       case 'FilterPopupChange': {
+           return{
+               ...state,
+               minutesRange: action.minuteRange,
+               priceRange: action.priceRange,
+               isPer90: action.per90Value,
+               isInWatchlist: action.isInWatchlistValue,
+           }
+       }
        case 'Reset': {
             return {
                 isPer90: false,

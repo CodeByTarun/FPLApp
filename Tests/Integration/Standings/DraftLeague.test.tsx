@@ -1,9 +1,9 @@
 import React from "react";
-import { render, fireEvent } from "../reduxRender";
+import { render, fireEvent, waitFor } from "../reduxRender";
 import DraftLeague from "../../../App/Features/Standings/DraftLeague";
 import { draftLeagueInfo } from "../../SampleData/Gameweek32Data";
 
-test('draft league list renders and can click on a team', () => {
+test('draft league list renders and can click on a team', async() => {
 
     const mockFn = jest.fn();
 
@@ -20,7 +20,7 @@ test('draft league list renders and can click on a team', () => {
 
     fireEvent.press(queryAllByTestId('animatedButton')[0]);
 
-    expect(mockFn).toBeCalledTimes(1);
+    await waitFor(() => expect(mockFn).toBeCalledTimes(1));
     expect(mockFn).toBeCalledWith(false);
 
 })

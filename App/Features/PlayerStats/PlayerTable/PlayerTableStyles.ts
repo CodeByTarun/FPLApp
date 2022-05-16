@@ -49,12 +49,5 @@ export const styles = StyleSheet.create({
         marginLeft: 0,
 
     },
-
-    filterText: {
-        color: textPrimaryColor,
-        fontSize: mediumFont,
-        flex: 1,
-        fontWeight: '500'
-    },
     //#endregion
 });

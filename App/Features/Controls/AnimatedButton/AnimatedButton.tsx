@@ -24,7 +24,7 @@ const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChil
             config: {easing: easings.easeInQuint, duration: 100}
         });
 
-        buttonFn();
+        setTimeout(() => buttonFn(), 100);
 
     }
 

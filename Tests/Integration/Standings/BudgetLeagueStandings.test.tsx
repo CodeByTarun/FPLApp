@@ -1,10 +1,10 @@
 import React from "react";
 import BudgetLeagueStandings from "../../../App/Features/Standings/BudgetLeague/LeagueStandings/BudgetLeagueStandings";
 import { budgetLeague } from "../../SampleData/BudgetManager";
-import { render, fireEvent } from "../reduxRender";
+import { render, fireEvent, waitFor } from "../reduxRender";
 
 
-test('league standings renders and can press on entries', () => {
+test('league standings renders and can press on entries', async() => {
 
     const mockFn = jest.fn();
 
@@ -20,6 +20,6 @@ test('league standings renders and can press on entries', () => {
 
     fireEvent.press(queryAllByTestId('leagueEntryItemButton')[0]);
 
-    expect(mockFn).toBeCalledTimes(1);
+    await waitFor(() => expect(mockFn).toBeCalledTimes(1));
     expect(mockFn).toBeCalledWith(false);
 });

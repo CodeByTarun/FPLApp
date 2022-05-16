@@ -17,6 +17,7 @@ import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableF
 import { styles } from "./PlayerTableStyles";
 import { Dropdown, ToolTip, CustomButton, SearchControl, FilterButton } from "../../Controls";
 import CustomSlider from "../../Controls/Slider";
+import TableFilterPopup from "./TableFilterPopup";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -103,38 +104,9 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                     </View>
                     <View style={{flex: 1.3, height: '65%', paddingRight: 2, alignSelf: 'center', marginBottom: 2.5}}>
                         <FilterButton isArrowAbove={true}
-                                      view={
-                                      <View style={{width: GlobalConstants.width* 0.60, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
-                                        <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
-                                            <Text style={styles.filterText}>Per 90 (if applicable):</Text>
-                                            <Checkbox value={ playerTableFilterState.isPer90 } 
-                                                    color={playerTableFilterState.isPer90 ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
-                                                    onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsPer90'})}/>
-                                        </View>
-                                        <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
-                                            <Text style={styles.filterText}>On Watchlist:</Text>
-                                            <Checkbox value={ playerTableFilterState.isInWatchlist } 
-                                                    color={playerTableFilterState.isInWatchlist ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
-                                                    onValueChange={ () => playerTableFilterDispatch({type: 'ChangeIsInWatchlist'})}/>
-                                        </View>
-                                        <View style={{flex: 2, padding: 5}}>
-                                            <CustomSlider header={"Price Range:"} minValue={initialPriceRange[0]} maxValue={initialPriceRange[1]} 
-                                                          step={1} isPrice={true} initialRange={playerTableFilterState.priceRange} debounceValue={400}
-                                                          onValueChange={value => playerTableFilterDispatch({type: 'ChangePriceRange', range: value})}/>
-                                        </View>
-                                        <View style={{flex: 2, padding: 5}}>
-                                            <CustomSlider header={"Minutes Per Game Range:"} minValue={0} maxValue={90 * 38} 
-                                                          step={1} initialRange={playerTableFilterState.minutesRange} debounceValue={400}
-                                                          onValueChange={ value => playerTableFilterDispatch({type: 'ChangeMinutesRange', range: value}) }/>
-                                        </View>
-                                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: 10}}>
-                                            <Pressable style={[globalStyles.baseButton]}
-                                                        onPress={() => playerTableFilterDispatch({type: 'Reset', range: initialPriceRange})}>
-                                                <Text style={{color: GlobalConstants.textPrimaryColor, fontWeight: '500'}}>Clear Filters</Text>
-                                            </Pressable>
-                                        </View>
-                                      </View>
-                                      }/>                            
+                                      view={<TableFilterPopup filterDispatch={playerTableFilterDispatch} 
+                                                              filterState={playerTableFilterState} 
+                                                              initialPriceRange={initialPriceRange}/>}/>
                     </View>
                 </View>
             </View>

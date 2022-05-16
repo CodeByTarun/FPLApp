@@ -38,7 +38,6 @@ const PlayerView = ({overview, header, id} : PlayerViewProps) => {
                             <Image testID="playerViewJersey" style={styles.jerseyImage} source={Jerseys[overview.elements.find(player => player.id === id)!.team_code]} resizeMode="contain"/>
                         </View>
                         <Text numberOfLines={1} style={styles.playerHeaderText}>{overview.elements.find(player => player.id === id)?.web_name}</Text> 
-                        <Text style={styles.playerHeaderText}>{overview.elements.find(player => player.id === id)?.event_points} Points</Text>
                     </View>
                 </AnimatedButton>
             }
