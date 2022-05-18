@@ -62,9 +62,10 @@ export const styles = StyleSheet.create({
 
     modalBackground: {
         position: 'absolute',
-        height: '100%',
-        width: '100%',
-        top: 0,
+        height: '110%',
+        width: '110%',
+        top: '-5%',
+        left: '-5%',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         alignItems: 'center',
         justifyContent: 'center',

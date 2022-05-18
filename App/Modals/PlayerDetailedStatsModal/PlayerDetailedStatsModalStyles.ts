@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
         justifyContent:'center',
         height: '100%',
         zIndex: 2,
+        elevation: 100,
     },
 
     viewToggleIndiciator: {

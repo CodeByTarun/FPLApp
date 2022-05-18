@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     //#region player table
     topBarContainer: {
         width: '100%', 
-        height: 110, 
+        aspectRatio: 3.5,
         backgroundColor: primaryColor,
         paddingLeft: 5,
         paddingRight: 5,

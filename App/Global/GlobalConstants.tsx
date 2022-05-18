@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 // Dimensions
 export const {width, height} = Dimensions.get('window');
 
-export const FIXTURES_VIEW_HEIGHT = `${((40 + 80) /  height) * 100}%`
+export const FIXTURES_VIEW_HEIGHT = `${(width / height * 33)}%`
 
 // Styling
 export const cornerRadius = 12;
@@ -30,9 +30,9 @@ export const modalBackgroundColor = primaryColor;
 export const modalButtonColor = secondaryColor;
 
 // Fonts
-export const smallFont = width*0.025;
-export const mediumFont = width*0.035;
-export const largeFont = width*0.045;
+export const smallFont = width / height * 16;
+export const mediumFont = width / height * 23;
+export const largeFont = width / height * 30;
 
 
 export const Per90Stats = ["Total Points", "Goals Scored", "Assists", 

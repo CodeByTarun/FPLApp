@@ -10,7 +10,8 @@ export const styles = StyleSheet.create({
     },
 
     top: {
-        height: 50,
+        width: '100%',
+        aspectRatio: 8,
         backgroundColor: primaryColor,
         zIndex: 1,
     },  
@@ -85,7 +86,7 @@ export const styles = StyleSheet.create({
     text: {
         alignSelf: 'center',
         color: textPrimaryColor,
-        fontSize: width*0.045,
+        fontSize: mediumFont*1.3,
         fontWeight: 'bold'
     },
 

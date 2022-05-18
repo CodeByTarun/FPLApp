@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor, secondaryColor, aLittleDarkerColor, aLittleLighterColor, textSecondaryColor, testColor } from "../../../Global/GlobalConstants";
+import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor, secondaryColor, aLittleDarkerColor, aLittleLighterColor, textSecondaryColor, testColor, smallFont, mediumFont } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
-        height: 80,
+        height: height - (width / height * 33 * 100) - 40,
         width: width* 0.3288,
         paddingTop: 5, paddingBottom: 5,
     },
@@ -27,15 +27,15 @@ export const styles = StyleSheet.create({
     //#region top bar
     topbar: {
         alignSelf: 'center',
-        height: '25%',
-        width: '100%',
+        flex: 1, 
+        justifyContent: 'center',
     },
 
     datetext: {
-        fontSize: 0.03 * width,
+        fontSize: smallFont * 1.2,
         alignSelf: 'center',
-        paddingLeft: 5,
-        color: textPrimaryColor
+        color: textPrimaryColor,
+        flex: 1,
     },
 
     //#endregion
@@ -45,31 +45,34 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        flexGrow: 1,
-        padding: 3,
+        flex: 4,
+        paddingTop: 3,
     },
 
     scoreAndTimeView: {
-        paddingBottom: 5
+        paddingBottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     scoreText: {
-        fontSize: 0.04 * width,
+        fontSize: mediumFont,
         alignSelf: 'center',
-        margin: 2,
+        margin: 1,
         color: textPrimaryColor,
     },
 
     timeText: {
-        fontSize: 0.025 * width,
+        fontSize: smallFont,
         alignSelf: 'center',
+        textAlign: 'center',
         color: 'red',
         fontWeight: "bold",
-        marginLeft: 3
+        marginLeft: 1
     },
 
     fullTimeText: {
-        fontSize: 0.025 * width,
+        fontSize: mediumFont * 0.8,
         alignSelf: 'center',
         color: lightColor
     }

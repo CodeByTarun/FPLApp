@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     animatedView: {
         backgroundColor: primaryColor,
         zIndex: 1,
+        elevation: 2,
         width: '100%',
         position: 'absolute',
         flexDirection: 'column',
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
     },
 
     gameweekButton: {
-        flex: 1,
+
         flexDirection: 'row',
         alignSelf: 'center',
         height: '70%',
@@ -35,18 +36,18 @@ export const styles = StyleSheet.create({
       gameweekText: {
         color: textPrimaryColor, 
         alignSelf: 'center', 
-        fontSize: largeFont * 0.9, 
+        fontSize: mediumFont*1.3,
         fontWeight: '700'
       },
 
       gameweekDropDownSymbol: {
         color: textPrimaryColor, 
-        fontSize: mediumFont * 0.6, 
+        fontSize: mediumFont * 0.65, 
         fontWeight: '700', 
         marginTop: 0, 
         transform: [{rotate: '-45deg'}], 
         alignSelf: 'center',
-        marginBottom: 5
+        marginBottom:5
       },
 
       buttonsContainers: {

@@ -37,7 +37,7 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek) => {
            return <><Text style={styles.scoreText}>{score[0]} - {score[1]}</Text>
                     <Text testID='liveFixtureText' style={styles.timeText}>{GetHighestMinForAPlayer(fixture, gameweek) + "'"}</Text></>
         } else {
-            return <Text testID='notStarted' style={[styles.scoreText, {paddingBottom: 10}]}>vs</Text>
+            return <Text testID='notStarted' style={[styles.scoreText, {marginBottom: 15}]}>vs</Text>
         }
     }
 }

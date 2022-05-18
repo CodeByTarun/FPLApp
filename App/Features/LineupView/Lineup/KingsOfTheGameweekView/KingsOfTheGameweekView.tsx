@@ -1,6 +1,5 @@
 import React from "react";
 import { ScrollView, View, Text, Image } from "react-native";
-import { secondaryColor } from "../../../../Global/GlobalConstants";
 import globalStyles from "../../../../Global/GlobalStyles";
 import { Jerseys } from "../../../../Global/Images";
 import { FplOverview } from "../../../../Models/FplOverview";
@@ -21,14 +20,16 @@ const KingsOfTheGameweekView = ({overviewData} : KingsOfTheGameweekViewProps) =>
                     kings.map(king => 
                         
                         <View key={king.id} style={styles.kingsCardView} testID='kingPlayerButton'>
-                            <View style={{flex: 8}}>
-                                <Image style={styles.jersey} source={Jerseys[overviewData.elements.find(element => element.id === king.top_element_info!.id)!.team_code]} resizeMode="contain"/>
+                            <View style={{flex: 1}}>
+                                <View style={{width: '100%', height: '100%'}}>
+                                    <Image style={styles.jersey} source={Jerseys[overviewData.elements.find(element => element.id === king.top_element_info!.id)!.team_code]} resizeMode="contain"/>
+                                </View>
                             </View>
+
                             <View style={styles.textContainer}>
                                 <Text numberOfLines={1} style={styles.kingsText}>{overviewData.elements.find(element => element.id === king.top_element_info!.id)?.web_name}</Text>    
                                 <View style={styles.gameweekAndScoreContainer}>
-                                    <Text style={styles.gameweekText}>GW {king.id}</Text> 
-                                    <Text style={styles.scoreText}>{king.top_element_info!.points}</Text>
+                                    <Text style={styles.gameweekAndScoreText}>GW {king.id} | {king.top_element_info!.points}</Text> 
                                 </View>
                             </View>
                         </View>

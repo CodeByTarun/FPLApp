@@ -60,15 +60,15 @@ const TeamSwitch = ({overview, fixtures, gameweek}: TeamSwitchProps) => {
             { (teamInfo.teamType === TeamTypes.Fixture && teamInfo.fixture !== null && overview !== undefined) &&
                 <TouchableWithoutFeedback testID="teamSwitchButton" style={{flex: 1, flexDirection: 'row'}} onPress={switchTeam}>
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                    <AnimatedView testID='animatedViewTeamSwitch' style={[styles.highlight, { left: slideSpring.left }, globalStyles.shadow]} children={undefined}/>
-                        <View style={[styles.buttonContainer]}>
+                        <AnimatedView testID='animatedViewTeamSwitch' style={[styles.highlight, { left: slideSpring.left }, globalStyles.shadow]} children={undefined}/>
+                        <View style={[styles.buttonContainer, {paddingLeft:15}]}>
                             <View style={{ flex: 1 }}>
                                 <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_h, overview).code]} resizeMode='contain'/>
                             </View>
                             <Text style={[styles.scoreText]}>{getTeamScore(fixtures, gameweek, teamInfo, true)}</Text>
                         </View>
                         <Text> </Text>
-                        <View style={styles.buttonContainer}>
+                        <View style={[styles.buttonContainer, {paddingRight: 15}]}>
                             <Text style={[styles.scoreText]}>{getTeamScore(fixtures, gameweek, teamInfo, false)}</Text>
                             <View style={{ flex: 1 }}>
                                 <Image style={styles.emblems} source={Emblems[GetTeamDataFromOverviewWithFixtureTeamID(teamInfo.fixture.team_a, overview).code]} resizeMode='contain'/>

@@ -120,12 +120,12 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
         paddingBottom: 1, 
+        backgroundColor: primaryColor,
     },
 
     nameContainer: {
         flex: 1, 
         flexDirection: 'row', 
-        backgroundColor: primaryColor
     },
 
     nameText: {
@@ -133,21 +133,13 @@ export const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
     },
-
-    scoreText: {
-        fontSize: width*0.028,
-        color: textPrimaryColor,   
-        textAlign: 'center',
-        fontWeight: '600', 
-    },
-
+    
     scoreContainer: {
         flex: 1, 
         flexDirection: 'row',
         backgroundColor: secondaryColor, 
         paddingLeft: 5, 
         paddingRight: 5, 
-        marginTop: -0.1
     },
     
     //#endregion

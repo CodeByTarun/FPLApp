@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 7,
+        padding: 6,
         elevation: 10,
     },
 
@@ -33,14 +33,17 @@ export const styles = StyleSheet.create({
         resizeMode: 'contain',
         alignSelf: 'center',
         height: '100%',
-        width: '90%',
+        width: '100%',
      },
 
     scoreText: {
         marginLeft: 3,
         marginRight: 3,
+        flex: 1,
+        textAlign: 'center',
         fontWeight: '700',
         color: textPrimaryColor,
         fontSize: mediumFont,
+        alignSelf: 'center',
     },
 });

@@ -51,7 +51,8 @@ export const styles = StyleSheet.create({
         flex: 1,
         zIndex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        elevation: 100,
     },
 
     controlText: {

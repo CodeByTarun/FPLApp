@@ -25,7 +25,7 @@ const BonusPointView = ({overviewData, fixturesData, teamInfo} : BonusPointViewP
                 </View>
                 
                 { bonusPoints &&
-                    <View style={{flex: 1, flexDirection: 'row'}} testID="bonusPointsView">
+                    <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', justifyContent: 'center'}} testID="bonusPointsView">
                         <View style={[styles.bonusPointsView, {borderRightWidth: 0.5,}]}>
                         {
                             bonusPoints.h.slice().sort((a, b) => b.value - a.value).slice(0,5).map( player => 

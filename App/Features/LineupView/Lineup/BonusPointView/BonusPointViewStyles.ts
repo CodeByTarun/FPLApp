@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { primaryColor, aLittleLighterColor, textPrimaryColor, width } from "../../../../Global/GlobalConstants";
+import { primaryColor, aLittleLighterColor, textPrimaryColor, width, smallFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     
@@ -8,37 +8,36 @@ export const styles = StyleSheet.create({
         height: '95%', 
         backgroundColor: primaryColor, 
         alignSelf: 'flex-end', 
-        paddingBottom: 10
     },
 
     bonusPointsView: {
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
-        backgroundColor: primaryColor, 
         borderColor: aLittleLighterColor,
+        paddingBottom: 5
     },
 
     bonusPointsText: {
         color: textPrimaryColor,
         alignSelf: 'center',
-        fontSize: width*0.025,
+        fontSize: smallFont * 0.95
     },
 
     titleContainer: {
         width: '100%', 
         justifyContent: 'center', 
         alignItems: 'center',  
-        paddingBottom: 5,
+
         backgroundColor: primaryColor
     },
 
     titleText: {
         color: textPrimaryColor,
         alignSelf: 'center',
-        fontSize: width*0.035,
+        fontSize: smallFont * 1.4,
         fontWeight: 'bold',
-        padding: 5,
+        padding: 3,
         backgroundColor: primaryColor
     },
 });

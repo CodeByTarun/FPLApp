@@ -30,48 +30,36 @@ export const styles = StyleSheet.create({
     },
 
     textContainer: {
-        flex: 5,
         backgroundColor: secondaryColor,
-        marginBottom: 0,
+        padding: 1,
         width: '90%'
     },
     
     gameweekAndScoreContainer: {
         flexDirection: 'row', 
         backgroundColor: aLittleDarkerColor,
-        flex: 1,
+        width: '100%',
         alignItems: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: 1,
     },
 
     kingsText: {
-        color: 'white',
+        color: textPrimaryColor,
         fontSize: smallFont,
         fontWeight: '500',
-        flex: 1,
         alignSelf: 'center',
         textAlign: 'center',
-        paddingTop: 2
+        paddingBottom: 2,
     },
 
-    gameweekText: {
-        color: 'white',
+    gameweekAndScoreText: {
+        color: textPrimaryColor,
         fontSize: smallFont,
         fontWeight: '500',
         flex: 2,
         alignSelf: 'center',
         textAlign: 'center',
-        paddingTop: 2
     },
 
-    scoreText: {
-        fontSize: smallFont,
-        fontWeight: '500',
-        color: textPrimaryColor,
-        flex: 1,
-        alignSelf:'center',
-        textAlign: 'center',
-        paddingTop: 2,
-        backgroundColor: aLittleLighterColor
-    },
 });

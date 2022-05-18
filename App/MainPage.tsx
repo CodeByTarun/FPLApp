@@ -55,7 +55,7 @@ const MainPage = () => {
                     <LineupViewQueriesContainer overview={overview.data} fixtures={fixtures.data}/>
                   </View>
                   <PlayerStats overview={overview.data} fixtures={fixtures.data}/>
-                  <View style={{width: '100%', height: 50}}>
+                  <View style={{}}>
                     <BottomTabs/>
                   </View>
                 </View>

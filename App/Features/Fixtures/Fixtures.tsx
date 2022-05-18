@@ -46,7 +46,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
   const expandRef = useSpringRef();
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? 120 : height, ref: expandRef, config: { friction: 18, mass: 0.5 }});
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? FIXTURES_VIEW_HEIGHT : '100%', ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
   useChain([expandRef]);
 

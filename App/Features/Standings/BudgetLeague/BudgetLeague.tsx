@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { FplManagerInfo } from "../../../Models/FplManagerInfo";
 import { useGetBudgetLeagueInfoQuery } from "../../../Store/fplSlice";
-import { AnimatedButton } from "../../Controls";
+import { AnimatedButton, LoadingIndicator } from "../../Controls";
 import { styles } from "../StandingsStyles";
 import BudgetLeagueList from "./LeagueList/BudgetLeagueList";
 import BudgetLeagueStandings from "./LeagueStandings/BudgetLeagueStandings";
@@ -33,8 +33,14 @@ const BudgetLeague = ({budgetUserInfo, setModalVisibility} : BudgetLeagueProps) 
                 <BudgetLeagueList budgetUserInfo={budgetUserInfo} setLeagueToShow={setLeagueToShow}/>
                 :
                 <>
-                {budgetLeagueInfo.isSuccess &&
+                {budgetLeagueInfo.isSuccess ?
                     <BudgetLeagueStandings budgetLeagueInfo={budgetLeagueInfo.data} setModalVisibility={setModalVisibility}/>
+                    :
+                    <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+                        <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>
+                            <LoadingIndicator/>
+                        </View>
+                    </View>
                 }
                 </>
             }

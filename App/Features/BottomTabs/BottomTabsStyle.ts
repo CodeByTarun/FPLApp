@@ -4,7 +4,8 @@ import { aLittleDarkerColor, primaryColor } from "../../Global/GlobalConstants";
 export const styles = StyleSheet.create({
 
     container: {
-        flex: 1,
+        aspectRatio: 8,
+        width: '100%',
         backgroundColor: primaryColor,
         flexDirection: 'row',
         elevation: 1,
