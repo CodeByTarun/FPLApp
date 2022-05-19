@@ -45,6 +45,7 @@ This project utilized functional components, react native hooks and the redux de
 To use this application you must install it via Xcode for iPhones or download the apk file provided for the android build.
 
 Android APK: https://drive.google.com/file/d/1Y_iuUvAIALsR3Vgv4f2MwZmj0KPPhko3/view?usp=sharing
+
 IOS Simulator: https://drive.google.com/file/d/1V3kGreEit4FuTQOVBv8hjCldTjigr6u2/view?usp=sharing
 
 ## Usage
