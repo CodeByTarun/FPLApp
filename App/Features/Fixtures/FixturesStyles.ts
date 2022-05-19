@@ -1,18 +1,20 @@
 import { StyleSheet } from "react-native";
 import { height, largeFont, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
 
 export const styles = StyleSheet.create({
     animatedView: {
         backgroundColor: primaryColor,
         zIndex: 1,
-        elevation: 2,
+        elevation: 0.2,
+        overflow: 'hidden',
         width: '100%',
         position: 'absolute',
         flexDirection: 'column',
     },
 
     controlsContainer: {
-        height: 40, 
+        aspectRatio: 12, 
         width: '100%',
         flexDirection: 'row', 
         justifyContent: 'center', 
@@ -70,7 +72,7 @@ export const styles = StyleSheet.create({
 
       closeFixtureViewButtonContainer: {
         position: 'absolute',
-        bottom: 40,
+        bottom: 20,
         right: 20, 
       },
 
@@ -91,7 +93,7 @@ export const styles = StyleSheet.create({
 
       previousGameweekButtonContainer: {
         position: 'absolute',
-        bottom: 40,
+        bottom: 20,
         left: '32%',
       },
 
@@ -104,7 +106,7 @@ export const styles = StyleSheet.create({
 
       nextGameweekButtonContainer: {
         position: 'absolute',
-        bottom: 40,
+        bottom:20,
         right: '32%',
       }, 
 

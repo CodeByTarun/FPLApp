@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         position: "absolute",
         right: 5,
-        bottom: -7,
+        bottom: -5,
     },
 
     injuredImage: {

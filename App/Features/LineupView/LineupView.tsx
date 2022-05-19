@@ -104,7 +104,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                 }                
             </View>
                 <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
-                        distanceFromTop={70 + (GlobalConstants.height * 0.175)} 
+                        distanceFromTop={((GlobalConstants.height) * 0.17 + 70)} 
                         distanceForArrowFromRight={GlobalConstants.width*0.36} 
                         isVisible={isStandingsModalVisible} 
                         setIsVisible={setIsStandingsModalVisible} 

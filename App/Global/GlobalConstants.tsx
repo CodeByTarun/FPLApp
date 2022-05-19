@@ -3,7 +3,10 @@ import { Dimensions } from "react-native";
 // Dimensions
 export const {width, height} = Dimensions.get('window');
 
-export const FIXTURES_VIEW_HEIGHT = `${(width / height * 33)}%`
+const fixtureViewRatio = width / height * 31;
+
+export const FIXTURES_VIEW_HEIGHT = `${fixtureViewRatio}%`;
+export const FIXTURE_CARD_HEIGHT = (fixtureViewRatio / 100 * height) - (width / 12);
 
 // Styling
 export const cornerRadius = 12;

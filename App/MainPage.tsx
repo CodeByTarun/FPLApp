@@ -48,9 +48,9 @@ const MainPage = () => {
       { (fixtures.isSuccess && overview.isSuccess) ?
         <>
           <SafeAreaView style={styles.safeArea}>
-                <View style={{flex: 1}}>
-                  <View style={{height: GlobalConstants.FIXTURES_VIEW_HEIGHT, width: '100%'}}/>
-                  <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
+                <View style={{flex: 1, overflow: 'hidden'}}>
+                  <View style={styles.fixturesView}/>
+                    <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
                   <View style={styles.lineupView}>
                     <LineupViewQueriesContainer overview={overview.data} fixtures={fixtures.data}/>
                   </View>
@@ -85,9 +85,16 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
+  
+  fixturesView: {
+    height: GlobalConstants.FIXTURES_VIEW_HEIGHT, 
+    width: '100%', 
+    overflow: 'hidden',
+  },
 
   lineupView: {
     flex: 1,
+    overflow: 'hidden'
   },
   
   splashScreenContainer: {

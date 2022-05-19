@@ -58,14 +58,14 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
                     <AnimatedButton buttonFn={() => filterDispatch({type: 'FilterPopupChange', minuteRange: minuteRange, priceRange: priceRange, 
                                                                                                isInWatchlistValue: isInWatchlist, per90Value: isPer90})}>
                         <View style={[globalStyles.baseButton, styles.buttonInnerContainer]}>
-                            <Text style={{color: GlobalConstants.textPrimaryColor, fontWeight: '500'}}>Apply</Text>
+                            <Text style={styles.buttonFont}>Apply</Text>
                         </View>
                     </AnimatedButton>
                 </View>
                 <View style={styles.buttonContainer}>
                     <AnimatedButton buttonFn={clearFunction}>
                         <View style={[globalStyles.baseButton, styles.buttonInnerContainer, {backgroundColor: GlobalConstants.redColor}]}>
-                            <Text style={{color: GlobalConstants.textPrimaryColor, fontWeight: '500'}}>Clear</Text>
+                            <Text style={styles.buttonFont}>Clear</Text>
                         </View>
                     </AnimatedButton>
                 </View>
@@ -93,5 +93,11 @@ const styles = StyleSheet.create({
     buttonInnerContainer: {
         width: '85%',
         alignSelf: 'center'
+    },
+
+    buttonFont: {
+        fontSize: GlobalConstants.mediumFont,
+        fontWeight: '500',
+        color: GlobalConstants.textPrimaryColor,
     }
 });

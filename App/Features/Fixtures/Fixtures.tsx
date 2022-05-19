@@ -184,7 +184,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         }
 
       </View>
-      <ToolTip distanceFromRight={width * 0.15} distanceFromTop={height * 0.1} 
+      <ToolTip distanceFromRight={width * 0.15} distanceFromTop={height * 0.09} 
                distanceForArrowFromRight={width * 0.3} isVisible={isGameweekViewVisible} 
                setIsVisible={setIsGameweekViewVisible} 
                view={

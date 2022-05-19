@@ -6,6 +6,7 @@ import UserTeamInfo, { getAllUserTeamInfo } from "../../../Helpers/FplDataStorag
 import { useAppDispatch } from "../../../Store/hooks";
 import { closeModal, openTeamModal } from "../../../Store/modalSlice";
 import { changeToDraftTeam, changeToBudgetTeam } from "../../../Store/teamSlice";
+import { AnimatedButton } from "../../Controls";
 import { styles } from "./TeamListViewStyle";
 
 interface TeamListViewProps {
@@ -49,18 +50,22 @@ const TeamListView = ({setIsVisible} : TeamListViewProps) => {
                     <ScrollView> 
                         {userTeams.map(team => 
                         <View key={team.id}>
-                            <TouchableOpacity style={styles.button} onPress={() => selectedATeam(team)}>
-                                <Text numberOfLines={1} style={styles.buttonText}>{team.name}</Text>
-                            </TouchableOpacity> 
-                            <Seperator/>
+                            <AnimatedButton buttonFn={() => selectedATeam(team)}>
+                                <View style={styles.button}>
+                                    <Text numberOfLines={1} style={styles.buttonText}>{team.name}</Text>
+                                </View> 
+                                <Seperator/>
+                            </AnimatedButton>
                         </View>)}  
                     </ScrollView>
                 </>
                 :
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity style={styles.addTeamButton} onPress={addATeam}>
-                        <Text style={styles.addTeamButtonText}>Add a Team</Text>
-                    </TouchableOpacity>
+                    <AnimatedButton buttonFn={addATeam}>
+                        <View style={styles.addTeamButton}>
+                            <Text style={styles.addTeamButtonText}>Add a Team</Text>
+                        </View>
+                    </AnimatedButton>
                 </View>
             }
         </View>

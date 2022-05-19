@@ -25,13 +25,13 @@ export const styles = StyleSheet.create({
     },
 
     controlsOuterContainers: {
-        marginBottom: 20,
+        marginBottom: 5,
         marginTop: 10,
     },
 
     controlContainer: {
         width: '60%',
-        height: 40,
+        aspectRatio: 5,
         flexDirection: 'row',
         alignSelf: 'center',
         backgroundColor: secondaryColor,

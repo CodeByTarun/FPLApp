@@ -1,13 +1,10 @@
 import React from "react";
-import { Pressable } from "react-native";
 import TeamModal from "./TeamModal";
 import PlayerDetailedStatsModal from "./PlayerDetailedStatsModal";
 import PlayerModal from "./PlayerModal";
-import globalStyles from "../Global/GlobalStyles";
 import { FplFixture } from "../Models/FplFixtures";
 import { FplOverview } from "../Models/FplOverview";
-import { useAppDispatch, useAppSelector } from "../Store/hooks";
-import { closeModal, ModalTypes } from "../Store/modalSlice";
+import { useAppSelector } from "../Store/hooks";
 import GameweekOverviewModal from "./GameweekOverviewModal";
 import InfoModal from "./InfoModal";
 import PlayerComparisonModal from "./PlayerComparisonModal";

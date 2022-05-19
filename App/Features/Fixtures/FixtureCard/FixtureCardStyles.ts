@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor, secondaryColor, aLittleDarkerColor, aLittleLighterColor, textSecondaryColor, testColor, smallFont, mediumFont } from "../../../Global/GlobalConstants";
+import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
-        height: height - (width / height * 33 * 100) - 40,
+        height: FIXTURE_CARD_HEIGHT,
         width: width* 0.3288,
         paddingTop: 5, paddingBottom: 5,
     },
@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
         marginRight: 2.5,
         padding: 5,
         borderRadius: cornerRadius,
+        marginBottom: 2.5
     },
     //#endregion
 

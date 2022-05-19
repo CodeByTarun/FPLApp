@@ -86,7 +86,7 @@ function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures:
         
         if (players) {
             playerStatsView.push(
-                <View style={styles.playerRowContainer} key={5}>
+                <View style={[styles.playerRowContainer, {paddingBottom: 2}]} key={5}>
                     { players.slice(11, 15).map(player => { return <PlayerStatsDisplay key={player.overviewData.id} player={player} overview={overview} 
                                                                                     fixtures={fixtures} teamInfo={teamInfo}
                                                                                     viewIndex={viewIndex} currentGameweek={currentGameweek}/> })}
@@ -172,7 +172,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                                     </AnimatedView>
                                 )}
                             </View>
-                            <View style={{ position: 'absolute', left: 7, height: '12%', aspectRatio: 1.2}}>
+                            <View style={{ position: 'absolute', left: 7, height: '11%', aspectRatio: 1.3}}>
                             { cardTransition((animatedStyles) => (teamInfo.gameweek === currentGameweek) &&
                                 <AnimatedView style={[{height: '100%', width: '100%', bottom: animatedStyles.bottom}]}>
                                     <AdditionalInfoCard viewIndex={viewIndex} setViewIndex={setViewIndex} viewIndexScenes={viewIndexScenes}/>

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         backgroundColor: GlobalConstants.primaryColor,
         display: 'flex',
         zIndex: 2,
-        elevation: 2,
+        elevation: 20,
     },
 });
 

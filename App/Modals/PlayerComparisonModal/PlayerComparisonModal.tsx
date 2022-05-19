@@ -111,14 +111,14 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
                     </View>
                     <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
                         
-                    <ScrollView style={{paddingBottom: 15, flex: 1, paddingTop: 15}}>
-                        { playersToCompare.map(player => { return(
-                            <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
-                                                playerOverview={player.playerOverview} playerSummary={player.playerSummary} 
-                                                playerList={playersToCompare}
-                                                viewIndex={viewIndex} statsFilterState={statsFilterState} 
-                                                currentGameweek={currentGameweek} removePlayerFunction={removePlayer}/>
-                        )})}
+                        <ScrollView style={{paddingBottom: 15, flex: 1, paddingTop: 15}}>
+                            { playersToCompare.map(player => { return(
+                                <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
+                                                    playerOverview={player.playerOverview} playerSummary={player.playerSummary} 
+                                                    playerList={playersToCompare}
+                                                    viewIndex={viewIndex} statsFilterState={statsFilterState} 
+                                                    currentGameweek={currentGameweek} removePlayerFunction={removePlayer}/>
+                            )})}
 
                     </ScrollView>
                     </View>

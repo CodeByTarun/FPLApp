@@ -31,7 +31,6 @@ export const styles = StyleSheet.create({
 
     textContainer: {
         backgroundColor: secondaryColor,
-        padding: 1,
         width: '90%'
     },
     

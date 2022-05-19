@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
         borderColor: aLittleLighterColor,
         borderRadius: cornerRadius,
         padding: 10,
-        marginBottom: 20
+        marginBottom: 20,
+        marginTop: 15
     },
 
     closeButtonContainer: {
@@ -28,7 +29,7 @@ export const styles = StyleSheet.create({
         top: -20, 
         left: 15,
         padding: 5,
-        maxWidth: '75%'
+        maxWidth: '75%',
     },
 
     sectionCostText: {

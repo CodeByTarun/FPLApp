@@ -37,11 +37,11 @@ const ToolTip = ({ distanceForArrowFromRight, distanceFromRight, distanceFromTop
     })
 
     return (
-        <Modal visible={isVisible} transparent={true}>
+        <Modal style={{margin: 0}} visible={isVisible} statusBarTranslucent transparent={true}>
             { transitions((animatedStyle, show) => show &&
             <>
                 <AnimatedPressable testID="background" style={[styles.modalBackground, {backgroundColor: animatedStyle.backgroundColor}]} onPress={() => { setIsVisible(false); } } hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }} children={undefined}/>
-                <AnimatedView testID="tooltip" style={[styles.modalView, globalStyles.modalShadow, {opacity: animatedStyle.opacity}, isArrowAbove ? {right: distanceFromRight, top: distanceFromTop} : {right: distanceFromRight, bottom: distanceFromTop}]}>
+                <AnimatedView testID="tooltip" style={[styles.modalView, globalStyles.modalShadow, {opacity: animatedStyle.opacity}, isArrowAbove ? {right: distanceFromRight, top: distanceFromTop } : {right: distanceFromRight, bottom: distanceFromTop}]}>
                     <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceForArrowFromRight}]}/>
                     { view }
                 </AnimatedView> 
@@ -61,8 +61,7 @@ const styles = StyleSheet.create({
         elevation: 2,
         position: 'absolute',
         backgroundColor: primaryColor,
-        borderRadius: cornerRadius,
-        
+        borderRadius: cornerRadius,        
     },
 
     modalBackground: {
@@ -72,7 +71,6 @@ const styles = StyleSheet.create({
         top: -height,
         left: -width,
         opacity: 0.5,
-        backgroundColor: 'black',
         zIndex: 1, 
         elevation: 1, 
     },

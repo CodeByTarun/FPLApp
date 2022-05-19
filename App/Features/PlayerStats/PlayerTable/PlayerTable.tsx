@@ -18,6 +18,7 @@ import { styles } from "./PlayerTableStyles";
 import { Dropdown, ToolTip, CustomButton, SearchControl, FilterButton } from "../../Controls";
 import CustomSlider from "../../Controls/Slider";
 import TableFilterPopup from "./TableFilterPopup";
+import { CustomVerticalSeparator, VerticalSeparator } from "../../../Global/GlobalComponents";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -86,6 +87,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                         value={playerTableFilterState.teamFilter} 
                                         setValue={teamFilterDispatch}/>
                             </View>
+                            {CustomVerticalSeparator(4, 4)}
                             <View style={{flex: 1, marginLeft: 10, marginRight: 5}}>
                                 <Dropdown defaultValue="All Positions" 
                                         headerText="Position"
@@ -93,13 +95,15 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                         value={playerTableFilterState.positionFilter} 
                                         setValue={positionFilterDispatch}/>
                             </View>
-                            <View style={{flex: 1.5, marginLeft: 10, marginRight: 0 }}>
+                                {CustomVerticalSeparator(4, 4)}
+                            <View style={{flex: 1, marginLeft: 10, marginRight: 5 }}>
                                 <Dropdown defaultValue="Total Points" 
                                         headerText={"Stat" + ((playerTableFilterState.isPer90 && GlobalConstants.Per90Stats.includes(playerTableFilterState.statFilter)) ? " (per 90)" : "")}
                                         options={Object.values(OverviewStats).sort()} 
                                         value={playerTableFilterState.statFilter} 
                                         setValue={statFilterDispatch}/>
                             </View>
+                                {CustomVerticalSeparator(4, 4)}
                         </View>
                     </View>
                     <View style={{flex: 1.3, height: '65%', paddingRight: 2, alignSelf: 'center', marginBottom: 2.5}}>

@@ -38,6 +38,7 @@ export const styles = StyleSheet.create(
         text: {
             color: textPrimaryColor,
             fontSize: mediumFont,
+            paddingLeft: 10
         },
 
         textInput: {

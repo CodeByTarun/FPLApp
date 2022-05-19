@@ -20,16 +20,17 @@ export const styles = StyleSheet.create({
     headerText: {
         alignSelf: 'flex-start', 
         color: textSecondaryColor, 
-        fontSize: mediumFont * 0.8,
+        fontSize: mediumFont * 0.75,
         paddingLeft: 2,
     },
 
     selectedValueText: {
         color: textPrimaryColor,
-        zIndex: 0.5,
+        fontSize: mediumFont,
         marginRight: 5,
         alignSelf: 'center',
-        maxWidth: '80%'
+        maxWidth: '80%',
+        flex: 1,
     },
 
     modal: {

@@ -28,7 +28,6 @@ export const styles = StyleSheet.create({
         height: '100%',
         backgroundColor: fieldColor,
         padding: 2,
-        borderRadius: cornerRadius,
         marginRight: 4,
         fontWeight: '600'
     },

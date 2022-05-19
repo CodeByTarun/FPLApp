@@ -8,14 +8,16 @@ export const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: primaryColor,
         flexDirection: 'row',
-        elevation: 1,
+        elevation: 0.1,
         shadowColor: 'black',
         shadowOffset: {
             width: 0,
-            height: -2,
+            height: -1,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 2,
+        shadowRadius: 1,
+        borderTopColor: 'rgba(0, 0, 0, 0.04)',
+        borderTopWidth: 1,
     },
     
 });
