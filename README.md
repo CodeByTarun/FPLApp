@@ -44,6 +44,8 @@ This project utilized functional components, react native hooks and the redux de
 
 To use this application you must install it via Xcode for iPhones or download the apk file provided for the android build.
 
+Android APK: https://drive.google.com/file/d/1Y_iuUvAIALsR3Vgv4f2MwZmj0KPPhko3/view?usp=sharing
+
 ## Usage
 
 Upon starting up the app, it fetches data from the FPL API. If there is an error fetching the data, it will tell you to close the app and open it later. Once the data has been fetched it will take you to the main screen. Here you can view fixtures for the current gameweek at the top and switch the gameweek as well to look at upcoming and previous fixtures. Below this, there is a screen telling you to add your team if no team has been added yet. You can add your draft or budget league team to your list of teams. To add your team, you need your team ID which can be found embedded in the URL when viewing your team on a web browser.
