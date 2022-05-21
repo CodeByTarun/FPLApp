@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         justifyContent: 'flex-end', 
         alignItems: 'center', 
-        paddingRight: 5
+        margin: 0 ,
     },
 
     lineupHeaderContainer: {
@@ -59,9 +59,11 @@ export const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        height: '70%',
-        aspectRatio: 1,
-        margin: 3
+        height: '100%',
+        aspectRatio: 0.65,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 7
     },
 
     playerSearchButtonContainer: {

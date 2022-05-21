@@ -1,7 +1,7 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
 import React, { useCallback, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch/TeamSwitch";
@@ -22,6 +22,8 @@ import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
 import { FplManagerInfo } from "../../Models/FplManagerInfo";
 import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
 import TeamListView from "./TeamListView";
+import Popup from "../Popup";
+import { Icons } from "../../Global/Images";
 
 interface LineupViewProps {
     overview: FplOverview,
@@ -76,9 +78,11 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     </View>
 
                     <View style={styles.rightButtonsContainers}>
-                        <View style={styles.buttonContainer}>
-                            <CustomButton image={'team'} buttonFunction={onMyTeamButtonPress}/>
-                        </View>
+                        <Popup view={<View style={{height: 10, width: 10}}/>}>
+                            <View style={styles.buttonContainer}>
+                             <Image style={{width: '90%', height: '90%', alignSelf: 'center'}} source={Icons['team']} resizeMode='contain'/>
+                            </View>
+                        </Popup>
                     </View>
 
                 </View>
