@@ -1,6 +1,6 @@
 import React from "react"
 import { View } from "react-native"
-import { aLittleLighterColor, lightColor, secondaryColor } from "./GlobalConstants"
+import { aLittleLighterColor, secondaryColor } from "./GlobalConstants"
 
 export const Seperator = () => {
     return (

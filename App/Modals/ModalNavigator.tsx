@@ -8,6 +8,7 @@ import { useAppSelector } from "../Store/hooks";
 import GameweekOverviewModal from "./GameweekOverviewModal";
 import InfoModal from "./InfoModal";
 import PlayerComparisonModal from "./PlayerComparisonModal";
+import PopupModal from "./PopupModal/PopupModal";
 
 interface ModalNavigatorProps {
     overview: FplOverview,
@@ -27,6 +28,7 @@ const ModalNavigator = ({overview, fixtures} : ModalNavigatorProps) => {
             <GameweekOverviewModal overview={overview} modalInfo={modalInfo}/>
             <InfoModal modalInfo={modalInfo}/>
             <TeamModal modalInfo={modalInfo}/>
+            <PopupModal/>
         </>
     )
 }

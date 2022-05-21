@@ -3,12 +3,14 @@ import { fplSlice } from './fplSlice';
 import teamReducer from './teamSlice';
 import modalReducer from './modalSlice';
 import navigationReducer from './navigationSlice';
+import popupReducer from './popupSlice';
 
 export const store = configureStore({
   reducer: {
     team: teamReducer,
     modal: modalReducer,
     navigation: navigationReducer,
+    popup: popupReducer,
     [fplSlice.reducerPath]: fplSlice.reducer
   },
   middleware: getDefaultMiddleware =>
