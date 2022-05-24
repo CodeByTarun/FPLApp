@@ -78,7 +78,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     </View>
 
                     <View style={styles.rightButtonsContainers}>
-                        <Popup view={<View style={{height: 10, width: 10}}/>}>
+                        <Popup isArrowAbove={false} arrowDistance={7} view={<TeamListView setIsVisible={setIsTeamsListVisible}/>}>
                             <View style={styles.buttonContainer}>
                              <Image style={{width: '90%', height: '90%', alignSelf: 'center'}} source={Icons['team']} resizeMode='contain'/>
                             </View>

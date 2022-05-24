@@ -4,6 +4,7 @@ import { height, width } from "../../Global/GlobalConstants";
 import { useAppDispatch } from "../../Store/hooks";
 import { openPopup } from "../../Store/popupSlice";
 import { AnimatedButton } from "../Controls";
+import Arrow from "../Controls/Arrow";
 
 interface ILocationInfo {
     distanceFromRight: number;
@@ -14,9 +15,10 @@ interface ILocationInfo {
 interface PopupProps {
     view: JSX.Element;
     isArrowAbove?: boolean;
+    arrowDistance?: number;
 }
 
-const Popup = ({view, isArrowAbove, children} : PropsWithChildren<PopupProps>) => {
+const Popup = ({view, isArrowAbove = true, arrowDistance = 0, children} : PropsWithChildren<PopupProps>) => {
 
     const dispatch = useAppDispatch();
 
@@ -29,11 +31,15 @@ const Popup = ({view, isArrowAbove, children} : PropsWithChildren<PopupProps>) =
     }, [])
     
     const getAndSetLocationInfo = () => {
-        viewRef.current?.measure((x, y, width, height, pageX, pageY) => {
-            console.log(x, y, width, height, pageX, pageY);
-            setLocationInfo({ distanceFromRight: x, distanceFromTopOrBottom: y, arrowDistance: 10});
+        viewRef.current?.measure((x, y, widthComponent, heightComponent, pageX, pageY) => {
+            console.log(x, y, widthComponent, heightComponent, pageX, pageY, width);
+            let horizontalDistance = width - pageX - x;
+            let verticalDistance = isArrowAbove ? pageY : pageY + heightComponent;
+            setLocationInfo({ distanceFromRight: horizontalDistance, distanceFromTopOrBottom: verticalDistance, arrowDistance: arrowDistance});
         });
     }
+
+    // arrow below: pageY + height
 
     const buttonFunction = () => {
         if (viewRef) {
@@ -45,8 +51,11 @@ const Popup = ({view, isArrowAbove, children} : PropsWithChildren<PopupProps>) =
     useEffect(() => {
         if (showPopup) {
             dispatch(openPopup(
-            <View style={[{ position: 'absolute', top: locationInfo.distanceFromTopOrBottom, right: locationInfo.distanceFromRight, backgroundColor: 'pink'}]}>
+            <View style={[{ position: 'absolute', right: locationInfo.distanceFromRight}, 
+                          isArrowAbove ? {bottom: locationInfo.distanceFromTopOrBottom} : {top: locationInfo.distanceFromTopOrBottom}]}>
+                {isArrowAbove ?? <Arrow distanceFromRight={locationInfo.arrowDistance}/>}
                 { view }
+                {!isArrowAbove ?? <Arrow isArrowAbove={false} distanceFromRight={locationInfo.arrowDistance}/>}
             </View>));
             setShowPopup(false);
         }
@@ -68,6 +77,6 @@ export default Popup;
 /* 
 ! Steps
 ! 1. make the view with a child work (sizing is correct) DONE
-! 2. add function to get location of the button
+! 2. add function to get location of the button DONE
 ! 3. add popup with the view in it
 */  

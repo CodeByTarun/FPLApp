@@ -63,7 +63,8 @@ export const styles = StyleSheet.create({
         aspectRatio: 0.65,
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 7
+        marginRight: 7,
+        backgroundColor: 'red'
     },
 
     playerSearchButtonContainer: {

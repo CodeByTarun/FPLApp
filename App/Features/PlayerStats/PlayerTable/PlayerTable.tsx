@@ -1,24 +1,21 @@
 // Basic table that will show pts, goals, assists, playernames and positions
 // will also have a search function to find players faster
 
-import React, { useCallback, useReducer, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image, Pressable } from "react-native";
+import React, { useCallback, useReducer } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { FplOverview } from "../../../Models/FplOverview";
 import * as GlobalConstants from "../../../Global/GlobalConstants";
 import { OverviewStats } from "../../../Global/EnumsAndDicts"
 import { FplFixture } from "../../../Models/FplFixtures";
-import Checkbox from "expo-checkbox";
-import { Slider } from "@miblanchard/react-native-slider";
 import PlayerList from "../PlayerList/PlayerList";
 import { useAppDispatch } from "../../../Store/hooks";
 import { goToMainScreen } from "../../../Store/navigationSlice";
 import globalStyles from "../../../Global/GlobalStyles";
 import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
 import { styles } from "./PlayerTableStyles";
-import { Dropdown, ToolTip, CustomButton, SearchControl, FilterButton } from "../../Controls";
-import CustomSlider from "../../Controls/Slider";
+import { Dropdown, SearchControl, FilterButton } from "../../Controls";
 import TableFilterPopup from "./TableFilterPopup";
-import { CustomVerticalSeparator, VerticalSeparator } from "../../../Global/GlobalComponents";
+import { CustomVerticalSeparator } from "../../../Global/GlobalComponents";
 
 interface PlayerTableProps {
     overview: FplOverview;

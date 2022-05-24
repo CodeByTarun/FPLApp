@@ -2,23 +2,19 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { primaryColor } from "../../../Global/GlobalConstants";
 
-interface ArrowWrapperProps {
+interface ArrowProps {
     isArrowAbove?: boolean;
     distanceFromRight: number;
 }
 
-const ArrowWrapper = ({isArrowAbove = true, distanceFromRight, children} : React.PropsWithChildren<ArrowWrapperProps>) => {
+const Arrow = ({isArrowAbove = true, distanceFromRight} : ArrowProps) => {
 
     return (
-        <View>
-            { !isArrowAbove && children}
-            <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceFromRight}]}/>
-            { isArrowAbove && children}
-        </View>
+        <View testID="arrow" style={[styles.arrow, isArrowAbove ? styles.above : styles.below, {right: distanceFromRight}]}/>
     )
 }
 
-export default ArrowWrapper;
+export default Arrow;
 
 const styles = StyleSheet.create({
     arrow: {
