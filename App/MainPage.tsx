@@ -1,69 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View, Platform, StatusBar, Image, ActivityIndicator } from 'react-native';
-import FixturesView from './Features/Fixtures/Fixtures';
+import React, { useContext } from "react";
+import { SafeAreaView, StyleSheet, Text, View, Platform, StatusBar, Image } from 'react-native';
 import * as GlobalConstants from './Global/GlobalConstants'
-import { useGetFixturesQuery, useGetOverviewQuery } from './Store/fplSlice';
-import { useAppSelector } from "./Store/hooks";
-import { ScreenTypes } from "./Store/navigationSlice";
 import ModalNavigator from "./Modals/ModalNavigator";
 import { LineupViewQueriesContainer } from "./Features/LineupView";
 import PlayerStats from "./Features/PlayerStats";
 import FixturesContainer from "./Features/Fixtures/FixturesContainer";
 import BottomTabs from "./Features/BottomTabs";
-import { LoadingIndicator } from "./Features/Controls";
 import globalStyles from "./Global/GlobalStyles";
-import * as SplashScreen from "expo-splash-screen";
+import { FplBaseDataContext } from "./AppContext";
 
 const MainPage = () => {
 
-  const overview = useGetOverviewQuery();
-  const fixtures = useGetFixturesQuery();
-
-  useEffect( function refetchFixtures() {
-    if (fixtures.isError) {
-      setTimeout(() => { fixtures.refetch() }, 30000);
-    }
-  }, [fixtures.isError]);
-
-  useEffect( function refetchOverview() {
-    if (overview.isError) {
-      setTimeout(() => { overview.refetch() }, 30000);
-    }
-  }, [overview.isError]);
-
-  useEffect( function showSplashScreenWhileFetchingData() {
-    SplashScreen.preventAutoHideAsync();
-  }, [])
-
-  useEffect( function removeSplashScreen() {
-
-    if (fixtures.isSuccess && overview.isSuccess) {
-      setTimeout(() => SplashScreen.hideAsync(), 2000);
-    }
-
-  }, [fixtures.isSuccess, overview.isSuccess]);
+  const {overview, fixtures} = useContext(FplBaseDataContext)
 
   return (
     <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>
-      { (fixtures.isSuccess && overview.isSuccess) ?
+      { (fixtures && overview) ?
         <>
           <SafeAreaView style={styles.safeArea}>
-                <View style={{flex: 1, overflow: 'hidden'}}>
-                  <View style={styles.fixturesView}/>
-                    <FixturesContainer overview={overview.data} fixtures={fixtures.data}/>
-                  <View style={styles.lineupView}>
-                    <LineupViewQueriesContainer overview={overview.data} fixtures={fixtures.data}/>
-                  </View>
-                  <PlayerStats overview={overview.data} fixtures={fixtures.data}/>
-                  <View style={{}}>
-                    <BottomTabs/>
-                  </View>
-                </View>
+            <View style={{flex: 1, overflow: 'hidden'}}>
+              <View style={styles.fixturesView}/>
+                <FixturesContainer overview={overview} fixtures={fixtures}/>
+              <View style={styles.lineupView}>
+                <LineupViewQueriesContainer overview={overview} fixtures={fixtures}/>
+              </View>
+              <PlayerStats overview={overview} fixtures={fixtures}/>
+              <View>
+                <BottomTabs/>
+              </View>
+            </View>
           </SafeAreaView>
-
-          {(overview.data && fixtures.data) &&
-            <ModalNavigator overview={overview.data} fixtures={fixtures.data}/>
-          }
+          <ModalNavigator overview={overview} fixtures={fixtures}/>
         </> :
         <View style={styles.splashScreenContainer}>
           <Image style={styles.splashScreenImage} source={require('../assets/splash.png')} resizeMode={'contain'}/>
@@ -71,7 +38,7 @@ const MainPage = () => {
                 <Text style={{ alignSelf: 'center', textAlign: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.largeFont, fontWeight: '600' }}> 
                     There has been an error retrieving data from the FPL API. Try reopening the app later.
                 </Text>
-              </View>
+              </View >
         </View> 
       }
     </View>

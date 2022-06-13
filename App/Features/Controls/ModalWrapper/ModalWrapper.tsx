@@ -40,7 +40,7 @@ const ModalWrapper = ({ isVisible, closeFn, children, modalHeight, modalWidth } 
                                               modalWidth ? {width: modalWidth} : {}, 
                                               {top: styling.top}]}>
                             <CloseButton closeFunction={() => dispatch(closeModal())}/> 
-                                { children }
+                            { children }
                         </AnimatedView>
                     </TouchableWithoutFeedback>
                 </AnimatedPressable>)
