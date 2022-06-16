@@ -17,6 +17,9 @@ import { FIXTURES_VIEW_HEIGHT, height, width } from "../../Global/GlobalConstant
 import { animated, config, useChain, useSpring, useSpringRef } from "@react-spring/native";
 import FixtureCardLoading from "./FixtureCardLoading";
 import FixturesViewButton from "./FixturesViewButton";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../App";
 
 const AnimatedView = animated(View);
 const AnimatedPressable = animated(Pressable);
@@ -37,6 +40,7 @@ function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
 const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
   const dispatch = useAppDispatch();
+  const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
   const liveGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
   const teamInfo = useAppSelector(state => state.team);
   const navigation = useAppSelector(state => state.navigation);
@@ -110,7 +114,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
     }, [teamInfo.gameweek]);
 
     const onInfoButtonPress = useCallback(() => {
-      dispatch(openInfoModal());
+      navigator.navigate('InfoModal');
     }, [])
 
     const onCalendarButtonPress = useCallback(() => {
