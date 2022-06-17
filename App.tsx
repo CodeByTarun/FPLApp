@@ -70,7 +70,7 @@ function App() {
           <Stack.Group>
             <Stack.Screen name="Home" component={MainPage} options={{headerShown: false}}/>
           </Stack.Group>
-          <Stack.Group screenOptions={{ presentation: 'transparentModal', headerShown: false, animationEnabled: false }}>
+          <Stack.Group screenOptions={{ presentation: 'transparentModal', headerShown: false }}>
             <Stack.Screen name='InfoModal' component={InfoModal}/>
           </Stack.Group>
         </Stack.Navigator>
