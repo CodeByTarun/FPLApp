@@ -5,6 +5,7 @@ import { aLittleLighterColor, lightColor, textSecondaryColor } from "../../../..
 import { GetMinutesValueForDetailedStatsView, GetStatValueForDetailedStatsView } from "../../../../Helpers/FplAPIHelpers";
 import { PlayerOverview } from "../../../../Models/FplOverview";
 import { FplPlayerSummary, History } from "../../../../Models/FplPlayerSummary";
+import { useAppSelector } from "../../../../Store/hooks";
 import { StatsFilterState } from "../../StatsFilterReducer";
 import { styles } from "./StatsStyles";
 
@@ -29,10 +30,11 @@ interface StatsProps {
     statsFilterState: StatsFilterState;
     player: PlayerOverview;
     playerData: FplPlayerSummary;
-    currentGameweek: number;
 }
 
-const Stats = ({statsFilterState, player, playerData, currentGameweek} : StatsProps) => {
+const Stats = ({statsFilterState, player, playerData} : StatsProps) => {
+
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
     const getMinutes = useCallback(() => {
         
@@ -82,7 +84,7 @@ const Stats = ({statsFilterState, player, playerData, currentGameweek} : StatsPr
 
             <View style={[styles.sectionBorder, styles.bottomSection]}>
                 <Text style={styles.sectionHeaderText}>
-                    GW {currentGameweek} 
+                    GW {liveGameweek} 
                 </Text>
 
                 {Object.keys(PlayerDetailedStatsBottom).map((key) => {

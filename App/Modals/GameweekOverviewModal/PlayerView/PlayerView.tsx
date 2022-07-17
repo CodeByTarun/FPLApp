@@ -1,11 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
-import { View, TouchableOpacity, Text, Image } from "react-native";
+import { View, Text, Image } from "react-native";
+import { RootStackParams } from "../../../../App";
 import { AnimatedButton } from "../../../Features/Controls";
 import globalStyles from "../../../Global/GlobalStyles";
 import { Jerseys } from "../../../Global/Images";
 import { FplOverview } from "../../../Models/FplOverview";
 import { useAppDispatch } from "../../../Store/hooks";
-import { openPlayerDetailedStatsModal } from "../../../Store/modalSlice";
+import { changePlayerOverviewInfo } from "../../../Store/modalSlice";
 import { styles } from "./PlayerViewStyles";
 
 interface PlayerViewProps {
@@ -17,12 +20,14 @@ interface PlayerViewProps {
 const PlayerView = ({overview, header, id} : PlayerViewProps) => {
 
     const dispatch = useAppDispatch();
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const openPlayerStatsModal = useCallback((id: number) => {
 
         let player = overview.elements.find(element => element.id === id);
         if (player) {
-            dispatch(openPlayerDetailedStatsModal(player))
+            dispatch(changePlayerOverviewInfo(player));
+            navigation.navigate('PlayerDetailedStatsModal');
         }
     }, [overview])
 

@@ -3,96 +3,62 @@ import { PlayerData } from "../Models/CombinedData";
 import { PlayerOverview } from "../Models/FplOverview";
 import { FplPlayerSummary } from "../Models/FplPlayerSummary";
 
-export enum ModalTypes {
-    PlayerModal, 
-    DetailedPlayerModal,
-    TeamModal,
-    GameweekOverviewModal,
-    PlayerComparisonModal,
-    InfoModal,
-    BackgroundOnly,
-    Closed,
+export interface ListModalData {
+    title: string,
+    buttonText: string,
+    buttonFn: () => void,
+    items: string[],
+    itemSelectFn: (item: string) => void,
+    isSearchable: boolean,
+    currentItem: string,
 }
 
-export interface PlayerModalInfo {
-    modalType: ModalTypes.PlayerModal,
-    player: PlayerData,
+const initialListModalData: ListModalData = {
+    title: 'Title',
+    buttonText: 'button',
+    buttonFn: () => {},
+    items: [],
+    itemSelectFn: () => {},
+    isSearchable: false,
+    currentItem: '',
 }
+export type ModalInfo = {
+    playerData: PlayerData | null;
+    playerOverview: PlayerOverview | null;
+    playerSummary: FplPlayerSummary | null;
+    listModalData: ListModalData;
+} 
 
-export interface DetailedPlayerModalInfo {
-    modalType: ModalTypes.DetailedPlayerModal,
-    player: PlayerOverview,
-}
-
-export interface TeamModalInfo {
-    modalType: ModalTypes.TeamModal,
-}
-
-export interface GameweekOverviewModalInfo {
-    modalType: ModalTypes.GameweekOverviewModal,
-}
-
-export interface PlayerComparisonModalInfo {
-    modalType: ModalTypes.PlayerComparisonModal,
-    playerOverview: PlayerOverview,
-    playerSummary: FplPlayerSummary,
-}
-
-export interface InfoModalInfo {
-    modalType: ModalTypes.InfoModal,
-}
-export interface BackgroundOnlyInfo {
-    modalType: ModalTypes.BackgroundOnly,
-}
-
-export interface ClosedInfo {
-    modalType: ModalTypes.Closed,
-}
-
-export type ModalInfo = PlayerModalInfo | DetailedPlayerModalInfo | PlayerComparisonModalInfo | TeamModalInfo | 
-                        GameweekOverviewModalInfo | InfoModalInfo | BackgroundOnlyInfo | ClosedInfo;
-
-const initialState = {modalType: ModalTypes.Closed} as ModalInfo;
+const initialState: ModalInfo = { playerData: null, playerOverview: null, playerSummary: null, listModalData: initialListModalData };
 
 const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
 
-        openPlayerModal(state: ModalInfo, playerData: PayloadAction<PlayerData>): ModalInfo {
-            return { modalType: ModalTypes.PlayerModal, player: playerData.payload};
+        changePlayerModalInfo(state: ModalInfo, playerData: PayloadAction<PlayerData>): ModalInfo {
+            return { ...state, playerData: playerData.payload };
         },
 
-        openPlayerDetailedStatsModal(state: ModalInfo, playerOverview: PayloadAction<PlayerOverview>): ModalInfo {
-            return { modalType: ModalTypes.DetailedPlayerModal, player: playerOverview.payload };
+        changePlayerDetailedModalInfo(state: ModalInfo, playerInfo: PayloadAction<{ playerOverview: PlayerOverview, playerSummary: FplPlayerSummary }>): ModalInfo {
+            return { ...state, playerOverview: playerInfo.payload.playerOverview, playerSummary: playerInfo.payload.playerSummary };
         },
 
-        openPlayerComparisonModal(state: ModalInfo, playerData: PayloadAction<{playerOverview: PlayerOverview, playerSummary: FplPlayerSummary}>): ModalInfo {
-            return { modalType: ModalTypes.PlayerComparisonModal, playerOverview: playerData.payload.playerOverview, playerSummary: playerData.payload.playerSummary }
+        changePlayerOverviewInfo(state: ModalInfo, playerOverview: PayloadAction<PlayerOverview>): ModalInfo {
+            return { ...state, playerOverview: playerOverview.payload };
         },
 
-        openTeamModal(state: ModalInfo): ModalInfo {
-            return { modalType: ModalTypes.TeamModal };
+        changePlayerSummaryInfo(state: ModalInfo, playerSummary: PayloadAction<FplPlayerSummary>): ModalInfo {
+            return { ...state, playerSummary: playerSummary.payload };
         },
 
-        openGameweekOverviewModal(state: ModalInfo): ModalInfo {
-            return { modalType: ModalTypes.GameweekOverviewModal }
+        changeListModalData(state: ModalInfo, listModalData: PayloadAction<ListModalData>): ModalInfo {
+            return { ...state, listModalData: listModalData.payload };
         },
-
-        openInfoModal(state: ModalInfo): ModalInfo {
-            return { modalType: ModalTypes.InfoModal}
-        },
-
-        closeModal(state: ModalInfo): ModalInfo {
-            return { modalType: ModalTypes.Closed };
-        },
-
-        showModalBackground(state: ModalInfo): ModalInfo {
-            return { modalType: ModalTypes.BackgroundOnly };
-        }
     }
 });
 
-export const { openPlayerModal, openPlayerDetailedStatsModal, openPlayerComparisonModal, openTeamModal, 
-               openGameweekOverviewModal, openInfoModal, closeModal, showModalBackground } =  modalSlice.actions;
-export default modalSlice.reducer;
+export const { changePlayerModalInfo, changePlayerDetailedModalInfo, changePlayerOverviewInfo, 
+               changePlayerSummaryInfo, changeListModalData } =  modalSlice.actions;
+
+export default modalSlice.reducer;  

@@ -3,6 +3,7 @@ import { FlatList, Text, View } from "react-native";
 import { DifficultyColors } from "../../../../Global/EnumsAndDicts";
 import { FplFixture } from "../../../../Models/FplFixtures";
 import { FplOverview } from "../../../../Models/FplOverview";
+import { useAppSelector } from "../../../../Store/hooks";
 import { styles } from "./FixtureDifficultyListStyles";
 
 interface FixtureDifficultyListProps {
@@ -10,7 +11,7 @@ interface FixtureDifficultyListProps {
     fixtures: FplFixture[];
     overview: FplOverview;
     isFullList: boolean;
-    currentGameweek: number;
+    liveGameweek: number
 }
 
 const FixtureDifficultyList = React.memo((props: FixtureDifficultyListProps) => {
@@ -18,7 +19,7 @@ const FixtureDifficultyList = React.memo((props: FixtureDifficultyListProps) => 
     const [fixtureList, setFixtureList] = useState([] as FplFixture[]);
 
     useEffect(() => {
-        setFixtureList(props.fixtures.filter((fixture) => (fixture.team_a === props.team || fixture.team_h === props.team) && (fixture.event && fixture.event >= props.currentGameweek + 1)))
+        setFixtureList(props.fixtures.filter((fixture) => (fixture.team_a === props.team || fixture.team_h === props.team) && (fixture.event && fixture.event >= props.liveGameweek)))
     }, [])
 
     const renderItem = useCallback(({item}: {item: FplFixture}) => {

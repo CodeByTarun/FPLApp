@@ -20,13 +20,12 @@ interface statInfo {
 interface ManagerInfoCardProps {
     teamInfo: DraftInfo | BudgetInfo,
     players : PlayerData[],
-    currentGameweek: number,
     budgetManagerInfo? : FplManagerInfo,
     budgetGameweekPicks? : FplManagerGameweekPicks,
     draftManagerInfo? : FplDraftUserInfo,
 }
 
-const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo, budgetGameweekPicks, draftManagerInfo}: ManagerInfoCardProps) => {
+const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPicks, draftManagerInfo}: ManagerInfoCardProps) => {
 
     const [stat, setStat] = useState({title: "Gameweek", 
                                       value: (teamInfo.teamType === TeamTypes.Budget) ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : GetTeamTotalPoints(teamInfo, players) , 
@@ -124,7 +123,7 @@ const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo,
     }, [stat, teamInfo.gameweek, teamInfo.info.id])
 
     return (
-        <Pressable testID="managerCardButton" style={[styles.container, globalStyles.tabShadow]} disabled={(teamInfo.gameweek !== currentGameweek)} onPress={(teamInfo.teamType === TeamTypes.Budget) ? changingBudgetStat : changingDraftStat}>
+        <Pressable testID="managerCardButton" style={[styles.container, globalStyles.tabShadow]} disabled={(teamInfo.gameweek !== teamInfo.liveGameweek)} onPress={(teamInfo.teamType === TeamTypes.Budget) ? changingBudgetStat : changingDraftStat}>
             {((((teamInfo.teamType === TeamTypes.Budget) && budgetManagerInfo) || ((teamInfo.teamType === TeamTypes.Draft) && draftManagerInfo)) && players) &&
             <>
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>
@@ -136,7 +135,7 @@ const ManagerInfoCard = ({teamInfo, players, currentGameweek, budgetManagerInfo,
                 <View style={{alignSelf: 'center', justifyContent: 'center'}}>
                     <Text numberOfLines={1} style={styles.text}>{stat.stat}</Text>
                 </View>
-                {(teamInfo.gameweek === currentGameweek) &&
+                {(teamInfo.gameweek === teamInfo.liveGameweek) &&
                     <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 7}}>  
                         { [1,2,3,4,5].map(index => {
                             return (

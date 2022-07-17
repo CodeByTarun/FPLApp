@@ -11,11 +11,10 @@ import { styles } from "./GameweekViewStyles";
 interface GameweekViewProps {
     isVisible: boolean;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-    liveGameweek: number;
     overview: FplOverview;
 }
 
-const GameweekView = ({isVisible, setIsVisible, liveGameweek, overview} : GameweekViewProps) => {
+const GameweekView = ({isVisible, setIsVisible, overview} : GameweekViewProps) => {
 
     const dispatch = useAppDispatch();
     const teamInfo = useAppSelector(state => state.team);
@@ -57,7 +56,7 @@ const GameweekView = ({isVisible, setIsVisible, liveGameweek, overview} : Gamewe
             </View>
             
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Pressable style={[styles.currentGameweekButton]} onPress={() => onGameweekButtonPress(liveGameweek)}>
+                <Pressable style={[styles.currentGameweekButton]} onPress={() => onGameweekButtonPress(teamInfo.liveGameweek)}>
                     <Text style={[styles.text, {fontWeight: '600'}]}>Current Gameweek</Text>
                 </Pressable>
             </View>

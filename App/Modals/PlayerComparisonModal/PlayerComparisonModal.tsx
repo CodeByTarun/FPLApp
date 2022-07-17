@@ -1,21 +1,20 @@
 import Checkbox from "expo-checkbox";
-import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
-import { Modal, Pressable, View, Text, TouchableOpacity, Animated, ScrollView } from "react-native";
-import { Slider } from "@miblanchard/react-native-slider";
-import { AnimatedButton, CloseButton, CustomButton, FilterButton, ModalWrapper, ToolTip } from "../../Features/Controls";
-import { fieldColor, height, lightColor, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import React, { useEffect, useReducer, useState } from "react";
+import { View, Text, ScrollView } from "react-native";
+import { AnimatedButton, FilterButton, ModalWrapper, ToolTip } from "../../Features/Controls";
+import { fieldColor, height, lightColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
 import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
-import { useAppDispatch } from "../../Store/hooks";
-import { closeModal, ModalInfo, ModalTypes } from "../../Store/modalSlice";
+import { ModalInfo } from "../../Store/modalSlice";
 import { StatsFilterActionKind, statsFilterReducer } from "../PlayerDetailedStatsModal/StatsFilterReducer";
 import { styles } from "./PlayerComparisonModalStyles";
 import AddPlayerModal from "./AddPlayerModal";
 import PlayerComparisonView from "./PlayerComparisonView";
 import { animated, useSpring } from "@react-spring/native";
 import CustomSlider from "../../Features/Controls/Slider";
+import { useAppSelector } from "../../Store/hooks";
 
 export interface CombinedPlayerData {
     playerOverview: PlayerOverview;
@@ -33,11 +32,10 @@ const views = ['GW', 'Stats', 'FDR'];
 
 const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerComparisonModalProps) => {
 
-    const dispatch = useAppDispatch();
-    const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
     const [viewIndex, setViewIndex] = useState(0);
-    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, currentGameweek], isPer90: false });
+    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, liveGameweek], isPer90: false });
     const [isAddPlayerModalVisible, setIsAddPlayerModalVisible] = useState(false);
     const [playersToCompare, setPlayersToCompare] = useState([] as CombinedPlayerData[]);
 
@@ -46,13 +44,14 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
 
     //#endregion
     useEffect(() => {
-        if (modalInfo.modalType === ModalTypes.PlayerComparisonModal) {
+        if (modalInfo.playerOverview && modalInfo.playerSummary) {
             setPlayersToCompare([{playerOverview: modalInfo.playerOverview, playerSummary: modalInfo.playerSummary}]);
         }
-    }, [modalInfo.modalType])
+
+    }, [modalInfo.playerOverview])
 
     //#region Players to compare functions
-    const addPlayer = (playerToAdd: PlayerOverview) => {
+    const addPlayer = (playerToAdd: PlayerOverview) => { 
 
         if (playersToCompare.find(player => player.playerOverview.id === playerToAdd.id) !== undefined) return
 
@@ -72,7 +71,7 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
     //#endregion
 
     return (
-        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.PlayerComparisonModal} closeFn={() => dispatch(closeModal())} modalHeight={'80%'} modalWidth={'85%'}>
+        <ModalWrapper modalHeight={'80%'} modalWidth={'85%'}>
             <View style={styles.modalContainer}>
                 <View style={{flex: 1}}>
                     <Text style={styles.titleText}>Player Comparison</Text>
@@ -85,7 +84,7 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
                                     <AnimatedButton buttonFn={() => setViewIndex(index)}>
                                         <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
                                     </AnimatedButton>
-                                </View>
+                                </View> 
                             )}
                         </View>
                         {viewIndex === 1 &&
@@ -100,7 +99,7 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
                                                             onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
                                                     </View>
                                                     <View style={{ marginTop: 10 }}>
-                                                        <CustomSlider header={"Gameweeks:"} minValue={1} maxValue={currentGameweek} 
+                                                        <CustomSlider header={"Gameweeks:"} minValue={1} maxValue={liveGameweek} 
                                                                       step={1} initialRange={statsFilterState.gameSpan}
                                                                       onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value })}/>
                                                     </View>
@@ -115,9 +114,8 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
                             { playersToCompare.map(player => { return(
                                 <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
                                                     playerOverview={player.playerOverview} playerSummary={player.playerSummary} 
-                                                    playerList={playersToCompare}
-                                                    viewIndex={viewIndex} statsFilterState={statsFilterState} 
-                                                    currentGameweek={currentGameweek} removePlayerFunction={removePlayer}/>
+                                                    playerList={playersToCompare} viewIndex={viewIndex} 
+                                                    statsFilterState={statsFilterState} removePlayerFunction={removePlayer}/>
                             )})}
 
                     </ScrollView>
@@ -141,4 +139,4 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
     )
 }
 
-export default PlayerComparisonModal;
+export default PlayerComparisonModal; 

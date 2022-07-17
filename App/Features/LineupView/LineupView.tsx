@@ -9,7 +9,6 @@ import { useAppDispatch } from "../../Store/hooks";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
-import { openTeamModal } from "../../Store/modalSlice";
 import globalStyles from "../../Global/GlobalStyles";
 import Standings from "../Standings";
 import { styles } from "./LineupViewStyles";
@@ -24,6 +23,9 @@ import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
 import TeamListView from "./TeamListView";
 import Popup from "../Popup";
 import { Icons } from "../../Global/Images";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../App";
 
 interface LineupViewProps {
     overview: FplOverview,
@@ -40,14 +42,10 @@ interface LineupViewProps {
 
 const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks, draftOverview, draftUserInfo, draftLeagueInfo, budgetUserInfo, budgetGameweekPicks}: LineupViewProps) => {
 
-    const dispatch = useAppDispatch();
+    const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const [isStandingsModalVisible, setIsStandingsModalVisible] = useState(false); 
     const [isTeamsListVisible, setIsTeamsListVisible] = useState(false);
-
-    const onMyTeamButtonPress = useCallback(() => {
-        setIsTeamsListVisible(true);
-    }, []);
 
     return (
         <View style={styles.container}>
@@ -95,7 +93,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                 
                  (teamInfo.teamType === TeamTypes.Empty) ?
                     <View style={{flex: 1, alignContent: 'center', justifyContent: 'center'}}>
-                        <TouchableOpacity testID="noTeamsFoundButton" style={styles.button} onPress={() => dispatch(openTeamModal())}>
+                        <TouchableOpacity testID="noTeamsFoundButton" style={styles.button} onPress={() => navigator.navigate('TeamModal')}>
                             <Text style={styles.buttonText}>Add your fantasy team</Text>
                         </TouchableOpacity>
                     </View> : 

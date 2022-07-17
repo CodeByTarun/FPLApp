@@ -1,12 +1,11 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Pressable, View, Image, Text } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import { FplFixture } from "../../Models/FplFixtures";
-import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
-import { useAppDispatch } from "../../Store/hooks";
-import { closeModal, ModalInfo, ModalTypes, openPlayerComparisonModal } from "../../Store/modalSlice";
+import { FplOverview } from "../../Models/FplOverview";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
+import { changePlayerSummaryInfo, ModalInfo } from "../../Store/modalSlice";
 import * as GlobalConstants from "../../Global/GlobalConstants";
-import { Slider } from "@miblanchard/react-native-slider";
 import Checkbox from "expo-checkbox";
 import { useGetPlayerSummaryQuery } from "../../Store/fplSlice";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
@@ -16,74 +15,76 @@ import { CustomButton, FilterButton, LoadingIndicator, ModalWrapper } from "../.
 import { styles } from "./PlayerDetailedStatsModalStyles";
 import { statsFilterReducer, StatsFilterActionKind } from "./StatsFilterReducer";
 import { HistoryList, Stats } from "./PlayerDetailedStatsViews";
-import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
 import { animated, useSpring } from "@react-spring/native";
 import CustomSlider from "../../Features/Controls/Slider";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../App";
+import { FplBaseDataContext } from "../../AppContext";
 
 const AnimatedView = animated(View);
 
-interface PlayerDetailedStatsModalProps {
-    overview: FplOverview;
-    fixtures: FplFixture[];
-    modalInfo: ModalInfo;
-}
-
-const PlayerDetailedStatsModal = ({overview, fixtures, modalInfo}: PlayerDetailedStatsModalProps) => {
+const PlayerDetailedStatsModal = () => {
 
     const dispatch = useAppDispatch();
-    const playerDataQuery = useGetPlayerSummaryQuery((modalInfo.modalType === ModalTypes.DetailedPlayerModal) ? modalInfo.player.id : skipToken);
-    const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+    const { overview, fixtures } = useContext(FplBaseDataContext);
+    const modalInfo = useAppSelector(state => state.modal);
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
-    const playerRef = useRef(false as PlayerOverview | false);
-    playerRef.current = (modalInfo.modalType === ModalTypes.DetailedPlayerModal) ? modalInfo.player : playerRef.current;
-    const player = playerRef.current as PlayerOverview | false;
+    const playerDataQuery = useGetPlayerSummaryQuery(modalInfo.playerOverview ? modalInfo.playerOverview.id : skipToken);
 
-    const playerDataRef = useRef(false as FplPlayerSummary | false);
-    playerDataRef.current = (playerDataQuery.isSuccess) ? playerDataQuery.data : playerDataRef.current;
-    const playerData = playerDataRef.current as FplPlayerSummary | false;
+    const playerOverview = modalInfo.playerOverview;
+    const playerSummary = modalInfo.playerSummary;
 
     const [isStatsViewShowing, setIsStatViewShowing] = useState(true);
-    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, currentGameweek], isPer90: false });
+    const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, liveGameweek ?? 38], isPer90: false });
 
     const toggleSpring = useSpring({ left: isStatsViewShowing ? '0%' : '50%' });
     const viewSwitchSpring = useSpring({ statsLeft: isStatsViewShowing ? '0%' : '-120%', historyLeft: isStatsViewShowing ? '120%' : '0%' });
 
-    useEffect( function ModalClosed() {
-        statsFilterDispatch({ type: StatsFilterActionKind.Reset, value: [1, currentGameweek] });
-        setIsStatViewShowing(true);
-    }, [modalInfo.modalType]);
+    // useEffect( function ModalClosed() {
+    //     statsFilterDispatch({ type: StatsFilterActionKind.Reset, value: [1, currentGameweek] });
+    //     setIsStatViewShowing(true);
+    // }, [modalInfo.modalType]);
+
+    useEffect( function SetPlayerSummaryToModalStore() {
+        if (playerDataQuery.isSuccess) {
+            dispatch(changePlayerSummaryInfo(playerDataQuery.data));
+        } 
+    }, [playerDataQuery.isSuccess])
 
     return (
-        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.DetailedPlayerModal} closeFn={() => dispatch(closeModal())} modalHeight={'65%'} modalWidth={'80%'}>    
+        <ModalWrapper modalHeight={'65%'} modalWidth={'80%'}>    
             <View style={{ padding: 5, height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: GlobalConstants.primaryColor }}>
-                { playerData && player ? 
+                { overview && fixtures && liveGameweek && playerSummary && playerOverview && playerDataQuery.isSuccess ? 
                     <View style={{flex: 1, width: '100%'}}>
                         <View style={{flex: 10}}>
                             <View style={styles.header}>
                                 <View style={{flexDirection: 'row'}}>
-                                    <Text style={styles.titleText}>{player.web_name}</Text>
+                                    <Text style={styles.titleText}>{playerOverview.web_name}</Text>
                                     <View style={{flex: 1, alignContent: 'flex-end', justifyContent: 'flex-end'}}>
-                                        <Text style={[styles.text, {alignSelf: 'flex-end', marginBottom: 1}]}>Form: {player.form}</Text>
+                                        <Text style={[styles.text, {alignSelf: 'flex-end', marginBottom: 1}]}>Form: {playerOverview.form}</Text>
                                     </View>
                                 </View>
                                 <View style={{flexDirection: 'row', paddingTop: 3}}>
                                     <View style={{flexDirection: 'row'}}>
-                                        <Text style={[styles.text, {fontWeight: 'bold'}]}>{overview.teams.find(team => team.code === player.team_code)?.short_name}  </Text>
-                                        <Text style={styles.text}>{overview.element_types.find(element => element.id === player.element_type)?.singular_name_short}  </Text>
-                                        <Text style={styles.text}>£{(player.now_cost / 10).toFixed(1)}  </Text>
+                                        <Text style={[styles.text, {fontWeight: 'bold'}]}>{overview.teams.find(team => team.code === playerOverview.team_code)?.short_name}  </Text>
+                                        <Text style={styles.text}>{overview.element_types.find(element => element.id === playerOverview.element_type)?.singular_name_short}  </Text>
+                                        <Text style={styles.text}>£{(playerOverview.now_cost / 10).toFixed(1)}  </Text>
                                     </View>
 
                                     <View style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
-                                        <Text style={styles.text}>Sel. {player.selected_by_percent}%</Text>
+                                        <Text style={styles.text}>Sel. {playerOverview.selected_by_percent}%</Text>
                                     </View>                                    
                                 </View>
-                                { (player.status !== 'a') && 
+                                { (playerOverview.status !== 'a') && 
                                     <View style={{ flexDirection: 'row', height: 30, marginTop: 10, backgroundColor: GlobalConstants.secondaryColor}}>
                                         <View style={{height: '90%', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', marginLeft: 3, marginRight: 3}}>
-                                            <Image style={{height: '100%', width: '100%', alignSelf: 'center', marginBottom: -2}} source={(player.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
+                                            <Image style={{height: '100%', width: '100%', alignSelf: 'center', marginBottom: -2}} source={(playerOverview.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
                                         </View>
                                         <View style={{flex: 1, justifyContent: 'center'}}> 
-                                            <Text style={[styles.text, { flexWrap: 'wrap'}]}>{player.news}</Text>
+                                            <Text style={[styles.text, { flexWrap: 'wrap'}]}>{playerOverview.news}</Text>
                                         </View>
                                     </View>
                                 }
@@ -91,7 +92,7 @@ const PlayerDetailedStatsModal = ({overview, fixtures, modalInfo}: PlayerDetaile
 
                             <View style={styles.controlsContainer}>
                                 <View style={{flex: 1, height: '85%', alignSelf: 'center'}}>
-                                    <CustomButton image="playercomparison" buttonFunction={() => dispatch(openPlayerComparisonModal({playerOverview: player, playerSummary: playerData}))}/>
+                                    <CustomButton image="playercomparison" buttonFunction={() => navigation.navigate("PlayerComparisonModal")}/>
                                 </View>
                                 <Pressable style={styles.statHistoryToggle} onPress={() => setIsStatViewShowing(!isStatsViewShowing)} hitSlop={5}>
                                     <AnimatedView style={[styles.viewToggleIndiciator, globalStyles.shadow, { left: toggleSpring.left }]} children={undefined}/>
@@ -117,7 +118,7 @@ const PlayerDetailedStatsModal = ({overview, fixtures, modalInfo}: PlayerDetaile
                                                                         onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
                                                                 </View>
                                                                 <View style={{ marginTop: 10 }}>
-                                                                    <CustomSlider header="Gameweeks:" minValue={1} maxValue={currentGameweek} step={1}
+                                                                    <CustomSlider header="Gameweeks:" minValue={1} maxValue={liveGameweek} step={1}
                                                                                   initialRange={statsFilterState.gameSpan}
                                                                                   onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value })}/>
                                                                 </View>
@@ -130,16 +131,16 @@ const PlayerDetailedStatsModal = ({overview, fixtures, modalInfo}: PlayerDetaile
 
                             <View style={{flex: 1, overflow: 'hidden'}}>
                                 <AnimatedView style={{position: 'absolute', width: '100%', height: '100%', left: viewSwitchSpring.statsLeft}}>
-                                    <Stats statsFilterState={statsFilterState} player={player} playerData={playerData} currentGameweek={currentGameweek}/> 
+                                    <Stats statsFilterState={statsFilterState} player={playerOverview} playerData={playerSummary}/> 
                                 </AnimatedView>
                                 <AnimatedView style={{position: 'absolute', width: '100%', height: '100%', left: viewSwitchSpring.historyLeft}}>
-                                    <HistoryList overview={overview} player={player} playerData={playerData}/>
+                                    <HistoryList overview={overview} player={playerOverview} playerData={playerSummary}/>
                                 </AnimatedView>
                             </View>
                         </View>
 
                         <View style={{flex: 1, paddingTop: 10, zIndex: -1}}>
-                            <FixtureDifficultyList isFullList={true} overview={overview} fixtures={fixtures} currentGameweek={currentGameweek} team={player.team}/>
+                            <FixtureDifficultyList isFullList={true} overview={overview} fixtures={fixtures} team={playerOverview.team} liveGameweek={liveGameweek}/>
                         </View>
                     </View> : 
                     <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>

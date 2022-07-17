@@ -27,7 +27,7 @@ export const styles = StyleSheet.create(
         //#endregion
 
         titleText: {
-            alignSelf: 'center',
+            alignSelf: 'center', 
             color: textPrimaryColor,
             fontSize: largeFont,
             fontWeight: 'bold',
@@ -38,7 +38,6 @@ export const styles = StyleSheet.create(
         text: {
             color: textPrimaryColor,
             fontSize: mediumFont,
-            paddingLeft: 10
         },
 
         textInput: {
@@ -52,6 +51,7 @@ export const styles = StyleSheet.create(
             borderRadius: cornerRadius,
             padding: 8,
             flex: 1,
+            width: '100%'
         },
 
         switch: {
@@ -91,6 +91,7 @@ export const styles = StyleSheet.create(
 
         modalTeamList: {
             flex: 1,
+            width: '100%',
             margin: 5,
             paddingTop: 10,
         },        

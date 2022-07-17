@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
-import { height, largeFont, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
-import { IsThereAMatchInProgress } from "../../Helpers/FplAPIHelpers";
+import { height, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     animatedView: {

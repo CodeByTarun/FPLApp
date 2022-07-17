@@ -4,7 +4,6 @@ import { modalTextColor, mediumFont, height, largeFont, textPrimaryColor, second
 export const styles = StyleSheet.create({
 
     container: {
-        maxHeight: height * 0.6,
     },
 
     titleText: {
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
 
     fixtureScoreView: {
         flexDirection: 'row', 
-        width: '75%', 
+        width: '100%', 
         alignSelf: 'center', 
         height: height*0.05, 
         alignItems: 'center', 
@@ -36,8 +35,8 @@ export const styles = StyleSheet.create({
     scoreText: {
         color: modalTextColor,
         fontSize: largeFont,
-        marginLeft: 5,
-        marginRight: 5,
+        marginLeft: 10,
+        marginRight: 10,
     },
 
     emblemView: {

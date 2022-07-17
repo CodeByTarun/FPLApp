@@ -7,13 +7,23 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useGetOverviewQuery, useGetFixturesQuery } from './App/Store/fplSlice';
 import * as SplashScreen from "expo-splash-screen";
 import { FplBaseDataContext } from './App/AppContext';
-import InfoModal from './App/Modals/InfoModalTest';
-import { StackCardInterpolatedStyle, StackCardInterpolationProps, StackCardStyleInterpolator, TransitionSpec } from '@react-navigation/stack/lib/typescript/src/types';
-import { ViewStyle } from 'react-native';
+import PlayerModal from './App/Modals/PlayerModal';
+import InfoModal from './App/Modals/InfoModal';
+import PlayerDetailedStatsModal from './App/Modals/PlayerDetailedStatsModal';
+import PlayerComparisonModal from './App/Modals/PlayerComparisonModal';
+import TeamModal from './App/Modals/TeamModal';
+import GameweekOverviewModal from './App/Modals/GameweekOverviewModal';
+import ListModal from './App/Modals/ListModal';
 
 export type RootStackParams = {
   Home: any;
   InfoModal: any;
+  PlayerModal: any;
+  PlayerDetailedStatsModal: any;
+  PlayerComparisonModal: any;
+  TeamModal: any;
+  GameweekOverview: any;
+  ListModal: any;
 }
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -30,7 +40,6 @@ function App() {
 
   const overview = useGetOverviewQuery();
   const fixtures = useGetFixturesQuery();
-
   const errorCount = useRef(0);
 
   useEffect( function refetchIfError() {
@@ -71,7 +80,13 @@ function App() {
             <Stack.Screen name="Home" component={MainPage} options={{headerShown: false}}/>
           </Stack.Group>
           <Stack.Group screenOptions={{ presentation: 'transparentModal', headerShown: false }}>
-            <Stack.Screen name='InfoModal' component={InfoModal}/>
+            <Stack.Screen name="InfoModal" component={InfoModal}/>
+            <Stack.Screen name="PlayerModal" component={PlayerModal}/>
+            <Stack.Screen name="PlayerDetailedStatsModal" component={PlayerDetailedStatsModal}/>
+            <Stack.Screen name="PlayerComparisonModal" component={PlayerComparisonModal}/>
+            <Stack.Screen name="TeamModal" component={TeamModal}/>
+            <Stack.Screen name="GameweekOverview" component={GameweekOverviewModal}/>
+            <Stack.Screen name="ListModal" component={ListModal}/>
           </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>

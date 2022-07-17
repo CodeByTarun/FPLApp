@@ -6,6 +6,7 @@ import { primaryColor } from "../../../Global/GlobalConstants";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { FplPlayerSummary, History } from "../../../Models/FplPlayerSummary";
+import { useAppSelector } from "../../../Store/hooks";
 import { StatsFilterState } from "../../PlayerDetailedStatsModal/StatsFilterReducer";
 import { CombinedPlayerData } from "../PlayerComparisonModal";
 import { styles } from "./PlayerComparisonViewStyles";
@@ -37,12 +38,13 @@ interface PlayerComparisonViewProps {
     playerSummary: FplPlayerSummary;
     viewIndex: number;
     statsFilterState: StatsFilterState;
-    currentGameweek: number;
     removePlayerFunction: (playerToRemove: PlayerOverview) => void;
     playerList: CombinedPlayerData[];
 }
 
-const PlayerComparisonView = ({overview, fixtures, playerOverview, playerSummary, viewIndex, statsFilterState, currentGameweek, removePlayerFunction, playerList} : PlayerComparisonViewProps) => {
+const PlayerComparisonView = ({overview, fixtures, playerOverview, playerSummary, viewIndex, statsFilterState, removePlayerFunction, playerList} : PlayerComparisonViewProps) => {
+
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
     const getMinutes = useCallback(() => {
         if (playerSummary && statsFilterState.gameSpan) {
@@ -121,7 +123,7 @@ const PlayerComparisonView = ({overview, fixtures, playerOverview, playerSummary
                     </ScrollView> 
                 :
                 <View style={{margin: 5, height: 40}} onStartShouldSetResponder={() => true}>
-                    <FixtureDifficultyList team={playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} currentGameweek={currentGameweek}/>
+                    <FixtureDifficultyList team={playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} liveGameweek={liveGameweek}/>
                 </View>
             )}
             </View>

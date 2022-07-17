@@ -2,33 +2,33 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import UserTeamInfo from "../Helpers/FplDataStorageService";
 import { FplFixture } from "../Models/FplFixtures";
 
-export interface FixtureInfo {
+interface baseInfo {
+    gameweek: number;
+    liveGameweek: number;
+}
+
+export interface FixtureInfo extends baseInfo {
     teamType: TeamTypes.Fixture,
     fixture: FplFixture | null,
     isHome: boolean,
-    gameweek: number,
 }
 
-export interface DraftInfo {
+export interface DraftInfo extends baseInfo {
     teamType: TeamTypes.Draft,
-    gameweek: number,
     info: UserTeamInfo,
 }
 
-export interface BudgetInfo {
+export interface BudgetInfo extends baseInfo {
     teamType: TeamTypes.Budget,
-    gameweek: number,
     info: UserTeamInfo,
 }
 
-export interface DreamTeamInfo {
+export interface DreamTeamInfo extends baseInfo {
     teamType: TeamTypes.Dream,
-    gameweek: number,
 }
 
-export interface EmptyTeam {
+export interface EmptyTeam extends baseInfo {
     teamType: TeamTypes.Empty,
-    gameweek: number,
 }
 
 export type TeamInfo = FixtureInfo | DraftInfo | BudgetInfo | DreamTeamInfo | EmptyTeam;
@@ -42,7 +42,7 @@ export enum TeamTypes {
     Empty,
 }
 
-const initialState: TeamInfo = {teamType: TeamTypes.Empty} as TeamInfo;
+const initialState: TeamInfo = {teamType: TeamTypes.Empty, gameweek: 1, liveGameweek: 1} as TeamInfo;
 
 const teamSlice = createSlice({
     name: 'team',
@@ -50,6 +50,10 @@ const teamSlice = createSlice({
     reducers: {
         changeGameweek(state: TeamInfo, action: PayloadAction<number>): void {
             state.gameweek = action.payload;
+        },
+
+        setLiveGameweek(state: TeamInfo, action: PayloadAction<number>): void {
+            state.liveGameweek = action.payload;
         },
 
         changingFixtureWhenGameweekChanged(state: TeamInfo, action: PayloadAction<FplFixture|null>): TeamInfo {
@@ -83,23 +87,23 @@ const teamSlice = createSlice({
         },
 
         changeToDreamTeam(state: TeamInfo): DreamTeamInfo {
-            return {teamType: TeamTypes.Dream, gameweek: state.gameweek}
+            return {teamType: TeamTypes.Dream, gameweek: state.gameweek, liveGameweek: state.liveGameweek}
         },
 
         changeToDraftTeam(state: TeamInfo, action: PayloadAction<UserTeamInfo>): DraftInfo {
-            return { teamType: TeamTypes.Draft, gameweek: state.gameweek, info: action.payload }
+            return { teamType: TeamTypes.Draft, gameweek: state.gameweek, info: action.payload, liveGameweek: state.liveGameweek }
         },
 
         changeToBudgetTeam(state: TeamInfo, action: PayloadAction<UserTeamInfo>): BudgetInfo {
-            return { teamType: TeamTypes.Budget, gameweek: state.gameweek, info: action.payload }
+            return { teamType: TeamTypes.Budget, gameweek: state.gameweek, info: action.payload, liveGameweek: state.liveGameweek}
         },
 
         changeToEmpty(state: TeamInfo) : EmptyTeam {
-            return { teamType: TeamTypes.Empty, gameweek: state.gameweek }
+            return { teamType: TeamTypes.Empty, gameweek: state.gameweek, liveGameweek: state.liveGameweek }
         },
     }
 });
 
-export const { changeGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam, 
+export const { changeGameweek, setLiveGameweek, changeToFixture, removeFixture, toggleTeamShown, setIsHomeToTrue, changeToDreamTeam, 
                changeToDraftTeam, changeToBudgetTeam, changingFixtureWhenGameweekChanged, changeToEmpty } = teamSlice.actions;
 export default teamSlice.reducer;

@@ -1,10 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { View } from "react-native";
-import { draftOverview } from "../../../Tests/SampleData/Overviews";
+import { RootStackParams } from "../../../App";
 import { VerticalSeparator } from "../../Global/GlobalComponents";
-import globalStyles from "../../Global/GlobalStyles";
 import { useAppDispatch } from "../../Store/hooks";
-import { openGameweekOverviewModal, openTeamModal } from "../../Store/modalSlice";
 import { goToFixturesScreen, goToPlayerStatsScreen } from "../../Store/navigationSlice";
 import { changeToDreamTeam } from "../../Store/teamSlice";
 import { styles } from "./BottomTabsStyle";
@@ -13,13 +13,14 @@ import TabButton from "./TabButton";
 const BottomTabs = () => {
 
     const dispatch = useAppDispatch();
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const goToDreamTeam = () => {
         dispatch(changeToDreamTeam());
     }
 
     const openOverview = () => {
-        dispatch(openGameweekOverviewModal());
+        navigation.navigate("GameweekOverview");
     }
 
     const goToFixtures = () => {
@@ -31,7 +32,7 @@ const BottomTabs = () => {
     }
 
     const openMyTeams = () => {
-        dispatch(openTeamModal());
+        navigation.navigate('TeamModal');
     }
 
     return (

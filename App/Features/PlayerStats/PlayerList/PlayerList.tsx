@@ -1,16 +1,17 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, View, Text } from "react-native";
-import { OverviewStats } from "../../../Global/EnumsAndDicts";
-import { height, Per90Stats } from "../../../Global/GlobalConstants";
+import { RootStackParams } from "../../../../App";
+import { height } from "../../../Global/GlobalConstants";
 import { FilterPlayerListPlayers, GetOwnedPlayersManagerShortInitials, GetStatValue, SortPlayerListPlayers } from "../../../Helpers/FplAPIHelpers";
 import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../../Helpers/FplDataStorageService";
-import TeamModal from "../../../Modals/TeamModal";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { useGetDraftLeagueInfoQuery, useGetDraftLeaguePlayerStatusesQuery, useGetDraftOverviewQuery, useGetDraftUserInfoQuery } from "../../../Store/fplSlice";
 import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
-import { openPlayerDetailedStatsModal } from "../../../Store/modalSlice";
+import { changePlayerOverviewInfo } from "../../../Store/modalSlice";
 import { TeamTypes } from "../../../Store/teamSlice";
 import { CustomButton, LoadingIndicator } from "../../Controls";
 import { PlayerTableFilterState } from "../PlayerTable/PlayerTableFilterReducer";
@@ -28,11 +29,11 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     const [playerList, setPlayerList] = useState([] as PlayerOverview[]);
     const [watchlist, setWatchlist] = useState({playerIds: []} as PlayersWatchlist | undefined);
+
     const teamInfo = useAppSelector(state => state.team);
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const dispatch = useAppDispatch();
-    const currentGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
-
 
     const [isListDoneFiltering, setIsListDoneFiltering] = useState(true);
     const [isDraftTeam, setIsDraftTeam] = useState(null as number | null);
@@ -125,10 +126,15 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     const renderPlayerItem = useCallback(({item}: {item: PlayerOverview}) => {
 
+        const pressPlayerFn = () => {
+            dispatch(changePlayerOverviewInfo(item));
+            navigation.navigate('PlayerDetailedStatsModal');
+        }
+
         let isInWatchList = watchlist?.playerIds.includes(item.id);
 
         return (
-        <Pressable key={item.id} style={styles.tableView} onPress={() => dispatch(openPlayerDetailedStatsModal(item))}>
+        <Pressable key={item.id} style={styles.tableView} onPress={pressPlayerFn}>
             <View testID="watchlistButtonContainer" style={{flex: 0.60, justifyContent: 'center', opacity: isInWatchList ? 1 : 0.5}}>
                 <CustomButton image={isInWatchList ? "favourite" : "unfavourite"} buttonFunction={isInWatchList ? () => removeFromWatchlist(item.id) : () => addToWatchlist(item.id)}/>
             </View>
@@ -139,7 +145,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
             </View>
 
             <View style={{ flex: 3 }}>
-                <FixtureDifficultyList team={item.team} isFullList={false} currentGameweek={currentGameweek} fixtures={fixtures} overview={overview} />
+                <FixtureDifficultyList team={item.team} isFullList={false} fixtures={fixtures} overview={overview} liveGameweek={teamInfo.liveGameweek} />
             </View>
 
             <View style={[styles.tableNumberView, { flex: 1 }]}>

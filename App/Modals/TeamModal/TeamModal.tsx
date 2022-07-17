@@ -1,29 +1,32 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react";
-import { Modal, Pressable, View, Image, Text, ScrollView, TextInput, StyleSheet } from "react-native";
-import globalStyles from "../../Global/GlobalStyles";
+import { View, Image, Text, ScrollView, TextInput } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { Icons } from "../../Global/Images";
 import UserTeamInfo, { changeFavouriteUserTeam, getAllUserTeamInfo, removeUserTeamInfo, addUserTeamInfo, editUserTeamInfo } from "../../Helpers/FplDataStorageService";
 import { useAppDispatch } from "../../Store/hooks";
 import { changeToBudgetTeam, changeToDraftTeam } from "../../Store/teamSlice";
 import Checkbox from "expo-checkbox";
-import { closeModal, ModalInfo, ModalTypes } from "../../Store/modalSlice";
-import { AnimatedButton, CloseButton, ModalWrapper } from "../../Features/Controls";
+import { AnimatedButton, ModalWrapper } from "../../Features/Controls";
 import { styles } from "./TeamModalStyles";
 import { userTeamReducer, userTeamInitialState, UserTeamActionKind } from "./UserTeamReducer";
 import { Seperator } from "../../Global/GlobalComponents";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../App";
 
-interface TeamModalProps {
-    modalInfo: ModalInfo,
-}
+// interface TeamModalProps {
+//     modalInfo: ModalInfo,
+// }
 
-const TeamModal = ({modalInfo}: TeamModalProps) => {
+const TeamModal = () => {
 
     const [userTeams, setUserTeams] = useState([] as UserTeamInfo[] | undefined);
     const [confirmIsDisabled, setConfirmIsDisabled] = useState(true)
     const [teamFormOpen, setTeamFormOpen] = useState(false);
     const [userTeamState, userTeamDispatch] = useReducer(userTeamReducer, userTeamInitialState);
+
     const dispatch = useAppDispatch();
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     useEffect( function initialSetup() {
         async function getTeams() {
@@ -39,12 +42,12 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
 
     }, [userTeamState])
 
-    useEffect( function resetModal() {
-        if (modalInfo.modalType !== ModalTypes.TeamModal) {
-            userTeamDispatch({ type: UserTeamActionKind.Reset })
-            setTeamFormOpen(false);
-        }
-    }, [modalInfo])
+    // useEffect( function resetModal() {
+    //     if (modalInfo.modalType !== ModalTypes.TeamModal) {
+    //         userTeamDispatch({ type: UserTeamActionKind.Reset })
+    //         setTeamFormOpen(false);
+    //     }
+    // }, [modalInfo])
 
     const addTeam = useCallback(async() => {
 
@@ -102,110 +105,108 @@ const TeamModal = ({modalInfo}: TeamModalProps) => {
         else {
             dispatch(changeToBudgetTeam(teamSelected))
         }
-        dispatch(closeModal());
+        navigation.goBack();
     }, [])
 
     return (
-        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.TeamModal} closeFn={() => dispatch(closeModal())}  modalHeight={"50%"} modalWidth={"75%"}>
-            <>
-                <Text style={[styles.titleText]}>{(teamFormOpen) ? (userTeamState.teamEditing) ? "Edit Team" : "Add Team" : "My Teams"}</Text>
+        <ModalWrapper modalHeight={"50%"} modalWidth={"75%"}>
+            <Text style={[styles.titleText]}>{(teamFormOpen) ? (userTeamState.teamEditing) ? "Edit Team" : "Add Team" : "My Teams"}</Text>
 
-                { (teamFormOpen) ?
-                    <View style={styles.modalAddTeamView}>
-                        
-                        <View style={{flex: 1, justifyContent: 'center'}}>
-                            <TextInput style={[styles.text, styles.textInput]} 
-                                    placeholder="Team Name" 
-                                    placeholderTextColor={'lightgray'}
-                                    returnKeyType="done"
-                                    maxLength={20}
-                                    spellCheck={false}
-                                    value={ userTeamState.userTeam.name }
-                                    onChangeText={ text => userTeamDispatch({ type: UserTeamActionKind.ChangeName, value: text, data: userTeams })}/>
-                        </View>
-
-                        <View style={{flex: 1, justifyContent: 'center'}}>
-                            <TextInput style={[styles.text, styles.textInput]} 
-                                    placeholder="Manager ID" 
-                                    placeholderTextColor={'lightgray'}
-                                    keyboardType="numeric"
-                                    returnKeyType="done"
-                                    maxLength={9}
-                                    value={ (userTeamState.userTeam.id) ? userTeamState.userTeam.id.toString() : '' }
-                                    onChangeText={ text => userTeamDispatch({ type: UserTeamActionKind.ChangeID, value: text, data: userTeams })}/>
-                        </View>
-
-                        <View style={{flex: 1, flexDirection:'row', alignItems: 'center', paddingRight: 5}}>
-                            <Text style={[styles.text, {padding: 7, flex: 1,}]}>Draft team?</Text>
-                            <Checkbox color={userTeamState.userTeam.isDraftTeam ? GlobalConstants.fieldColor : GlobalConstants.lightColor} 
-                                    value={ userTeamState.userTeam.isDraftTeam } 
-                                    onValueChange={ value => userTeamDispatch({ type: UserTeamActionKind.IsDraft, value: value, data: userTeams })}/>
-                        </View>
-                        
-                        <View style={{flex: 0.5, justifyContent: 'center'}}>
-                            <Text style={[styles.text, {color: GlobalConstants.redColor, padding: 7}]}>{ userTeamState.error }</Text>
-                        </View>
-                        <View style={{flexDirection: 'row'}}>
-
-                            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <AnimatedButton buttonFn={(userTeamState.teamEditing) ? removeATeam : closeForm}>
-                                    <View style={[styles.formButton, {backgroundColor: (userTeamState.teamEditing) ? GlobalConstants.redColor : 'grey' }]}>
-                                        <Text style={{alignSelf:'center'}}>{(userTeamState.teamEditing) ? 'Delete' : 'Back'}</Text>
-                                    </View>
-                                </AnimatedButton>
-                            </View>                         
-
-                            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                <AnimatedButton buttonFn={(userTeamState.teamEditing) ? editTeam : addTeam} disabled={confirmIsDisabled}>
-                                    <View style={[styles.formButton, {opacity: confirmIsDisabled ? 0.5 : 1}]}>
-                                        <Text style={{alignSelf:'center'}}>Confirm</Text>
-                                    </View>
-                                </AnimatedButton>
-                            </View>
-                        </View>
-                    </View> : 
-                    <>
-                    <ScrollView style={styles.modalTeamList}>
-                        <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
-                            <Seperator/>
-                            { (userTeams && userTeams.length > 0) &&
-                                userTeams.map((team) => 
-                                    <View key={team.id}>
-                                        <View style={styles.modalListRow}>
-                                            <View style={styles.favouriteButton}>
-                                                <AnimatedButton buttonFn={() => { favouriteATeam(team) }}>
-                                                    <View style={styles.favouriteButton}>
-                                                        <Image style={styles.icon} source={team.isFavourite ? Icons['favourite'] : Icons['unfavourite']} resizeMode="contain"/>
-                                                    </View>
-                                                </AnimatedButton>
-                                            </View>
-                                            <View style={styles.teamButton}>
-                                                <AnimatedButton buttonFn={() => selectedATeam(team)}>
-                                                    <Text style={styles.text}>{team.name}</Text>
-                                                </AnimatedButton>
-                                            </View>
-                                            <View style={styles.editButton}> 
-                                                <AnimatedButton buttonFn={() => openEditTeam(team)}>
-                                                    <View style={styles.editButton}>
-                                                        <Image style={styles.icon} source={Icons['edit']} resizeMode="contain"/>
-                                                    </View>
-                                                </AnimatedButton>
-                                            </View>
-                                        </View> 
-                                        <Seperator/>
-                                    </View>
-                                )
-                            }
-                        </View>
-                    </ScrollView>
-                    <View style={styles.addButton}>
-                        <AnimatedButton buttonFn={() => {setTeamFormOpen(true)}}>
-                            <Text style={[styles.text, styles.buttonText]}>Add Team</Text>
-                        </AnimatedButton>
+            { (teamFormOpen) ?
+                <View style={styles.modalAddTeamView}>
+                    
+                    <View style={{flex: 1, justifyContent: 'center'}}>
+                        <TextInput style={[styles.text, styles.textInput]} 
+                                placeholder="Team Name" 
+                                placeholderTextColor={'lightgray'}
+                                returnKeyType="done"
+                                maxLength={20}
+                                spellCheck={false}
+                                value={ userTeamState.userTeam.name }
+                                onChangeText={ text => userTeamDispatch({ type: UserTeamActionKind.ChangeName, value: text, data: userTeams })}/>
                     </View>
-                    </>
-                }
-            </>
+
+                    <View style={{flex: 1, justifyContent: 'center'}}>
+                        <TextInput style={[styles.text, styles.textInput]} 
+                                placeholder="Manager ID" 
+                                placeholderTextColor={'lightgray'}
+                                keyboardType="numeric"
+                                returnKeyType="done"
+                                maxLength={9}
+                                value={ (userTeamState.userTeam.id) ? userTeamState.userTeam.id.toString() : '' }
+                                onChangeText={ text => userTeamDispatch({ type: UserTeamActionKind.ChangeID, value: text, data: userTeams })}/>
+                    </View>
+
+                    <View style={{flex: 1, flexDirection:'row', alignItems: 'center', paddingRight: 5}}>
+                        <Text style={[styles.text, {padding: 7, flex: 1,}]}>Draft team?</Text>
+                        <Checkbox color={userTeamState.userTeam.isDraftTeam ? GlobalConstants.fieldColor : GlobalConstants.lightColor} 
+                                value={ userTeamState.userTeam.isDraftTeam } 
+                                onValueChange={ value => userTeamDispatch({ type: UserTeamActionKind.IsDraft, value: value, data: userTeams })}/>
+                    </View>
+                    
+                    <View style={{flex: 0.5, justifyContent: 'center'}}>
+                        <Text style={[styles.text, {color: GlobalConstants.redColor, padding: 7}]}>{ userTeamState.error }</Text>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                            <AnimatedButton buttonFn={(userTeamState.teamEditing) ? removeATeam : closeForm}>
+                                <View style={[styles.formButton, {backgroundColor: (userTeamState.teamEditing) ? GlobalConstants.redColor : 'grey' }]}>
+                                    <Text style={{alignSelf:'center'}}>{(userTeamState.teamEditing) ? 'Delete' : 'Back'}</Text>
+                                </View>
+                            </AnimatedButton>
+                        </View>                         
+
+                        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                            <AnimatedButton buttonFn={(userTeamState.teamEditing) ? editTeam : addTeam} disabled={confirmIsDisabled}>
+                                <View style={[styles.formButton, {opacity: confirmIsDisabled ? 0.5 : 1}]}>
+                                    <Text style={{alignSelf:'center'}}>Confirm</Text>
+                                </View>
+                            </AnimatedButton>
+                        </View>
+                    </View>
+                </View> : 
+                <>
+                <ScrollView style={styles.modalTeamList}>
+                    <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
+                        <Seperator/>
+                        { (userTeams && userTeams.length > 0) &&
+                            userTeams.map((team) => 
+                                <View key={team.id}>
+                                    <View style={styles.modalListRow}>
+                                        <View style={styles.favouriteButton}>
+                                            <AnimatedButton buttonFn={() => { favouriteATeam(team) }}>
+                                                <View style={styles.favouriteButton}>
+                                                    <Image style={styles.icon} source={team.isFavourite ? Icons['favourite'] : Icons['unfavourite']} resizeMode="contain"/>
+                                                </View>
+                                            </AnimatedButton>
+                                        </View>
+                                        <View style={styles.teamButton}>
+                                            <AnimatedButton buttonFn={() => selectedATeam(team)}>
+                                                <Text style={styles.text}>{team.name}</Text>
+                                            </AnimatedButton>
+                                        </View>
+                                        <View style={styles.editButton}> 
+                                            <AnimatedButton buttonFn={() => openEditTeam(team)}>
+                                                <View style={styles.editButton}>
+                                                    <Image style={styles.icon} source={Icons['edit']} resizeMode="contain"/>
+                                                </View>
+                                            </AnimatedButton>
+                                        </View>
+                                    </View> 
+                                    <Seperator/>
+                                </View>
+                            )
+                        }
+                    </View>
+                </ScrollView>
+                <View style={styles.addButton}>
+                    <AnimatedButton buttonFn={() => {setTeamFormOpen(true)}}>
+                        <Text style={[styles.text, styles.buttonText]}>Add Team</Text>
+                    </AnimatedButton>
+                </View>
+                </>
+            }
         </ModalWrapper>
     )
 }

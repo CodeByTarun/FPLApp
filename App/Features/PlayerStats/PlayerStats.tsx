@@ -1,9 +1,10 @@
 // This is going to show a table of players when clicked on that will be filtered as the user types in it
 // When one of the players names are clicked on a player card will open showing there stats
 
-import { animated, config, useSpring } from "@react-spring/native";
-import React, { useCallback, useEffect, useRef } from "react";
-import { StyleSheet, Keyboard, Animated, View } from "react-native";
+import { animated, useSpring } from "@react-spring/native";
+import React, { useContext } from "react";
+import { StyleSheet, View } from "react-native";
+import { FplBaseDataContext } from "../../AppContext";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
@@ -13,20 +14,19 @@ import PlayerTable from "./PlayerTable/PlayerTable";
    
 const AnimatedView = animated(View);
 
-interface PlayerSearchProps {
-    overview: FplOverview;
-    fixtures: FplFixture[];
-}
-
-const PlayerStats = (props: PlayerSearchProps) => {
+const PlayerStats = () => {
 
     const navigation = useAppSelector(state => state.navigation);
+    const {overview, fixtures} = useContext(FplBaseDataContext);
+
 
     const popupSpring = useSpring({top: (navigation.screenType === ScreenTypes.PlayerStats) ? '0%' : '120%', config: { friction: 18, mass: 0.5 }});
 
     return (
         <AnimatedView style={[styles.container, { height: '100%', top: popupSpring.top }]}>
-            <PlayerTable overview={props.overview} fixtures={props.fixtures}/>
+            { overview && fixtures && 
+                <PlayerTable overview={overview} fixtures={fixtures}/>
+            }
         </AnimatedView>
     )
 }

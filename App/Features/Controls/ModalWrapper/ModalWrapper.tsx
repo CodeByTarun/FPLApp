@@ -1,51 +1,41 @@
-import { animated, easings, useTransition } from "@react-spring/native";
-import React, { useState } from "react";
-import { Pressable, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp, useCardAnimation } from "@react-navigation/stack";
+import React, { PropsWithChildren } from "react";
+import { Animated, Pressable, StyleSheet, View } from "react-native";
+import { RootStackParams } from "../../../../App";
+import { height, primaryColor } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
-import { useAppDispatch } from "../../../Store/hooks";
-import { closeModal } from "../../../Store/modalSlice";
 import CloseButton from "../CloseButton/CloseButton";
 
 interface ModalWrapperProps {
-    isVisible: boolean,
-    closeFn: () => void,
-    children: React.ReactNode,
     modalHeight?: string;
     modalWidth?: string;
+    maxHeight?: number;
 }
 
-const AnimatedPressable = animated(Pressable);
-const AnimatedView = animated(View);
+const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWithChildren<ModalWrapperProps>) => {
 
-const ModalWrapper = ({ isVisible, closeFn, children, modalHeight, modalWidth } : ModalWrapperProps) => {
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+    const { current } = useCardAnimation();
 
-    const dispatch = useAppDispatch();
-
-    const transitions = useTransition(isVisible, {
-        from: { backgroundColor: 'rgba(0, 0, 0, 0.1)', top: '100%' },
-        enter: { backgroundColor: 'rgba(0, 0, 0, 0.5)', top: '0%' },
-        leave: { backgroundColor: 'rgba(0, 0, 0, 0.1)', top: '100%' },
-        config: {
-            duration: isVisible ? 200 : 200,
-            easing: easings.easeInQuart,
-        },
+    const modalScale = current.progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
     });
 
     return(
-        transitions((styling, show) => show && 
-                <AnimatedPressable testID="background" style={[styles.modalBackground, globalStyles.modalShadow, {backgroundColor: styling.backgroundColor}]} onPress={closeFn}>
-                    <TouchableWithoutFeedback style={{}}>
-                        <AnimatedView style={[globalStyles.modalView, globalStyles.modalShadow, 
-                                              modalHeight ? {height: modalHeight} : {}, 
-                                              modalWidth ? {width: modalWidth} : {}, 
-                                              {top: styling.top}]}>
-                            <CloseButton closeFunction={() => dispatch(closeModal())}/> 
-                            { children }
-                        </AnimatedView>
-                    </TouchableWithoutFeedback>
-                </AnimatedPressable>)
-    )
-}
+        <View testID="background" style={styles.modalBackground}>
+            <Pressable style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.5)' }]} onPress={navigation.goBack}/>
+            <Animated.View style={[styles.modal, globalStyles.modalShadow, 
+                                    modalHeight ? {height: modalHeight} : {}, 
+                                    modalWidth ? {width: modalWidth} : {}, 
+                                    maxHeight ? {maxHeight: maxHeight} : {},
+                                    {transform: [{ scale: modalScale }]}]}>
+                <CloseButton closeFunction={navigation.goBack}/> 
+                { children }
+            </Animated.View>
+        </View>
+)}
 
 export default ModalWrapper;
 
@@ -55,18 +45,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center', 
         alignSelf: 'center', 
-        flex: 1, 
         zIndex: 1,
-        position: 'absolute'
+        position: 'absolute',
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: primaryColor,
        },
 
     modalBackground: {
-        position: 'absolute',
-        height: '110%',
-        width: '110%',
-        top: '-5%',
-        left: '-5%',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },

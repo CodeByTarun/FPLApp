@@ -1,10 +1,11 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, ScrollView } from "react-native";
+import { RootStackParams } from "../../../../App";
 import { Seperator } from "../../../Global/GlobalComponents";
-import globalStyles from "../../../Global/GlobalStyles";
 import UserTeamInfo, { getAllUserTeamInfo } from "../../../Helpers/FplDataStorageService";
 import { useAppDispatch } from "../../../Store/hooks";
-import { closeModal, openTeamModal } from "../../../Store/modalSlice";
 import { changeToDraftTeam, changeToBudgetTeam } from "../../../Store/teamSlice";
 import { AnimatedButton } from "../../Controls";
 import { styles } from "./TeamListViewStyle";
@@ -16,6 +17,7 @@ interface TeamListViewProps {
 const TeamListView = ({setIsVisible} : TeamListViewProps) => {
 
     const dispatch = useAppDispatch();
+    const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
     const [userTeams, setUserTeams] = useState([] as UserTeamInfo[] | undefined);
 
     useEffect( function initialSetup() {
@@ -37,7 +39,7 @@ const TeamListView = ({setIsVisible} : TeamListViewProps) => {
 
     const addATeam = useCallback(() => {
 
-        dispatch(openTeamModal());
+        navigator.navigate('TeamModal');
         setIsVisible(false);
 
     }, [])

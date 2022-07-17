@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
-import { View, Text, ScrollView, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { Seperator } from "../../../Global/GlobalComponents";
-import { textPrimaryColor, largeFont, textSecondaryColor, aLittleLighterColor, smallFont } from "../../../Global/GlobalConstants";
 import { FplDraftLeagueInfo, LeagueEntry, Standing } from "../../../Models/FplDraftLeagueInfo";
 import { useAppDispatch } from "../../../Store/hooks";
 import { changeToDraftTeam } from "../../../Store/teamSlice";

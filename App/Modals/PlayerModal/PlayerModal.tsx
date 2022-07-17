@@ -1,28 +1,24 @@
 // This will contain understat and fpl data combined in a nice playercard that will help
 // ppl see how a player is performing recently as well as on the overall season
 
-import React, { useRef } from "react";
-import { Modal, Pressable, View, Image, StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
+import React, { useContext } from "react";
+import { View, Image, Text, ScrollView } from "react-native";
 import { StatNames } from "../../Global/EnumsAndDicts";
-import globalStyles from "../../Global/GlobalStyles";
 import { Emblems } from "../../Global/Images";
 import { PlayerData } from "../../Models/CombinedData";
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
-import * as GlobalConstants from "../../Global/GlobalConstants";
-import { GetScoreForLiveFixture, GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
-import { useAppDispatch } from "../../Store/hooks";
-import { closeModal, ModalInfo, ModalTypes, openPlayerDetailedStatsModal } from "../../Store/modalSlice";
-import { AnimatedButton, CloseButton, ModalWrapper } from "../../Features/Controls";
+import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
+import { AnimatedButton, ModalWrapper } from "../../Features/Controls";
 import { styles } from "./PlayerModalStyles";
-
-interface PlayerCardProps {
-    overview: FplOverview;
-    fixtures: FplFixture[];
-    modalInfo: ModalInfo;
-    teamInfo: TeamInfo;
-}
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../App";
+import { FplBaseDataContext } from "../../AppContext";
+import { height } from "../../Global/GlobalConstants";
+import { changePlayerOverviewInfo } from "../../Store/modalSlice";
 
 function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) {
 
@@ -87,24 +83,28 @@ function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, f
     )
 }
 
-const PlayerModal = ({overview, fixtures, teamInfo, modalInfo}: PlayerCardProps) => {
+const PlayerModal = () => {
 
     const dispatch = useAppDispatch();
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+    const { overview, fixtures } = useContext(FplBaseDataContext);
 
-    const playerRef = useRef(false as PlayerData | false);
-    playerRef.current = (modalInfo.modalType === ModalTypes.PlayerModal) ? modalInfo.player : playerRef.current;
-    const player = playerRef.current;
+    const teamInfo = useAppSelector(state => state.team);
+    const modalInfo = useAppSelector(state => state.modal);
+
+    const player = modalInfo.playerData;
 
     const onMoreInfoPress = () => {
         if (player) {
-            dispatch(openPlayerDetailedStatsModal(player.overviewData));
+            dispatch(changePlayerOverviewInfo(player.overviewData));
+            navigation.navigate('PlayerDetailedStatsModal');
         }
     }
 
     return (
-        <ModalWrapper isVisible={modalInfo.modalType === ModalTypes.PlayerModal} closeFn={() => dispatch(closeModal())} modalWidth={"75%"}>
+        <ModalWrapper modalWidth={"75%"} maxHeight={height * 0.6}>
             <View style={[styles.container]}>
-                { player &&
+                { player && overview && fixtures &&
                 <>
                     <Text style={styles.titleText}>
                         {player.overviewData.first_name + " " + player.overviewData.second_name}

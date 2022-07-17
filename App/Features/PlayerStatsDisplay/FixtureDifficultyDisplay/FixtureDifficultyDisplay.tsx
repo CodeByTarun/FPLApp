@@ -4,16 +4,18 @@ import { DifficultyColors } from "../../../Global/EnumsAndDicts";
 import { PlayerData } from "../../../Models/CombinedData";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview } from "../../../Models/FplOverview";
+import { useAppSelector } from "../../../Store/hooks";
 import { styles } from "./FixtureDifficultyDisplayStyles";
 
 interface FixtureDifficultyDisplayProps {
     overview: FplOverview;
     fixtures: FplFixture[];
     player: PlayerData;
-    currentGameweek: number;
 }
 
-const FixtureDifficultyDisplay = ({overview, fixtures, player, currentGameweek} : FixtureDifficultyDisplayProps) => {
+const FixtureDifficultyDisplay = ({overview, fixtures, player} : FixtureDifficultyDisplayProps) => {
+
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
     return (
         <View style={{flex: 1}}>
@@ -22,7 +24,7 @@ const FixtureDifficultyDisplay = ({overview, fixtures, player, currentGameweek} 
                 <Text style={[styles.fixtureDifficultyText, {flex: 2}]}>Opp</Text>
             </View>
             { fixtures.filter((fixture) => (fixture.team_a === player.overviewData.team || fixture.team_h === player.overviewData.team) && 
-                                            (fixture.event && fixture.event >= currentGameweek + 1)).slice(0,5).map(fixture => {
+                                            (fixture.event && fixture.event >= liveGameweek + 1)).slice(0,5).map(fixture => {
                                                 return (
                                                     <View testID="fixtureDifficultyPlayerStatsView" style={[styles.fixtureDifficultyContainer, { backgroundColor: DifficultyColors[fixture.team_a === player.overviewData.team ? fixture.team_a_difficulty : fixture.team_h_difficulty]}]}
                                                             key={fixture.id}>

@@ -29,7 +29,6 @@ export const fplSlice = createApi({
 
     getFixtures: builder.query<FplFixture[], void>({
       query: () => '/fixtures/',
-      
     }),
 
     getGameweekData: builder.query<FplGameweek, number>({

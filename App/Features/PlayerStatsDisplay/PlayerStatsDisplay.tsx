@@ -1,19 +1,22 @@
-import React from "react";
-import { Image, View, Text, TouchableOpacity } from "react-native";
+import React, { useCallback } from "react";
+import { Image, View, Text } from "react-native";
 import * as GlobalConstants from "../../Global/GlobalConstants"
 import { PlayerData } from "../../Models/CombinedData";
 import { Icons, Jerseys, StatImages } from "../../Global/Images";
-import { GetFixtureStats, GetPlayerScoreAndFixtureText, GetPointTotal } from "../../Helpers/FplAPIHelpers";
+import { GetFixtureStats, GetPlayerScoreAndFixtureText } from "../../Helpers/FplAPIHelpers";
 import { useAppDispatch } from "../../Store/hooks";
 import { FplOverview } from "../../Models/FplOverview";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { Identifier } from "../../Models/FplGameweek";
 import { FplFixture } from "../../Models/FplFixtures";
-import { openPlayerModal } from "../../Store/modalSlice";
 import globalStyles from "../../Global/GlobalStyles";
 import { styles } from "./PlayerStatsDisplayStyles";
 import FixtureDifficultyDisplay from "./FixtureDifficultyDisplay";
 import { AnimatedButton } from "../Controls";
+import { changePlayerModalInfo } from "../../Store/modalSlice";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../App";
 
 interface PlayerStatsDisplayProps {
     player: PlayerData;
@@ -21,7 +24,6 @@ interface PlayerStatsDisplayProps {
     teamInfo: TeamInfo;
     fixtures: FplFixture[];
     viewIndex: number;
-    currentGameweek: number;
 }
 
 const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
@@ -66,14 +68,20 @@ const singleStatView = (label: string, value: number | string) => {
     )
 }
 
-const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex, currentGameweek}: PlayerStatsDisplayProps) => {
+const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: PlayerStatsDisplayProps) => {
 
     const dispatch = useAppDispatch();
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+
+    const openPlayerModal = useCallback(() => {
+        dispatch(changePlayerModalInfo(player));
+        navigation.navigate('PlayerModal');
+    }, [player])
 
     return (
         <>
         {(player.gameweekData && teamInfo.teamType !== TeamTypes.Empty) &&
-        <AnimatedButton buttonFn={() => dispatch(openPlayerModal(player))}>
+        <AnimatedButton buttonFn={openPlayerModal}>
             <View testID="playerStatsDisplayButton" style={styles.container} >
                 { viewIndex === 0 &&
                 <>
@@ -137,7 +145,7 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex, cu
                             </>
                             }
                             { (viewIndex === 3) && 
-                                <FixtureDifficultyDisplay overview={overview} fixtures={fixtures} player={player} currentGameweek={currentGameweek}/>
+                                <FixtureDifficultyDisplay overview={overview} fixtures={fixtures} player={player}/>
                             }
                         </View>
                         <View testID="infoCardNamePlayerStats" style={styles.infoCardNameContainer}>

@@ -5,7 +5,7 @@ import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
 import { useGetFixturesQuery, useGetGameweekDataQuery } from "../../Store/fplSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { changeGameweek } from "../../Store/teamSlice";
+import { changeGameweek, setLiveGameweek } from "../../Store/teamSlice";
 import Fixtures from "./Fixtures";
 
 interface FixturesContainerProps {
@@ -16,14 +16,15 @@ interface FixturesContainerProps {
 const FixturesContainer = ({ overview, fixtures } : FixturesContainerProps) => {
 
     const dispatch = useAppDispatch();
-    const liveGameweek = overview.events.filter((event) => { return event.is_current === true; })[0].id;
+    const liveGameweek = overview.events.filter((event) => { return event.is_current === true; })[0]?.id;
     const teamInfo = useAppSelector(state => state.team);
     const gameweekData = useGetGameweekDataQuery((teamInfo.gameweek) ? teamInfo.gameweek : skipToken);
     const fixturesData = useGetFixturesQuery();
 
     useEffect(function getLiveGameweek() {
         if (liveGameweek) {
-            dispatch(changeGameweek(liveGameweek))
+            dispatch(changeGameweek(liveGameweek ?? 1));
+            dispatch(setLiveGameweek(liveGameweek ?? 1));
           }
     }, [])
 
@@ -32,7 +33,7 @@ const FixturesContainer = ({ overview, fixtures } : FixturesContainerProps) => {
         let refetchGameweek: NodeJS.Timer;
   
         if (teamInfo.gameweek !== undefined && fixtures !== undefined) {
-          if (teamInfo.gameweek === liveGameweek && IsThereAMatchInProgress(teamInfo.gameweek, fixtures)) {
+          if (teamInfo.gameweek === liveGameweek && IsThereAMatchInProgress(teamInfo.gameweek, fixtures) && liveGameweek) {
             refetchFixture = setInterval(() => fixturesData.refetch(), 30000);
             refetchGameweek = setInterval(() => gameweekData.refetch(), 30000);
           }
@@ -43,7 +44,7 @@ const FixturesContainer = ({ overview, fixtures } : FixturesContainerProps) => {
             clearInterval(refetchFixture);
             clearInterval(refetchGameweek);
           }
-        };
+        }
       }, [teamInfo.gameweek]);
 
     return (

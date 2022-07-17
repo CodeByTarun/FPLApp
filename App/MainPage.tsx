@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Platform, StatusBar, Image } from 'react-native';
 import * as GlobalConstants from './Global/GlobalConstants'
-import ModalNavigator from "./Modals/ModalNavigator";
 import { LineupViewQueriesContainer } from "./Features/LineupView";
 import PlayerStats from "./Features/PlayerStats";
 import FixturesContainer from "./Features/Fixtures/FixturesContainer";
@@ -11,7 +10,7 @@ import { FplBaseDataContext } from "./AppContext";
 
 const MainPage = () => {
 
-  const {overview, fixtures} = useContext(FplBaseDataContext)
+  const {overview, fixtures} = useContext(FplBaseDataContext);
 
   return (
     <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>
@@ -24,13 +23,12 @@ const MainPage = () => {
               <View style={styles.lineupView}>
                 <LineupViewQueriesContainer overview={overview} fixtures={fixtures}/>
               </View>
-              <PlayerStats overview={overview} fixtures={fixtures}/>
+              <PlayerStats/>
               <View>
                 <BottomTabs/>
               </View>
             </View>
           </SafeAreaView>
-          <ModalNavigator overview={overview} fixtures={fixtures}/>
         </> :
         <View style={styles.splashScreenContainer}>
           <Image style={styles.splashScreenImage} source={require('../assets/splash.png')} resizeMode={'contain'}/>
