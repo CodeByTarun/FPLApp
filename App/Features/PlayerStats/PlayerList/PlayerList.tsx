@@ -164,7 +164,6 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
             data={playerList}
             renderItem={renderPlayerItem}
             keyExtractor={keyExtractor}
-            removeClippedSubviews={true}
             initialNumToRender={15}
             maxToRenderPerBatch={40}/> :
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

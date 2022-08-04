@@ -1,5 +1,8 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { View, Text, FlatList } from "react-native";
+import { RootStackParams } from "../../../../App";
 import { Seperator } from "../../../Global/GlobalComponents";
 import { FplDraftLeagueInfo, LeagueEntry, Standing } from "../../../Models/FplDraftLeagueInfo";
 import { useAppDispatch } from "../../../Store/hooks";
@@ -10,17 +13,17 @@ import { styles } from "../StandingsStyles";
 
 interface DraftLeagueStandingsProps {
     draftLeagueInfo: FplDraftLeagueInfo;
-    setModalVisibility: (value: React.SetStateAction<boolean>) => void;
 }
 
-const DraftLeague = ({ draftLeagueInfo, setModalVisibility } : DraftLeagueStandingsProps) => {
+const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) => {
 
     const dispatch = useAppDispatch();
+    const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const openDraftTeamFromStandings = useCallback((leagueEntry: LeagueEntry | undefined) => {
         if (leagueEntry) {
             dispatch(changeToDraftTeam({id: leagueEntry.entry_id, name: leagueEntry.entry_name, isDraftTeam: true, isFavourite: false}));
-            setModalVisibility(false);
+            navigator.goBack();
         }
     }, [])
 

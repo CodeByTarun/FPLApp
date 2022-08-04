@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text, View, Platform, StatusBar, Image } from 'react-native';
 import * as GlobalConstants from './Global/GlobalConstants'
 import { LineupViewQueriesContainer } from "./Features/LineupView";
@@ -7,10 +7,21 @@ import FixturesContainer from "./Features/Fixtures/FixturesContainer";
 import BottomTabs from "./Features/BottomTabs";
 import globalStyles from "./Global/GlobalStyles";
 import { FplBaseDataContext } from "./AppContext";
+import { useAppDispatch } from "./Store/hooks";
+import { setLiveGameweek } from "./Store/teamSlice";
 
 const MainPage = () => {
 
+  const dispatch = useAppDispatch();
   const {overview, fixtures} = useContext(FplBaseDataContext);
+
+  useEffect(() => {
+    if (overview) {
+      let liveGameweek = overview?.events.filter((event) => { return event.is_current === true; })[0]?.id;
+      dispatch(setLiveGameweek((liveGameweek === undefined) ? 1 : liveGameweek));
+    }
+  }, [overview])
+  
 
   return (
     <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>

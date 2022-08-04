@@ -16,17 +16,14 @@ interface FixturesContainerProps {
 const FixturesContainer = ({ overview, fixtures } : FixturesContainerProps) => {
 
     const dispatch = useAppDispatch();
-    const liveGameweek = overview.events.filter((event) => { return event.is_current === true; })[0]?.id;
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
     const teamInfo = useAppSelector(state => state.team);
     const gameweekData = useGetGameweekDataQuery((teamInfo.gameweek) ? teamInfo.gameweek : skipToken);
     const fixturesData = useGetFixturesQuery();
 
-    useEffect(function getLiveGameweek() {
-        if (liveGameweek) {
-            dispatch(changeGameweek(liveGameweek ?? 1));
-            dispatch(setLiveGameweek(liveGameweek ?? 1));
-          }
-    }, [])
+    useEffect(function setGameweekToLiveGameweek() {
+      dispatch(changeGameweek(liveGameweek ? liveGameweek : 1));
+    }, [liveGameweek])
 
     useEffect( function refetchLiveGameweekData() {
         let refetchFixture: NodeJS.Timer;

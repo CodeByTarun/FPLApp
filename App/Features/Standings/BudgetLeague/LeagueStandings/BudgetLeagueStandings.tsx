@@ -1,5 +1,8 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { FlatList, View, Text } from "react-native";
+import { RootStackParams } from "../../../../../App";
 import { Seperator } from "../../../../Global/GlobalComponents";
 import { FplBudgetLeagueInfo, Result } from "../../../../Models/FplBudgetLeagueInfo";
 import { useAppDispatch } from "../../../../Store/hooks";
@@ -10,17 +13,17 @@ import { styles } from "../../StandingsStyles";
 
 interface BudgetLeagueStandingsProps {
     budgetLeagueInfo: FplBudgetLeagueInfo;
-    setModalVisibility: (value: React.SetStateAction<boolean>) => void;
 }
 
-const BudgetLeagueStandings = ({budgetLeagueInfo, setModalVisibility} : BudgetLeagueStandingsProps) => {
+const BudgetLeagueStandings = ({budgetLeagueInfo} : BudgetLeagueStandingsProps) => {
     
     const dispatch = useAppDispatch();
+    const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const onLeagueEntryItemPress = useCallback((id: number, name: string) => {
         dispatch(changeToBudgetTeam({id: id, name: name, isDraftTeam: false, isFavourite: false}));
-        setModalVisibility(false);
-    }, [setModalVisibility])
+        navigator.goBack();
+    }, [])
 
     const renderLeagueEntryItem = useCallback(({item}: {item: Result}) => {
         return (

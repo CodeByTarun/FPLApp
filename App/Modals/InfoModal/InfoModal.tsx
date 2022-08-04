@@ -1,14 +1,9 @@
 import React from "react";
 import { Text } from "react-native";
 import { ModalWrapper } from "../../Features/Controls";
-import { ModalInfo } from "../../Store/modalSlice";
 import { styles } from "./InfoModalStyles";
 
-interface InfoModalProps {
-    modalInfo: ModalInfo;
-}
-
-const InfoModal = ({modalInfo} : InfoModalProps) => {
+const InfoModal = () => {
 
     return (
         <ModalWrapper modalWidth={'65%'}>

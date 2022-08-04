@@ -1,18 +1,17 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
-import React, { useCallback, useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import Lineup from "./Lineup";
 import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch/TeamSwitch";
-import { useAppDispatch } from "../../Store/hooks";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import globalStyles from "../../Global/GlobalStyles";
 import Standings from "../Standings";
 import { styles } from "./LineupViewStyles";
-import {AnimatedButton, CustomButton, LoadingIndicator, ToolTip} from "../Controls";
+import {AnimatedButton, LoadingIndicator, ToolTip} from "../Controls";
 import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
 import { FplDraftOverview } from "../../Models/FplDraftOverview";
 import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";
@@ -20,12 +19,11 @@ import { FplGameweek } from "../../Models/FplGameweek";
 import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
 import { FplManagerInfo } from "../../Models/FplManagerInfo";
 import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
-import TeamListView from "./TeamListView";
-import Popup from "../Popup";
-import { Icons } from "../../Global/Images";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
+import { useAppDispatch } from "../../Store/hooks";
+import { changeMutableView } from "../../Store/modalSlice";
 
 interface LineupViewProps {
     overview: FplOverview,
@@ -43,9 +41,12 @@ interface LineupViewProps {
 const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks, draftOverview, draftUserInfo, draftLeagueInfo, budgetUserInfo, budgetGameweekPicks}: LineupViewProps) => {
 
     const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
+    const dispatch = useAppDispatch();
 
-    const [isStandingsModalVisible, setIsStandingsModalVisible] = useState(false); 
-    const [isTeamsListVisible, setIsTeamsListVisible] = useState(false);
+    const openStandingsModal = () => {
+        dispatch(changeMutableView({view: <Standings teamInfo={teamInfo} budgetUserInfo={budgetUserInfo} draftLeagueInfo={draftLeagueInfo}/>, width: '85%'}));
+        navigator.navigate('MutableModal');
+    }
 
     return (
         <View style={styles.container}>
@@ -65,7 +66,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                             (teamInfo.teamType === TeamTypes.Dream) ?
                                 <Text style={styles.text}>Dream Team</Text> :
                             (teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Budget) ?
-                                <AnimatedButton buttonFn={() => setIsStandingsModalVisible(!isStandingsModalVisible)}>
+                                <AnimatedButton buttonFn={openStandingsModal}>
                                     <View testID="managerTeamDropDownButton" style={{flexDirection: 'row'}}>
                                         <Text style={styles.text}>{teamInfo.info.name}  </Text> 
                                         <Text style={globalStyles.dropDownSymbol}>◣</Text>
@@ -76,11 +77,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     </View>
 
                     <View style={styles.rightButtonsContainers}>
-                        <Popup isArrowAbove={false} arrowDistance={7} view={<TeamListView setIsVisible={setIsTeamsListVisible}/>}>
-                            <View style={styles.buttonContainer}>
-                             <Image style={{width: '90%', height: '90%', alignSelf: 'center'}} source={Icons['team']} resizeMode='contain'/>
-                            </View>
-                        </Popup>
+
                     </View>
 
                 </View>
@@ -105,7 +102,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     </View>
                 }                
             </View>
-                <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
+                {/* <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
                         distanceFromTop={((GlobalConstants.height) * 0.17 + 70)} 
                         distanceForArrowFromRight={GlobalConstants.width*0.36} 
                         isVisible={isStandingsModalVisible} 
@@ -114,11 +111,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                             <View style={[styles.leagueContainer, globalStyles.shadow]}>
                                 <Standings teamInfo={teamInfo} setModalVisibility={setIsStandingsModalVisible} budgetUserInfo={budgetUserInfo} draftLeagueInfo={draftLeagueInfo}/>
                             </View>
-                        }/>
-
-                <ToolTip distanceFromRight={4} distanceFromTop={GlobalConstants.height * 0.175 + 70} distanceForArrowFromRight={7} 
-                         isVisible={isTeamsListVisible} setIsVisible={setIsTeamsListVisible} 
-                         view={<TeamListView setIsVisible={setIsTeamsListVisible}/>}/>
+                        }/> */}
         </View>
     )
 }

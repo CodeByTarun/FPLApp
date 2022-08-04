@@ -1,35 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import React from "react";
 import { PlayerData } from "../Models/CombinedData";
 import { PlayerOverview } from "../Models/FplOverview";
 import { FplPlayerSummary } from "../Models/FplPlayerSummary";
 
-export interface ListModalData {
-    title: string,
-    buttonText: string,
-    buttonFn: () => void,
-    items: string[],
-    itemSelectFn: (item: string) => void,
-    isSearchable: boolean,
-    currentItem: string,
-}
 
-const initialListModalData: ListModalData = {
-    title: 'Title',
-    buttonText: 'button',
-    buttonFn: () => {},
-    items: [],
-    itemSelectFn: () => {},
-    isSearchable: false,
-    currentItem: '',
-}
 export type ModalInfo = {
     playerData: PlayerData | null;
     playerOverview: PlayerOverview | null;
     playerSummary: FplPlayerSummary | null;
-    listModalData: ListModalData;
+    mutableView: { view: React.ReactNode | null, width: string };
+    filterView: React.ReactNode | null;
 } 
 
-const initialState: ModalInfo = { playerData: null, playerOverview: null, playerSummary: null, listModalData: initialListModalData };
+const initialState: ModalInfo = { playerData: null, playerOverview: null, playerSummary: null, mutableView: {view: null, width: '65%'}, filterView: null };
 
 const modalSlice = createSlice({
     name: 'modal',
@@ -52,13 +36,17 @@ const modalSlice = createSlice({
             return { ...state, playerSummary: playerSummary.payload };
         },
 
-        changeListModalData(state: ModalInfo, listModalData: PayloadAction<ListModalData>): ModalInfo {
-            return { ...state, listModalData: listModalData.payload };
+        changeMutableView(state: ModalInfo, mutableView: PayloadAction<{view: React.ReactNode, width: string}>): ModalInfo {
+            return { ...state, mutableView: mutableView.payload };
         },
+
+        changeFilterView(state: ModalInfo, filterView: PayloadAction<React.ReactNode>): ModalInfo {
+            return { ...state, filterView: filterView.payload };
+        }
     }
 });
 
 export const { changePlayerModalInfo, changePlayerDetailedModalInfo, changePlayerOverviewInfo, 
-               changePlayerSummaryInfo, changeListModalData } =  modalSlice.actions;
+               changePlayerSummaryInfo, changeMutableView, changeFilterView } =  modalSlice.actions;
 
 export default modalSlice.reducer;  

@@ -2,7 +2,7 @@
 // will also have a search function to find players faster
 
 import React, { useCallback, useReducer } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, NavigatorIOS, Image } from "react-native";
 import { FplOverview } from "../../../Models/FplOverview";
 import * as GlobalConstants from "../../../Global/GlobalConstants";
 import { OverviewStats } from "../../../Global/EnumsAndDicts"
@@ -13,9 +13,14 @@ import { goToMainScreen } from "../../../Store/navigationSlice";
 import globalStyles from "../../../Global/GlobalStyles";
 import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
 import { styles } from "./PlayerTableStyles";
-import { Dropdown, SearchControl, FilterButton } from "../../Controls";
+import { Dropdown, SearchControl, AnimatedButton } from "../../Controls";
 import TableFilterPopup from "./TableFilterPopup";
 import { CustomVerticalSeparator } from "../../../Global/GlobalComponents";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../../App";
+import { changeFilterView } from "../../../Store/modalSlice";
+import { Icons } from "../../../Global/Images";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -23,6 +28,8 @@ interface PlayerTableProps {
 }
 
 const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
+
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const initialPriceRange = [
         Math.min(...(overview.elements.map(element => element.now_cost))),
@@ -62,6 +69,13 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
         playerTableFilterDispatch({type: 'StatFilterChange', filterValue: value})
     }, []);
     //#endregion
+
+    const openFilter = () => {
+        dispatch(changeFilterView(<TableFilterPopup filterDispatch={playerTableFilterDispatch} 
+                                                    filterState={playerTableFilterState} 
+                                                    initialPriceRange={initialPriceRange}/>));
+        navigation.navigate('FilterModal');
+    }
 
     return (
         <View style={{flex: 1}}>
@@ -103,16 +117,15 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                 {CustomVerticalSeparator(4, 4)}
                         </View>
                     </View>
-                    <View style={{flex: 1.3, height: '65%', paddingRight: 2, alignSelf: 'center', marginBottom: 2.5}}>
-                        <FilterButton isArrowAbove={true}
-                                      view={<TableFilterPopup filterDispatch={playerTableFilterDispatch} 
-                                                              filterState={playerTableFilterState} 
-                                                              initialPriceRange={initialPriceRange}/>}/>
+                    <View style={{flex: 1.3, height: '65%', marginTop: 3, alignSelf: 'center', justifyContent: 'center'}}>
+                        <AnimatedButton buttonFn={openFilter}>
+                            <Image source={Icons['filter']} resizeMode='contain' style={{height: '85%', width: '85%', alignSelf: 'center'}}/>
+                        </AnimatedButton>
                     </View>
                 </View>
             </View>
 
-            <View style={{ flex: 11, zIndex: 0}}>
+            <View style={{ flex: 11}}>
                 <PlayerList overview={overview} fixtures={fixtures} filters={playerTableFilterState}/>
             </View>
         </View>

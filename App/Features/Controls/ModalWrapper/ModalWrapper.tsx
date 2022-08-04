@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp, useCardAnimation } from "@react-navigation/stack";
-import React, { PropsWithChildren } from "react";
-import { Animated, Pressable, StyleSheet, View } from "react-native";
+import React, { PropsWithChildren, useCallback } from "react";
+import { Animated, Keyboard, Pressable, StyleSheet, View } from "react-native";
 import { RootStackParams } from "../../../../App";
-import { height, primaryColor } from "../../../Global/GlobalConstants";
+import { primaryColor } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
 import CloseButton from "../CloseButton/CloseButton";
 
@@ -23,15 +23,20 @@ const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWi
         outputRange: [0, 1],
     });
 
+    const closeFuntion = useCallback(() => {
+        Keyboard.dismiss();
+        navigation.goBack();
+    }, [])
+
     return(
         <View testID="background" style={styles.modalBackground}>
-            <Pressable style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.5)' }]} onPress={navigation.goBack}/>
+            <Pressable style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.5)' }]} onPress={closeFuntion}/>
             <Animated.View style={[styles.modal, globalStyles.modalShadow, 
                                     modalHeight ? {height: modalHeight} : {}, 
                                     modalWidth ? {width: modalWidth} : {}, 
                                     maxHeight ? {maxHeight: maxHeight} : {},
                                     {transform: [{ scale: modalScale }]}]}>
-                <CloseButton closeFunction={navigation.goBack}/> 
+                <CloseButton closeFunction={closeFuntion}/> 
                 { children }
             </Animated.View>
         </View>

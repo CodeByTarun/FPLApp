@@ -13,19 +13,22 @@ export const Emblems: { [key: number]: ImageURISource} =
         11 : require('../../assets/emblems/t11.png'),
         13 : require('../../assets/emblems/t13.png'),
         14 : require('../../assets/emblems/t14.png'),
+        17 : require('../../assets/emblems/t17.png'),
         20 : require('../../assets/emblems/t20.png'),
         21 : require('../../assets/emblems/t21.png'),
         31 : require('../../assets/emblems/t31.png'),
         36 : require('../../assets/emblems/t36.png'),
         39 : require('../../assets/emblems/t39.png'),
         43 : require('../../assets/emblems/t43.png'),
-        45: require('../../assets/emblems/t45.png'),
-        57: require('../../assets/emblems/t57.png'),
-        90: require('../../assets/emblems/t90.png'),
-        94: require('../../assets/emblems/t94.png'),
+        45 : require('../../assets/emblems/t45.png'),
+        54 : require('../../assets/emblems/t54.png'),
+        57 : require('../../assets/emblems/t57.png'),
+        90 : require('../../assets/emblems/t90.png'),
+        91 : require('../../assets/emblems/t91.png'),
+        94 : require('../../assets/emblems/t94.png'),
     }
 
-    export const Jerseys: { [key: number]: ImageURISource} = 
+export const Jerseys: { [key: number]: ImageURISource} = 
     {
         1 : require('../../assets/jerseys/1.png'),
         2 : require('../../assets/jerseys/2.png'),
@@ -37,19 +40,22 @@ export const Emblems: { [key: number]: ImageURISource} =
         11 : require('../../assets/jerseys/11.png'),
         13 : require('../../assets/jerseys/13.png'),
         14 : require('../../assets/jerseys/14.png'),
+        17 : require('../../assets/jerseys/17.png'),
         20 : require('../../assets/jerseys/20.png'),
         21 : require('../../assets/jerseys/21.png'),
         31 : require('../../assets/jerseys/31.png'),
         36 : require('../../assets/jerseys/36.png'),
         39 : require('../../assets/jerseys/39.png'),
         43 : require('../../assets/jerseys/43.png'),
-        45: require('../../assets/jerseys/45.png'),
-        57: require('../../assets/jerseys/57.png'),
-        90: require('../../assets/jerseys/90.png'),
-        94: require('../../assets/jerseys/94.png'),
+        45 : require('../../assets/jerseys/45.png'),
+        54 : require('../../assets/jerseys/54.png'),
+        57 : require('../../assets/jerseys/57.png'),
+        90 : require('../../assets/jerseys/90.png'),
+        91 : require('../../assets/jerseys/91.png'),
+        94 : require('../../assets/jerseys/94.png'),
     }
 
-    export const StatImages: { [key: string]: ImageURISource} = 
+export const StatImages: { [key: string]: ImageURISource} = 
     {
         "goals_scored" : require('../../assets/stats/goal.png'), 
         "assists" : require('../../assets/stats/assist.png'), 
@@ -60,7 +66,7 @@ export const Emblems: { [key: number]: ImageURISource} =
         //"clean_sheets" : require("('../../../assets/stats/goal.png"), 
     }
 
-    export const Icons: { [key:string]: ImageURISource} = 
+export const Icons: { [key:string]: ImageURISource} = 
     {
         "close" : require('../../assets/icons/close.png'),
         "favourite" : require('../../assets/icons/favourite.png'),

@@ -43,3 +43,5 @@ export const Per90Stats = ["Total Points", "Goals Scored", "Assists",
                             "Yellow Cards", "Red Cards", "Saves", "Bonus",
                             "Bonus Points Total", "Influence", "Creativity",
                             "Threat", "ICT Index"];
+
+export const PlayerComparisonLimit = 5;

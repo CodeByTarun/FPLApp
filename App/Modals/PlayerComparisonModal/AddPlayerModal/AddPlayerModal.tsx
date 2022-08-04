@@ -7,7 +7,7 @@ import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { styles } from "./AddPlayerModalStyles";
 
 interface AddPlayerModalProps {
-    overview: FplOverview;
+    overview: FplOverview | undefined;
     closeFunction: () => void;
     addPlayerFunction: (player: PlayerOverview) => void;
 }
@@ -15,7 +15,7 @@ interface AddPlayerModalProps {
 const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayerModalProps) => {
 
     const getPlayerList = useCallback(() => {
-        return overview.elements.slice().sort((playerA, playerB) => playerA.first_name.toLowerCase().localeCompare(playerB.first_name.toLowerCase()))
+        return overview?.elements.slice().sort((playerA, playerB) => playerA.first_name.toLowerCase().localeCompare(playerB.first_name.toLowerCase()))
     }, [overview])
 
     const memoizedGetPlayerList = useMemo(() => getPlayerList(), [overview])
@@ -27,7 +27,7 @@ const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayer
 
         let players = memoizedGetPlayerList;
 
-        setPlayerList(players.filter(player => player.first_name.includes(searchAddPlayerModalText) || player.second_name.includes(searchAddPlayerModalText)));
+        setPlayerList(players?.filter(player => player.first_name.includes(searchAddPlayerModalText) || player.second_name.includes(searchAddPlayerModalText)));
 
     }, [searchAddPlayerModalText])
 
@@ -50,7 +50,6 @@ const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayer
 
     return (
         <View style={{width: width * 0.7, height: height * 0.7, padding: 15}}>
-            <CloseButton closeFunction={closeFunction}/>
             <Text style={styles.titleText}>Add Player</Text>
             <View style={styles.searchControlContainer}>
                 <SearchControl value={searchAddPlayerModalText} onChangeTextFunction={setSearchAddPlayerModalText} placeHolderText={"Search Player..."}/>
@@ -61,7 +60,6 @@ const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayer
                           ItemSeparatorComponent={Seperator}
                           keyExtractor={keyExtractor}/>
             </View>
-            
         </View>
     )
 

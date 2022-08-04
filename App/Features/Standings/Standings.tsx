@@ -10,17 +10,16 @@ interface StandingsProps {
     teamInfo: TeamInfo;
     draftLeagueInfo?: FplDraftLeagueInfo;
     budgetUserInfo?: FplManagerInfo;
-    setModalVisibility: (value: React.SetStateAction<boolean>) => void;
 }
 
-const Standings = ({teamInfo, draftLeagueInfo, budgetUserInfo, setModalVisibility} : StandingsProps) => {
+const Standings = ({teamInfo, draftLeagueInfo, budgetUserInfo} : StandingsProps) => {
     return (
-        <View style={{flex: 1}}>
+        <View style={{width: '100%', maxHeight: '70%'}}>
             {(teamInfo.teamType == TeamTypes.Draft && draftLeagueInfo) &&
-                <DraftLeague draftLeagueInfo={draftLeagueInfo} setModalVisibility={setModalVisibility}/>
+                <DraftLeague draftLeagueInfo={draftLeagueInfo}/>
             }
             {(teamInfo.teamType === TeamTypes.Budget && budgetUserInfo) && 
-                <BudgetLeague budgetUserInfo={budgetUserInfo} setModalVisibility={setModalVisibility}/>
+                <BudgetLeague budgetUserInfo={budgetUserInfo}/>
             }
         </View>
     )

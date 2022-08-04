@@ -1,13 +1,16 @@
 
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { animated, useSpring } from "@react-spring/native";
-import React, { useCallback, useEffect, useState } from "react";
-import { FlatList, Keyboard, Modal, Pressable, Text, View } from "react-native";
+import React, { useCallback, useEffect } from "react";
+import { FlatList, Keyboard, Pressable, Text, View } from "react-native";
+import { RootStackParams } from "../../../../App";
 import globalStyles from "../../../Global/GlobalStyles";
+import { useAppDispatch } from "../../../Store/hooks";
+import { changeMutableView } from "../../../Store/modalSlice";
 import AnimatedButton from "../AnimatedButton/AnimatedButton";
-import CloseButton from "../CloseButton/CloseButton";
 import { styles } from "./DropdownStyles";
 
-const AnimatedPressable = animated(Pressable);
 const AnimatedView = animated(View);
 
 interface DropdownProps {
@@ -20,40 +23,22 @@ interface DropdownProps {
 
 const Dropdown = (props: DropdownProps) => {
     
-    const [showDropdown, setShowDropdown] = useState(false);
+    const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
+    const dispatch = useAppDispatch();
 
-    useEffect(() => {
+    const selectedOption = useCallback((item: string) => {
+        props.setValue(item);
         Keyboard.dismiss();
-    }, [showDropdown])
-
-    useEffect(function optionSelected() {
-        setShowDropdown(false);
-    }, [props.value])
+        navigator.goBack();
+    }, [props.setValue])
 
     const clearValue = useCallback(() => {
         props.setValue(props.defaultValue);
-        setShowDropdown(false);
+        Keyboard.dismiss();
+        navigator.goBack();
     }, [])
 
-    const [animatedStyle, api] = useSpring(() => ({ backgroundColor: 'rgba(0, 0, 0, 0)', top: '100%', scale: 1 }));
-
-    useEffect( function openDropdownAnimation() {
-        if (showDropdown) {
-            api.start({
-                to: { backgroundColor: 'rgba(0, 0, 0, 0.5)', top: '0%' },
-                config: {duration: 200}
-            });
-        }
-    }, [showDropdown])
-
-    const closeDropdown = () => {
-        api.start({
-            to: { backgroundColor: 'rgba(0, 0, 0, 0)', top: '100%' },
-            config: { duration: 100 },
-        });
-
-        setTimeout(() => setShowDropdown(false), 100);
-    }
+    const [animatedStyle, api] = useSpring(() => ({ scale: 1 }));
 
     const openDropdown = () => {
         api.start({
@@ -64,8 +49,41 @@ const Dropdown = (props: DropdownProps) => {
             config: { duration: 100 },
         });
 
-       setTimeout(() => setShowDropdown(true), 100);
+       setTimeout(() => {
+        dispatch(changeMutableView({view: dropDownModalView(), width: '65%'}));
+        navigator.navigate('MutableModal');
+       }, 100);
     }
+
+    const dropDownModalView = useCallback(() => {
+        return (
+            <View style={{height: '100%', width: '100%'}}>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>{props.headerText}</Text>
+                </View>
+
+                <FlatList
+                    style={styles.flatList}
+                    ListHeaderComponentStyle = {styles.flatListHeader}
+                    data={props.options}
+                    keyExtractor={item => item}
+                    renderItem={({item}) => 
+                        <AnimatedButton buttonFn={() => selectedOption(item)}>
+                            <View style={styles.itemView}>
+                                <Text style={styles.itemText}>{item}</Text>
+                            </View>
+                        </AnimatedButton>
+                    }/>
+                <View style={styles.resetContainer}>
+                    <AnimatedButton buttonFn={clearValue}>
+                        <View style={styles.clearButton}>
+                            <Text style={styles.resetText}>Reset</Text>
+                        </View>
+                    </AnimatedButton>
+                </View>
+            </View>
+        )
+    }, [props.headerText, props.options, props.setValue]);
 
     return (
         <AnimatedView style={[styles.container,{ transform: [{scale: animatedStyle.scale}] }]}>
@@ -76,36 +94,6 @@ const Dropdown = (props: DropdownProps) => {
                 <Text numberOfLines={1} style={styles.selectedValueText}>{props.value}  </Text>
                 <Text style={globalStyles.dropDownSymbol}>◣</Text>
             </Pressable>
-                <Modal style={styles.modal} transparent={true} visible={showDropdown} testID={'dropdownModal'}>
-                    <AnimatedPressable testID="background" style={[styles.modalBackground, { backgroundColor: animatedStyle.backgroundColor}]} onPress={closeDropdown}>
-                        <AnimatedView style={[globalStyles.modalShadow, styles.modalView, { top: animatedStyle.top }]}>
-                            <CloseButton closeFunction={closeDropdown}/> 
-                            <View style={styles.titleContainer}>
-                                <Text style={styles.titleText}>{props.headerText}</Text>
-                            </View>
-
-                            <FlatList
-                                style={styles.flatList}
-                                ListHeaderComponentStyle = {styles.flatListHeader}
-                                data={props.options}
-                                keyExtractor={item => item}
-                                renderItem={({item}) => 
-                                    <AnimatedButton buttonFn={() => props.setValue(item)}>
-                                        <View style={styles.itemView}>
-                                            <Text style={styles.itemText}>{item}</Text>
-                                        </View>
-                                    </AnimatedButton>
-                                }/>
-                            <View style={styles.resetContainer}>
-                                <AnimatedButton buttonFn={clearValue}>
-                                    <View style={styles.clearButton}>
-                                        <Text style={styles.resetText}>Reset</Text>
-                                    </View>
-                                </AnimatedButton>
-                            </View>
-                        </AnimatedView>
-                    </AnimatedPressable>
-                </Modal>
         </AnimatedView>
     )
 }

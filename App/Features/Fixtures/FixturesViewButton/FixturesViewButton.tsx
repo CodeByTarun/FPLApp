@@ -1,15 +1,16 @@
 import { animated, easings, useSpring } from "@react-spring/native";
-import React, { PropsWithChildren, useEffect } from "react";
-import { Pressable } from "react-native";
+import React, { PropsWithChildren, useEffect, useRef } from "react";
+import { View, Pressable } from "react-native";
 
 const AnimatedPressable = animated(Pressable);
 
 interface FixturesViewButtonProps {
     isVisible: boolean;
     buttonFn: () => void;
+    isDisabled?: boolean;
 }
 
-const FixturesViewButton = ({isVisible, buttonFn, children} : PropsWithChildren<FixturesViewButtonProps>) => {
+const FixturesViewButton = ({isVisible, buttonFn, isDisabled = false, children} : PropsWithChildren<FixturesViewButtonProps>) => {
 
     const [animatedStyle, api] = useSpring(() => ({ scale: 0 }));
 
@@ -37,7 +38,7 @@ const FixturesViewButton = ({isVisible, buttonFn, children} : PropsWithChildren<
     }
 
     return (
-        <AnimatedPressable style={{transform: [{scale: animatedStyle.scale}]}} hitSlop={5} onPress={onButtonPress}>
+        <AnimatedPressable style={{transform: [{scale: animatedStyle.scale}]}} hitSlop={5} disabled={isDisabled} onPress={onButtonPress}>
             { children }
         </AnimatedPressable>
     )

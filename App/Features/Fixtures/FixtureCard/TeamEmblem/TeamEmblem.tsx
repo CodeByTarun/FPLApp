@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
-import * as GlobalConstants from "../../../../Global/GlobalConstants"
+import { View, Image, Text } from "react-native";
 import { Emblems } from "../../../../Global/Images";
 import {  Team } from "../../../../Models/FplOverview";
 import { styles } from "./TeamEmblemStyles";

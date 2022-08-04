@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React from "react";
+import React, { useContext } from "react";
 import { View } from "react-native";
 import { RootStackParams } from "../../../App";
+import { FplBaseDataContext } from "../../AppContext";
 import { VerticalSeparator } from "../../Global/GlobalComponents";
-import { useAppDispatch } from "../../Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { goToFixturesScreen, goToPlayerStatsScreen } from "../../Store/navigationSlice";
 import { changeToDreamTeam } from "../../Store/teamSlice";
 import { styles } from "./BottomTabsStyle";
@@ -14,6 +15,9 @@ const BottomTabs = () => {
 
     const dispatch = useAppDispatch();
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+    const { overview } = useContext(FplBaseDataContext);
+    const liveGameweek = overview?.events.filter((event) => { return event.is_current === true; })[0]?.id;
+    const gameweek = useAppSelector(state => state.team.gameweek);
 
     const goToDreamTeam = () => {
         dispatch(changeToDreamTeam());
@@ -38,11 +42,11 @@ const BottomTabs = () => {
     return (
         <View style={[styles.container]}>
 
-            <TabButton fn={goToDreamTeam} imageName='dreamteam' header="Dream Team"/>
+            <TabButton fn={goToDreamTeam} imageName='dreamteam' header="Dream Team" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
 
             <VerticalSeparator/>
 
-            <TabButton fn={openOverview} imageName='strategy' header="Overview"/>
+            <TabButton fn={openOverview} imageName='strategy' header="Overview" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
  
             <VerticalSeparator/>
             

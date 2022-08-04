@@ -17,6 +17,7 @@ import globalStyles from '../../../Global/GlobalStyles'
 import { goToMainScreen, ScreenTypes } from '../../../Store/navigationSlice'
 import { styles } from './FixtureCardStyles'
 import { animated, useSpring } from '@react-spring/native';
+import { AnimatedButton } from '../../Controls';
 
 const AnimatedPressable = animated(Pressable);
 
@@ -46,21 +47,8 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
 
     const dispatch = useAppDispatch();
     const navigation = useAppSelector(state => state.navigation);
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
     
-    const [animatedStyle, api] = useSpring(() => ({ scale: 1 }));
-
-    const onPress = () => {
-
-        api.start({
-            to: [
-                { scale: 0.99 },
-                { scale: 1 }
-              ],
-              config: {duration: 10},
-              onRest: showFixture,
-        });
-    };
-
     const showFixture = () => {
         if (navigation.screenType === ScreenTypes.Fixtures) {
             dispatch(goToMainScreen());   
@@ -71,22 +59,24 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
     return (
         
         <View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? -5 : 0 }]}>
-            <AnimatedPressable testID='fixtureCardButton' style={[styles.button, { transform: [{scale: animatedStyle.scale}] }]} onPress={onPress} disabled={!fixture?.started}>            
-                <View style={[styles.card, globalStyles.shadow]}>
-                    <View style={styles.topbar}>
-                        <Text style={styles.datetext}>
-                            { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
-                        </Text>
-                    </View>
-                    <View style={styles.scoreView}>
-                        <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview)}/>
-                        <View style={styles.scoreAndTimeView}>
-                            { SetScoreAndTime(fixture, gameweekData) }
+            <View style={[styles.card, globalStyles.shadow]}>
+                <AnimatedButton buttonFn={showFixture} disabled={(((fixture.event !== null) && (fixture.event > liveGameweek)))}>            
+                    <View style={styles.button}>
+                        <View style={styles.topbar}>
+                            <Text style={styles.datetext}>
+                                { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
+                            </Text>
                         </View>
-                        <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/>
+                        <View style={styles.scoreView}>
+                            <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview)}/>
+                            <View style={styles.scoreAndTimeView}>
+                                { SetScoreAndTime(fixture, gameweekData) }
+                            </View>
+                            <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/>
+                        </View>
                     </View>
-                </View>
-            </AnimatedPressable>
+                </AnimatedButton>
+            </View>
         </View>
     )
 }

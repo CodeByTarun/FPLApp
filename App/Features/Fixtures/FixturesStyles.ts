@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { height, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import { height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     animatedView: {
@@ -120,4 +120,34 @@ export const styles = StyleSheet.create({
         height: height * 0.6,
         width: width * 0.7,
       },
+
+      bottomBar: {
+        width: '80%',
+        alignSelf: 'center',
+        height: 50,
+        backgroundColor: primaryColor,
+        flexDirection: 'row'
+      },
+
+      bottomaBarSections: {
+        flex: 1/3,
+      },
+
+      buttonContainer: {
+        height: '100%', 
+        width: '100%', 
+        alignItems: 'center', 
+        justifyContent: 'center'
+      },
+
+      image: {
+        height: '50%',
+        width: '50%',
+      },
+
+      text: {
+        color: textSecondaryColor,
+        fontWeight: '600',
+        fontSize: mediumFont
+      }
 });

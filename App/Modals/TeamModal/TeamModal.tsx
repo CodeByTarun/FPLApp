@@ -96,7 +96,7 @@ const TeamModal = () => {
     const closeForm = useCallback(() => {
         userTeamDispatch({ type: UserTeamActionKind.Reset });
         setTeamFormOpen(false);
-    }, [])
+    }, []);
 
     const selectedATeam = useCallback((teamSelected: UserTeamInfo) => {
         if (teamSelected.isDraftTeam === true) {
@@ -106,7 +106,7 @@ const TeamModal = () => {
             dispatch(changeToBudgetTeam(teamSelected))
         }
         navigation.goBack();
-    }, [])
+    }, []);
 
     return (
         <ModalWrapper modalHeight={"50%"} modalWidth={"75%"}>

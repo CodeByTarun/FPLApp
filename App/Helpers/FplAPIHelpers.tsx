@@ -348,11 +348,11 @@ export function GetOwnedPlayersManagerShortInitials(budgetId: number, overview: 
 
 }
 
-export function GetStatValueForDetailedStatsView(stat: string, playerData: FplPlayerSummary, player: PlayerOverview, statsFilterState: StatsFilterState, minutesValue: number) {
+export function GetStatValueForDetailedStatsView(stat: string, playerData: FplPlayerSummary, player: PlayerOverview, statsFilterState: StatsFilterState, minutesValue: number, liveGameweek: number) {
 
     let statValue: number;
 
-        if (playerData && statsFilterState.gameSpan) {
+        if (playerData && (statsFilterState.gameSpan[0] !== 1 || statsFilterState.gameSpan[1] !== liveGameweek)) {
             statValue = playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
                                           .reduce((prev, curr) => prev + (Number(curr[stat as keyof History])), 0) 
         } else {
@@ -363,9 +363,9 @@ export function GetStatValueForDetailedStatsView(stat: string, playerData: FplPl
 
 }
 
-export function GetMinutesValueForDetailedStatsView(playerData: FplPlayerSummary, player: PlayerOverview, statsFilterState: StatsFilterState) {
+export function GetMinutesValueForDetailedStatsView(playerData: FplPlayerSummary, player: PlayerOverview, statsFilterState: StatsFilterState, liveGameweek: number) {
     
-    if (playerData && statsFilterState.gameSpan) {
+    if (playerData && (statsFilterState.gameSpan[0] !== 1 || statsFilterState.gameSpan[1] !== liveGameweek)) {
         return playerData.history.filter(history => (history.round >= statsFilterState.gameSpan[0]) && (history.round <= statsFilterState.gameSpan[1]))
                                  .reduce((prev, curr) => prev + curr.minutes, 0); 
     } else {

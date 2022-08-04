@@ -10,10 +10,9 @@ import BudgetLeagueStandings from "./LeagueStandings/BudgetLeagueStandings";
 
 interface BudgetLeagueProps {
     budgetUserInfo: FplManagerInfo;
-    setModalVisibility: (value: React.SetStateAction<boolean>) => void;
 }
 
-const BudgetLeague = ({budgetUserInfo, setModalVisibility} : BudgetLeagueProps) => {
+const BudgetLeague = ({budgetUserInfo} : BudgetLeagueProps) => {
 
     const [leagueToShow, setLeagueToShow] = useState(null as number | null);
 
@@ -34,7 +33,7 @@ const BudgetLeague = ({budgetUserInfo, setModalVisibility} : BudgetLeagueProps) 
                 :
                 <>
                 {budgetLeagueInfo.isSuccess ?
-                    <BudgetLeagueStandings budgetLeagueInfo={budgetLeagueInfo.data} setModalVisibility={setModalVisibility}/>
+                    <BudgetLeagueStandings budgetLeagueInfo={budgetLeagueInfo.data}/>
                     :
                     <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
                         <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>

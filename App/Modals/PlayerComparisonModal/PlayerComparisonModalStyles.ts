@@ -3,18 +3,19 @@ import { aLittleLighterColor, cornerRadius, height, largeFont, mediumFont, prima
 
 export const styles = StyleSheet.create({
     
-    modalContainer: {
-        flex: 1,
-        padding: 10,
-        paddingTop: 20,
+    container: {
+        width: '100%',
+        height: '100%',
+        paddingTop: 10,
+        paddingBottom: 10,
     },
-    
+
     titleText: {
         fontSize: largeFont * 1.2,
         color: textPrimaryColor, 
         fontWeight: '600',
         textAlign: 'center',
-        paddingBottom: 20,
+        paddingBottom: 15,
         paddingTop: 10
     },
 
@@ -25,12 +26,15 @@ export const styles = StyleSheet.create({
     },
 
     controlsOuterContainers: {
-        marginBottom: 5,
+        marginBottom: 15,
         marginTop: 10,
+        height: 35,
+        width: '100%',
     },
 
     controlContainer: {
         width: '60%',
+        height: '100%',
         aspectRatio: 5,
         flexDirection: 'row',
         alignSelf: 'center',
@@ -62,12 +66,22 @@ export const styles = StyleSheet.create({
         fontSize: mediumFont * 0.9,
     },
 
+    editButtonContainer: {
+        position: 'absolute',
+        left: 0,
+        top: '15%',
+        height: '80%',
+        width: '15%',
+        justifyContent: 'center'
+    },
+
     filterButtonContainer: {
         position: 'absolute', 
         right: 0, 
         top: '10%', 
         height: '80%', 
         width: '15%',
+        marginTop: 3,
     },
 
     button: {

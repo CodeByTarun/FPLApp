@@ -9,10 +9,6 @@ export const styles = StyleSheet.create({
         paddingTop: 5, paddingBottom: 5,
     },
 
-    button: {
-        flex: 1,
-    },
-
     card: {
         backgroundColor: primaryColor,
         flex: 1,
@@ -22,6 +18,12 @@ export const styles = StyleSheet.create({
         padding: 5,
         borderRadius: cornerRadius,
         marginBottom: 2.5
+    },
+
+    button: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: primaryColor,
     },
     //#endregion
 

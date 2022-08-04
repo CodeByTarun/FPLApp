@@ -10,9 +10,10 @@ interface TabButtonProps {
     fn: () => void;
     imageName: string;
     header: string;
+    isDisabled? : boolean;
 }
 
-const TabButton = ({fn, imageName, header} : TabButtonProps) => {
+const TabButton = ({fn, imageName, header, isDisabled = false} : TabButtonProps) => {
 
     const [animatedStyle, api] = useSpring(() => ({ scale: 1 }))
 
@@ -28,7 +29,7 @@ const TabButton = ({fn, imageName, header} : TabButtonProps) => {
     }
 
     return(
-        <AnimatedPressable style={[styles.tabContainer, { transform: [{scale: animatedStyle.scale}] }]} onPress={onPressFn}> 
+        <AnimatedPressable disabled={isDisabled} style={[styles.tabContainer, { transform: [{scale: animatedStyle.scale}], opacity: isDisabled ? 0.5 : 1 }]} onPress={onPressFn}> 
 
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={Icons[imageName]} resizeMode='contain'/>

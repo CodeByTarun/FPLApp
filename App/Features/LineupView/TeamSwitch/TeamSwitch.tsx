@@ -1,9 +1,7 @@
-import React, { useRef, useState } from "react";
-import { View, StyleSheet, Image, Text, Animated, LayoutChangeEvent, TouchableWithoutFeedback } from "react-native";
+import React, {  } from "react";
+import { View, Image, Text, TouchableWithoutFeedback } from "react-native";
 import { FixtureInfo, TeamInfo, TeamTypes, toggleTeamShown } from "../../../Store/teamSlice";
-import { useGetOverviewQuery } from "../../../Store/fplSlice";
 import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
-import * as GlobalConstants from '../../../Global/GlobalConstants'
 import { GetScoreForLiveFixture, GetTeamDataFromOverviewWithFixtureTeamID } from "../../../Helpers/FplAPIHelpers";
 import { Emblems } from "../../../Global/Images";
 import globalStyles from "../../../Global/GlobalStyles";
@@ -11,7 +9,7 @@ import { FplOverview } from "../../../Models/FplOverview";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { styles } from "./TeamSwitchStyles";
 import { FplGameweek } from "../../../Models/FplGameweek";
-import { animated, config, useSpring } from "@react-spring/native";
+import { animated, useSpring } from "@react-spring/native";
 
 // This is going to be a switch selector control
 // First i need a background,

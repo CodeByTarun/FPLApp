@@ -14,6 +14,8 @@ import PlayerComparisonModal from './App/Modals/PlayerComparisonModal';
 import TeamModal from './App/Modals/TeamModal';
 import GameweekOverviewModal from './App/Modals/GameweekOverviewModal';
 import ListModal from './App/Modals/ListModal';
+import MutableModal from './App/Modals/MutableModal';
+import FilterModal from './App/Modals/FilterModal';
 
 export type RootStackParams = {
   Home: any;
@@ -24,6 +26,8 @@ export type RootStackParams = {
   TeamModal: any;
   GameweekOverview: any;
   ListModal: any;
+  MutableModal: any;
+  FilterModal: any;
 }
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -87,6 +91,8 @@ function App() {
             <Stack.Screen name="TeamModal" component={TeamModal}/>
             <Stack.Screen name="GameweekOverview" component={GameweekOverviewModal}/>
             <Stack.Screen name="ListModal" component={ListModal}/>
+            <Stack.Screen name="MutableModal" component={MutableModal}/>
+            <Stack.Screen name="FilterModal" component={FilterModal}/>
           </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>

@@ -49,7 +49,9 @@ const teamSlice = createSlice({
     initialState,
     reducers: {
         changeGameweek(state: TeamInfo, action: PayloadAction<number>): void {
-            state.gameweek = action.payload;
+            if (action.payload > 0 && action.payload < 39) {
+                state.gameweek = action.payload;
+            }
         },
 
         setLiveGameweek(state: TeamInfo, action: PayloadAction<number>): void {
@@ -58,14 +60,14 @@ const teamSlice = createSlice({
 
         changingFixtureWhenGameweekChanged(state: TeamInfo, action: PayloadAction<FplFixture|null>): TeamInfo {
             if ( state.teamType === TeamTypes.Fixture) {
-                return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event } as FixtureInfo;
+                return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event, liveGameweek: state.liveGameweek } as FixtureInfo;
             }
 
             return state;
         },
 
         changeToFixture(state: TeamInfo, action: PayloadAction<FplFixture|null>): FixtureInfo {
-            return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event } as FixtureInfo;
+            return { teamType: TeamTypes.Fixture, fixture: action.payload, isHome: (state.teamType === TeamTypes.Fixture) ? state.isHome : true , gameweek: action.payload?.event, liveGameweek: state.liveGameweek } as FixtureInfo;
         },
 
         removeFixture(state: TeamInfo): void {

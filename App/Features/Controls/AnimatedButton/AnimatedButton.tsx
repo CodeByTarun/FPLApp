@@ -1,5 +1,5 @@
 import { animated, easings, useSpring } from "@react-spring/native";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { Pressable } from "react-native";
 import { transform } from "typescript";
 
@@ -13,8 +13,20 @@ interface AnimatedButtonProps {
 const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChildren<AnimatedButtonProps>) => {
 
     const [animatedStyle, api] = useSpring(() => ({ scale: 1 }));
+    const [isDisabled, setIsDisabled] = useState(disabled);
+
+    useEffect(() => {
+        if (disabled) {
+            setIsDisabled(true);
+        }
+        else {
+            setIsDisabled(false);
+        }
+    }, [disabled])
 
     const onButtonPress = () => {
+
+        setIsDisabled(true);
 
         api.start({
             to: [
@@ -24,12 +36,15 @@ const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChil
             config: {easing: easings.easeInQuint, duration: 100}
         });
 
-        setTimeout(() => buttonFn(), 100);
+        setTimeout(() => {
+            buttonFn();
+            setIsDisabled(disabled);
+        }, 100);
 
     }
 
     return (
-        <AnimatedPressable testID={'animatedButton'} style={{transform: [{scale: animatedStyle.scale}]}} onPress={onButtonPress} disabled={disabled}>
+        <AnimatedPressable testID={'animatedButton'} hitSlop={5} style={{transform: [{scale: animatedStyle.scale}], opacity: isDisabled ? 0.5 : 1}} onPress={onButtonPress} disabled={isDisabled}>
             { children }
         </AnimatedPressable>
     )

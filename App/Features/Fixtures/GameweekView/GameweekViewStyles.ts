@@ -4,7 +4,8 @@ import { height, width, largeFont, textPrimaryColor, secondaryColor, mediumFont,
 export const styles = StyleSheet.create({
     
     container: {
-        flex: 1,
+        height: '100%',
+         width: '100%',
     },
 
     titleText: {
@@ -13,15 +14,14 @@ export const styles = StyleSheet.create({
         alignSelf: 'center', 
         marginTop: 10, 
         fontWeight: '700', 
-        textAlign: 'center'
+        textAlign: 'center',
     },
 
     listContainer: {
-        flex: 4, 
         marginTop: 10, 
         borderTopWidth: 1, 
         borderBottomWidth: 1, 
-        borderColor: secondaryColor
+        borderColor: secondaryColor,
     },
 
     gameweekItem: {
@@ -30,6 +30,16 @@ export const styles = StyleSheet.create({
         height: height * 0.06,
         justifyContent: 'center',
         paddingLeft: 10,
+    },
+
+    bottomView: {
+        padding: 10,
+        paddingTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        borderTopColor: secondaryColor,
+        borderTopWidth: 1,
     },
 
     text: {

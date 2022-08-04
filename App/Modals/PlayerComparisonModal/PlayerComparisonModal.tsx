@@ -1,48 +1,51 @@
-import Checkbox from "expo-checkbox";
-import React, { useEffect, useReducer, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
-import { AnimatedButton, FilterButton, ModalWrapper, ToolTip } from "../../Features/Controls";
-import { fieldColor, height, lightColor, secondaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import React, { useCallback, useContext, useEffect, useReducer, useState } from "react";
+import { View, Text, Image } from "react-native";
+import { AnimatedButton, ModalWrapper } from "../../Features/Controls";
+import { lightColor, secondaryColor, textPrimaryColor, textSecondaryColor } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
-import { FplFixture } from "../../Models/FplFixtures";
-import { FplOverview, PlayerOverview } from "../../Models/FplOverview";
+import { PlayerOverview } from "../../Models/FplOverview";
 import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
-import { ModalInfo } from "../../Store/modalSlice";
-import { StatsFilterActionKind, statsFilterReducer } from "../PlayerDetailedStatsModal/StatsFilterReducer";
+import { changeFilterView, changeMutableView } from "../../Store/modalSlice";
+import { statsFilterReducer } from "../PlayerDetailedStatsModal/StatsFilterReducer";
 import { styles } from "./PlayerComparisonModalStyles";
 import AddPlayerModal from "./AddPlayerModal";
-import PlayerComparisonView from "./PlayerComparisonView";
 import { animated, useSpring } from "@react-spring/native";
-import CustomSlider from "../../Features/Controls/Slider";
-import { useAppSelector } from "../../Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParams } from "../../../App";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { FplBaseDataContext } from "../../AppContext";
+import PlayerComparisonFlatList from "./PlayerComparisonFlatList";
+import { Icons } from "../../Global/Images";
+import FilterView from "../PlayerDetailedStatsModal/FilterView";
 
 export interface CombinedPlayerData {
     playerOverview: PlayerOverview;
     playerSummary: FplPlayerSummary;
-}
-interface PlayerComparisonModalProps {
-    overview: FplOverview,
-    fixtures: FplFixture[],
-    modalInfo: ModalInfo,
 }
 
 const AnimatedView = animated(View);
 
 const views = ['GW', 'Stats', 'FDR'];
 
-const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerComparisonModalProps) => {
+const PlayerComparisonModal = () => {
 
     const liveGameweek = useAppSelector(state => state.team.liveGameweek);
+    const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
+    const dispatch = useAppDispatch();
+    const modalInfo = useAppSelector(state => state.modal);
+    const { overview, fixtures } = useContext(FplBaseDataContext);
 
     const [viewIndex, setViewIndex] = useState(0);
+    const [isEditActive, setIsEditActive] = useState(false);
     const [statsFilterState, statsFilterDispatch] = useReducer(statsFilterReducer, { gameSpan: [1, liveGameweek], isPer90: false });
-    const [isAddPlayerModalVisible, setIsAddPlayerModalVisible] = useState(false);
     const [playersToCompare, setPlayersToCompare] = useState([] as CombinedPlayerData[]);
 
     //#region  Control Animation
     const slideSpring = useSpring({left: `${viewIndex * (100 / 3)}%`});
 
     //#endregion
+    
     useEffect(() => {
         if (modalInfo.playerOverview && modalInfo.playerSummary) {
             setPlayersToCompare([{playerOverview: modalInfo.playerOverview, playerSummary: modalInfo.playerSummary}]);
@@ -70,73 +73,67 @@ const PlayerComparisonModal = ({overview, fixtures, modalInfo} : PlayerCompariso
     }
     //#endregion
 
+    const openAddPlayerModal = useCallback(() => {
+        dispatch(changeMutableView({view: <AddPlayerModal overview={overview} 
+                                                          closeFunction={navigator.goBack}
+                                                          addPlayerFunction={addPlayer}/>,
+                                    width: '65%'}));
+        navigator.navigate('MutableModal');
+    }, [playersToCompare ]);
+
+    const openFilter = () => {
+        dispatch(changeFilterView(<FilterView statsFilterState={statsFilterState} statsFilterDispatch={statsFilterDispatch} liveGameweek={liveGameweek}/>));
+        navigator.navigate('FilterModal');
+    }
+
     return (
         <ModalWrapper modalHeight={'80%'} modalWidth={'85%'}>
-            <View style={styles.modalContainer}>
-                <View style={{flex: 1}}>
-                    <Text style={styles.titleText}>Player Comparison</Text>
-                    <View style={[styles.controlsOuterContainers]}>
-                        <View style={styles.controlContainer}>
-                            <AnimatedView style={[styles.switch, globalStyles.shadow, { left: slideSpring.left }]} children={undefined}/>
-
-                            { views.map( (name, index) =>
-                                <View key={index} style={styles.controlButtons}>
-                                    <AnimatedButton buttonFn={() => setViewIndex(index)}>
-                                        <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
-                                    </AnimatedButton>
-                                </View> 
-                            )}
-                        </View>
-                        {viewIndex === 1 &&
-                            <View style={styles.filterButtonContainer}>
-                                <FilterButton isArrowAbove={true}
-                                              view={
-                                                <View style={{ width: width * 0.65, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
-                                                    <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                                        <Text style={[styles.text, { flex: 1 }]}>Per 90 Stats?</Text>
-                                                        <Checkbox value={statsFilterState.isPer90}
-                                                            color={statsFilterState.isPer90 ? fieldColor : lightColor}
-                                                            onValueChange={() => statsFilterDispatch({ type: StatsFilterActionKind.ChangeIsPer90 })} />
-                                                    </View>
-                                                    <View style={{ marginTop: 10 }}>
-                                                        <CustomSlider header={"Gameweeks:"} minValue={1} maxValue={liveGameweek} 
-                                                                      step={1} initialRange={statsFilterState.gameSpan}
-                                                                      onValueChange={value => statsFilterDispatch({ type: StatsFilterActionKind.ChangeGameSpan, value: value })}/>
-                                                    </View>
-                                                </View>
-                                              }/>
-                            </View>
-                        }
+            <View style={styles.container}>
+                <Text style={styles.titleText}>Player Comparison</Text>
+                <View style={[styles.controlsOuterContainers]}>
+                    <View style={[styles.editButtonContainer, isEditActive && {opacity: 0.5}]}>
+                        <AnimatedButton buttonFn={() => setIsEditActive(!isEditActive)}>
+                            <Image source={Icons['edit']} resizeMode='contain' style={{height: '80%', width: '80%', alignSelf: 'center'}}/>
+                        </AnimatedButton>
                     </View>
-                    <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
-                        
-                        <ScrollView style={{paddingBottom: 15, flex: 1, paddingTop: 15}}>
-                            { playersToCompare.map(player => { return(
-                                <PlayerComparisonView key={player.playerOverview.id} overview={overview} fixtures={fixtures} 
-                                                    playerOverview={player.playerOverview} playerSummary={player.playerSummary} 
-                                                    playerList={playersToCompare} viewIndex={viewIndex} 
-                                                    statsFilterState={statsFilterState} removePlayerFunction={removePlayer}/>
-                            )})}
+                    <View style={styles.controlContainer}>
+                        <AnimatedView style={[styles.switch, globalStyles.shadow, { left: slideSpring.left }]} children={undefined}/>
 
-                    </ScrollView>
+                        { views.map( (name, index) =>
+                            <View key={index} style={styles.controlButtons}>
+                                <AnimatedButton buttonFn={() => setViewIndex(index)}>
+                                    <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
+                                </AnimatedButton>
+                            </View> 
+                        )}
                     </View>
-                    <AnimatedButton buttonFn={() => setIsAddPlayerModalVisible(true)} disabled={playersToCompare.length >= 5}>                
-                        <View style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]}>
-                            <Text style={styles.buttonText}>Add Player</Text>
+                    {viewIndex === 1 &&
+                        <View style={styles.filterButtonContainer}>
+                            <AnimatedButton buttonFn={openFilter}>
+                                <Image source={Icons['filter']} resizeMode='contain' style={{height: '85%', width: '85%', alignSelf: 'center'}}/>
+                            </AnimatedButton> 
                         </View>
-                    </AnimatedButton>
+                    }
                 </View>
-                <ToolTip distanceFromRight={width * 0.15} distanceForArrowFromRight={-width}
-                        distanceFromTop={height * 0.15}
-                        isVisible={isAddPlayerModalVisible} 
-                        setIsVisible={setIsAddPlayerModalVisible}
-                        isArrowAbove={true}
-                        view={<AddPlayerModal overview={overview} 
-                                            closeFunction={() => setIsAddPlayerModalVisible(false)}
-                                            addPlayerFunction={addPlayer}/>}/>
+                <View style={{flex: 1}}>
+                    { overview && fixtures &&
+                        <PlayerComparisonFlatList overview={overview} fixtures={fixtures} isEditActive={isEditActive}
+                                                    viewIndex={viewIndex} statsFilterState={statsFilterState} 
+                                                    removePlayerFunction={ removePlayer } playerList={playersToCompare}/>
+                    }
+                </View>
+                <AnimatedButton buttonFn={() => openAddPlayerModal()} disabled={playersToCompare.length >= 5}>                
+                    <View style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]}>
+                        <Text style={styles.buttonText}>Add Player</Text>
+                    </View>
+                </AnimatedButton>
             </View>
         </ModalWrapper>
     )
 }
 
 export default PlayerComparisonModal; 
+
+const playersToCompareHeader = () => {
+
+}

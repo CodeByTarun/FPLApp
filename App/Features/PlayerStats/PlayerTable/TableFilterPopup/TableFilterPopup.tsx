@@ -6,6 +6,9 @@ import * as GlobalConstants from "../../../../Global/GlobalConstants";
 import CustomSlider from "../../../Controls/Slider";
 import { PlayerTableFilterAction, PlayerTableFilterState } from "../PlayerTableFilterReducer";
 import { AnimatedButton } from "../../../Controls";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParams } from "../../../../../App";
 
 interface TableFilterPopupProps {
     filterDispatch: (value: PlayerTableFilterAction) => void;
@@ -14,6 +17,8 @@ interface TableFilterPopupProps {
 }
 
 const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : TableFilterPopupProps) => {
+
+    const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const [isPer90, setIsPer90] = useState(filterState.isPer90);
     const [isInWatchlist, setIsInWatchlist] = useState(filterState.isInWatchlist);
@@ -27,10 +32,11 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
         setMinuteRange([0, 90*38]);
 
         filterDispatch({type: 'Reset', range: initialPriceRange});
+        navigation.goBack();
     }
 
     return (
-        <View style={{width: GlobalConstants.width* 0.60, marginLeft: 10, marginRight: 10, marginBottom: 5, marginTop: 10 }}>
+        <View style={{width: '100%'}}>
             <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
                 <Text style={styles.filterText}>Per 90 (if applicable):</Text>
                 <Checkbox value={ isPer90 } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}

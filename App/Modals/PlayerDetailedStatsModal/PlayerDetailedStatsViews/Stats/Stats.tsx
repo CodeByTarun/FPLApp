@@ -38,7 +38,7 @@ const Stats = ({statsFilterState, player, playerData} : StatsProps) => {
 
     const getMinutes = useCallback(() => {
         
-        return GetMinutesValueForDetailedStatsView(playerData, player, statsFilterState);
+        return GetMinutesValueForDetailedStatsView(playerData, player, statsFilterState, liveGameweek);
 
     }, [statsFilterState.isPer90, statsFilterState.gameSpan, player, playerData])
 
@@ -46,7 +46,7 @@ const Stats = ({statsFilterState, player, playerData} : StatsProps) => {
 
     const getStatValue = useCallback((stat: string): string => {
 
-        return GetStatValueForDetailedStatsView(stat, playerData, player, statsFilterState, minutesValue);
+        return GetStatValueForDetailedStatsView(stat, playerData, player, statsFilterState, minutesValue, liveGameweek);
 
     }, [statsFilterState.isPer90, statsFilterState.gameSpan, player, playerData]);
 
