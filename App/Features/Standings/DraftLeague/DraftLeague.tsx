@@ -47,7 +47,7 @@ const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) => {
     }, [])
 
     return (
-    <>  
+    <View style={{height: '100%', width: '100%'}}>  
         <Text style={styles.titleText} numberOfLines={1}>{draftLeagueInfo.league.name}</Text>
         <FlatList data={draftLeagueInfo.standings}
                   stickyHeaderIndices={[0]}
@@ -56,7 +56,7 @@ const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) => {
                   ListHeaderComponent={ StandingsHeader }
                   renderItem={renderLeagueEntryItem}
                   testID='draftLeagueStandingsList'/>
-    </>
+    </View>
     )
 }
 

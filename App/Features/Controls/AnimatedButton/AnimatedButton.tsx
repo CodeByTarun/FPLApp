@@ -44,7 +44,7 @@ const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChil
     }
 
     return (
-        <AnimatedPressable testID={'animatedButton'} hitSlop={5} style={{transform: [{scale: animatedStyle.scale}], opacity: isDisabled ? 0.5 : 1}} onPress={onButtonPress} disabled={isDisabled}>
+        <AnimatedPressable testID={'animatedButton'} hitSlop={0} style={{transform: [{scale: animatedStyle.scale}], opacity: isDisabled ? 0.5 : 1}} onPress={onButtonPress} disabled={isDisabled}>
             { children }
         </AnimatedPressable>
     )

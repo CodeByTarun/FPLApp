@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
-import { primaryColor, aLittleLighterColor, textPrimaryColor, width, smallFont } from "../../../../Global/GlobalConstants";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { primaryColor, aLittleLighterColor, textPrimaryColor, width, smallFont, mediumFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     
     container:{ 
-        width: '60%', 
+        width: widthPercentageToDP('60%'), 
         height: '95%', 
         backgroundColor: primaryColor, 
         alignSelf: 'flex-end', 
@@ -15,13 +16,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         borderColor: aLittleLighterColor,
-        paddingBottom: 5
+        paddingBottom: heightPercentageToDP('0.5%'),
+        paddingTop: heightPercentageToDP('0.5%'),
     },
 
     bonusPointsText: {
         color: textPrimaryColor,
         alignSelf: 'center',
-        fontSize: smallFont * 0.95
+        fontSize: smallFont,
+        flex: 1,
     },
 
     titleContainer: {
@@ -35,9 +38,10 @@ export const styles = StyleSheet.create({
     titleText: {
         color: textPrimaryColor,
         alignSelf: 'center',
-        fontSize: smallFont * 1.4,
+        fontSize: mediumFont * 1.2,
         fontWeight: 'bold',
-        padding: 3,
+        paddingTop: heightPercentageToDP('1%'),
+        paddingBottom: heightPercentageToDP('0.5%'),
         backgroundColor: primaryColor
     },
 });

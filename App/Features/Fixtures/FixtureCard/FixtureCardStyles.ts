@@ -1,23 +1,27 @@
 import { StyleSheet } from "react-native";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
 import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
         height: FIXTURE_CARD_HEIGHT,
-        width: width* 0.3288,
-        paddingTop: 5, paddingBottom: 5,
+        aspectRatio: 1.541,
+        paddingTop: heightPercentageToDP('0.5%'), 
     },
 
     card: {
         backgroundColor: primaryColor,
         flex: 1,
         flexDirection: 'column',
-        marginLeft: 2.5,
-        marginRight: 2.5,
-        padding: 5,
+        marginBottom: heightPercentageToDP('1%'),
+        marginLeft: widthPercentageToDP('1%'),
+        marginRight: widthPercentageToDP('1%'),
+        paddingLeft: widthPercentageToDP('1%'),
+        paddingRight: widthPercentageToDP('1%'),
+        paddingBottom: heightPercentageToDP('1%'),
+        paddingTop: heightPercentageToDP('1%'),
         borderRadius: cornerRadius,
-        marginBottom: 2.5
     },
 
     button: {
@@ -30,15 +34,18 @@ export const styles = StyleSheet.create({
     //#region top bar
     topbar: {
         alignSelf: 'center',
-        flex: 1, 
-        justifyContent: 'center',
+        width: '100%',
+        height: heightPercentageToDP('2%'),
+        flexDirection: 'row'
     },
 
     datetext: {
-        fontSize: smallFont * 1.2,
+        fontSize: smallFont * 1.1,
         alignSelf: 'center',
         color: textPrimaryColor,
+        fontWeight: '500',
         flex: 1,
+        textAlign: 'center'
     },
 
     //#endregion
@@ -48,12 +55,12 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        flex: 4,
-        paddingTop: 3,
+        flex: 1,
+        paddingTop: heightPercentageToDP('0.25%'),
+        paddingBottom: heightPercentageToDP('0.25%'),
     },
 
     scoreAndTimeView: {
-        paddingBottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -61,7 +68,7 @@ export const styles = StyleSheet.create({
     scoreText: {
         fontSize: mediumFont,
         alignSelf: 'center',
-        margin: 1,
+        margin: heightPercentageToDP('0.5%'),
         color: textPrimaryColor,
     },
 
@@ -71,7 +78,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'red',
         fontWeight: "bold",
-        marginLeft: 1
+        marginLeft: widthPercentageToDP('0.5%'),
     },
 
     fullTimeText: {

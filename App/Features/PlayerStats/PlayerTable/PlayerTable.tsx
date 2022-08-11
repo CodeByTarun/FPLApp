@@ -83,43 +83,41 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                 <View style={styles.firstRowTopBarContainer}>
                     <SearchControl placeHolderText="Search" value={playerTableFilterState.playerSearchText} onChangeTextFunction={text => playerTableFilterDispatch({type: 'PlayerSearchTextChange', filterValue: text})}/>
                     
-                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', flex: 1.5, marginRight: 2.5}} onPress={closePlayerSearch}>
+                    <TouchableOpacity style={styles.closeButtonContainer} onPress={closePlayerSearch}>
                         <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>  Close</Text>
                     </TouchableOpacity>
                 </View>
                 
                 <View style={styles.secondRowTopbarContainer}>
-                    <View style={{ flex: 10, flexDirection:'row' }}>
-                        <View style={{flex: 1, flexDirection: 'row', paddingBottom: 10, paddingTop: 10, paddingLeft: 5, paddingRight: 5}}>
-                            <View style={{flex: 1, marginRight: 5}}>
-                                <Dropdown defaultValue="All Teams" 
-                                        headerText="Team"
-                                        options={Array.from(overview.teams.map(team => team.name))} 
-                                        value={playerTableFilterState.teamFilter} 
-                                        setValue={teamFilterDispatch}/>
-                            </View>
-                            {CustomVerticalSeparator(4, 4)}
-                            <View style={{flex: 1, marginLeft: 10, marginRight: 5}}>
-                                <Dropdown defaultValue="All Positions" 
-                                        headerText="Position"
-                                        options={Array.from(overview.element_types.map(type => type.plural_name))} 
-                                        value={playerTableFilterState.positionFilter} 
-                                        setValue={positionFilterDispatch}/>
-                            </View>
-                                {CustomVerticalSeparator(4, 4)}
-                            <View style={{flex: 1, marginLeft: 10, marginRight: 5 }}>
-                                <Dropdown defaultValue="Total Points" 
-                                        headerText={"Stat" + ((playerTableFilterState.isPer90 && GlobalConstants.Per90Stats.includes(playerTableFilterState.statFilter)) ? " (per 90)" : "")}
-                                        options={Object.values(OverviewStats).sort()} 
-                                        value={playerTableFilterState.statFilter} 
-                                        setValue={statFilterDispatch}/>
-                            </View>
-                                {CustomVerticalSeparator(4, 4)}
+                    <View style={styles.dropDownsContainer}>
+                        <View style={styles.dropDownContainer}>
+                            <Dropdown defaultValue="All Teams" 
+                                    headerText="Team"
+                                    options={Array.from(overview.teams.map(team => team.name))} 
+                                    value={playerTableFilterState.teamFilter} 
+                                    setValue={teamFilterDispatch}/>
                         </View>
+                        {CustomVerticalSeparator(4, 4)}
+                        <View style={[styles.dropDownContainer, styles.leftMarginDropDown]}>
+                            <Dropdown defaultValue="All Positions" 
+                                    headerText="Position"
+                                    options={Array.from(overview.element_types.map(type => type.plural_name))} 
+                                    value={playerTableFilterState.positionFilter} 
+                                    setValue={positionFilterDispatch}/>
+                        </View>
+                            {CustomVerticalSeparator(4, 4)}
+                        <View style={[styles.dropDownContainer, styles.leftMarginDropDown]}>
+                            <Dropdown defaultValue="Total Points" 
+                                    headerText={"Stat" + ((playerTableFilterState.isPer90 && GlobalConstants.Per90Stats.includes(playerTableFilterState.statFilter)) ? " (per 90)" : "")}
+                                    options={Object.values(OverviewStats).sort()} 
+                                    value={playerTableFilterState.statFilter} 
+                                    setValue={statFilterDispatch}/>
+                        </View>
+                            {CustomVerticalSeparator(4, 4)}
                     </View>
-                    <View style={{flex: 1.3, height: '65%', marginTop: 3, alignSelf: 'center', justifyContent: 'center'}}>
+                    <View style={styles.filterButtonContainer}>
                         <AnimatedButton buttonFn={openFilter}>
-                            <Image source={Icons['filter']} resizeMode='contain' style={{height: '85%', width: '85%', alignSelf: 'center'}}/>
+                            <Image source={Icons['filter']} resizeMode='contain' style={styles.filter}/>
                         </AnimatedButton>
                     </View>
                 </View>

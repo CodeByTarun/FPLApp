@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { heightPercentageToDP } from "react-native-responsive-screen";
 import { primaryColor, cornerRadius, smallFont, textSecondaryColor, lightColor, textPrimaryColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -30,7 +31,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent:'center', 
-        paddingBottom: 7
+        paddingBottom: heightPercentageToDP('1.25%'),
     },
 
     activeIndex: {

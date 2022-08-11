@@ -135,16 +135,16 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
         return (
         <Pressable key={item.id} style={styles.tableView} onPress={pressPlayerFn}>
-            <View testID="watchlistButtonContainer" style={{flex: 0.60, justifyContent: 'center', opacity: isInWatchList ? 1 : 0.5}}>
+            <View testID="watchlistButtonContainer" style={[styles.watchListButtonContainer, {opacity: isInWatchList ? 1 : 0.5}]}>
                 <CustomButton image={isInWatchList ? "favourite" : "unfavourite"} buttonFunction={isInWatchList ? () => removeFromWatchlist(item.id) : () => addToWatchlist(item.id)}/>
             </View>
-            <View style={{ flex: 3, height: height * 0.05 }}>
+            <View style={styles.playerListInfoContainer}>
                 <PlayerListInfo overview={overview} player={item} owner={(teamInfo.teamType === TeamTypes.Draft) ? 
                                                                         GetOwnedPlayersManagerShortInitials(item.id, overview, draftOverview.data, draftLeagueRosters.data, draftLeagueInfo.data) : 
                                                                         null}/>
             </View>
 
-            <View style={{ flex: 3 }}>
+            <View style={{}}>
                 <FixtureDifficultyList team={item.team} isFullList={false} fixtures={fixtures} overview={overview} liveGameweek={teamInfo.liveGameweek} />
             </View>
 

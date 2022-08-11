@@ -1,25 +1,26 @@
 import { StyleSheet } from "react-native";
-import { width, smallFont, textPrimaryColor } from "../../../../Global/GlobalConstants";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { width, smallFont, textPrimaryColor, mediumFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     container: {
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 5,
+        paddingLeft: widthPercentageToDP('1%'),
+        paddingRight: widthPercentageToDP('1%'),
         width: width* 0.132
     },
 
     text: {
-        fontSize: smallFont,
+        fontSize: mediumFont * 0.75,
         color: textPrimaryColor,
         textAlign: 'center', 
     },
 
     fixtureDifficultyIndicator: {
-        position: 'absolute', 
-        height: '100%', 
-        width: '115%', 
+        marginTop: heightPercentageToDP('0.6%'),
+        width: '110%', 
         borderBottomWidth: 2, 
         bottom: 0
     }

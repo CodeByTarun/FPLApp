@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { secondaryColor, cornerRadius, primaryColor, textPrimaryColor, mediumFont } from "../../../Global/GlobalConstants";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { secondaryColor, cornerRadius, primaryColor, textPrimaryColor, mediumFont, largeFont } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     container: {
@@ -14,9 +15,17 @@ export const styles = StyleSheet.create({
         height: "100%",
         width: "50%",
         position: 'absolute',
-        left: -1,
         backgroundColor: primaryColor,
         borderRadius: cornerRadius,
+    },
+
+    switchContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: widthPercentageToDP('0%'),
+        paddingRight: widthPercentageToDP('0%'),
     },
 
     buttonContainer: {
@@ -24,26 +33,33 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 6,
+        paddingTop: heightPercentageToDP('0.75%'),
+        paddingBottom: heightPercentageToDP('0.75%'),
+        paddingLeft: widthPercentageToDP('2%'),
+        paddingRight: widthPercentageToDP('2%'),
         elevation: 10,
     },
 
+    emblemContainer: {
+        flex: 3,
+        alignSelf: 'center',
+    },
+
     emblems: {
-        flex:1,
         resizeMode: 'contain',
         alignSelf: 'center',
-        height: '100%',
-        width: '100%',
+        height: '90%',
+        width: '90%',
      },
 
     scoreText: {
-        marginLeft: 3,
-        marginRight: 3,
+        paddingLeft: widthPercentageToDP('0.75%'),
+        paddingRight: widthPercentageToDP('0.75%'),
         flex: 1,
         textAlign: 'center',
         fontWeight: '700',
         color: textPrimaryColor,
-        fontSize: mediumFont,
+        fontSize: mediumFont * 1.1,
         alignSelf: 'center',
     },
 });

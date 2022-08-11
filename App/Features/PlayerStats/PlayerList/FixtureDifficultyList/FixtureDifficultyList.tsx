@@ -33,7 +33,7 @@ const FixtureDifficultyList = React.memo((props: FixtureDifficultyListProps) => 
     const keyExtractor = useCallback((fixture: FplFixture) => fixture.id.toString(), []);
 
     return (
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', height: '100%'}}>
             { (props.isFullList ? fixtureList : fixtureList.slice(0, 3)).map(fixture => renderItem(fixture))}
         </View>
     )

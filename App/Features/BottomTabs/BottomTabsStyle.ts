@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
-import { aLittleDarkerColor, primaryColor } from "../../Global/GlobalConstants";
+import { heightPercentageToDP } from "react-native-responsive-screen";
+import { BOTTOM_BAR_HEIGHT, primaryColor } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     container: {
-        aspectRatio: 8,
+        height: BOTTOM_BAR_HEIGHT,
         width: '100%',
         backgroundColor: primaryColor,
         flexDirection: 'row',
@@ -12,12 +13,10 @@ export const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: {
             width: 0,
-            height: -1,
+            height: -(heightPercentageToDP('0.1%')),
         },
         shadowOpacity: 0.25,
-        shadowRadius: 1,
-        borderTopColor: 'rgba(0, 0, 0, 0.04)',
-        borderTopWidth: 1,
+        shadowRadius: heightPercentageToDP('0.2%'),
     },
     
 });

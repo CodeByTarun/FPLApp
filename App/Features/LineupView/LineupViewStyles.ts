@@ -1,23 +1,24 @@
 import { StyleSheet } from "react-native";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
 import { primaryColor, textPrimaryColor, width, smallFont, cornerRadius, height, secondaryColor, largeFont, mediumFont } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        margin: 0,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor: primaryColor
     },
 
     top: {
         width: '100%',
-        aspectRatio: 8,
+        height: heightPercentageToDP('7%'),
         backgroundColor: primaryColor,
         zIndex: 1,
     },  
 
     middle: {
-        flex: 9,
+        flex: 1,
         width : '100%',
     },
 
@@ -26,64 +27,21 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         zIndex: 1,
+        paddingBottom: heightPercentageToDP('1%'),
         backgroundColor: primaryColor,
     },
 
-    leftButtonsContainer: {
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        paddingLeft: 5, 
-        flexDirection: 'row' 
-    },
-
-    rightButtonsContainers: {
-        flex: 1, 
-        flexDirection: 'row', 
-        justifyContent: 'flex-end', 
-        alignItems: 'center', 
-        margin: 0 ,
-    },
-
     lineupHeaderContainer: {
-        flex: 3, 
-        justifyContent: 'center', 
+        flex: 1, 
         alignItems: 'center', 
-        padding: 6
+        justifyContent: 'center',
     },
 
     teamSwitchContainer: {
         alignSelf: 'center', 
-        height: '90%', 
-        width: '65%'
-    },
-
-    buttonContainer: {
-        height: '100%',
-        aspectRatio: 0.65,
-        alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 7,
-        backgroundColor: 'red'
-    },
-
-    playerSearchButtonContainer: {
-        height: '60%',
-        aspectRatio: 1,
-        margin: 3,
-        marginTop: 4,
-    },
-
-    switchContainer: {
-        alignSelf: 'center',
-        height: '100%',
-        width: '100%',
-    },
-
-    icon: {
-        width: '80%',
-        height: '80%',
-        alignSelf: 'center'
+        height: '80%', 
+        aspectRatio: 4.5,
     },
 
     text: {
@@ -93,21 +51,13 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
 
-    leagueContainer: {
-        height: height * 0.55, 
-        width: width * 0.8,
-        borderRadius: cornerRadius,
-        padding: 5,
-        backgroundColor: primaryColor
-    },
-
     button: {
         position: 'absolute',
         top: '33%',
-        padding: 20, 
+        padding: heightPercentageToDP('20%'),
         backgroundColor: secondaryColor, 
         borderRadius: cornerRadius, 
-        width: '60%', alignSelf: 'center'
+        width: widthPercentageToDP('60%'), alignSelf: 'center'
     },
 
     buttonText: {

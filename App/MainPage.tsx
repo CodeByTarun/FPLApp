@@ -24,7 +24,7 @@ const MainPage = () => {
   
 
   return (
-    <View style={{flex: 1, backgroundColor: GlobalConstants.primaryColor}}>
+    <View style={styles.container}>
       { (fixtures && overview) ?
         <>
           <SafeAreaView style={styles.safeArea}>
@@ -55,6 +55,11 @@ const MainPage = () => {
 }
 
 const styles = StyleSheet.create({
+  
+  container: {
+    flex: 1,
+    backgroundColor: GlobalConstants.primaryColor,
+  },
   
   safeArea: {
     backgroundColor: GlobalConstants.primaryColor,

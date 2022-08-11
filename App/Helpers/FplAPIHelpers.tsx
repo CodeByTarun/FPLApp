@@ -50,12 +50,51 @@ function GetFixturePlayerData(gameweekData: FplGameweek, overviewData: FplOvervi
                     overviewData: fixturePlayer,
                 } as PlayerData))
 
+        if (fixtureInfo.fixture?.started === false) {
+            return FilterForTopPlayersOnTeamForFixturesThatHaveNotStarted(combinedPlayerData, fixtureInfo);
+        }
+
         return combinedPlayerData.filter(player => FilterForPlayerThatHavePlayedInTheFixture(player, fixtureInfo))
                                  .sort((playerA, playerB) => (playerA.overviewData.element_type - playerB.overviewData.element_type));
     }
     
     return null;
 }
+
+function FilterForTopPlayersOnTeamForFixturesThatHaveNotStarted(combinedPlayerData: PlayerData[], fixtureInfo: FixtureInfo): PlayerData[] | null {
+    
+    let sortedPlayers = combinedPlayerData.sort((playerA, playerB) => (playerB.overviewData.minutes - playerA.overviewData.minutes));
+
+    let players: PlayerData[] = [];
+
+    for (let i = 1; i <= 4; i++) {
+        players.concat(sortedPlayers.filter(player => player.overviewData.element_type === i).slice(0, elementMinAndMax[i].min + 1))
+    }
+
+    let filteredPlayers = sortedPlayers.filter(player => !players.includes(player));
+    let index = 0;
+
+    while (players.length <= 11) {
+
+        let player = filteredPlayers[index];
+        
+        if (players.filter(playerInList => playerInList.overviewData.element_type === player.overviewData.element_type).length < elementMinAndMax[player.overviewData.element_type].max) {
+            players.push(player);
+        }
+
+        index++;
+    }
+
+    return players.sort((playerA, playerB) => (playerA.overviewData.element_type - playerB.overviewData.element_type));
+}
+
+// 1: Goalkeeper, 2: Defender, 3: Midfielder, 4: Forward
+const elementMinAndMax: {[key: number] : {min: number, max: number}} = {
+    1 : {min: 1, max: 1 },
+    2: {min: 3, max: 5},
+    3: {min: 3, max: 5},
+    4: {min: 1, max: 3},
+} 
 
 function GetDreamTeamPlayerData(gameweekData: FplGameweek, overviewData: FplOverview, teamInfo: TeamInfo): PlayerData[] | null {
     let listOfDreamTeamPlayers = gameweekData.elements.filter(element => element.stats.in_dreamteam === true);
@@ -198,6 +237,9 @@ export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
 }
 
 export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: FixtureInfo) : number {
+
+    if (!playerData.gameweekData) return playerData.overviewData.total_points;
+
     let playerStats = playerData.gameweekData.explain.find(explain => explain.fixture === fixtureInfo.fixture?.id)?.stats;
 
     if (playerStats !== undefined) {

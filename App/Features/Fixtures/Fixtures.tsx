@@ -12,7 +12,7 @@ import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
 import { FplGameweek } from "../../Models/FplGameweek";
 import globalStyles from "../../Global/GlobalStyles";
 import GameweekView from "./GameweekView";
-import { FIXTURES_VIEW_HEIGHT } from "../../Global/GlobalConstants";
+import { FIXTURES_VIEW_CONTROLS_HEIGHT, FIXTURES_VIEW_HEIGHT, height } from "../../Global/GlobalConstants";
 import { animated, useChain, useSpring, useSpringRef } from "@react-spring/native";
 import FixtureCardLoading from "./FixtureCardLoading";
 import { useNavigation } from "@react-navigation/native";
@@ -48,7 +48,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
   const expandRef = useSpringRef();
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? FIXTURES_VIEW_HEIGHT : '100%', ref: expandRef, config: { friction: 18, mass: 0.5 }});
+  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? `${(FIXTURES_VIEW_HEIGHT/ height) * 100}%` : '100%', ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
   useChain([expandRef]);
 
@@ -122,6 +122,9 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
     const onCalendarButtonPress = useCallback(() => {
       if (navigation.screenType === ScreenTypes.Fixtures) {
+        if (teamInfo.gameweek > teamInfo.liveGameweek) {
+          dispatch(changeGameweek(teamInfo.liveGameweek));
+        }
         dispatch(goToMainScreen());
       } else {
         dispatch(goToFixturesScreen());
@@ -147,7 +150,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
           <ScrollView ref={fixtureScrollViewRef} 
                       horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
                       showsHorizontalScrollIndicator={false}
-                      style={{ flex: 1, marginLeft: 2.5, marginRight: 2.5 }} 
+                      style={styles.fixturesScrollView} 
                       contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}
                       testID='fixturesScrollView'>
             { 
@@ -156,7 +159,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                       .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
             }
           </ScrollView> :
-          <View style={{flexDirection: 'row', flex: 1, marginLeft: 2.5, marginRight: 2.5}}>
+          <View style={[styles.fixturesScrollView, {flexDirection: 'row'}]}>
             <FixtureCardLoading/>
             <FixtureCardLoading/>
             <FixtureCardLoading/>

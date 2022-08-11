@@ -1,6 +1,7 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useState } from "react";
 import { View, Text } from "react-native";
+import { height } from "../../../Global/GlobalConstants";
 import { FplManagerInfo } from "../../../Models/FplManagerInfo";
 import { useGetBudgetLeagueInfoQuery } from "../../../Store/fplSlice";
 import { AnimatedButton, LoadingIndicator } from "../../Controls";
@@ -19,10 +20,10 @@ const BudgetLeague = ({budgetUserInfo} : BudgetLeagueProps) => {
     const budgetLeagueInfo = useGetBudgetLeagueInfoQuery(leagueToShow ? leagueToShow : skipToken);
 
     return (
-        <View style={{flex: 1, padding: 5}}>
+        <View style={{height: '100%', width: '100%', padding: 5}}>
             <Text style={styles.titleText} numberOfLines={1}>{leagueToShow ? (budgetLeagueInfo.isSuccess ? budgetLeagueInfo.data.league.name : "")  : 'Leagues'}</Text>
             { leagueToShow && 
-                <View testID="backButtonStandings" style={{position: 'absolute', left: 10, top: 10}}>
+                <View testID="backButtonStandings" style={{position: 'absolute', left: 5, top: 5}}>
                     <AnimatedButton buttonFn={() => setLeagueToShow(null)}>
                         <Text style={styles.backButtonText}>Go Back</Text>
                     </AnimatedButton>
@@ -35,7 +36,7 @@ const BudgetLeague = ({budgetUserInfo} : BudgetLeagueProps) => {
                 {budgetLeagueInfo.isSuccess ?
                     <BudgetLeagueStandings budgetLeagueInfo={budgetLeagueInfo.data}/>
                     :
-                    <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+                    <View style={{height: height * 0.5, justifyContent: 'center', alignContent: 'center'}}>
                         <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>
                             <LoadingIndicator/>
                         </View>

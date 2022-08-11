@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
-import { width, primaryColor, smallFont, textSecondaryColor, secondaryColor, textPrimaryColor, mediumFont, largeFont, aLittleDarkerColor, aLittleLighterColor, lightColor } from "../../../../Global/GlobalConstants";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { width, primaryColor, smallFont, textSecondaryColor, secondaryColor, textPrimaryColor, mediumFont, largeFont, aLittleDarkerColor, aLittleLighterColor, lightColor, tertiaryColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     kingsView: {
         flex: 1,
         alignSelf: 'center',
-        marginTop: 3,
-        width: width*0.867,
+        marginTop: heightPercentageToDP('0.5%'),
+        width: widthPercentageToDP('86.7%'),
         backgroundColor: primaryColor,           
     },
 
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
     },
 
     kingsCardView: {
-        width: width*0.8*0.27,
+        width: widthPercentageToDP('16.5%'),
         padding: 5,
         borderColor: 'white',
         justifyContent: 'center',
@@ -31,7 +32,8 @@ export const styles = StyleSheet.create({
 
     textContainer: {
         backgroundColor: secondaryColor,
-        width: '90%'
+        width: '90%',
+        height: heightPercentageToDP('3.5%'), 
     },
     
     gameweekAndScoreContainer: {
@@ -40,7 +42,15 @@ export const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center', 
         justifyContent: 'center',
-        padding: 1,
+        paddingLeft: widthPercentageToDP('1%'),
+        paddingRight: widthPercentageToDP('1%'),
+        flex: 1,
+    },
+
+    kingsTextContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     kingsText: {
@@ -49,7 +59,6 @@ export const styles = StyleSheet.create({
         fontWeight: '500',
         alignSelf: 'center',
         textAlign: 'center',
-        paddingBottom: 2,
     },
 
     gameweekAndScoreText: {

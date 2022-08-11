@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
-import { cornerRadius, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { cornerRadius, primaryColor, secondaryColor, smallFont, tertiaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     container: {
         height: '100%',
-        width: width*(1/6),
+        width: widthPercentageToDP('16.5%'),
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -13,20 +14,20 @@ export const styles = StyleSheet.create({
         flex:3, 
         justifyContent: 'center', 
         alignItems: 'center', 
-        width: '100%'
+        width: '100%',
     },
 
     jerseyImage: {
         alignSelf: 'center', 
-        height: '85%'
+        height: '85%',
     },
 
     allStatsContainer: {
         alignItems: 'flex-start', 
         justifyContent: 'flex-start', 
-        width: '90%', 
+        aspectRatio: 0.9,
         height: '90%', 
-        position: 'absolute'
+        position: 'absolute',     
     },
 
     text: {
@@ -43,83 +44,86 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        marginLeft: 0,
     },
 
     statsImage: {
         aspectRatio: 1,
-        width: width/26,
-        marginRight: -8,
+        width: heightPercentageToDP('2%'),
+        marginLeft: -widthPercentageToDP('1%')
     },
 
     cardsContainer: {
         flexDirection: 'row',
         position: "absolute",
-        right: 10,
-        top: 1,
+        right: 0,
+        top: 0,
     },
 
     cardImage: {
+        width: heightPercentageToDP('2%'),
         aspectRatio: 1,
-        width: width/24,
-        marginRight: -10,
-        marginTop: 0,
+        marginRight: -widthPercentageToDP('0.5%'),
         transform: [{ rotate: "337deg" }]
     },
 
     dreamTeamContainer: {
         flexDirection: 'row',
         position: "absolute",
-        left: -2,
+        left: -widthPercentageToDP('0.25%'),
         bottom: 0,
         zIndex: 1,
     },
 
     dreamTeamImage: {
-        height: width/20,
-        width: width/20,
+        aspectRatio: 1,
+        width: heightPercentageToDP('2.5%'),
         marginRight: 0,
+        marginLeft: -widthPercentageToDP('1%')
     },
 
     injuredContainer: {
         flexDirection: 'row',
         position: "absolute",
-        right: 5,
-        bottom: -5,
+        right: 0,
+        marginRight: -widthPercentageToDP('0.5%'),
+        marginBottom: -widthPercentageToDP('0.5%'),
+        bottom: 0,
     },
 
     injuredImage: {
-        height: width/16,
-        width: width/16,
+        width: heightPercentageToDP('3%'),
+        aspectRatio: 1,
     }, 
 
     captainAndViceCaptainContainer: {
         position: 'absolute',
-        height: '30%',
+        height: heightPercentageToDP('2.5%'),
         aspectRatio: 1,
-        bottom: 0,
-        right: -10,
+        elevation: 1,
+        zIndex: 1,
+        top: -heightPercentageToDP('1.25%'),
+        right: -heightPercentageToDP('1.25%'),
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: primaryColor,
-        borderRadius: 100
+        backgroundColor: tertiaryColor,
+        borderRadius: 100,
     },
 
     captainAndViceCaptainText: {
-        color: textPrimaryColor,
+        color: primaryColor,
         alignSelf: 'center',
-        fontSize: smallFont * 1.3,
-        fontWeight: '800',
+        fontSize: smallFont,
+        fontWeight: '700',
         textAlign: 'center'
     },
     //#endregion
 
     //#region Score and Name
     scoreAndNameContainer: {
-        flex: 1.5, 
+        height: heightPercentageToDP('4%'), 
         justifyContent: 'center', 
         alignItems: 'center',
-        paddingBottom: 1, 
+        paddingBottom: 0, 
         backgroundColor: primaryColor,
     },
 
@@ -130,16 +134,16 @@ export const styles = StyleSheet.create({
 
     nameText: {
         fontWeight: '500',
-        paddingLeft: 5,
-        paddingRight: 5,
+        paddingLeft: widthPercentageToDP('1%'),
+        paddingRight: widthPercentageToDP('1%'),
     },
     
     scoreContainer: {
         flex: 1, 
         flexDirection: 'row',
         backgroundColor: secondaryColor, 
-        paddingLeft: 5, 
-        paddingRight: 5, 
+        paddingLeft: widthPercentageToDP('1%'),
+        paddingRight: widthPercentageToDP('1%'),
     },
     
     //#endregion
@@ -147,15 +151,14 @@ export const styles = StyleSheet.create({
     //#region info card
     playerInfoCardContainer: {
         height: '95%', 
-        width: '110%', 
-        margin: 10, 
+        width: widthPercentageToDP('16%'), 
         backgroundColor: primaryColor, 
         borderRadius: cornerRadius
     },
 
     infoCardContainer: {
         flex: 4, 
-        padding: 3
+        padding: widthPercentageToDP('0.25%')
     },
 
     nextWeekText: {
@@ -177,8 +180,8 @@ export const styles = StyleSheet.create({
 
     infoCardNameText: {
         fontWeight: '600', 
-        paddingLeft: 5, 
-        paddingRight: 5, 
+        paddingLeft: widthPercentageToDP('1%'),
+        paddingRight: widthPercentageToDP('1%'),
         fontSize: smallFont * 1.1, 
         textAlign: 'center',
         color: textPrimaryColor

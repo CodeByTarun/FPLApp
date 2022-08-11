@@ -1,24 +1,25 @@
 import { StyleSheet } from "react-native";
-import { height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { BOTTOM_BAR_HEIGHT, FIXTURES_VIEW_CONTROLS_HEIGHT, height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     animatedView: {
-        backgroundColor: primaryColor,
         zIndex: 1,
         elevation: 0.2,
         overflow: 'hidden',
         width: '100%',
         position: 'absolute',
         flexDirection: 'column',
+        backgroundColor: primaryColor
     },
 
     controlsContainer: {
-        aspectRatio: 12, 
+        height: FIXTURES_VIEW_CONTROLS_HEIGHT,
         width: '100%',
         flexDirection: 'row', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        paddingRight: 10,
+        paddingRight: widthPercentageToDP('1%'),
     },
 
     fixturesListContainer: {
@@ -45,10 +46,9 @@ export const styles = StyleSheet.create({
         color: textPrimaryColor, 
         fontSize: mediumFont * 0.65, 
         fontWeight: '700', 
-        marginTop: 0, 
         transform: [{rotate: '-45deg'}], 
         alignSelf: 'center',
-        marginBottom:5
+        marginBottom: heightPercentageToDP('0.5%'),
       },
 
       buttonsContainers: {
@@ -65,72 +65,22 @@ export const styles = StyleSheet.create({
 
       fixturesScrollView: {
         flex: 1, 
-        marginLeft: 2.5, 
-        marginRight: 2.5,
-      },
-
-      closeFixtureViewButtonContainer: {
-        position: 'absolute',
-        bottom: 20,
-        right: 20, 
-      },
-
-      closeFixtureViewButton: {
-        flex: 1,
-        borderRadius: 100,
-        backgroundColor: secondaryColor,
-        padding: 15,
-      },
-
-      closeFixtureViewButtonText: {
-        fontSize: mediumFont,
-        fontWeight: '500',
-        color: textSecondaryColor,
-        alignSelf: 'center',
-        textAlign: 'center'
-      },
-
-      previousGameweekButtonContainer: {
-        position: 'absolute',
-        bottom: 20,
-        left: '32%',
-      },
-
-      previousGamweekButton: {
-        flex: 1,
-        borderRadius: 100,
-        backgroundColor: secondaryColor,
-        padding: 15,
-      },
-
-      nextGameweekButtonContainer: {
-        position: 'absolute',
-        bottom:20,
-        right: '32%',
-      }, 
-
-      nextGamweekButton: {
-        flex: 1,
-        borderRadius: 100,
-        backgroundColor: secondaryColor,
-        padding: 15,
-      },
-
-      gameweekViewContainer: {
-        height: height * 0.6,
-        width: width * 0.7,
+        marginLeft: widthPercentageToDP('0.25%'), 
+        marginRight: widthPercentageToDP('0.25%'),
       },
 
       bottomBar: {
-        width: '80%',
+        width: widthPercentageToDP('60%'),
         alignSelf: 'center',
-        height: 50,
+        height: BOTTOM_BAR_HEIGHT,
         backgroundColor: primaryColor,
-        flexDirection: 'row'
+        flexDirection: 'row',
       },
 
       bottomaBarSections: {
         flex: 1/3,
+        alignContent: 'center',
+        justifyContent: 'center',
       },
 
       buttonContainer: {
@@ -146,7 +96,7 @@ export const styles = StyleSheet.create({
       },
 
       text: {
-        color: textSecondaryColor,
+        color: textPrimaryColor,
         fontWeight: '600',
         fontSize: mediumFont
       }

@@ -52,11 +52,6 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
         <View style={styles.container}>
             <View style={styles.top}>
                 <View style={[styles.controlsContainer, globalStyles.bottomShadow]}>
-
-                    <View style={styles.leftButtonsContainer}>
-
-                    </View>
-
                     <View style={styles.lineupHeaderContainer}>
                         {
                             (teamInfo.teamType === TeamTypes.Fixture && gameweek) ?
@@ -64,7 +59,9 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                                     <TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek}/>
                                 </View> :
                             (teamInfo.teamType === TeamTypes.Dream) ?
-                                <Text style={styles.text}>Dream Team</Text> :
+                            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                <Text style={styles.text}>Dream Team</Text>
+                            </View> :
                             (teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Budget) ?
                                 <AnimatedButton buttonFn={openStandingsModal}>
                                     <View testID="managerTeamDropDownButton" style={{flexDirection: 'row'}}>
@@ -75,11 +72,6 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                                 <></>
                         }
                     </View>
-
-                    <View style={styles.rightButtonsContainers}>
-
-                    </View>
-
                 </View>
             </View>
             <View style={styles.middle}>
@@ -102,16 +94,6 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                     </View>
                 }                
             </View>
-                {/* <ToolTip distanceFromRight={GlobalConstants.width * 0.1} 
-                        distanceFromTop={((GlobalConstants.height) * 0.17 + 70)} 
-                        distanceForArrowFromRight={GlobalConstants.width*0.36} 
-                        isVisible={isStandingsModalVisible} 
-                        setIsVisible={setIsStandingsModalVisible} 
-                        view={
-                            <View style={[styles.leagueContainer, globalStyles.shadow]}>
-                                <Standings teamInfo={teamInfo} setModalVisibility={setIsStandingsModalVisible} budgetUserInfo={budgetUserInfo} draftLeagueInfo={draftLeagueInfo}/>
-                            </View>
-                        }/> */}
         </View>
     )
 }

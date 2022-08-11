@@ -126,17 +126,17 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
         <Pressable testID="managerCardButton" style={[styles.container, globalStyles.tabShadow]} disabled={(teamInfo.gameweek !== teamInfo.liveGameweek)} onPress={(teamInfo.teamType === TeamTypes.Budget) ? changingBudgetStat : changingDraftStat}>
             {((((teamInfo.teamType === TeamTypes.Budget) && budgetManagerInfo) || ((teamInfo.teamType === TeamTypes.Draft) && draftManagerInfo)) && players) &&
             <>
-                <View style={{alignSelf: 'center', justifyContent: 'center'}}>
+                <View style={styles.titleContainter}>
                     <Text style={styles.text}>{stat.title}</Text>
                 </View>
-                <View style={{flex: 1, alignSelf: 'center', justifyContent: 'center'}}>
-                    <Text numberOfLines={1} adjustsFontSizeToFit={true} style={stat.stat === 'rank' ? styles.rankText : styles.statText}>{stat.value}</Text>
+                <View style={styles.middleTextContainter}>
+                    <Text numberOfLines={1} style={stat.stat === 'rank' ? styles.rankText : styles.statText}>{stat.value}</Text>
                 </View>
-                <View style={{alignSelf: 'center', justifyContent: 'center'}}>
+                <View style={styles.categoryContainer}>
                     <Text numberOfLines={1} style={styles.text}>{stat.stat}</Text>
                 </View>
                 {(teamInfo.gameweek === teamInfo.liveGameweek) &&
-                    <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: 7}}>  
+                    <View style={styles.dotsContainer}>  
                         { [1,2,3,4,5].map(index => {
                             return (
                                 <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : lightColor}]}/>

@@ -14,7 +14,7 @@ interface StandingsProps {
 
 const Standings = ({teamInfo, draftLeagueInfo, budgetUserInfo} : StandingsProps) => {
     return (
-        <View style={{width: '100%', maxHeight: '70%'}}>
+        <View style={{width: '100%', height: '100%'}}>
             {(teamInfo.teamType == TeamTypes.Draft && draftLeagueInfo) &&
                 <DraftLeague draftLeagueInfo={draftLeagueInfo}/>
             }
@@ -26,3 +26,4 @@ const Standings = ({teamInfo, draftLeagueInfo, budgetUserInfo} : StandingsProps)
 }
 
 export default Standings;
+

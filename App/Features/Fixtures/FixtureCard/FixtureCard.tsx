@@ -56,11 +56,13 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
         dispatch(changeToFixture(fixture));
     }
 
+    //TODO: add disable condition back: ((fixture.event !== null) && (fixture.event > liveGameweek))
+
     return (
         
         <View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? -5 : 0 }]}>
             <View style={[styles.card, globalStyles.shadow]}>
-                <AnimatedButton buttonFn={showFixture} disabled={(((fixture.event !== null) && (fixture.event > liveGameweek)))}>            
+                <AnimatedButton buttonFn={showFixture} disabled={((fixture.event !== null) && (fixture.event > liveGameweek))}>            
                     <View style={styles.button}>
                         <View style={styles.topbar}>
                             <Text style={styles.datetext}>

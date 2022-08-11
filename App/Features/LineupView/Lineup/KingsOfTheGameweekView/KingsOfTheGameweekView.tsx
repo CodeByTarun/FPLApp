@@ -26,8 +26,10 @@ const KingsOfTheGameweekView = ({overviewData} : KingsOfTheGameweekViewProps) =>
                                 </View>
                             </View>
 
-                            <View style={styles.textContainer}>
-                                <Text numberOfLines={1} style={styles.kingsText}>{overviewData.elements.find(element => element.id === king.top_element_info!.id)?.web_name}</Text>    
+                            <View style={[styles.textContainer]}>
+                                <View style={styles.kingsTextContainer}>
+                                    <Text numberOfLines={1} style={styles.kingsText}>{overviewData.elements.find(element => element.id === king.top_element_info!.id)?.web_name}</Text>    
+                                </View>
                                 <View style={styles.gameweekAndScoreContainer}>
                                     <Text style={styles.gameweekAndScoreText}>GW {king.id} | {king.top_element_info!.points}</Text> 
                                 </View>

@@ -23,6 +23,8 @@ import AdditionalInfoCard from "./AdditionalInfoCard";
 import BonusPointView from "./BonusPointView";
 import KingsOfTheGameweekView from "./KingsOfTheGameweekView";
 import { animated, useTransition } from "@react-spring/native";
+import globalStyles from "../../../Global/GlobalStyles";
+import { primaryColor, textPrimaryColor } from "../../../Global/GlobalConstants";
 
 const AnimatedView = animated(View);
 
@@ -145,10 +147,12 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
 
     return (
         <>
-        {(teamInfo.teamType !== TeamTypes.Empty && players && teamInfo.gameweek <= teamInfo.liveGameweek && gameweek) &&
+        {(teamInfo.teamType !== TeamTypes.Empty && players) &&
         <View style={{flex: 1}}>
-            <View style={{flex: 4}}>
-                <Image style={styles.field} source={require('../../../../assets/threequartersfield.jpg')}/>
+            <View style={styles.topContainer}>
+                <View style={styles.fieldContainer}>
+                    <Image style={styles.field} source={require('../../../../assets/field.jpg')} resizeMode={'contain'}/>
+                </View>
                     { players &&
                         <View testID="fixtureOrDreamTeamPlayersStatsView" style={styles.playerContainer}>
                             {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex)}
@@ -170,7 +174,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                                     </AnimatedView>
                                 )}
                             </View>
-                            <View style={{ position: 'absolute', left: 7, height: '11%', aspectRatio: 1.3}}>
+                            <View style={styles.additionalInfoCardContainer}>
                             { cardTransition((animatedStyles) => (teamInfo.gameweek === teamInfo.liveGameweek) &&
                                 <AnimatedView style={[{height: '100%', width: '100%', bottom: animatedStyles.bottom}]}>
                                     <AdditionalInfoCard viewIndex={viewIndex} setViewIndex={setViewIndex} viewIndexScenes={viewIndexScenes}/>
@@ -186,7 +190,12 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
     
                 { bonusPointsViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Fixture)  && 
                     <AnimatedView style={[{height: '100%', width: '100%', top: animatedStyles.top}]}>
-                        <BonusPointView overviewData={overview} fixturesData={fixtures} teamInfo={teamInfo}/>  
+                        {teamInfo.fixture?.started ?
+                        <BonusPointView overviewData={overview} fixturesData={fixtures} teamInfo={teamInfo}/> :
+                        <View style={[globalStyles.shadow, styles.unstartedFixtureView]}>
+                            <Text style={styles.unstartedFixtureViewText} >Most Played 11 with Total Points</Text>
+                        </View>
+                        } 
                     </AnimatedView>
                 )} 
                 { kingsOfTheGameweekViewTransition((animatedStyles) => (teamInfo.teamType === TeamTypes.Dream) && 

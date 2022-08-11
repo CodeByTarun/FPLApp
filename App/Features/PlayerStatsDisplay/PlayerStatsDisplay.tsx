@@ -29,6 +29,8 @@ interface PlayerStatsDisplayProps {
 const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
     let stat : number | undefined;
 
+    if (!player.gameweekData) return null;
+
     if (teamInfo.teamType === TeamTypes.Fixture) {
         stat = GetFixtureStats(player, teamInfo, statIdentifier)
     } else {
@@ -80,7 +82,7 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: P
 
     return (
         <>
-        {(player.gameweekData && teamInfo.teamType !== TeamTypes.Empty) &&
+        {(teamInfo.teamType !== TeamTypes.Empty) &&
         <AnimatedButton buttonFn={openPlayerModal}>
             <View testID="playerStatsDisplayButton" style={styles.container} >
                 { viewIndex === 0 &&
@@ -97,26 +99,26 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: P
                             { StatView(player, teamInfo, Identifier.YellowCards) }
                             { StatView(player, teamInfo, Identifier.RedCards) }
                         </View> 
-                        {(player.gameweekData.stats.in_dreamteam && teamInfo.teamType !== TeamTypes.Dream) &&
+                        {(teamInfo.teamType !== TeamTypes.Dream && player.gameweekData && player.gameweekData.stats.in_dreamteam) &&
                             <View testID="dreamTeamPlayerStats" style={styles.dreamTeamContainer}>
                                 <Image testID="dreamTeamIconPlayerStats" style={styles.dreamTeamImage} source={Icons['dreamteam']} resizeMode="contain"/>
                             </View>
                         }
-                        {((teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) && player.overviewData.status !== 'a') &&
+                        {((teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Fixture) && player.overviewData.status !== 'a') &&
                         <View testID="injuryIndicatorPlayerStats" style={styles.injuredContainer}>
                             <Image style={styles.injuredImage} resizeMode="contain" testID="injuryIndicatorImagePlayerStats"
                                 source={(player.overviewData.status === 'd') ? Icons['doubtful'] : Icons['out']}/>
-                        </View>
-                        }
-                        { ((teamInfo.teamType === TeamTypes.Budget) && (player.isCaptain || player.isViceCaptain)) &&
-                        <View testID="captainAndViceCaptainPlayerStats" style={styles.captainAndViceCaptainContainer}>
-                            <Text style={styles.captainAndViceCaptainText}>{player.isCaptain ? "C" : "V"}</Text>
                         </View>
                         }
                     </View> 
                 </View>
 
                 <View testID="scoreAndNameContainer" style={[styles.scoreAndNameContainer, {width: (teamInfo.teamType === TeamTypes.Budget || teamInfo.teamType === TeamTypes.Draft) ? '115%' : '95%'}]}>
+                    { ((teamInfo.teamType === TeamTypes.Budget) && (player.isCaptain || player.isViceCaptain)) &&
+                            <View testID="captainAndViceCaptainPlayerStats" style={[styles.captainAndViceCaptainContainer, globalStyles.modalShadow]}>
+                                <Text style={styles.captainAndViceCaptainText}>{player.isCaptain ? "C" : "V"}</Text>
+                            </View>
+                    }
                     <View style={styles.nameContainer}>
                         <Text numberOfLines={1} style={[styles.text, styles.nameText]}>{player.overviewData.web_name}</Text>
                     </View>

@@ -1,12 +1,15 @@
 import { Dimensions } from "react-native";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from "react-native-responsive-screen";
 
 // Dimensions
 export const {width, height} = Dimensions.get('window');
 
-const fixtureViewRatio = width / height * 31;
 
-export const FIXTURES_VIEW_HEIGHT = `${fixtureViewRatio}%`;
-export const FIXTURE_CARD_HEIGHT = (fixtureViewRatio / 100 * height) - (width / 12);
+export const FIXTURES_VIEW_HEIGHT = heightPercentageToDP('17%');
+export const FIXTURES_VIEW_CONTROLS_HEIGHT = heightPercentageToDP('5%');
+export const FIXTURE_CARD_HEIGHT = heightPercentageToDP('12%');
+
+export const BOTTOM_BAR_HEIGHT = heightPercentageToDP('7.5%');
 
 // Styling
 export const cornerRadius = 12;
@@ -33,9 +36,9 @@ export const modalBackgroundColor = primaryColor;
 export const modalButtonColor = secondaryColor;
 
 // Fonts
-export const smallFont = width / height * 16;
-export const mediumFont = width / height * 23;
-export const largeFont = width / height * 30;
+export const smallFont = wp('1.8%');
+export const mediumFont = hp('1.6%');
+export const largeFont = wp('4.5%');
 
 
 export const Per90Stats = ["Total Points", "Goals Scored", "Assists", 

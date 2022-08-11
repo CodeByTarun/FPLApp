@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
 import { mediumFont, primaryColor, secondaryColor, textPrimaryColor } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -7,9 +8,23 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: secondaryColor,
         flexDirection: 'row',
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 5,
+        paddingTop: heightPercentageToDP('1%'),
+        paddingBottom: heightPercentageToDP('1%'),
+        paddingLeft: widthPercentageToDP('0.5%'),
+        width: '100%',
+        height: heightPercentageToDP('6.25%')
+    },
+
+    watchListButtonContainer: {
+        height: '100%',
+        aspectRatio: 1,
+        justifyContent: 'center',
+        paddingTop: heightPercentageToDP('0.25%'),
+        paddingBottom: heightPercentageToDP('0.25%'),
+    },
+
+    playerListInfoContainer: {
+        width: widthPercentageToDP('33%'),
     },
 
     tableNumberView: {
@@ -20,13 +35,7 @@ export const styles = StyleSheet.create({
 
     tableText: {
         color: textPrimaryColor,
-        fontSize: mediumFont * 0.95,
-    },
-
-    jersey: {
-        height: '100%',
-        width: '100%',
-        alignSelf: 'center',
+        fontSize: mediumFont,
     },
 });
 
