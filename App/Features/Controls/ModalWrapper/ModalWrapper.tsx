@@ -2,14 +2,15 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp, useCardAnimation } from "@react-navigation/stack";
 import React, { PropsWithChildren, useCallback } from "react";
 import { Animated, Keyboard, Pressable, StyleSheet, View } from "react-native";
+import { moderateVerticalScale } from "react-native-size-matters";
 import { RootStackParams } from "../../../../App";
 import { primaryColor } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
 import CloseButton from "../CloseButton/CloseButton";
 
 interface ModalWrapperProps {
-    modalHeight?: string;
-    modalWidth?: string;
+    modalHeight?: string | number;
+    modalWidth?: string | number;
     maxHeight?: number;
 }
 
@@ -52,7 +53,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center', 
         zIndex: 1,
         position: 'absolute',
-        padding: 10,
+        padding: moderateVerticalScale(10),
         borderRadius: 10,
         backgroundColor: primaryColor,
        },

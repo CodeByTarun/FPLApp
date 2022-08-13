@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP } from "react-native-responsive-screen";
+import { moderateVerticalScale } from "react-native-size-matters";
 import { primaryColor, cornerRadius, smallFont, textSecondaryColor, lightColor, textPrimaryColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
 
     textContainer: {
         flex: 1,
-        justifyContent: 'center',
+        paddingTop: moderateVerticalScale(8),
         alignItems: 'center',
     },
 
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent:'center', 
-        paddingBottom: heightPercentageToDP('1.25%'),
+        paddingBottom: moderateVerticalScale(7),
     },
 
     activeIndex: {

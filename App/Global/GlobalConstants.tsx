@@ -1,21 +1,23 @@
 import { Dimensions } from "react-native";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from "react-native-responsive-screen";
+import { scale, verticalScale, moderateScale, moderateVerticalScale } from 'react-native-size-matters';
 
 // Dimensions
 export const {width, height} = Dimensions.get('window');
 
 
-export const FIXTURES_VIEW_HEIGHT = heightPercentageToDP('17%');
-export const FIXTURES_VIEW_CONTROLS_HEIGHT = heightPercentageToDP('5%');
-export const FIXTURE_CARD_HEIGHT = heightPercentageToDP('12%');
+export const FIXTURES_VIEW_HEIGHT = moderateVerticalScale(height * 0.17, -0.2);
+export const FIXTURES_VIEW_CONTROLS_HEIGHT = moderateVerticalScale(height * 0.05, -0.2);
+export const FIXTURE_CARD_HEIGHT = moderateVerticalScale(height * 0.12, -0.2);
 
-export const BOTTOM_BAR_HEIGHT = heightPercentageToDP('7.5%');
+export const BOTTOM_BAR_HEIGHT = moderateVerticalScale(50, 0.1);
+
+//7.5% height
 
 // Styling
 export const cornerRadius = 12;
 
 // Color Scheme
-export const fieldColor = '#629512';
+export const fieldColor = '#5e9111';
 export const redColor = '#f44336';
 
 export const buttonColor = 'whitesmoke';
@@ -36,9 +38,9 @@ export const modalBackgroundColor = primaryColor;
 export const modalButtonColor = secondaryColor;
 
 // Fonts
-export const smallFont = wp('1.8%');
-export const mediumFont = hp('1.6%');
-export const largeFont = wp('4.5%');
+export const smallFont = moderateScale(8, 0.3);
+export const mediumFont = moderateScale(11, 0.4);
+export const largeFont = moderateScale(16, 0.6);
 
 
 export const Per90Stats = ["Total Points", "Goals Scored", "Assists", 

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { primaryColor, textPrimaryColor, width, smallFont, cornerRadius, height, secondaryColor, largeFont, mediumFont } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
 
     top: {
         width: '100%',
-        height: heightPercentageToDP('7%'),
+        height: moderateVerticalScale(50, 0.4),
         backgroundColor: primaryColor,
         zIndex: 1,
     },  
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         zIndex: 1,
-        paddingBottom: heightPercentageToDP('1%'),
+        paddingBottom: moderateVerticalScale(5, 0.4),
         backgroundColor: primaryColor,
     },
 
@@ -54,10 +54,10 @@ export const styles = StyleSheet.create({
     button: {
         position: 'absolute',
         top: '33%',
-        padding: heightPercentageToDP('20%'),
+        padding: moderateVerticalScale(5),
         backgroundColor: secondaryColor, 
         borderRadius: cornerRadius, 
-        width: widthPercentageToDP('60%'), alignSelf: 'center'
+        width: moderateScale(width * 0.6), alignSelf: 'center'
     },
 
     buttonText: {

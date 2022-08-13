@@ -1,13 +1,14 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { moderateScale, moderateVerticalScale, scale, verticalScale } from "react-native-size-matters";
 import { width, primaryColor, smallFont, textSecondaryColor, secondaryColor, textPrimaryColor, mediumFont, largeFont, aLittleDarkerColor, aLittleLighterColor, lightColor, tertiaryColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     kingsView: {
         flex: 1,
         alignSelf: 'center',
-        marginTop: heightPercentageToDP('0.5%'),
-        width: widthPercentageToDP('86.7%'),
+        marginTop: moderateVerticalScale(7),
+        width: moderateScale(280, 0.9),
+        paddingLeft: moderateScale(2),
         backgroundColor: primaryColor,           
     },
 
@@ -16,8 +17,10 @@ export const styles = StyleSheet.create({
     },
 
     kingsCardView: {
-        width: widthPercentageToDP('16.5%'),
-        padding: 5,
+        width: scale(65),
+        paddingRight: moderateScale(5),
+        paddingTop: moderateVerticalScale(5),
+        paddingBottom: moderateVerticalScale(5),
         borderColor: 'white',
         justifyContent: 'center',
         alignItems: 'center'
@@ -33,7 +36,7 @@ export const styles = StyleSheet.create({
     textContainer: {
         backgroundColor: secondaryColor,
         width: '90%',
-        height: heightPercentageToDP('3.5%'), 
+        height: verticalScale(25), 
     },
     
     gameweekAndScoreContainer: {
@@ -42,8 +45,8 @@ export const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center', 
         justifyContent: 'center',
-        paddingLeft: widthPercentageToDP('1%'),
-        paddingRight: widthPercentageToDP('1%'),
+        paddingLeft: moderateScale(2),
+        paddingRight: moderateScale(2),
         flex: 1,
     },
 

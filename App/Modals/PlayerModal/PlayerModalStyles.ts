@@ -1,25 +1,29 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { modalTextColor, mediumFont, height, largeFont, textPrimaryColor, secondaryColor, cornerRadius, textSecondaryColor } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     container: {
+        width: '100%', 
+        height: '100%'
     },
 
     titleText: {
         fontSize: largeFont, 
         color: textPrimaryColor, 
         alignSelf: 'center', 
-        paddingTop: 15, 
+        paddingTop: moderateVerticalScale(10), 
         fontWeight: '500', 
         textAlign: 'center', 
-        paddingBottom: 5
+        paddingBottom: moderateVerticalScale(5)
     },
 
     fixtureContainer: {
         alignItems: 'center',
-        marginTop: 15,
-        marginBottom: 5,
+        width: '100%',
+        marginTop: moderateVerticalScale(10),
+        marginBottom: moderateVerticalScale(5),
     },
 
     fixtureScoreView: {
@@ -29,14 +33,14 @@ export const styles = StyleSheet.create({
         height: height*0.05, 
         alignItems: 'center', 
         justifyContent: 'center',
-        marginBottom: 10,
+        marginBottom: moderateVerticalScale(10),
     },
 
     scoreText: {
         color: modalTextColor,
         fontSize: largeFont,
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: moderateScale(10, 0.3),
+        marginRight: moderateScale(10, 0.3),
     },
 
     emblemView: {
@@ -54,7 +58,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         borderColor: 'lightgray', 
         borderBottomWidth: 1, 
-        padding: 5
+        padding: moderateScale(5, 0.2)
     },
 
     statText: {
@@ -64,22 +68,23 @@ export const styles = StyleSheet.create({
 
     statContainer: {
         flexDirection: 'row', 
-        padding: 5
+        padding: moderateScale(5, 0.2)
     },
 
     button: {
-        height: 40,
-        width: '50%',
+        height: moderateVerticalScale(40, 0.2),
+        width: moderateScale(100, 0.3),
         backgroundColor: secondaryColor,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: cornerRadius,
-        marginTop: 10,
+        marginTop: moderateVerticalScale(5),
         alignSelf: 'center'
     },
 
     buttonText: {
         color: textPrimaryColor,
+        fontSize: mediumFont,
         fontWeight: '500',
     }
 

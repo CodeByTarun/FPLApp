@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { textPrimaryColor, mediumFont } from "../../../Global/GlobalConstants";
 import * as GlobalConstants from "../../../Global/GlobalConstants";
 import { Slider } from "@miblanchard/react-native-slider";
+import { moderateVerticalScale } from "react-native-size-matters";
 
 interface SliderProps {
     header: string;
@@ -30,7 +31,7 @@ const CustomSlider = ({ header, minValue, maxValue, step, onValueChange, isPrice
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{ header }</Text>
-            <View style={{ flexDirection: 'row', paddingTop: 10}}>
+            <View style={styles.headerContainer}>
                 <Text style={[styles.text, {fontSize: GlobalConstants.mediumFont*0.9}]}>{ isPrice ? sliderRange[0] / 10 : sliderRange[0] }</Text>
                 <Text style={[styles.text, {textAlign: 'right', fontSize: GlobalConstants.mediumFont*0.9}]}>{ isPrice ? sliderRange[1] / 10 : sliderRange[1] }</Text>
             </View>
@@ -52,6 +53,11 @@ export default CustomSlider;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+
+    headerContainer: {
+        flexDirection: 'row',
+        paddingTop: moderateVerticalScale(10),
     },
 
     text: {

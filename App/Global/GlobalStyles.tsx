@@ -17,7 +17,7 @@ export const globalStyles = StyleSheet.create(
             marginTop: 0, 
             transform: [{rotate: '-45deg'}], 
             alignSelf: 'center',
-            marginBottom: 5
+            marginBottom: 5,
        },
 
        modalView: {

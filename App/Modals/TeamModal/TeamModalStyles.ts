@@ -1,38 +1,17 @@
 import { StyleSheet } from "react-native"
+import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters"
 import { secondaryColor, modalTextColor, largeFont, mediumFont, modalButtonColor, cornerRadius, fieldColor, width, textSecondaryColor, textPrimaryColor } from "../../Global/GlobalConstants"
 
 export const styles = StyleSheet.create(
     {
-        //#region Modal Styling
-        //#region  close button
-        closeButton: {
-            position: 'absolute',
-            zIndex: 1,
-            right: -7,
-            top: -7,
-            height: 25,
-            width: 25,
-            margin: 0,
-            borderRadius: 20,
-        },
-
-        closeButtonBackground: {
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-            backgroundColor: secondaryColor,
-            borderRadius: 20,
-        },
-
-        //#endregion
 
         titleText: {
             alignSelf: 'center', 
             color: textPrimaryColor,
             fontSize: largeFont,
             fontWeight: 'bold',
-            marginTop: 12, 
-            marginBottom: 5,
+            marginTop: moderateVerticalScale(10), 
+            marginBottom: moderateVerticalScale(5),
         },
 
         text: {
@@ -40,42 +19,56 @@ export const styles = StyleSheet.create(
             fontSize: mediumFont,
         },
 
-        textInput: {
-            backgroundColor: modalButtonColor,
-            height: '70%',
-            padding: 7,
-            borderRadius: cornerRadius,
-        },
-
         modalAddTeamView: {
             borderRadius: cornerRadius,
-            padding: 8,
+            padding: moderateScale(5),
             flex: 1,
             width: '100%'
         },
 
-        switch: {
-            height: '45%',
-            width: '25%',
-            transform: [
-                {scaleX: 0.8 },
-                { scaleY: 0.8 }
-            ]
+        textInputContainer: {
+            justifyContent: 'center',
+            paddingTop: moderateVerticalScale(10),
+            paddingBottom: moderateVerticalScale(10),
+        },
+
+        textInput: {
+            backgroundColor: modalButtonColor,
+            height: moderateVerticalScale(45, 0.2),
+            paddingLeft: moderateScale(10),
+            borderRadius: cornerRadius,
+            fontSize: mediumFont,
+        },
+
+        checkBoxContainer: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingRight: moderateScale(5),
+            paddingTop: moderateVerticalScale(10),
+        },
+
+        buttonsContainer: {
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            width: '100%',
+            alignSelf: 'center'
         },
 
         formButton: {
             justifyContent: 'center',
             backgroundColor: fieldColor,
-            padding: 9,
-            width: width * 0.25,
+            padding: moderateScale(10, 0.2),
+            width: moderateScale(100, 0.4),
             borderRadius: cornerRadius,
         },
 
         modalListRow: {
             flexDirection: 'row',
-            padding: 10,
             flex: 1,
             alignItems: 'center',
+            height: moderateVerticalScale(45, 0.4)
         },
         
         button: {
@@ -92,40 +85,61 @@ export const styles = StyleSheet.create(
         modalTeamList: {
             flex: 1,
             width: '100%',
-            margin: 5,
-            paddingTop: 10,
+            margin: moderateScale(5),
+            paddingTop: moderateVerticalScale(10),
         },        
 
         addButton: {
-            width: '40%',
+            width: moderateScale(100, 0.4),
             backgroundColor: modalButtonColor,
-            height: '10%',
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: cornerRadius,
             alignSelf: 'center',
-            marginTop: 5,
+            marginTop: moderateVerticalScale(5),
+            marginBottom: moderateVerticalScale(5),
+            padding: moderateScale(10, 0.2)
         },
 
         buttonText: {
             fontSize: mediumFont,
         },
 
+        favouriteButtonContainer: {
+            paddingLeft: moderateScale(4), 
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            paddingTop: moderateScale(6),
+            paddingBottom: moderateScale(6),
+        },
+
         favouriteButton: {
-            flex: 1,
-            justifyContent: 'center'
+            height: '75%',
+            width: '75%',
+            alignSelf: 'center',
+            justifyContent: 'center',
         },
 
         teamButton: {
             flex: 7,
-            marginLeft: 5,
+            marginLeft: moderateScale(5),
+        },
+
+        editButtonContainer: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            paddingTop: moderateScale(8),
+            paddingBottom: moderateScale(8),
+            paddingRight: moderateScale(6),
         },
 
         editButton: {
-            flex: 1,
+            height: '75%',
+            width: '75%',
             justifyContent: 'center',
-            padding: 3,
+            alignSelf: 'center',
         },
-
     }
-)
+);

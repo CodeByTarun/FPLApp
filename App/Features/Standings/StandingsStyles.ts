@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateVerticalScale } from "react-native-size-matters";
 import { textSecondaryColor, smallFont, textPrimaryColor, mediumFont, secondaryColor, largeFont, primaryColor, lightColor } from "../../Global/GlobalConstants";
 
 
@@ -8,8 +9,8 @@ export const styles = StyleSheet.create({
         textAlign: 'center', 
         color: textPrimaryColor, 
         fontWeight: '700', 
-        marginBottom: 20, 
-        marginTop: 20, 
+        marginBottom: moderateVerticalScale(25), 
+        marginTop: moderateVerticalScale(15), 
         fontSize: largeFont
     },
 
@@ -31,8 +32,8 @@ export const styles = StyleSheet.create({
     standingsButtonContainer: {
         flex: 1, 
         flexDirection: 'row', 
-        paddingTop: 10, 
-        paddingBottom: 10
+        paddingTop: moderateVerticalScale(10), 
+        paddingBottom: moderateVerticalScale(10)
     },
 
     teamNameText: {
@@ -60,7 +61,7 @@ export const styles = StyleSheet.create({
     headerContainer: {
         flex: 1, 
         flexDirection: 'row', 
-        paddingBottom: 7, 
+        paddingBottom: moderateVerticalScale(7), 
         borderBottomColor: lightColor, 
         borderBottomWidth: 1.5, 
         backgroundColor: primaryColor

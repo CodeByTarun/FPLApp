@@ -1,6 +1,7 @@
 import React from "react";
 import { View, TextInput, Image, StyleSheet } from "react-native";
-import { textPrimaryColor, secondaryColor, cornerRadius, textSecondaryColor } from "../../../Global/GlobalConstants";
+import { moderateScale } from "react-native-size-matters";
+import { textPrimaryColor, secondaryColor, cornerRadius, textSecondaryColor, mediumFont } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
 import { Icons } from "../../../Global/Images";
 
@@ -31,12 +32,13 @@ export default SearchControl;
 const styles = StyleSheet.create({
     searchBoxContainer: {
         flex: 9,
+        fontSize: mediumFont,
         backgroundColor: secondaryColor,
         flexDirection: 'row',
         borderRadius: cornerRadius,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 11,      
+        padding: moderateScale(11, 0.1),      
     },
 
     searchbox: {

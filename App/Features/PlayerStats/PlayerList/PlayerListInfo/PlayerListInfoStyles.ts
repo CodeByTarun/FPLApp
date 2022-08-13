@@ -1,6 +1,6 @@
-import { coreModule } from "@reduxjs/toolkit/dist/query";
 import { StyleSheet } from "react-native";
-import { textPrimaryColor, mediumFont, secondaryColor, cornerRadius, lightColor, aLittleLighterColor, fieldColor } from "../../../../Global/GlobalConstants";
+import { moderateScale } from "react-native-size-matters";
+import { textPrimaryColor, mediumFont, fieldColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     tableText: {
@@ -22,13 +22,19 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
     },
 
+    playerInfoContainer: {
+        flex: 3,
+        justifyContent: 'center',
+        paddingLeft: moderateScale(4, 0.2),
+    },
+
     ownerText: {
         color: textPrimaryColor,
         fontSize: mediumFont * 0.8,
         height: '100%',
         backgroundColor: fieldColor,
         padding: 2,
-        marginRight: 4,
+        marginRight: moderateScale(4),
         fontWeight: '600'
     },
 });

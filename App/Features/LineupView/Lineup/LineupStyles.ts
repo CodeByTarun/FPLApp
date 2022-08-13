@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
-import { primaryColor, aLittleLighterColor, textPrimaryColor, width, smallFont, tertiaryColor, textSecondaryColor, mediumFont } from "../../../Global/GlobalConstants";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { primaryColor, textPrimaryColor, mediumFont, height } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create(
     {   
@@ -10,22 +10,23 @@ export const styles = StyleSheet.create(
 
         bottomContainer: {
             flex: 1,
-            backgroundColor: '#629512',
+            backgroundColor: '#5e9111',
             borderTopWidth: 1.5,
-            borderTopColor: 'white'
+            borderTopColor: 'white',
         },
 
         fieldContainer: {
             width: '100%',
             height: '100%',
-            backgroundColor: '#629512',
+            backgroundColor: '#5e9111',
             position: 'absolute',
         },
 
         field: {
-            height: heightPercentageToDP('65%'),
+            height: moderateVerticalScale(height * 0.52, 0.22),
             alignSelf: 'center',
-            position: "absolute"
+            position: "absolute",
+            bottom: 0
         },
 
         playerContainer: {
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create(
 
         managerInfoCardContainer: {
             position: 'absolute', 
-            height: heightPercentageToDP('11%'), 
+            height: moderateVerticalScale(70), 
             aspectRatio: 1, 
             right: 0, 
             zIndex: 0
@@ -53,7 +54,7 @@ export const styles = StyleSheet.create(
         additionalInfoCardContainer: {
             position: 'absolute', 
             left: 7, 
-            height: heightPercentageToDP('6%'), 
+            height: moderateVerticalScale(37), 
             aspectRatio: 1.3
         },
 
@@ -66,10 +67,10 @@ export const styles = StyleSheet.create(
             backgroundColor: primaryColor, 
             alignSelf: 'center', 
             justifyContent: 'center', 
-            position: 'absolute', 
-            bottom: 0, 
-            width: widthPercentageToDP('60%'),
-            height: '70%',
+            position: 'absolute',  
+            bottom: 0,
+            width: moderateScale(225, 0.7),
+            height: moderateScale(50, 0.4),
             alignContent: 'center'
         },
         

@@ -49,16 +49,16 @@ const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayer
     }
 
     return (
-        <View style={{width: width * 0.7, height: height * 0.7, padding: 15}}>
+        <View style={styles.modalContainer}>
             <Text style={styles.titleText}>Add Player</Text>
             <View style={styles.searchControlContainer}>
                 <SearchControl value={searchAddPlayerModalText} onChangeTextFunction={setSearchAddPlayerModalText} placeHolderText={"Search Player..."}/>
             </View>
             <View style={styles.listContainer}>
                 <FlatList data={playerList}
-                          renderItem={renderPlayerItem}
-                          ItemSeparatorComponent={Seperator}
-                          keyExtractor={keyExtractor}/>
+                        renderItem={renderPlayerItem}
+                        ItemSeparatorComponent={Seperator}
+                        keyExtractor={keyExtractor}/>
             </View>
         </View>
     )

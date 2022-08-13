@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { View, Text, FlatList } from "react-native";
+import { moderateScale } from "react-native-size-matters";
 import { RootStackParams } from "../../../../App";
 import { Seperator } from "../../../Global/GlobalComponents";
 import { FplDraftLeagueInfo, LeagueEntry, Standing } from "../../../Models/FplDraftLeagueInfo";
@@ -35,7 +36,7 @@ const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) => {
             <AnimatedButton buttonFn={() => openDraftTeamFromStandings(leagueEntry)}>
                 <View style={styles.standingsButtonContainer}>
                     <Text style={[styles.leagueText, {flex: 1}]}>{item.rank}</Text>
-                    <View style={{flex: 3, paddingLeft: 5}}>
+                    <View style={{flex: 3, paddingLeft: moderateScale(5)}}>
                         <Text numberOfLines={1} style={styles.teamNameText}>{leagueEntry?.entry_name}</Text>
                         <Text numberOfLines={1} style={styles.managerNameText}>{leagueEntry?.player_first_name + " " + leagueEntry?.player_last_name}</Text>
                     </View>

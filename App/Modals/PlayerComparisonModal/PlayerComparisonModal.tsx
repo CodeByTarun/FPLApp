@@ -18,6 +18,7 @@ import { FplBaseDataContext } from "../../AppContext";
 import PlayerComparisonFlatList from "./PlayerComparisonFlatList";
 import { Icons } from "../../Global/Images";
 import FilterView from "../PlayerDetailedStatsModal/FilterView";
+import { moderateScale } from "react-native-size-matters";
 
 export interface CombinedPlayerData {
     playerOverview: PlayerOverview;
@@ -77,7 +78,7 @@ const PlayerComparisonModal = () => {
         dispatch(changeMutableView({view: <AddPlayerModal overview={overview} 
                                                           closeFunction={navigator.goBack}
                                                           addPlayerFunction={addPlayer}/>,
-                                    width: '65%'}));
+                                    width: moderateScale(250, 0.4)}));
         navigator.navigate('MutableModal');
     }, [playersToCompare ]);
 
@@ -87,7 +88,7 @@ const PlayerComparisonModal = () => {
     }
 
     return (
-        <ModalWrapper modalHeight={'80%'} modalWidth={'85%'}>
+        <ModalWrapper modalHeight={'80%'} modalWidth={moderateScale(300, 0.8)}>
             <View style={styles.container}>
                 <Text style={styles.titleText}>Player Comparison</Text>
                 <View style={[styles.controlsOuterContainers]}>

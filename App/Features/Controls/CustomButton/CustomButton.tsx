@@ -1,6 +1,7 @@
 import { animated, useSpring } from "@react-spring/native";
 import React from "react";
 import { TouchableOpacity, StyleSheet, Image, Pressable } from "react-native";
+import { moderateScale } from "react-native-size-matters";
 import { cornerRadius, primaryColor, secondaryColor } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
 import { Icons } from "../../../Global/Images";
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-        padding: 3,
+        padding: moderateScale(3, 0.1),
     }, 
 
     icon: {

@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { View, Text, FlatList } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { Seperator } from "../../../../Global/GlobalComponents";
 import { Classic, FplManagerInfo } from "../../../../Models/FplManagerInfo";
 import { AnimatedButton } from "../../../Controls";
@@ -20,8 +21,8 @@ const BudgetLeagueList = ({budgetUserInfo, setLeagueToShow} : BudgetLeagueListPr
     const renderLeagueItem = useCallback(({item}: {item: Classic}) => {
         return (
             <AnimatedButton buttonFn={() => onLeagueItemPress(item.id)}>
-                <View testID="leagueItemButton" style={{flex: 1, flexDirection: 'row', paddingTop: 15, paddingBottom: 15}}>
-                    <Text style={[styles.teamNameText, {paddingLeft: 5}]}>{item.name}</Text>
+                <View testID="leagueItemButton" style={{flex: 1, flexDirection: 'row', paddingTop: moderateVerticalScale(15), paddingBottom: moderateVerticalScale(15)}}>
+                    <Text style={[styles.teamNameText, {paddingLeft: moderateScale(5)}]}>{item.name}</Text>
                     <Text style={[styles.leagueText, {width: '30%'}]}>{item.entry_rank}</Text>
                 </View>
             </AnimatedButton>

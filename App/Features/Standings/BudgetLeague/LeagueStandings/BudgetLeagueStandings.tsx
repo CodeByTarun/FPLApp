@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { FlatList, View, Text } from "react-native";
+import { moderateScale } from "react-native-size-matters";
 import { RootStackParams } from "../../../../../App";
 import { Seperator } from "../../../../Global/GlobalComponents";
 import { FplBudgetLeagueInfo, Result } from "../../../../Models/FplBudgetLeagueInfo";
@@ -30,7 +31,7 @@ const BudgetLeagueStandings = ({budgetLeagueInfo} : BudgetLeagueStandingsProps) 
             <AnimatedButton buttonFn={() => onLeagueEntryItemPress(item.entry, item.entry_name)}>
                 <View testID="leagueEntryItemButton" style={styles.standingsButtonContainer}>
                     <Text style={[styles.leagueText, {flex: 1}]}>{item.rank}</Text>
-                    <View style={{flex: 3, paddingLeft: 5}}>
+                    <View style={{flex: 3, paddingLeft: moderateScale(5)}}>
                         <Text numberOfLines={1} style={styles.teamNameText}>{item.entry_name}</Text>
                         <Text numberOfLines={1} style={styles.managerNameText}>{item.player_name}</Text>
                     </View>

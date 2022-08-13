@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { secondaryColor, cornerRadius, primaryColor, textPrimaryColor, mediumFont, largeFont } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -24,8 +24,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: widthPercentageToDP('0%'),
-        paddingRight: widthPercentageToDP('0%'),
     },
 
     buttonContainer: {
@@ -33,10 +31,10 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: heightPercentageToDP('0.75%'),
-        paddingBottom: heightPercentageToDP('0.75%'),
-        paddingLeft: widthPercentageToDP('2%'),
-        paddingRight: widthPercentageToDP('2%'),
+        paddingTop: moderateVerticalScale(6, 0.3),
+        paddingBottom: moderateVerticalScale(6, 0.3),
+        paddingLeft: moderateScale(5, 0.3),
+        paddingRight: moderateScale(5, 0.3),
         elevation: 10,
     },
 
@@ -53,8 +51,8 @@ export const styles = StyleSheet.create({
      },
 
     scoreText: {
-        paddingLeft: widthPercentageToDP('0.75%'),
-        paddingRight: widthPercentageToDP('0.75%'),
+        paddingLeft: moderateScale(5, 0.3),
+        paddingRight: moderateScale(5, 0.3),
         flex: 1,
         textAlign: 'center',
         fontWeight: '700',

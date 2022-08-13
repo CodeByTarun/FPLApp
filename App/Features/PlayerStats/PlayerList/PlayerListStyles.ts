@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
 import { mediumFont, primaryColor, secondaryColor, textPrimaryColor } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -8,27 +8,28 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: secondaryColor,
         flexDirection: 'row',
-        paddingTop: heightPercentageToDP('1%'),
-        paddingBottom: heightPercentageToDP('1%'),
-        paddingLeft: widthPercentageToDP('0.5%'),
+        paddingTop: verticalScale(7),
+        paddingBottom: verticalScale(7),
+        paddingLeft: moderateScale(5),
         width: '100%',
-        height: heightPercentageToDP('6.25%')
+        height: moderateVerticalScale(50, 0.3)
     },
 
     watchListButtonContainer: {
         height: '100%',
         aspectRatio: 1,
         justifyContent: 'center',
-        paddingTop: heightPercentageToDP('0.25%'),
-        paddingBottom: heightPercentageToDP('0.25%'),
+        paddingTop: moderateVerticalScale(2),
+        paddingBottom: moderateVerticalScale(2),
     },
 
     playerListInfoContainer: {
-        width: widthPercentageToDP('33%'),
+        width: moderateScale(120),
     },
 
     tableNumberView: {
-        flex: 1,
+        width: moderateScale(50, 0.8),
+        height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
     },

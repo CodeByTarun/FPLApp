@@ -1,26 +1,26 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
-import { height, width, primaryColor, cornerRadius, textPrimaryColor, lightColor, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { width, primaryColor, cornerRadius, textPrimaryColor, lightColor, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
         height: FIXTURE_CARD_HEIGHT,
-        aspectRatio: 1.541,
-        paddingTop: heightPercentageToDP('0.5%'), 
+        width: moderateScale(width / 3, -0.217),
+        paddingTop: moderateVerticalScale(5), 
     },
 
     card: {
         backgroundColor: primaryColor,
         flex: 1,
         flexDirection: 'column',
-        marginBottom: heightPercentageToDP('1%'),
-        marginLeft: widthPercentageToDP('1%'),
-        marginRight: widthPercentageToDP('1%'),
-        paddingLeft: widthPercentageToDP('1%'),
-        paddingRight: widthPercentageToDP('1%'),
-        paddingBottom: heightPercentageToDP('1%'),
-        paddingTop: heightPercentageToDP('1%'),
+        marginBottom: moderateVerticalScale(5, 0.8),
+        marginLeft: moderateScale(5, 0.8),
+        marginRight: moderateScale(5, 0.8),
+        paddingLeft: moderateScale(5, 0.8),
+        paddingRight: moderateScale(5, 0.8),
+        paddingBottom: moderateVerticalScale(5, 0.8),
+        paddingTop: moderateVerticalScale(8.5, 0.8),
         borderRadius: cornerRadius,
     },
 
@@ -35,8 +35,8 @@ export const styles = StyleSheet.create({
     topbar: {
         alignSelf: 'center',
         width: '100%',
-        height: heightPercentageToDP('2%'),
-        flexDirection: 'row'
+        height: moderateVerticalScale(10),
+        flexDirection: 'row',
     },
 
     datetext: {
@@ -56,8 +56,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-        paddingTop: heightPercentageToDP('0.25%'),
-        paddingBottom: heightPercentageToDP('0.25%'),
+        paddingTop: moderateVerticalScale(2),
+        paddingBottom: moderateVerticalScale(2),
     },
 
     scoreAndTimeView: {
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     scoreText: {
         fontSize: mediumFont,
         alignSelf: 'center',
-        margin: heightPercentageToDP('0.5%'),
+        margin: moderateVerticalScale(2),
         color: textPrimaryColor,
     },
 
@@ -78,7 +78,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'red',
         fontWeight: "bold",
-        marginLeft: widthPercentageToDP('0.5%'),
+        marginLeft: moderateScale(2),
     },
 
     fullTimeText: {

@@ -9,6 +9,7 @@ import { AnimatedButton } from "../../../Controls";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../../../App";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 
 interface TableFilterPopupProps {
     filterDispatch: (value: PlayerTableFilterAction) => void;
@@ -36,30 +37,30 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
     }
 
     return (
-        <View style={{width: '100%'}}>
-            <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
+        <View style={styles.container}>
+            <View style={styles.checkboxContainer}>
                 <Text style={styles.filterText}>Per 90 (if applicable):</Text>
                 <Checkbox value={ isPer90 } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
                         color={isPer90 ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
                         onValueChange={ () => setIsPer90(!isPer90)}/>
             </View>
-            <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
+            <View style={styles.checkboxContainer}>
                 <Text style={styles.filterText}>On Watchlist:</Text>
                 <Checkbox value={ isInWatchlist } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
                         color={isInWatchlist ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
                         onValueChange={ () => setIsInWatchlist(!isInWatchlist)}/>
             </View>
-            <View style={{flex: 2, padding: 5}}>
+            <View style={styles.sliderContainer}>
                 <CustomSlider header={"Price Range:"} minValue={initialPriceRange[0]} maxValue={initialPriceRange[1]} 
                                 step={1} isPrice={true} initialRange={priceRange} debounceValue={400}
                                 onValueChange={value => setPriceRange(value)}/>
             </View>
-            <View style={{flex: 2, padding: 5}}>
+            <View style={styles.sliderContainer}>
                 <CustomSlider header={"Minutes Per Game Range:"} minValue={0} maxValue={90 * 38} 
                                 step={1} initialRange={minuteRange} debounceValue={400}
                                 onValueChange={ value => setMinuteRange(value) }/>
             </View>
-            <View style={{flex: 1, flexDirection:'row', alignItems: 'center', justifyContent: 'center', paddingBottom: 10}}>
+            <View style={styles.buttonsContainer}>
                 <View style={styles.buttonContainer}>
                     <AnimatedButton buttonFn={() => filterDispatch({type: 'FilterPopupChange', minuteRange: minuteRange, priceRange: priceRange, 
                                                                                                isInWatchlistValue: isInWatchlist, per90Value: isPer90})}>
@@ -83,11 +84,37 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
 export default TableFilterPopup;
 
 const styles = StyleSheet.create({
+
+    container: {
+        padding: moderateScale(5, 0.2),
+        width: '100%',
+    },
+
     filterText: {
         color: GlobalConstants.textPrimaryColor,
         fontSize: GlobalConstants.mediumFont,
         flex: 1,
         fontWeight: '500'
+    },
+
+    checkboxContainer: {
+        flex: 1, 
+        flexDirection: 'row',
+        paddingBottom: moderateVerticalScale(10),
+    },
+
+    sliderContainer: {
+        flex: 2, 
+        paddingBottom: moderateVerticalScale(10),
+    },
+    
+    buttonsContainer: {
+        flex: 1, 
+        width: moderateScale(250),
+        alignSelf: 'center',
+        flexDirection:'row', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
     },
 
     buttonContainer: {
@@ -97,8 +124,9 @@ const styles = StyleSheet.create({
     },
 
     buttonInnerContainer: {
-        width: '85%',
-        alignSelf: 'center'
+        width: moderateScale(100, 0.4),
+        alignSelf: 'center',
+        padding: moderateScale(10, 0.2)
     },
 
     buttonFont: {

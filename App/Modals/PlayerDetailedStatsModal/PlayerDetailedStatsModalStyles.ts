@@ -1,7 +1,17 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { height, largeFont, textPrimaryColor, mediumFont, width, aLittleLighterColor, cornerRadius, primaryColor, secondaryColor } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
+
+    container: {
+        padding: moderateScale(5),
+        height: '100%',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: primaryColor,
+    },
 
     header: {
 
@@ -12,10 +22,10 @@ export const styles = StyleSheet.create({
     },
 
     controlsContainer: {
-        height: width*0.1,
+        height: moderateVerticalScale(40),
         flexDirection: 'row',
-        marginTop: 10,
-        marginBottom: 5,
+        marginTop: moderateVerticalScale(10),
+        marginBottom: moderateVerticalScale(5),
     },
 
     statHistoryToggle: {
@@ -23,9 +33,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row', 
-        borderRadius: 5,
-        marginTop: 5,
-        marginBottom: 5,
+        borderRadius: 10,
+        marginTop: moderateVerticalScale(5),
+        marginBottom: moderateVerticalScale(5),
         backgroundColor: secondaryColor
     },
 
@@ -49,7 +59,7 @@ export const styles = StyleSheet.create({
         width: '50%',
         position: 'absolute',
         backgroundColor: primaryColor,
-        borderRadius: 5,
+        borderRadius: 10,
         zIndex: 1,
     },
 
@@ -59,61 +69,11 @@ export const styles = StyleSheet.create({
         fontWeight: '500',
     },
 
-    tableTextContainer: {
-        width: width*0.1,
-        flex: 1,
-    },
-
     headerText: {
         color: textPrimaryColor,
         fontSize: mediumFont * 0.9,
         fontWeight: '500',
         alignSelf: 'center',
     },
-
-    sectionBorder: {
-        borderWidth: 2, 
-        borderColor: aLittleLighterColor, 
-        borderRadius: cornerRadius,
-    },
-
-    sectionHeaderText: {
-        backgroundColor: primaryColor,
-        fontSize: largeFont,
-        fontWeight: 'bold',
-        color: textPrimaryColor,
-        position: 'absolute',
-        top: -20, 
-        left: 15,
-        padding: 5
-    },
-
-    gameweekSectionText: {
-        color: textPrimaryColor,
-        fontSize: mediumFont * 0.8,
-        fontWeight: '500',
-        alignSelf: 'center'
-    },
-
-    //#region  close button
-    closeButton: {
-        position: 'absolute',
-        zIndex: 1,
-        right: -7,
-        top: -7,
-        height: 25,
-        width: 25,
-        margin: 0,
-        borderRadius: 20,
-    },
-
-    closeButtonBackground: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        backgroundColor: secondaryColor,
-        borderRadius: 20,
-    },
-
     //#endregion
 })

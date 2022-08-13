@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { smallFont, textSecondaryColor } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -7,11 +8,11 @@ export const styles = StyleSheet.create({
         height: '20%',
         width: '100%',
         flexDirection: 'row',
-        paddingBottom: 3,
+        paddingBottom: moderateVerticalScale(2),
     },
 
     fixtureDifficultyText: {
-        fontSize: smallFont * 0.9, 
+        fontSize: moderateScale(7.5, 0.4), 
         alignSelf: 'center',
         flex: 1,
         textAlign:'center',
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
     },
 
     fixtureViewText: {
-        fontSize: smallFont * 0.9, 
+        fontSize: moderateScale(7.5, 0.4), 
         color: 'black', 
         fontWeight: '400', 
         alignSelf: 'center',

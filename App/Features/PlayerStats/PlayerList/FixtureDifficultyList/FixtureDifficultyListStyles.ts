@@ -1,15 +1,15 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
-import { width, smallFont, textPrimaryColor, mediumFont } from "../../../../Global/GlobalConstants";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { textPrimaryColor, mediumFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     container: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: widthPercentageToDP('1%'),
-        paddingRight: widthPercentageToDP('1%'),
-        width: width* 0.132
+        paddingLeft: moderateScale(5),
+        paddingRight: moderateScale(5),
+        width: moderateScale(50, 0.8),
     },
 
     text: {
@@ -19,9 +19,9 @@ export const styles = StyleSheet.create({
     },
 
     fixtureDifficultyIndicator: {
-        marginTop: heightPercentageToDP('0.6%'),
+        marginTop: moderateVerticalScale(5),
         width: '110%', 
-        borderBottomWidth: 2, 
+        borderBottomWidth: moderateVerticalScale(2), 
         bottom: 0
     }
 

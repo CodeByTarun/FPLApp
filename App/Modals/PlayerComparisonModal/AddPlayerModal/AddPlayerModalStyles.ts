@@ -1,17 +1,18 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
 import { width, height, largeFont, textPrimaryColor, aLittleLighterColor, textSecondaryColor, mediumFont } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     modalContainer: {
-        width: width * 0.7, 
-        height: height * 0.7, 
-        padding: 15
+        width: '100%', 
+        height: '100%', 
+        padding: 10,
     },
 
     searchControlContainer: {
-        height: 40, 
-        width: '100%'
+        height: moderateVerticalScale(40, 0.2), 
+        width: '100%',
     },
 
     titleText: {
@@ -19,23 +20,23 @@ export const styles = StyleSheet.create({
         color: textPrimaryColor, 
         fontWeight: '600',
         textAlign: 'center',
-        paddingBottom: 20,
-        paddingTop: 10
+        paddingBottom: moderateVerticalScale(20),
+        paddingTop: moderateVerticalScale(10),
     },
 
     listContainer: {
-        paddingTop: 10,
-        flex: 1,
+        paddingTop: moderateVerticalScale(10),
         borderTopColor: aLittleLighterColor,
+        height: verticalScale(325)
     },
 
     playerItemContainer: {
-        padding: 15,
+        padding: moderateVerticalScale(10),
     },
 
     playerText: {
         color: textSecondaryColor,
-        fontSize: mediumFont
+        fontSize: mediumFont,
     }
 
 });

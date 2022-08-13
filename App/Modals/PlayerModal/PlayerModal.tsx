@@ -17,8 +17,9 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 import { FplBaseDataContext } from "../../AppContext";
-import { height } from "../../Global/GlobalConstants";
+import { height, width } from "../../Global/GlobalConstants";
 import { changePlayerOverviewInfo } from "../../Store/modalSlice";
+import { moderateScale } from "react-native-size-matters";
 
 function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) {
 
@@ -102,7 +103,7 @@ const PlayerModal = () => {
     }
 
     return (
-        <ModalWrapper modalWidth={"75%"} maxHeight={height * 0.6}>
+        <ModalWrapper modalWidth={moderateScale(width * 0.75, -0.1)} maxHeight={height * 0.6}>
             <View style={[styles.container]}>
                 { player && overview && fixtures &&
                 <>

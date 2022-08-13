@@ -13,7 +13,6 @@ import PlayerDetailedStatsModal from './App/Modals/PlayerDetailedStatsModal';
 import PlayerComparisonModal from './App/Modals/PlayerComparisonModal';
 import TeamModal from './App/Modals/TeamModal';
 import GameweekOverviewModal from './App/Modals/GameweekOverviewModal';
-import ListModal from './App/Modals/ListModal';
 import MutableModal from './App/Modals/MutableModal';
 import FilterModal from './App/Modals/FilterModal';
 
@@ -25,7 +24,6 @@ export type RootStackParams = {
   PlayerComparisonModal: any;
   TeamModal: any;
   GameweekOverview: any;
-  ListModal: any;
   MutableModal: any;
   FilterModal: any;
 }
@@ -90,7 +88,6 @@ function App() {
             <Stack.Screen name="PlayerComparisonModal" component={PlayerComparisonModal}/>
             <Stack.Screen name="TeamModal" component={TeamModal}/>
             <Stack.Screen name="GameweekOverview" component={GameweekOverviewModal}/>
-            <Stack.Screen name="ListModal" component={ListModal}/>
             <Stack.Screen name="MutableModal" component={MutableModal}/>
             <Stack.Screen name="FilterModal" component={FilterModal}/>
           </Stack.Group>

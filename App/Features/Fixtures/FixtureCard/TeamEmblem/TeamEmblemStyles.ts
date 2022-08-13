@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP } from "react-native-responsive-screen";
-import { width, textPrimaryColor, smallFont } from "../../../../Global/GlobalConstants";
+import { moderateVerticalScale } from "react-native-size-matters";
+import { textPrimaryColor, smallFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     teamInfoView: {
         flex: 1,
         justifyContent: 'center',
-        paddingTop: heightPercentageToDP('0.5%'),
+        paddingTop: moderateVerticalScale(5),
     },
 
     emblems: {
@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
     text: {
         fontSize: smallFont, 
         alignSelf: 'center', 
+        fontWeight: '400',
         color: textPrimaryColor, 
-        paddingTop: heightPercentageToDP('0.5%'), 
+        paddingTop: moderateVerticalScale(5), 
     }
 });

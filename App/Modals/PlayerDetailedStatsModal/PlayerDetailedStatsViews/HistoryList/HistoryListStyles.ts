@@ -1,22 +1,23 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { width, textPrimaryColor, mediumFont, lightColor, secondaryColor, aLittleLighterColor, primaryColor, textSecondaryColor, cornerRadius } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     container: {
         flex: 1, 
-        paddingBottom: 5,
-        marginBottom: 5, 
+        paddingBottom: moderateVerticalScale(5),
+        marginBottom: moderateVerticalScale(5), 
         backgroundColor: primaryColor, 
-        paddingLeft: 5, 
-        paddingRight: 5,
+        paddingLeft: moderateScale(5), 
+        paddingRight: moderateScale(5),
         borderWidth: 2,
         borderColor: aLittleLighterColor,
         borderRadius: cornerRadius,
     },
 
     tableTextContainer: {
-        width: width*0.1,
+        width: moderateScale(38, 0.4),
         flex: 1,
     },
 
@@ -33,8 +34,8 @@ export const styles = StyleSheet.create({
         width: '100%',
         borderBottomColor: lightColor, 
         borderBottomWidth: 1,
-        paddingBottom: 5, 
-        paddingTop: 10,
+        paddingBottom: moderateVerticalScale(8), 
+        paddingTop: moderateVerticalScale(8),
         backgroundColor: primaryColor
     },
 
@@ -42,8 +43,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent: 'center', 
-        paddingBottom: 5, 
-        paddingTop: 5,
+        paddingBottom: moderateVerticalScale(5), 
+        paddingTop: moderateVerticalScale(5),
         borderBottomColor: aLittleLighterColor, 
         borderBottomWidth: 1,
     },
@@ -53,7 +54,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         borderTopColor: lightColor, 
         borderTopWidth: 1, 
-        paddingTop: 5,
+        paddingTop: moderateVerticalScale(5),
     }
 
 });

@@ -1,6 +1,7 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useState } from "react";
 import { View, Text } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { height } from "../../../Global/GlobalConstants";
 import { FplManagerInfo } from "../../../Models/FplManagerInfo";
 import { useGetBudgetLeagueInfoQuery } from "../../../Store/fplSlice";
@@ -20,10 +21,10 @@ const BudgetLeague = ({budgetUserInfo} : BudgetLeagueProps) => {
     const budgetLeagueInfo = useGetBudgetLeagueInfoQuery(leagueToShow ? leagueToShow : skipToken);
 
     return (
-        <View style={{height: '100%', width: '100%', padding: 5}}>
+        <View style={{height: '100%', width: '100%'}}>
             <Text style={styles.titleText} numberOfLines={1}>{leagueToShow ? (budgetLeagueInfo.isSuccess ? budgetLeagueInfo.data.league.name : "")  : 'Leagues'}</Text>
             { leagueToShow && 
-                <View testID="backButtonStandings" style={{position: 'absolute', left: 5, top: 5}}>
+                <View testID="backButtonStandings" style={{position: 'absolute', left: moderateScale(5), top: moderateVerticalScale(5)}}>
                     <AnimatedButton buttonFn={() => setLeagueToShow(null)}>
                         <Text style={styles.backButtonText}>Go Back</Text>
                     </AnimatedButton>

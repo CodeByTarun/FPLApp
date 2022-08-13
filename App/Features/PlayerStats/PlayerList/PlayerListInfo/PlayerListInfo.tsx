@@ -25,7 +25,7 @@ const PlayerListInfo = React.memo(({overview, player, owner} : PlayerListInfoPro
 
             </View>
             
-            <View testID="playerListInfoDetailsContainer" style={{flex: 3, justifyContent: 'center'}}> 
+            <View testID="playerListInfoDetailsContainer" style={styles.playerInfoContainer}> 
                 <View style={{flexDirection: 'row'}}>
                     { owner && 
                         <Text testID="ownerText" style={styles.ownerText}>{owner}</Text>

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
 import { BOTTOM_BAR_HEIGHT, FIXTURES_VIEW_CONTROLS_HEIGHT, height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        paddingRight: widthPercentageToDP('1%'),
+        paddingRight: moderateScale(5),
     },
 
     fixturesListContainer: {
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
         fontWeight: '700', 
         transform: [{rotate: '-45deg'}], 
         alignSelf: 'center',
-        marginBottom: heightPercentageToDP('0.5%'),
+        marginBottom: moderateVerticalScale(4),
       },
 
       buttonsContainers: {
@@ -65,12 +65,12 @@ export const styles = StyleSheet.create({
 
       fixturesScrollView: {
         flex: 1, 
-        marginLeft: widthPercentageToDP('0.25%'), 
-        marginRight: widthPercentageToDP('0.25%'),
+        marginLeft: moderateScale(2.5), 
+        marginRight: moderateScale(2.5)
       },
 
       bottomBar: {
-        width: widthPercentageToDP('60%'),
+        width: moderateScale(width * 0.6, -0.2),
         alignSelf: 'center',
         height: BOTTOM_BAR_HEIGHT,
         backgroundColor: primaryColor,

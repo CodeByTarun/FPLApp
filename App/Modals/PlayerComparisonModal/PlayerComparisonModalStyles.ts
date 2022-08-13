@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { aLittleLighterColor, cornerRadius, height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -6,8 +7,10 @@ export const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: moderateVerticalScale(10),
+        paddingBottom: moderateVerticalScale(10),
+        paddingLeft: moderateScale(5),
+        paddingRight: moderateScale(5),
     },
 
     titleText: {
@@ -15,8 +18,8 @@ export const styles = StyleSheet.create({
         color: textPrimaryColor, 
         fontWeight: '600',
         textAlign: 'center',
-        paddingBottom: 15,
-        paddingTop: 10
+        paddingBottom: moderateVerticalScale(15),
+        paddingTop: moderateVerticalScale(10)
     },
 
     text: {
@@ -26,9 +29,9 @@ export const styles = StyleSheet.create({
     },
 
     controlsOuterContainers: {
-        marginBottom: 15,
-        marginTop: 10,
-        height: 35,
+        marginBottom: moderateVerticalScale(15),
+        marginTop: moderateVerticalScale(10),
+        height: moderateVerticalScale(35, 0.2),
         width: '100%',
     },
 
@@ -71,8 +74,8 @@ export const styles = StyleSheet.create({
         left: 0,
         top: '15%',
         height: '80%',
-        width: '15%',
-        justifyContent: 'center'
+        width: moderateScale(25),
+        justifyContent: 'center',
     },
 
     filterButtonContainer: {
@@ -80,26 +83,26 @@ export const styles = StyleSheet.create({
         right: 0, 
         top: '10%', 
         height: '80%', 
-        width: '15%',
-        marginTop: 3,
+        width: moderateScale(25),
+        marginTop: moderateVerticalScale(3),
     },
 
     button: {
-        height: 40,
-        width: '50%',
+        width: moderateScale(100, 0.4),
         backgroundColor: secondaryColor,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: cornerRadius,
-        marginBottom: 5,
-        marginTop: 15,
-        padding: 10,
+        marginBottom: moderateVerticalScale(5),
+        marginTop: moderateVerticalScale(10),
+        padding: moderateScale(10, 0.2),
         alignSelf: 'center'
     },
 
     buttonText: {
         color: textPrimaryColor,
         fontWeight: '500',
+        fontSize: mediumFont,
     },
 
     searchBox: {

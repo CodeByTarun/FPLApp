@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP } from "react-native-responsive-screen";
-import { cornerRadius, height, largeFont, lightColor, primaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../../../Global/GlobalConstants";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { cornerRadius, height, largeFont, lightColor, mediumFont, primaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     container: {
@@ -17,18 +17,19 @@ export const styles = StyleSheet.create({
     titleContainter: {
         alignSelf: 'center',
         justifyContent: 'center',
-        paddingTop: heightPercentageToDP('1%'),
+        paddingTop: moderateVerticalScale(8),
     },
 
     middleTextContainter: {
         flex: 1,
         alignSelf: 'center',
         justifyContent: 'center',
+        width: '100%'
     },
 
     categoryContainer: {
         alignSelf: 'center',
-        paddingBottom: heightPercentageToDP('1%'),
+        paddingBottom: moderateVerticalScale(5),
         justifyContent: 'center',
     },
 
@@ -42,14 +43,15 @@ export const styles = StyleSheet.create({
     rankText: {
         color: textPrimaryColor, 
         alignSelf: 'center', 
-        fontWeight: '600'
+        fontWeight: '600',
+        fontSize: mediumFont
     },
     
     dotsContainer: {
         flexDirection: 'row', 
         alignItems: 'center', 
         justifyContent:'center', 
-        paddingBottom: heightPercentageToDP('1.25%'),
+        paddingBottom: moderateVerticalScale(8),
     },
 
     text: {

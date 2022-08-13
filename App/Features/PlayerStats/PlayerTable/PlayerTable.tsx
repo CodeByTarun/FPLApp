@@ -98,7 +98,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                     setValue={teamFilterDispatch}/>
                         </View>
                         {CustomVerticalSeparator(4, 4)}
-                        <View style={[styles.dropDownContainer, styles.leftMarginDropDown]}>
+                        <View style={[styles.dropDownContainer]}>
                             <Dropdown defaultValue="All Positions" 
                                     headerText="Position"
                                     options={Array.from(overview.element_types.map(type => type.plural_name))} 
@@ -106,7 +106,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                     setValue={positionFilterDispatch}/>
                         </View>
                             {CustomVerticalSeparator(4, 4)}
-                        <View style={[styles.dropDownContainer, styles.leftMarginDropDown]}>
+                        <View style={[styles.dropDownContainer]}>
                             <Dropdown defaultValue="Total Points" 
                                     headerText={"Stat" + ((playerTableFilterState.isPer90 && GlobalConstants.Per90Stats.includes(playerTableFilterState.statFilter)) ? " (per 90)" : "")}
                                     options={Object.values(OverviewStats).sort()} 

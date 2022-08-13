@@ -1,21 +1,21 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP } from "react-native-responsive-screen";
-import { aLittleDarkerColor, aLittleLighterColor, lightColor, smallFont, textSecondaryColor } from "../../../Global/GlobalConstants";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { lightColor, smallFont } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     tabContainer: {
         flex: 1,
-        marginBottom: heightPercentageToDP('1%'),
-        marginTop: heightPercentageToDP('1%'),
+        marginBottom: moderateVerticalScale(5),
+        marginTop: moderateVerticalScale(5),
     },
 
     imageContainer: {
         flex: 1,
-        paddingTop: heightPercentageToDP('0.4%'),
-        paddingBottom: heightPercentageToDP('0.4%'),
-        paddingLeft: heightPercentageToDP('0.4%'),
-        paddingRight: heightPercentageToDP('0.4%'),
+        paddingTop: moderateVerticalScale(3, 0),
+        paddingBottom: moderateVerticalScale(3, 0),
+        paddingLeft: moderateScale(5, 0.4),
+        paddingRight: moderateScale(5, 0.4),
     },
 
     image: {
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     },
 
     headerText: {
-        fontSize: smallFont* 1.1,
+        fontSize: moderateScale(9, 0.2),
         alignSelf: 'center',
         color: lightColor,
     },

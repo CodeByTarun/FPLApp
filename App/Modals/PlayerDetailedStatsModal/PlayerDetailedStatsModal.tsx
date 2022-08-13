@@ -19,6 +19,7 @@ import { RootStackParams } from "../../../App";
 import { FplBaseDataContext } from "../../AppContext";
 import { ScrollView } from "react-native-gesture-handler";
 import FilterView from "./FilterView";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 
 const AnimatedView = animated(View);
 
@@ -53,8 +54,8 @@ const PlayerDetailedStatsModal = () => {
     }
 
     return (
-        <ModalWrapper modalHeight={'65%'} modalWidth={'80%'}>    
-            <View style={{ padding: 5, height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center', backgroundColor: GlobalConstants.primaryColor }}>
+        <ModalWrapper modalHeight={moderateVerticalScale(GlobalConstants.height * 0.65, -0.1)} modalWidth={moderateScale(GlobalConstants.width * 0.8, -0.1)}>    
+            <View style={styles.container}>
                 { overview && fixtures && liveGameweek && playerSummary && playerOverview && playerDataQuery.isSuccess ? 
                     <View style={{flex: 1, width: '100%'}}>
                         <View style={{flex: 10}}>
@@ -62,10 +63,10 @@ const PlayerDetailedStatsModal = () => {
                                 <View style={{flexDirection: 'row'}}>
                                     <Text style={styles.titleText}>{playerOverview.web_name}</Text>
                                     <View style={{flex: 1, alignContent: 'flex-end', justifyContent: 'flex-end'}}>
-                                        <Text style={[styles.text, {alignSelf: 'flex-end', marginBottom: 1}]}>Form: {playerOverview.form}</Text>
+                                        <Text style={[styles.text, {alignSelf: 'flex-end', marginBottom: moderateVerticalScale(1)}]}>Form: {playerOverview.form}</Text>
                                     </View>
                                 </View>
-                                <View style={{flexDirection: 'row', paddingTop: 3}}>
+                                <View style={{flexDirection: 'row', paddingTop: moderateVerticalScale(3)}}>
                                     <View style={{flexDirection: 'row'}}>
                                         <Text style={[styles.text, {fontWeight: 'bold'}]}>{overview.teams.find(team => team.code === playerOverview.team_code)?.short_name}  </Text>
                                         <Text style={styles.text}>{overview.element_types.find(element => element.id === playerOverview.element_type)?.singular_name_short}  </Text>
@@ -77,9 +78,9 @@ const PlayerDetailedStatsModal = () => {
                                     </View>                                    
                                 </View>
                                 { (playerOverview.status !== 'a') && 
-                                    <View style={{ flexDirection: 'row', height: 30, marginTop: 10, backgroundColor: GlobalConstants.secondaryColor}}>
-                                        <View style={{height: '90%', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', marginLeft: 3, marginRight: 3}}>
-                                            <Image style={{height: '100%', width: '100%', alignSelf: 'center', marginBottom: -2}} source={(playerOverview.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
+                                    <View style={{ flexDirection: 'row', height: moderateVerticalScale(30), marginTop: moderateVerticalScale(10), backgroundColor: GlobalConstants.secondaryColor}}>
+                                        <View style={{height: '90%', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', marginLeft: moderateScale(3), marginRight: moderateScale(3)}}>
+                                            <Image style={{height: '100%', width: '100%', alignSelf: 'center', marginBottom: moderateVerticalScale(-2)}} source={(playerOverview.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
                                         </View>
                                         <View style={{flex: 1, justifyContent: 'center'}}> 
                                             <Text style={[styles.text, { flexWrap: 'wrap'}]}>{playerOverview.news}</Text>
@@ -89,7 +90,7 @@ const PlayerDetailedStatsModal = () => {
                             </View>
 
                             <View style={styles.controlsContainer}>
-                                <View style={{flex: 1, height: '85%', alignSelf: 'center'}}>
+                                <View style={{flex: 1, height: '70%', alignSelf: 'center'}}>
                                     <CustomButton image="playercomparison" buttonFunction={() => navigation.navigate("PlayerComparisonModal")}/>
                                 </View>
                                 <Pressable style={styles.statHistoryToggle} onPress={() => setIsStatViewShowing(!isStatsViewShowing)} hitSlop={5}>
@@ -103,7 +104,7 @@ const PlayerDetailedStatsModal = () => {
                                 </Pressable>
                                 
                                 
-                                <View style={{flex: 1, height: '85%', alignSelf: 'center', justifyContent: 'center', marginTop: 3}}>
+                                <View style={{flex: 1, height: '75%', alignSelf: 'center', justifyContent: 'center', paddingTop: moderateVerticalScale(5, 0.1)}}>
                                     {isStatsViewShowing && 
                                         <AnimatedButton buttonFn={openFilter}>
                                             <Image source={Icons['filter']} resizeMode='contain' style={{height: '85%', width: '85%', alignSelf: 'center'}}/>

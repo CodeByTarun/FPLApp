@@ -13,6 +13,7 @@ import { Seperator } from "../../Global/GlobalComponents";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
+import { moderateScale } from "react-native-size-matters";
 
 // interface TeamModalProps {
 //     modalInfo: ModalInfo,
@@ -109,13 +110,13 @@ const TeamModal = () => {
     }, []);
 
     return (
-        <ModalWrapper modalHeight={"50%"} modalWidth={"75%"}>
+        <ModalWrapper modalHeight={"50%"} modalWidth={moderateScale(GlobalConstants.width * 0.76, -0.2)}>
             <Text style={[styles.titleText]}>{(teamFormOpen) ? (userTeamState.teamEditing) ? "Edit Team" : "Add Team" : "My Teams"}</Text>
 
             { (teamFormOpen) ?
                 <View style={styles.modalAddTeamView}>
                     
-                    <View style={{flex: 1, justifyContent: 'center'}}>
+                    <View style={styles.textInputContainer}>
                         <TextInput style={[styles.text, styles.textInput]} 
                                 placeholder="Team Name" 
                                 placeholderTextColor={'lightgray'}
@@ -126,7 +127,7 @@ const TeamModal = () => {
                                 onChangeText={ text => userTeamDispatch({ type: UserTeamActionKind.ChangeName, value: text, data: userTeams })}/>
                     </View>
 
-                    <View style={{flex: 1, justifyContent: 'center'}}>
+                    <View style={styles.textInputContainer}>
                         <TextInput style={[styles.text, styles.textInput]} 
                                 placeholder="Manager ID" 
                                 placeholderTextColor={'lightgray'}
@@ -137,21 +138,21 @@ const TeamModal = () => {
                                 onChangeText={ text => userTeamDispatch({ type: UserTeamActionKind.ChangeID, value: text, data: userTeams })}/>
                     </View>
 
-                    <View style={{flex: 1, flexDirection:'row', alignItems: 'center', paddingRight: 5}}>
-                        <Text style={[styles.text, {padding: 7, flex: 1,}]}>Draft team?</Text>
+                    <View style={styles.checkBoxContainer}>
+                        <Text style={[styles.text, {paddingLeft: moderateScale(5), flex: 1,}]}>Draft team?</Text>
                         <Checkbox color={userTeamState.userTeam.isDraftTeam ? GlobalConstants.fieldColor : GlobalConstants.lightColor} 
                                 value={ userTeamState.userTeam.isDraftTeam } 
                                 onValueChange={ value => userTeamDispatch({ type: UserTeamActionKind.IsDraft, value: value, data: userTeams })}/>
                     </View>
                     
                     <View style={{flex: 0.5, justifyContent: 'center'}}>
-                        <Text style={[styles.text, {color: GlobalConstants.redColor, padding: 7}]}>{ userTeamState.error }</Text>
+                        <Text style={[styles.text, {color: GlobalConstants.redColor, padding: moderateScale(5)}]}>{ userTeamState.error }</Text>
                     </View>
-                    <View style={{flexDirection: 'row'}}>
 
+                    <View style={styles.buttonsContainer}>
                         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                             <AnimatedButton buttonFn={(userTeamState.teamEditing) ? removeATeam : closeForm}>
-                                <View style={[styles.formButton, {backgroundColor: (userTeamState.teamEditing) ? GlobalConstants.redColor : 'grey' }]}>
+                                <View style={[styles.formButton, {backgroundColor: GlobalConstants.redColor}]}>
                                     <Text style={{alignSelf:'center'}}>{(userTeamState.teamEditing) ? 'Delete' : 'Back'}</Text>
                                 </View>
                             </AnimatedButton>
@@ -159,12 +160,13 @@ const TeamModal = () => {
 
                         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                             <AnimatedButton buttonFn={(userTeamState.teamEditing) ? editTeam : addTeam} disabled={confirmIsDisabled}>
-                                <View style={[styles.formButton, {opacity: confirmIsDisabled ? 0.5 : 1}]}>
+                                <View style={[styles.formButton]}>
                                     <Text style={{alignSelf:'center'}}>Confirm</Text>
                                 </View>
                             </AnimatedButton>
                         </View>
                     </View>
+
                 </View> : 
                 <>
                 <ScrollView style={styles.modalTeamList}>
@@ -174,7 +176,7 @@ const TeamModal = () => {
                             userTeams.map((team) => 
                                 <View key={team.id}>
                                     <View style={styles.modalListRow}>
-                                        <View style={styles.favouriteButton}>
+                                        <View style={styles.favouriteButtonContainer}>
                                             <AnimatedButton buttonFn={() => { favouriteATeam(team) }}>
                                                 <View style={styles.favouriteButton}>
                                                     <Image style={styles.icon} source={team.isFavourite ? Icons['favourite'] : Icons['unfavourite']} resizeMode="contain"/>
@@ -186,7 +188,7 @@ const TeamModal = () => {
                                                 <Text style={styles.text}>{team.name}</Text>
                                             </AnimatedButton>
                                         </View>
-                                        <View style={styles.editButton}> 
+                                        <View style={styles.editButtonContainer}> 
                                             <AnimatedButton buttonFn={() => openEditTeam(team)}>
                                                 <View style={styles.editButton}>
                                                     <Image style={styles.icon} source={Icons['edit']} resizeMode="contain"/>

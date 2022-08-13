@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale } from "react-native-size-matters";
 import { primaryColor } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -9,7 +10,7 @@ export const styles = StyleSheet.create({
         zIndex: 1,
         position: 'absolute',
         bottom: 0,
-        padding: 15,
+        padding: moderateScale(10),
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         backgroundColor: primaryColor,

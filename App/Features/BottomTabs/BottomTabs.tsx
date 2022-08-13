@@ -41,25 +41,25 @@ const BottomTabs = () => {
 
     return (
         <View style={[styles.container]}>
+            <View style={styles.tabBarWidth}>
+                <TabButton fn={goToDreamTeam} imageName='dreamteam' header="Dream Team" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
 
-            <TabButton fn={goToDreamTeam} imageName='dreamteam' header="Dream Team" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
+                <VerticalSeparator/>
 
-            <VerticalSeparator/>
+                <TabButton fn={openOverview} imageName='strategy' header="Overview" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
+    
+                <VerticalSeparator/>
+                
+                <TabButton fn={goToFixtures} imageName='calendar' header="Fixtures"/>
 
-            <TabButton fn={openOverview} imageName='strategy' header="Overview" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
- 
-            <VerticalSeparator/>
-            
-            <TabButton fn={goToFixtures} imageName='calendar' header="Fixtures"/>
+                <VerticalSeparator/>
+                
+                <TabButton fn={goToPlayersSearch} imageName='playersearch' header="Players"/>
 
-            <VerticalSeparator/>
-            
-            <TabButton fn={goToPlayersSearch} imageName='playersearch' header="Players"/>
+                <VerticalSeparator/>
 
-            <VerticalSeparator/>
-
-            <TabButton fn={openMyTeams} imageName='team' header="My Teams"/>
-
+                <TabButton fn={openMyTeams} imageName='team' header="My Teams"/>
+            </View>
         </View>
     );
 }

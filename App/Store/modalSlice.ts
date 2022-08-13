@@ -9,7 +9,7 @@ export type ModalInfo = {
     playerData: PlayerData | null;
     playerOverview: PlayerOverview | null;
     playerSummary: FplPlayerSummary | null;
-    mutableView: { view: React.ReactNode | null, width: string };
+    mutableView: { view: React.ReactNode | null, width: string | number};
     filterView: React.ReactNode | null;
 } 
 
@@ -36,7 +36,7 @@ const modalSlice = createSlice({
             return { ...state, playerSummary: playerSummary.payload };
         },
 
-        changeMutableView(state: ModalInfo, mutableView: PayloadAction<{view: React.ReactNode, width: string}>): ModalInfo {
+        changeMutableView(state: ModalInfo, mutableView: PayloadAction<{view: React.ReactNode, width: string | number}>): ModalInfo {
             return { ...state, mutableView: mutableView.payload };
         },
 

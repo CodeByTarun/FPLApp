@@ -11,7 +11,7 @@ import { FplFixture } from "../../Models/FplFixtures";
 import globalStyles from "../../Global/GlobalStyles";
 import Standings from "../Standings";
 import { styles } from "./LineupViewStyles";
-import {AnimatedButton, LoadingIndicator, ToolTip} from "../Controls";
+import {AnimatedButton, LoadingIndicator} from "../Controls";
 import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
 import { FplDraftOverview } from "../../Models/FplDraftOverview";
 import { FplDraftUserInfo } from "../../Models/FplDraftUserInfo";

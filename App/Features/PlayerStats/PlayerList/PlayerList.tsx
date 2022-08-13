@@ -144,11 +144,13 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
                                                                         null}/>
             </View>
 
-            <View style={{}}>
+            <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+                <View style={{alignSelf: 'center'}}>
                 <FixtureDifficultyList team={item.team} isFullList={false} fixtures={fixtures} overview={overview} liveGameweek={teamInfo.liveGameweek} />
+                </View>
             </View>
 
-            <View style={[styles.tableNumberView, { flex: 1 }]}>
+            <View style={[styles.tableNumberView]}>
                 <Text style={styles.tableText}>{getStatValue(item)}</Text>
             </View>
         </Pressable>)

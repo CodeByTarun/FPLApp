@@ -130,7 +130,7 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
                     <Text style={styles.text}>{stat.title}</Text>
                 </View>
                 <View style={styles.middleTextContainter}>
-                    <Text numberOfLines={1} style={stat.stat === 'rank' ? styles.rankText : styles.statText}>{stat.value}</Text>
+                    <Text numberOfLines={1} style={stat.stat === 'Rank' ? styles.rankText : styles.statText}>{stat.value}</Text>
                 </View>
                 <View style={styles.categoryContainer}>
                     <Text numberOfLines={1} style={styles.text}>{stat.stat}</Text>

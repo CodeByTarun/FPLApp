@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
+import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
 import { cornerRadius, primaryColor, secondaryColor, smallFont, tertiaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     container: {
         height: '100%',
-        width: widthPercentageToDP('16.5%'),
+        width: moderateScale(60),
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -48,8 +48,9 @@ export const styles = StyleSheet.create({
 
     statsImage: {
         aspectRatio: 1,
-        width: heightPercentageToDP('2%'),
-        marginLeft: -widthPercentageToDP('1%')
+        width: verticalScale(14),
+        marginLeft: -moderateScale(5, 0.2),
+        marginBottom: moderateVerticalScale(2),
     },
 
     cardsContainer: {
@@ -60,49 +61,49 @@ export const styles = StyleSheet.create({
     },
 
     cardImage: {
-        width: heightPercentageToDP('2%'),
+        width: verticalScale(15),
         aspectRatio: 1,
-        marginRight: -widthPercentageToDP('0.5%'),
+        marginRight: -moderateScale(5, -0.3),
         transform: [{ rotate: "337deg" }]
     },
 
     dreamTeamContainer: {
         flexDirection: 'row',
         position: "absolute",
-        left: -widthPercentageToDP('0.25%'),
+        left: -moderateScale(2, -1.5),
         bottom: 0,
         zIndex: 1,
     },
 
     dreamTeamImage: {
         aspectRatio: 1,
-        width: heightPercentageToDP('2.5%'),
+        width: verticalScale(16),
         marginRight: 0,
-        marginLeft: -widthPercentageToDP('1%')
+        marginLeft: -moderateScale(4, 0.3)
     },
 
     injuredContainer: {
         flexDirection: 'row',
         position: "absolute",
         right: 0,
-        marginRight: -widthPercentageToDP('0.5%'),
-        marginBottom: -widthPercentageToDP('0.5%'),
+        marginRight: -moderateScale(8, -0.4),
+        marginBottom: -moderateScale(5, 0.1),
         bottom: 0,
     },
 
     injuredImage: {
-        width: heightPercentageToDP('3%'),
+        width: verticalScale(20),
         aspectRatio: 1,
     }, 
 
     captainAndViceCaptainContainer: {
         position: 'absolute',
-        height: heightPercentageToDP('2.5%'),
+        height: verticalScale(16),
         aspectRatio: 1,
         elevation: 1,
         zIndex: 1,
-        top: -heightPercentageToDP('1.25%'),
-        right: -heightPercentageToDP('1.25%'),
+        top: -verticalScale(8),
+        right: -verticalScale(8),
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: tertiaryColor,
@@ -120,7 +121,7 @@ export const styles = StyleSheet.create({
 
     //#region Score and Name
     scoreAndNameContainer: {
-        height: heightPercentageToDP('4%'), 
+        height: moderateVerticalScale(30), 
         justifyContent: 'center', 
         alignItems: 'center',
         paddingBottom: 0, 
@@ -134,16 +135,16 @@ export const styles = StyleSheet.create({
 
     nameText: {
         fontWeight: '500',
-        paddingLeft: widthPercentageToDP('1%'),
-        paddingRight: widthPercentageToDP('1%'),
+        paddingLeft: moderateScale(4),
+        paddingRight: moderateScale(4),
     },
     
     scoreContainer: {
         flex: 1, 
         flexDirection: 'row',
         backgroundColor: secondaryColor, 
-        paddingLeft: widthPercentageToDP('1%'),
-        paddingRight: widthPercentageToDP('1%'),
+        paddingLeft: moderateScale(4),
+        paddingRight: moderateScale(4),
     },
     
     //#endregion
@@ -151,14 +152,14 @@ export const styles = StyleSheet.create({
     //#region info card
     playerInfoCardContainer: {
         height: '95%', 
-        width: widthPercentageToDP('16%'), 
+        width: moderateScale(60, 0.7), 
         backgroundColor: primaryColor, 
         borderRadius: cornerRadius
     },
 
     infoCardContainer: {
         flex: 4, 
-        padding: widthPercentageToDP('0.25%')
+        padding: moderateScale(2)
     },
 
     nextWeekText: {
@@ -180,8 +181,8 @@ export const styles = StyleSheet.create({
 
     infoCardNameText: {
         fontWeight: '600', 
-        paddingLeft: widthPercentageToDP('1%'),
-        paddingRight: widthPercentageToDP('1%'),
+        paddingLeft: moderateScale(5),
+        paddingRight: moderateScale(5),
         fontSize: smallFont * 1.1, 
         textAlign: 'center',
         color: textPrimaryColor
