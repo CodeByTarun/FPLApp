@@ -223,8 +223,7 @@ function getStatTotal(fixture: FplFixture, gameweek:FplGameweek, statIdentifier:
     return 0;
 }
 
-export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
-    
+export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo) {
     if (teamInfo.teamType === TeamTypes.Fixture) {
         return GetPlayerPointsForAFixture(player, teamInfo);
     } 
@@ -236,9 +235,9 @@ export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo): number {
     }
 }
 
-export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: FixtureInfo) : number {
+export function GetPlayerPointsForAFixture(playerData: PlayerData, fixtureInfo: FixtureInfo) {
 
-    if (!playerData.gameweekData) return playerData.overviewData.total_points;
+    if (!fixtureInfo.fixture?.started) return playerData.overviewData.total_points;
 
     let playerStats = playerData.gameweekData.explain.find(explain => explain.fixture === fixtureInfo.fixture?.id)?.stats;
 

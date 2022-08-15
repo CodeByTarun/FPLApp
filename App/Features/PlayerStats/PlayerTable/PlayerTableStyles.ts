@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { heightPercentageToDP, widthPercentageToDP } from "react-native-responsive-screen";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { primaryColor, secondaryColor, cornerRadius, textPrimaryColor, mediumFont } from "../../../Global/GlobalConstants";
 
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
     closeButtonContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: moderateScale(5),
+        marginRight: moderateScale(7, 0.3),
         marginLeft: moderateScale(5),
     },
 

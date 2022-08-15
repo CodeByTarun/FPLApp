@@ -6,6 +6,7 @@ import { StatsFilterState } from "../../../PlayerDetailedStatsModal/StatsFilterR
 import { CombinedPlayerData } from "../../PlayerComparisonModal";
 import {  History } from "../../../../Models/FplPlayerSummary";
 import { styles } from "./StatColumnStyles";
+import { moderateVerticalScale } from "react-native-size-matters";
 
 interface StatColumnProps {
     header: string;
@@ -57,8 +58,8 @@ const StatColumn = ({header, statName, playerList, playerDataHeight, statsFilter
                 { playerList.map( (player, index) => {
 
                     return (
-                        <View key={player.playerOverview.id.toString()} style={{height: playerDataHeight}}>
-                            <Text style={[styles.headerText, {opacity: 0, marginTop: 3}]}/>
+                        <View key={player.playerOverview.id.toString()} style={{height: playerDataHeight, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
+                            <Text style={[styles.headerText, {opacity: 0, marginTop: moderateVerticalScale(3)}]}/>
                             <Text style={[styles.valueText, playersStatArray[index] === minValue && styles.redText, playersStatArray[index] === maxValue && styles.greenText]}>
                                 { playersStatArray[index] ? playersStatArray[index] : 0 }
                             </Text>

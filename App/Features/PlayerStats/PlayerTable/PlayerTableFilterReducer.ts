@@ -27,7 +27,8 @@ export type PlayerTableFilterAction = {
     isInWatchlistValue: boolean;
 } | {
     type: "Reset";
-    range: number[];
+    priceRange: number[];
+    minutesRange: number[];
 }
 
 export function playerTableFilterReducer(state: PlayerTableFilterState, action: PlayerTableFilterAction): PlayerTableFilterState {
@@ -93,12 +94,12 @@ export function playerTableFilterReducer(state: PlayerTableFilterState, action: 
             return {
                 isPer90: false,
                 isInWatchlist: false,
-                priceRange: action.range,
+                priceRange: action.priceRange,
                 teamFilter: 'All Teams',
                 positionFilter: 'All Positions',
                 statFilter: 'Total Points',
                 playerSearchText: '',
-                minutesRange: [0, (90 * 38)],
+                minutesRange: action.minutesRange,
             }
        }
     }

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, scale } from "react-native-size-matters";
 import { textPrimaryColor, mediumFont, textSecondaryColor, fieldColor, redColor } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -9,8 +10,8 @@ export const styles = StyleSheet.create({
 
     headerText: {
         color: textPrimaryColor,
-        padding: 5,
-        marginRight: 5,
+        padding: scale(5),
+        marginRight: scale(5),
         fontSize: mediumFont,
         textAlign: 'center',
         fontWeight: '500'
@@ -18,10 +19,10 @@ export const styles = StyleSheet.create({
 
     valueText: {
         color: textSecondaryColor,
-        fontSize: mediumFont,
+        fontSize: mediumFont * 1.05,
         flex: 1,
-        padding: 5,
-        marginRight: 5,
+        padding: scale(3),
+        marginRight: scale(5),
         textAlign: 'center'
     },
 

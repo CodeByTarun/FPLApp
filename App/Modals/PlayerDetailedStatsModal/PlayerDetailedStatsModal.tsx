@@ -54,7 +54,7 @@ const PlayerDetailedStatsModal = () => {
     }
 
     return (
-        <ModalWrapper modalHeight={moderateVerticalScale(GlobalConstants.height * 0.65, -0.1)} modalWidth={moderateScale(GlobalConstants.width * 0.8, -0.1)}>    
+        <ModalWrapper modalHeight={moderateVerticalScale(GlobalConstants.height * 0.63, -0.3)} modalWidth={moderateScale(GlobalConstants.width * 0.8, -0.15)}>    
             <View style={styles.container}>
                 { overview && fixtures && liveGameweek && playerSummary && playerOverview && playerDataQuery.isSuccess ? 
                     <View style={{flex: 1, width: '100%'}}>
@@ -72,7 +72,7 @@ const PlayerDetailedStatsModal = () => {
                                         <Text style={styles.text}>{overview.element_types.find(element => element.id === playerOverview.element_type)?.singular_name_short}  </Text>
                                         <Text style={styles.text}>£{(playerOverview.now_cost / 10).toFixed(1)}  </Text>
                                     </View>
-
+ 
                                     <View style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
                                         <Text style={styles.text}>Sel. {playerOverview.selected_by_percent}%</Text>
                                     </View>                                    
@@ -90,9 +90,10 @@ const PlayerDetailedStatsModal = () => {
                             </View>
 
                             <View style={styles.controlsContainer}>
-                                <View style={{flex: 1, height: '70%', alignSelf: 'center'}}>
+                                <View style={styles.playerComparisonButtonContainer}>
                                     <CustomButton image="playercomparison" buttonFunction={() => navigation.navigate("PlayerComparisonModal")}/>
                                 </View>
+                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                                 <Pressable style={styles.statHistoryToggle} onPress={() => setIsStatViewShowing(!isStatsViewShowing)} hitSlop={5}>
                                     <AnimatedView style={[styles.viewToggleIndiciator, globalStyles.shadow, { left: toggleSpring.left }]} children={undefined}/>
                                     <View style={[styles.viewToggleStyle]}>
@@ -102,9 +103,10 @@ const PlayerDetailedStatsModal = () => {
                                         <Text style={{alignSelf: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.mediumFont * 0.9}}>History</Text>
                                     </View>
                                 </Pressable>
+                                </View>
                                 
                                 
-                                <View style={{flex: 1, height: '75%', alignSelf: 'center', justifyContent: 'center', paddingTop: moderateVerticalScale(5, 0.1)}}>
+                                <View style={styles.filterButtonContainer}>
                                     {isStatsViewShowing && 
                                         <AnimatedButton buttonFn={openFilter}>
                                             <Image source={Icons['filter']} resizeMode='contain' style={{height: '85%', width: '85%', alignSelf: 'center'}}/>

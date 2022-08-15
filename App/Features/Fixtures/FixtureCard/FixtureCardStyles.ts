@@ -7,27 +7,16 @@ export const styles = StyleSheet.create({
     fixtureViewContainer: {
         height: FIXTURE_CARD_HEIGHT,
         width: moderateScale(width / 3, -0.217),
-        paddingTop: moderateVerticalScale(5), 
+        padding: moderateScale(5, 0.25),
     },
 
     card: {
-        backgroundColor: primaryColor,
-        flex: 1,
-        flexDirection: 'column',
-        marginBottom: moderateVerticalScale(5, 0.8),
-        marginLeft: moderateScale(5, 0.8),
-        marginRight: moderateScale(5, 0.8),
-        paddingLeft: moderateScale(5, 0.8),
-        paddingRight: moderateScale(5, 0.8),
-        paddingBottom: moderateVerticalScale(5, 0.8),
-        paddingTop: moderateVerticalScale(8.5, 0.8),
-        borderRadius: cornerRadius,
-    },
-
-    button: {
         height: '100%',
-        width: '100%',
-        backgroundColor: primaryColor,
+        flexDirection: 'column',
+        borderRadius: cornerRadius,
+        paddingTop: moderateVerticalScale(5),
+        paddingBottom: moderateVerticalScale(3),
+        backgroundColor: primaryColor
     },
     //#endregion
 
@@ -35,7 +24,7 @@ export const styles = StyleSheet.create({
     topbar: {
         alignSelf: 'center',
         width: '100%',
-        height: moderateVerticalScale(10),
+        height: moderateVerticalScale(11),
         flexDirection: 'row',
     },
 

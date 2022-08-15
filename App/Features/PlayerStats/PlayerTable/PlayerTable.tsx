@@ -8,7 +8,7 @@ import * as GlobalConstants from "../../../Global/GlobalConstants";
 import { OverviewStats } from "../../../Global/EnumsAndDicts"
 import { FplFixture } from "../../../Models/FplFixtures";
 import PlayerList from "../PlayerList/PlayerList";
-import { useAppDispatch } from "../../../Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
 import { goToMainScreen } from "../../../Store/navigationSlice";
 import globalStyles from "../../../Global/GlobalStyles";
 import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
@@ -30,6 +30,7 @@ interface PlayerTableProps {
 const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
     const initialPriceRange = [
         Math.min(...(overview.elements.map(element => element.now_cost))),
@@ -44,7 +45,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
         positionFilter: 'All Positions', 
         statFilter: 'Total Points',
         playerSearchText: '',
-        minutesRange: [0, (90 * 38)],
+        minutesRange: [0, (90 * liveGameweek)],
     }
 
     const [playerTableFilterState, playerTableFilterDispatch] = useReducer(playerTableFilterReducer, initialPlayerTableFilterState);   

@@ -21,6 +21,10 @@ const stats: {[key: string] : string } = {
     'saves' : 'S',
     'bonus' : 'B',
     'bps' : 'BPS',
+    "influence": "I",
+    "creativity": "C",
+    "threat": "T",
+    "ict_index" : "ICT",
 }
 
 interface HistoryProps {

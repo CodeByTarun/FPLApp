@@ -1,6 +1,7 @@
-import { animated, useSpring } from "@react-spring/native";
+import { animated, config, useSpring } from "@react-spring/native";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, ScrollView, Text, View, Image } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { AnimatedButton } from "../../../Features/Controls";
 import FixtureDifficultyList from "../../../Features/PlayerStats/PlayerList/FixtureDifficultyList";
 import { Seperator } from "../../../Global/GlobalComponents";
@@ -66,7 +67,12 @@ const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterSta
         setPlayerDataHeight(height / PlayerComparisonLimit);
     }, []);
 
-    const editViewSpring = useSpring({ width: isEditActive ? playerDataHeight / 2 : 0 });
+    const editViewSpring = useSpring({ opacity: isEditActive ? 1 : 0, buttonLeft: isEditActive ? 0 : -moderateVerticalScale(20) });
+
+    const viewSpring = useSpring({ gameweekLeft: viewIndex === 0 ? '0%' : (viewIndex === 1 ? '-120%' : '-240%'),
+                                   statView: viewIndex === 1 ? '0%' : (viewIndex === 0 ? '120%' : '-120%'),
+                                   fixtureDifficultyView: viewIndex === 2 ? '0%' : (viewIndex === 0 ? '240%' : '120%'),
+                                   });
 
     const playerMinutesArray = useMemo(() => {
 
@@ -84,82 +90,93 @@ const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterSta
 
     }, [playerList, statsFilterState.gameSpan, statsFilterState.isPer90]);
 
+    const PlayerInfoAndHeaders = useCallback((viewIndex: number) => {
+        return (
+            <View pointerEvents="box-none" style={{position: 'absolute', height: '100%', width: '100%'}}>
+                <View pointerEvents="none" style={{opacity: 0}}>
+                    { viewIndex !== 2 && 
+                        <Text style={styles.headerText}/>
+                    }
+                </View>
+                <View pointerEvents="box-none" onLayout={getPlayerDataHeight} style={[{flex: 1}, viewIndex !== 2 && {borderTopColor: textSecondaryColor, borderTopWidth: 1}]}>
+                    { playerList.map( player => 
+                    <View pointerEvents="box-none" style={{height: '20%', width: '100%'}} key={player.playerOverview.id}>
+                        <View pointerEvents="box-none" style={{flexDirection: 'row',width: '100%', marginTop: moderateVerticalScale(3)}}>
+                            <AnimatedView style={{flexDirection: 'row', left: editViewSpring.buttonLeft }}>
+                                <AnimatedButton key={player.playerOverview.id.toString()} buttonFn={() => removePlayerFunction(player.playerOverview)}>
+                                    <AnimatedView style={{height: moderateVerticalScale(20) , width: moderateVerticalScale(20), opacity: editViewSpring.opacity, justifyContent: 'center', alignItems: 'center'}}>
+                                        <Image source={Icons['close']} style={{height: '60%', width: '60%'}} resizeMode='contain'/>
+                                    </AnimatedView>
+                                </AnimatedButton>
+                                <Text style={[styles.playerHeaderText, {fontWeight: 'bold'}]}>{player.playerOverview.web_name}  </Text>
+                            </AnimatedView>
+                            <View pointerEvents="none" style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
+                                <Text style={styles.playerHeaderText}>{overview.element_types.find(element => element.id === player.playerOverview.element_type)?.singular_name_short}</Text>
+                                <Text style={[styles.playerHeaderText, {fontWeight: 'bold'}]}>{overview.teams.find(team => team.code === player.playerOverview.team_code)?.short_name}</Text>
+                                <Text style={styles.playerHeaderText}>£{(player.playerOverview.now_cost / 10).toFixed(1)}</Text>
+                            </View>
+    
+                        </View>
+                        <View pointerEvents="none" style={{flex: 1}}/>
+                        <Seperator/>
+    
+                    </View>    
+                    ) }
+                </View>
+            </View>
+        )
+    }, [playerList])
+
     return (
 
         <View style={styles.container}>
-            <AnimatedView style={{height: '100%', width: editViewSpring.width}}>
-                {viewIndex !== 2 &&
-                    <Text style={styles.headerText}/>
-                }
-                { playerList.map(player => {
-                    return (
-                        <AnimatedButton key={player.playerOverview.id.toString()} buttonFn={() => removePlayerFunction(player.playerOverview)}>
-                            <View style={{height: playerDataHeight, padding: 5, justifyContent: 'center'}}>
-                                <Image source={Icons['close']} style={{height: '80%', width: '80%'}} resizeMode='contain'/>
-                            </View>
-                        </AnimatedButton>
-                    )
-                })}
-            </AnimatedView>
-
 
             <View style={styles.dataContainer}>
-                <ScrollView horizontal>
-                    <View style={{flexDirection: 'row'}}>
-                        { viewIndex === 0  &&
-                            Object.keys(gameweekStats).map(key => <StatColumn key={key} header={gameweekStats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={viewIndex}
-                                                                            playerList={playerList} playerDataHeight={playerDataHeight} playerMinutesArray={playerMinutesArray}/>)
-                        }
-                        { viewIndex === 1 && 
-                            Object.keys(stats).map(key => <StatColumn key={key} header={stats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={viewIndex}
-                                                                    playerList={playerList} playerDataHeight={playerDataHeight} playerMinutesArray={playerMinutesArray}/>)
-                        }
-                        { viewIndex === 2 && 
-                            <View>
-                                { playerList.map(player => {
+                <AnimatedView style={{height: '100%', position: 'absolute', left: viewSpring.gameweekLeft, width: '100%'}}>
+                    <ScrollView horizontal>
 
-                                    return (
-                                        <View style={{height: playerDataHeight}}>
-                                            <Text style={[styles.headerText, {}]}/>
-                                            <View style={{flex:1, marginBottom: 7}}>
-                                                <FixtureDifficultyList team={player.playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} liveGameweek={liveGameweek}/>
-                                            </View>
+                            { 
+                                Object.keys(gameweekStats).map(key => <StatColumn key={key} header={gameweekStats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={viewIndex}
+                                                                                playerList={playerList} playerDataHeight={playerDataHeight} playerMinutesArray={playerMinutesArray}/>)
+                            }
+
+                    </ScrollView>
+                    { PlayerInfoAndHeaders(0) }       
+                </AnimatedView>                 
+
+                <AnimatedView style={{height: '100%', position: 'absolute', left: viewSpring.statView, width: '100%'}}>
+                    <ScrollView horizontal>
+                            {  
+                                Object.keys(stats).map(key => <StatColumn key={key} header={stats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={viewIndex}
+                                                                        playerList={playerList} playerDataHeight={playerDataHeight} playerMinutesArray={playerMinutesArray}/>)
+                            }
+                    </ScrollView>
+                    { PlayerInfoAndHeaders(1) }                        
+                </AnimatedView>
+
+                <AnimatedView style={{height: '100%', position: 'absolute', left: viewSpring.fixtureDifficultyView, width: '100%'}}>
+                    <ScrollView horizontal style={{flexDirection: 'row'}}>
+                        <View>
+                            { playerList.map(player => {
+
+                                return (
+                                    <View key={player.playerOverview.id.toString()} style={{height: playerDataHeight}}>
+                                        <Text style={[styles.headerText, {}]}/>
+                                        <View style={{flex:1, marginBottom: 7}}>
+                                            <FixtureDifficultyList team={player.playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} liveGameweek={liveGameweek}/>
                                         </View>
-                                    )
+                                    </View>
+                                )
+                            })}
+                        </View>
+                    </ScrollView>
+                    { PlayerInfoAndHeaders(2) }                        
+                </AnimatedView>
 
-                                })}
-                            </View>
-                        }
-                    </View>
-                </ScrollView>
-                <View pointerEvents="none" style={{position: 'absolute', height: '100%', width: '100%'}}>
-                    <View style={{opacity: 0}}>
-                        { viewIndex !== 2 && 
-                            <Text style={styles.headerText}/>
-                        }
-                    </View>
-                    <View onLayout={getPlayerDataHeight} style={[{flex: 1}, viewIndex !== 2 && {borderTopColor: textSecondaryColor, borderTopWidth: 1}]}>
-                        { playerList.map( player => 
-                        <View style={{height: '20%', width: '100%'}} key={player.playerOverview.id}>
-                            <View style={{flexDirection: 'row',width: '100%', marginTop: 3}}>
-                                <Text style={[styles.playerHeaderText, {fontWeight: 'bold'}]}>{player.playerOverview.web_name}  </Text>
-                                <View style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
-                                    <Text style={styles.playerHeaderText}>{overview.element_types.find(element => element.id === player.playerOverview.element_type)?.singular_name_short}</Text>
-                                    <Text style={[styles.playerHeaderText, {fontWeight: 'bold'}]}>{overview.teams.find(team => team.code === player.playerOverview.team_code)?.short_name}</Text>
-                                    <Text style={styles.playerHeaderText}>£{(player.playerOverview.now_cost / 10).toFixed(1)}</Text>
-                                </View>
-
-                            </View>
-                            <View style={{flex: 1}}/>
-                            <Seperator/>
-
-                        </View>    
-                        ) }
-                    </View>
-                </View>
             </View>
         </View>
     )
 }
 
 export default PlayerComparisonFlatList;
+

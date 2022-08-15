@@ -21,6 +21,7 @@ import { RootStackParams } from "../../../App";
 import { changeMutableView } from "../../Store/modalSlice";
 import { VerticalSeparator } from "../../Global/GlobalComponents";
 import { Icons } from "../../Global/Images";
+import { moderateScale } from "react-native-size-matters";
 
 const AnimatedView = animated(View);
 const AnimatedPressable = animated(Pressable);
@@ -66,7 +67,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   }
 
   const gameweekButton = useCallback(() => {
-    dispatch(changeMutableView({view: <GameweekView overview={overview}/>, width: '65%'}));
+    dispatch(changeMutableView({view: <GameweekView overview={overview}/>, width: moderateScale(275)}));
 
     navigator.navigate('MutableModal');
   }, [teamInfo.gameweek])

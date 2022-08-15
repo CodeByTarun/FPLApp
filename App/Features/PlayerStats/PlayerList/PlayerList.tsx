@@ -4,7 +4,6 @@ import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, View, Text } from "react-native";
 import { RootStackParams } from "../../../../App";
-import { height } from "../../../Global/GlobalConstants";
 import { FilterPlayerListPlayers, GetOwnedPlayersManagerShortInitials, GetStatValue, SortPlayerListPlayers } from "../../../Helpers/FplAPIHelpers";
 import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../../Helpers/FplDataStorageService";
 import { FplFixture } from "../../../Models/FplFixtures";

@@ -28,8 +28,23 @@ export const styles = StyleSheet.create({
         marginBottom: moderateVerticalScale(5),
     },
 
+    playerComparisonButtonContainer: {
+        width: moderateScale(30),
+        height: '70%',
+        alignSelf: 'center'
+    },
+
+    filterButtonContainer: {
+        width: moderateScale(30),
+        height: '75%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        paddingTop: moderateVerticalScale(3)
+    },
+
     statHistoryToggle: {
-        flex: 2, 
+        height: '75%',
+        width: moderateScale(125, 0.4),
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row', 

@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { View, StyleSheet, LayoutChangeEvent, Text } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import Svg, { Circle, Path } from "react-native-svg";
 import * as GlobalConstants from "../../../Global/GlobalConstants";
 
@@ -30,9 +31,9 @@ const PieChart = (props: PieChartProps) => {
             {(dimensions != [0,0]) && 
                 <Svg width={dimensions[0]} height={dimensions[1]} style={{alignSelf: 'center', position: 'absolute', transform: [{scaleX: isFirstValueEqualOrBigger ? 1 : -1}]}}>
                     <Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius}
-                            stroke={(props.firstStatValue === 0 && props.secondStatValue === 0) ? 'gray' : (isFirstValueEqualOrBigger ? props.secondStatColor : props.firstStatColor)} strokeWidth={7}/>
+                            stroke={(props.firstStatValue === 0 && props.secondStatValue === 0) ? 'gray' : (isFirstValueEqualOrBigger ? props.secondStatColor : props.firstStatColor)} strokeWidth={moderateScale(7)}/>
                     <Circle cx={dimensions[0] / 2} cy={dimensions[1] / 2} r={radius} 
-                            stroke={(props.firstStatValue === 0 && props.secondStatValue === 0) ? 'gray' : isFirstValueEqualOrBigger ? props.firstStatColor : props.secondStatColor} strokeWidth={7} 
+                            stroke={(props.firstStatValue === 0 && props.secondStatValue === 0) ? 'gray' : isFirstValueEqualOrBigger ? props.firstStatColor : props.secondStatColor} strokeWidth={moderateScale(7)} 
                             strokeDasharray={circumference * ( (isFirstValueEqualOrBigger ? props.firstStatValue : props.secondStatValue)/(props.firstStatValue + props.secondStatValue))}
                             transform={`rotate(-90, ${dimensions[0]/2}, ${dimensions[1]/2})`}/>
                 </Svg>
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundCircle: {
         borderRadius: 100,
         borderColor: 'black',
-        borderWidth: 10,
+        borderWidth: moderateVerticalScale(10),
         justifyContent: 'center',
         alignItems: 'center',  
     },

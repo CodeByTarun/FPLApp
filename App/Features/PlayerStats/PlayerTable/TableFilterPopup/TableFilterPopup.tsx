@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../../../App";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { useAppSelector } from "../../../../Store/hooks";
 
 interface TableFilterPopupProps {
     filterDispatch: (value: PlayerTableFilterAction) => void;
@@ -21,6 +22,7 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
+    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
     const [isPer90, setIsPer90] = useState(filterState.isPer90);
     const [isInWatchlist, setIsInWatchlist] = useState(filterState.isInWatchlist);
     const [priceRange, setPriceRange] = useState(filterState.priceRange);
@@ -30,9 +32,9 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
         setIsPer90(false);
         setIsInWatchlist(false);
         setPriceRange(initialPriceRange);
-        setMinuteRange([0, 90*38]);
+        setMinuteRange([0, 90*liveGameweek]);
 
-        filterDispatch({type: 'Reset', range: initialPriceRange});
+        filterDispatch({type: 'Reset', priceRange: initialPriceRange, minutesRange: [0, 90*liveGameweek]});
         navigation.goBack();
     }
 
@@ -56,7 +58,7 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
                                 onValueChange={value => setPriceRange(value)}/>
             </View>
             <View style={styles.sliderContainer}>
-                <CustomSlider header={"Minutes Per Game Range:"} minValue={0} maxValue={90 * 38} 
+                <CustomSlider header={"Minutes Per Game Range:"} minValue={0} maxValue={90 * liveGameweek} 
                                 step={1} initialRange={minuteRange} debounceValue={400}
                                 onValueChange={ value => setMinuteRange(value) }/>
             </View>

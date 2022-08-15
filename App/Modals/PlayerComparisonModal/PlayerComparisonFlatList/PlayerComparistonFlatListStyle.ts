@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale } from "react-native-size-matters";
 import { height, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -9,7 +10,14 @@ export const styles = StyleSheet.create({
     },
 
     dataContainer: {
-        flex: 1
+        flex: 1,
+        overflow: 'hidden'
+    },
+
+    viewContainer: {
+        height: '100%',
+        position: 'absolute',
+        flexDirection: 'row',
     },
 
     scrollContainer: {
@@ -32,7 +40,7 @@ export const styles = StyleSheet.create({
 
     headerText: {
         color: textPrimaryColor,
-        padding: 5,
+        padding: moderateScale(5, 0.3),
         fontSize: mediumFont,
     },
 
@@ -45,7 +53,7 @@ export const styles = StyleSheet.create({
 
     playerHeaderText: {
         color: textPrimaryColor,
-        padding: 3,
+        padding: moderateScale(3, 0.3),
         fontSize: mediumFont
     }
 

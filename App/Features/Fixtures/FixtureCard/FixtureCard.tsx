@@ -56,29 +56,26 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
         dispatch(changeToFixture(fixture));
     }
 
-    //TODO: add disable condition back: ((fixture.event !== null) && (fixture.event > liveGameweek))
-
     return (
         
         <View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? -5 : 0 }]}>
+                <AnimatedButton buttonFn={showFixture} disabled={((fixture.event !== null) && (fixture.event > liveGameweek))}>   
             <View style={[styles.card, globalStyles.shadow]}>
-                <AnimatedButton buttonFn={showFixture} disabled={((fixture.event !== null) && (fixture.event > liveGameweek))}>            
-                    <View style={styles.button}>
-                        <View style={styles.topbar}>
-                            <Text style={styles.datetext}>
-                                { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
-                            </Text>
-                        </View>
-                        <View style={styles.scoreView}>
-                            <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview)}/>
-                            <View style={styles.scoreAndTimeView}>
-                                { SetScoreAndTime(fixture, gameweekData) }
-                            </View>
-                            <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/>
-                        </View>
+                <View style={styles.topbar}>
+                    <Text style={styles.datetext}>
+                        { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
+                    </Text>
+                </View>
+                <View style={styles.scoreView}>
+                    <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview)}/>
+                    <View style={styles.scoreAndTimeView}>
+                        { SetScoreAndTime(fixture, gameweekData) }
                     </View>
-                </AnimatedButton>
+                    <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/>
+                </View>
             </View>
+
+                </AnimatedButton>
         </View>
     )
 }

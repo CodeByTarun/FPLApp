@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
 
     emblems: {
         alignSelf: 'center',
-        height: '60%'
+        height: '60%',
+        width: '100%',
     },
 
     text: {

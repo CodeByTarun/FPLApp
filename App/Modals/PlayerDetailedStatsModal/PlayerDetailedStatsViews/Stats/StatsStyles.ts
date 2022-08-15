@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { aLittleLighterColor, cornerRadius, primaryColor, largeFont, textPrimaryColor, mediumFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
 
     container: {
         flex: 1, 
-        paddingTop: 10, 
-        paddingBottom: 5, 
+        paddingTop: moderateVerticalScale(10), 
+        paddingBottom: moderateVerticalScale(5), 
         zIndex: -1
     },
 
@@ -23,8 +24,8 @@ export const styles = StyleSheet.create({
 
     bottomSection: {
         flex: 1, 
-        marginTop: 20, 
-        padding: 5, 
+        marginTop: moderateVerticalScale(20), 
+        padding: moderateScale(5), 
         justifyContent: 'center', 
         alignItems: 'center', 
         flexDirection: 'row',
@@ -32,15 +33,15 @@ export const styles = StyleSheet.create({
 
     pieChartContainer: {
         flex: 3,
-        margin: 5,
-        padding: 5,
+        margin: moderateScale(5),
+        padding: moderateScale(5),
     },
 
     rightSideStatsContainer: {
         flex: 3, 
-        marginTop: 15, 
-        marginRight: 15, 
-        marginBottom: 15
+        marginTop: moderateVerticalScale(15), 
+        marginRight: moderateScale(15), 
+        marginBottom: moderateVerticalScale(15)
     },
 
     sectionHeaderText: {
@@ -49,9 +50,9 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: textPrimaryColor,
         position: 'absolute',
-        top: -20, 
-        left: 15,
-        padding: 5
+        top: -moderateVerticalScale(20), 
+        left: moderateScale(15),
+        padding: moderateScale(5)
     },
 
     pointsHeaderText: {
@@ -60,14 +61,14 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: textPrimaryColor,
         position: 'absolute',
-        top: -20, 
-        right: 15,
-        padding: 5
+        top: -moderateVerticalScale(20), 
+        right: moderateScale(15),
+        padding: moderateScale(5)
     },
 
     gameweekSectionText: {
         color: textPrimaryColor,
-        fontSize: mediumFont * 0.8,
+        fontSize: mediumFont * 0.9,
         fontWeight: '500',
         alignSelf: 'center'
     },

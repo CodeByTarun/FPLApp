@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     jerseyImage: {
         alignSelf: 'center', 
         height: '85%',
+        width: '100%',       
     },
 
     allStatsContainer: {
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
         width: verticalScale(15),
         aspectRatio: 1,
         marginRight: -moderateScale(5, -0.3),
-        transform: [{ rotate: "337deg" }]
+        transform: [{ rotate: "337deg" }],
     },
 
     dreamTeamContainer: {
@@ -79,15 +80,15 @@ export const styles = StyleSheet.create({
         aspectRatio: 1,
         width: verticalScale(16),
         marginRight: 0,
-        marginLeft: -moderateScale(4, 0.3)
+        marginLeft: -moderateScale(4, 0.3),
     },
 
     injuredContainer: {
         flexDirection: 'row',
         position: "absolute",
         right: 0,
-        marginRight: -moderateScale(8, -0.4),
-        marginBottom: -moderateScale(5, 0.1),
+        marginRight: -moderateScale(7, -0.2),
+        marginBottom: -moderateScale(3, 0.8),
         bottom: 0,
     },
 

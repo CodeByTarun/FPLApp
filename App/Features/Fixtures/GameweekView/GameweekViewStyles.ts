@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { height, width, largeFont, textPrimaryColor, secondaryColor, mediumFont, cornerRadius } from "../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
@@ -12,29 +13,28 @@ export const styles = StyleSheet.create({
         fontSize: largeFont, 
         color: textPrimaryColor, 
         alignSelf: 'center', 
-        marginTop: 10, 
+        marginTop: moderateVerticalScale(10),
+        marginBottom: moderateVerticalScale(10), 
         fontWeight: '700', 
         textAlign: 'center',
     },
 
     listContainer: {
-        marginTop: 10, 
+        marginTop: moderateVerticalScale(10), 
         borderTopWidth: 1, 
         borderBottomWidth: 1, 
         borderColor: secondaryColor,
     },
 
     gameweekItem: {
-        borderBottomColor: secondaryColor,
-        borderBottomWidth: 1,
-        height: height * 0.06,
+        height: moderateVerticalScale(height * 0.06, -0.3),
         justifyContent: 'center',
-        paddingLeft: 10,
+        paddingLeft: moderateScale(7),
     },
 
     bottomView: {
-        padding: 10,
-        paddingTop: 20,
+        paddingBottom: moderateVerticalScale(10),
+        paddingTop: moderateVerticalScale(20),
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
@@ -51,7 +51,8 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: secondaryColor,
         borderRadius: cornerRadius,
-        padding: 10
-    }
+        padding: moderateScale(10, 0.2),
+        width: moderateScale(145, 0.25),
+    },
     
 });
