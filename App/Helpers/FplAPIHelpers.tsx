@@ -354,18 +354,18 @@ export function SortPlayerListPlayers(filters: PlayerTableFilterState, playerA: 
         }
 }
 
-export function GetStatValue(filters: PlayerTableFilterState, player: PlayerOverview) {
-    if (filters.statFilter !== 'Cost') {
+export function GetStatValue(isPer90: boolean, statFilter: string, player: PlayerOverview) {
+    if (statFilter !== 'Cost') {
             
-        if (filters.isPer90 && Per90Stats.includes(filters.statFilter)) {
+        if (isPer90 && Per90Stats.includes(statFilter)) {
     
-            return (getNum(player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / player.minutes * 90)).toFixed(2)
+            return (getNum(player[Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview] as number / player.minutes * 90)).toFixed(2)
         } else {
-            return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview])
+            return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview])
         }
     }
     else {
-        return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === filters.statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
+        return (player[Object.keys(OverviewStats).find(key => OverviewStats[key] === statFilter) as keyof PlayerOverview] as number / 10).toFixed(1)
     }
 }
 

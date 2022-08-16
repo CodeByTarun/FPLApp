@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, View, Text } from "react-native";
 import { RootStackParams } from "../../../../App";
 import { FilterPlayerListPlayers, GetOwnedPlayersManagerShortInitials, GetStatValue, SortPlayerListPlayers } from "../../../Helpers/FplAPIHelpers";
-import { addPlayerToWatchList, getPlayersWatchlist, PlayersWatchlist, removePlayerFromWatchlist } from "../../../Helpers/FplDataStorageService";
+import { getPlayersWatchlist, PlayersWatchlist } from "../../../Helpers/FplDataStorageService";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { useGetDraftLeagueInfoQuery, useGetDraftLeaguePlayerStatusesQuery, useGetDraftOverviewQuery, useGetDraftUserInfoQuery } from "../../../Store/fplSlice";
@@ -15,6 +15,7 @@ import { TeamTypes } from "../../../Store/teamSlice";
 import { CustomButton, LoadingIndicator } from "../../Controls";
 import { PlayerTableFilterState } from "../PlayerTable/PlayerTableFilterReducer";
 import FixtureDifficultyList from "./FixtureDifficultyList";
+import PlayerItem from "./PlayerItem";
 import PlayerListInfo from "./PlayerListInfo/PlayerListInfo";
 import { styles } from "./PlayerListStyles";
 
@@ -31,8 +32,6 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     const teamInfo = useAppSelector(state => state.team);
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
-
-    const dispatch = useAppDispatch();
 
     const [isListDoneFiltering, setIsListDoneFiltering] = useState(true);
     const [isDraftTeam, setIsDraftTeam] = useState(null as number | null);
@@ -61,22 +60,12 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
         getWatchlist();
     },[]);
 
-    const addToWatchlist = useCallback(async(playerId: number) => {
-        await addPlayerToWatchList(playerId);
-        setWatchlist(await getPlayersWatchlist());
-    }, [])
-
-    const removeFromWatchlist = useCallback(async(playerId: number) => {
-        await removePlayerFromWatchlist(playerId);
-        setWatchlist(await getPlayersWatchlist());
-    }, [])
-
     //#endregion
 
     //#region Filter Effects
     useEffect(function FilterPlayerList() {   
         filteringPlayerList(); 
-    }, [filters.teamFilter, filters.positionFilter, filters.statFilter, filters.isPer90, filters.isInWatchlist, watchlist]);
+    }, [filters.teamFilter, filters.positionFilter, filters.statFilter, filters.isPer90, filters.isInWatchlist]);
 
     useEffect(function debouncedFilterPlayerListPriceRange() {
         const timer = setTimeout(() => {
@@ -100,6 +89,11 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
     const filteringPlayerList = () => {
         setIsListDoneFiltering(false);
 
+        async function getWatchlist() {
+            setWatchlist(await getPlayersWatchlist());
+        }
+        getWatchlist();
+
         setPlayerList(overview.elements.filter(filterPlayers)
                                        .sort(sortPlayers))
     }
@@ -118,42 +112,15 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
 
     //#endregion
 
-    //#region Flatlist Functions
-    const getStatValue = useCallback((player : PlayerOverview) => {
-        return GetStatValue(filters, player);
-    }, [filters.statFilter, filters.isPer90]);
+    console.log('hi');
 
     const renderPlayerItem = useCallback(({item}: {item: PlayerOverview}) => {
 
-        const pressPlayerFn = () => {
-            dispatch(changePlayerOverviewInfo(item));
-            navigation.navigate('PlayerDetailedStatsModal');
-        }
+        return <PlayerItem player={item} fixtures={fixtures} overview={overview} teamInfo={teamInfo} 
+                           draftOverview={draftOverview.data} draftLeagueRosters={draftLeagueRosters.data} draftLeagueInfo={draftLeagueInfo.data} 
+                           watchList={watchlist} navigation={navigation} isPer90={filters.isPer90} statFilter={filters.statFilter}/>
 
-        let isInWatchList = watchlist?.playerIds.includes(item.id);
-
-        return (
-        <Pressable key={item.id} style={styles.tableView} onPress={pressPlayerFn}>
-            <View testID="watchlistButtonContainer" style={[styles.watchListButtonContainer, {opacity: isInWatchList ? 1 : 0.5}]}>
-                <CustomButton image={isInWatchList ? "favourite" : "unfavourite"} buttonFunction={isInWatchList ? () => removeFromWatchlist(item.id) : () => addToWatchlist(item.id)}/>
-            </View>
-            <View style={styles.playerListInfoContainer}>
-                <PlayerListInfo overview={overview} player={item} owner={(teamInfo.teamType === TeamTypes.Draft) ? 
-                                                                        GetOwnedPlayersManagerShortInitials(item.id, overview, draftOverview.data, draftLeagueRosters.data, draftLeagueInfo.data) : 
-                                                                        null}/>
-            </View>
-
-            <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
-                <View style={{alignSelf: 'center'}}>
-                <FixtureDifficultyList team={item.team} isFullList={false} fixtures={fixtures} overview={overview} liveGameweek={teamInfo.liveGameweek} />
-                </View>
-            </View>
-
-            <View style={[styles.tableNumberView]}>
-                <Text style={styles.tableText}>{getStatValue(item)}</Text>
-            </View>
-        </Pressable>)
-    }, [filters, watchlist, draftOverview.isSuccess, draftLeagueRosters.isSuccess, draftUserInfo.isSuccess, draftLeagueInfo.isSuccess, isDraftTeam])
+    }, [filters.isPer90, filters.statFilter, draftOverview.isSuccess, draftLeagueRosters.isSuccess, draftUserInfo.isSuccess, draftLeagueInfo.isSuccess, isDraftTeam, watchlist]);
 
     const keyExtractor = useCallback((item: PlayerOverview) => item.id.toString(), []);
     //#endregion
@@ -166,7 +133,7 @@ const PlayerList = React.memo(({overview, fixtures, filters}: PlayerListProps) =
             renderItem={renderPlayerItem}
             keyExtractor={keyExtractor}
             initialNumToRender={15}
-            maxToRenderPerBatch={40}/> :
+            maxToRenderPerBatch={30}/> :
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>
                     <LoadingIndicator/>

@@ -30,7 +30,6 @@ interface PlayerTableProps {
 const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
-    const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
     const initialPriceRange = [
         Math.min(...(overview.elements.map(element => element.now_cost))),
@@ -45,7 +44,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
         positionFilter: 'All Positions', 
         statFilter: 'Total Points',
         playerSearchText: '',
-        minutesRange: [0, (90 * liveGameweek)],
+        minutesRange: [0, (90 * overview?.events.filter((event) => { return event.is_current === true; })[0]?.id)],
     }
 
     const [playerTableFilterState, playerTableFilterDispatch] = useReducer(playerTableFilterReducer, initialPlayerTableFilterState);   

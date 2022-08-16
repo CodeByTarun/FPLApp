@@ -29,11 +29,6 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
     const [minuteRange, setMinuteRange] = useState(filterState.minutesRange);
 
     const clearFunction = () => {
-        setIsPer90(false);
-        setIsInWatchlist(false);
-        setPriceRange(initialPriceRange);
-        setMinuteRange([0, 90*liveGameweek]);
-
         filterDispatch({type: 'Reset', priceRange: initialPriceRange, minutesRange: [0, 90*liveGameweek]});
         navigation.goBack();
     }
@@ -58,7 +53,7 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
                                 onValueChange={value => setPriceRange(value)}/>
             </View>
             <View style={styles.sliderContainer}>
-                <CustomSlider header={"Minutes Per Game Range:"} minValue={0} maxValue={90 * liveGameweek} 
+                <CustomSlider header={"Minutes Range:"} minValue={0} maxValue={90 * liveGameweek} 
                                 step={1} initialRange={minuteRange} debounceValue={400}
                                 onValueChange={ value => setMinuteRange(value) }/>
             </View>
