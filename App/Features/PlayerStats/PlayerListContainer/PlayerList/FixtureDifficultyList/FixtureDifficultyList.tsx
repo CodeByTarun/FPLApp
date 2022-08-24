@@ -9,9 +9,10 @@ import { FixtureDifficultyListStyles } from "./FixtureDifficultyListStyles";
 interface FixtureDifficultyListProps {
     team: number;
     isFullList: boolean;
+    numberOfFixturesToShow?: number;
 }
 
-const FixtureDifficultyList = React.memo(({team, isFullList}: FixtureDifficultyListProps) => {
+const FixtureDifficultyList = React.memo(({team, isFullList, numberOfFixturesToShow = 3}: FixtureDifficultyListProps) => {
 
     const theme = useTheme();
     const styles = FixtureDifficultyListStyles(theme);
@@ -29,7 +30,7 @@ const FixtureDifficultyList = React.memo(({team, isFullList}: FixtureDifficultyL
 
     return (
         <View style={{flexDirection: 'row', height: '100%'}}>
-            { (isFullList ? fixtureLists[team] : fixtureLists[team].slice(0, 3)).map(fixture => renderItem(fixture))}
+            { (isFullList ? fixtureLists[team] : fixtureLists[team].slice(0, numberOfFixturesToShow)).map(fixture => renderItem(fixture))}
         </View>
     )
 });

@@ -13,7 +13,8 @@ interface AnimatedButtonProps {
 const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChildren<AnimatedButtonProps>) => {
 
     const [isDisabled, setIsDisabled] = useState(disabled);
-    const buttonSpring = useSpring({opacity: isDisabled ? 0.7 : 1, scale: isDisabled ? 0.85 : 1});
+    const buttonSpring = useSpring({opacity: isDisabled ? 0.7 : 1});
+    const [scaleSpring, api] = useSpring(() => ({ scale: 1 }))
 
     useEffect(() => {
         if (disabled) {
@@ -27,8 +28,14 @@ const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChil
     const onButtonPress = () => {
 
         setIsDisabled(true);
-
-        buttonFn();
+        api.start({
+            to: [
+                {scale: 0.97},
+                {scale: 1},
+            ],
+            config: {duration: 50}, 
+            onRest: () => buttonFn()
+        })
 
 
         setTimeout(() => {
@@ -37,7 +44,7 @@ const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChil
     }
 
     return (
-        <AnimatedPressable testID={'animatedButton'} hitSlop={0} style={{ opacity: buttonSpring.opacity, transform: [{scale: buttonSpring.scale}] }} onPress={onButtonPress} disabled={isDisabled}>
+        <AnimatedPressable testID={'animatedButton'} hitSlop={0} style={{ opacity: buttonSpring.opacity, transform: [{scale: scaleSpring.scale}] }} onPress={onButtonPress} disabled={isDisabled}>
             { children }
         </AnimatedPressable>
     )

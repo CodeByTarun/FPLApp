@@ -26,6 +26,7 @@ export const GameweekOverviewModalStyles = (theme: Theme) => StyleSheet.create({
     viewContainer: {
         flex: 1,
         marginTop: moderateVerticalScale(15),
+        overflow: 'hidden'
     },
 
     sliderContainer: {

@@ -8,9 +8,10 @@ interface FplDataBaseContextValue {
     overview: FplOverview;
     fixtures: FplFixture[];
     fixtureLists: FixturesMap;
+    TeamFixtureDifficultyView: JSX.Element;
   }
 
-export const FplBaseDataContext = createContext<FplDataBaseContextValue>({ overview: {} as FplOverview, fixtures: [] as FplFixture[], fixtureLists: {} as FixturesMap });
+export const FplBaseDataContext = createContext<FplDataBaseContextValue>({ overview: {} as FplOverview, fixtures: [] as FplFixture[], fixtureLists: {} as FixturesMap, TeamFixtureDifficultyView: {} as JSX.Element });
 
 interface ManageThemeContextValue {
   theme: string;

@@ -19,6 +19,7 @@ import { FplFixture } from './App/Models/FplFixtures';
 import { Appearance, useColorScheme } from 'react-native';
 import { darkTheme, defaultTheme } from './App/Global/GlobalConstants';
 import { getThemeData, setThemeData } from './App/Helpers/FplDataStorageService';
+import TeamFixtureDifficulty from './App/Modals/GameweekOverviewModal/TeamFixtureDifficulty';
 
 export interface FixturesMap {
   [key: number] : FplFixture[];
@@ -51,6 +52,7 @@ function App() {
   const overview = useGetOverviewQuery();
   const fixtures = useGetFixturesQuery();
   const [fixtureLists, setFixtureLists] = useState({} as FixturesMap);
+  const [teamFixtureDifficultyView, setTeamFixtureDifficultyView] = useState({} as JSX.Element);
   const errorCount = useRef(0);
 
   const colorScheme = useColorScheme();
@@ -156,9 +158,13 @@ useEffect(function themeChanged() {
 
   }, [fixtures.isSuccess, overview.isSuccess]);
 
+  useEffect(function createTeamFixtureDifficultyView() {
+    setTeamFixtureDifficultyView(<TeamFixtureDifficulty/>);
+  }, [fixtureLists])
+
   if (overview.isSuccess && fixtures.isSuccess) 
     return (
-        <FplBaseDataContext.Provider value={{ overview: overview.data, fixtures: fixtures.data, fixtureLists: fixtureLists}}>
+        <FplBaseDataContext.Provider value={{ overview: overview.data, fixtures: fixtures.data, fixtureLists: fixtureLists, TeamFixtureDifficultyView: teamFixtureDifficultyView}}>
           <ManageThemeContext.Provider value={{theme: theme, useDeviceTheme: useDeviceTheme, setTheme: setTheme, setUseDeviceTheme: setUseDeviceTheme }}>
             <NavigationContainer theme={(theme === 'dark') ? darkTheme : defaultTheme}>
               <Stack.Navigator initialRouteName='Home'>

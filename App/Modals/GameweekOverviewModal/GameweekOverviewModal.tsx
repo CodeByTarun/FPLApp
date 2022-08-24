@@ -1,10 +1,11 @@
 import { useTheme } from "@react-navigation/native";
 import { animated, useSpring } from "@react-spring/native";
-import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, Text, Pressable, Animated } from "react-native";
+import { moderateScale } from "react-native-size-matters";
+import { FplBaseDataContext } from "../../AppContext";
 import { ModalWrapper } from "../../Features/Controls";
 import globalStyles from "../../Global/GlobalStyles";
-import { PlayerOverview } from "../../Models/FplOverview";
 import { useAppSelector } from "../../Store/hooks";
 import { GameweekOverviewModalStyles } from "./GameweekOverviewModalStyles";
 import GameweekSummary from "./GameweekSummary";
@@ -16,14 +17,16 @@ const GameweekOverviewModal = () => {
     const theme = useTheme();
     const styles = GameweekOverviewModalStyles(theme);
     const gameweek = useAppSelector(state => state.team.gameweek);
+    const {TeamFixtureDifficultyView} = useContext(FplBaseDataContext);
      
     const [view, setView] = useState(1);
 
     const sliderSpring = useSpring({left: view === 1 ? '0%' : '50%'})
+    const viewSpring = useSpring({gameweekLeft: view === 1 ? '0%' : '-120%', teamFDRLeft: view === 1 ? '120%' : '0%'});
 
     return (
 
-        <ModalWrapper modalHeight={'60%'} modalWidth={'70%'}>
+        <ModalWrapper modalHeight={'60%'} modalWidth={moderateScale(300, 0.5)}>
             <View style={styles.modalView}>
 
                 <Text style={styles.titleText}>Overview</Text>
@@ -39,12 +42,13 @@ const GameweekOverviewModal = () => {
                 </Pressable>
 
                 <View style={styles.viewContainer}>
-                    {view === 1 && 
+                    <AnimatedView style={{height: '100%', width: '100%', position: 'absolute', left: viewSpring.gameweekLeft}}>
                         <GameweekSummary/>
-                    }
-                    {view === 2 && 
-                        <></>
-                    }
+                    </AnimatedView>
+                    
+                    <AnimatedView style={{height: '100%', width: '100%', position: 'absolute', left: viewSpring.teamFDRLeft}}>
+                        { TeamFixtureDifficultyView }
+                    </AnimatedView>
                 </View>
                 
             </View>
