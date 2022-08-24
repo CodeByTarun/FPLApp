@@ -1,13 +1,16 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { View } from "react-native";
-import { secondaryColor } from "../../../Global/GlobalConstants";
-import { styles } from "../FixtureCard/FixtureCardStyles";
+import { FixtureCardStyles } from "../FixtureCard/FixtureCardStyles";
 
 const FixtureCardLoading = () => {
 
+    const theme = useTheme();
+    const styles = FixtureCardStyles(theme);
+
     return (
         <View style={styles.fixtureViewContainer}>
-            <View style={[styles.card, {backgroundColor: secondaryColor}]}/>
+            <View style={[styles.card, {backgroundColor: theme.colors.background}]}/>
         </View>
     )
 

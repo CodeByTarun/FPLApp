@@ -327,7 +327,7 @@ export function GetTeamTotalExpectedPoints(teamInfo: TeamInfo, players: PlayerDa
 export function FilterPlayerListPlayers(filters: PlayerTableFilterState, player: PlayerOverview, 
                                         overview: FplOverview, watchlist: PlayersWatchlist | undefined) {
     return (
-        player.web_name.startsWith(filters.playerSearchText) && 
+        (filters.playerSearchText === '' || player.web_name.startsWith(filters.playerSearchText)) && 
         (!filters.isInWatchlist || watchlist?.playerIds.includes(player.id)) &&
         (filters.teamFilter === 'All Teams' || player.team_code === overview.teams.find(team => team.name === filters.teamFilter)?.code) &&
         (filters.positionFilter === 'All Positions' || player.element_type === overview.element_types.find(element => element.plural_name === filters.positionFilter)?.id) &&

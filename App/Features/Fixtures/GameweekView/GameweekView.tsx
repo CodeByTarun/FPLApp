@@ -1,23 +1,25 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { animated } from "@react-spring/native";
 import React, { useCallback, useEffect, useRef } from "react";
 import { View, Text, ScrollView, Pressable, Platform } from "react-native";
 import { moderateVerticalScale } from "react-native-size-matters";
 import { RootStackParams } from "../../../../App";
-import { Seperator } from "../../../Global/GlobalComponents";
-import { height, primaryColor, secondaryColor } from "../../../Global/GlobalConstants";
+import { Separator } from "../../../Global/GlobalComponents";
+import { height } from "../../../Global/GlobalConstants";
 import { FplOverview } from "../../../Models/FplOverview";
 import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
 import { changeGameweek } from "../../../Store/teamSlice";
 import { AnimatedButton } from "../../Controls";
-import { styles } from "./GameweekViewStyles";
+import { GameweekViewStyles } from "./GameweekViewStyles";
 
 interface GameweekViewProps {
     overview: FplOverview;
 }
 
 const GameweekView = ({overview} : GameweekViewProps) => {
+
+    const theme = useTheme();
+    const styles = GameweekViewStyles(theme);
 
     const dispatch = useAppDispatch();
     const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -50,11 +52,11 @@ const GameweekView = ({overview} : GameweekViewProps) => {
                     { overview.events.map((event) => {return (
                         <View key={event.id}>
                             <AnimatedButton  buttonFn={() => onGameweekButtonPress(event.id)}>
-                                <View testID="gameweeksItem" style={[styles.gameweekItem, {backgroundColor: (teamInfo.gameweek === event.id) ? secondaryColor : primaryColor }]}>
+                                <View testID="gameweeksItem" style={[styles.gameweekItem, {backgroundColor: (teamInfo.gameweek === event.id) ? theme.colors.background : theme.colors.primary }]}>
                                     <Text style={styles.text}>{event.name}</Text>
                                 </View>
                             </AnimatedButton>
-                            <Seperator/>
+                            {Separator(theme)}
                         </View>
                     )})}
                 </ScrollView>

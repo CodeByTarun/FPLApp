@@ -1,15 +1,16 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
-import { moderateScale, scale } from "react-native-size-matters";
-import { textPrimaryColor, mediumFont, textSecondaryColor, fieldColor, redColor } from "../../../../Global/GlobalConstants";
+import { scale } from "react-native-size-matters";
+import { mediumFont, fieldColor, redColor } from "../../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const StatColumnStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         alignItems: 'center'
     },
 
     headerText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         padding: scale(5),
         marginRight: scale(5),
         fontSize: mediumFont,
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
     },
 
     valueText: {
-        color: textSecondaryColor,
+        color: theme.colors.notification,
         fontSize: mediumFont * 1.05,
         flex: 1,
         padding: scale(3),

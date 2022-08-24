@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { smallFont, textSecondaryColor } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const FixtureDifficultyDisplayStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         height: '20%',
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         flex: 1,
         textAlign:'center',
-        color: textSecondaryColor, 
+        color: theme.colors.notification, 
         fontWeight: '600'
     },
 

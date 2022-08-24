@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "../reduxRender";
-import PlayerList from "../../../App/Features/PlayerStats/PlayerList";
+import PlayerList from "../../../App/Features/PlayerStats/PlayerListContainer/PlayerList";
 import { overview } from "../../SampleData/Overviews";
 import { allFixtures } from "../../SampleData/Fixtures";
 import { PlayerTableFilterState } from "../../../App/Features/PlayerStats/PlayerTable/PlayerTableFilterReducer";

@@ -1,22 +1,25 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { View, Text, FlatList } from "react-native";
 import { moderateScale } from "react-native-size-matters";
 import { RootStackParams } from "../../../../App";
-import { Seperator } from "../../../Global/GlobalComponents";
+import { Separator } from "../../../Global/GlobalComponents";
 import { FplDraftLeagueInfo, LeagueEntry, Standing } from "../../../Models/FplDraftLeagueInfo";
 import { useAppDispatch } from "../../../Store/hooks";
 import { changeToDraftTeam } from "../../../Store/teamSlice";
 import { AnimatedButton } from "../../Controls";
 import StandingsHeader from "../StandingsHeader";
-import { styles } from "../StandingsStyles";
+import { StandingsStyles } from "../StandingsStyles";
 
 interface DraftLeagueStandingsProps {
     draftLeagueInfo: FplDraftLeagueInfo;
 }
 
 const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) => {
+
+    const theme = useTheme();
+    const styles = StandingsStyles(theme);
 
     const dispatch = useAppDispatch();
     const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -52,7 +55,7 @@ const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) => {
         <Text style={styles.titleText} numberOfLines={1}>{draftLeagueInfo.league.name}</Text>
         <FlatList data={draftLeagueInfo.standings}
                   stickyHeaderIndices={[0]}
-                  ItemSeparatorComponent={ Seperator }
+                  ItemSeparatorComponent={ () => Separator(theme) }
                   keyExtractor={item => item.league_entry.toString()}
                   ListHeaderComponent={ StandingsHeader }
                   renderItem={renderLeagueEntryItem}

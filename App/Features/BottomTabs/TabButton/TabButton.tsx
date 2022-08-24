@@ -1,8 +1,9 @@
+import { useTheme } from "@react-navigation/native";
 import { animated, useSpring } from "@react-spring/native";
 import React from "react";
-import { TouchableOpacity, View, Image, Text, Pressable } from "react-native";
+import { View, Image, Text, Pressable } from "react-native";
 import { Icons } from "../../../Global/Images";
-import { styles } from "./TabButtonStyles";
+import { TabButtonStyles } from "./TabButtonStyles";
 
 const AnimatedPressable = animated(Pressable);
 
@@ -15,6 +16,8 @@ interface TabButtonProps {
 
 const TabButton = ({fn, imageName, header, isDisabled = false} : TabButtonProps) => {
 
+    const theme = useTheme();
+    const styles = TabButtonStyles(theme);
     const [animatedStyle, api] = useSpring(() => ({ scale: 1 }))
 
     const onPressFn = () => {

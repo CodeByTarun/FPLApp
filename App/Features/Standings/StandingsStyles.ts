@@ -1,13 +1,14 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateVerticalScale } from "react-native-size-matters";
-import { textSecondaryColor, smallFont, textPrimaryColor, mediumFont, secondaryColor, largeFont, primaryColor, lightColor } from "../../Global/GlobalConstants";
+import { smallFont, mediumFont, largeFont } from "../../Global/GlobalConstants";
 
 
-export const styles = StyleSheet.create({
+export const StandingsStyles = (theme: Theme) => StyleSheet.create({
 
     titleText:{
         textAlign: 'center', 
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         fontWeight: '700', 
         marginBottom: moderateVerticalScale(25), 
         marginTop: moderateVerticalScale(15), 
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
     },
 
     leagueHeaderText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: smallFont * 1.3,
         alignSelf: 'center',
         textAlign: 'center',
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
     },
 
     leagueText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: smallFont * 1.3,
         alignSelf: 'center',
         textAlign: 'center'
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
     teamNameText: {
         textAlign: 'left', 
         flex: 1, 
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: smallFont * 1.4, 
         fontWeight: '600'
     },
@@ -47,12 +48,12 @@ export const styles = StyleSheet.create({
     managerNameText: {
         textAlign: 'left', 
         flex: 1, 
-        color: textSecondaryColor, 
+        color: theme.colors.notification, 
         fontSize: smallFont * 1.1,
     },
 
     backButtonText:{ 
-        color: textSecondaryColor,
+        color: theme.colors.notification,
         fontSize: mediumFont,
         fontWeight: '700', 
         textAlign: 'center'
@@ -62,8 +63,8 @@ export const styles = StyleSheet.create({
         flex: 1, 
         flexDirection: 'row', 
         paddingBottom: moderateVerticalScale(7), 
-        borderBottomColor: lightColor, 
+        borderBottomColor: theme.colors.border, 
         borderBottomWidth: 1.5, 
-        backgroundColor: primaryColor
+        backgroundColor: theme.colors.primary,
     },
 });

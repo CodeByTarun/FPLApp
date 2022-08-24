@@ -1,10 +1,11 @@
+import { useTheme } from "@react-navigation/native";
 import React, { useCallback } from "react";
 import { View, Text, FlatList } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { Seperator } from "../../../../Global/GlobalComponents";
+import { Separator } from "../../../../Global/GlobalComponents";
 import { Classic, FplManagerInfo } from "../../../../Models/FplManagerInfo";
 import { AnimatedButton } from "../../../Controls";
-import { styles } from "../../StandingsStyles";
+import { StandingsStyles } from "../../StandingsStyles";
 
 interface BudgetLeagueListProps {
     budgetUserInfo: FplManagerInfo;
@@ -13,6 +14,9 @@ interface BudgetLeagueListProps {
 
 
 const BudgetLeagueList = ({budgetUserInfo, setLeagueToShow} : BudgetLeagueListProps) => {
+
+    const theme = useTheme();
+    const styles = StandingsStyles(theme);
 
     const onLeagueItemPress = useCallback((id: number) => {
         setLeagueToShow(id);
@@ -31,7 +35,7 @@ const BudgetLeagueList = ({budgetUserInfo, setLeagueToShow} : BudgetLeagueListPr
     return (
         <FlatList data={budgetUserInfo.leagues.classic.concat(budgetUserInfo.leagues.h2h)}
                     stickyHeaderIndices={[0]}
-                    ItemSeparatorComponent={ Seperator }
+                    ItemSeparatorComponent={() => Separator(theme)}
                     keyExtractor={item => item.id.toString()}
                     testID='budgetLeagueList'
                     ListHeaderComponent={

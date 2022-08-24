@@ -1,13 +1,14 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { secondaryColor, cornerRadius, primaryColor, textPrimaryColor, mediumFont, largeFont } from "../../../Global/GlobalConstants";
+import { cornerRadius, mediumFont } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const TeamSwitchStyles = (theme: Theme) => StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: secondaryColor,
+        backgroundColor: theme.colors.background,
         borderRadius: cornerRadius,
     },
 
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
         height: "100%",
         width: "50%",
         position: 'absolute',
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.card,
         borderRadius: cornerRadius,
     },
 
@@ -56,7 +57,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         fontWeight: '700',
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont * 1.1,
         alignSelf: 'center',
     },

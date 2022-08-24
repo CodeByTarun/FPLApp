@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { height, largeFont, textPrimaryColor, mediumFont, width, aLittleLighterColor, cornerRadius, primaryColor, secondaryColor } from "../../Global/GlobalConstants";
+import { largeFont, mediumFont } from "../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const PlayerDetailedStatsModalStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         padding: moderateScale(5),
@@ -10,7 +11,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
     },
 
     header: {
@@ -51,12 +52,12 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: moderateVerticalScale(5),
         marginBottom: moderateVerticalScale(5),
-        backgroundColor: secondaryColor
+        backgroundColor: theme.colors.background
     },
 
     titleText: {
         fontSize: largeFont * 1.3,
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontWeight: 'bold',
     }, 
 
@@ -73,19 +74,19 @@ export const styles = StyleSheet.create({
         height: '100%',
         width: '50%',
         position: 'absolute',
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.card,
         borderRadius: 10,
         zIndex: 1,
     },
 
     text: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont * 0.9,
         fontWeight: '500',
     },
 
     headerText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont * 0.9,
         fontWeight: '500',
         alignSelf: 'center',

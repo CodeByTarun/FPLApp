@@ -7,23 +7,27 @@ import * as GlobalConstants from "../../Global/GlobalConstants";
 import { useGetPlayerSummaryQuery } from "../../Store/fplSlice";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { Icons } from "../../Global/Images";
-import FixtureDifficultyList from "../../Features/PlayerStats/PlayerList/FixtureDifficultyList";
+import FixtureDifficultyList from "../../Features/PlayerStats/PlayerListContainer/PlayerList/FixtureDifficultyList";
 import { AnimatedButton, CustomButton, LoadingIndicator, ModalWrapper } from "../../Features/Controls";
-import { styles } from "./PlayerDetailedStatsModalStyles";
+import { PlayerDetailedStatsModalStyles } from "./PlayerDetailedStatsModalStyles";
 import { statsFilterReducer } from "./StatsFilterReducer";
 import { HistoryList, Stats } from "./PlayerDetailedStatsViews";
 import { animated, useSpring } from "@react-spring/native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 import { FplBaseDataContext } from "../../AppContext";
 import { ScrollView } from "react-native-gesture-handler";
 import FilterView from "./FilterView";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { KingOfTheGameweekViewStyles } from "../../Features/LineupView/Lineup/KingsOfTheGameweekView/KingsOfTheGameweekViewStyles";
 
 const AnimatedView = animated(View);
 
 const PlayerDetailedStatsModal = () => {
+
+    const theme = useTheme();
+    const styles = PlayerDetailedStatsModalStyles(theme);
 
     const dispatch = useAppDispatch();
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -78,7 +82,7 @@ const PlayerDetailedStatsModal = () => {
                                     </View>                                    
                                 </View>
                                 { (playerOverview.status !== 'a') && 
-                                    <View style={{ flexDirection: 'row', height: moderateVerticalScale(30), marginTop: moderateVerticalScale(10), backgroundColor: GlobalConstants.secondaryColor}}>
+                                    <View style={{ flexDirection: 'row', height: moderateVerticalScale(30), marginTop: moderateVerticalScale(10), backgroundColor: theme.colors.background}}>
                                         <View style={{height: '90%', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', marginLeft: moderateScale(3), marginRight: moderateScale(3)}}>
                                             <Image style={{height: '100%', width: '100%', alignSelf: 'center', marginBottom: moderateVerticalScale(-2)}} source={(playerOverview.status === 'd') ? Icons['doubtful'] : Icons['out']} resizeMode="contain"/>
                                         </View>
@@ -97,10 +101,10 @@ const PlayerDetailedStatsModal = () => {
                                 <Pressable style={styles.statHistoryToggle} onPress={() => setIsStatViewShowing(!isStatsViewShowing)} hitSlop={5}>
                                     <AnimatedView style={[styles.viewToggleIndiciator, globalStyles.shadow, { left: toggleSpring.left }]} children={undefined}/>
                                     <View style={[styles.viewToggleStyle]}>
-                                        <Text style={{alignSelf: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.mediumFont * 0.9}}>Stats</Text>
+                                        <Text style={{alignSelf: 'center', color: theme.colors.text, fontSize: GlobalConstants.mediumFont * 0.9}}>Stats</Text>
                                     </View>
                                     <View style={[styles.viewToggleStyle]}>
-                                        <Text style={{alignSelf: 'center', color: GlobalConstants.textPrimaryColor, fontSize: GlobalConstants.mediumFont * 0.9}}>History</Text>
+                                        <Text style={{alignSelf: 'center', color: theme.colors.text, fontSize: GlobalConstants.mediumFont * 0.9}}>History</Text>
                                     </View>
                                 </Pressable>
                                 </View>
@@ -127,7 +131,7 @@ const PlayerDetailedStatsModal = () => {
                         </View>
 
                         <ScrollView horizontal style={{flex: 1, paddingTop: 10, zIndex: -1}}>
-                            <FixtureDifficultyList isFullList={true} overview={overview} fixtures={fixtures} team={playerOverview.team} liveGameweek={liveGameweek}/>
+                            <FixtureDifficultyList isFullList={true} team={playerOverview.team}/>
                         </ScrollView>
                     </View> : 
                     <View style={{height: '20%', width: '20%', alignSelf: 'center'}}>

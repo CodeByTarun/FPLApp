@@ -2,8 +2,8 @@
 // add a dropdown to show the bps for that match, this will happen when clicked on??? idk how 
 // to incorporate this yet
 
-import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity, Pressable } from 'react-native'
+import React, {  } from 'react'
+import { View, Text } from 'react-native'
 import { FplFixture } from '../../../Models/FplFixtures'
 import TeamEmblem from "./TeamEmblem"
 import moment from 'moment-timezone';
@@ -15,11 +15,9 @@ import { FplGameweek } from '../../../Models/FplGameweek'
 import { FplOverview } from '../../../Models/FplOverview'
 import globalStyles from '../../../Global/GlobalStyles'
 import { goToMainScreen, ScreenTypes } from '../../../Store/navigationSlice'
-import { styles } from './FixtureCardStyles'
-import { animated, useSpring } from '@react-spring/native';
+import { FixtureCardStyles } from './FixtureCardStyles'
 import { AnimatedButton } from '../../Controls';
-
-const AnimatedPressable = animated(Pressable);
+import { useTheme } from '@react-navigation/native';
 
 interface FixtureCardProp {
     overview: FplOverview;
@@ -27,7 +25,7 @@ interface FixtureCardProp {
     gameweekData: FplGameweek;
 }
 
-const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek) => {
+const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek, styles) => {
 
     if (fixture !== undefined) {
         if (fixture.finished_provisional == true) {
@@ -44,6 +42,9 @@ const SetScoreAndTime = (fixture: FplFixture, gameweek: FplGameweek) => {
 }
 
 const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
+
+    const theme = useTheme();
+    const styles = FixtureCardStyles(theme);
 
     const dispatch = useAppDispatch();
     const navigation = useAppSelector(state => state.navigation);
@@ -69,7 +70,7 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
                 <View style={styles.scoreView}>
                     <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview)}/>
                     <View style={styles.scoreAndTimeView}>
-                        { SetScoreAndTime(fixture, gameweekData) }
+                        { SetScoreAndTime(fixture, gameweekData, styles) }
                     </View>
                     <TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/>
                 </View>

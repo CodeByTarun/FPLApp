@@ -7,10 +7,10 @@ import { useAppDispatch } from "../../Store/hooks";
 import { changeToBudgetTeam, changeToDraftTeam } from "../../Store/teamSlice";
 import Checkbox from "expo-checkbox";
 import { AnimatedButton, ModalWrapper } from "../../Features/Controls";
-import { styles } from "./TeamModalStyles";
+import { TemaModalStyles } from "./TeamModalStyles";
 import { userTeamReducer, userTeamInitialState, UserTeamActionKind } from "./UserTeamReducer";
-import { Seperator } from "../../Global/GlobalComponents";
-import { useNavigation } from "@react-navigation/native";
+import { Separator } from "../../Global/GlobalComponents";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 import { moderateScale } from "react-native-size-matters";
@@ -20,6 +20,9 @@ import { moderateScale } from "react-native-size-matters";
 // }
 
 const TeamModal = () => {
+
+    const theme = useTheme();
+    const styles = TemaModalStyles(theme);
 
     const [userTeams, setUserTeams] = useState([] as UserTeamInfo[] | undefined);
     const [confirmIsDisabled, setConfirmIsDisabled] = useState(true)
@@ -106,7 +109,7 @@ const TeamModal = () => {
         else {
             dispatch(changeToBudgetTeam(teamSelected))
         }
-        navigation.goBack();
+        setTimeout(navigation.goBack, 200);
     }, []);
 
     return (
@@ -171,7 +174,7 @@ const TeamModal = () => {
                 <>
                 <ScrollView style={styles.modalTeamList}>
                     <View style={{flex: 1}} onStartShouldSetResponder={() => true}>
-                        <Seperator/>
+                        {Separator(theme)}
                         { (userTeams && userTeams.length > 0) &&
                             userTeams.map((team) => 
                                 <View key={team.id}>
@@ -196,7 +199,7 @@ const TeamModal = () => {
                                             </AnimatedButton>
                                         </View>
                                     </View> 
-                                    <Seperator/>
+                                    {Separator(theme)}
                                 </View>
                             )
                         }

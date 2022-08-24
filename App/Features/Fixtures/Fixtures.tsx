@@ -6,7 +6,7 @@ import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import { changeGameweek, changeToBudgetTeam, changeToDraftTeam, changeToEmpty, changeToFixture, changingFixtureWhenGameweekChanged, TeamTypes } from "../../Store/teamSlice";
 import { goToFixturesScreen, goToMainScreen, ScreenTypes } from "../../Store/navigationSlice";
-import { styles } from "./FixturesStyles";
+import { FixturesStyles } from "./FixturesStyles";
 import { AnimatedButton, CustomButton } from "../Controls";
 import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
 import { FplGameweek } from "../../Models/FplGameweek";
@@ -15,7 +15,7 @@ import GameweekView from "./GameweekView";
 import { FIXTURES_VIEW_CONTROLS_HEIGHT, FIXTURES_VIEW_HEIGHT, height } from "../../Global/GlobalConstants";
 import { animated, useChain, useSpring, useSpringRef } from "@react-spring/native";
 import FixtureCardLoading from "./FixtureCardLoading";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 import { changeMutableView } from "../../Store/modalSlice";
@@ -40,6 +40,9 @@ function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
 }
 
 const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
+
+  const theme = useTheme();
+  const styles = FixturesStyles(theme);
 
   const dispatch = useAppDispatch();
   const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -117,8 +120,8 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
       }
   }
 
-    const onInfoButtonPress = useCallback(() => {
-      navigator.navigate('InfoModal');
+    const onSettingsButtonPress = useCallback(() => {
+      navigator.navigate('SettingsModal');
     }, [])
 
     const onCalendarButtonPress = useCallback(() => {
@@ -126,11 +129,11 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         if (teamInfo.gameweek > teamInfo.liveGameweek) {
           dispatch(changeGameweek(teamInfo.liveGameweek));
         }
-        dispatch(goToMainScreen());
+        setTimeout(() => dispatch(goToMainScreen()), 100)
       } else {
         dispatch(goToFixturesScreen());
       } 
-    }, [navigation])
+    }, [navigation, teamInfo.gameweek])
 
   return (
     <AnimatedView style={[styles.animatedView, { height: expandSpring.height }]}>
@@ -142,7 +145,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
           </AnimatedPressable>
           <View style={styles.buttonsContainers}>
             <View style={styles.singleButtonContainer}>
-              <CustomButton image="info" buttonFunction={onInfoButtonPress}/>
+              <CustomButton image="cogwheel" buttonFunction={onSettingsButtonPress}/>
             </View>
           </View>
       </View>  
@@ -175,7 +178,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                 </View>
               </AnimatedButton>
             </View>
-            <VerticalSeparator/>
+            {VerticalSeparator(theme)}
             <View style={styles.bottomaBarSections}>
               <AnimatedButton buttonFn={onCalendarButtonPress}>
                 <View style={styles.buttonContainer}>
@@ -183,7 +186,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                 </View>
               </AnimatedButton>
             </View>
-            <VerticalSeparator/>
+            {VerticalSeparator(theme)}
             <View style={styles.bottomaBarSections}>
               <AnimatedButton buttonFn={() => dispatch(changeGameweek(teamInfo.gameweek + 1))} disabled={(teamInfo.gameweek >= 38)}>
                 <View style={styles.buttonContainer}>

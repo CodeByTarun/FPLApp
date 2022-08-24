@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { primaryColor, textPrimaryColor, mediumFont, height } from "../../../Global/GlobalConstants";
+import { mediumFont, height, darkFieldColor, fieldColor } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create(
+export const LineupStyles = (theme: Theme) => StyleSheet.create(
     {   
         topContainer: {
             flex: 4,
@@ -10,15 +11,15 @@ export const styles = StyleSheet.create(
 
         bottomContainer: {
             flex: 1,
-            backgroundColor: '#5e9111',
+            backgroundColor: theme.dark ? darkFieldColor : fieldColor,
             borderTopWidth: 1.5,
-            borderTopColor: 'white',
+            borderTopColor: theme.dark ? '#8c8c8c' : 'white',
         },
 
         fieldContainer: {
             width: '100%',
             height: '100%',
-            backgroundColor: '#5e9111',
+            backgroundColor: theme.dark ? darkFieldColor : fieldColor,
             position: 'absolute',
         },
 
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create(
         },
 
         unstartedFixtureView: {
-            backgroundColor: primaryColor, 
+            backgroundColor: theme.colors.primary, 
             alignSelf: 'center', 
             justifyContent: 'center', 
             position: 'absolute',  
@@ -75,7 +76,7 @@ export const styles = StyleSheet.create(
         },
         
         unstartedFixtureViewText: {
-            color: textPrimaryColor, 
+            color: theme.colors.text, 
             fontSize: mediumFont * 1.1,
             fontWeight: '500', 
             alignSelf: 'center'

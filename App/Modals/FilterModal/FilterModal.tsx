@@ -1,14 +1,17 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp, useCardAnimation } from "@react-navigation/stack";
-import React, { useCallback } from "react";
+import React from "react";
 import { Animated, Pressable, View, StyleSheet } from "react-native";
 import { RootStackParams } from "../../../App";
 import { height } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { useAppSelector } from "../../Store/hooks";
-import { styles } from "./FilterModalStyles";
+import { FilterModalStyles } from "./FilterModalStyles";
 
 const FilterModal = () => {
+
+    const theme = useTheme();
+    const styles = FilterModalStyles(theme);
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
     const filterView = useAppSelector(state => state.modal.filterView);

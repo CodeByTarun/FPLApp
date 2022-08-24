@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "../reduxRender";
-import FixtureDifficultyList from "../../../App/Features/PlayerStats/PlayerList/FixtureDifficultyList";
+import FixtureDifficultyList from "../../../App/Features/PlayerStats/PlayerListContainer/PlayerList/FixtureDifficultyList";
 import { allFixtures } from "../../SampleData/Fixtures";
 import { overview } from "../../SampleData/Overviews";
 

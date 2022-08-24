@@ -1,13 +1,14 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native"
-import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters"
-import { secondaryColor, modalTextColor, largeFont, mediumFont, modalButtonColor, cornerRadius, fieldColor, width, textSecondaryColor, textPrimaryColor } from "../../Global/GlobalConstants"
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters"
+import { largeFont, mediumFont, cornerRadius, fieldColor } from "../../Global/GlobalConstants"
 
-export const styles = StyleSheet.create(
+export const TemaModalStyles = (theme: Theme) => StyleSheet.create(
     {
 
         titleText: {
             alignSelf: 'center', 
-            color: textPrimaryColor,
+            color: theme.colors.text,
             fontSize: largeFont,
             fontWeight: 'bold',
             marginTop: moderateVerticalScale(10), 
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create(
         },
 
         text: {
-            color: textPrimaryColor,
+            color: theme.colors.text,
             fontSize: mediumFont,
         },
 
@@ -33,7 +34,7 @@ export const styles = StyleSheet.create(
         },
 
         textInput: {
-            backgroundColor: modalButtonColor,
+            backgroundColor: theme.colors.background,
             height: moderateVerticalScale(45, 0.2),
             paddingLeft: moderateScale(10),
             borderRadius: cornerRadius,
@@ -91,7 +92,7 @@ export const styles = StyleSheet.create(
 
         addButton: {
             width: moderateScale(100, 0.4),
-            backgroundColor: modalButtonColor,
+            backgroundColor: theme.colors.background,
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: cornerRadius,

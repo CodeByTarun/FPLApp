@@ -64,7 +64,6 @@ export const globalStyles = StyleSheet.create(
 
         baseButton: {
             borderRadius: 100,
-            backgroundColor: GlobalConstants.secondaryColor,
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',

@@ -5,8 +5,9 @@ import { useAppSelector } from "../../../../Store/hooks";
 import { StatsFilterState } from "../../../PlayerDetailedStatsModal/StatsFilterReducer";
 import { CombinedPlayerData } from "../../PlayerComparisonModal";
 import {  History } from "../../../../Models/FplPlayerSummary";
-import { styles } from "./StatColumnStyles";
+import { StatColumnStyles } from "./StatColumnStyles";
 import { moderateVerticalScale } from "react-native-size-matters";
+import { useTheme } from "@react-navigation/native";
 
 interface StatColumnProps {
     header: string;
@@ -20,6 +21,9 @@ interface StatColumnProps {
 
 const StatColumn = ({header, statName, playerList, playerDataHeight, statsFilterState, playerMinutesArray, viewIndex} : StatColumnProps) => {
     
+    const theme = useTheme();
+    const styles = StatColumnStyles(theme);
+
     const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
     const playersStatArray = useMemo(() => {

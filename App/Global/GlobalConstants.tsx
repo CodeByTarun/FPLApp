@@ -18,18 +18,19 @@ export const cornerRadius = 12;
 
 // Color Scheme
 export const fieldColor = '#5e9111';
+export const darkFieldColor = '#242424';
 export const redColor = '#f44336';
 
 export const buttonColor = 'whitesmoke';
-export const primaryColor = '#451295';
-export const secondaryColor = '#582aa0';
+export const primaryColor = '#121212';
+export const secondaryColor = '#2a2a2a';
 export const lightColor = '#9b7fc6';
-export const aLittleLighterColor = '#7955b3';
+export const aLittleLighterColor = '#bcbcbc';
 export const darkColor = '#462280';
-export const aLittleDarkerColor = '#693faa';
-export const tertiaryColor = 'white';
+export const aLittleDarkerColor = '#bcbcbc';
+export const tertiaryColor = '#bcbcbc';
 export const textPrimaryColor = '#ece7f4';
-export const textSecondaryColor = '#c7b8df';
+export const textSecondaryColor = '#bcbcbc';
 
 export const testColor = '#451295';
 
@@ -50,3 +51,55 @@ export const Per90Stats = ["Total Points", "Goals Scored", "Assists",
                             "Threat", "ICT Index"];
 
 export const PlayerComparisonLimit = 5;
+
+export const defaultTheme = {
+    dark: false,
+    colors: {
+        primary: '#451295',
+        background: '#582aa0',
+        card: '#451295',
+        text: '#ece7f4',
+        border: '#9b7fc6',
+        notification: '#c7b8df',
+    }
+}
+
+export const darkTheme = {
+    dark: true,
+    colors: {
+        primary: '#121212',
+        background: '#181818',
+        card: '#141414',
+        text: '#ece7f4',
+        border: '#606060',
+        notification: '#808080',
+    }
+}
+// current background color
+// #272727 
+// 50% #676767
+
+// Default Theme
+
+// export const buttonColor = 'whitesmoke';
+// export const primaryColor = '#451295';
+// export const secondaryColor = '#582aa0';
+// export const lightColor = '#9b7fc6';
+// export const aLittleLighterColor = '#7955b3';
+// export const darkColor = '#462280';
+// export const aLittleDarkerColor = '#693faa';
+// export const tertiaryColor = 'white';
+// export const textPrimaryColor = '#ece7f4';
+// export const textSecondaryColor = '#c7b8df';
+
+// Dark Theme
+// export const buttonColor = 'whitesmoke';
+// export const primaryColor = '#121212';
+// export const secondaryColor = '#2a2a2a';
+// export const lightColor = '#9b7fc6';
+// export const aLittleLighterColor = '#bcbcbc';
+// export const darkColor = '#462280';
+// export const aLittleDarkerColor = '#bcbcbc';
+// export const tertiaryColor = '#bcbcbc';
+// export const textPrimaryColor = '#ece7f4';
+// export const textSecondaryColor = '#bcbcbc';

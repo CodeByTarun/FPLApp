@@ -1,16 +1,15 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Lineup from "./Lineup";
-import * as GlobalConstants from "../../Global/GlobalConstants";
 import TeamSwitch from "./TeamSwitch/TeamSwitch";
 import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import globalStyles from "../../Global/GlobalStyles";
 import Standings from "../Standings";
-import { styles } from "./LineupViewStyles";
+import { LineupViewStyles } from "./LineupViewStyles";
 import {AnimatedButton, LoadingIndicator} from "../Controls";
 import { FplDraftGameweekPicks } from "../../Models/FplDraftGameekPicks";
 import { FplDraftOverview } from "../../Models/FplDraftOverview";
@@ -19,7 +18,7 @@ import { FplGameweek } from "../../Models/FplGameweek";
 import { FplManagerGameweekPicks } from "../../Models/FplManagerGameweekPicks";
 import { FplManagerInfo } from "../../Models/FplManagerInfo";
 import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 import { useAppDispatch } from "../../Store/hooks";
@@ -39,6 +38,9 @@ interface LineupViewProps {
 }
 
 const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks, draftOverview, draftUserInfo, draftLeagueInfo, budgetUserInfo, budgetGameweekPicks}: LineupViewProps) => {
+
+    const theme = useTheme();
+    const styles = LineupViewStyles(theme);
 
     const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
     const dispatch = useAppDispatch();

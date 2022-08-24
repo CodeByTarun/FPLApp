@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-import { height, mediumFont, primaryColor, secondaryColor, textPrimaryColor, textSecondaryColor } from "../../../Global/GlobalConstants";
+import { mediumFont } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const PlayerComparisonFlatListStyle = (theme: Theme) => StyleSheet.create({
     
     container: {
         flex: 1,
@@ -39,20 +40,20 @@ export const styles = StyleSheet.create({
     },
 
     headerText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         padding: moderateScale(5, 0.3),
         fontSize: mediumFont,
     },
 
     playerHeadersContainer: {
         flex: 1,
-        borderTopColor: textSecondaryColor,
+        borderTopColor: theme.colors.notification,
         borderTopWidth: 1,
 
     },
 
     playerHeaderText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         padding: moderateScale(3, 0.3),
         fontSize: mediumFont
     }

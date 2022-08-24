@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { Theme, useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp, useCardAnimation } from "@react-navigation/stack";
 import React, { PropsWithChildren, useCallback } from "react";
 import { Animated, Keyboard, Pressable, StyleSheet, View } from "react-native";
@@ -7,6 +7,7 @@ import { RootStackParams } from "../../../../App";
 import { primaryColor } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
 import CloseButton from "../CloseButton/CloseButton";
+import { throttle } from "lodash";
 
 interface ModalWrapperProps {
     modalHeight?: string | number;
@@ -16,6 +17,10 @@ interface ModalWrapperProps {
 
 const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWithChildren<ModalWrapperProps>) => {
 
+    const theme = useTheme();
+    const styles = ModalWrapperStyles(theme);
+    
+
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
     const { current } = useCardAnimation();
 
@@ -24,14 +29,16 @@ const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWi
         outputRange: [0, 1],
     });
 
+    const throttledCloseFunction = throttle(navigation.goBack, 200);
+
     const closeFuntion = useCallback(() => {
         Keyboard.dismiss();
-        navigation.goBack();
+        throttledCloseFunction();        
     }, [])
 
     return(
         <View testID="background" style={styles.modalBackground}>
-            <Pressable style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.5)' }]} onPress={closeFuntion}/>
+            <Pressable style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.6)' }]} onPress={closeFuntion}/>
             <Animated.View style={[styles.modal, globalStyles.modalShadow, 
                                     modalHeight ? {height: modalHeight} : {}, 
                                     modalWidth ? {width: modalWidth} : {}, 
@@ -45,7 +52,7 @@ const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWi
 
 export default ModalWrapper;
 
-export const styles = StyleSheet.create({
+export const ModalWrapperStyles = (theme: Theme) => StyleSheet.create({
 
     modal: {
         justifyContent: 'center', 
@@ -55,7 +62,7 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         padding: moderateVerticalScale(10),
         borderRadius: 10,
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
        },
 
     modalBackground: {

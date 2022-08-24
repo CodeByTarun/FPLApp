@@ -1,8 +1,9 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { Pressable, View, Text } from "react-native";
 import { textPrimaryColor, lightColor } from "../../../../Global/GlobalConstants";
 import globalStyles from "../../../../Global/GlobalStyles";
-import { styles } from "./AdditionalInfoCardStyles";
+import { AdditionalInfoCardStyles } from "./AdditionalInfoCardStyles";
 
 interface AdditionalInfoCardProps {
     viewIndex: number;
@@ -12,6 +13,9 @@ interface AdditionalInfoCardProps {
 
 const AdditionalInfoCard = ({viewIndex, setViewIndex, viewIndexScenes} : AdditionalInfoCardProps) => {
 
+    const theme = useTheme();
+    const styles = AdditionalInfoCardStyles(theme);
+
     return (
         <Pressable testID="additionalInfoCardButton" style={[styles.cardContainer, globalStyles.tabShadow]}
                     onPress={() => setViewIndex((viewIndex + 1 < viewIndexScenes.length) ? viewIndex + 1 : 0)}>
@@ -20,10 +24,10 @@ const AdditionalInfoCard = ({viewIndex, setViewIndex, viewIndexScenes} : Additio
             </View>
                 
             <View style={styles.dotsContainer}>
-                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 0 ? textPrimaryColor : lightColor}]}/>
-                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 1 ? textPrimaryColor : lightColor}]}/>          
-                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 2 ? textPrimaryColor : lightColor}]}/>
-                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 3 ? textPrimaryColor : lightColor}]}/>                            
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 0 ? textPrimaryColor : theme.colors.border}]}/>
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 1 ? textPrimaryColor : theme.colors.border}]}/>          
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 2 ? textPrimaryColor : theme.colors.border}]}/>
+                <View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 3 ? textPrimaryColor : theme.colors.border}]}/>                            
             </View>
         </Pressable>
     )

@@ -4,6 +4,7 @@ import { textPrimaryColor, mediumFont } from "../../../Global/GlobalConstants";
 import * as GlobalConstants from "../../../Global/GlobalConstants";
 import { Slider } from "@miblanchard/react-native-slider";
 import { moderateVerticalScale } from "react-native-size-matters";
+import { Theme, useTheme } from "@react-navigation/native";
 
 interface SliderProps {
     header: string;
@@ -17,6 +18,9 @@ interface SliderProps {
 }
 
 const CustomSlider = ({ header, minValue, maxValue, step, onValueChange, isPrice = false, initialRange, debounceValue = 0 } : SliderProps) => {
+
+    const theme = useTheme();
+    const styles = CustomSliderStyles(theme);
 
     const [sliderRange, setSliderRange] = useState(initialRange);
 
@@ -40,9 +44,9 @@ const CustomSlider = ({ header, minValue, maxValue, step, onValueChange, isPrice
                     minimumValue={minValue}
                     maximumValue={maxValue}
                     step={step}
-                    thumbTintColor={GlobalConstants.lightColor}
-                    maximumTrackTintColor={GlobalConstants.secondaryColor}
-                    minimumTrackTintColor={GlobalConstants.lightColor}/>
+                    thumbTintColor={theme.colors.border}
+                    maximumTrackTintColor={theme.colors.background}
+                    minimumTrackTintColor={theme.colors.border}/>
         </View>
     )
 
@@ -50,7 +54,7 @@ const CustomSlider = ({ header, minValue, maxValue, step, onValueChange, isPrice
 
 export default CustomSlider;
 
-const styles = StyleSheet.create({
+const CustomSliderStyles = (theme: Theme) => StyleSheet.create({
     container: {
         flex: 1,
     },
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont,
         flex: 1,
         fontWeight: '500'

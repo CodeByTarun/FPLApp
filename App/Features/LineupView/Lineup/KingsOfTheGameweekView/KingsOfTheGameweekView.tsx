@@ -1,15 +1,19 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, View, Text, Image } from "react-native";
 import globalStyles from "../../../../Global/GlobalStyles";
 import { Jerseys } from "../../../../Global/Images";
 import { FplOverview } from "../../../../Models/FplOverview";
-import { styles } from "./KingsOfTheGameweekViewStyles";
+import { KingOfTheGameweekViewStyles } from "./KingsOfTheGameweekViewStyles";
 
 interface KingsOfTheGameweekViewProps {
     overviewData: FplOverview;
 }
 
 const KingsOfTheGameweekView = ({overviewData} : KingsOfTheGameweekViewProps) => {
+
+    const theme = useTheme();
+    const styles = KingOfTheGameweekViewStyles(theme);
 
     let kings = overviewData.events.filter(event => event.top_element_info !== null).reverse();
 

@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import { animated, useSpring } from "@react-spring/native";
 import React, { useCallback, useRef, useState } from "react";
 import { Animated, Easing, LayoutChangeEvent, View } from "react-native";
@@ -8,6 +9,8 @@ import { lightColor, primaryColor } from "../../../Global/GlobalConstants";
 const AnimatedView = animated(View);
 
 const LoadingIndicator = () => {
+
+    const theme = useTheme();
 
     const rotationSpring = useSpring({
         to: {rotate: '360deg'},
@@ -21,9 +24,9 @@ const LoadingIndicator = () => {
             <Svg width={'90%'} height={'90%'} viewBox="0 0 100 100" style={{alignSelf: 'center'}}>
                 <Defs>
                     <LinearGradient id="opacity">
-                        <Stop offset={'0%'} stopOpacity={1.0} stopColor={lightColor}/>
-                        <Stop offset={'60%'} stopOpacity={0.04} stopColor={lightColor}/>
-                        <Stop offset={'100%'} stopOpacity={0} stopColor={primaryColor}/>
+                        <Stop offset={'0%'} stopOpacity={1.0} stopColor={theme.colors.border}/>
+                        <Stop offset={'60%'} stopOpacity={0.04} stopColor={theme.colors.border}/>
+                        <Stop offset={'100%'} stopOpacity={0} stopColor={theme.colors.primary}/>
                     </LinearGradient>
                 </Defs>
                 <Path d="M10 50 A 40 40 0 0 0 90 50" stroke={'url(#opacity)'} strokeWidth={15} strokeLinecap={"round"}/>

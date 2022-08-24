@@ -1,12 +1,12 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { primaryColor, secondaryColor, cornerRadius, textPrimaryColor, mediumFont } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({ 
+export const PLayerTableStyles = (theme: Theme) => StyleSheet.create({ 
     //#region player table
     topBarContainer: {
         width: '100%', 
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         paddingTop: moderateVerticalScale(10),
         paddingLeft: moderateScale(5),
         paddingRight: moderateScale(5),

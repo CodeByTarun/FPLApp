@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { width, primaryColor, cornerRadius, textPrimaryColor, lightColor, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
+import { width, cornerRadius, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
         height: FIXTURE_CARD_HEIGHT,
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
         borderRadius: cornerRadius,
         paddingTop: moderateVerticalScale(5),
         paddingBottom: moderateVerticalScale(3),
-        backgroundColor: primaryColor
+        backgroundColor: theme.colors.card
     },
     //#endregion
 
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
     datetext: {
         fontSize: smallFont * 1.1,
         alignSelf: 'center',
-        color: textPrimaryColor,
+        color: theme.colors.notification,
         fontWeight: '500',
         flex: 1,
         textAlign: 'center'
@@ -58,7 +59,7 @@ export const styles = StyleSheet.create({
         fontSize: mediumFont,
         alignSelf: 'center',
         margin: moderateVerticalScale(2),
-        color: textPrimaryColor,
+        color: theme.colors.text,
     },
 
     timeText: {
@@ -73,7 +74,7 @@ export const styles = StyleSheet.create({
     fullTimeText: {
         fontSize: mediumFont * 0.8,
         alignSelf: 'center',
-        color: lightColor
+        color: theme.colors.border,
     }
     //#endregion
 });

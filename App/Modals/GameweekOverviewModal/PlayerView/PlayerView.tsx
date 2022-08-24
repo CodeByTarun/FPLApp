@@ -23,13 +23,14 @@ const PlayerView = ({overview, header, id} : PlayerViewProps) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const openPlayerStatsModal = useCallback((id: number) => {
-
         let player = overview.elements.find(element => element.id === id);
         if (player) {
             dispatch(changePlayerOverviewInfo(player));
             navigation.navigate('PlayerDetailedStatsModal');
         }
     }, [overview])
+
+    
 
     return (
         <View style={styles.playerContainer}>

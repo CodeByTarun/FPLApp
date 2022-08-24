@@ -1,10 +1,11 @@
+import { useTheme } from "@react-navigation/native";
 import Checkbox from "expo-checkbox";
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { moderateVerticalScale } from "react-native-size-matters";
 import CustomSlider from "../../../Features/Controls/Slider";
 import { fieldColor, lightColor } from "../../../Global/GlobalConstants";
-import { styles } from "../PlayerDetailedStatsModalStyles";
+import { PlayerDetailedStatsModalStyles } from "../PlayerDetailedStatsModalStyles";
 import { StatsFilterAction, StatsFilterActionKind, StatsFilterState } from "../StatsFilterReducer";
 
 
@@ -15,6 +16,9 @@ interface FilterViewProps {
 }
 
 const FilterView = ({statsFilterState, statsFilterDispatch, liveGameweek} : FilterViewProps) => {
+
+    const theme = useTheme();
+    const styles = PlayerDetailedStatsModalStyles(theme);
 
     const [isPer90, setIsPer90] = useState(statsFilterState.isPer90);
     const [gameSpan, setGameSpan] = useState(statsFilterState.gameSpan);

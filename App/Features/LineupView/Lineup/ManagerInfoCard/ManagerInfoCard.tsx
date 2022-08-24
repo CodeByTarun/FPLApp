@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { lightColor, textPrimaryColor } from "../../../../Global/GlobalConstants";
@@ -8,7 +9,7 @@ import { FplDraftUserInfo } from "../../../../Models/FplDraftUserInfo";
 import { FplManagerGameweekPicks } from "../../../../Models/FplManagerGameweekPicks";
 import { FplManagerInfo } from "../../../../Models/FplManagerInfo";
 import { BudgetInfo, DraftInfo, TeamTypes } from "../../../../Store/teamSlice";
-import { styles } from "./ManagerInfoCardStyles";
+import { ManagerInfoCardStyles } from "./ManagerInfoCardStyles";
 
 interface statInfo {
     title: string,
@@ -26,6 +27,9 @@ interface ManagerInfoCardProps {
 }
 
 const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPicks, draftManagerInfo}: ManagerInfoCardProps) => {
+
+    const theme = useTheme();
+    const styles = ManagerInfoCardStyles(theme);
 
     const [stat, setStat] = useState({title: "Gameweek", 
                                       value: (teamInfo.teamType === TeamTypes.Budget) ? GetTeamTotalPoints(teamInfo, players, budgetGameweekPicks) : GetTeamTotalPoints(teamInfo, players) , 
@@ -139,14 +143,14 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
                     <View style={styles.dotsContainer}>  
                         { [1,2,3,4,5].map(index => {
                             return (
-                                <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : lightColor}]}/>
+                                <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : theme.colors.border}]}/>
                             )
                         }) }
                         {(teamInfo.teamType === TeamTypes.Budget) &&
                             <>  
                                 { [6,7].map(index => {
                                     return (
-                                        <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : lightColor}]}/>
+                                        <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : theme.colors.border}]}/>
                                     )
                                 }) }
                             </>

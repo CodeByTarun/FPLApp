@@ -1,15 +1,16 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, scale, verticalScale } from "react-native-size-matters";
-import { width, primaryColor, smallFont, textSecondaryColor, secondaryColor, textPrimaryColor, mediumFont, largeFont, aLittleDarkerColor, aLittleLighterColor, lightColor, tertiaryColor } from "../../../../Global/GlobalConstants";
+import { smallFont } from "../../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const KingOfTheGameweekViewStyles = (theme: Theme) => StyleSheet.create({
     kingsView: {
         flex: 1,
         alignSelf: 'center',
         marginTop: moderateVerticalScale(7),
         width: moderateScale(280, 0.9),
         paddingLeft: moderateScale(2),
-        backgroundColor: primaryColor,           
+        backgroundColor: theme.colors.primary,           
     },
 
     kingsScrollView: {
@@ -34,14 +35,14 @@ export const styles = StyleSheet.create({
     },
 
     textContainer: {
-        backgroundColor: secondaryColor,
+        backgroundColor: theme.dark ? theme.colors.card : theme.colors.background,
         width: '90%',
         height: verticalScale(25), 
     },
     
     gameweekAndScoreContainer: {
         flexDirection: 'row', 
-        backgroundColor: aLittleDarkerColor,
+        backgroundColor: theme.colors.background,
         width: '100%',
         alignItems: 'center', 
         justifyContent: 'center',
@@ -57,7 +58,7 @@ export const styles = StyleSheet.create({
     },
 
     kingsText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: smallFont,
         fontWeight: '500',
         alignSelf: 'center',
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
     },
 
     gameweekAndScoreText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: smallFont,
         fontWeight: '500',
         flex: 2,

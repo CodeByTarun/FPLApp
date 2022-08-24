@@ -1,18 +1,19 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { width, textPrimaryColor, mediumFont, lightColor, secondaryColor, aLittleLighterColor, primaryColor, textSecondaryColor, cornerRadius } from "../../../../Global/GlobalConstants";
+import { mediumFont, cornerRadius } from "../../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const HistoryListStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         flex: 1, 
         paddingBottom: moderateVerticalScale(5),
         marginBottom: moderateVerticalScale(5), 
-        backgroundColor: primaryColor, 
+        backgroundColor: theme.colors.primary, 
         paddingLeft: moderateScale(5), 
         paddingRight: moderateScale(5),
         borderWidth: 2,
-        borderColor: aLittleLighterColor,
+        borderColor: theme.colors.border,
         borderRadius: cornerRadius,
     },
 
@@ -22,7 +23,7 @@ export const styles = StyleSheet.create({
     },
 
     headerText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont * 0.9,
         fontWeight: '500',
         alignSelf: 'center',
@@ -32,11 +33,11 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center',  
         width: '100%',
-        borderBottomColor: lightColor, 
+        borderBottomColor: theme.colors.border, 
         borderBottomWidth: 1,
         paddingBottom: moderateVerticalScale(8), 
         paddingTop: moderateVerticalScale(8),
-        backgroundColor: primaryColor
+        backgroundColor: theme.colors.primary
     },
 
     historyItemContainer: {
@@ -45,14 +46,14 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         paddingBottom: moderateVerticalScale(5), 
         paddingTop: moderateVerticalScale(5),
-        borderBottomColor: aLittleLighterColor, 
+        borderBottomColor: theme.colors.border, 
         borderBottomWidth: 1,
     },
 
     footerContainer: {
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         flexDirection: 'row', 
-        borderTopColor: lightColor, 
+        borderTopColor: theme.colors.border, 
         borderTopWidth: 1, 
         paddingTop: moderateVerticalScale(5),
     }

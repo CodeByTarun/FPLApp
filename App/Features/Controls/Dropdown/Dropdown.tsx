@@ -1,5 +1,5 @@
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { animated, useSpring } from "@react-spring/native";
 import React, { useCallback, useEffect } from "react";
@@ -9,7 +9,7 @@ import globalStyles from "../../../Global/GlobalStyles";
 import { useAppDispatch } from "../../../Store/hooks";
 import { changeMutableView } from "../../../Store/modalSlice";
 import AnimatedButton from "../AnimatedButton/AnimatedButton";
-import { styles } from "./DropdownStyles";
+import { DropDownStyles } from "./DropdownStyles";
 
 const AnimatedView = animated(View);
 
@@ -22,20 +22,29 @@ interface DropdownProps {
 }
 
 const Dropdown = (props: DropdownProps) => {
+
+    const theme = useTheme();
+    const styles = DropDownStyles(theme);
     
     const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
     const dispatch = useAppDispatch();
 
     const selectedOption = useCallback((item: string) => {
         props.setValue(item);
-        Keyboard.dismiss();
-        navigator.goBack();
+
+        setTimeout(() => {
+            Keyboard.dismiss();
+            navigator.goBack();
+        }, 100);
     }, [props.setValue])
 
     const clearValue = useCallback(() => {
         props.setValue(props.defaultValue);
-        Keyboard.dismiss();
-        navigator.goBack();
+
+        setTimeout(() => {
+            Keyboard.dismiss();
+            navigator.goBack();
+        }, 100);
     }, [])
 
     const [animatedStyle, api] = useSpring(() => ({ scale: 1 }));

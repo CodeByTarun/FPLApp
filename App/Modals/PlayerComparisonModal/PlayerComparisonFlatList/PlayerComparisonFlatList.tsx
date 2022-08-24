@@ -1,18 +1,19 @@
-import { animated, config, useSpring } from "@react-spring/native";
+import { useTheme } from "@react-navigation/native";
+import { animated, useSpring } from "@react-spring/native";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, ScrollView, Text, View, Image } from "react-native";
-import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { moderateVerticalScale } from "react-native-size-matters";
 import { AnimatedButton } from "../../../Features/Controls";
-import FixtureDifficultyList from "../../../Features/PlayerStats/PlayerList/FixtureDifficultyList";
-import { Seperator } from "../../../Global/GlobalComponents";
-import { height, PlayerComparisonLimit, textSecondaryColor } from "../../../Global/GlobalConstants";
+import FixtureDifficultyList from "../../../Features/PlayerStats/PlayerListContainer/PlayerList/FixtureDifficultyList";
+import { Separator } from "../../../Global/GlobalComponents";
+import { PlayerComparisonLimit, textSecondaryColor } from "../../../Global/GlobalConstants";
 import { Icons } from "../../../Global/Images";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
 import { useAppSelector } from "../../../Store/hooks";
 import { StatsFilterState } from "../../PlayerDetailedStatsModal/StatsFilterReducer";
 import { CombinedPlayerData } from "../PlayerComparisonModal";
-import { styles } from "./PlayerComparistonFlatListStyle";
+import { PlayerComparisonFlatListStyle } from "./PlayerComparistonFlatListStyle";
 import StatColumn from "./StatColumn";
 
 const AnimatedView = animated(View);
@@ -46,7 +47,7 @@ const gameweekStats: {[key: string] : string } = {
     'transfers_out_event' : 'Transfers Out', //number
 }
 
-interface PlayerComparisonViewProps {
+interface PlayerComparisonFlatListProps {
     overview: FplOverview;
     fixtures: FplFixture[];
     viewIndex: number;
@@ -56,7 +57,10 @@ interface PlayerComparisonViewProps {
     isEditActive: boolean;
 }
 
-const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterState, removePlayerFunction, playerList, isEditActive} : PlayerComparisonViewProps) => {
+const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterState, removePlayerFunction, playerList, isEditActive} : PlayerComparisonFlatListProps) => {
+
+    const theme = useTheme();
+    const styles = PlayerComparisonFlatListStyle(theme);
 
     const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
@@ -118,7 +122,7 @@ const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterSta
     
                         </View>
                         <View pointerEvents="none" style={{flex: 1}}/>
-                        <Seperator/>
+                        {Separator(theme)}
     
                     </View>    
                     ) }
@@ -163,7 +167,7 @@ const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterSta
                                     <View key={player.playerOverview.id.toString()} style={{height: playerDataHeight}}>
                                         <Text style={[styles.headerText, {}]}/>
                                         <View style={{flex:1, marginBottom: 7}}>
-                                            <FixtureDifficultyList team={player.playerOverview.team} fixtures={fixtures} overview={overview} isFullList={true} liveGameweek={liveGameweek}/>
+                                            <FixtureDifficultyList team={player.playerOverview.team} isFullList={true}/>
                                         </View>
                                     </View>
                                 )

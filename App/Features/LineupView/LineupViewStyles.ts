@@ -1,19 +1,20 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { primaryColor, textPrimaryColor, width, smallFont, cornerRadius, height, secondaryColor, largeFont, mediumFont } from "../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const LineupViewStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         flex: 1,
         overflow: 'hidden',
-        backgroundColor: primaryColor
+        backgroundColor: theme.colors.primary
     },
 
     top: {
         width: '100%',
         height: moderateVerticalScale(50, 0.4),
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         zIndex: 1,
     },  
 
@@ -28,7 +29,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         zIndex: 1,
         paddingBottom: moderateVerticalScale(5, 0.4),
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
     },
 
     lineupHeaderContainer: {
@@ -46,7 +47,7 @@ export const styles = StyleSheet.create({
 
     text: {
         alignSelf: 'center',
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont*1.3,
         fontWeight: 'bold'
     },
@@ -55,13 +56,13 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         top: '33%',
         padding: moderateVerticalScale(5),
-        backgroundColor: secondaryColor, 
+        backgroundColor: theme.colors.background, 
         borderRadius: cornerRadius, 
         width: moderateScale(width * 0.6), alignSelf: 'center'
     },
 
     buttonText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontWeight: '500',
         fontSize: mediumFont * 1.1,
         alignSelf: 'center'

@@ -1,17 +1,16 @@
 import React, { useCallback, useContext, useEffect, useReducer, useState } from "react";
 import { View, Text, Image } from "react-native";
 import { AnimatedButton, ModalWrapper } from "../../Features/Controls";
-import { lightColor, secondaryColor, textPrimaryColor, textSecondaryColor } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { PlayerOverview } from "../../Models/FplOverview";
 import { FplPlayerSummary } from "../../Models/FplPlayerSummary";
 import { changeFilterView, changeMutableView } from "../../Store/modalSlice";
 import { statsFilterReducer } from "../PlayerDetailedStatsModal/StatsFilterReducer";
-import { styles } from "./PlayerComparisonModalStyles";
+import { PlayerComparisonModalStyles } from "./PlayerComparisonModalStyles";
 import AddPlayerModal from "./AddPlayerModal";
 import { animated, useSpring } from "@react-spring/native";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { RootStackParams } from "../../../App";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { FplBaseDataContext } from "../../AppContext";
@@ -30,6 +29,9 @@ const AnimatedView = animated(View);
 const views = ['GW', 'Stats', 'FDR'];
 
 const PlayerComparisonModal = () => {
+
+    const theme = useTheme();
+    const styles = PlayerComparisonModalStyles(theme);
 
     const liveGameweek = useAppSelector(state => state.team.liveGameweek);
     const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -103,7 +105,7 @@ const PlayerComparisonModal = () => {
                         { views.map( (name, index) =>
                             <View key={index} style={styles.controlButtons}>
                                 <AnimatedButton buttonFn={() => setViewIndex(index)}>
-                                    <Text style={[styles.controlText, {color: viewIndex === index ? textPrimaryColor : textSecondaryColor}]}>{name}</Text>
+                                    <Text style={[styles.controlText, {color: viewIndex === index ? theme.colors.text : theme.colors.notification}]}>{name}</Text>
                                 </AnimatedButton>
                             </View> 
                         )}
@@ -124,7 +126,7 @@ const PlayerComparisonModal = () => {
                     }
                 </View>
                 <AnimatedButton buttonFn={() => openAddPlayerModal()} disabled={playersToCompare.length >= 5}>                
-                    <View style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? lightColor : secondaryColor}]}>
+                    <View style={[styles.button, {backgroundColor: (playersToCompare.length >= 5) ? theme.colors.border : theme.colors.background}]}>
                         <Text style={styles.buttonText}>Add Player</Text>
                     </View>
                 </AnimatedButton>

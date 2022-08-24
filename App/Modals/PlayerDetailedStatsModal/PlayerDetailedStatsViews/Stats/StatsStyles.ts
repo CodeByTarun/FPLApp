@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { aLittleLighterColor, cornerRadius, primaryColor, largeFont, textPrimaryColor, mediumFont } from "../../../../Global/GlobalConstants";
+import { cornerRadius, largeFont, mediumFont } from "../../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const StatStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         flex: 1, 
@@ -13,7 +14,7 @@ export const styles = StyleSheet.create({
 
     sectionBorder: {
         borderWidth: 2, 
-        borderColor: aLittleLighterColor, 
+        borderColor: theme.colors.border, 
         borderRadius: cornerRadius,
     },
 
@@ -45,10 +46,10 @@ export const styles = StyleSheet.create({
     },
 
     sectionHeaderText: {
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         fontSize: largeFont,
         fontWeight: 'bold',
-        color: textPrimaryColor,
+        color: theme.colors.text,
         position: 'absolute',
         top: -moderateVerticalScale(20), 
         left: moderateScale(15),
@@ -56,10 +57,10 @@ export const styles = StyleSheet.create({
     },
 
     pointsHeaderText: {
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         fontSize: largeFont,
         fontWeight: 'bold',
-        color: textPrimaryColor,
+        color: theme.colors.text,
         position: 'absolute',
         top: -moderateVerticalScale(20), 
         right: moderateScale(15),
@@ -67,7 +68,7 @@ export const styles = StyleSheet.create({
     },
 
     gameweekSectionText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont * 0.9,
         fontWeight: '500',
         alignSelf: 'center'

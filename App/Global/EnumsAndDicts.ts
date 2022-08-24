@@ -55,16 +55,3 @@ export const DifficultyColors: {[key: number]: string} = {
     4 : '#f44336',
     5 : '#9f2c23',  
 }
-    
-    // 1 : '#86f88e',
-    // 2 : '#36f443',
-    // 3 : '#e6e6e6',
-    // 4 : '#f44336',
-    // 5 : '#9f2c23',  
-
-    // 1 : 'white',
-    // 2 : 'white',
-    // 3 : lightColor,
-    // 4 : aLittleDarkerColor,
-    // 5 : darkColor,  
-    

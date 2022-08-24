@@ -16,7 +16,7 @@ import { FplFixture } from "../../../Models/FplFixtures";
 import { FplDraftUserInfo } from "../../../Models/FplDraftUserInfo";
 import { FplManagerInfo } from "../../../Models/FplManagerInfo";
 import { PlayerData } from "../../../Models/CombinedData";
-import { styles } from "./LineupStyles";
+import { LineupStyles } from "./LineupStyles";
 import ManagerInfoCard from "./ManagerInfoCard/ManagerInfoCard";
 import PlayerStatsDisplay from "../../PlayerStatsDisplay";
 import AdditionalInfoCard from "./AdditionalInfoCard";
@@ -24,11 +24,11 @@ import BonusPointView from "./BonusPointView";
 import KingsOfTheGameweekView from "./KingsOfTheGameweekView";
 import { animated, useTransition } from "@react-spring/native";
 import globalStyles from "../../../Global/GlobalStyles";
-import { primaryColor, textPrimaryColor } from "../../../Global/GlobalConstants";
+import { useTheme } from "@react-navigation/native";
 
 const AnimatedView = animated(View);
 
-function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number) {
+function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: TeamInfo, viewIndex: number, styles) {
 
     try {
         const playerStatsView = [];
@@ -81,7 +81,7 @@ function CreatePlayerStatsView(players: PlayerData[], overview: FplOverview, fix
     }
 }
 
-function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, viewIndex: number) {
+function CreateBenchView(players: PlayerData[], overview: FplOverview, fixtures: FplFixture[], teamInfo: DraftInfo | BudgetInfo, viewIndex: number, styles) {
 
     try {
         const playerStatsView = [];
@@ -119,6 +119,9 @@ interface LineupProps {
 
 const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, draftOverview, budgetGameweekPicks, budgetUserInfo, draftUserInfo} : LineupProps) => {
 
+    const theme = useTheme();
+    const styles = LineupStyles(theme);
+
     const players = GetPlayerGameweekDataSortedByPosition(gameweek, overview, teamInfo, draftOverview, draftGameweekPicks, budgetGameweekPicks);
 
     const [viewIndex, setViewIndex] = useState(0); 
@@ -151,11 +154,11 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
         <View style={{flex: 1}}>
             <View style={styles.topContainer}>
                 <View style={styles.fieldContainer}>
-                    <Image style={styles.field} source={require('../../../../assets/field.jpg')} resizeMode={'contain'}/>
+                    <Image style={styles.field} source={theme.dark ? require('../../../../assets/fielddark.jpg') : require('../../../../assets/field.jpg')} resizeMode={'contain'}/>
                 </View>
                     { players &&
                         <View testID="fixtureOrDreamTeamPlayersStatsView" style={styles.playerContainer}>
-                            {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex)}
+                            {CreatePlayerStatsView(players, overview, fixtures, teamInfo, viewIndex, styles)}
                         </View>
                     }
                     {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || 
@@ -205,7 +208,7 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
                 )}
                 {((teamInfo.teamType === TeamTypes.Budget && budgetGameweekPicks) || (teamInfo.teamType === TeamTypes.Draft && draftGameweekPicks && draftOverview)) && players &&
                     <>
-                    { CreateBenchView(players, overview, fixtures, teamInfo, viewIndex) }
+                    { CreateBenchView(players, overview, fixtures, teamInfo, viewIndex, styles) }
                     </>
                 }
 

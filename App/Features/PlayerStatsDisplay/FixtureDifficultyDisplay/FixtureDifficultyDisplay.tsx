@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { View, Text } from "react-native";
 import { DifficultyColors } from "../../../Global/EnumsAndDicts";
@@ -5,7 +6,7 @@ import { PlayerData } from "../../../Models/CombinedData";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview } from "../../../Models/FplOverview";
 import { useAppSelector } from "../../../Store/hooks";
-import { styles } from "./FixtureDifficultyDisplayStyles";
+import { FixtureDifficultyDisplayStyles } from "./FixtureDifficultyDisplayStyles";
 
 interface FixtureDifficultyDisplayProps {
     overview: FplOverview;
@@ -14,6 +15,9 @@ interface FixtureDifficultyDisplayProps {
 }
 
 const FixtureDifficultyDisplay = ({overview, fixtures, player} : FixtureDifficultyDisplayProps) => {
+
+    const theme = useTheme();
+    const styles = FixtureDifficultyDisplayStyles(theme);
 
     const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 

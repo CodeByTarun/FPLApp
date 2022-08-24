@@ -1,9 +1,13 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { View, Text } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-import { styles } from "../StandingsStyles";
+import { StandingsStyles } from "../StandingsStyles";
 
 const StandingsHeader = () => {
+
+    const theme = useTheme();
+    const styles = StandingsStyles(theme);
 
     return (
         <View style={styles.headerContainer}>

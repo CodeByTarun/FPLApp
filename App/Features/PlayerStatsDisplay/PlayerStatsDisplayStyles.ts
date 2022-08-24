@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
-import { cornerRadius, primaryColor, secondaryColor, smallFont, tertiaryColor, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import { cornerRadius, smallFont, width } from "../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     container: {
         height: '100%',
         width: moderateScale(60),
@@ -37,7 +38,7 @@ export const styles = StyleSheet.create({
         fontWeight: '600', 
         alignSelf: 'center', 
         textAlign:'center',
-        color: textPrimaryColor,
+        color: theme.colors.text,
     },
 
     //#region Stats
@@ -107,12 +108,12 @@ export const styles = StyleSheet.create({
         right: -verticalScale(8),
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: tertiaryColor,
+        backgroundColor: theme.colors.text,
         borderRadius: 100,
     },
 
     captainAndViceCaptainText: {
-        color: primaryColor,
+        color: theme.colors.primary,
         alignSelf: 'center',
         fontSize: smallFont,
         fontWeight: '700',
@@ -126,7 +127,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
         paddingBottom: 0, 
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
     },
 
     nameContainer: {
@@ -143,7 +144,7 @@ export const styles = StyleSheet.create({
     scoreContainer: {
         flex: 1, 
         flexDirection: 'row',
-        backgroundColor: secondaryColor, 
+        backgroundColor: theme.colors.background, 
         paddingLeft: moderateScale(4),
         paddingRight: moderateScale(4),
     },
@@ -154,7 +155,7 @@ export const styles = StyleSheet.create({
     playerInfoCardContainer: {
         height: '95%', 
         width: moderateScale(60, 0.7), 
-        backgroundColor: primaryColor, 
+        backgroundColor: theme.colors.primary, 
         borderRadius: cornerRadius
     },
 
@@ -164,7 +165,7 @@ export const styles = StyleSheet.create({
     },
 
     nextWeekText: {
-        color: textSecondaryColor, 
+        color: theme.colors.notification, 
         fontSize: smallFont*0.9,
         fontWeight: '400', 
         alignSelf: 'center', 
@@ -173,7 +174,7 @@ export const styles = StyleSheet.create({
 
     infoCardNameContainer: {
         flex: 1, 
-        backgroundColor: secondaryColor, 
+        backgroundColor: theme.colors.background, 
         alignItems: 'center', 
         justifyContent: 'center',
         borderBottomRightRadius: cornerRadius, 
@@ -186,7 +187,7 @@ export const styles = StyleSheet.create({
         paddingRight: moderateScale(5),
         fontSize: smallFont * 1.1, 
         textAlign: 'center',
-        color: textPrimaryColor
+        color: theme.colors.text
     },
     //#endregion
 });

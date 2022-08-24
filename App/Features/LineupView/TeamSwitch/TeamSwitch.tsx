@@ -7,14 +7,10 @@ import { Emblems } from "../../../Global/Images";
 import globalStyles from "../../../Global/GlobalStyles";
 import { FplOverview } from "../../../Models/FplOverview";
 import { FplFixture } from "../../../Models/FplFixtures";
-import { styles } from "./TeamSwitchStyles";
+import { TeamSwitchStyles } from "./TeamSwitchStyles";
 import { FplGameweek } from "../../../Models/FplGameweek";
 import { animated, useSpring } from "@react-spring/native";
-
-// This is going to be a switch selector control
-// First i need a background,
-// Place the colored blurb over the left team
-// Put the text for the team names and the touchable opacity at the top level
+import { useTheme } from "@react-navigation/native";
 
 const AnimatedView = animated(View);
 
@@ -42,6 +38,9 @@ const getTeamScore = (fixtures: FplFixture[], gameweek: FplGameweek, teamInfo: F
 }
 
 const TeamSwitch = ({overview, fixtures, gameweek}: TeamSwitchProps) => {
+
+    const theme = useTheme();
+    const styles = TeamSwitchStyles(theme);
 
     const teamInfo: TeamInfo = useAppSelector((state) => state.team);
     const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { View, ScrollView, FlatList, Text, TouchableWithoutFeedback } from "react-native";
-import globalStyles from "../../../../Global/GlobalStyles";
+import { useTheme } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
+import { View, ScrollView, Text } from "react-native";
 import { FplOverview, PlayerOverview } from "../../../../Models/FplOverview";
 import { FplPlayerSummary, History } from "../../../../Models/FplPlayerSummary";
-import { styles } from "./HistoryListStyles";
+import { HistoryListStyles } from "./HistoryListStyles";
 
 const stats: {[key: string] : string } = {
     'round' : 'GW',
@@ -34,6 +34,9 @@ interface HistoryProps {
 }
 
 const HistoryList = ({overview, player, playerData} : HistoryProps) => {
+
+    const theme = useTheme();
+    const styles = HistoryListStyles(theme);
 
     const [isHidden, setIsHidden] = useState(false);
 

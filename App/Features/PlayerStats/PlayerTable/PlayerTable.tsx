@@ -2,25 +2,25 @@
 // will also have a search function to find players faster
 
 import React, { useCallback, useReducer } from "react";
-import { View, Text, TouchableOpacity, NavigatorIOS, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { FplOverview } from "../../../Models/FplOverview";
 import * as GlobalConstants from "../../../Global/GlobalConstants";
 import { OverviewStats } from "../../../Global/EnumsAndDicts"
 import { FplFixture } from "../../../Models/FplFixtures";
-import PlayerList from "../PlayerList/PlayerList";
-import { useAppDispatch, useAppSelector } from "../../../Store/hooks";
+import { useAppDispatch } from "../../../Store/hooks";
 import { goToMainScreen } from "../../../Store/navigationSlice";
 import globalStyles from "../../../Global/GlobalStyles";
 import { PlayerTableFilterState, playerTableFilterReducer } from "./PlayerTableFilterReducer";
-import { styles } from "./PlayerTableStyles";
+import { PLayerTableStyles } from "./PlayerTableStyles";
 import { Dropdown, SearchControl, AnimatedButton } from "../../Controls";
 import TableFilterPopup from "./TableFilterPopup";
 import { CustomVerticalSeparator } from "../../../Global/GlobalComponents";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../../App";
 import { changeFilterView } from "../../../Store/modalSlice";
 import { Icons } from "../../../Global/Images";
+import PlayerListContainer from "../PlayerListContainer";
 
 interface PlayerTableProps {
     overview: FplOverview;
@@ -28,6 +28,9 @@ interface PlayerTableProps {
 }
 
 const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
+
+    const theme = useTheme();
+    const styles = PLayerTableStyles(theme);
 
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
@@ -97,7 +100,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                     value={playerTableFilterState.teamFilter} 
                                     setValue={teamFilterDispatch}/>
                         </View>
-                        {CustomVerticalSeparator(4, 4)}
+                        {CustomVerticalSeparator(4, 4, theme)}
                         <View style={[styles.dropDownContainer]}>
                             <Dropdown defaultValue="All Positions" 
                                     headerText="Position"
@@ -105,7 +108,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                     value={playerTableFilterState.positionFilter} 
                                     setValue={positionFilterDispatch}/>
                         </View>
-                            {CustomVerticalSeparator(4, 4)}
+                            {CustomVerticalSeparator(4, 4, theme)}
                         <View style={[styles.dropDownContainer]}>
                             <Dropdown defaultValue="Total Points" 
                                     headerText={"Stat" + ((playerTableFilterState.isPer90 && GlobalConstants.Per90Stats.includes(playerTableFilterState.statFilter)) ? " (per 90)" : "")}
@@ -113,7 +116,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                                     value={playerTableFilterState.statFilter} 
                                     setValue={statFilterDispatch}/>
                         </View>
-                            {CustomVerticalSeparator(4, 4)}
+                            {CustomVerticalSeparator(4, 4, theme)}
                     </View>
                     <View style={styles.filterButtonContainer}>
                         <AnimatedButton buttonFn={openFilter}>
@@ -124,7 +127,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
             </View>
 
             <View style={{ flex: 11}}>
-                <PlayerList overview={overview} fixtures={fixtures} filters={playerTableFilterState}/>
+                <PlayerListContainer overview={overview} fixtures={fixtures} filters={playerTableFilterState}/>
             </View>
         </View>
 

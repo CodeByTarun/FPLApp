@@ -1,15 +1,16 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { cornerRadius, height, largeFont, lightColor, mediumFont, primaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const ManagerInfoCardStyles = (theme: Theme) => StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
         marginRight: 15,
         borderBottomLeftRadius: cornerRadius,
         borderBottomRightRadius: cornerRadius,
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         alignSelf: 'center',
         zIndex: 1,
     },
@@ -34,14 +35,14 @@ export const styles = StyleSheet.create({
     },
 
     statText: {
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         alignSelf: 'center', 
         fontWeight: '600',
         fontSize: largeFont,
     },
 
     rankText: {
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         alignSelf: 'center', 
         fontWeight: '600',
         fontSize: mediumFont
@@ -56,16 +57,16 @@ export const styles = StyleSheet.create({
 
     text: {
         fontSize: smallFont,
-        color: textSecondaryColor,
+        color: theme.colors.notification,
         fontWeight: '500',
         alignSelf: 'center'
     },
 
     activeIndex: {
-        backgroundColor: textPrimaryColor,
+        backgroundColor: theme.colors.text,
     },
 
     inactiveIndex: {
-        backgroundColor: lightColor,
+        backgroundColor: theme.colors.border,
     },
 });

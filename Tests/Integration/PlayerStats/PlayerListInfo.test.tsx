@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "../reduxRender";
-import PlayerListInfo from "../../../App/Features/PlayerStats/PlayerList/PlayerListInfo";
+import PlayerListInfo from "../../../App/Features/PlayerStats/PlayerListContainer/PlayerList/PlayerListInfo";
 import { overview } from "../../SampleData/Overviews";
 import { PlayerOverview } from "../../../App/Models/FplOverview";
 

@@ -1,16 +1,16 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback } from "react";
 import { FlatList, View, Text } from "react-native";
 import { moderateScale } from "react-native-size-matters";
 import { RootStackParams } from "../../../../../App";
-import { Seperator } from "../../../../Global/GlobalComponents";
+import { Separator } from "../../../../Global/GlobalComponents";
 import { FplBudgetLeagueInfo, Result } from "../../../../Models/FplBudgetLeagueInfo";
 import { useAppDispatch } from "../../../../Store/hooks";
 import { changeToBudgetTeam } from "../../../../Store/teamSlice";
 import { AnimatedButton } from "../../../Controls";
 import StandingsHeader from "../../StandingsHeader";
-import { styles } from "../../StandingsStyles";
+import { StandingsStyles } from "../../StandingsStyles";
 
 interface BudgetLeagueStandingsProps {
     budgetLeagueInfo: FplBudgetLeagueInfo;
@@ -18,6 +18,9 @@ interface BudgetLeagueStandingsProps {
 
 const BudgetLeagueStandings = ({budgetLeagueInfo} : BudgetLeagueStandingsProps) => {
     
+    const theme = useTheme();
+    const styles = StandingsStyles(theme);
+
     const dispatch = useAppDispatch();
     const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
 
@@ -45,7 +48,7 @@ const BudgetLeagueStandings = ({budgetLeagueInfo} : BudgetLeagueStandingsProps) 
     return(
         <FlatList data={budgetLeagueInfo.standings.results}
                   stickyHeaderIndices={[0]}
-                  ItemSeparatorComponent={ Seperator }
+                  ItemSeparatorComponent={ () => Separator(theme) }
                   keyExtractor={item => item.id.toString()}
                   ListHeaderComponent={ StandingsHeader }
                   renderItem={renderLeagueEntryItem}

@@ -1,8 +1,8 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-import { primaryColor } from "../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const FilterModalStyles = (theme: Theme) => StyleSheet.create({
 
     modal: {
         justifyContent: 'center', 
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         padding: moderateScale(10),
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         width: '85%',
        },
 

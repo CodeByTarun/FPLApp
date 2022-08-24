@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
-import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
-import { width, height, largeFont, textPrimaryColor, aLittleLighterColor, textSecondaryColor, mediumFont } from "../../../Global/GlobalConstants";
+import { moderateVerticalScale, verticalScale } from "react-native-size-matters";
+import { largeFont, mediumFont } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const AddPlayerModalStyles = (theme: Theme) => StyleSheet.create({
 
     modalContainer: {
         width: '100%', 
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
 
     titleText: {
         fontSize: largeFont * 1.2,
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         fontWeight: '600',
         textAlign: 'center',
         paddingBottom: moderateVerticalScale(20),
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
 
     listContainer: {
         paddingTop: moderateVerticalScale(10),
-        borderTopColor: aLittleLighterColor,
+        borderTopColor: theme.colors.border,
         height: verticalScale(325)
     },
 
@@ -35,7 +36,7 @@ export const styles = StyleSheet.create({
     },
 
     playerText: {
-        color: textSecondaryColor,
+        color: theme.colors.notification,
         fontSize: mediumFont,
     }
 

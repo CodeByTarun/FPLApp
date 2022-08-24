@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import React, { useState } from "react";
 import { View, Text } from "react-native";
@@ -6,7 +7,7 @@ import { height } from "../../../Global/GlobalConstants";
 import { FplManagerInfo } from "../../../Models/FplManagerInfo";
 import { useGetBudgetLeagueInfoQuery } from "../../../Store/fplSlice";
 import { AnimatedButton, LoadingIndicator } from "../../Controls";
-import { styles } from "../StandingsStyles";
+import { StandingsStyles } from "../StandingsStyles";
 import BudgetLeagueList from "./LeagueList/BudgetLeagueList";
 import BudgetLeagueStandings from "./LeagueStandings/BudgetLeagueStandings";
 
@@ -15,6 +16,9 @@ interface BudgetLeagueProps {
 }
 
 const BudgetLeague = ({budgetUserInfo} : BudgetLeagueProps) => {
+
+    const theme = useTheme();
+    const styles = StandingsStyles(theme);
 
     const [leagueToShow, setLeagueToShow] = useState(null as number | null);
 

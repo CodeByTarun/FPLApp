@@ -10,11 +10,11 @@ import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { Identifier } from "../../Models/FplGameweek";
 import { FplFixture } from "../../Models/FplFixtures";
 import globalStyles from "../../Global/GlobalStyles";
-import { styles } from "./PlayerStatsDisplayStyles";
+import { PlayerStatsDisplayStyles } from "./PlayerStatsDisplayStyles";
 import FixtureDifficultyDisplay from "./FixtureDifficultyDisplay";
 import { AnimatedButton } from "../Controls";
 import { changePlayerModalInfo } from "../../Store/modalSlice";
-import { useNavigation } from "@react-navigation/native";
+import { Theme, useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 
@@ -26,7 +26,7 @@ interface PlayerStatsDisplayProps {
     viewIndex: number;
 }
 
-const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier) => {
+const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identifier, styles) => {
     let stat : number | undefined;
 
     if (!player.gameweekData) return null;
@@ -55,15 +55,15 @@ const StatView = (player:PlayerData, teamInfo: TeamInfo, statIdentifier : Identi
     }
 }
 
-const singleStatView = (label: string, value: number | string) => {
+const singleStatView = (label: string, value: number | string, theme: Theme) => {
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', paddingLeft: 5, paddingRight: 5}}>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={{fontSize: GlobalConstants.smallFont, color: GlobalConstants.textSecondaryColor, 
+                <Text style={{fontSize: GlobalConstants.smallFont, color: theme.colors.notification, 
                             fontWeight: '500', alignSelf: 'center'}}>{label}</Text>
             </View>
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingBottom: 0}}>
-                <Text style={{fontSize: GlobalConstants.smallFont * 1.2, color: GlobalConstants.textPrimaryColor, 
+                <Text style={{fontSize: GlobalConstants.smallFont * 1.2, color: theme.colors.text, 
                                 textAlign: 'right', fontWeight: '500', alignSelf: 'flex-end'}}>{value}</Text>
             </View>
         </View>
@@ -71,6 +71,9 @@ const singleStatView = (label: string, value: number | string) => {
 }
 
 const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: PlayerStatsDisplayProps) => {
+
+    const theme = useTheme();
+    const styles = PlayerStatsDisplayStyles(theme);
 
     const dispatch = useAppDispatch();
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -91,13 +94,13 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: P
                     <Image testID="playerStatsJersey" style={styles.jerseyImage} source={Jerseys[player.overviewData.team_code]} resizeMode="contain"/>
 
                     <View style={styles.allStatsContainer}>
-                        { StatView(player, teamInfo, Identifier.GoalsScored) }
-                        { StatView(player, teamInfo, Identifier.Assists) }
-                        { StatView(player, teamInfo, Identifier.Saves) }
-                        { StatView(player, teamInfo, Identifier.OwnGoals) }
+                        { StatView(player, teamInfo, Identifier.GoalsScored, styles) }
+                        { StatView(player, teamInfo, Identifier.Assists, styles) }
+                        { StatView(player, teamInfo, Identifier.Saves, styles) }
+                        { StatView(player, teamInfo, Identifier.OwnGoals, styles) }
                         <View style={styles.cardsContainer}>
-                            { StatView(player, teamInfo, Identifier.YellowCards) }
-                            { StatView(player, teamInfo, Identifier.RedCards) }
+                            { StatView(player, teamInfo, Identifier.YellowCards, styles) }
+                            { StatView(player, teamInfo, Identifier.RedCards, styles) }
                         </View> 
                         {(teamInfo.teamType !== TeamTypes.Dream && player.gameweekData && player.gameweekData.stats.in_dreamteam) &&
                             <View testID="dreamTeamPlayerStats" style={styles.dreamTeamContainer}>
@@ -133,17 +136,17 @@ const PlayerStatsDisplay = ({player, overview, teamInfo, fixtures, viewIndex}: P
                         <View testID="infoCardContainerPlayerStats" style={styles.infoCardContainer}>
                             {(viewIndex === 1) && 
                             <>
-                                {singleStatView('Cost', '£' + (player.overviewData.now_cost / 10).toFixed(1))}
-                                {singleStatView('Sel.', player.overviewData.selected_by_percent + '%')}
-                                {singleStatView('Form', player.overviewData.form)}
+                                {singleStatView('Cost', '£' + (player.overviewData.now_cost / 10).toFixed(1), theme)}
+                                {singleStatView('Sel.', player.overviewData.selected_by_percent + '%', theme)}
+                                {singleStatView('Form', player.overviewData.form, theme)}
                             </>
                             }
                             { (viewIndex === 2) && 
                             <>
-                                {singleStatView('PTS', player.overviewData.event_points)}
-                                {singleStatView('xPTS', player.overviewData.ep_this)}
+                                {singleStatView('PTS', player.overviewData.event_points, theme)}
+                                {singleStatView('xPTS', player.overviewData.ep_this, theme)}
                                 <Text style={styles.nextWeekText}>Next Week</Text>
-                                {singleStatView('xPTS', player.overviewData.ep_next)}
+                                {singleStatView('xPTS', player.overviewData.ep_next, theme)}
                             </>
                             }
                             { (viewIndex === 3) && 

@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { textPrimaryColor, mediumFont } from "../../../../Global/GlobalConstants";
+import { textPrimaryColor, mediumFont } from "../../../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const FixtureDifficultyListStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         alignItems: 'center',
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
 
     text: {
         fontSize: mediumFont * 0.75,
-        color: textPrimaryColor,
+        color: theme.colors.text,
         textAlign: 'center', 
     },
 

@@ -6,7 +6,7 @@ import * as GlobalConstants from "../../../../Global/GlobalConstants";
 import CustomSlider from "../../../Controls/Slider";
 import { PlayerTableFilterAction, PlayerTableFilterState } from "../PlayerTableFilterReducer";
 import { AnimatedButton } from "../../../Controls";
-import { useNavigation } from "@react-navigation/native";
+import { Theme, useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../../../App";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
@@ -20,6 +20,9 @@ interface TableFilterPopupProps {
 
 const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : TableFilterPopupProps) => {
 
+    const theme = useTheme();
+    const styles = TableFilterPopupStyles(theme);
+
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const liveGameweek = useAppSelector(state => state.team.liveGameweek);
@@ -30,7 +33,7 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
 
     const clearFunction = () => {
         filterDispatch({type: 'Reset', priceRange: initialPriceRange, minutesRange: [0, 90*liveGameweek]});
-        navigation.goBack();
+        setTimeout(navigation.goBack, 200);
     }
 
     return (
@@ -38,14 +41,14 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
             <View style={styles.checkboxContainer}>
                 <Text style={styles.filterText}>Per 90 (if applicable):</Text>
                 <Checkbox value={ isPer90 } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
-                        color={isPer90 ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
+                        color={isPer90 ? GlobalConstants.fieldColor : theme.colors.background}
                         onValueChange={ () => setIsPer90(!isPer90)}/>
             </View>
             <View style={styles.checkboxContainer}>
                 <Text style={styles.filterText}>On Watchlist:</Text>
                 <Checkbox value={ isInWatchlist } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
-                        color={isInWatchlist ? GlobalConstants.fieldColor : GlobalConstants.lightColor}
-                        onValueChange={ () => setIsInWatchlist(!isInWatchlist)}/>
+                          color={isInWatchlist ? GlobalConstants.fieldColor : theme.colors.background}
+                          onValueChange={ () => setIsInWatchlist(!isInWatchlist)}/>
             </View>
             <View style={styles.sliderContainer}>
                 <CustomSlider header={"Price Range:"} minValue={initialPriceRange[0]} maxValue={initialPriceRange[1]} 
@@ -61,7 +64,7 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
                 <View style={styles.buttonContainer}>
                     <AnimatedButton buttonFn={() => filterDispatch({type: 'FilterPopupChange', minuteRange: minuteRange, priceRange: priceRange, 
                                                                                                isInWatchlistValue: isInWatchlist, per90Value: isPer90})}>
-                        <View style={[globalStyles.baseButton, styles.buttonInnerContainer]}>
+                        <View style={[globalStyles.baseButton, styles.buttonInnerContainer, {backgroundColor: theme.colors.background}]}>
                             <Text style={styles.buttonFont}>Apply</Text>
                         </View>
                     </AnimatedButton>
@@ -80,7 +83,7 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
 
 export default TableFilterPopup;
 
-const styles = StyleSheet.create({
+const TableFilterPopupStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         padding: moderateScale(5, 0.2),
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
     },
 
     filterText: {
-        color: GlobalConstants.textPrimaryColor,
+        color: theme.colors.text,
         fontSize: GlobalConstants.mediumFont,
         flex: 1,
         fontWeight: '500'
@@ -129,6 +132,6 @@ const styles = StyleSheet.create({
     buttonFont: {
         fontSize: GlobalConstants.mediumFont,
         fontWeight: '500',
-        color: GlobalConstants.textPrimaryColor,
+        color: theme.colors.text,
     }
 });

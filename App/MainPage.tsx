@@ -9,8 +9,12 @@ import globalStyles from "./Global/GlobalStyles";
 import { FplBaseDataContext } from "./AppContext";
 import { useAppDispatch } from "./Store/hooks";
 import { setLiveGameweek } from "./Store/teamSlice";
+import { Theme, useTheme } from "@react-navigation/native";
 
 const MainPage = () => {
+
+  const theme = useTheme();
+  const styles = mainPageStyles(theme);
 
   const dispatch = useAppDispatch();
   const {overview, fixtures} = useContext(FplBaseDataContext);
@@ -21,7 +25,6 @@ const MainPage = () => {
       dispatch(setLiveGameweek((liveGameweek === undefined) ? 1 : liveGameweek));
     }
   }, [overview])
-  
 
   return (
     <View style={styles.container}>
@@ -54,15 +57,15 @@ const MainPage = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const mainPageStyles = (theme: Theme) => StyleSheet.create({
   
   container: {
     flex: 1,
-    backgroundColor: GlobalConstants.primaryColor,
+    backgroundColor: theme.colors.primary,
   },
   
   safeArea: {
-    backgroundColor: GlobalConstants.primaryColor,
+    backgroundColor: theme.colors.primary,
     flex: 1,
     marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     position: 'absolute', 
     zIndex: 1, 
     elevation: 1,  
-    backgroundColor: GlobalConstants.primaryColor
+    backgroundColor: theme.colors.primary
   },
 
   splashScreenImage: {
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
 
   loadingText: {
     fontSize: GlobalConstants.largeFont * 1.2,
-    color: GlobalConstants.lightColor,
+    color: theme.colors.text,
     fontWeight: '500',
   }
   

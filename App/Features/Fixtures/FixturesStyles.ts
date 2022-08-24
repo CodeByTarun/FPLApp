@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
 import { BOTTOM_BAR_HEIGHT, FIXTURES_VIEW_CONTROLS_HEIGHT, height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const FixturesStyles = (theme: Theme) => StyleSheet.create({
     animatedView: {
         zIndex: 1,
         elevation: 0.2,
@@ -10,7 +11,7 @@ export const styles = StyleSheet.create({
         width: '100%',
         position: 'absolute',
         flexDirection: 'column',
-        backgroundColor: primaryColor
+        backgroundColor: theme.colors.primary,
     },
 
     controlsContainer: {
@@ -36,14 +37,14 @@ export const styles = StyleSheet.create({
       },
 
       gameweekText: {
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         alignSelf: 'center', 
         fontSize: mediumFont*1.3,
         fontWeight: '700'
       },
 
       gameweekDropDownSymbol: {
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         fontSize: mediumFont * 0.65, 
         fontWeight: '700', 
         transform: [{rotate: '-45deg'}], 
@@ -58,7 +59,7 @@ export const styles = StyleSheet.create({
       },
 
       singleButtonContainer: {
-        height: '60%', 
+        height: '65%',
         alignSelf:'center', 
         aspectRatio: 1
       },
@@ -73,7 +74,7 @@ export const styles = StyleSheet.create({
         width: moderateScale(width * 0.6, -0.2),
         alignSelf: 'center',
         height: BOTTOM_BAR_HEIGHT,
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.primary,
         flexDirection: 'row',
       },
 
@@ -96,7 +97,7 @@ export const styles = StyleSheet.create({
       },
 
       text: {
-        color: textPrimaryColor,
+        color: theme.colors.notification,
         fontWeight: '600',
         fontSize: mediumFont
       }

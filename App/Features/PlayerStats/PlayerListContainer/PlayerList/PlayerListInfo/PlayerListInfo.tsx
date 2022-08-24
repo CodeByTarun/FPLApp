@@ -1,8 +1,9 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { View, Image, Text } from "react-native";
-import { Icons, Jerseys } from "../../../../Global/Images";
-import { FplOverview, PlayerOverview } from "../../../../Models/FplOverview";
-import { styles } from "./PlayerListInfoStyles";
+import { Icons, Jerseys } from "../../../../../Global/Images";
+import { FplOverview, PlayerOverview } from "../../../../../Models/FplOverview";
+import { PlayerListInfoStyles } from "./PlayerListInfoStyles";
 
 interface PlayerListInfoProps {
     overview: FplOverview,
@@ -11,6 +12,9 @@ interface PlayerListInfoProps {
 }
 
 const PlayerListInfo = React.memo(({overview, player, owner} : PlayerListInfoProps) => {
+
+    const theme = useTheme();
+    const styles = PlayerListInfoStyles(theme);
 
     return (
         <View style={{flex: 1, flexDirection: 'row'}}>
@@ -44,3 +48,5 @@ const PlayerListInfo = React.memo(({overview, player, owner} : PlayerListInfoPro
 });
 
 export default PlayerListInfo;
+
+PlayerListInfo.displayName = 'PlayerListInfo';

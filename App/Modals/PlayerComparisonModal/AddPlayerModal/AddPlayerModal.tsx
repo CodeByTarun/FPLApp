@@ -1,10 +1,10 @@
+import { useTheme } from "@react-navigation/native";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { FlatList, View, Text, TouchableOpacity } from "react-native";
-import { AnimatedButton, CloseButton, SearchControl } from "../../../Features/Controls";
-import { Seperator } from "../../../Global/GlobalComponents";
-import { width, height } from "../../../Global/GlobalConstants";
+import { FlatList, View, Text } from "react-native";
+import { AnimatedButton, SearchControl } from "../../../Features/Controls";
+import { Separator } from "../../../Global/GlobalComponents";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
-import { styles } from "./AddPlayerModalStyles";
+import { AddPlayerModalStyles } from "./AddPlayerModalStyles";
 
 interface AddPlayerModalProps {
     overview: FplOverview | undefined;
@@ -13,6 +13,9 @@ interface AddPlayerModalProps {
 }
 
 const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayerModalProps) => {
+
+    const theme = useTheme();
+    const styles = AddPlayerModalStyles(theme);
 
     const getPlayerList = useCallback(() => {
         return overview?.elements.slice().sort((playerA, playerB) => playerA.first_name.toLowerCase().localeCompare(playerB.first_name.toLowerCase()))
@@ -57,7 +60,7 @@ const AddPlayerModal = ({overview, closeFunction, addPlayerFunction} : AddPlayer
             <View style={styles.listContainer}>
                 <FlatList data={playerList}
                         renderItem={renderPlayerItem}
-                        ItemSeparatorComponent={Seperator}
+                        ItemSeparatorComponent={() => Separator(theme)}
                         keyExtractor={keyExtractor}/>
             </View>
         </View>

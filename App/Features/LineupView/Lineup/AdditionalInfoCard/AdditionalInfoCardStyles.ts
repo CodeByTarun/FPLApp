@@ -1,13 +1,14 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateVerticalScale } from "react-native-size-matters";
 import { primaryColor, cornerRadius, smallFont, textSecondaryColor, lightColor, textPrimaryColor } from "../../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const AdditionalInfoCardStyles = (theme: Theme) => StyleSheet.create({
     cardContainer: {
         flex: 1,
         alignContent:'center', 
         justifyContent: 'center',
-        backgroundColor: primaryColor, 
+        backgroundColor: theme.colors.primary, 
         borderBottomLeftRadius: cornerRadius, 
         zIndex: 1,
         borderBottomRightRadius: cornerRadius
@@ -21,7 +22,7 @@ export const styles = StyleSheet.create({
 
     text: {
         fontSize: smallFont, 
-        color: textSecondaryColor,
+        color: theme.colors.notification,
         alignSelf: 'center', 
         textAlign: 'center', 
         fontWeight: '600'
@@ -35,10 +36,10 @@ export const styles = StyleSheet.create({
     },
 
     activeIndex: {
-        backgroundColor: textPrimaryColor,
+        backgroundColor: theme.colors.text,
     },
 
     inactiveIndex: {
-        backgroundColor: lightColor,
+        backgroundColor: theme.colors.border,
     },    
 });

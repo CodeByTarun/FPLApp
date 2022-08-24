@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { modalTextColor, mediumFont, height, largeFont, textPrimaryColor, secondaryColor, cornerRadius, textSecondaryColor } from "../../Global/GlobalConstants";
+import { mediumFont, height, largeFont, cornerRadius } from "../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const PlayerModalStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         width: '100%', 
@@ -11,7 +12,7 @@ export const styles = StyleSheet.create({
 
     titleText: {
         fontSize: largeFont, 
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         alignSelf: 'center', 
         paddingTop: moderateVerticalScale(10), 
         fontWeight: '500', 
@@ -37,7 +38,7 @@ export const styles = StyleSheet.create({
     },
 
     scoreText: {
-        color: modalTextColor,
+        color: theme.colors.text,
         fontSize: largeFont,
         marginLeft: moderateScale(10, 0.3),
         marginRight: moderateScale(10, 0.3),
@@ -62,7 +63,7 @@ export const styles = StyleSheet.create({
     },
 
     statText: {
-        color: modalTextColor,
+        color: theme.colors.text,
         fontSize: mediumFont,
     },
 
@@ -74,7 +75,7 @@ export const styles = StyleSheet.create({
     button: {
         height: moderateVerticalScale(40, 0.2),
         width: moderateScale(100, 0.3),
-        backgroundColor: secondaryColor,
+        backgroundColor: theme.colors.background,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: cornerRadius,
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
     },
 
     buttonText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont,
         fontWeight: '500',
     }

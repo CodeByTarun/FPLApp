@@ -1,13 +1,13 @@
+import { useTheme } from "@react-navigation/native";
 import React, { useCallback, useMemo } from "react";
 import { View, Text } from "react-native";
 import { PieChart } from "../../../../Features/Controls";
-import { aLittleLighterColor, lightColor, textSecondaryColor } from "../../../../Global/GlobalConstants";
 import { GetMinutesValueForDetailedStatsView, GetStatValueForDetailedStatsView } from "../../../../Helpers/FplAPIHelpers";
 import { PlayerOverview } from "../../../../Models/FplOverview";
 import { FplPlayerSummary, History } from "../../../../Models/FplPlayerSummary";
 import { useAppSelector } from "../../../../Store/hooks";
 import { StatsFilterState } from "../../StatsFilterReducer";
-import { styles } from "./StatsStyles";
+import { StatStyles} from "./StatsStyles";
 
 const PlayerDetailedStatsRightSide: {[key: string]: string } = {
     "bonus": "Bonus",
@@ -33,6 +33,9 @@ interface StatsProps {
 }
 
 const Stats = ({statsFilterState, player, playerData} : StatsProps) => {
+
+    const theme = useTheme();
+    const styles = StatStyles(theme);
 
     const liveGameweek = useAppSelector(state => state.team.liveGameweek);
 
@@ -63,7 +66,7 @@ const Stats = ({statsFilterState, player, playerData} : StatsProps) => {
 
                 <View style={styles.pieChartContainer}>
                         <PieChart firstStatName="G" secondStatName="A" 
-                                  firstStatColor={textSecondaryColor} secondStatColor={aLittleLighterColor} 
+                                  firstStatColor={theme.colors.notification} secondStatColor={theme.colors.border} 
                                   firstStatValue={Number(getStatValue('goals_scored'))} 
                                   secondStatValue={Number(getStatValue('assists'))}/>                    
                 </View>

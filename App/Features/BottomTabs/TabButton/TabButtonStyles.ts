@@ -1,8 +1,8 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { lightColor, smallFont } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const TabButtonStyles = (theme: Theme) => StyleSheet.create({
 
     tabContainer: {
         flex: 1,
@@ -26,6 +26,6 @@ export const styles = StyleSheet.create({
     headerText: {
         fontSize: moderateScale(9, 0.2),
         alignSelf: 'center',
-        color: lightColor,
+        color: theme.colors.notification,
     },
 });

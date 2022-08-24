@@ -12,8 +12,8 @@ import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { GetTeamDataFromOverviewWithFixtureTeamID } from "../../Helpers/FplAPIHelpers";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { AnimatedButton, ModalWrapper } from "../../Features/Controls";
-import { styles } from "./PlayerModalStyles";
-import { useNavigation } from "@react-navigation/native";
+import { PlayerModalStyles } from "./PlayerModalStyles";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 import { FplBaseDataContext } from "../../AppContext";
@@ -21,12 +21,12 @@ import { height, width } from "../../Global/GlobalConstants";
 import { changePlayerOverviewInfo } from "../../Store/modalSlice";
 import { moderateScale } from "react-native-size-matters";
 
-function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[]) {
+function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, overview: FplOverview, fixtures: FplFixture[], styles) {
 
     if (teamInfo.teamType === TeamTypes.Fixture) {
 
         if (teamInfo.fixture) {
-            return FixturePlayerStatsView(playerData, overview, teamInfo.fixture);
+            return FixturePlayerStatsView(playerData, overview, teamInfo.fixture, styles);
         }
     }
     else if (teamInfo.teamType !== TeamTypes.Empty) {
@@ -36,14 +36,14 @@ function AllFixturesPlayerStatsView(playerData: PlayerData, teamInfo: TeamInfo, 
         return playerData.gameweekData.explain.map(fixture => 
             {
                 game = fixtures.find(game => game.id === fixture.fixture)
-                if (game) return FixturePlayerStatsView(playerData, overview, game)
+                if (game) return FixturePlayerStatsView(playerData, overview, game, styles)
             })        
     }
 
     return null;
 }
 
-function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, fixture: FplFixture) {
+function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, fixture: FplFixture, styles) {
 
     return (
         <View testID="fixturePlayerStatsContainer" key={fixture.id} style={styles.fixtureContainer} onStartShouldSetResponder={() => true}>
@@ -86,6 +86,9 @@ function FixturePlayerStatsView(playerData: PlayerData, overview: FplOverview, f
 
 const PlayerModal = () => {
 
+    const theme = useTheme();
+    const styles = PlayerModalStyles(theme);
+
     const dispatch = useAppDispatch();
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
     const { overview, fixtures } = useContext(FplBaseDataContext);
@@ -111,7 +114,7 @@ const PlayerModal = () => {
                         {player.overviewData.first_name + " " + player.overviewData.second_name}
                     </Text>
                     <ScrollView style={{ }}>
-                        { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures) }      
+                        { AllFixturesPlayerStatsView(player, teamInfo, overview, fixtures, styles) }      
                     </ScrollView>
                     <AnimatedButton buttonFn={onMoreInfoPress}>
                         <View style={[styles.button]}>

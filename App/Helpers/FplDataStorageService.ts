@@ -151,6 +151,45 @@ export async function removePlayerFromWatchlist(id: number) {
 
 //#endregion
 
+//#region theme 
+export interface ThemeData {
+    theme: string,
+    useDeviceTheme: boolean,
+}
+
+//set and get needed
+// use get to initialize the value
+export async function setThemeData(themeData: ThemeData) {
+    try{
+        const jsonValue = JSON.stringify(themeData);
+        await AsyncStorage.setItem('themeData', jsonValue);
+    } catch(e) {
+        console.log('error has occured');
+    }
+}
+
+export async function getThemeData() {
+    try {
+        const jsonValue = await AsyncStorage.getItem('themeData');
+
+        if (jsonValue === null) {
+            await setThemeData({
+                theme: 'light',
+                useDeviceTheme: false,
+            });
+
+            return {theme: 'light', useDeviceTheme: false} as ThemeData;
+        }
+        else {
+            return JSON.parse(jsonValue) as ThemeData;
+        }
+
+    } catch(e) {
+        console.log('error has occured');// error
+    }
+}
+//#endregion
+
 export async function clearAsyncStorage() {
     AsyncStorage.clear();
 }

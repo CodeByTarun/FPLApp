@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { aLittleLighterColor, cornerRadius, height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor } from "../../Global/GlobalConstants";
+import { cornerRadius, largeFont, mediumFont } from "../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const PlayerComparisonModalStyles = (theme: Theme) => StyleSheet.create({
     
     container: {
         width: '100%',
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
 
     titleText: {
         fontSize: largeFont * 1.2,
-        color: textPrimaryColor, 
+        color: theme.colors.text, 
         fontWeight: '600',
         textAlign: 'center',
         paddingBottom: moderateVerticalScale(15),
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
     },
 
     text: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont * 0.9,
         fontWeight: '500',
     },
@@ -41,14 +42,14 @@ export const styles = StyleSheet.create({
         aspectRatio: 5,
         flexDirection: 'row',
         alignSelf: 'center',
-        backgroundColor: secondaryColor,
+        backgroundColor: theme.colors.background,
         borderRadius: cornerRadius,
     },
 
     switch: {
         width: '33.3333%',
         height: '100%',
-        backgroundColor: primaryColor,
+        backgroundColor: theme.colors.card,
         position: 'absolute',
         zIndex: 1,
         borderRadius: cornerRadius,
@@ -64,7 +65,7 @@ export const styles = StyleSheet.create({
 
     controlText: {
         textAlign: 'center',
-        color: textSecondaryColor,
+        color: theme.colors.notification,
         fontWeight: '600',
         fontSize: mediumFont * 0.9,
     },
@@ -89,7 +90,7 @@ export const styles = StyleSheet.create({
 
     button: {
         width: moderateScale(100, 0.4),
-        backgroundColor: secondaryColor,
+        backgroundColor: theme.colors.background,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: cornerRadius,
@@ -100,7 +101,7 @@ export const styles = StyleSheet.create({
     },
 
     buttonText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontWeight: '500',
         fontSize: mediumFont,
     },
@@ -108,6 +109,6 @@ export const styles = StyleSheet.create({
     searchBox: {
         flex: 1,
         alignSelf: 'center',
-        color: textPrimaryColor,
+        color: theme.colors.text,
     },
 });

@@ -1,3 +1,4 @@
+import { Theme, useTheme } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import { View, StyleSheet, LayoutChangeEvent, Text } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
@@ -14,6 +15,9 @@ interface PieChartProps {
 }
 
 const PieChart = (props: PieChartProps) => {
+
+    const theme = useTheme();
+    const styles = PieChartStyles(theme);
 
     const [dimensions, setDimensions] = useState([0,0]);
 
@@ -49,7 +53,7 @@ const PieChart = (props: PieChartProps) => {
 
 export default PieChart;
 
-const styles = StyleSheet.create({
+const PieChartStyles = (theme: Theme) => StyleSheet.create({
     backgroundCircle: {
         borderRadius: 100,
         borderColor: 'black',
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: GlobalConstants.textPrimaryColor,
+        color: theme.colors.text,
         fontWeight: '700',
     },
 });

@@ -2,12 +2,16 @@ import React from "react";
 import { Pressable, View, Image, StyleSheet } from "react-native";
 import { Icons } from "../../../Global/Images";
 import * as GlobalConstants from "../../../Global/GlobalConstants"
+import { Theme, useTheme } from "@react-navigation/native";
 
 interface CloseButtonProps {
     closeFunction: () => void;
 }
 
 const CloseButton = ({closeFunction}: CloseButtonProps) => {
+
+    const theme = useTheme();
+    const styles = CloseButtonStyles(theme);
 
     return(
         <Pressable testID="closeButton" style={styles.closeButton} onPress={closeFunction}>
@@ -18,7 +22,7 @@ const CloseButton = ({closeFunction}: CloseButtonProps) => {
     )
 }
 
-const styles = StyleSheet.create({
+const CloseButtonStyles = (theme: Theme) => StyleSheet.create({
     closeButton: {
         position: 'absolute',
         zIndex: 10,
@@ -35,7 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-        backgroundColor: GlobalConstants.secondaryColor,
+        backgroundColor: theme.colors.background,
         borderRadius: 20,
     },
 })

@@ -1,8 +1,8 @@
+import { Theme, useTheme } from "@react-navigation/native";
 import React from "react";
 import { View, TextInput, Image, StyleSheet } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-import { textPrimaryColor, secondaryColor, cornerRadius, textSecondaryColor, mediumFont } from "../../../Global/GlobalConstants";
-import globalStyles from "../../../Global/GlobalStyles";
+import { cornerRadius, textSecondaryColor, mediumFont } from "../../../Global/GlobalConstants";
 import { Icons } from "../../../Global/Images";
 
 interface SearchControlProps {
@@ -12,10 +12,14 @@ interface SearchControlProps {
 }
 
 const SearchControl = ({value, onChangeTextFunction, placeHolderText} : SearchControlProps) => {
+
+    const theme = useTheme();
+    const styles = SearchControlStyles(theme);
+
     return (
         <View style={[styles.searchBoxContainer, styles.shadow]}>
             <View style={{height: '100%', width: 20, marginRight: 10, marginLeft: 5, justifyContent: 'center', alignSelf: 'center', flexDirection:'row'}}>
-                <Image style={{height: 18, width: '100%', alignSelf: 'center'}} resizeMode="contain" source={Icons['search']}/>
+                <Image style={{height: 18, width: '100%', alignSelf: 'center'}} resizeMode="contain" source={(theme.dark ? Icons['search'] : Icons['searchPurple'])}/>
             </View>
             <TextInput style={styles.searchbox} 
                         value={value}
@@ -29,11 +33,11 @@ const SearchControl = ({value, onChangeTextFunction, placeHolderText} : SearchCo
 
 export default SearchControl;
 
-const styles = StyleSheet.create({
+const SearchControlStyles = (theme: Theme) => StyleSheet.create({
     searchBoxContainer: {
         flex: 9,
         fontSize: mediumFont,
-        backgroundColor: secondaryColor,
+        backgroundColor: theme.colors.background,
         flexDirection: 'row',
         borderRadius: cornerRadius,
         alignItems: 'center',
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     searchbox: {
         flex: 1,
         alignSelf: 'center',
-        color: textPrimaryColor,
+        color: theme.colors.text,
     },
 
     shadow: {

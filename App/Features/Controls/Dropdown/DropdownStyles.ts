@@ -1,8 +1,9 @@
+import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters";
 import { textSecondaryColor, mediumFont, textPrimaryColor, largeFont, redColor, cornerRadius, height, lightColor, aLittleLighterColor, secondaryColor, primaryColor, width } from "../../../Global/GlobalConstants";
 
-export const styles = StyleSheet.create({
+export const DropDownStyles = (theme: Theme) => StyleSheet.create({
     container: {
         flex: 1, 
         flexDirection: 'column', 
@@ -23,13 +24,13 @@ export const styles = StyleSheet.create({
     headerText: {
         alignSelf: 'flex-start',
         marginBottom: moderateVerticalScale(2), 
-        color: textSecondaryColor, 
+        color: theme.colors.border, 
         fontSize: mediumFont * 0.75,
         paddingLeft: scale(1),
     },
 
     selectedValueText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         fontSize: mediumFont,
         marginRight: moderateScale(5),
         alignSelf: 'center',
@@ -47,12 +48,12 @@ export const styles = StyleSheet.create({
 
     titleContainer: {
         padding: moderateScale(15),
-        borderBottomColor: secondaryColor,
+        borderBottomColor: theme.colors.background,
         borderBottomWidth: 2,
     },
 
     titleText: {
-        color: textPrimaryColor,
+        color: theme.colors.text,
         alignSelf: 'center',
         fontSize: largeFont,
         fontWeight: 'bold',
@@ -67,12 +68,12 @@ export const styles = StyleSheet.create({
     },
 
     itemView: {
-        borderBottomColor: secondaryColor,
+        borderBottomColor: theme.colors.background,
         borderBottomWidth: 1,
     },
 
     itemText: {
-        color: textSecondaryColor,
+        color: theme.colors.notification,
         fontSize: mediumFont,
         paddingBottom: moderateVerticalScale(15),
         paddingTop: moderateVerticalScale(15),
@@ -83,7 +84,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: redColor,
-        borderRadius: cornerRadius,
+        borderRadius: 100,
         width: moderateScale(80),
         alignSelf: 'center',
         padding: moderateScale(10),
@@ -91,13 +92,13 @@ export const styles = StyleSheet.create({
 
     resetText: {
         fontSize: mediumFont, 
-        color: textPrimaryColor,
+        color: theme.colors.text,
     },
 
     resetContainer: {
         paddingTop: moderateVerticalScale(15),
         paddingBottom: moderateVerticalScale(5),
-        borderTopColor: secondaryColor,
+        borderTopColor: theme.colors.background,
         borderTopWidth: 2,
     },
 })
