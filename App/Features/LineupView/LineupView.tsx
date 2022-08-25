@@ -54,6 +54,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
         <View style={styles.container}>
             <View style={styles.top}>
                 <View style={[styles.controlsContainer, globalStyles.bottomShadow]}>
+                    <View style={styles.sideControlsContainer}/>
                     <View style={styles.lineupHeaderContainer}>
                         {
                             (teamInfo.teamType === TeamTypes.Fixture && gameweek) ?
@@ -67,11 +68,16 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                             (teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Budget) ?
                                 <AnimatedButton buttonFn={openStandingsModal}>
                                     <View testID="managerTeamDropDownButton" style={{flexDirection: 'row'}}>
-                                        <Text style={styles.text}>{teamInfo.info.name}  </Text> 
+                                        <Text style={styles.text}>{teamInfo.teamType === TeamTypes.Draft ? draftUserInfo?.entry.name : budgetUserInfo?.name}  </Text> 
                                         <Text style={globalStyles.dropDownSymbol}>◣</Text>
                                     </View>
                                 </AnimatedButton> :
                                 <></>
+                        }
+                    </View>
+                    <View style={[styles.sideControlsContainer, {alignItems: 'flex-end'}]}>
+                        {(teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Budget) &&
+                            <Text style={styles.idText}>ID# {teamInfo.info.id}</Text>
                         }
                     </View>
                 </View>

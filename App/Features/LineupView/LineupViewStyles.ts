@@ -32,8 +32,22 @@ export const LineupViewStyles = (theme: Theme) => StyleSheet.create({
         backgroundColor: theme.colors.primary,
     },
 
+    sideControlsContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingRight: moderateScale(10),
+        paddingLeft: moderateScale(10),
+    },
+
+    idText: {
+        color: theme.colors.notification,
+        fontSize: mediumFont,
+        fontWeight: '500',
+        padding: 1,
+    },
+
     lineupHeaderContainer: {
-        flex: 1, 
+        flex: 2.5, 
         alignItems: 'center', 
         justifyContent: 'center',
     },

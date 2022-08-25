@@ -88,4 +88,5 @@ export const Icons: { [key:string]: ImageURISource} =
         "strategy" : require('../../assets/icons/strategy.png'),
         "playercomparison" : require('../../assets/icons/playercomparison.png'),
         "cogwheel" : require('../../assets/icons/cogwheel.png'),
+        "save" : require('../../assets/icons/save.png'),
     }

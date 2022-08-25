@@ -38,7 +38,8 @@ export const ManagerInfoCardStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text, 
         alignSelf: 'center', 
         fontWeight: '600',
-        fontSize: largeFont,
+        fontSize: largeFont * 0.95,
+
     },
 
     rankText: {

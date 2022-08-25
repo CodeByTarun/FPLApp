@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { Pressable, View, Image, Text } from "react-native";
+import { Pressable, View, Image, Text, ScrollView } from "react-native";
 import globalStyles from "../../Global/GlobalStyles";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { changeFilterView, changePlayerSummaryInfo } from "../../Store/modalSlice";
@@ -17,10 +17,8 @@ import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
 import { FplBaseDataContext } from "../../AppContext";
-import { ScrollView } from "react-native-gesture-handler";
 import FilterView from "./FilterView";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { KingOfTheGameweekViewStyles } from "../../Features/LineupView/Lineup/KingsOfTheGameweekView/KingsOfTheGameweekViewStyles";
 
 const AnimatedView = animated(View);
 

@@ -5,8 +5,8 @@ import store from "../../../App/Store/store";
 import { changeToDraftTeam, TeamInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { budgetManagerInfo, draftLeagueInfo } from "../../SampleData/Gameweek32Data";
 
-let draftInfo: TeamInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
-let budgetInfo: TeamInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget }
+let draftInfo: TeamInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft, liveGameweek: 3 }
+let budgetInfo: TeamInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget, liveGameweek: 3 }
 
 
 test('show draft league if team type is draft and draft league info is present', () => {

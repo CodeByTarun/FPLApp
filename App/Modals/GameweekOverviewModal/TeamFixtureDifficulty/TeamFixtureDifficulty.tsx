@@ -1,7 +1,6 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { FixturesMap } from "../../../../App";
 import { FplBaseDataContext } from "../../../AppContext";

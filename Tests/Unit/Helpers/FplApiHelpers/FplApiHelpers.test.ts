@@ -12,13 +12,13 @@ import { budgetLeaguePicks, draftLeaguePicks, gameweek32, gameweek32Fixture } fr
 import { liveFixture, liveGameweek } from "../../../SampleData/LiveScoreData";
 import { draftLeagueInfo, draftPlayerStatuses } from "../../../SampleData/DraftManager";
 
-const fixtureInfo: TeamInfo =  { teamType: TeamTypes.Fixture, fixture: fixture as FplFixture, isHome: true, gameweek: 21 }
+const fixtureInfo: TeamInfo =  { teamType: TeamTypes.Fixture, fixture: fixture as FplFixture, isHome: true, gameweek: 21, liveGameweek: 3, }
 
-let draftInfo: DraftInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
+let draftInfo: DraftInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft, liveGameweek: 3 }
 
-let budgetInfo: BudgetInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget }
+let budgetInfo: BudgetInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget, liveGameweek: 3 }
 
-const dreamInfo: TeamInfo = {teamType: TeamTypes.Dream, gameweek: 32}
+const dreamInfo: TeamInfo = {teamType: TeamTypes.Dream, gameweek: 32, liveGameweek: 3}
 
 
 describe('GetTeamDataFromOverviewWithFixtureTeamID', () => {
@@ -102,7 +102,7 @@ describe('GetPointTotal', () => {
     });
 
     test('live fixture', () => {
-        let fixtureInfo: FixtureInfo = { fixture: liveFixture, gameweek: 32, isHome: true, teamType: TeamTypes.Fixture }
+        let fixtureInfo: FixtureInfo = { fixture: liveFixture, gameweek: 32, isHome: true, teamType: TeamTypes.Fixture, liveGameweek: 3 }
         let players = GetPlayerGameweekDataSortedByPosition(liveGameweek, overview, fixtureInfo, draftOverview);
 
         expect(GetPointTotal(players![0], fixtureInfo)).toBe(1);

@@ -46,13 +46,6 @@ const TeamModal = () => {
 
     }, [userTeamState])
 
-    // useEffect( function resetModal() {
-    //     if (modalInfo.modalType !== ModalTypes.TeamModal) {
-    //         userTeamDispatch({ type: UserTeamActionKind.Reset })
-    //         setTeamFormOpen(false);
-    //     }
-    // }, [modalInfo])
-
     const addTeam = useCallback(async() => {
 
         await addUserTeamInfo(userTeamState.userTeam)

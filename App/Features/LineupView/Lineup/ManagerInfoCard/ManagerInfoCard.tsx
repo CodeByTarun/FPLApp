@@ -93,6 +93,18 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
                 index: 7,
             })
         } 
+        else if (stat.index === 7) {
+
+            let value = budgetManagerInfo?.last_deadline_value;
+            let bank = budgetManagerInfo?.last_deadline_bank;
+
+            setStat({
+                title: "Squad Value",
+                value: `£${value ? (value / 10).toFixed(1) : 0.0}` ,
+                stat: `Bank: £${bank ? (bank / 10).toFixed(1) : 0.0}`,
+                index: 8, 
+            })
+        }
         else {
             setStat({
                 title: "Gameweek",
@@ -134,7 +146,7 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
                     <Text style={styles.text}>{stat.title}</Text>
                 </View>
                 <View style={styles.middleTextContainter}>
-                    <Text numberOfLines={1} style={stat.stat === 'Rank' ? styles.rankText : styles.statText}>{stat.value}</Text>
+                    <Text numberOfLines={1} adjustsFontSizeToFit style={stat.stat === 'Rank' ? styles.rankText : styles.statText}>{stat.value}</Text>
                 </View>
                 <View style={styles.categoryContainer}>
                     <Text numberOfLines={1} style={styles.text}>{stat.stat}</Text>
@@ -148,7 +160,7 @@ const ManagerInfoCard = ({teamInfo, players, budgetManagerInfo, budgetGameweekPi
                         }) }
                         {(teamInfo.teamType === TeamTypes.Budget) &&
                             <>  
-                                { [6,7].map(index => {
+                                { [6,7,8].map(index => {
                                     return (
                                         <View testID="managerCardDots" key={index} style={[globalStyles.dots, {backgroundColor: stat.index === index ? textPrimaryColor : theme.colors.border}]}/>
                                     )
