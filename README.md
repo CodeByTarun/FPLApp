@@ -56,7 +56,7 @@ Example:
 
 When on the points tab on the browser the URL will contain your team ID: https://fantasy.premierleague.com/entry/ ***8423283*** /event/36
 
-Once your team it will be set as your favourite team and will open automatically when the app is opened. If you click on your team’s name, the standings will open for draft leagues and a list of leagues will open for budget leagues. You can navigate to any league and click on any team to view how they are doing. 
+Once your team has been added it will be set as your favourite team and will open automatically when the app is opened. If you click on your team’s name, the standings will open for draft leagues and a list of leagues will open for budget leagues. You can navigate to any league and click on any team to view how they are doing. 
 
 When viewing your team there are two cards at the top that show if you are viewing the current gameweek, press the right one to view additional info such as expected points, cost, form, selection percentage and upcoming fixtures. The left one shows point totals, transaction totals and rank.
 
