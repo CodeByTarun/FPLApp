@@ -65,7 +65,7 @@ export enum Scoring {
 export interface Cup {
     matches:    any[];
     status:     Status;
-    cup_league: number;
+    cup_league: number | null;
 }
 
 export interface Status {

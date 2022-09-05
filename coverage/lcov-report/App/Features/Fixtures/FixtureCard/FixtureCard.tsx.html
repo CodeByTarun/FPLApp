@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/12</span>
+                <span class='fraction'>9/12</span>
             </div>
         
             
@@ -145,8 +145,7 @@
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,38 +174,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">143x</span>
+<span class="cline-any cline-yes">143x</span>
+<span class="cline-any cline-yes">101x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">41x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">143x</span>
+<span class="cline-any cline-yes">143x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">143x</span>
+<span class="cline-any cline-yes">273x</span>
+<span class="cline-any cline-yes">273x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">143x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">143x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -290,24 +288,23 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) =&gt; 
 &nbsp;
     return (
         
-        &lt;View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? <span class="branch-0 cbranch-no" title="branch not covered" >-5 </span>: 0 }]}&gt;
-                &lt;AnimatedButton buttonFn={showFixture} disabled={((fixture.event !== null) &amp;&amp; (fixture.event &gt; liveGameweek))}&gt;   
-            &lt;View style={[styles.card, globalStyles.shadow]}&gt;
-                &lt;View style={styles.topbar}&gt;
-                    &lt;Text style={styles.datetext}&gt;
-                        { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
-                    &lt;/Text&gt;
-                &lt;/View&gt;
-                &lt;View style={styles.scoreView}&gt;
-                    &lt;TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview)}/&gt;
-                    &lt;View style={styles.scoreAndTimeView}&gt;
-                        { SetScoreAndTime(fixture, gameweekData, styles) }
+        &lt;View style={[styles.fixtureViewContainer, { marginBottom: (navigation.screenType === ScreenTypes.Fixtures) ? -5 : 0 }]}&gt;
+            &lt;AnimatedButton buttonFn={showFixture} disabled={((fixture.event !== null) &amp;&amp; (fixture.event &gt; liveGameweek))}&gt;   
+                &lt;View style={[styles.card, globalStyles.shadow]}&gt;
+                    &lt;View style={styles.topbar}&gt;
+                        &lt;Text style={styles.datetext}&gt;
+                            { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
+                        &lt;/Text&gt;
                     &lt;/View&gt;
-                    &lt;TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/&gt;
+                    &lt;View style={styles.scoreView}&gt;
+                        &lt;TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_h, overview)}/&gt;
+                        &lt;View style={styles.scoreAndTimeView}&gt;
+                            { SetScoreAndTime(fixture, gameweekData, styles) }
+                        &lt;/View&gt;
+                        &lt;TeamEmblem team={GetTeamDataFromOverviewWithFixtureTeamID(fixture.team_a, overview)}/&gt;
+                    &lt;/View&gt;
                 &lt;/View&gt;
-            &lt;/View&gt;
-&nbsp;
-                &lt;/AnimatedButton&gt;
+            &lt;/AnimatedButton&gt;
         &lt;/View&gt;
     )
 }
@@ -319,7 +316,7 @@ export default FixtureCard;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-01T22:37:22.820Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -11,7 +11,7 @@ test('everything renders', async () => {
     expect(queryByTestId('playerDetailedStatsHistoryListView')).toBeTruthy();
     await waitFor(() => expect(queryByTestId('historyListScrollView')).toHaveProp('horizontal', true));
     expect(queryAllByTestId('historyListItem')).toBeTruthy();
-    expect(queryAllByTestId('historyFooterItem')).toHaveLength(15);
+    expect(queryAllByTestId('historyFooterItem')).toHaveLength(19);
 
     expect(queryByText('GW')).toBeTruthy();
     expect(queryByText('OG')).toBeTruthy();

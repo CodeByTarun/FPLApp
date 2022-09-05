@@ -33,14 +33,16 @@ const AnimatedButton = ({ buttonFn, disabled = false, children } : PropsWithChil
                 {scale: 0.97},
                 {scale: 1},
             ],
-            config: {duration: 50}, 
-            onRest: () => buttonFn()
+            config: {duration: 100}, 
         })
 
+        setTimeout(() => {
+            buttonFn();
+        }, 100);
 
         setTimeout(() => {
             setIsDisabled(disabled);
-        }, 100);
+        }, 150);
     }
 
     return (

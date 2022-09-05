@@ -12,7 +12,9 @@ import gameweekData from './gameweek.json';
 import gameweek32FixtureData from './gameweek32Fixture.json';
 import fixturesData from './fixtures.json';
 import draftLeagueInfoData from './draftLeagueInfo.json';
+import budgetLeagueInfoData from './budgetLeagueInfo.json';
 import { FplDraftLeagueInfo } from '../../../App/Models/FplDraftLeagueInfo';
+import { FplBudgetLeagueInfo } from '../../../App/Models/FplBudgetLeagueInfo';
 
 export const budgetLeaguePicks = budgetLeaguePicksData as FplManagerGameweekPicks;
 export const budgetManagerInfo = budgetManagerInfoData as FplManagerInfo;
@@ -22,3 +24,4 @@ export const gameweek32 = gameweekData as FplGameweek;
 export const gameweek32Fixture = gameweek32FixtureData as FplFixture;
 export const fixtures = fixturesData as FplFixture[];
 export const draftLeagueInfo = draftLeagueInfoData as FplDraftLeagueInfo;
+export const budgetLeagueInfo = budgetLeagueInfoData as FplBudgetLeagueInfo;

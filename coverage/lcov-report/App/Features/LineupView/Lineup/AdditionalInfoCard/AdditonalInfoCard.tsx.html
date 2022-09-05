@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -114,12 +114,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,16 +155,16 @@ const AdditionalInfoCard = ({viewIndex, setViewIndex, viewIndexScenes} : Additio
 &nbsp;
     return (
         &lt;Pressable testID="additionalInfoCardButton" style={[styles.cardContainer, globalStyles.tabShadow]}
-                    onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setViewIndex((viewIndex + 1 &lt; viewIndexScenes.length) ? viewIndex + 1 : 0)}</span>&gt;
+                    onPress={() =&gt; setViewIndex((viewIndex + 1 &lt; viewIndexScenes.length) ? viewIndex + 1 : 0)}&gt;
             &lt;View style={styles.textContainer}&gt;
                 &lt;Text style={styles.text}&gt;{viewIndexScenes[viewIndex]}&lt;/Text&gt;
             &lt;/View&gt;
                 
             &lt;View style={styles.dotsContainer}&gt;
-                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 0 ? textPrimaryColor : <span class="branch-1 cbranch-no" title="branch not covered" >theme.colors.border}</span>]}/&gt;
-                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >textPrimaryColor </span>: theme.colors.border}]}/&gt;          
-                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 2 ? <span class="branch-0 cbranch-no" title="branch not covered" >textPrimaryColor </span>: theme.colors.border}]}/&gt;
-                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 3 ? <span class="branch-0 cbranch-no" title="branch not covered" >textPrimaryColor </span>: theme.colors.border}]}/&gt;                            
+                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 0 ? textPrimaryColor : theme.colors.border}]}/&gt;
+                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 1 ? textPrimaryColor : theme.colors.border}]}/&gt;          
+                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 2 ? textPrimaryColor : theme.colors.border}]}/&gt;
+                &lt;View testID="additionalInfoCardDots" style={[globalStyles.dots, {backgroundColor: viewIndex === 3 ? textPrimaryColor : theme.colors.border}]}/&gt;                            
             &lt;/View&gt;
         &lt;/Pressable&gt;
     )
@@ -178,7 +178,7 @@ export default AdditionalInfoCard;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-01T22:37:22.820Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

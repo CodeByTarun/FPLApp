@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.52% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/21</span>
+                <span class='fraction'>18/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/20</span>
+                <span class='fraction'>18/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -175,39 +175,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
+<span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,7 +231,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { useTheme } from "@react-navigation/native";
+<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">import { useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useContext, useState } from "react";
 import { Pressable, View, Text } from "react-native";
@@ -259,43 +259,43 @@ interface PlayerItemProps {
     removeFromWatchlist: (playerId: number) =&gt; Promise&lt;void&gt;;
 }
 &nbsp;
-const PlayerItem = React.memo(<span class="fstat-no" title="function not covered" >({</span>player, draftData, watchList, navigation, isPer90, statFilter, addToWatchlist, removeFromWatchlist} : PlayerItemProps) =&gt; {
+const PlayerItem = React.memo(({player, draftData, watchList, navigation, isPer90, statFilter, addToWatchlist, removeFromWatchlist} : PlayerItemProps) =&gt; {
 &nbsp;
-    const theme = <span class="cstat-no" title="statement not covered" >useTheme();</span>
-    const styles = <span class="cstat-no" title="statement not covered" >PlayerItemStyles(theme);</span>
+    const theme = useTheme();
+    const styles = PlayerItemStyles(theme);
 &nbsp;
-    const dispatch = <span class="cstat-no" title="statement not covered" >useAppDispatch();</span>
-    const { overview } = <span class="cstat-no" title="statement not covered" >useContext(FplBaseDataContext);</span>
+    const dispatch = useAppDispatch();
+    const { overview } = useContext(FplBaseDataContext);
     
-    const [inWatchList, setInWatchList] = <span class="cstat-no" title="statement not covered" >useState(watchList?.playerIds.includes(player.id));</span>
+    const [inWatchList, setInWatchList] = useState(watchList?.playerIds.includes(player.id));
 &nbsp;
-    const addToWatchlistFn = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >as</span>ync(playerId: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        await addToWatchlist(playerId);</span>
-<span class="cstat-no" title="statement not covered" >        setInWatchList(true);</span>
+    const addToWatchlistFn = useCallback(async(playerId: number) =&gt; {
+        await addToWatchlist(playerId);
+        setInWatchList(true);
     }, []);
 &nbsp;
-    const removeFromWatchlistFn = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >as</span>ync(playerId: number) =&gt; {</span>
+    const removeFromWatchlistFn = useCallback(<span class="fstat-no" title="function not covered" >as</span>ync(playerId: number) =&gt; {
 <span class="cstat-no" title="statement not covered" >        await removeFromWatchlist(playerId);</span>
 <span class="cstat-no" title="statement not covered" >        setInWatchList(false);</span>
     }, []);
 &nbsp;
-    const pressPlayerFn = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        dispatch(changePlayerOverviewInfo(player));</span>
-<span class="cstat-no" title="statement not covered" >        navigation.navigate('PlayerDetailedStatsModal');</span>
+    const pressPlayerFn = useCallback(() =&gt; {
+        dispatch(changePlayerOverviewInfo(player));
+        navigation.navigate('PlayerDetailedStatsModal');
     }, []);
 &nbsp;
-    const getStatValue = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >(p</span>layer : PlayerOverview) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return GetStatValue(isPer90, statFilter, player);</span>
+    const getStatValue = useCallback((player : PlayerOverview) =&gt; {
+        return GetStatValue(isPer90, statFilter, player);
     }, [statFilter, isPer90]);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
-        &lt;Pressable key={player.id} style={styles.tableView} onPress={pressPlayerFn}&gt;
+    return (
+        &lt;Pressable testID="playerItem" key={player.id} style={styles.tableView} onPress={pressPlayerFn}&gt;
             &lt;View testID="watchlistButtonContainer" style={[styles.watchListButtonContainer, {opacity: inWatchList ? 1 : 0.5}]}&gt;
-                &lt;CustomButton image={inWatchList ? "favourite" : "unfavourite"} buttonFunction={inWatchList ? <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >removeFromWatchlistFn(player.id) </span>: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >addToWatchlistFn(player.id)}</span>/&gt;
+                &lt;CustomButton image={inWatchList ? "favourite" : "unfavourite"} buttonFunction={inWatchList ? <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >removeFromWatchlistFn(player.id) </span>: () =&gt; addToWatchlistFn(player.id)}/&gt;
             &lt;/View&gt;
             &lt;View style={styles.playerListInfoContainer}&gt;
                 &lt;PlayerListInfo overview={overview} player={player} owner={(draftData.draftLeagueRosters) ? 
-                                                                        GetOwnedPlayersManagerShortInitials(player.id, overview, draftData.draftOverview, draftData.draftLeagueRosters, draftData.draftLeagueInfo) : 
+<span class="branch-0 cbranch-no" title="branch not covered" >                                                                        GetOwnedPlayersManagerShortInitials(player.id, overview, draftData.draftOverview, draftData.draftLeagueRosters, draftData.draftLeagueInfo) </span>: 
                                                                         null}/&gt;
             &lt;/View&gt;
 &nbsp;
@@ -322,7 +322,7 @@ PlayerItem.displayName = 'PlayerItem';</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-01T22:37:22.820Z
             </div>
         <script src="../../../../../../prettify.js"></script>
         <script>

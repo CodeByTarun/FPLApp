@@ -1,15 +1,19 @@
 import React from "react";
-import { render } from "../../reduxRender";
+import { reduxRender, render } from "../../reduxRender";
 import { Stats } from "../../../../App/Modals/PlayerDetailedStatsModal/PlayerDetailedStatsViews";
 import { StatsFilterState } from "../../../../App/Modals/PlayerDetailedStatsModal/StatsFilterReducer";
 import { playerOverview, playerSummary } from "./PlayerData";
+import store from "../../../../App/Store/store";
+import { setLiveGameweek } from "../../../../App/Store/teamSlice";
 
 test('everything renders', () => {
 
     let statsFilterState: StatsFilterState = {gameSpan: [1, 33], isPer90: false};
 
+    const customStore = store;
+    customStore.dispatch(setLiveGameweek(33));
 
-    const { queryByTestId, queryByText, queryAllByTestId } = render(<Stats statsFilterState={statsFilterState} player={playerOverview} playerData={playerSummary} currentGameweek={33}/>);
+    const { queryByTestId, queryByText, queryAllByTestId } = reduxRender(<Stats statsFilterState={statsFilterState} player={playerOverview} playerData={playerSummary}/>);
 
     expect(queryByTestId('playerDetailedStatsStatsView')).toBeTruthy();
     expect(queryByText('Totals')).toBeTruthy();
@@ -32,7 +36,8 @@ test('isPer90', () => {
 
     let statsFilterState: StatsFilterState = {gameSpan: [1, 33], isPer90: true};
 
-    const { queryByTestId, queryByText, queryAllByTestId } = render(<Stats statsFilterState={statsFilterState} player={playerOverview} playerData={playerSummary} currentGameweek={33}/>);
+    const { queryByTestId, queryByText, queryAllByTestId } = reduxRender(<Stats statsFilterState={statsFilterState} player={playerOverview} playerData={playerSummary}/>);
 
     expect(queryByText('Per 90')).toBeTruthy();
 });
+``

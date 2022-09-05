@@ -10,6 +10,9 @@ import { render, fireEvent, cleanup, waitFor } from "@testing-library/react-nati
 import { Dropdown } from "../../../App/Features/Controls";
 import "@testing-library/jest-native";
 import { Globals } from "@react-spring/native";
+import { reduxRender } from "../reduxRender";
+import store from "../../../App/Store/store";
+import { mockedNavigation } from "../../jestSetupFile";
 
 const options = [
     '1',
@@ -23,48 +26,21 @@ Globals.assign({
     skipAnimation: true,
 })
 
-test('header from props is shown and opening dropdown and closing using close button', async () => {
+test('test if dropdown button shows the right content and that content changes when the value changes and pressing the button does the appropriate action', async () => {
 
+    const customStore = store;
     const mockSetFn = jest.fn();
-    const {queryAllByText, getByText, getByTestId}  = render(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={'1'} setValue={ mockSetFn }/>);
+
+    const { getByText }  = reduxRender(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={'1'} setValue={ mockSetFn }/>, customStore);
          
-    expect(queryAllByText('Header')).toHaveLength(2);    
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
+    expect(getByText('Header')).toBeTruthy();;    
+    expect(getByText('1')).toBeTruthy();
+
+    expect(customStore.getState().modal.mutableView.view).toBeFalsy();
 
     fireEvent.press(getByText('◣'));
-    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', true));
-
-    fireEvent.press(getByTestId('closeButton'));
-    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', false));
-})
-
-test('selected an option and then clear', async () => {
-
-    let value = '1';
-    const mockSetFn = jest.fn((newValue) => value = newValue);
-    const {getByText, getByTestId, queryAllByText, rerender }  = render(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={value} setValue={ mockSetFn }/>);
-         
-    expect(queryAllByText('Header')).toHaveLength(2);    
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
-
-    fireEvent.press(getByText('◣'));
-    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', true));
-
-    fireEvent.press(getByText('2'));
-    await waitFor(() => expect(mockSetFn).toBeCalledTimes(1));
-
-    await waitFor(() => expect(value).toBe('2')); 
-
-    rerender(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={value} setValue={ mockSetFn }/>);
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
-
-    fireEvent.press(getByText('◣'));
-    await waitFor(() => expect(getByTestId('dropdownModal')).toHaveProp('visible', true));
-
-    fireEvent.press(getByText('Reset'));
-    await waitFor(() => expect(value).toBe('1')); 
-    await waitFor(() => expect(mockSetFn).toBeCalledTimes(2));
-
-    rerender(<Dropdown defaultValue={"1"} headerText={"Header"} options={options} value={value} setValue={ mockSetFn }/>);
-    expect(getByTestId('dropdownModal')).toHaveProp('visible', false);
+    await waitFor(() => expect(mockedNavigation).toBeCalledWith('MutableModal'));
+    
+    expect(customStore.getState().modal.mutableView.view).toBeTruthy();
 });
+

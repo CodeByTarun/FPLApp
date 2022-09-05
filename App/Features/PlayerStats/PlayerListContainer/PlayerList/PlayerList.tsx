@@ -17,8 +17,6 @@ interface PlayerListProps {
 
 const PlayerList = React.memo(({playerListData, draftData, addToWatchlist, removeFromWatchlist}: PlayerListProps) => {
 
-    const theme = useTheme();
-
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
 
     const renderPlayerItem = useCallback(({item}: {item: PlayerOverview}) => {
@@ -35,6 +33,7 @@ const PlayerList = React.memo(({playerListData, draftData, addToWatchlist, remov
 
     return(
         <FlatList
+            testID="playerList"
             data={playerListData.playerList}
             renderItem={renderPlayerItem}
             keyExtractor={keyExtractor}

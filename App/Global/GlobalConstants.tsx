@@ -67,7 +67,7 @@ export const defaultTheme = {
 export const darkTheme = {
     dark: true,
     colors: {
-        primary: '#121212',
+        primary: '#101010',
         background: '#181818',
         card: '#141414',
         text: '#ece7f4',

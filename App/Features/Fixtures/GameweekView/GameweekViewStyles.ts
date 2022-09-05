@@ -44,7 +44,7 @@ export const GameweekViewStyles = (theme: Theme) => StyleSheet.create({
     },
 
     text: {
-        color: theme.colors.notification,
+        color: theme.colors.text,
         fontSize: mediumFont,
     },
 

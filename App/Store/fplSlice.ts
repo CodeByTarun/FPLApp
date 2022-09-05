@@ -68,7 +68,7 @@ export const fplSlice = createApi({
     }),
 
     getBudgetLeagueInfo: builder.query<FplBudgetLeagueInfo, number>({
-      query: (leagueId: number) => `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/?page_new_entries=1&page_standings=1&phase=1`
+      query: (leagueId: number) => `https://fantasy.premierleague.com/api/leagues-classic/${leagueId}/standings/`
     }),
   })
 })

@@ -23,18 +23,7 @@ const TeamFixtureDifficulty = () => {
 
         return teamAAverageDifficulty - teamBAverageDifficulty
     });
-
-    let fixturesfive = fixtureLists[13].slice(0, 4);
-    let then = fixturesfive.reduce((previousValue, fixture) => previousValue + ((fixture.team_a === 13) ? fixture.team_h_difficulty : fixture.team_a_difficulty) , 0);
-                    
-    console.log(fixtureLists[13])
-    console.log(fixturesfive);
-    console.log(then);
-
-
-
-    console.log("13   " + getAverageFixutreDifficultyOverNext4Games(13, fixtureLists, liveGameweek));
-
+         
     return (
         <View style={styles.container}>
             <ScrollView style={styles.outerScrollView}>
@@ -70,7 +59,7 @@ const TeamFixtureDifficulty = () => {
     )
 }
 
-export default React.memo(TeamFixtureDifficulty);
+export default TeamFixtureDifficulty;
 
 const TeamFixtureDifficultyStyles = (theme: Theme) => StyleSheet.create({
 

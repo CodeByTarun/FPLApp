@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { render, fireEvent } from "../reduxRender";
+import { render, fireEvent, reduxRender } from "../reduxRender";
 import Standings from "../../../App/Features/Standings";
 import store from "../../../App/Store/store";
 import { changeToDraftTeam, TeamInfo, TeamTypes } from "../../../App/Store/teamSlice";
@@ -11,9 +11,7 @@ let budgetInfo: TeamInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: fa
 
 test('show draft league if team type is draft and draft league info is present', () => {
 
-    const mockFn = jest.fn();
-
-    const { queryByTestId } = render(<Standings teamInfo={draftInfo} draftLeagueInfo={draftLeagueInfo} setModalVisibility={mockFn}/>);
+    const { queryByTestId } = reduxRender(<Standings teamInfo={draftInfo} draftLeagueInfo={draftLeagueInfo}/>);
 
     expect(queryByTestId('draftLeagueStandingsList')).toBeTruthy();
     expect(queryByTestId('budgetLeagueStandingsList')).toBeFalsy();
@@ -22,9 +20,7 @@ test('show draft league if team type is draft and draft league info is present',
 
 test('show budget league if team type is budget and budget league info is present', () => {
 
-    const mockFn = jest.fn();
-
-    const { queryByTestId } = render(<Standings teamInfo={budgetInfo} budgetUserInfo={budgetManagerInfo} setModalVisibility={mockFn}/>);
+    const { queryByTestId } = reduxRender(<Standings teamInfo={budgetInfo} budgetUserInfo={budgetManagerInfo}/>);
 
     expect(queryByTestId('draftLeagueStandingsList')).toBeFalsy();
     expect(queryByTestId('budgetLeagueList')).toBeTruthy();

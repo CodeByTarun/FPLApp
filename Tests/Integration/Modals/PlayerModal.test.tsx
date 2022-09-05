@@ -1,21 +1,26 @@
 import React from "react";
-import { render } from "../reduxRender";
+import { reduxRender, render } from "../reduxRender";
 import PlayerModal from "../../../App/Modals/PlayerModal";
 import { draftOverview, overview } from "../../SampleData/Overviews";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../App/Helpers/FplAPIHelpers";
 import { budgetLeaguePicks, draftLeaguePicks, fixtures, gameweek32 } from "../../SampleData/Gameweek32Data";
-import { TeamInfo, TeamTypes } from "../../../App/Store/teamSlice";
+import { changeToDraftTeam, changeToFixture, TeamInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { Emblems } from "../../../App/Global/Images";
 import { doubleGameweek32, doubleGameweek32DraftPicks, singleFixtureForDoubleGWPlayer } from "../../SampleData/DoubleGW32Data";
-import { ModalTypes } from "../../../App/Store/modalSlice";
+import { changePlayerModalInfo } from "../../../App/Store/modalSlice";
+import store from "../../../App/Store/store";
 
-let draftInfo: TeamInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
+let draftInfo: TeamInfo = { gameweek: 32, liveGameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
 
 test('one fixture modal renders correctly', () => {
 
     let players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
-    const { queryByTestId, queryByText } = render(<PlayerModal overview={overview} fixtures={fixtures} modalInfo={{modalType: ModalTypes.PlayerModal, player:players![0]}} teamInfo={draftInfo}/>);
+    let customStore = store;
+    customStore.dispatch(changePlayerModalInfo(players![0]));
+    customStore.dispatch(changeToDraftTeam({ id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }));
+
+    const { queryByTestId, queryByText } = reduxRender(<PlayerModal/>, customStore);
 
     expect(queryByTestId('closeButton')).toBeTruthy();
 
@@ -50,7 +55,11 @@ test('two fixtures modal renders correctly', () => {
 
     let players = GetPlayerGameweekDataSortedByPosition(doubleGameweek32, overview, draftInfo, draftOverview, doubleGameweek32DraftPicks, budgetLeaguePicks);
 
-    const { queryAllByTestId, queryByText } = render(<PlayerModal overview={overview} fixtures={fixtures} modalInfo={{modalType: ModalTypes.PlayerModal, player:players![9]}} teamInfo={draftInfo}/>);
+    let customStore = store;
+    customStore.dispatch(changePlayerModalInfo(players![9]));
+    customStore.dispatch(changeToDraftTeam({ id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }));
+
+    const { queryAllByTestId, queryByText } = reduxRender(<PlayerModal/>, customStore);
 
     expect(queryByText('Dominic Calvert-Lewin')).toBeTruthy();
     
@@ -60,11 +69,15 @@ test('two fixtures modal renders correctly', () => {
 
 test('if two fixtures but team type is fixure only show the stats for that game', () => {
 
-    let fixtureInfo: TeamInfo = {fixture: singleFixtureForDoubleGWPlayer, gameweek: 31, isHome: true, teamType: TeamTypes.Fixture};
+    let fixtureInfo: TeamInfo = {fixture: singleFixtureForDoubleGWPlayer, liveGameweek: 31, gameweek: 31, isHome: true, teamType: TeamTypes.Fixture};
 
     let players = GetPlayerGameweekDataSortedByPosition(doubleGameweek32, overview, draftInfo, draftOverview, doubleGameweek32DraftPicks, budgetLeaguePicks);
 
-    const { queryAllByTestId } = render(<PlayerModal overview={overview} fixtures={fixtures} modalInfo={{modalType: ModalTypes.PlayerModal, player:players![9]}} teamInfo={fixtureInfo}/>);
+    let customStore = store;
+    customStore.dispatch(changePlayerModalInfo(players![9]));
+    customStore.dispatch(changeToFixture(singleFixtureForDoubleGWPlayer));
+
+    const { queryAllByTestId } = reduxRender(<PlayerModal/>, customStore);
 
     expect(queryAllByTestId('fixturePlayerStatsContainer')).toHaveLength(1);
 });

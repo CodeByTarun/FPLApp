@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "../reduxRender";
 import AdditionalInfoCard from "../../../App/Features/LineupView/Lineup/AdditionalInfoCard";
 import { StyleSheet } from "react-native";
-import { textPrimaryColor, lightColor } from "../../../App/Global/GlobalConstants";
+import { textPrimaryColor, lightColor, defaultTheme, darkTheme } from "../../../App/Global/GlobalConstants";
 
 const viewIndexScenes = ["Lineup", "More Info", "Points", "Fixtures"];
 
@@ -16,7 +16,7 @@ test('info card is pressable and shows correct ui on press', () => {
     expect(getByTestId('additionalInfoCardButton')).toBeEnabled();
     expect(getByText(viewIndexScenes[0])).toBeTruthy();
     expect(getAllByTestId('additionalInfoCardDots')[0]).toHaveStyle({backgroundColor: textPrimaryColor});
-    expect(getAllByTestId('additionalInfoCardDots')[1]).toHaveStyle({backgroundColor: lightColor});
+    expect(getAllByTestId('additionalInfoCardDots')[1]).toHaveStyle({backgroundColor: defaultTheme.colors.border});
 
     fireEvent.press(getByTestId('additionalInfoCardButton'));
 
@@ -26,7 +26,7 @@ test('info card is pressable and shows correct ui on press', () => {
     rerender(<AdditionalInfoCard viewIndex={viewIndex} setViewIndex={mockSetViewIndexFn} viewIndexScenes={viewIndexScenes}/>);
 
     expect(getByText(viewIndexScenes[1])).toBeTruthy();
-    expect(getAllByTestId('additionalInfoCardDots')[0]).toHaveStyle({backgroundColor: lightColor});
+    expect(getAllByTestId('additionalInfoCardDots')[0]).toHaveStyle({backgroundColor: defaultTheme.colors.border});
     expect(getAllByTestId('additionalInfoCardDots')[1]).toHaveStyle({backgroundColor: textPrimaryColor});
 
     fireEvent.press(getByTestId('additionalInfoCardButton'));
@@ -37,7 +37,7 @@ test('info card is pressable and shows correct ui on press', () => {
     rerender(<AdditionalInfoCard viewIndex={viewIndex} setViewIndex={mockSetViewIndexFn} viewIndexScenes={viewIndexScenes}/>);
 
     expect(getByText(viewIndexScenes[2])).toBeTruthy();
-    expect(getAllByTestId('additionalInfoCardDots')[1]).toHaveStyle({backgroundColor: lightColor});
+    expect(getAllByTestId('additionalInfoCardDots')[1]).toHaveStyle({backgroundColor: defaultTheme.colors.border});
     expect(getAllByTestId('additionalInfoCardDots')[2]).toHaveStyle({backgroundColor: textPrimaryColor});
 
     fireEvent.press(getByTestId('additionalInfoCardButton'));
@@ -48,7 +48,7 @@ test('info card is pressable and shows correct ui on press', () => {
     rerender(<AdditionalInfoCard viewIndex={viewIndex} setViewIndex={mockSetViewIndexFn} viewIndexScenes={viewIndexScenes}/>);
 
     expect(getByText(viewIndexScenes[3])).toBeTruthy();
-    expect(getAllByTestId('additionalInfoCardDots')[2]).toHaveStyle({backgroundColor: lightColor});
+    expect(getAllByTestId('additionalInfoCardDots')[2]).toHaveStyle({backgroundColor: defaultTheme.colors.border});
     expect(getAllByTestId('additionalInfoCardDots')[3]).toHaveStyle({backgroundColor: textPrimaryColor});
 
     fireEvent.press(getByTestId('additionalInfoCardButton'));
@@ -60,15 +60,5 @@ test('info card is pressable and shows correct ui on press', () => {
 
     expect(getByText(viewIndexScenes[0])).toBeTruthy();
     expect(getAllByTestId('additionalInfoCardDots')[0]).toHaveStyle({backgroundColor: textPrimaryColor});
-    expect(getAllByTestId('additionalInfoCardDots')[1]).toHaveStyle({backgroundColor: lightColor});
-});
-
-const styles = StyleSheet.create({
-    activeIndex: {
-        backgroundColor: textPrimaryColor,
-    },
-
-    inactiveIndex: {
-        backgroundColor: lightColor,
-    },
+    expect(getAllByTestId('additionalInfoCardDots')[1]).toHaveStyle({backgroundColor: defaultTheme.colors.border});
 });

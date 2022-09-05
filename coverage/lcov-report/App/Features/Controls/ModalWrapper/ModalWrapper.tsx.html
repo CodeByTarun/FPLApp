@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.38% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/13</span>
+                <span class='fraction'>12/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>4/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">84.61% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/12</span>
+                <span class='fraction'>11/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -136,7 +136,9 @@
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,26 +157,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,34 +230,36 @@ interface ModalWrapperProps {
     maxHeight?: number;
 }
 &nbsp;
-const ModalWrapper = <span class="fstat-no" title="function not covered" >({</span> children, modalHeight, modalWidth, maxHeight } : PropsWithChildren&lt;ModalWrapperProps&gt;) =&gt; {
+const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWithChildren&lt;ModalWrapperProps&gt;) =&gt; {
 &nbsp;
-    const theme = <span class="cstat-no" title="statement not covered" >useTheme();</span>
-    const styles = <span class="cstat-no" title="statement not covered" >ModalWrapperStyles(theme);</span>
+    const theme = useTheme();
+    const styles = ModalWrapperStyles(theme);
     
 &nbsp;
-    const navigation = <span class="cstat-no" title="statement not covered" >useNavigation&lt;StackNavigationProp&lt;RootStackParams&gt;&gt;();</span>
-    const { current } = <span class="cstat-no" title="statement not covered" >useCardAnimation();</span>
+    const navigation = useNavigation&lt;StackNavigationProp&lt;RootStackParams&gt;&gt;();
+    const { current } = useCardAnimation();
 &nbsp;
-    const modalScale = <span class="cstat-no" title="statement not covered" >current.progress.interpolate({</span>
+    console.log(current);
+&nbsp;
+    const modalScale = current ? <span class="branch-0 cbranch-no" title="branch not covered" >current.progress.interpolate({</span>
         inputRange: [0, 1],
         outputRange: [0, 1],
-    });
+    }) : 1;
 &nbsp;
-    const throttledCloseFunction = <span class="cstat-no" title="statement not covered" >throttle(navigation.goBack, 200);</span>
+    const throttledCloseFunction = throttle(navigation.goBack, 200);
 &nbsp;
-    const closeFuntion = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+    const closeFuntion = useCallback(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >        Keyboard.dismiss();</span>
 <span class="cstat-no" title="statement not covered" >        throttledCloseFunction();        </span>
     }, [])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return(</span>
+    return(
         &lt;View testID="background" style={styles.modalBackground}&gt;
             &lt;Pressable style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.6)' }]} onPress={closeFuntion}/&gt;
             &lt;Animated.View style={[styles.modal, globalStyles.modalShadow, 
-                                    modalHeight ? {height: modalHeight} : {}, 
-                                    modalWidth ? {width: modalWidth} : {}, 
-                                    maxHeight ? {maxHeight: maxHeight} : {},
+                                    modalHeight ? {height: modalHeight} : <span class="branch-1 cbranch-no" title="branch not covered" >{}, </span>
+                                    modalWidth ? {width: modalWidth} : <span class="branch-1 cbranch-no" title="branch not covered" >{}, </span>
+                                    maxHeight ? <span class="branch-0 cbranch-no" title="branch not covered" >{maxHeight: maxHeight} </span>: {},
                                     {transform: [{ scale: modalScale }]}]}&gt;
                 &lt;CloseButton closeFunction={closeFuntion}/&gt; 
                 { children }
@@ -263,7 +269,7 @@ const ModalWrapper = <span class="fstat-no" title="function not covered" >({</sp
 &nbsp;
 export default ModalWrapper;
 &nbsp;
-export const ModalWrapperStyles = <span class="fstat-no" title="function not covered" >(t</span>heme: Theme) =&gt; <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
+export const ModalWrapperStyles = (theme: Theme) =&gt; StyleSheet.create({
 &nbsp;
     modal: {
         justifyContent: 'center', 
@@ -289,7 +295,7 @@ export const ModalWrapperStyles = <span class="fstat-no" title="function not cov
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:46:45.834Z
+                at 2022-09-05T22:04:36.350Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

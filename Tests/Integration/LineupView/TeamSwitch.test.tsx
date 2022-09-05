@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "../reduxRender";
+import { render, fireEvent, reduxRender } from "../reduxRender";
 import TeamSwitch from "../../../App/Features/LineupView/TeamSwitch";
 import { changeGameweek, changeToFixture, DreamTeamInfo, FixtureInfo, TeamTypes } from "../../../App/Store/teamSlice";
 import { fixtures, gameweek32, gameweek32Fixture } from "../../SampleData/Gameweek32Data";
@@ -9,11 +9,11 @@ import { waitFor } from "@testing-library/react-native";
 import { Globals } from "@react-spring/native";
 import { useAppSelector } from "../../../App/Store/hooks";
 
-let fixtureInfo: FixtureInfo = { gameweek: 32, isHome: true, fixture:  gameweek32Fixture, teamType: TeamTypes.Fixture }
+let fixtureInfo: FixtureInfo = { gameweek: 32, liveGameweek: 1, isHome: true, fixture:  gameweek32Fixture, teamType: TeamTypes.Fixture }
 
 test('when not a fixture team, switch should not show up', () => {
 
-    const { queryByTestId } = render(<TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek32}/>);
+    const { queryByTestId } = reduxRender(<TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek32}/>);
 
     expect(queryByTestId('teamSwitchButton')).toBeFalsy();
 }) 
@@ -28,7 +28,7 @@ test('switch from home to away team back to home team when a fixture team', asyn
     store.dispatch(changeGameweek(32));
     store.dispatch(changeToFixture(gameweek32Fixture));
 
-    const { queryByTestId, rerender } = render(<TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek32}/>, customStore);
+    const { queryByTestId, rerender } = reduxRender(<TeamSwitch overview={overview} fixtures={fixtures} gameweek={gameweek32}/>, customStore);
 
     expect(queryByTestId('animatedViewTeamSwitch')).toHaveStyle({ left: '0%' });
     

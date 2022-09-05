@@ -18,10 +18,7 @@ const BottomTabs = () => {
 
     const dispatch = useAppDispatch();
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
-    const { overview } = useContext(FplBaseDataContext);
-    const liveGameweek = overview?.events.filter((event) => { return event.is_current === true; })[0]?.id;
-    const gameweek = useAppSelector(state => state.team.gameweek);
-
+    
     const goToDreamTeam = () => {
         dispatch(changeToDreamTeam());
     }
@@ -45,11 +42,11 @@ const BottomTabs = () => {
     return (
         <View style={[styles.container]}>
             <View style={styles.tabBarWidth}>
-                <TabButton fn={goToDreamTeam} imageName='dreamteam' header="Dream Team" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
+                <TabButton fn={goToDreamTeam} imageName='dreamteam' header="Dream Team"/>
 
                 {VerticalSeparator(theme)}
 
-                <TabButton fn={openOverview} imageName='strategy' header="Overview" isDisabled={((liveGameweek === undefined) || (gameweek > liveGameweek))}/>
+                <TabButton fn={openOverview} imageName='strategy' header="Overview"/>
     
                 {VerticalSeparator(theme)}
                 

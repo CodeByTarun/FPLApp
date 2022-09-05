@@ -56,7 +56,7 @@ const PlayerItem = React.memo(({player, draftData, watchList, navigation, isPer9
     }, [statFilter, isPer90]);
 
     return (
-        <Pressable key={player.id} style={styles.tableView} onPress={pressPlayerFn}>
+        <Pressable testID="playerItem" key={player.id} style={styles.tableView} onPress={pressPlayerFn}>
             <View testID="watchlistButtonContainer" style={[styles.watchListButtonContainer, {opacity: inWatchList ? 1 : 0.5}]}>
                 <CustomButton image={inWatchList ? "favourite" : "unfavourite"} buttonFunction={inWatchList ? () => removeFromWatchlistFn(player.id) : () => addToWatchlistFn(player.id)}/>
             </View>

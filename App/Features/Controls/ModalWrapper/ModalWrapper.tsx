@@ -24,10 +24,12 @@ const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWi
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
     const { current } = useCardAnimation();
 
-    const modalScale = current.progress.interpolate({
+    console.log(current);
+
+    const modalScale = current ? current.progress.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 1],
-    });
+    }) : 1;
 
     const throttledCloseFunction = throttle(navigation.goBack, 200);
 

@@ -15,7 +15,6 @@ import PlayerList from "./PlayerList/PlayerList";
 
 interface PlayerListContainerProps {
     overview: FplOverview;
-    fixtures: FplFixture[];
     filters: PlayerTableFilterState;
 }
 
@@ -32,7 +31,7 @@ export interface PlayerListData {
     statFilter: string;
 }
 
-const PlayerListContainer = ({overview, fixtures, filters} : PlayerListContainerProps) => {
+const PlayerListContainer = ({overview, filters} : PlayerListContainerProps) => {
 
     const [playerListData, setPlayerListData] = useState({ playerList: [] as PlayerOverview[], watchList: {playerIds: []} as PlayersWatchlist | undefined } as PlayerListData)
 

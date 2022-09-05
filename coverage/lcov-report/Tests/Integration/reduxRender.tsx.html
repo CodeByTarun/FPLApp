@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -81,50 +81,95 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { FunctionComponent, ReactElement } from "react";
-import { render as rtlRender, RenderOptions } from "@testing-library/react-native";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { FunctionComponent, ReactElement, useState } from "react";
+import { render as rtlRender } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import store from "../../App/Store/store";
 import { AnyAction, Store } from "@reduxjs/toolkit";
+import { FplBaseDataContext, ManageThemeContext } from "../../App/AppContext";
+import { overview } from "../SampleData/Overviews";
+import { fixtures } from "../SampleData/Gameweek32Data";
+import { FixturesMap } from "../../App";
+import fixtureDifficultyList from "../SampleData/fixtureDifficultyList.json"
 &nbsp;
-const render = (ui: ReactElement, customStore: Store&lt;any, AnyAction&gt; = store, renderOptions?: RenderOptions, ) =&gt; {
+export const setThemeMockFn = jest.fn();
+export const setUseDeviceThemeMockFn = jest.fn();
+&nbsp;
+const reduxRender = (ui: ReactElement, customStore: Store&lt;any, AnyAction&gt; = <span class="branch-0 cbranch-no" title="branch not covered" >store </span>) =&gt; {
+&nbsp;
     const Wrapper: FunctionComponent = ({ children }) =&gt; {
         return (
-            &lt;Provider store={customStore}&gt;{ children }&lt;/Provider&gt;
+            &lt;Provider store={customStore}&gt;
+                &lt;FplBaseDataContext.Provider value={{overview: overview, fixtures: fixtures, fixtureLists: fixtureDifficultyList as FixturesMap, TeamFixtureDifficultyView: null as React.ReactNode}}&gt;
+                    &lt;ManageThemeContext.Provider value={{theme: 'light', useDeviceTheme: true, setTheme: setThemeMockFn, setUseDeviceTheme: setUseDeviceThemeMockFn}}&gt;
+                        { children }
+                    &lt;/ManageThemeContext.Provider&gt;
+                &lt;/FplBaseDataContext.Provider&gt;
+            &lt;/Provider&gt;
         )
     };
 &nbsp;
-    return rtlRender(ui, {wrapper: Wrapper, ...renderOptions});
+    return rtlRender(ui, {wrapper: Wrapper, createNodeMock: <span class="fstat-no" title="function not covered" >()</span> =&gt; {}});
 }
 &nbsp;
 export * from "@testing-library/react-native";
 &nbsp;
-export { render }</pre></td></tr></table></pre>
+export { reduxRender }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-05T22:04:36.350Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.05% </span>
+                <span class="strong">62.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>37/77</span>
+                <span class='fraction'>48/77</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">46.15% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/26</span>
+                <span class='fraction'>14/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.89% </span>
+                <span class="strong">73.68% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>11/19</span>
+                <span class='fraction'>14/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.44% </span>
+                <span class="strong">59.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>32/72</span>
+                <span class='fraction'>43/72</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -270,9 +270,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -365,30 +365,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -560,31 +560,31 @@ export interface PlayersWatchlist {
     playerIds: number[],
 }
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >setPlayersWatchlist(</span>watchlist: PlayersWatchlist) {
-<span class="cstat-no" title="statement not covered" >    try{</span>
-        const jsonValue = <span class="cstat-no" title="statement not covered" >JSON.stringify(watchlist);</span>
-<span class="cstat-no" title="statement not covered" >        await AsyncStorage.setItem('watchlist', jsonValue);</span>
+export async function setPlayersWatchlist(watchlist: PlayersWatchlist) {
+    try{
+        const jsonValue = JSON.stringify(watchlist);
+        await AsyncStorage.setItem('watchlist', jsonValue);
     } catch(e) {
 <span class="cstat-no" title="statement not covered" >        console.log('error has occured');</span>
     }
 }
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >getPlayersWatchlist(</span>) { 
-<span class="cstat-no" title="statement not covered" >    try {</span>
-        const jsonValue = <span class="cstat-no" title="statement not covered" >await AsyncStorage.getItem('watchlist');</span>
-<span class="cstat-no" title="statement not covered" >        return jsonValue != null ? JSON.parse(jsonValue) as PlayersWatchlist : {playerIds: []} as PlayersWatchlist;</span>
+export async function getPlayersWatchlist() { 
+    try {
+        const jsonValue = await AsyncStorage.getItem('watchlist');
+        return jsonValue != null ? <span class="branch-0 cbranch-no" title="branch not covered" >JSON.parse(jsonValue) as PlayersWatchlist </span>: {playerIds: []} as PlayersWatchlist;
     } catch(e) {
 <span class="cstat-no" title="statement not covered" >        console.log('error has occured');/</span>/ error
     }
 }
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >addPlayerToWatchList(</span>id: number) {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-        let watchlist = <span class="cstat-no" title="statement not covered" >await getPlayersWatchlist();</span>
+export async function addPlayerToWatchList(id: number) {
+    try {
+        let watchlist = await getPlayersWatchlist();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if (watchlist !== undefined) {</span>
-<span class="cstat-no" title="statement not covered" >            watchlist.playerIds.push(id);</span>
-<span class="cstat-no" title="statement not covered" >            await setPlayersWatchlist(watchlist);</span>
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (watchlist !== undefined) {
+            watchlist.playerIds.push(id);
+            await setPlayersWatchlist(watchlist);
         }       
     } catch (e) {
 <span class="cstat-no" title="statement not covered" >        console.log('error has occured');</span>
@@ -658,7 +658,7 @@ export async function <span class="fstat-no" title="function not covered" >clear
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-01T22:37:22.820Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

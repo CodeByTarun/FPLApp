@@ -22,27 +22,63 @@ import { changeMutableView } from "../../Store/modalSlice";
 import { VerticalSeparator } from "../../Global/GlobalComponents";
 import { Icons } from "../../Global/Images";
 import { moderateScale } from "react-native-size-matters";
+import moment from "moment";
+import { timezone } from "expo-localization";
+import { notEqual } from "assert";
 
 const AnimatedView = animated(View);
 const AnimatedPressable = animated(Pressable);
 
 interface FixturesViewProp {
-  overview: FplOverview;
+  overview: FplOverview | undefined;
   fixtures: FplFixture[] | undefined;
   gameweek: FplGameweek | undefined;
 }
 
-function SortFixtures(fixture1: FplFixture, fixture2: FplFixture) : number {
-  if (fixture1.finished_provisional !== true && fixture2.finished_provisional === true) {
-    return -1;
+function SortFixtures(fixture1: FplFixture, fixture2: FplFixture, dateNow: string) : number {
+  
+  if (fixture1.kickoff_time && fixture2.kickoff_time) {
+    
+    if (moment(fixture1.kickoff_time).isSame(dateNow, 'day') && !moment(fixture2.kickoff_time).isSame(dateNow, 'day')) {
+      return -1;
+    }
+    else if (moment(fixture1.kickoff_time).isAfter(dateNow, 'day') && (!moment(fixture2.kickoff_time).isAfter(dateNow, 'day') && !moment(fixture2.kickoff_time).isSame(dateNow, 'day'))) {
+        return -1;
+    }
+    else if (moment(fixture1.kickoff_time).isBefore(dateNow, 'day') && moment(fixture2.kickoff_time).isBefore(dateNow, 'day')) {
+      if (moment(fixture1.kickoff_time).isAfter(fixture2.kickoff_time, 'hour')) {
+        return -1;
+      }
+      else if (moment(fixture2.kickoff_time).isAfter(fixture1.kickoff_time, 'hour')) {
+        return 1;
+      } 
+      else {
+        return 0;
+      }
+    }
+    
+    else if (moment(fixture1.kickoff_time).isSame(dateNow, 'day') && moment(fixture2.kickoff_time).isSame(dateNow, 'day')) {
+      if (!fixture1.finished_provisional && fixture2.finished_provisional) {
+        return -1;
+      }
+      if (fixture1.finished_provisional && !fixture2.finished_provisional) {
+        return 1;
+      }
+      else if (fixture1.started && !fixture2.started) {
+        return -1;
+      }
+    }
   }
-  return 0;
+
+    return 0;
 }
 
 const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
   const theme = useTheme();
   const styles = FixturesStyles(theme);
+
+  let dateNow = new Date().toISOString();
 
   const dispatch = useAppDispatch();
   const navigator = useNavigation<StackNavigationProp<RootStackParams>>();
@@ -64,16 +100,18 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         { scale: 0.95 },
         { scale: 1 }
       ],
-      config: {duration: 10},
-      onRest: gameweekButton,
+      config: {duration: 100},
     });
+    gameweekButton();
   }
 
   const gameweekButton = useCallback(() => {
-    dispatch(changeMutableView({view: <GameweekView overview={overview}/>, width: moderateScale(275)}));
+    if (overview) {
+      dispatch(changeMutableView({view: <GameweekView overview={overview}/>, width: moderateScale(275)}));
 
-    navigator.navigate('MutableModal');
-  }, [teamInfo.gameweek])
+      navigator.navigate('MutableModal');
+    }
+  }, [teamInfo.gameweek, overview])
 
   useEffect( function setInitialData() {
 
@@ -108,7 +146,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
       if ((teamInfo.teamType === TeamTypes.Empty && fixtures) || (teamInfo.teamType === TeamTypes.Fixture && fixtures)) {
         let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.filter((fixture) => { return fixture.event == teamInfo.gameweek})
-                                                                       .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2));
+                                                                       .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2, dateNow));
       
         if (sortedGameweekFixtures !== undefined) {
             dispatch(changeToFixture(sortedGameweekFixtures[0]));                            
@@ -139,7 +177,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
     <AnimatedView style={[styles.animatedView, { height: expandSpring.height }]}>
       <View style={styles.controlsContainer}>
           <View style={{flex: 1}}/>
-          <AnimatedPressable style={[styles.gameweekButton, { transform: [{ scale: gameweekButtonAnimatedStyle.scale }]}]} onPress={onGamweekButtonPress}>
+          <AnimatedPressable testID={'gameweekButton'} style={[styles.gameweekButton, { transform: [{ scale: gameweekButtonAnimatedStyle.scale }]}]} onPress={onGamweekButtonPress}>
             <Text style={styles.gameweekText}>  Gameweek {teamInfo.gameweek}  </Text>
             <Text style={styles.gameweekDropDownSymbol}>◣</Text>
           </AnimatedPressable>
@@ -150,7 +188,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
           </View>
       </View>  
       <View style={styles.fixturesListContainer}>
-        { (fixtures && gameweek) ?
+        { (fixtures && gameweek && overview) ?
           <ScrollView ref={fixtureScrollViewRef} 
                       horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
                       showsHorizontalScrollIndicator={false}
@@ -159,7 +197,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
                       testID='fixturesScrollView'>
             { 
               fixtures.filter((fixture) => { return fixture.event == (teamInfo.gameweek !== 0 ? teamInfo.gameweek : 1)})
-                      .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2))
+                      .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2, dateNow))
                       .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
             }
           </ScrollView> :
@@ -181,7 +219,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
             {VerticalSeparator(theme)}
             <View style={styles.bottomaBarSections}>
               <AnimatedButton buttonFn={onCalendarButtonPress}>
-                <View style={styles.buttonContainer}>
+                <View testID={'calendarButton'} style={styles.buttonContainer}>
                   <Image style={styles.image} source={Icons['calendar']} resizeMode='contain'/>
                 </View>
               </AnimatedButton>

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/10</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">90.47% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>19/21</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/10</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -217,14 +217,14 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -326,14 +326,14 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
     const styles = LineupViewStyles(theme);
 &nbsp;
     const navigator = useNavigation&lt;StackNavigationProp&lt;RootStackParams&gt;&gt;();
-    const dispatch = <span class="cstat-no" title="statement not covered" >useAppDispatch();</span>
+    const dispatch = useAppDispatch();
 &nbsp;
-    const openStandingsModal = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+    const openStandingsModal = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >        dispatch(changeMutableView({view: &lt;Standings teamInfo={teamInfo} budgetUserInfo={budgetUserInfo} draftLeagueInfo={draftLeagueInfo}/&gt;, width: '85%'}));</span>
 <span class="cstat-no" title="statement not covered" >        navigator.navigate('MutableModal');</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
         &lt;View style={styles.container}&gt;
             &lt;View style={styles.top}&gt;
                 &lt;View style={[styles.controlsContainer, globalStyles.bottomShadow]}&gt;
@@ -351,7 +351,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                             (teamInfo.teamType === TeamTypes.Draft || teamInfo.teamType === TeamTypes.Budget) ?
                                 &lt;AnimatedButton buttonFn={openStandingsModal}&gt;
                                     &lt;View testID="managerTeamDropDownButton" style={{flexDirection: 'row'}}&gt;
-                                        &lt;Text style={styles.text}&gt;{teamInfo.teamType === TeamTypes.Draft ? draftUserInfo?.entry.name : budgetUserInfo?.name}  &lt;/Text&gt; 
+                                        &lt;Text style={styles.text}&gt;{teamInfo.teamType === TeamTypes.Draft ? draftUserInfo?.entry.name : <span class="branch-1 cbranch-no" title="branch not covered" >budgetUserInfo?.name}</span>  &lt;/Text&gt; 
                                         &lt;Text style={globalStyles.dropDownSymbol}&gt;◣&lt;/Text&gt;
                                     &lt;/View&gt;
                                 &lt;/AnimatedButton&gt; :
@@ -378,7 +378,7 @@ const LineupView = ({overview, fixtures, gameweek, teamInfo, draftGameweekPicks,
                         &lt;/TouchableOpacity&gt;
                     &lt;/View&gt; : 
                     
-                    &lt;View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}&gt;
+<span class="branch-1 cbranch-no" title="branch not covered" >                    &lt;View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}&gt;</span>
                         &lt;View style={{height: '20%', width: '20%', alignSelf: 'center'}}&gt;
                             &lt;LoadingIndicator/&gt;
                         &lt;/View&gt;
@@ -397,7 +397,7 @@ export default LineupView;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-01T22:37:22.820Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

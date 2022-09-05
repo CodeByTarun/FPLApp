@@ -5,13 +5,13 @@ import { moderateScale, moderateVerticalScale } from "react-native-size-matters"
 
 export const Separator = (theme: Theme) => {
     return (
-        <View style={{borderBottomWidth: moderateVerticalScale(1), borderBottomColor: theme.colors.background }}/>
+        <View testID="separator" style={{borderBottomWidth: moderateVerticalScale(1), borderBottomColor: theme.colors.background }}/>
     )
 }
 
 export const VerticalSeparator = (theme: Theme) => {
     return(
-        <View style={{borderLeftColor: theme.colors.background, borderLeftWidth: 1, marginBottom: moderateVerticalScale(7),  marginTop: moderateVerticalScale(7)}}/>
+        <View testID="verticalSeparator" style={{borderLeftColor: theme.colors.background, borderLeftWidth: 1, marginBottom: moderateVerticalScale(7),  marginTop: moderateVerticalScale(7)}}/>
     )
 }
 

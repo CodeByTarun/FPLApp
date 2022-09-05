@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>3/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.18% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/11</span>
+                <span class='fraction'>10/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -137,17 +137,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,26 +193,26 @@ import GameweekSummary from "./GameweekSummary";
 &nbsp;
 const AnimatedView = animated(View);
 &nbsp;
-const GameweekOverviewModal = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+const GameweekOverviewModal = () =&gt; {
 &nbsp;
-    const theme = <span class="cstat-no" title="statement not covered" >useTheme();</span>
-    const styles = <span class="cstat-no" title="statement not covered" >GameweekOverviewModalStyles(theme);</span>
-    const gameweek = <span class="cstat-no" title="statement not covered" >useAppSelector(<span class="fstat-no" title="function not covered" >st</span>ate =&gt; <span class="cstat-no" title="statement not covered" >state.team.gameweek)</span>;</span>
-    const {TeamFixtureDifficultyView} = <span class="cstat-no" title="statement not covered" >useContext(FplBaseDataContext);</span>
+    const theme = useTheme();
+    const styles = GameweekOverviewModalStyles(theme);
+    const gameweek = useAppSelector(state =&gt; state.team.gameweek);
+    const {TeamFixtureDifficultyView} = useContext(FplBaseDataContext);
      
-    const [view, setView] = <span class="cstat-no" title="statement not covered" >useState(1);</span>
+    const [view, setView] = useState(1);
 &nbsp;
-    const sliderSpring = <span class="cstat-no" title="statement not covered" >useSpring({left: view === 1 ? '0%' : '50%'})</span>
-    const viewSpring = <span class="cstat-no" title="statement not covered" >useSpring({gameweekLeft: view === 1 ? '0%' : '-120%', teamFDRLeft: view === 1 ? '120%' : '0%'});</span>
+    const sliderSpring = useSpring({left: view === 1 ? '0%' : <span class="branch-1 cbranch-no" title="branch not covered" >'50%'}</span>)
+    const viewSpring = useSpring({gameweekLeft: view === 1 ? '0%' : <span class="branch-1 cbranch-no" title="branch not covered" >'-120%',</span> teamFDRLeft: view === 1 ? '120%' : <span class="branch-1 cbranch-no" title="branch not covered" >'0%'}</span>);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
 &nbsp;
         &lt;ModalWrapper modalHeight={'60%'} modalWidth={moderateScale(300, 0.5)}&gt;
             &lt;View style={styles.modalView}&gt;
 &nbsp;
                 &lt;Text style={styles.titleText}&gt;Overview&lt;/Text&gt;
 &nbsp;
-                &lt;Pressable style={styles.sliderContainer} onPress={(<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setView(view === 1 ? 2 : 1))</span>}&gt;
+                &lt;Pressable testID="overviewSwitch" style={styles.sliderContainer} onPress={(<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setView(view === 1 ? 2 : 1))</span>}&gt;
                     &lt;AnimatedView style={[styles.slider, globalStyles.shadow, {left: sliderSpring.left}]}/&gt;
                     &lt;View style={styles.sliderPartContainer}&gt;
                         &lt;Text style={styles.sliderText}&gt;Gameweek {gameweek}&lt;/Text&gt;
@@ -244,7 +244,7 @@ export default GameweekOverviewModal;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-05T22:04:36.350Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

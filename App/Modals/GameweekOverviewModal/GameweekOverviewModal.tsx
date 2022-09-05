@@ -2,7 +2,7 @@ import { useTheme } from "@react-navigation/native";
 import { animated, useSpring } from "@react-spring/native";
 import React, { useContext, useState } from "react";
 import { View, Text, Pressable, Animated } from "react-native";
-import { moderateScale } from "react-native-size-matters";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { FplBaseDataContext } from "../../AppContext";
 import { ModalWrapper } from "../../Features/Controls";
 import globalStyles from "../../Global/GlobalStyles";
@@ -26,12 +26,12 @@ const GameweekOverviewModal = () => {
 
     return (
 
-        <ModalWrapper modalHeight={'60%'} modalWidth={moderateScale(300, 0.5)}>
+        <ModalWrapper modalHeight={moderateVerticalScale(425, 0.45)} modalWidth={moderateScale(300, 0.5)}>
             <View style={styles.modalView}>
 
                 <Text style={styles.titleText}>Overview</Text>
 
-                <Pressable style={styles.sliderContainer} onPress={(() => setView(view === 1 ? 2 : 1))}>
+                <Pressable testID="overviewSwitch" style={styles.sliderContainer} onPress={(() => setView(view === 1 ? 2 : 1))}>
                     <AnimatedView style={[styles.slider, globalStyles.shadow, {left: sliderSpring.left}]}/>
                     <View style={styles.sliderPartContainer}>
                         <Text style={styles.sliderText}>Gameweek {gameweek}</Text>

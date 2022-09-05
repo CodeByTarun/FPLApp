@@ -13,7 +13,7 @@ test('enabled button pressed triggers button function', async () => {
     await waitFor(() => expect(mockFn).toHaveBeenCalledTimes(1));
 });
 
-test('disabled button pressed does not trigger function', () => {
+test('disabled button pressed does not trigger function', async () => {
 
     let mockFn = jest.fn();
     
@@ -21,7 +21,7 @@ test('disabled button pressed does not trigger function', () => {
 
     fireEvent.press((getByTestId('imageButton')));
 
-    expect(mockFn).toHaveBeenCalledTimes(0);
+    await waitFor(() => expect(mockFn).toHaveBeenCalledTimes(0));
 
 });
 

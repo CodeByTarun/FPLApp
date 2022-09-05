@@ -68,7 +68,7 @@ const GameweekSummary = () => {
                 if (playerOverview) {
                     return (
                         <AnimatedButton key={category} buttonFn={() => openPlayerStatsModal(playerId as number)} >
-                            <View style={[styles.playerItemContainer, { borderBottomWidth: moderateVerticalScale(1), borderBottomColor: category === 'Most Vice Captained' ? theme.colors.primary : theme.colors.background }]}>
+                            <View testID="playerItemButton" style={[styles.playerItemContainer, { borderBottomWidth: moderateVerticalScale(1), borderBottomColor: category === 'Most Vice Captained' ? theme.colors.primary : theme.colors.background }]}>
                                 <Text style={styles.playerItemText}>{category}</Text>
                                 <View style={styles.playerInfoContainer}>
                                     <PlayerListInfo overview={overview} player={playerOverview}/>

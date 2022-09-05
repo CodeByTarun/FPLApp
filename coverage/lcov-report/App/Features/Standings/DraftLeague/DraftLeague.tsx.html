@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.41% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/17</span>
+                <span class='fraction'>13/17</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.25% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/16</span>
+                <span class='fraction'>12/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -147,47 +147,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,18 +221,18 @@ const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) =&gt; {
     const dispatch = useAppDispatch();
     const navigator = useNavigation&lt;StackNavigationProp&lt;RootStackParams&gt;&gt;();
 &nbsp;
-    const openDraftTeamFromStandings = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >(l</span>eagueEntry: LeagueEntry | undefined) =&gt; {</span>
+    const openDraftTeamFromStandings = useCallback(<span class="fstat-no" title="function not covered" >(l</span>eagueEntry: LeagueEntry | undefined) =&gt; {
 <span class="cstat-no" title="statement not covered" >        if (leagueEntry) {</span>
 <span class="cstat-no" title="statement not covered" >            dispatch(changeToDraftTeam({id: leagueEntry.entry_id, name: leagueEntry.entry_name, isDraftTeam: true, isFavourite: false}));</span>
 <span class="cstat-no" title="statement not covered" >            navigator.goBack();</span>
         }
     }, [])
 &nbsp;
-    const renderLeagueEntryItem = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >({</span>item}: {item: Standing}) =&gt; {</span>
+    const renderLeagueEntryItem = useCallback(({item}: {item: Standing}) =&gt; {
 &nbsp;
-        let leagueEntry = <span class="cstat-no" title="statement not covered" >draftLeagueInfo.league_entries.find(<span class="fstat-no" title="function not covered" >en</span>try =&gt; <span class="cstat-no" title="statement not covered" >entry.id === item.league_entry)</span>;</span>
+        let leagueEntry = draftLeagueInfo.league_entries.find(entry =&gt; entry.id === item.league_entry);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return (</span>
+        return (
             &lt;AnimatedButton buttonFn={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >openDraftTeamFromStandings(leagueEntry)}</span>&gt;
                 &lt;View style={styles.standingsButtonContainer}&gt;
                     &lt;Text style={[styles.leagueText, {flex: 1}]}&gt;{item.rank}&lt;/Text&gt;
@@ -247,13 +247,13 @@ const DraftLeague = ({ draftLeagueInfo } : DraftLeagueStandingsProps) =&gt; {
         )
     }, [])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
     &lt;View style={{height: '100%', width: '100%'}}&gt;  
         &lt;Text style={styles.titleText} numberOfLines={1}&gt;{draftLeagueInfo.league.name}&lt;/Text&gt;
         &lt;FlatList data={draftLeagueInfo.standings}
                   stickyHeaderIndices={[0]}
-                  ItemSeparatorComponent={ <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >Separator(theme) </span>}
-                  keyExtractor={<span class="fstat-no" title="function not covered" >it</span>em =&gt; <span class="cstat-no" title="statement not covered" >item.league_entry.toString()}</span>
+                  ItemSeparatorComponent={ () =&gt; Separator(theme) }
+                  keyExtractor={item =&gt; item.league_entry.toString()}
                   ListHeaderComponent={ StandingsHeader }
                   renderItem={renderLeagueEntryItem}
                   testID='draftLeagueStandingsList'/&gt;
@@ -268,7 +268,7 @@ export default DraftLeague;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-25T05:45:17.151Z
+                at 2022-09-01T22:41:51.360Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

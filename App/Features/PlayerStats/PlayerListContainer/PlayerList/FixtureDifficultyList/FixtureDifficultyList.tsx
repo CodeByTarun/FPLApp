@@ -29,7 +29,7 @@ const FixtureDifficultyList = React.memo(({team, isFullList, numberOfFixturesToS
         )}, []);
 
     return (
-        <View style={{flexDirection: 'row', height: '100%'}}>
+        <View testID="fixtureDifficultyList" style={{flexDirection: 'row', height: '100%'}}>
             { (isFullList ? fixtureLists[team] : fixtureLists[team].slice(0, numberOfFixturesToShow)).map(fixture => renderItem(fixture))}
         </View>
     )

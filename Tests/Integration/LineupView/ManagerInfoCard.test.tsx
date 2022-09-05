@@ -1,7 +1,7 @@
 import React from "react";
-import { render, fireEvent } from "../reduxRender";
+import { render, fireEvent, reduxRender } from "../reduxRender";
 import ManagerInfoCard from "../../../App/Features/LineupView/Lineup/ManagerInfoCard";
-import { BudgetInfo, changeGameweek, changeToBudgetTeam, changeToDraftTeam, DraftInfo, TeamTypes } from "../../../App/Store/teamSlice";
+import { BudgetInfo, changeGameweek, changeToBudgetTeam, changeToDraftTeam, DraftInfo, setLiveGameweek, TeamTypes } from "../../../App/Store/teamSlice";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../App/Helpers/FplAPIHelpers";
 import { budgetLeaguePicks, budgetManagerInfo, draftLeaguePicks, draftManagerInfo, gameweek32 } from "../../SampleData/Gameweek32Data";
 import { draftOverview, overview } from "../../SampleData/Overviews";
@@ -10,17 +10,18 @@ import { PlayerData } from "../../../App/Models/CombinedData";
 import { StyleSheet } from "react-native";
 import { textPrimaryColor, lightColor } from "../../../App/Global/GlobalConstants";
 
-let draftInfo: DraftInfo = { gameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
+let draftInfo: DraftInfo = { gameweek: 32, liveGameweek: 32, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
 
 test('draft league manager card shows the right info', () => {
 
     const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
     const customStore = store;
-    store.dispatch(changeToDraftTeam({ id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }));
-    store.dispatch(changeGameweek(32));
+    customStore.dispatch(changeToDraftTeam({ id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }));
+    customStore.dispatch(changeGameweek(32));
+    customStore.dispatch(setLiveGameweek(32));
 
-    const { getByText, getByTestId, getAllByTestId } = render(<ManagerInfoCard teamInfo={draftInfo} players={players as PlayerData[]} draftManagerInfo={draftManagerInfo} currentGameweek={32}/>, customStore);
+    const { getByText, getByTestId, getAllByTestId } = reduxRender(<ManagerInfoCard teamInfo={draftInfo} players={players as PlayerData[]} draftManagerInfo={draftManagerInfo}/>, customStore);
 
     expect(getByTestId('managerCardButton')).toBeEnabled();
 
@@ -64,17 +65,18 @@ test('draft league manager card shows the right info', () => {
     expect(getAllByTestId('managerCardDots')[0]).toHaveStyle({backgroundColor: textPrimaryColor});  
 })
 
-let budgetInfo: BudgetInfo = { gameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget }
+let budgetInfo: BudgetInfo = { gameweek: 32, liveGameweek: 32, info: { id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Budget }
 
 test('budget league manager card shows the right info', () => {
 
     const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, budgetInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
     const customStore = store;
-    store.dispatch(changeToBudgetTeam({ id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }));
-    store.dispatch(changeGameweek(32));
+    customStore.dispatch(changeToBudgetTeam({ id: 89544331, isDraftTeam: false, isFavourite: true, name: 'Tarun' }));
+    customStore.dispatch(changeGameweek(32));
+    customStore.dispatch(setLiveGameweek(32));
 
-    const { getByText, getByTestId, getAllByTestId } = render(<ManagerInfoCard teamInfo={budgetInfo} players={players as PlayerData[]} budgetGameweekPicks={budgetLeaguePicks} budgetManagerInfo={budgetManagerInfo} currentGameweek={32}/>, customStore);
+    const { getByText, getByTestId, getAllByTestId } = reduxRender(<ManagerInfoCard teamInfo={budgetInfo} players={players as PlayerData[]} budgetGameweekPicks={budgetLeaguePicks} budgetManagerInfo={budgetManagerInfo}/>, customStore);
 
     expect(getByTestId('managerCardButton')).toBeEnabled();
 
@@ -92,7 +94,7 @@ test('budget league manager card shows the right info', () => {
     fireEvent.press(getByTestId('managerCardButton'));
 
     expect(getByText('Gameweek')).toBeTruthy();
-    expect(getByText('8629334')).toBeTruthy();
+    expect(getByText('4747839')).toBeTruthy();
     expect(getByText('Rank')).toBeTruthy();
     expect(getAllByTestId('managerCardDots')[2]).toHaveStyle({backgroundColor: textPrimaryColor});
 
@@ -106,23 +108,28 @@ test('budget league manager card shows the right info', () => {
     fireEvent.press(getByTestId('managerCardButton'));
 
     expect(getByText('Overall')).toBeTruthy();
-    expect(getByText('1109')).toBeTruthy();
+    expect(getByText('284')).toBeTruthy();
     expect(getByText('Points')).toBeTruthy();
     expect(getAllByTestId('managerCardDots')[4]).toHaveStyle({backgroundColor: textPrimaryColor});  
 
     fireEvent.press(getByTestId('managerCardButton'));
 
     expect(getByText('Overall')).toBeTruthy();
-    expect(getByText('8043629')).toBeTruthy();
+    expect(getByText('4243897')).toBeTruthy();
     expect(getByText('Rank')).toBeTruthy();
     expect(getAllByTestId('managerCardDots')[5]).toHaveStyle({backgroundColor: textPrimaryColor});
 
     fireEvent.press(getByTestId('managerCardButton'));
 
     expect(getByText('Overall')).toBeTruthy();
-    expect(getByText('3')).toBeTruthy();
+    expect(getByText('2')).toBeTruthy();
     expect(getByText('Transactions')).toBeTruthy();
     expect(getAllByTestId('managerCardDots')[6]).toHaveStyle({backgroundColor: textPrimaryColor});  
+
+    fireEvent.press(getByTestId('managerCardButton'));
+
+    expect(getByText('Squad Value')).toBeTruthy();
+    expect(getAllByTestId('managerCardDots')[7]).toHaveStyle({backgroundColor: textPrimaryColor});  
 
     fireEvent.press(getByTestId('managerCardButton'));
 
@@ -135,13 +142,15 @@ test('budget league manager card shows the right info', () => {
 
 test('only show gameweek points when on a past gameweek', () => {
 
+    let draftInfo: DraftInfo = { gameweek: 32, liveGameweek: 31, info: { id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }, teamType: TeamTypes.Draft }
+
     const players = GetPlayerGameweekDataSortedByPosition(gameweek32, overview, draftInfo, draftOverview, draftLeaguePicks, budgetLeaguePicks);
 
     const customStore = store;
     store.dispatch(changeToDraftTeam({ id: 61187, isDraftTeam: true, isFavourite: true, name: 'Tarun' }));
     store.dispatch(changeGameweek(32));
 
-    const { getByText, getByTestId, queryAllByTestId } = render(<ManagerInfoCard teamInfo={draftInfo} players={players as PlayerData[]} draftManagerInfo={draftManagerInfo} currentGameweek={33}/>, customStore);
+    const { getByText, getByTestId, queryAllByTestId } = reduxRender(<ManagerInfoCard teamInfo={draftInfo} players={players as PlayerData[]} draftManagerInfo={draftManagerInfo}/>, customStore);
 
     expect(getByTestId('managerCardButton')).toBeDisabled();
 

@@ -40,13 +40,13 @@ const TableFilterPopup = ({ filterDispatch, filterState, initialPriceRange } : T
         <View style={styles.container}>
             <View style={styles.checkboxContainer}>
                 <Text style={styles.filterText}>Per 90 (if applicable):</Text>
-                <Checkbox value={ isPer90 } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
+                <Checkbox testID="checkbox" value={ isPer90 } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
                         color={isPer90 ? GlobalConstants.fieldColor : theme.colors.background}
                         onValueChange={ () => setIsPer90(!isPer90)}/>
             </View>
             <View style={styles.checkboxContainer}>
                 <Text style={styles.filterText}>On Watchlist:</Text>
-                <Checkbox value={ isInWatchlist } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
+                <Checkbox testID="checkbox" value={ isInWatchlist } hitSlop={{top: 5, bottom: 5, left: 5, right: 5}}
                           color={isInWatchlist ? GlobalConstants.fieldColor : theme.colors.background}
                           onValueChange={ () => setIsInWatchlist(!isInWatchlist)}/>
             </View>

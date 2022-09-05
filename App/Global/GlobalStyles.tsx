@@ -98,7 +98,6 @@ export const globalStyles = StyleSheet.create(
         dots: {
             height: GlobalConstants.height*0.005,
             aspectRatio: 1,
-            backgroundColor: GlobalConstants.textSecondaryColor,
             borderRadius: 100,
             marginRight: 1.5,
             marginLeft: 1.5,

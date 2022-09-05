@@ -27,15 +27,16 @@ const TabButton = ({fn, imageName, header, isDisabled = false} : TabButtonProps)
                 { scale: 1}
             ],
             config: { duration: 100 },
-            onRest: fn
-        })
+        });
+
+        setTimeout(fn, 100);
     }
 
     return(
-        <AnimatedPressable disabled={isDisabled} style={[styles.tabContainer, { transform: [{scale: animatedStyle.scale}], opacity: isDisabled ? 0.5 : 1 }]} onPress={onPressFn}> 
+        <AnimatedPressable testID={'tabButton'} disabled={isDisabled} style={[styles.tabContainer, { transform: [{scale: animatedStyle.scale}], opacity: isDisabled ? 0.5 : 1 }]} onPress={onPressFn}> 
 
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={Icons[imageName]} resizeMode='contain'/>
+                <Image testID={'tabIcon'} style={styles.image} source={Icons[imageName]} resizeMode='contain'/>
             </View>
             <Text style={styles.headerText}>{header}</Text>
 

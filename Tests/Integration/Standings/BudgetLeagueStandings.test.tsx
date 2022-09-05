@@ -1,14 +1,21 @@
 import React from "react";
 import BudgetLeagueStandings from "../../../App/Features/Standings/BudgetLeague/LeagueStandings/BudgetLeagueStandings";
+import { store } from "../../../App/Store/store";
+import { BudgetInfo, TeamTypes } from "../../../App/Store/teamSlice";
+import { mockedNavigation, mockedNavigationGoBack } from "../../jestSetupFile";
 import { budgetLeague } from "../../SampleData/BudgetManager";
-import { render, fireEvent, waitFor } from "../reduxRender";
+import { fireEvent, waitFor, reduxRender } from "../reduxRender";
 
+beforeAll(() => {
+    mockedNavigation.mockClear();
+    mockedNavigationGoBack.mockClear();
+});
 
 test('league standings renders and can press on entries', async() => {
 
-    const mockFn = jest.fn();
+    const customStore = store;
 
-    const { queryByTestId, queryByText, queryAllByTestId, queryAllByText } = render(<BudgetLeagueStandings budgetLeagueInfo={budgetLeague} setModalVisibility={mockFn}/>)
+    const { queryByTestId, queryByText, queryAllByTestId, queryAllByText } = reduxRender(<BudgetLeagueStandings budgetLeagueInfo={budgetLeague}/>, customStore)
 
     expect(queryByTestId('budgetLeagueStandingsList')).toBeTruthy();
     // Rank, team name, player name, gw total, overall total should all show up for each entry
@@ -20,6 +27,8 @@ test('league standings renders and can press on entries', async() => {
 
     fireEvent.press(queryAllByTestId('leagueEntryItemButton')[0]);
 
-    await waitFor(() => expect(mockFn).toBeCalledTimes(1));
-    expect(mockFn).toBeCalledWith(false);
+    await waitFor(() => expect(mockedNavigationGoBack).toBeCalledTimes(1));
+
+    expect(customStore.getState().team).toStrictEqual({gameweek: 1, liveGameweek: 1, teamType: TeamTypes.Budget, info: {id: 9086695, name: 'Gheri', isDraftTeam: false, isFavourite: false}} as BudgetInfo);
+
 });

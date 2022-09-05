@@ -17,7 +17,7 @@ const SearchControl = ({value, onChangeTextFunction, placeHolderText} : SearchCo
     const styles = SearchControlStyles(theme);
 
     return (
-        <View style={[styles.searchBoxContainer, styles.shadow]}>
+        <View testID="searchControl" style={[styles.searchBoxContainer, styles.shadow]}>
             <View style={{height: '100%', width: 20, marginRight: 10, marginLeft: 5, justifyContent: 'center', alignSelf: 'center', flexDirection:'row'}}>
                 <Image style={{height: 18, width: '100%', alignSelf: 'center'}} resizeMode="contain" source={(theme.dark ? Icons['search'] : Icons['searchPurple'])}/>
             </View>

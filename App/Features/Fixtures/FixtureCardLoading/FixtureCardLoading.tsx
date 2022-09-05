@@ -9,7 +9,7 @@ const FixtureCardLoading = () => {
     const styles = FixtureCardStyles(theme);
 
     return (
-        <View style={styles.fixtureViewContainer}>
+        <View testID="fixtureCardLoading" style={styles.fixtureViewContainer}>
             <View style={[styles.card, {backgroundColor: theme.colors.background}]}/>
         </View>
     )

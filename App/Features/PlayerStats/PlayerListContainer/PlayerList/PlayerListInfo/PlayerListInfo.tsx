@@ -17,7 +17,7 @@ const PlayerListInfo = React.memo(({overview, player, owner} : PlayerListInfoPro
     const styles = PlayerListInfoStyles(theme);
 
     return (
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View testID="playerListInfo" style={{flex: 1, flexDirection: 'row'}}>
             <View style={{ flex: 1}}>
                 <Image testID="jerseyPlayerListInfo" style={styles.image} source={Jerseys[player.team_code]} resizeMode="contain"/>
 
