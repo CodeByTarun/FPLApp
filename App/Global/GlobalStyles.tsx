@@ -1,6 +1,6 @@
 import React from "react";
 import * as GlobalConstants from '../Global/GlobalConstants';
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create(
     {
@@ -28,16 +28,23 @@ export const globalStyles = StyleSheet.create(
             padding: 10,
        },
 
-       modalShadow: {
-            shadowColor: 'black',
-            shadowOffset: {
-                width: 0,
-                height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-       },
+       modalShadow: 
+        (Platform.OS === "ios") ? 
+            {
+                shadowColor: 'black',
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+            } :
+            {
+                elevation: 10,
+                borderWidth: 1.5,
+                borderColor: 'rgba(10, 10, 10, 0.1)',
+            }
+       ,
 
        modalBackground: {
             position: 'absolute',
@@ -79,21 +86,32 @@ export const globalStyles = StyleSheet.create(
             elevation: 3,
         },
 
-        topShadow: {
-            shadowColor: 'black',
-            shadowOffset: {width: 0, height: -2},
-            shadowRadius: 2,
-            shadowOpacity: 0.15,
-            elevation: 3,
-        },
+        topShadow: (Platform.OS === "ios") ? {
+                shadowColor: 'black',
+                shadowOffset: {width: 0, height: 0},
+                shadowRadius: 2,
+                shadowOpacity: 0.45,
+            } : 
+            {
+                elevation: 5,
+                borderWidth: 1,
+                borderColor: 'rgba(10, 10, 10, 0.2)',
+            },
         
-        shadow: {
-            shadowColor: 'black',
-            shadowOffset: {width: 0, height: 0},
-            shadowRadius: 1.5,
-            shadowOpacity: 0.6,
-            elevation: 5,
-        },
+        shadow:
+            (Platform.OS === "ios") ? 
+            {
+                shadowColor: 'black',
+                shadowOffset: {width: 0, height: 0},
+                shadowRadius: 1.5,
+                shadowOpacity: 0.6,
+            } : 
+            {
+                elevation: 5,
+                borderWidth: 1,
+                borderColor: 'rgba(10,10, 10, 0.2)',
+            }
+        ,
 
         dots: {
             height: GlobalConstants.height*0.005,

@@ -40,7 +40,7 @@ const BottomTabs = () => {
     }
 
     return (
-        <View style={[styles.container]}>
+        <View style={[styles.container, styles.shadow]}>
             <View style={styles.tabBarWidth}>
                 <TabButton fn={goToDreamTeam} imageName='dreamteam' header="Dream Team"/>
 

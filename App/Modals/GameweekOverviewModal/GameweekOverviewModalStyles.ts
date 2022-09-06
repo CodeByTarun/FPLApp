@@ -49,6 +49,7 @@ export const GameweekOverviewModalStyles = (theme: Theme) => StyleSheet.create({
         textAlign: 'center',
         color: theme.colors.text,
         zIndex: 1,
+        elevation: 10,
     },
 
     slider: {
@@ -57,5 +58,8 @@ export const GameweekOverviewModalStyles = (theme: Theme) => StyleSheet.create({
         backgroundColor: theme.colors.card,
         height: '100%',
         borderRadius: cornerRadius,
+        transform: [
+            { scale: 1.05 }
+        ]
     },
 });

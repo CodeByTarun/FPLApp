@@ -2,13 +2,13 @@ import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { width, cornerRadius, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
-
+// width: moderateScale(width / 3, -0.217) + moderateVerticalScale(0.5, 50),
 export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
     //#region main layout
     fixtureViewContainer: {
         height: FIXTURE_CARD_HEIGHT,
-        width: moderateScale(width / 3, -0.217),
-        padding: moderateScale(5, 0.25),
+        width: moderateScale(width / 3, -0.268) + moderateVerticalScale(0.5, 60),
+        padding: moderateVerticalScale(5, 0.5),
     },
 
     card: {
@@ -25,7 +25,7 @@ export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
     topbar: {
         alignSelf: 'center',
         width: '100%',
-        height: moderateVerticalScale(11),
+        height: moderateVerticalScale(11, 2),
         flexDirection: 'row',
     },
 
@@ -35,7 +35,7 @@ export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.notification,
         fontWeight: '500',
         flex: 1,
-        textAlign: 'center'
+        textAlign: 'center',
     },
 
     //#endregion

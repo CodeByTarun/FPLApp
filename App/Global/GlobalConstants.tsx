@@ -39,9 +39,9 @@ export const modalBackgroundColor = primaryColor;
 export const modalButtonColor = secondaryColor;
 
 // Fonts
-export const smallFont = moderateScale(8, 0.3);
-export const mediumFont = moderateScale(11, 0.4);
-export const largeFont = moderateScale(16, 0.6);
+export const smallFont = moderateScale(8, 0.65) - moderateVerticalScale(0.1, 50);
+export const mediumFont = moderateScale(11, 0.65) - moderateVerticalScale(0.1, 50);
+export const largeFont = moderateScale(16, 0.65) - moderateVerticalScale(0.1, 50);
 
 
 export const Per90Stats = ["Total Points", "Goals Scored", "Assists", 

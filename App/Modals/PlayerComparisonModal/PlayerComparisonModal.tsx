@@ -59,9 +59,12 @@ const PlayerComparisonModal = () => {
     //#region Players to compare functions
     const addPlayer = (playerToAdd: PlayerOverview) => { 
 
+        const requestHeaders: HeadersInit = new Headers();
+        requestHeaders.set("User-Agent", "Mozilla/5.0");        
+
         if (playersToCompare.find(player => player.playerOverview.id === playerToAdd.id) !== undefined) return
 
-        fetch(`https://fantasy.premierleague.com/api/element-summary/${playerToAdd.id}/`)
+        fetch(`https://fantasy.premierleague.com/api/element-summary/${playerToAdd.id}/`, {headers: requestHeaders})
         .then(response => response.json())
         .then(data => {
             setPlayersToCompare([...playersToCompare, {playerOverview: playerToAdd, playerSummary: data as FplPlayerSummary}])
@@ -88,6 +91,8 @@ const PlayerComparisonModal = () => {
         dispatch(changeFilterView(<FilterView statsFilterState={statsFilterState} statsFilterDispatch={statsFilterDispatch} liveGameweek={liveGameweek}/>));
         navigator.navigate('FilterModal');
     }
+
+    console.log(playersToCompare);
 
     return (
         <ModalWrapper modalHeight={'80%'} modalWidth={moderateScale(300, 0.8)}>

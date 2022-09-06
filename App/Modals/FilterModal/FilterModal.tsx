@@ -20,7 +20,7 @@ const FilterModal = () => {
 
     const modalSlideInFromBottom = current.progress.interpolate({
         inputRange: [0, 1],
-        outputRange: [height, 0],
+        outputRange: [height, 2],
     });
 
 

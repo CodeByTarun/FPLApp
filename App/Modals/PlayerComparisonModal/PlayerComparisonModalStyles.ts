@@ -53,6 +53,9 @@ export const PlayerComparisonModalStyles = (theme: Theme) => StyleSheet.create({
         position: 'absolute',
         zIndex: 1,
         borderRadius: cornerRadius,
+        transform: [
+            { scale: 1.03 }
+        ]
     },
 
     controlButtons: {

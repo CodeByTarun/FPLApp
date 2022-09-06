@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useGetOverviewQuery, useGetFixturesQuery } from './App/Store/fplSlice';
 import * as SplashScreen from "expo-splash-screen";
+import * as ScreenOrientation from 'expo-screen-orientation';
 import { FplBaseDataContext, ManageThemeContext } from './App/AppContext';
 import PlayerModal from './App/Modals/PlayerModal';
 import SettingsModal from './App/Modals/SettingsModal';
@@ -20,6 +21,7 @@ import { Appearance, useColorScheme } from 'react-native';
 import { darkTheme, defaultTheme } from './App/Global/GlobalConstants';
 import { getThemeData, setThemeData } from './App/Helpers/FplDataStorageService';
 import TeamFixtureDifficulty from './App/Modals/GameweekOverviewModal/TeamFixtureDifficulty';
+import { useFonts } from 'expo-font';
 
 export interface FixturesMap {
   [key: number] : FplFixture[];
@@ -35,6 +37,10 @@ export type RootStackParams = {
   GameweekOverview: any;
   MutableModal: any;
   FilterModal: any;
+}
+
+let customFonts = {
+  SFNSText: require('./assets/fonts/SFNSText-Regular.otf')
 }
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -55,9 +61,13 @@ function App() {
   const [teamFixtureDifficultyView, setTeamFixtureDifficultyView] = useState({} as JSX.Element);
   const errorCount = useRef(0);
 
+  const [isFontLoaded] = useFonts(customFonts);
+
   const colorScheme = useColorScheme();
   const [theme, setTheme] = useState('light');
   const [useDeviceTheme, setUseDeviceTheme] = useState(false);
+
+  console.log(isFontLoaded);
 
   useEffect( function refetchIfError() {
     if (errorCount.current < 3) {
@@ -100,6 +110,14 @@ function App() {
     getThemeDataFromStorage();
   }, []);
 
+  useEffect(function lockOrientation() {
+    async function lockingOrientation() {
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    }
+
+    lockingOrientation();
+  }, [])
+
   useEffect(function useDevicesThemeChanged() {
 
     if (useDeviceTheme) {
@@ -141,7 +159,7 @@ useEffect(function themeChanged() {
 
   useEffect( function removeSplashScreen() {
 
-    if (fixtures.isSuccess && overview.isSuccess) {
+    if (fixtures.isSuccess && overview.isSuccess && isFontLoaded) {
 
       let liveGameweek = overview.data.events.filter((event) => { return event.is_current === true; })[0]?.id;
 
@@ -156,13 +174,13 @@ useEffect(function themeChanged() {
       setTimeout(() => SplashScreen.hideAsync(), 2000);
     }
 
-  }, [fixtures.isSuccess, overview.isSuccess]);
+  }, [fixtures.isSuccess, overview.isSuccess, isFontLoaded]);
 
   useEffect(function createTeamFixtureDifficultyView() {
     setTeamFixtureDifficultyView(<TeamFixtureDifficulty/>);
   }, [fixtureLists])
 
-  if (overview.isSuccess && fixtures.isSuccess) 
+  if (overview.isSuccess && fixtures.isSuccess && isFontLoaded) 
     return (
         <FplBaseDataContext.Provider value={{ overview: overview.data, fixtures: fixtures.data, fixtureLists: fixtureLists, TeamFixtureDifficultyView: teamFixtureDifficultyView}}>
           <ManageThemeContext.Provider value={{theme: theme, useDeviceTheme: useDeviceTheme, setTheme: setTheme, setUseDeviceTheme: setUseDeviceTheme }}>

@@ -38,7 +38,7 @@ const TabButton = ({fn, imageName, header, isDisabled = false} : TabButtonProps)
             <View style={styles.imageContainer}>
                 <Image testID={'tabIcon'} style={styles.image} source={Icons[imageName]} resizeMode='contain'/>
             </View>
-            <Text style={styles.headerText}>{header}</Text>
+            <Text style={[styles.headerText]}>{header}</Text>
 
         </AnimatedPressable>
     )

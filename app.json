@@ -18,7 +18,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.codebytarun.fplapp"
+      "bundleIdentifier": "com.codebytarun.fplapp",
+      "requireFullScreen": true
     },
     "android": {
       "adaptiveIcon": {

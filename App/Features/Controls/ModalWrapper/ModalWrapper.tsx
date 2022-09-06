@@ -24,8 +24,6 @@ const ModalWrapper = ({ children, modalHeight, modalWidth, maxHeight } : PropsWi
     const navigation = useNavigation<StackNavigationProp<RootStackParams>>();
     const { current } = useCardAnimation();
 
-    console.log(current);
-
     const modalScale = current ? current.progress.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 1],

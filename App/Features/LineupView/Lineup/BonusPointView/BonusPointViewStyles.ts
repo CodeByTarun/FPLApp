@@ -7,7 +7,7 @@ export const BonusPointViewStyles = (theme: Theme) => StyleSheet.create({
     
     container:{ 
         width: moderateScale(225, 0.3), 
-        height: moderateVerticalScale(80, 0.8), 
+        height: moderateVerticalScale(80, 1.5), 
         backgroundColor: theme.colors.primary, 
         alignSelf: 'flex-end', 
         marginBottom: -1,
@@ -18,14 +18,14 @@ export const BonusPointViewStyles = (theme: Theme) => StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         borderColor: theme.colors.border,
-        paddingBottom: moderateVerticalScale(5),
-        paddingTop: moderateVerticalScale(2),
+        paddingBottom: moderateScale(5, 1.5),
+        paddingTop: moderateScale(2, 4),
     },
 
     bonusPointsText: {
         color: theme.colors.text,
         alignSelf: 'center',
-        fontSize: moderateScale(8, 0.4),
+        fontSize: (moderateScale(8, 0.4) + moderateVerticalScale(8, 0.3)) / 2,
         flex: 1,
     },
 
@@ -50,8 +50,8 @@ export const BonusPointViewStyles = (theme: Theme) => StyleSheet.create({
         alignSelf: 'center',
         fontSize: mediumFont * 1.1,
         fontWeight: 'bold',
-        paddingTop: verticalScale(5),
-        paddingBottom: verticalScale(4),
+        paddingTop: moderateVerticalScale(2.5, 5),
+        paddingBottom: moderateVerticalScale(2.5, 1),
         backgroundColor: theme.colors.primary
     },
 });

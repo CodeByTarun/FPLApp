@@ -52,7 +52,7 @@ export const PlayerDetailedStatsModalStyles = (theme: Theme) => StyleSheet.creat
         borderRadius: 10,
         marginTop: moderateVerticalScale(5),
         marginBottom: moderateVerticalScale(5),
-        backgroundColor: theme.colors.background
+        backgroundColor: theme.colors.background,
     },
 
     titleText: {
@@ -77,6 +77,9 @@ export const PlayerDetailedStatsModalStyles = (theme: Theme) => StyleSheet.creat
         backgroundColor: theme.colors.card,
         borderRadius: 10,
         zIndex: 1,
+        transform: [
+            { scale: 1.03 }
+        ]
     },
 
     text: {

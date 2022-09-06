@@ -1,18 +1,19 @@
 import { StyleSheet } from "react-native";
-import { moderateVerticalScale } from "react-native-size-matters";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { textPrimaryColor, smallFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     teamInfoView: {
         flex: 1,
         justifyContent: 'center',
-        paddingTop: moderateVerticalScale(5),
+        alignItems: 'center',
+        alignSelf: 'center',
     },
 
     emblems: {
         alignSelf: 'center',
-        height: '60%',
-        width: '100%',
+        height: moderateVerticalScale(25, 0.8),
+        width: moderateVerticalScale(25, 0.75),
     },
 
     text: {
@@ -20,6 +21,6 @@ export const styles = StyleSheet.create({
         alignSelf: 'center', 
         fontWeight: '400',
         color: textPrimaryColor, 
-        paddingTop: moderateVerticalScale(5), 
+        paddingTop: moderateVerticalScale(3), 
     }
 });

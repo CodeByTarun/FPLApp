@@ -1,6 +1,6 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
-import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters";
 import { cornerRadius, mediumFont } from "../../../Global/GlobalConstants";
 
 export const TeamSwitchStyles = (theme: Theme) => StyleSheet.create({
@@ -18,6 +18,9 @@ export const TeamSwitchStyles = (theme: Theme) => StyleSheet.create({
         position: 'absolute',
         backgroundColor: theme.colors.card,
         borderRadius: cornerRadius,
+        transform: [
+            {scale: 1.03}
+        ]
     },
 
     switchContainer: {
