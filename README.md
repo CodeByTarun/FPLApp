@@ -30,7 +30,7 @@
 
 This project was made as a quicker way for someone to view their FPL (fantasy premier league) teams and see how players are doing for any fixture in any gameweek. The application uses data from the fantasy premier league API. It also features live updates for fixtures and player scores. This was a great project to learn about the React Native framework, Expo, Typescript, React-Spring, Redux, Jest and the React Testing Library. A detailed explanation of how to use this mobile application is in the [Usage](https://github.com/CodeByTarun/FPLApp/blob/master/README.md#usage) section below.
 
-This project utilized functional components, react native hooks and the redux design pattern. The RTK Query data fetching and caching tool made using fetched data across the application easy. Redux was also used for storing the main state of the team whether it is the team of the week, a user’s team, or a team currently playing in a match. Test driven development (TDD) was used for the creation of services and helper functions. Testing was done using Jest and the React Testing Library. I chose to use this testing library as it leads to creation of tests that exclude implementation details. This is helpful because when I refactor my components my tests don’t break as often. Also, AsyncStorage was used to keep data offline in a key-value storage system. Animations were created using the React-Spring library.
+This project utilized functional components, react native hooks and the redux design pattern. The RTK Query data fetching and caching tool made using fetched data across the application easy. Redux was also used for storing the main state of the team whether it is the team of the week, a user’s team, or a team currently playing in a match. Test driven development (TDD) was used for the creation of services and helper functions. Testing was done using Jest and the React Testing Library. I chose to use this testing library as it leads to creation of tests that exclude implementation details. Also, AsyncStorage was used to keep data offline in a key-value storage system. Animations were created using the React-Spring library.
 
 
 ### Built With
@@ -39,6 +39,7 @@ This project utilized functional components, react native hooks and the redux de
 * [Redux](https://redux.js.org/)
 * [Expo](https://docs.expo.dev/)
 * [React-Spring](https://react-spring.io/)
+* [React Navigation](https://reactnavigation.org/)
 
 ## Getting Started
 
@@ -56,7 +57,7 @@ Example:
 
 When on the points tab on the browser the URL will contain your team ID: https://fantasy.premierleague.com/entry/ ***8423283*** /event/36
 
-Once your team it will be set as your favourite team and will open automatically when the app is opened. If you click on your team’s name, the standings will open for draft leagues and a list of leagues will open for budget leagues. You can navigate to any league and click on any team to view how they are doing. 
+Once your team has been added it will be set as your favourite team and will open automatically when the app is opened. If you click on your team’s name, the standings will open for draft leagues and a list of leagues will open for budget leagues. You can navigate to any league and click on any team to view how they are doing. 
 
 When viewing your team there are two cards at the top that show if you are viewing the current gameweek, press the right one to view additional info such as expected points, cost, form, selection percentage and upcoming fixtures. The left one shows point totals, transaction totals and rank.
 
@@ -97,6 +98,8 @@ Project Link: [https://github.com/TarunBola/FPLApp](https://github.com/TarunBola
 * [React Native SVG](https://github.com/react-native-svg/react-native-svg)
 * [Moment Timezone](https://momentjs.com/timezone/)
 * [flaticon](https://www.flaticon.com/free-icons/soccer)
+* [Lodash](https://lodash.com/)
+* [React Native Size Matters](https://github.com/nirsky/react-native-size-matters)
 
 <!-- Links and Images -->
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
