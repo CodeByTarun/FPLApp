@@ -40,7 +40,9 @@ export type RootStackParams = {
 }
 
 let customFonts = {
-  SFNSText: require('./assets/fonts/SFNSText-Regular.otf')
+  SFNSText: require('./assets/fonts/SFNSText-Regular.otf'),
+  SFNSTextBold: require('./assets/fonts/SFNSText-Bold.otf'),
+  SFNSTextSemiBold: require('./assets/fonts/SFNSText-Semibold.otf'),
 }
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -66,8 +68,6 @@ function App() {
   const colorScheme = useColorScheme();
   const [theme, setTheme] = useState('light');
   const [useDeviceTheme, setUseDeviceTheme] = useState(false);
-
-  console.log(isFontLoaded);
 
   useEffect( function refetchIfError() {
     if (errorCount.current < 3) {

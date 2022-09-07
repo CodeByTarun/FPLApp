@@ -4,6 +4,8 @@ import FixtureCard from "../../../App/Features/Fixtures/FixtureCard";
 import { overview } from "../../SampleData/Overviews";
 import { liveFixture, liveGameweek } from "../../SampleData/LiveScoreData";
 import { finishedFixture, upcomingFixture } from "../../SampleData/Fixtures";
+import store from "../../../App/Store/store";
+import { setLiveGameweek } from "../../../App/Store/teamSlice";
 
 jest.mock('expo-localization', () => {
     return {
@@ -21,7 +23,10 @@ test('when its a upcoming fixture does the correct UI show up', () => {
 
 test('when its a live fixture does the correct UI show up', () => {
 
-    const { queryByTestId } = reduxRender(<FixtureCard overview={overview} fixture={liveFixture} gameweekData={liveGameweek}/>);
+    const customStore = store;
+    store.dispatch(setLiveGameweek(32));
+
+    const { queryByTestId } = reduxRender(<FixtureCard overview={overview} fixture={liveFixture} gameweekData={liveGameweek}/>, customStore);
 
     expect(queryByTestId('liveFixtureText')).toBeTruthy();
     expect(queryByTestId('animatedButton')).toBeEnabled();

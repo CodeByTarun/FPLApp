@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
-import { BOTTOM_BAR_HEIGHT, FIXTURES_VIEW_CONTROLS_HEIGHT, height, largeFont, mediumFont, primaryColor, secondaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
+import { BOTTOM_BAR_HEIGHT, defaultFont, FIXTURES_VIEW_CONTROLS_HEIGHT, height, largeFont, mediumFont, primaryColor, secondaryColor, semiBoldFont, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../Global/GlobalConstants";
 
 export const FixturesStyles = (theme: Theme) => StyleSheet.create({
     animatedView: {
@@ -40,16 +40,16 @@ export const FixturesStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text, 
         alignSelf: 'center', 
         fontSize: mediumFont*1.3,
-        fontWeight: '700'
+        fontFamily: semiBoldFont,
       },
 
       gameweekDropDownSymbol: {
         color: theme.colors.text, 
         fontSize: mediumFont * 0.65, 
-        fontWeight: '700', 
         transform: [{rotate: '-45deg'}], 
         alignSelf: 'center',
         marginBottom: moderateVerticalScale(4),
+        fontFamily: semiBoldFont,
       },
 
       buttonsContainers: {
@@ -98,7 +98,7 @@ export const FixturesStyles = (theme: Theme) => StyleSheet.create({
 
       text: {
         color: theme.colors.notification,
-        fontWeight: '600',
-        fontSize: mediumFont
+        fontSize: mediumFont,
+        fontFamily: defaultFont,
       }
 });

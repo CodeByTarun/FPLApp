@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
-import { cornerRadius, smallFont, width } from "../../Global/GlobalConstants";
+import { cornerRadius, defaultFont, semiBoldFont, smallFont, width } from "../../Global/GlobalConstants";
 
 export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     container: {
@@ -35,10 +35,10 @@ export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     text: {
         flex: 1,
         fontSize: smallFont* 1.1,
-        fontWeight: '600', 
         alignSelf: 'center', 
         textAlign:'center',
         color: theme.colors.text,
+        fontFamily: semiBoldFont,
     },
 
     //#region Stats
@@ -116,8 +116,8 @@ export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.primary,
         alignSelf: 'center',
         fontSize: smallFont,
-        fontWeight: '700',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: semiBoldFont,
     },
     //#endregion
 
@@ -136,9 +136,9 @@ export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     },
 
     nameText: {
-        fontWeight: '500',
         paddingLeft: moderateScale(4),
         paddingRight: moderateScale(4),
+        fontFamily: semiBoldFont
     },
     
     scoreContainer: {
@@ -167,9 +167,9 @@ export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     nextWeekText: {
         color: theme.colors.notification, 
         fontSize: smallFont*0.9,
-        fontWeight: '400', 
         alignSelf: 'center', 
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: defaultFont
     },
 
     infoCardNameContainer: {
@@ -182,12 +182,12 @@ export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     },
 
     infoCardNameText: {
-        fontWeight: '600', 
         paddingLeft: moderateScale(5),
         paddingRight: moderateScale(5),
         fontSize: smallFont * 1.1, 
         textAlign: 'center',
-        color: theme.colors.text
+        color: theme.colors.text,
+        fontFamily: semiBoldFont,
     },
     //#endregion
 });

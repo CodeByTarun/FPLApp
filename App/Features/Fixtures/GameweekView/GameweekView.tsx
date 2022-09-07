@@ -63,7 +63,7 @@ const GameweekView = ({overview} : GameweekViewProps) => {
             
             <View style={styles.bottomView}>
                 <Pressable style={[styles.currentGameweekButton]} onPress={() => onGameweekButtonPress(teamInfo.liveGameweek)}>
-                    <Text style={[styles.text, {fontWeight: '600', textAlign: 'center'}]}>Current Gameweek</Text>
+                    <Text style={[styles.text, {textAlign: 'center'}]}>Current Gameweek</Text>
                 </Pressable>
             </View>
         </View>

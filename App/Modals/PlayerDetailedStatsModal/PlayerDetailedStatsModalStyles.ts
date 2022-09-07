@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { largeFont, mediumFont } from "../../Global/GlobalConstants";
+import { defaultFont, largeFont, mediumFont, semiBoldFont } from "../../Global/GlobalConstants";
 
 export const PlayerDetailedStatsModalStyles = (theme: Theme) => StyleSheet.create({
 
@@ -58,7 +58,7 @@ export const PlayerDetailedStatsModalStyles = (theme: Theme) => StyleSheet.creat
     titleText: {
         fontSize: largeFont * 1.3,
         color: theme.colors.text,
-        fontWeight: 'bold',
+        fontFamily: semiBoldFont,
     }, 
 
     viewToggleStyle: {
@@ -85,13 +85,13 @@ export const PlayerDetailedStatsModalStyles = (theme: Theme) => StyleSheet.creat
     text: {
         color: theme.colors.text,
         fontSize: mediumFont * 0.9,
-        fontWeight: '500',
+        fontFamily: defaultFont
     },
 
     headerText: {
         color: theme.colors.text,
         fontSize: mediumFont * 0.9,
-        fontWeight: '500',
+        fontFamily: defaultFont,
         alignSelf: 'center',
     },
     //#endregion

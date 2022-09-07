@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { mediumFont, height, darkFieldColor, fieldColor } from "../../../Global/GlobalConstants";
+import { mediumFont, height, darkFieldColor, fieldColor, defaultFont } from "../../../Global/GlobalConstants";
 
 export const LineupStyles = (theme: Theme) => StyleSheet.create(
     {   
@@ -62,6 +62,7 @@ export const LineupStyles = (theme: Theme) => StyleSheet.create(
         gameweekText: {
             position: 'absolute',
             top: 0,
+            fontFamily: defaultFont,
         },
 
         unstartedFixtureView: {
@@ -78,8 +79,8 @@ export const LineupStyles = (theme: Theme) => StyleSheet.create(
         unstartedFixtureViewText: {
             color: theme.colors.text, 
             fontSize: mediumFont * 1.1,
-            fontWeight: '500', 
-            alignSelf: 'center'
+            alignSelf: 'center',
+            fontFamily: defaultFont,
         },
     }
 );

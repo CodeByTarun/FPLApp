@@ -68,6 +68,6 @@ const CustomSliderStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text,
         fontSize: mediumFont,
         flex: 1,
-        fontWeight: '500'
+        fontFamily: GlobalConstants.defaultFont
     }
 });

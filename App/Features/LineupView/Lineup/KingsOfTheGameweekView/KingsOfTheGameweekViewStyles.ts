@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, scale, verticalScale } from "react-native-size-matters";
-import { smallFont } from "../../../../Global/GlobalConstants";
+import { defaultFont, smallFont } from "../../../../Global/GlobalConstants";
 
 export const KingOfTheGameweekViewStyles = (theme: Theme) => StyleSheet.create({
     kingsView: {
@@ -60,18 +60,18 @@ export const KingOfTheGameweekViewStyles = (theme: Theme) => StyleSheet.create({
     kingsText: {
         color: theme.colors.text,
         fontSize: smallFont,
-        fontWeight: '500',
         alignSelf: 'center',
         textAlign: 'center',
+        fontFamily: defaultFont,
     },
 
     gameweekAndScoreText: {
         color: theme.colors.text,
         fontSize: smallFont,
-        fontWeight: '500',
         flex: 2,
         alignSelf: 'center',
         textAlign: 'center',
+        fontFamily: defaultFont,
     },
 
 });

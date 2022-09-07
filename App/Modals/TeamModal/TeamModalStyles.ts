@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native"
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters"
-import { largeFont, mediumFont, cornerRadius, fieldColor } from "../../Global/GlobalConstants"
+import { largeFont, mediumFont, cornerRadius, fieldColor, defaultFont, semiBoldFont } from "../../Global/GlobalConstants"
 
 export const TemaModalStyles = (theme: Theme) => StyleSheet.create(
     {
@@ -10,7 +10,7 @@ export const TemaModalStyles = (theme: Theme) => StyleSheet.create(
             alignSelf: 'center', 
             color: theme.colors.text,
             fontSize: largeFont,
-            fontWeight: 'bold',
+            fontFamily: semiBoldFont,
             marginTop: moderateVerticalScale(10), 
             marginBottom: moderateVerticalScale(5),
         },
@@ -18,6 +18,7 @@ export const TemaModalStyles = (theme: Theme) => StyleSheet.create(
         text: {
             color: theme.colors.text,
             fontSize: mediumFont,
+            fontFamily: defaultFont,
         },
 
         modalAddTeamView: {
@@ -39,6 +40,7 @@ export const TemaModalStyles = (theme: Theme) => StyleSheet.create(
             paddingLeft: moderateScale(10),
             borderRadius: cornerRadius,
             fontSize: mediumFont,
+            fontFamily: defaultFont,
         },
 
         checkBoxContainer: {
@@ -104,6 +106,7 @@ export const TemaModalStyles = (theme: Theme) => StyleSheet.create(
 
         buttonText: {
             fontSize: mediumFont,
+            fontFamily: defaultFont,
         },
 
         favouriteButtonContainer: {

@@ -1,195 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1662415476713" clover="3.2.0">
-  <project timestamp="1662415476713" name="All files">
-    <metrics statements="327" coveredstatements="227" conditionals="79" coveredconditionals="20" methods="94" coveredmethods="29" elements="500" coveredelements="276" complexity="0" loc="327" ncloc="327" packages="23" files="106" classes="106"/>
-    <package name="App">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="AppContext.ts" path="T:\Coding\FPLApp\App\AppContext.ts">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls">
-      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\Controls\index.ts">
-        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.AnimatedButton">
-      <metrics statements="17" coveredstatements="10" conditionals="5" coveredconditionals="3" methods="6" coveredmethods="3"/>
-      <file name="AnimatedButton.tsx" path="T:\Coding\FPLApp\App\Features\Controls\AnimatedButton\AnimatedButton.tsx">
-        <metrics statements="17" coveredstatements="10" conditionals="5" coveredconditionals="3" methods="6" coveredmethods="3"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="16" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="17" count="6" type="stmt"/>
-        <line num="19" count="6" type="stmt"/>
-        <line num="20" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="24" count="6" type="stmt"/>
-        <line num="28" count="6" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="48" count="6" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.CloseButton">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="CloseButton.tsx" path="T:\Coding\FPLApp\App\Features\Controls\CloseButton\CloseButton.tsx">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.CustomButton">
-      <metrics statements="8" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="0"/>
-      <file name="CustomButton.tsx" path="T:\Coding\FPLApp\App\Features\Controls\CustomButton\CustomButton.tsx">
-        <metrics statements="8" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="17" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.Dropdown">
-      <metrics statements="14" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-      <file name="Dropdown.tsx" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\Dropdown.tsx">
-        <metrics statements="13" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="14" count="1" type="stmt"/>
+<coverage generated="1662498418801" clover="3.2.0">
+  <project timestamp="1662498418802" name="All files">
+    <metrics statements="117" coveredstatements="117" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4" elements="124" coveredelements="124" complexity="0" loc="117" ncloc="117" packages="6" files="78" classes="78"/>
+    <package name="App.Features.BottomTabs.TabButton">
+      <metrics statements="10" coveredstatements="10" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
+      <file name="TabButton.tsx" path="T:\Coding\FPLApp\App\Features\BottomTabs\TabButton\TabButton.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="17" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
       </file>
-      <file name="DropdownStyles.ts" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\DropdownStyles.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.Dropdown.DropDownModal">
-      <metrics statements="14" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
-      <file name="DropDownModal.tsx" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\DropDownModal\DropDownModal.tsx">
-        <metrics statements="14" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-      </file>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\Controls\Dropdown\DropDownModal\index.ts">
-        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.LoadingIndicator">
-      <metrics statements="5" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="LoadingIndicator.tsx" path="T:\Coding\FPLApp\App\Features\Controls\LoadingIndicator\LoadingIndicator.tsx">
-        <metrics statements="5" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.ModalWrapper">
-      <metrics statements="13" coveredstatements="11" conditionals="8" coveredconditionals="4" methods="3" coveredmethods="2"/>
-      <file name="ModalWrapper.tsx" path="T:\Coding\FPLApp\App\Features\Controls\ModalWrapper\ModalWrapper.tsx">
-        <metrics statements="13" coveredstatements="11" conditionals="8" coveredconditionals="4" methods="3" coveredmethods="2"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="29" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.PieChart">
-      <metrics statements="11" coveredstatements="2" conditionals="20" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="PieChart.tsx" path="T:\Coding\FPLApp\App\Features\Controls\PieChart\PieChart.tsx">
-        <metrics statements="11" coveredstatements="2" conditionals="20" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.Controls.SearchControl">
-      <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="SearchControl.tsx" path="T:\Coding\FPLApp\App\Features\Controls\SearchControl\SearchControl.tsx">
-        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Features.PlayerStats.PlayerListContainer.PlayerList.PlayerListInfo">
-      <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="2" methods="4" coveredmethods="4"/>
-      <file name="PlayerListInfo.tsx" path="T:\Coding\FPLApp\App\Features\PlayerStats\PlayerListContainer\PlayerList\PlayerListInfo\PlayerListInfo.tsx">
-        <metrics statements="7" coveredstatements="7" conditionals="6" coveredconditionals="2" methods="3" coveredmethods="3"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="16" count="5" type="stmt"/>
-        <line num="17" count="5" type="stmt"/>
-        <line num="19" count="5" type="stmt"/>
-        <line num="41" count="69" type="stmt"/>
-        <line num="42" count="15" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-      </file>
-      <file name="PlayerListInfoStyles.ts" path="T:\Coding\FPLApp\App\Features\PlayerStats\PlayerListContainer\PlayerList\PlayerListInfo\PlayerListInfoStyles.ts">
+      <file name="TabButtonStyles.ts" path="T:\Coding\FPLApp\App\Features\BottomTabs\TabButton\TabButtonStyles.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="6" count="5" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
       </file>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\PlayerStats\PlayerListContainer\PlayerList\PlayerListInfo\index.ts">
+      <file name="index.ts" path="T:\Coding\FPLApp\App\Features\BottomTabs\TabButton\index.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
     <package name="App.Global">
-      <metrics statements="35" coveredstatements="35" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="34" coveredstatements="34" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="GlobalConstants.tsx" path="T:\Coding\FPLApp\App\Global\GlobalConstants.tsx">
         <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="5" count="1" type="stmt"/>
@@ -223,193 +59,12 @@
         <line num="55" count="1" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
       </file>
-      <file name="GlobalStyles.tsx" path="T:\Coding\FPLApp\App\Global\GlobalStyles.tsx">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="1" type="stmt"/>
-      </file>
       <file name="Images.ts" path="T:\Coding\FPLApp\App\Global\Images.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="5" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
         <line num="70" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="App.Modals.GameweekOverviewModal">
-      <metrics statements="12" coveredstatements="11" conditionals="8" coveredconditionals="3" methods="4" coveredmethods="3"/>
-      <file name="GameweekOverviewModal.tsx" path="T:\Coding\FPLApp\App\Modals\GameweekOverviewModal\GameweekOverviewModal.tsx">
-        <metrics statements="11" coveredstatements="10" conditionals="8" coveredconditionals="3" methods="3" coveredmethods="2"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="25" count="1" type="cond" truecount="2" falsecount="2"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
-      </file>
-      <file name="GameweekOverviewModalStyles.ts" path="T:\Coding\FPLApp\App\Modals\GameweekOverviewModal\GameweekOverviewModalStyles.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
-      </file>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Modals\GameweekOverviewModal\index.ts">
-        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      </file>
-    </package>
-    <package name="App.Modals.GameweekOverviewModal.GameweekSummary">
-      <metrics statements="32" coveredstatements="23" conditionals="12" coveredconditionals="5" methods="14" coveredmethods="9"/>
-      <file name="GameweekSummary.tsx" path="T:\Coding\FPLApp\App\Modals\GameweekOverviewModal\GameweekSummary\GameweekSummary.tsx">
-        <metrics statements="32" coveredstatements="23" conditionals="12" coveredconditionals="5" methods="14" coveredmethods="9"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="61" count="160" type="stmt"/>
-        <line num="62" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="63" count="5" type="stmt"/>
-        <line num="64" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="66" count="2384" type="stmt"/>
-        <line num="68" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="69" count="5" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
-        <line num="91" count="32" type="stmt"/>
-        <line num="97" count="32" type="stmt"/>
-        <line num="106" count="5" type="stmt"/>
-        <line num="115" count="1" type="stmt"/>
-      </file>
-      <file name="index.ts" path="T:\Coding\FPLApp\App\Modals\GameweekOverviewModal\GameweekSummary\index.ts">
-        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      </file>
-    </package>
-    <package name="App.Store">
-      <metrics statements="56" coveredstatements="18" conditionals="16" coveredconditionals="3" methods="36" coveredmethods="4"/>
-      <file name="fplSlice.ts" path="T:\Coding\FPLApp\App\Store\fplSlice.ts">
-        <metrics statements="17" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="1"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
-      </file>
-      <file name="hooks.ts" path="T:\Coding\FPLApp\App\Store\hooks.ts">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-      </file>
-      <file name="modalSlice.ts" path="T:\Coding\FPLApp\App\Store\modalSlice.ts">
-        <metrics statements="9" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
-      </file>
-      <file name="navigationSlice.ts" path="T:\Coding\FPLApp\App\Store\navigationSlice.ts">
-        <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-      </file>
-      <file name="store.ts" path="T:\Coding\FPLApp\App\Store\store.ts">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-      </file>
-      <file name="teamSlice.ts" path="T:\Coding\FPLApp\App\Store\teamSlice.ts">
-        <metrics statements="20" coveredstatements="5" conditionals="16" coveredconditionals="3" methods="11" coveredmethods="1"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="52" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="53" count="1" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="63" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="80" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="87" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="110" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="Tests.Integration">
-      <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="2"/>
-      <file name="reduxRender.tsx" path="T:\Coding\FPLApp\Tests\Integration\reduxRender.tsx">
-        <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="2"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="15" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="Tests.SampleData.Gameweek32Data">
-      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="T:\Coding\FPLApp\Tests\SampleData\Gameweek32Data\index.ts">
-        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="Tests.SampleData.Overviews">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="T:\Coding\FPLApp\Tests\SampleData\Overviews\index.ts">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
       </file>
     </package>
     <package name="assets.emblems">

@@ -26,7 +26,7 @@ const GameweekOverviewModal = () => {
 
     return (
 
-        <ModalWrapper modalHeight={moderateVerticalScale(425, 0.45)} modalWidth={moderateScale(300, 0.5)}>
+        <ModalWrapper modalHeight={moderateVerticalScale(435, 0.45)} modalWidth={moderateScale(300, 0.5)}>
             <View style={styles.modalView}>
 
                 <Text style={styles.titleText}>Overview</Text>

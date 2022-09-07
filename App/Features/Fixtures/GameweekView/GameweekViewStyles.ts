@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { height, width, largeFont, textPrimaryColor, secondaryColor, mediumFont, cornerRadius } from "../../../Global/GlobalConstants";
+import { height, width, largeFont, textPrimaryColor, secondaryColor, mediumFont, cornerRadius, semiBoldFont, defaultFont } from "../../../Global/GlobalConstants";
 
 export const GameweekViewStyles = (theme: Theme) => StyleSheet.create({
     
@@ -16,8 +16,8 @@ export const GameweekViewStyles = (theme: Theme) => StyleSheet.create({
         alignSelf: 'center', 
         marginTop: moderateVerticalScale(10),
         marginBottom: moderateVerticalScale(10), 
-        fontWeight: '700', 
         textAlign: 'center',
+        fontFamily: semiBoldFont,
     },
 
     listContainer: {
@@ -46,6 +46,7 @@ export const GameweekViewStyles = (theme: Theme) => StyleSheet.create({
     text: {
         color: theme.colors.text,
         fontSize: mediumFont,
+        fontFamily: defaultFont
     },
 
     currentGameweekButton: {

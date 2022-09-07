@@ -5,7 +5,7 @@ import { moderateScale, moderateVerticalScale } from "react-native-size-matters"
 import { FixturesMap } from "../../../../App";
 import { FplBaseDataContext } from "../../../AppContext";
 import FixtureDifficultyList from "../../../Features/PlayerStats/PlayerListContainer/PlayerList/FixtureDifficultyList";
-import { mediumFont, smallFont } from "../../../Global/GlobalConstants";
+import { defaultFont, mediumFont, smallFont } from "../../../Global/GlobalConstants";
 import { useAppSelector } from "../../../Store/hooks";
 
 const TeamFixtureDifficulty = () => {
@@ -90,9 +90,9 @@ const TeamFixtureDifficultyStyles = (theme: Theme) => StyleSheet.create({
     teamText: {
         fontSize: mediumFont * 0.9,
         color: theme.colors.text,
-        fontWeight: '500',
         alignSelf: 'center',
-        paddingBottom: moderateVerticalScale(5)
+        paddingBottom: moderateVerticalScale(5),
+        fontFamily: defaultFont,
     },
 
     fdrContainer: {
@@ -108,7 +108,8 @@ const TeamFixtureDifficultyStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text,
         marginTop: 10,
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: defaultFont,
     }
 
 })

@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { scale } from "react-native-size-matters";
-import { mediumFont, fieldColor, redColor } from "../../../../Global/GlobalConstants";
+import { mediumFont, fieldColor, redColor, defaultFont } from "../../../../Global/GlobalConstants";
 
 export const StatColumnStyles = (theme: Theme) => StyleSheet.create({
 
@@ -15,7 +15,7 @@ export const StatColumnStyles = (theme: Theme) => StyleSheet.create({
         marginRight: scale(5),
         fontSize: mediumFont,
         textAlign: 'center',
-        fontWeight: '500'
+        fontFamily: defaultFont,
     },
 
     valueText: {
@@ -24,17 +24,20 @@ export const StatColumnStyles = (theme: Theme) => StyleSheet.create({
         flex: 1,
         padding: scale(3),
         marginRight: scale(5),
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: defaultFont,
     },
 
     greenText: {
         color: fieldColor,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: defaultFont,
     },
 
     redText: {
         color: redColor,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: defaultFont,
     }
 
 });

@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
-import { primaryColor, aLittleLighterColor, textPrimaryColor, width, smallFont, mediumFont } from "../../../../Global/GlobalConstants";
+import { primaryColor, aLittleLighterColor, textPrimaryColor, width, smallFont, mediumFont, defaultFont, semiBoldFont } from "../../../../Global/GlobalConstants";
 
 export const BonusPointViewStyles = (theme: Theme) => StyleSheet.create({
     
@@ -25,8 +25,9 @@ export const BonusPointViewStyles = (theme: Theme) => StyleSheet.create({
     bonusPointsText: {
         color: theme.colors.text,
         alignSelf: 'center',
-        fontSize: (moderateScale(8, 0.4) + moderateVerticalScale(8, 0.3)) / 2,
+        fontSize: moderateScale(8, 0.6) - moderateVerticalScale(0.1, 15),
         flex: 1,
+        fontFamily: defaultFont,
     },
 
     borderView: {
@@ -49,9 +50,9 @@ export const BonusPointViewStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text,
         alignSelf: 'center',
         fontSize: mediumFont * 1.1,
-        fontWeight: 'bold',
         paddingTop: moderateVerticalScale(2.5, 5),
         paddingBottom: moderateVerticalScale(2.5, 1),
-        backgroundColor: theme.colors.primary
+        backgroundColor: theme.colors.primary,
+        fontFamily: semiBoldFont,
     },
 });

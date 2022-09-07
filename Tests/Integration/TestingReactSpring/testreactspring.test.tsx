@@ -2,6 +2,7 @@ import { animated, Globals, useSpring } from "@react-spring/native";
 import { fireEvent, render } from "@testing-library/react-native";
 import React from "react";
 import { Pressable, View, Text } from "react-native";
+import { reduxRender } from "../reduxRender";
 
 const AnimatedView = animated(View);
 
@@ -41,7 +42,7 @@ test('does pressing the button call the function?', () => {
 
     const buttonFn = jest.fn();
 
-    const { getByTestId } = render(<AnimatedButtonTest buttonFn={buttonFn}/>);
+    const { getByTestId } = reduxRender(<AnimatedButtonTest buttonFn={buttonFn}/>);
 
     fireEvent.press(getByTestId('button'));
 

@@ -6,7 +6,7 @@ import { Appearance, Pressable, StyleSheet, Text, View } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { ManageThemeContext } from "../../AppContext";
 import { ModalWrapper } from "../../Features/Controls";
-import { cornerRadius, fieldColor, height, largeFont, mediumFont, width } from "../../Global/GlobalConstants";
+import { cornerRadius, defaultFont, fieldColor, height, largeFont, mediumFont, semiBoldFont, width } from "../../Global/GlobalConstants";
 import globalStyles from "../../Global/GlobalStyles";
 import { getThemeData, setThemeData } from "../../Helpers/FplDataStorageService";
 
@@ -72,7 +72,7 @@ const SettingsModalStyle = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text,
         fontSize: largeFont,
         alignSelf: 'center',
-        fontWeight: '600',
+        fontFamily: semiBoldFont,
         marginTop: moderateVerticalScale(10),
         marginBottom: moderateVerticalScale(15),
     },
@@ -84,6 +84,7 @@ const SettingsModalStyle = (theme: Theme) => StyleSheet.create({
         padding: moderateScale(5),
         paddingLeft: moderateScale(10),
         paddingRight: moderateScale(10),
+        fontFamily: defaultFont,
     },
 
     sliderContainer: {
@@ -106,6 +107,7 @@ const SettingsModalStyle = (theme: Theme) => StyleSheet.create({
         textAlign: 'center',
         color: theme.colors.text,
         zIndex: 1,
+        fontFamily: defaultFont,
     },
 
     slider: {
@@ -136,6 +138,7 @@ const SettingsModalStyle = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text,
         fontSize: mediumFont,
         flex: 1,
+        fontFamily: defaultFont,
     }
 
 });

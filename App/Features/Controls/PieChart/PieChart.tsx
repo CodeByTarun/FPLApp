@@ -44,8 +44,8 @@ const PieChart = (props: PieChartProps) => {
             }
             
             <View style={styles.textContainer}>
-                <Text style={[styles.text, {fontSize: radius * 0.38, color:props.firstStatColor}]}>{props.firstStatName}: {props.firstStatValue}</Text>
-                <Text style={[styles.text, {fontSize: radius * 0.38, color:props.secondStatColor}]}>{props.secondStatName}: {props.secondStatValue}</Text>
+                <Text style={[styles.text, {fontSize: radius * moderateVerticalScale(0.31), color:props.firstStatColor}]}>{props.firstStatName}: {props.firstStatValue}</Text>
+                <Text style={[styles.text, {fontSize: radius * moderateVerticalScale(0.31), color:props.secondStatColor}]}>{props.secondStatName}: {props.secondStatValue}</Text>
             </View>            
         </View>
     )
@@ -68,6 +68,7 @@ const PieChartStyles = (theme: Theme) => StyleSheet.create({
 
     text: {
         color: theme.colors.text,
-        fontWeight: '700',
+        fontFamily: GlobalConstants.semiBoldFont,
+        textAlign: 'center'
     },
 });

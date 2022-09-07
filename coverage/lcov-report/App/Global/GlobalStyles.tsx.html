@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
@@ -178,7 +178,25 @@
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a>
 <a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -293,9 +311,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 import * as GlobalConstants from '../Global/GlobalConstants';
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 &nbsp;
 export const globalStyles = StyleSheet.create(
     {
@@ -323,16 +359,23 @@ export const globalStyles = StyleSheet.create(
             padding: 10,
        },
 &nbsp;
-       modalShadow: {
-            shadowColor: 'black',
-            shadowOffset: {
-                width: 0,
-                height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-       },
+       modalShadow: 
+        (Platform.OS === "ios") ? 
+            {
+                shadowColor: 'black',
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+            } :
+<span class="branch-1 cbranch-no" title="branch not covered" >            {</span>
+                elevation: 10,
+                borderWidth: 1.5,
+                borderColor: 'rgba(10, 10, 10, 0.1)',
+            }
+       ,
 &nbsp;
        modalBackground: {
             position: 'absolute',
@@ -374,21 +417,32 @@ export const globalStyles = StyleSheet.create(
             elevation: 3,
         },
 &nbsp;
-        topShadow: {
-            shadowColor: 'black',
-            shadowOffset: {width: 0, height: -2},
-            shadowRadius: 2,
-            shadowOpacity: 0.15,
-            elevation: 3,
-        },
+        topShadow: (Platform.OS === "ios") ? {
+                shadowColor: 'black',
+                shadowOffset: {width: 0, height: 0},
+                shadowRadius: 2,
+                shadowOpacity: 0.45,
+            } : 
+<span class="branch-1 cbranch-no" title="branch not covered" >            {</span>
+                elevation: 5,
+                borderWidth: 1,
+                borderColor: 'rgba(10, 10, 10, 0.2)',
+            },
         
-        shadow: {
-            shadowColor: 'black',
-            shadowOffset: {width: 0, height: 0},
-            shadowRadius: 1.5,
-            shadowOpacity: 0.6,
-            elevation: 5,
-        },
+        shadow:
+            (Platform.OS === "ios") ? 
+            {
+                shadowColor: 'black',
+                shadowOffset: {width: 0, height: 0},
+                shadowRadius: 1.5,
+                shadowOpacity: 0.6,
+            } : 
+<span class="branch-1 cbranch-no" title="branch not covered" >            {</span>
+                elevation: 5,
+                borderWidth: 1,
+                borderColor: 'rgba(10,10, 10, 0.2)',
+            }
+        ,
 &nbsp;
         dots: {
             height: GlobalConstants.height*0.005,
@@ -415,7 +469,7 @@ export default globalStyles;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-09-05T22:04:36.350Z
+                at 2022-09-06T21:01:28.848Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

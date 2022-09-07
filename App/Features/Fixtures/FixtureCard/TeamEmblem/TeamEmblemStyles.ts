@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { textPrimaryColor, smallFont } from "../../../../Global/GlobalConstants";
+import { textPrimaryColor, smallFont, defaultFont } from "../../../../Global/GlobalConstants";
 
 export const styles = StyleSheet.create({
     teamInfoView: {
@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
     text: {
         fontSize: smallFont, 
         alignSelf: 'center', 
-        fontWeight: '400',
         color: textPrimaryColor, 
         paddingTop: moderateVerticalScale(3), 
+        fontFamily: defaultFont,
     }
 });

@@ -1,12 +1,13 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-import { textPrimaryColor, mediumFont, fieldColor } from "../../../../../Global/GlobalConstants";
+import { textPrimaryColor, mediumFont, fieldColor, defaultFont, semiBoldFont } from "../../../../../Global/GlobalConstants";
 
 export const PlayerListInfoStyles = (theme: Theme) => StyleSheet.create({
     tableText: {
         color: theme.colors.text,
         fontSize: mediumFont * 0.95,
+        fontFamily: defaultFont,
     },
 
     imageContainer: {
@@ -36,6 +37,6 @@ export const PlayerListInfoStyles = (theme: Theme) => StyleSheet.create({
         backgroundColor: fieldColor,
         padding: 2,
         marginRight: moderateScale(4),
-        fontWeight: '600'
+        fontFamily: semiBoldFont,
     },
 });

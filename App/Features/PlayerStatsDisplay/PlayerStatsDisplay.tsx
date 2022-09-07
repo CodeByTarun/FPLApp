@@ -59,12 +59,11 @@ const singleStatView = (label: string, value: number | string, theme: Theme) => 
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', paddingLeft: 5, paddingRight: 5}}>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={{fontSize: GlobalConstants.smallFont, color: theme.colors.notification, 
-                            fontWeight: '500', alignSelf: 'center'}}>{label}</Text>
+                <Text style={{fontSize: GlobalConstants.smallFont, color: theme.colors.notification, fontFamily: GlobalConstants.defaultFont, alignSelf: 'center'}}>{label}</Text>
             </View>
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingBottom: 0}}>
-                <Text style={{fontSize: GlobalConstants.smallFont * 1.2, color: theme.colors.text, 
-                                textAlign: 'right', fontWeight: '500', alignSelf: 'flex-end'}}>{value}</Text>
+                <Text style={{fontSize: GlobalConstants.smallFont * 1.2, color: theme.colors.text, fontFamily: GlobalConstants.defaultFont,
+                                textAlign: 'right', alignSelf: 'flex-end'}}>{value}</Text>
             </View>
         </View>
     )

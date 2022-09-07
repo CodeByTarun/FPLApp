@@ -94,7 +94,7 @@ const TableFilterPopupStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text,
         fontSize: GlobalConstants.mediumFont,
         flex: 1,
-        fontWeight: '500'
+        fontFamily: GlobalConstants.defaultFont,
     },
 
     checkboxContainer: {
@@ -131,7 +131,7 @@ const TableFilterPopupStyles = (theme: Theme) => StyleSheet.create({
 
     buttonFont: {
         fontSize: GlobalConstants.mediumFont,
-        fontWeight: '500',
         color: theme.colors.text,
+        fontFamily: GlobalConstants.defaultFont,
     }
 });

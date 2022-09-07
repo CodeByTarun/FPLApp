@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { mediumFont, height, largeFont, cornerRadius } from "../../Global/GlobalConstants";
+import { mediumFont, height, largeFont, cornerRadius, defaultFont } from "../../Global/GlobalConstants";
 
 export const PlayerModalStyles = (theme: Theme) => StyleSheet.create({
 
@@ -15,7 +15,7 @@ export const PlayerModalStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text, 
         alignSelf: 'center', 
         paddingTop: moderateVerticalScale(10), 
-        fontWeight: '500', 
+        fontFamily: defaultFont,
         textAlign: 'center', 
         paddingBottom: moderateVerticalScale(5)
     },
@@ -42,6 +42,7 @@ export const PlayerModalStyles = (theme: Theme) => StyleSheet.create({
         fontSize: largeFont,
         marginLeft: moderateScale(10, 0.3),
         marginRight: moderateScale(10, 0.3),
+        fontFamily: defaultFont,
     },
 
     emblemView: {
@@ -65,6 +66,7 @@ export const PlayerModalStyles = (theme: Theme) => StyleSheet.create({
     statText: {
         color: theme.colors.text,
         fontSize: mediumFont,
+        fontFamily: defaultFont,
     },
 
     statContainer: {
@@ -86,7 +88,7 @@ export const PlayerModalStyles = (theme: Theme) => StyleSheet.create({
     buttonText: {
         color: theme.colors.text,
         fontSize: mediumFont,
-        fontWeight: '500',
+        fontFamily: defaultFont,
     }
 
 }); 

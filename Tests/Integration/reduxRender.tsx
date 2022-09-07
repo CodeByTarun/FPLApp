@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useState } from "react";
+import React, { FunctionComponent, PropsWithChildren, ReactElement, useState } from "react";
 import { render as rtlRender } from "@testing-library/react-native";
 import { Provider } from "react-redux";
 import store from "../../App/Store/store";
@@ -14,7 +14,7 @@ export const setUseDeviceThemeMockFn = jest.fn();
 
 const reduxRender = (ui: ReactElement, customStore: Store<any, AnyAction> = store ) => {
 
-    const Wrapper: FunctionComponent = ({ children }) => {
+    function Wrapper ({ children }: PropsWithChildren<{}>) : JSX.Element {
         return (
             <Provider store={customStore}>
                 <FplBaseDataContext.Provider value={{overview: overview, fixtures: fixtures, fixtureLists: fixtureDifficultyList as FixturesMap, TeamFixtureDifficultyView: null as React.ReactNode}}>

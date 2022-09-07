@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters";
-import { cornerRadius, mediumFont } from "../../../Global/GlobalConstants";
+import { cornerRadius, mediumFont, semiBoldFont } from "../../../Global/GlobalConstants";
 
 export const TeamSwitchStyles = (theme: Theme) => StyleSheet.create({
     container: {
@@ -59,9 +59,9 @@ export const TeamSwitchStyles = (theme: Theme) => StyleSheet.create({
         paddingRight: moderateScale(5, 0.3),
         flex: 1,
         textAlign: 'center',
-        fontWeight: '700',
         color: theme.colors.text,
         fontSize: mediumFont * 1.1,
         alignSelf: 'center',
+        fontFamily: semiBoldFont,
     },
 });

@@ -87,7 +87,7 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                     <SearchControl placeHolderText="Search" value={playerTableFilterState.playerSearchText} onChangeTextFunction={text => playerTableFilterDispatch({type: 'PlayerSearchTextChange', filterValue: text})}/>
                     
                     <TouchableOpacity style={styles.closeButtonContainer} onPress={closePlayerSearch}>
-                        <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor }}>  Close</Text>
+                        <Text style={{ alignSelf: 'center', color: GlobalConstants.textPrimaryColor, fontFamily: GlobalConstants.defaultFont, fontSize: GlobalConstants.mediumFont }}>  Close</Text>
                     </TouchableOpacity>
                 </View>
                 
@@ -126,8 +126,8 @@ const PlayerTable = React.memo(({overview, fixtures}: PlayerTableProps) => {
                 </View>
             </View>
 
-            <View style={{ flex: 11}}>
-                <PlayerListContainer overview={overview} fixtures={fixtures} filters={playerTableFilterState}/>
+            <View style={{ flex: 1}}>
+                <PlayerListContainer overview={overview} filters={playerTableFilterState}/>
             </View>
         </View>
 

@@ -1,8 +1,8 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import React from "react";
 import { View, TextInput, Image, StyleSheet } from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { cornerRadius, textSecondaryColor, mediumFont } from "../../../Global/GlobalConstants";
+import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { cornerRadius, textSecondaryColor, mediumFont, defaultFont, smallFont } from "../../../Global/GlobalConstants";
 import { Icons } from "../../../Global/Images";
 
 interface SearchControlProps {
@@ -36,19 +36,23 @@ export default SearchControl;
 const SearchControlStyles = (theme: Theme) => StyleSheet.create({
     searchBoxContainer: {
         flex: 9,
-        fontSize: mediumFont,
         backgroundColor: theme.colors.background,
         flexDirection: 'row',
         borderRadius: cornerRadius,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: moderateScale(11, 0.1),      
+        paddingLeft: moderateScale(11, 0.1),
+        paddingRight: moderateScale(11, 0.1),
+        paddingTop: moderateVerticalScale(6, 1.5),
+        paddingBottom: moderateVerticalScale(6, 1.5),      
     },
 
     searchbox: {
         flex: 1,
         alignSelf: 'center',
         color: theme.colors.text,
+        fontFamily: defaultFont,
+        fontSize: mediumFont
     },
 
     shadow: {

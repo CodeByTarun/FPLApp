@@ -91,9 +91,7 @@ const PlayerComparisonModal = () => {
         dispatch(changeFilterView(<FilterView statsFilterState={statsFilterState} statsFilterDispatch={statsFilterDispatch} liveGameweek={liveGameweek}/>));
         navigator.navigate('FilterModal');
     }
-
-    console.log(playersToCompare);
-
+    
     return (
         <ModalWrapper modalHeight={'80%'} modalWidth={moderateScale(300, 0.8)}>
             <View style={styles.container}>

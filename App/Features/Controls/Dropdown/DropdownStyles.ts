@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters";
-import { textSecondaryColor, mediumFont, textPrimaryColor, largeFont, redColor, cornerRadius, height, lightColor, aLittleLighterColor, secondaryColor, primaryColor, width } from "../../../Global/GlobalConstants";
+import { textSecondaryColor, mediumFont, textPrimaryColor, largeFont, redColor, cornerRadius, height, lightColor, aLittleLighterColor, secondaryColor, primaryColor, width, defaultFont } from "../../../Global/GlobalConstants";
 
 export const DropDownStyles = (theme: Theme) => StyleSheet.create({
     container: {
@@ -27,6 +27,7 @@ export const DropDownStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.border, 
         fontSize: mediumFont * 0.75,
         paddingLeft: scale(1),
+        fontFamily: defaultFont,
     },
 
     selectedValueText: {
@@ -35,6 +36,7 @@ export const DropDownStyles = (theme: Theme) => StyleSheet.create({
         marginRight: moderateScale(5),
         alignSelf: 'center',
         flex: 1,
+        fontFamily: defaultFont,
     },
 
     modal: {

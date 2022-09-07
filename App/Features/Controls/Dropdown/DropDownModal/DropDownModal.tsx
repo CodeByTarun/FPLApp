@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 import { RootStackParams } from "../../../../../App";
-import { largeFont, mediumFont, redColor } from "../../../../Global/GlobalConstants";
+import { defaultFont, largeFont, mediumFont, redColor } from "../../../../Global/GlobalConstants";
 import AnimatedButton from "../../AnimatedButton/AnimatedButton";
 
 interface DropDownModalProps {
@@ -76,6 +76,7 @@ const DropDownModalStyles = (theme: Theme) => StyleSheet.create({
         alignSelf: 'center',
         fontSize: largeFont,
         fontWeight: 'bold',
+        fontFamily: defaultFont,
     },
 
     flatList: {
@@ -97,6 +98,7 @@ const DropDownModalStyles = (theme: Theme) => StyleSheet.create({
         paddingBottom: moderateVerticalScale(15),
         paddingTop: moderateVerticalScale(15),
         paddingLeft: moderateScale(5),
+        fontFamily: defaultFont,
     },
 
     clearButton: {

@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateVerticalScale, verticalScale } from "react-native-size-matters";
-import { largeFont, mediumFont } from "../../../Global/GlobalConstants";
+import { defaultFont, largeFont, mediumFont, semiBoldFont } from "../../../Global/GlobalConstants";
 
 export const AddPlayerModalStyles = (theme: Theme) => StyleSheet.create({
 
@@ -19,7 +19,7 @@ export const AddPlayerModalStyles = (theme: Theme) => StyleSheet.create({
     titleText: {
         fontSize: largeFont * 1.2,
         color: theme.colors.text, 
-        fontWeight: '600',
+        fontFamily: semiBoldFont,
         textAlign: 'center',
         paddingBottom: moderateVerticalScale(20),
         paddingTop: moderateVerticalScale(10),
@@ -38,6 +38,7 @@ export const AddPlayerModalStyles = (theme: Theme) => StyleSheet.create({
     playerText: {
         color: theme.colors.notification,
         fontSize: mediumFont,
+        fontFamily: defaultFont,
     }
 
 });

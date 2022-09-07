@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { cornerRadius, height, largeFont, lightColor, mediumFont, primaryColor, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../../../Global/GlobalConstants";
+import { cornerRadius, defaultFont, height, largeFont, lightColor, mediumFont, primaryColor, semiBoldFont, smallFont, textPrimaryColor, textSecondaryColor, width } from "../../../../Global/GlobalConstants";
 
 export const ManagerInfoCardStyles = (theme: Theme) => StyleSheet.create({
     container: {
@@ -37,16 +37,15 @@ export const ManagerInfoCardStyles = (theme: Theme) => StyleSheet.create({
     statText: {
         color: theme.colors.text, 
         alignSelf: 'center', 
-        fontWeight: '600',
         fontSize: largeFont * 0.95,
-
+        fontFamily: semiBoldFont,
     },
 
     rankText: {
         color: theme.colors.text, 
         alignSelf: 'center', 
-        fontWeight: '600',
-        fontSize: mediumFont
+        fontSize: mediumFont,
+        fontFamily: semiBoldFont,
     },
     
     dotsContainer: {
@@ -59,8 +58,8 @@ export const ManagerInfoCardStyles = (theme: Theme) => StyleSheet.create({
     text: {
         fontSize: smallFont,
         color: theme.colors.notification,
-        fontWeight: '500',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontFamily: semiBoldFont,
     },
 
     activeIndex: {

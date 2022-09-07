@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { smallFont, textSecondaryColor } from "../../../Global/GlobalConstants";
+import { defaultFont, semiBoldFont, smallFont, textSecondaryColor } from "../../../Global/GlobalConstants";
 
 export const FixtureDifficultyDisplayStyles = (theme: Theme) => StyleSheet.create({
 
@@ -18,7 +18,7 @@ export const FixtureDifficultyDisplayStyles = (theme: Theme) => StyleSheet.creat
         flex: 1,
         textAlign:'center',
         color: theme.colors.notification, 
-        fontWeight: '600'
+        fontFamily: semiBoldFont,
     },
 
     fixtureDifficultyContainer: {
@@ -33,9 +33,9 @@ export const FixtureDifficultyDisplayStyles = (theme: Theme) => StyleSheet.creat
     fixtureViewText: {
         fontSize: moderateScale(7.5, 0.4), 
         color: 'black', 
-        fontWeight: '400', 
         alignSelf: 'center',
         flex: 1,
-        textAlign:'center'
+        textAlign:'center',
+        fontFamily: defaultFont,
     },
 });

@@ -1,6 +1,6 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
-import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
+import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
 
 export const PLayerTableStyles = (theme: Theme) => StyleSheet.create({ 
     //#region player table
@@ -18,7 +18,7 @@ export const PLayerTableStyles = (theme: Theme) => StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: moderateScale(5)
+        paddingLeft: moderateScale(5),
     },
 
     closeButtonContainer: {

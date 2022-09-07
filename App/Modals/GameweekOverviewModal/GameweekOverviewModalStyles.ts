@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateVerticalScale, moderateScale } from "react-native-size-matters";
-import { largeFont, textPrimaryColor, mediumFont, textSecondaryColor, width, secondaryColor, cornerRadius, height, primaryColor } from "../../Global/GlobalConstants";
+import { largeFont, textPrimaryColor, mediumFont, textSecondaryColor, width, secondaryColor, cornerRadius, height, primaryColor, semiBoldFont, defaultFont } from "../../Global/GlobalConstants";
 
 export const GameweekOverviewModalStyles = (theme: Theme) => StyleSheet.create({
 
@@ -16,7 +16,7 @@ export const GameweekOverviewModalStyles = (theme: Theme) => StyleSheet.create({
     titleText: {
         fontSize: largeFont * 1.1,
         color: theme.colors.text,
-        fontWeight: '600',
+        fontFamily: semiBoldFont,
         alignSelf: 'center',
         padding: 15,
         paddingTop: 20,
@@ -30,8 +30,8 @@ export const GameweekOverviewModalStyles = (theme: Theme) => StyleSheet.create({
     },
 
     sliderContainer: {
-        height: moderateVerticalScale(30, 0.2),
-        width: moderateScale(175, 0.2),
+        height: moderateVerticalScale(35, 0.2),
+        width: moderateScale(200, 0.2),
         alignSelf: 'center',
         backgroundColor: theme.colors.background,
         borderRadius: cornerRadius,
@@ -50,6 +50,7 @@ export const GameweekOverviewModalStyles = (theme: Theme) => StyleSheet.create({
         color: theme.colors.text,
         zIndex: 1,
         elevation: 10,
+        fontFamily: defaultFont,
     },
 
     slider: {

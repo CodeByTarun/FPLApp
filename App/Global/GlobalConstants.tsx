@@ -43,6 +43,9 @@ export const smallFont = moderateScale(8, 0.65) - moderateVerticalScale(0.1, 50)
 export const mediumFont = moderateScale(11, 0.65) - moderateVerticalScale(0.1, 50);
 export const largeFont = moderateScale(16, 0.65) - moderateVerticalScale(0.1, 50);
 
+export const defaultFont = 'SFNSText';
+export const boldFont = 'SFNSTextBold';
+export const semiBoldFont = 'SFNSTextSemiBold';
 
 export const Per90Stats = ["Total Points", "Goals Scored", "Assists", 
                             "Clean Sheets", "Goals Conceded", "Own Goals",

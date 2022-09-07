@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateVerticalScale } from "react-native-size-matters";
-import { smallFont, mediumFont, largeFont } from "../../Global/GlobalConstants";
+import { smallFont, mediumFont, largeFont, semiBoldFont, defaultFont } from "../../Global/GlobalConstants";
 
 
 export const StandingsStyles = (theme: Theme) => StyleSheet.create({
@@ -9,7 +9,7 @@ export const StandingsStyles = (theme: Theme) => StyleSheet.create({
     titleText:{
         textAlign: 'center', 
         color: theme.colors.text, 
-        fontWeight: '700', 
+        fontFamily: semiBoldFont,
         marginBottom: moderateVerticalScale(25), 
         marginTop: moderateVerticalScale(15), 
         fontSize: largeFont
@@ -20,14 +20,15 @@ export const StandingsStyles = (theme: Theme) => StyleSheet.create({
         fontSize: smallFont * 1.3,
         alignSelf: 'center',
         textAlign: 'center',
-        fontWeight: '600'
+        fontFamily: semiBoldFont,
     },
 
     leagueText: {
         color: theme.colors.text,
         fontSize: smallFont * 1.3,
         alignSelf: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: defaultFont,
     },
 
     standingsButtonContainer: {
@@ -42,7 +43,7 @@ export const StandingsStyles = (theme: Theme) => StyleSheet.create({
         flex: 1, 
         color: theme.colors.text,
         fontSize: smallFont * 1.4, 
-        fontWeight: '600'
+        fontFamily: semiBoldFont,
     },
 
     managerNameText: {
@@ -50,12 +51,13 @@ export const StandingsStyles = (theme: Theme) => StyleSheet.create({
         flex: 1, 
         color: theme.colors.notification, 
         fontSize: smallFont * 1.1,
+        fontFamily: defaultFont,
     },
 
     backButtonText:{ 
         color: theme.colors.notification,
         fontSize: mediumFont,
-        fontWeight: '700', 
+        fontFamily: semiBoldFont,
         textAlign: 'center'
     },
     

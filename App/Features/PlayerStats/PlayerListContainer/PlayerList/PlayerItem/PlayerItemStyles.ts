@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateVerticalScale, moderateScale, verticalScale } from "react-native-size-matters";
-import { mediumFont } from "../../../../../Global/GlobalConstants";
+import { defaultFont, mediumFont } from "../../../../../Global/GlobalConstants";
 
 export const PlayerItemStyles = (theme: Theme) => StyleSheet.create({
 
@@ -40,6 +40,7 @@ export const PlayerItemStyles = (theme: Theme) => StyleSheet.create({
     tableText: {
         color: theme.colors.text,
         fontSize: mediumFont * 0.95,
+        fontFamily: defaultFont,
     },
 
 });

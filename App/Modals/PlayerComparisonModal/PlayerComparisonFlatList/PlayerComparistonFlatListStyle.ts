@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale } from "react-native-size-matters";
-import { mediumFont } from "../../../Global/GlobalConstants";
+import { defaultFont, mediumFont } from "../../../Global/GlobalConstants";
 
 export const PlayerComparisonFlatListStyle = (theme: Theme) => StyleSheet.create({
     
@@ -43,6 +43,7 @@ export const PlayerComparisonFlatListStyle = (theme: Theme) => StyleSheet.create
         color: theme.colors.text,
         padding: moderateScale(5, 0.3),
         fontSize: mediumFont,
+        fontFamily: defaultFont,
     },
 
     playerHeadersContainer: {
@@ -55,7 +56,8 @@ export const PlayerComparisonFlatListStyle = (theme: Theme) => StyleSheet.create
     playerHeaderText: {
         color: theme.colors.text,
         padding: moderateScale(3, 0.3),
-        fontSize: mediumFont
+        fontSize: mediumFont,
+        fontFamily: defaultFont,
     }
 
 });

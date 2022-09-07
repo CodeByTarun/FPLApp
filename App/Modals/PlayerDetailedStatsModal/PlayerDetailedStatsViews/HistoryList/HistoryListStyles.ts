@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { mediumFont, cornerRadius } from "../../../../Global/GlobalConstants";
+import { mediumFont, cornerRadius, defaultFont } from "../../../../Global/GlobalConstants";
 
 export const HistoryListStyles = (theme: Theme) => StyleSheet.create({
 
@@ -25,7 +25,7 @@ export const HistoryListStyles = (theme: Theme) => StyleSheet.create({
     headerText: {
         color: theme.colors.text,
         fontSize: mediumFont * 0.9,
-        fontWeight: '500',
+        fontFamily: defaultFont,
         alignSelf: 'center',
     },
 

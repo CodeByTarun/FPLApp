@@ -13,7 +13,7 @@ test('enabled button press triggers button function', async () => {
     fireEvent.press((getByTestId('animatedButton')));
     expect(getByTestId('animatedButton')).toBeDisabled();
     await waitFor(() => expect(mockFn).toHaveBeenCalledTimes(1));
-    expect(getByTestId('animatedButton')).toBeEnabled();    
+    await waitFor(() => expect(getByTestId('animatedButton')).toBeEnabled());    
 
 });
 

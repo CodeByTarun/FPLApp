@@ -8,7 +8,7 @@ import { FplBaseDataContext } from "../../../AppContext";
 import { AnimatedButton } from "../../../Features/Controls";
 import PlayerListInfo from "../../../Features/PlayerStats/PlayerListContainer/PlayerList/PlayerListInfo";
 import { Separator } from "../../../Global/GlobalComponents";
-import { cornerRadius, mediumFont, largeFont } from "../../../Global/GlobalConstants";
+import { cornerRadius, mediumFont, largeFont, semiBoldFont, defaultFont } from "../../../Global/GlobalConstants";
 import globalStyles from "../../../Global/GlobalStyles";
 import UserTeamInfo from "../../../Helpers/FplDataStorageService";
 import { Event, PlayerOverview } from "../../../Models/FplOverview";
@@ -137,7 +137,7 @@ const GameweekSummaryStyles = (theme: Theme) => StyleSheet.create({
     headerText: {
         fontSize: mediumFont * 0.9,
         color: theme.colors.border,
-        fontWeight: '600',
+        fontFamily: semiBoldFont,
         alignSelf: 'center',
         textAlign: 'center'
     },
@@ -146,7 +146,7 @@ const GameweekSummaryStyles = (theme: Theme) => StyleSheet.create({
         fontSize: largeFont,
         color: theme.colors.text,
         paddingTop: moderateVerticalScale(3),
-        fontWeight: '500', 
+        fontFamily: defaultFont,
         alignSelf: 'center',
         textAlign: 'center',
         marginBottom: -moderateVerticalScale(2),
@@ -171,8 +171,9 @@ const GameweekSummaryStyles = (theme: Theme) => StyleSheet.create({
     playerItemText: {
         flex: 1,
         alignSelf: 'center',
-        fontSize: mediumFont * 1.05,
+        fontSize: mediumFont,
         color: theme.colors.text,
+        fontFamily: defaultFont,
     },
 
     playerInfoContainer: {

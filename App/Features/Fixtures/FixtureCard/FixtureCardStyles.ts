@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { width, cornerRadius, smallFont, mediumFont, FIXTURE_CARD_HEIGHT } from "../../../Global/GlobalConstants";
+import { width, cornerRadius, smallFont, mediumFont, FIXTURE_CARD_HEIGHT, defaultFont } from "../../../Global/GlobalConstants";
 // width: moderateScale(width / 3, -0.217) + moderateVerticalScale(0.5, 50),
 export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
     //#region main layout
@@ -33,9 +33,9 @@ export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
         fontSize: smallFont * 1.1,
         alignSelf: 'center',
         color: theme.colors.notification,
-        fontWeight: '500',
         flex: 1,
         textAlign: 'center',
+        fontFamily: defaultFont,
     },
 
     //#endregion
@@ -60,6 +60,7 @@ export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
         alignSelf: 'center',
         margin: moderateVerticalScale(2),
         color: theme.colors.text,
+        fontFamily: defaultFont,
     },
 
     timeText: {
@@ -69,12 +70,14 @@ export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
         color: 'red',
         fontWeight: "bold",
         marginLeft: moderateScale(2),
+        fontFamily: defaultFont,
     },
 
     fullTimeText: {
         fontSize: mediumFont * 0.8,
         alignSelf: 'center',
         color: theme.colors.border,
+        fontFamily: defaultFont,
     }
     //#endregion
 });

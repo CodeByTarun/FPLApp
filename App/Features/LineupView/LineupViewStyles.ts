@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { primaryColor, textPrimaryColor, width, smallFont, cornerRadius, height, secondaryColor, largeFont, mediumFont } from "../../Global/GlobalConstants";
+import { primaryColor, textPrimaryColor, width, smallFont, cornerRadius, height, secondaryColor, largeFont, mediumFont, defaultFont, semiBoldFont } from "../../Global/GlobalConstants";
 
 export const LineupViewStyles = (theme: Theme) => StyleSheet.create({
 
@@ -42,8 +42,8 @@ export const LineupViewStyles = (theme: Theme) => StyleSheet.create({
     idText: {
         color: theme.colors.notification,
         fontSize: mediumFont,
-        fontWeight: '500',
         padding: 1,
+        fontFamily: defaultFont,
     },
 
     lineupHeaderContainer: {
@@ -63,7 +63,7 @@ export const LineupViewStyles = (theme: Theme) => StyleSheet.create({
         alignSelf: 'center',
         color: theme.colors.text,
         fontSize: mediumFont*1.3,
-        fontWeight: 'bold'
+        fontFamily: semiBoldFont,
     },
 
     button: {

@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { cornerRadius, largeFont, mediumFont } from "../../Global/GlobalConstants";
+import { cornerRadius, defaultFont, largeFont, mediumFont, semiBoldFont } from "../../Global/GlobalConstants";
 
 export const PlayerComparisonModalStyles = (theme: Theme) => StyleSheet.create({
     
@@ -17,7 +17,7 @@ export const PlayerComparisonModalStyles = (theme: Theme) => StyleSheet.create({
     titleText: {
         fontSize: largeFont * 1.2,
         color: theme.colors.text, 
-        fontWeight: '600',
+        fontFamily: semiBoldFont,
         textAlign: 'center',
         paddingBottom: moderateVerticalScale(15),
         paddingTop: moderateVerticalScale(10)
@@ -26,7 +26,7 @@ export const PlayerComparisonModalStyles = (theme: Theme) => StyleSheet.create({
     text: {
         color: theme.colors.text,
         fontSize: mediumFont * 0.9,
-        fontWeight: '500',
+        fontFamily: defaultFont,
     },
 
     controlsOuterContainers: {
@@ -69,8 +69,8 @@ export const PlayerComparisonModalStyles = (theme: Theme) => StyleSheet.create({
     controlText: {
         textAlign: 'center',
         color: theme.colors.notification,
-        fontWeight: '600',
         fontSize: mediumFont * 0.9,
+        fontFamily: semiBoldFont,
     },
 
     editButtonContainer: {
@@ -105,8 +105,8 @@ export const PlayerComparisonModalStyles = (theme: Theme) => StyleSheet.create({
 
     buttonText: {
         color: theme.colors.text,
-        fontWeight: '500',
         fontSize: mediumFont,
+        fontFamily: defaultFont,
     },
 
     searchBox: {
