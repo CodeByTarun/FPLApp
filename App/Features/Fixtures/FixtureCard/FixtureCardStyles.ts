@@ -15,7 +15,7 @@ export const FixtureCardStyles = (theme: Theme) => StyleSheet.create({
         height: '100%',
         flexDirection: 'column',
         borderRadius: cornerRadius,
-        paddingTop: moderateVerticalScale(5),
+        paddingTop: moderateVerticalScale(8, -0.4),
         paddingBottom: moderateVerticalScale(3),
         backgroundColor: theme.colors.card
     },

@@ -43,8 +43,8 @@ const SearchControlStyles = (theme: Theme) => StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: moderateScale(11, 0.1),
         paddingRight: moderateScale(11, 0.1),
-        paddingTop: moderateVerticalScale(6, 1.5),
-        paddingBottom: moderateVerticalScale(6, 1.5),      
+        paddingTop: moderateVerticalScale(11, 0.1),
+        paddingBottom: moderateVerticalScale(11, 0.1),      
     },
 
     searchbox: {
