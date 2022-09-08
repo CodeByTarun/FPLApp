@@ -140,7 +140,7 @@ const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterSta
                     <ScrollView horizontal>
 
                             { 
-                                Object.keys(gameweekStats).map(key => <StatColumn key={key} header={gameweekStats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={viewIndex}
+                                Object.keys(gameweekStats).map(key => <StatColumn key={key} header={gameweekStats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={0}
                                                                                 playerList={playerList} playerDataHeight={playerDataHeight} playerMinutesArray={playerMinutesArray}/>)
                             }
 
@@ -151,7 +151,7 @@ const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterSta
                 <AnimatedView style={{height: '100%', position: 'absolute', left: viewSpring.statView, width: '100%'}}>
                     <ScrollView horizontal>
                             {  
-                                Object.keys(stats).map(key => <StatColumn key={key} header={stats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={viewIndex}
+                                Object.keys(stats).map(key => <StatColumn key={key} header={stats[key]} statName={key} statsFilterState={statsFilterState} viewIndex={1}
                                                                         playerList={playerList} playerDataHeight={playerDataHeight} playerMinutesArray={playerMinutesArray}/>)
                             }
                     </ScrollView>
