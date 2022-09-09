@@ -76,6 +76,13 @@ Finally, in the top right is a cog which opens settings where you can change the
     <img src="/readmeImages/dreamteam.PNG" width="30%"/>
   </body>
 </body>
+
+<p align="center">
+  <img alt="Light" src="/readmeImages/dreamteam.PNG" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="Dark" src="/readmeImages/darktheme.PNG" width="45%">
+</p>
+
    
 ## Roadmap
 
