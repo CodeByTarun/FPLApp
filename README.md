@@ -69,16 +69,18 @@ Through the bottom navigation bar, you can view the dream team for the gameweek 
 Selecting a player will open a detailed view of there stats for the year and the history of the player as well. You can filter there stats for different gameweek spans and see there per 90 numbers as well. If you press the button on the left side of the view toggle button it will open a player comparison popup where you can add up to five players to compare their stats. You can compare these players during certain game spans and there per 90 numbers as well.
 
 <p align="center">
-  <img alt="playerstats" src="/readmeImages/playerstats.PNG" width="25%">
+  <img alt="playerstats" src="/readmeImages/playerstats.PNG" width="20%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="detailedstats" src="/readmeImages/playerdetailedstats.PNG" width="25%">
+  <img alt="playerstats" src="/readmeImages/playerstatsfilter.PNG" width="20%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="detailedstats" src="/readmeImages/playerdetailedstats.PNG" width="20%">
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="history" src="/readmeImages/history.PNG" width="25%">
+  <img alt="history" src="/readmeImages/history.PNG" width="20%">
 </p>
 
 The last button on the bottom bar opens a team modal for you to manage your teams. You can add, remove, edit, and choose a new default team on start up here.
 
-Finally, in the top right is a cog which opens settings where you can change the theme of the app and also has a credits tab which credits the FPL api and icon sources.
+Finally, in the top right is a cog which opens settings where you can change the theme of the app and also has a credits tab, crediting the FPL api and icon sources.
 
 <p align="center">
   <img alt="Light" src="/readmeImages/dreamteam.PNG" width="25%">
