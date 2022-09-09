@@ -28,7 +28,7 @@
 
 ## About The Project
 <p align="center">
-  <img alt="Dark" src="/readmeImages/dreamteam.PNG" width="33%">
+  <img alt="intro" src="/readmeImages/dreamteam.PNG" width="33%">
 </p>
 
 This project was made as a quicker way for someone to view their FPL (fantasy premier league) teams and see how players are doing for any fixture in any gameweek. The application uses data from the fantasy premier league API. It also features live updates for fixtures and player scores. This was a great project to learn about the React Native framework, Expo, Typescript, React-Spring, Redux, React Navigation, Jest and the React Testing Library. A detailed explanation of how to use this mobile application is in the [Usage](https://github.com/CodeByTarun/FPLApp/blob/master/README.md#usage) section below.
@@ -67,6 +67,15 @@ When viewing your team, there are two cards at the top that show if you are view
 Through the bottom navigation bar, you can view the dream team for the gameweek you are viewing, overview which will open a popup where you can see some info about the gameweek you are on as well as fixture difficulty ratings for every team sorted by average difficulty over the next 4 fixtures. The gameweek button expands the fixtures scrollview for easier viewing of all fixtures. The players button will open a player table where you can see various stats for players, filter players by price range, minutes played, team, and position. You can also check per 90 values for applicable stats and watchlist players.
 
 Selecting a player will open a detailed view of there stats for the year and the history of the player as well. You can filter there stats for different gameweek spans and see there per 90 numbers as well. If you press the button on the left side of the view toggle button it will open a player comparison popup where you can add up to five players to compare their stats. You can compare these players during certain game spans and there per 90 numbers as well.
+
+<p align="center">
+  <img alt="playerstats" src="/readmeImages/playerstats.PNG" width="25%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="detailedstats" src="/readmeImages/playerdetailedstats.PNG" width="25%">
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="history" src="/readmeImages/playerdetailedstats.PNG" width="25%">
+</p>
+
 The last button on the bottom bar opens a team modal for you to manage your teams. You can add, remove, edit, and choose a new default team on start up here.
 
 Finally, in the top right is a cog which opens settings where you can change the theme of the app and also has a credits tab which credits the FPL api and icon sources.
