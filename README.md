@@ -73,7 +73,7 @@ Selecting a player will open a detailed view of there stats for the year and the
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img alt="detailedstats" src="/readmeImages/playerdetailedstats.PNG" width="25%">
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="history" src="/readmeImages/playerdetailedstats.PNG" width="25%">
+  <img alt="history" src="/readmeImages/history.PNG" width="25%">
 </p>
 
 The last button on the bottom bar opens a team modal for you to manage your teams. You can add, remove, edit, and choose a new default team on start up here.
