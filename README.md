@@ -71,14 +71,30 @@ Selecting a player will open a detailed view of there stats for the year and the
 <p align="center">
   <img alt="playerstats" src="/readmeImages/playerstats.PNG" width="20%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="playerstats" src="/readmeImages/playerstatsfilter.PNG" width="20%">
+  <img alt="playerstatsfilter" src="/readmeImages/playerstatsfilter.PNG" width="20%">
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img alt="detailedstats" src="/readmeImages/playerdetailedstats.PNG" width="20%">
   &nbsp; &nbsp; &nbsp; &nbsp;
   <img alt="history" src="/readmeImages/history.PNG" width="20%">
 </p>
 
+<p align="center">
+  <img alt="playercomparison" src="/readmeImages/playercomparison.PNG" width="20%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="playercomparisonstats" src="/readmeImages/playercomparisonstats.PNG" width="20%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="playercomparisonfdr" src="/readmeImages/playercomparisonfdr.PNG" width="20%">
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="addplayer" src="/readmeImages/addplayer.PNG" width="20%">
+</p>
+
 The last button on the bottom bar opens a team modal for you to manage your teams. You can add, remove, edit, and choose a new default team on start up here.
+
+<p align="center">
+  <img alt="teammodal" src="/readmeImages/teammodal.PNG" width="25%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="addteam" src="/readmeImages/addteam.PNG" width="25%">
+</p>
 
 Finally, in the top right is a cog which opens settings where you can change the theme of the app and also has a credits tab, crediting the FPL api and icon sources.
 
