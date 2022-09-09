@@ -68,8 +68,15 @@ The last button on the bottom bar opens a team modal for you to manage your team
 
 Finally, in the top right is a cog which opens settings where you can change the theme of the app and also has a credits tab which credits the FPL api and icon sources.
 
-<img src="/readmeImages/darktheme.PNG" width="30%"/><img src="/readmeImages/dreamteam.PNG" width="30%"/>
-
+<body width='100%'>
+   <body width='50%' align-items='center' justify-content='center'>
+    <img src="/readmeImages/darktheme.PNG" width="30%"/>
+  </body>
+   <body width='50%' align-items='center' justify-content='center'>
+    <img src="/readmeImages/dreamteam.PNG" width="30%"/>
+  </body>
+</body>
+   
 ## Roadmap
 
 See the [open issues](https://github.com/TarunBola/FPLApp/issues) for a list of proposed features (and known issues).
