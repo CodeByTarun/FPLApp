@@ -68,6 +68,7 @@ The last button on the bottom bar opens a team modal for you to manage your team
 
 Finally, in the top right is a cog which opens settings where you can change the theme of the app and also has a credits tab which credits the FPL api and icon sources.
 
+<img src="/readmeImages/darktheme.PNG"/><img src="/readmeImages/dreamteam.PNG"/>
 
 ## Roadmap
 
