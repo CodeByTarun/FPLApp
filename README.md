@@ -74,7 +74,7 @@ Once your team has been added it will be set as your favourite team and will be 
   <img alt="standings" src="/readmeImages/standings.PNG" width="25%">
 </p>
 
-When viewing your team, there are two cards at the top that show if you are viewing the current gameweek. Press the right one to view additional info such as expected points, cost, form, selection percentage, and upcoming fixtures. The left one shows point totals, transaction totals, rank, and squad cost for budget teams.
+When viewing your team, there are two cards at the top that show if you are viewing the current gameweek. Press the left one to view additional info such as expected points, cost, form, selection percentage, and upcoming fixtures. The right one shows point totals, transaction totals, rank, and squad cost for budget teams.
 
 <p align="center">
   <img alt="teamcost" src="/readmeImages/teamcost.PNG" width="25%">
