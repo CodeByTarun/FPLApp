@@ -4,6 +4,14 @@
   <p align="center">Live updated fantasy premier league viewer for your teams, fixtures, dream teams and viewing player stats.</p>
 </p>
 
+<p align="center">
+  <img alt="budgetteam" src="/readmeImages/budgetteam.PNG" width="30%">
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="fixture" src="/readmeImages/fixture.PNG" width="30%">
+   &nbsp; &nbsp; &nbsp; &nbsp;
+  <img alt="dreamteam" src="/readmeImages/dreamteam.PNG" width="30%">
+</p>
+
 <!-- Table of Contents -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -27,13 +35,6 @@
 </details>
 
 ## About The Project
-<p align="center">
-  <img alt="budgetteam" src="/readmeImages/budgetteam.PNG" width="30%">
-  &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="fixture" src="/readmeImages/fixture.PNG" width="30%">
-   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="dreamteam" src="/readmeImages/dreamteam.PNG" width="30%">
-</p>
 
 This project was made as a quicker way for someone to view their FPL (fantasy premier league) teams and see how players are doing for any fixture in any gameweek. The application uses data from the fantasy premier league API. It also features live updates for fixtures and player scores. This was a great project to learn about the React Native framework, Expo, Typescript, React-Spring, Redux, React Navigation, Jest and the React Testing Library. A detailed explanation of how to use this mobile application is in the [Usage](https://github.com/CodeByTarun/FPLApp/blob/master/README.md#usage) section below.
 
