@@ -51,7 +51,7 @@ This project utilized functional components, react native hooks and the redux de
 
 ## Getting Started
 
-To use this application you must install it via Xcode for iPhones or download the apk file provided for the android build.
+To use this application you must install it via Xcode for iPhones or download the apk file provided for Android.
 
 Android APK: https://drive.google.com/file/d/1vZzS7Cwq4WA11SWRGeZhBkBHBEnRW1v8/view?usp=sharing
 
