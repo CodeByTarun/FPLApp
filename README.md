@@ -67,32 +67,32 @@ When on the points tab on the browser, the URL will contain your team ID: https:
 Once your team has been added it will be set as your favourite team and will be displayed initially whenever the app is opened. If you click on your team’s name, the standings will open for draft leagues and a list of leagues will open for budget leagues. You can navigate to any league and click on any team to view how they are doing. Other teams you are viewing can be added to your team list by using the team ID which is displayed to the right of the team name.
 
 <p align="center">
-  <img alt="budgetteam" src="/readmeImages/budgetteam.PNG" width="20%">
+  <img alt="budgetteam" src="/readmeImages/budgetteam.PNG" width="25%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="leaguelist" src="/readmeImages/leaguelist.PNG" width="20%">
+  <img alt="leaguelist" src="/readmeImages/leaguelist.PNG" width="25%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="standings" src="/readmeImages/standings.PNG" width="20%">
+  <img alt="standings" src="/readmeImages/standings.PNG" width="25%">
 </p>
 
 When viewing your team, there are two cards at the top that show if you are viewing the current gameweek. Press the right one to view additional info such as expected points, cost, form, selection percentage, and upcoming fixtures. The left one shows point totals, transaction totals, rank, and squad cost for budget teams.
 
 <p align="center">
-  <img alt="teamcost" src="/readmeImages/teamcost.PNG" width="20%">
+  <img alt="teamcost" src="/readmeImages/teamcost.PNG" width="25%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="teampoints" src="/readmeImages/teampoints.PNG" width="20%">
+  <img alt="teampoints" src="/readmeImages/teampoints.PNG" width="25%">
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="teamfdr" src="/readmeImages/teamfdr.PNG" width="20%">
+  <img alt="teamfdr" src="/readmeImages/teamfdr.PNG" width="25%">
 </p>
 
 
 Through the bottom navigation bar, you can view the dream team for the gameweek you are viewing, overview which will open a popup where you can see some info about the gameweek you are on as well as fixture difficulty ratings for every team sorted by average difficulty over the next 4 fixtures. The gameweek button expands the fixtures scrollview for easier viewing of all fixtures. 
 
 <p align="center">
-  <img alt="overview-gameweek" src="/readmeImages/overview-gameweek.PNG" width="20%">
+  <img alt="overview-gameweek" src="/readmeImages/overview-gameweek.PNG" width="30%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="overview-tfdr" src="/readmeImages/overview-tfdr.PNG" width="20%">
+  <img alt="overview-tfdr" src="/readmeImages/overview-tfdr.PNG" width="30%">
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="fixtures" src="/readmeImages/fixtures.PNG" width="20%">
+  <img alt="fixtures" src="/readmeImages/fixtures.PNG" width="30%">
 </p>
 
 The players button will open a player table where you can see various stats for players, filter players by price range, minutes played, team, and position. You can also check per 90 values for applicable stats and watchlist players. Selecting a player will open a detailed view of there stats for the year and the history of the player as well. You can filter there stats for different gameweek spans and see there per 90 numbers as well. If you press the button on the left side of the view toggle button it will open a player comparison popup where you can add up to five players to compare their stats. You can compare these players during certain game spans and there per 90 numbers as well.
