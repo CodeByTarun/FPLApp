@@ -1,3 +1,4 @@
+import moment from "moment";
 import { PlayerTableFilterState } from "../Features/PlayerStats/PlayerTable/PlayerTableFilterReducer";
 import { OverviewStats } from "../Global/EnumsAndDicts";
 import { Per90Stats } from "../Global/GlobalConstants";
@@ -228,7 +229,7 @@ export function GetPointTotal(player: PlayerData, teamInfo: TeamInfo) {
         return GetPlayerPointsForAFixture(player, teamInfo);
     } 
     else if (teamInfo.teamType === TeamTypes.Budget) {
-        return player.gameweekData.stats.total_points * player.multiplier;
+        return (player.multiplier === 0) ? player.gameweekData.stats.total_points : player.gameweekData.stats.total_points * player.multiplier;
     }
     else {
         return player.gameweekData.stats.total_points;
@@ -412,4 +413,42 @@ export function GetMinutesValueForDetailedStatsView(playerData: FplPlayerSummary
     } else {
         return player.minutes;
     }
+}
+
+export function SortFixtures(fixture1: FplFixture, fixture2: FplFixture, dateNow: string) : number {
+  
+    if (fixture1.kickoff_time && fixture2.kickoff_time) {
+      
+      if (moment(fixture1.kickoff_time).isSame(dateNow, 'day') && !moment(fixture2.kickoff_time).isSame(dateNow, 'day')) {
+        return -1;
+      }
+      else if (moment(fixture1.kickoff_time).isAfter(dateNow, 'day') && (!moment(fixture2.kickoff_time).isAfter(dateNow, 'day') && !moment(fixture2.kickoff_time).isSame(dateNow, 'day'))) {
+          return -1;
+      }
+      else if (moment(fixture1.kickoff_time).isBefore(dateNow, 'day') && moment(fixture2.kickoff_time).isBefore(dateNow, 'day')) {
+        if (moment(fixture1.kickoff_time).isAfter(fixture2.kickoff_time, 'hour')) {
+          return -1;
+        }
+        else if (moment(fixture2.kickoff_time).isAfter(fixture1.kickoff_time, 'hour')) {
+          return 1;
+        } 
+        else {
+          return 0;
+        }
+      }
+      
+      else if (moment(fixture1.kickoff_time).isSame(dateNow, 'day') && moment(fixture2.kickoff_time).isSame(dateNow, 'day')) {
+        if (!fixture1.finished_provisional && fixture2.finished_provisional) {
+          return -1;
+        }
+        if (fixture1.finished_provisional && !fixture2.finished_provisional) {
+          return 1;
+        }
+        else if (fixture1.started && !fixture2.started) {
+          return -1;
+        }
+      }
+    }
+  
+      return 0;
 }

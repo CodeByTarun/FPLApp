@@ -12,7 +12,7 @@ import { getAllUserTeamInfo } from "../../Helpers/FplDataStorageService";
 import { FplGameweek } from "../../Models/FplGameweek";
 import globalStyles from "../../Global/GlobalStyles";
 import GameweekView from "./GameweekView";
-import { FIXTURES_VIEW_CONTROLS_HEIGHT, FIXTURES_VIEW_HEIGHT, height } from "../../Global/GlobalConstants";
+import { FIXTURES_VIEW_CONTROLS_HEIGHT, FIXTURES_VIEW_HEIGHT, height, largeFont, mediumFont, textPrimaryColor, width } from "../../Global/GlobalConstants";
 import { animated, useChain, useSpring, useSpringRef } from "@react-spring/native";
 import FixtureCardLoading from "./FixtureCardLoading";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -25,6 +25,8 @@ import { moderateScale } from "react-native-size-matters";
 import moment from "moment";
 import { timezone } from "expo-localization";
 import { notEqual } from "assert";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SortFixtures } from "../../Helpers/FplAPIHelpers";
 
 const AnimatedView = animated(View);
 const AnimatedPressable = animated(Pressable);
@@ -35,48 +37,11 @@ interface FixturesViewProp {
   gameweek: FplGameweek | undefined;
 }
 
-function SortFixtures(fixture1: FplFixture, fixture2: FplFixture, dateNow: string) : number {
-  
-  if (fixture1.kickoff_time && fixture2.kickoff_time) {
-    
-    if (moment(fixture1.kickoff_time).isSame(dateNow, 'day') && !moment(fixture2.kickoff_time).isSame(dateNow, 'day')) {
-      return -1;
-    }
-    else if (moment(fixture1.kickoff_time).isAfter(dateNow, 'day') && (!moment(fixture2.kickoff_time).isAfter(dateNow, 'day') && !moment(fixture2.kickoff_time).isSame(dateNow, 'day'))) {
-        return -1;
-    }
-    else if (moment(fixture1.kickoff_time).isBefore(dateNow, 'day') && moment(fixture2.kickoff_time).isBefore(dateNow, 'day')) {
-      if (moment(fixture1.kickoff_time).isAfter(fixture2.kickoff_time, 'hour')) {
-        return -1;
-      }
-      else if (moment(fixture2.kickoff_time).isAfter(fixture1.kickoff_time, 'hour')) {
-        return 1;
-      } 
-      else {
-        return 0;
-      }
-    }
-    
-    else if (moment(fixture1.kickoff_time).isSame(dateNow, 'day') && moment(fixture2.kickoff_time).isSame(dateNow, 'day')) {
-      if (!fixture1.finished_provisional && fixture2.finished_provisional) {
-        return -1;
-      }
-      if (fixture1.finished_provisional && !fixture2.finished_provisional) {
-        return 1;
-      }
-      else if (fixture1.started && !fixture2.started) {
-        return -1;
-      }
-    }
-  }
-
-    return 0;
-}
-
 const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
   const theme = useTheme();
   const styles = FixturesStyles(theme);
+  const insets = useSafeAreaInsets();
 
   let dateNow = new Date().toISOString();
 
@@ -88,7 +53,6 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
   const fixtureScrollViewRef = useRef<ScrollView>(null);
 
   const expandRef = useSpringRef();
-  const expandSpring = useSpring({ height: (navigation.screenType !== ScreenTypes.Fixtures) ? `${(FIXTURES_VIEW_HEIGHT/ height) * 100}%` : '100%', ref: expandRef, config: { friction: 18, mass: 0.5 }});
 
   useChain([expandRef]);
 
@@ -111,7 +75,7 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
 
       navigator.navigate('MutableModal');
     }
-  }, [teamInfo.gameweek, overview])
+  }, [teamInfo.gameweek, overview]);
 
   useEffect( function setInitialData() {
 
@@ -145,10 +109,11 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
     fixtureScrollViewRef.current?.scrollTo({ x:0, y:0, animated:true });
 
       if ((teamInfo.teamType === TeamTypes.Empty && fixtures) || (teamInfo.teamType === TeamTypes.Fixture && fixtures)) {
-        let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.filter((fixture) => { return fixture.event == teamInfo.gameweek})
+        let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.filter((fixture) => { return fixture.event === teamInfo.gameweek})
                                                                        .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2, dateNow));
+
       
-        if (sortedGameweekFixtures !== undefined) {
+        if (sortedGameweekFixtures !== undefined && sortedGameweekFixtures.length !== 0) {
             dispatch(changeToFixture(sortedGameweekFixtures[0]));                            
         }
       }
@@ -162,19 +127,8 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
       navigator.navigate('SettingsModal');
     }, [])
 
-    const onCalendarButtonPress = useCallback(() => {
-      if (navigation.screenType === ScreenTypes.Fixtures) {
-        if (teamInfo.gameweek > teamInfo.liveGameweek) {
-          dispatch(changeGameweek(teamInfo.liveGameweek));
-        }
-        setTimeout(() => dispatch(goToMainScreen()), 100)
-      } else {
-        dispatch(goToFixturesScreen());
-      } 
-    }, [navigation, teamInfo.gameweek])
-
   return (
-    <AnimatedView style={[styles.animatedView, { height: expandSpring.height }]}>
+    <AnimatedView style={[styles.animatedView, { height: `${(FIXTURES_VIEW_HEIGHT/ (height - insets.top - insets.bottom)) * 100}%` }]}>
       <View style={styles.controlsContainer}>
           <View style={{flex: 1}}/>
           <AnimatedPressable testID={'gameweekButton'} style={[styles.gameweekButton, { transform: [{ scale: gameweekButtonAnimatedStyle.scale }]}]} onPress={onGamweekButtonPress}>
@@ -190,15 +144,20 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
       <View style={styles.fixturesListContainer}>
         { (fixtures && gameweek && overview) ?
           <ScrollView ref={fixtureScrollViewRef} 
-                      horizontal={(navigation.screenType === ScreenTypes.Fixtures) ? false : true} 
+                      horizontal={true} 
                       showsHorizontalScrollIndicator={false}
                       style={styles.fixturesScrollView} 
-                      contentContainerStyle={(navigation.screenType === ScreenTypes.Fixtures) ? {flex: 1, flexDirection: 'row', flexWrap: 'wrap'} : {}}
                       testID='fixturesScrollView'>
-            { 
-              fixtures.filter((fixture) => { return fixture.event == (teamInfo.gameweek !== 0 ? teamInfo.gameweek : 1)})
-                      .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2, dateNow))
-                      .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> })     
+            { ( fixtures.filter((fixture) => { return fixture.event == (teamInfo.gameweek !== 0 ? teamInfo.gameweek : 1)}).length > 0 ) ? 
+                <>
+                  {fixtures.filter((fixture) => { return fixture.event == (teamInfo.gameweek !== 0 ? teamInfo.gameweek : 1)})
+                          .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2, dateNow))
+                          .map((fixture) => { return <FixtureCard key={fixture.code} fixture={fixture} gameweekData={gameweek} overview={overview}/> }) }
+                </>   
+               :
+              <View style={[ { alignItems: 'center', justifyContent: 'center', width: width - 5, height: '100%'}]}>
+                <Text style={{alignSelf: 'center', textAlign: 'center', color: textPrimaryColor, fontSize: mediumFont, width: '100%'}}>No fixtures this gameweek.</Text>
+              </View> 
             }
           </ScrollView> :
           <View style={[styles.fixturesScrollView, {flexDirection: 'row'}]}>
@@ -207,34 +166,6 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
             <FixtureCardLoading/>
           </View>
         }
-        { (navigation.screenType === ScreenTypes.Fixtures) && 
-          <View style={[styles.bottomBar, globalStyles.topShadow]}>
-            <View style={styles.bottomaBarSections}>
-              <AnimatedButton buttonFn={() => dispatch(changeGameweek(teamInfo.gameweek - 1))} disabled={(teamInfo.gameweek <= 1)}>
-                <View style={styles.buttonContainer}>
-                  <Text style={styles.text}>Prev</Text>
-                </View>
-              </AnimatedButton>
-            </View>
-            {VerticalSeparator(theme)}
-            <View style={styles.bottomaBarSections}>
-              <AnimatedButton buttonFn={onCalendarButtonPress}>
-                <View testID={'calendarButton'} style={styles.buttonContainer}>
-                  <Image style={styles.image} source={Icons['calendar']} resizeMode='contain'/>
-                </View>
-              </AnimatedButton>
-            </View>
-            {VerticalSeparator(theme)}
-            <View style={styles.bottomaBarSections}>
-              <AnimatedButton buttonFn={() => dispatch(changeGameweek(teamInfo.gameweek + 1))} disabled={(teamInfo.gameweek >= 38)}>
-                <View style={styles.buttonContainer}>
-                  <Text style={styles.text}>Next</Text>
-                </View>
-              </AnimatedButton>
-            </View>
-          </View>
-        }
-
       </View>
       
     </AnimatedView>

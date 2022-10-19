@@ -1,10 +1,10 @@
 // This container is necassary to switch between the two teams playing against each other and
 // for switching to your own team and maybe even other teams in your league
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Lineup from "./Lineup";
 import TeamSwitch from "./TeamSwitch/TeamSwitch";
-import { TeamInfo, TeamTypes } from "../../Store/teamSlice";
+import { changeToEmpty, TeamInfo, TeamTypes } from "../../Store/teamSlice";
 import { FplOverview } from "../../Models/FplOverview";
 import { FplFixture } from "../../Models/FplFixtures";
 import globalStyles from "../../Global/GlobalStyles";
@@ -21,7 +21,7 @@ import { FplDraftLeagueInfo } from "../../Models/FplDraftLeagueInfo";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../../../App";
-import { useAppDispatch } from "../../Store/hooks";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
 import { changeMutableView } from "../../Store/modalSlice";
 
 interface LineupViewProps {

@@ -7,7 +7,6 @@ export const LineupViewStyles = (theme: Theme) => StyleSheet.create({
 
     container: {
         flex: 1,
-        overflow: 'hidden',
         backgroundColor: theme.colors.primary
     },
 

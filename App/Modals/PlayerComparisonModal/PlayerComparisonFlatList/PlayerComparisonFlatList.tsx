@@ -6,7 +6,7 @@ import { moderateVerticalScale } from "react-native-size-matters";
 import { AnimatedButton } from "../../../Features/Controls";
 import FixtureDifficultyList from "../../../Features/PlayerStats/PlayerListContainer/PlayerList/FixtureDifficultyList";
 import { Separator } from "../../../Global/GlobalComponents";
-import { PlayerComparisonLimit, textSecondaryColor } from "../../../Global/GlobalConstants";
+import { PlayerComparisonLimit, semiBoldFont, textSecondaryColor } from "../../../Global/GlobalConstants";
 import { Icons } from "../../../Global/Images";
 import { FplFixture } from "../../../Models/FplFixtures";
 import { FplOverview, PlayerOverview } from "../../../Models/FplOverview";
@@ -112,7 +112,7 @@ const PlayerComparisonFlatList = ({overview, fixtures, viewIndex, statsFilterSta
                                         <Image source={Icons['close']} style={{height: '60%', width: '60%'}} resizeMode='contain'/>
                                     </AnimatedView>
                                 </AnimatedButton>
-                                <Text style={[styles.playerHeaderText, {fontWeight: 'bold'}]}>{player.playerOverview.web_name}  </Text>
+                                <Text style={[styles.playerHeaderText, {fontFamily: semiBoldFont}]}>{player.playerOverview.web_name}  </Text>
                             </AnimatedView>
                             <View pointerEvents="none" style={{flexDirection: 'row', flex: 1, justifyContent: 'flex-end'}}>
                                 <Text style={styles.playerHeaderText}>{overview.element_types.find(element => element.id === player.playerOverview.element_type)?.singular_name_short}</Text>

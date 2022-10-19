@@ -12,15 +12,15 @@ export const styles = StyleSheet.create({
 
     emblems: {
         alignSelf: 'center',
-        height: moderateVerticalScale(25, 0.8),
-        width: moderateVerticalScale(25, 0.75),
+        height: moderateScale(25, 0.4),
+        width: moderateScale(25, 0.4),
     },
 
     text: {
         fontSize: smallFont, 
         alignSelf: 'center', 
         color: textPrimaryColor, 
-        paddingTop: moderateVerticalScale(3), 
+        paddingTop: moderateScale(3), 
         fontFamily: defaultFont,
     }
 });

@@ -24,7 +24,7 @@ export const GameweekViewStyles = (theme: Theme) => StyleSheet.create({
         marginTop: moderateVerticalScale(10), 
         borderTopWidth: 1, 
         borderBottomWidth: 1, 
-        borderColor: theme.colors.border,
+        borderColor: theme.colors.background,
     },
 
     gameweekItem: {

@@ -1,6 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, View, Text, Image } from "react-native";
+import { moderateScale } from "react-native-size-matters";
 import globalStyles from "../../../../Global/GlobalStyles";
 import { Jerseys } from "../../../../Global/Images";
 import { FplOverview } from "../../../../Models/FplOverview";
@@ -34,6 +35,7 @@ const KingsOfTheGameweekView = ({overviewData} : KingsOfTheGameweekViewProps) =>
                                 <View style={styles.kingsTextContainer}>
                                     <Text numberOfLines={1} style={styles.kingsText}>{overviewData.elements.find(element => element.id === king.top_element_info!.id)?.web_name}</Text>    
                                 </View>
+                                <View testID="separator" style={{borderBottomWidth: moderateScale(0.5), borderBottomColor: theme.colors.notification, opacity: 0.2, marginLeft: 5, marginRight: 5 }}/>
                                 <View style={styles.gameweekAndScoreContainer}>
                                     <Text style={styles.gameweekAndScoreText}>GW {king.id} | {king.top_element_info!.points}</Text> 
                                 </View>

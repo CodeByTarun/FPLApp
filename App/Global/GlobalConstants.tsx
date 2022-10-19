@@ -4,14 +4,11 @@ import { scale, verticalScale, moderateScale, moderateVerticalScale } from 'reac
 // Dimensions
 export const {width, height} = Dimensions.get('window');
 
+export const FIXTURES_VIEW_HEIGHT = moderateScale(110, 0.35);
+export const FIXTURES_VIEW_CONTROLS_HEIGHT = moderateScale(30, 0.35);
+export const FIXTURE_CARD_HEIGHT = moderateScale(80, 0.35);
 
-export const FIXTURES_VIEW_HEIGHT = moderateVerticalScale(height * 0.17, -0.2);
-export const FIXTURES_VIEW_CONTROLS_HEIGHT = moderateVerticalScale(height * 0.05, -0.2);
-export const FIXTURE_CARD_HEIGHT = moderateVerticalScale(height * 0.12, -0.2);
-
-export const BOTTOM_BAR_HEIGHT = moderateVerticalScale(50, 0.1);
-
-//7.5% height
+export const BOTTOM_BAR_HEIGHT = moderateScale(50, 0.1);
 
 // Styling
 export const cornerRadius = 12;
@@ -39,9 +36,9 @@ export const modalBackgroundColor = primaryColor;
 export const modalButtonColor = secondaryColor;
 
 // Fonts
-export const smallFont = moderateScale(8, 0.65) - moderateVerticalScale(0.1, 50);
-export const mediumFont = moderateScale(11, 0.65) - moderateVerticalScale(0.1, 50);
-export const largeFont = moderateScale(16, 0.65) - moderateVerticalScale(0.1, 50);
+export const smallFont = moderateScale(8, 0.3);
+export const mediumFont = moderateScale(11, 0.3);
+export const largeFont = moderateScale(16, 0.3);
 
 export const defaultFont = 'SFNSText';
 export const boldFont = 'SFNSTextBold';

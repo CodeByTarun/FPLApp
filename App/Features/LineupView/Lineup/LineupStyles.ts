@@ -24,7 +24,7 @@ export const LineupStyles = (theme: Theme) => StyleSheet.create(
         },
 
         field: {
-            height: moderateVerticalScale(height * 0.52, 0.22),
+            height: '100%',
             alignSelf: 'center',
             position: "absolute",
             bottom: 0

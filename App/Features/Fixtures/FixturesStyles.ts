@@ -65,7 +65,6 @@ export const FixturesStyles = (theme: Theme) => StyleSheet.create({
       },
 
       fixturesScrollView: {
-        flex: 1, 
         marginLeft: moderateScale(2.5), 
         marginRight: moderateScale(2.5),
       },

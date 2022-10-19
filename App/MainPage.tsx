@@ -10,6 +10,7 @@ import { FplBaseDataContext } from "./AppContext";
 import { useAppDispatch } from "./Store/hooks";
 import { setLiveGameweek } from "./Store/teamSlice";
 import { Theme, useTheme } from "@react-navigation/native";
+import FixturesView from "./Features/FixturesView";
 
 const MainPage = () => {
 
@@ -38,6 +39,7 @@ const MainPage = () => {
                 <LineupViewQueriesContainer overview={overview} fixtures={fixtures}/>
               </View>
               <PlayerStats/>
+              <FixturesView/>
               <View>
                 <BottomTabs/>
               </View>
@@ -73,12 +75,10 @@ const mainPageStyles = (theme: Theme) => StyleSheet.create({
   fixturesView: {
     height: GlobalConstants.FIXTURES_VIEW_HEIGHT, 
     width: '100%', 
-    overflow: 'hidden',
   },
 
   lineupView: {
     flex: 1,
-    overflow: 'hidden'
   },
   
   splashScreenContainer: {

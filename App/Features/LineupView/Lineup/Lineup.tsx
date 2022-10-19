@@ -8,7 +8,7 @@ import { Image, TouchableOpacity, View, Text } from "react-native";
 import { GetPlayerGameweekDataSortedByPosition } from "../../../Helpers/FplAPIHelpers";
 import { FplGameweek } from "../../../Models/FplGameweek";
 import { FplOverview } from "../../../Models/FplOverview";
-import { BudgetInfo, DraftInfo, TeamInfo, TeamTypes } from "../../../Store/teamSlice";
+import { BudgetInfo, changeToEmpty, DraftInfo, TeamInfo, TeamTypes } from "../../../Store/teamSlice";
 import { FplDraftGameweekPicks } from "../../../Models/FplDraftGameekPicks";
 import { FplManagerGameweekPicks } from "../../../Models/FplManagerGameweekPicks";
 import { FplDraftOverview } from "../../../Models/FplDraftOverview";
@@ -25,6 +25,7 @@ import KingsOfTheGameweekView from "./KingsOfTheGameweekView";
 import { animated, useTransition } from "@react-spring/native";
 import globalStyles from "../../../Global/GlobalStyles";
 import { useTheme } from "@react-navigation/native";
+import { useAppDispatch } from "../../../Store/hooks";
 
 const AnimatedView = animated(View);
 
@@ -130,6 +131,8 @@ const Lineup = ({overview, teamInfo, fixtures, gameweek, draftGameweekPicks, dra
         if (viewIndex !== 0) {
             setViewIndex(0);
         }
+        
+        
     }, [teamInfo.gameweek, teamInfo.teamType])
 
     const bonusPointsViewTransition = useTransition((teamInfo.teamType === TeamTypes.Fixture), {

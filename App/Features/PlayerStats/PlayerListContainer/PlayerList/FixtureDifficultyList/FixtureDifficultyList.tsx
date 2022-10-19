@@ -22,7 +22,7 @@ const FixtureDifficultyList = React.memo(({team, isFullList, numberOfFixturesToS
     const renderItem = useCallback((item: FplFixture) => {
         return (
             <View key={item.id.toString()} testID="fixtureDifficultyItem" style={[styles.container]} onStartShouldSetResponder={() => isFullList ? true : false}>
-                <Text style={[styles.text, {fontWeight: 'bold'}]}>GW {item.event}</Text>
+                <Text style={[styles.text]}>GW {item.event}</Text>
                 <Text style={styles.text}>{item.team_a === team ? overview.teams.find(team => team.id === item.team_h)?.short_name + '(A)' : overview.teams.find(team => team.id === item.team_a)?.short_name + '(H)'}</Text>
                 <View style={[styles.fixtureDifficultyIndicator, {borderBottomColor: DifficultyColors[item.team_a === team ? item.team_a_difficulty : item.team_h_difficulty]}]}/>
             </View>

@@ -42,7 +42,7 @@ const GameweekSummary = () => {
     const teamInfo = useAppSelector(state => state.team);
 
     const openHighestScoringTeam = () => {
-        if (overview) {
+        if (overview && overview.events.find(event => event.id === teamInfo.gameweek)?.highest_scoring_entry) {
             dispatch(changeToBudgetTeam({id: overview.events.find(event => event.id === teamInfo.gameweek)?.highest_scoring_entry, name: 'Top Team', isDraftTeam: false, isFavourite: false} as UserTeamInfo));
             navigation.goBack();
         }
@@ -94,7 +94,7 @@ const GameweekSummary = () => {
                     <AnimatedButton buttonFn={openHighestScoringTeam}>
                         <View style={[styles.highestPointsButton, globalStyles.shadow]}>
                             <Text style={styles.headerText}>Highest Points</Text>
-                            <Text style={styles.scoreText}>{overview.events.find(event => event.id === teamInfo.gameweek)?.highest_score}</Text>
+                            <Text style={styles.scoreText}>{overview.events.find(event => event.id === teamInfo.gameweek)?.highest_score ?? '0'}</Text>
                         </View>
                     </AnimatedButton>
                 </View>

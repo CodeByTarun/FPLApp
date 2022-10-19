@@ -7,7 +7,7 @@ export const BonusPointViewStyles = (theme: Theme) => StyleSheet.create({
     
     container:{ 
         width: moderateScale(225, 0.3), 
-        height: moderateVerticalScale(80, 1.5), 
+        marginTop: moderateVerticalScale(7),
         backgroundColor: theme.colors.primary, 
         alignSelf: 'flex-end', 
         marginBottom: -1,

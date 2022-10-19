@@ -1,7 +1,8 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
-import { defaultFont, semiBoldFont } from "../../../Global/GlobalConstants";
+import { defaultFont, semiBoldFont, smallFont } from "../../../Global/GlobalConstants";
+import normalize from "../../../Global/Helpers";
 
 export const TabButtonStyles = (theme: Theme) => StyleSheet.create({
 
@@ -25,7 +26,7 @@ export const TabButtonStyles = (theme: Theme) => StyleSheet.create({
     },
 
     headerText: {
-        fontSize: moderateScale(9, 0.2),
+        fontSize: smallFont * 1.1,
         alignSelf: 'center',
         color: theme.colors.notification,
         fontFamily: semiBoldFont,

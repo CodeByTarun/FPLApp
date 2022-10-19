@@ -1,7 +1,7 @@
 import { Theme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, verticalScale } from "react-native-size-matters";
-import { cornerRadius, defaultFont, semiBoldFont, smallFont, width } from "../../Global/GlobalConstants";
+import { cornerRadius, defaultFont, mediumFont, semiBoldFont, smallFont, width } from "../../Global/GlobalConstants";
 
 export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     container: {
@@ -138,7 +138,7 @@ export const PlayerStatsDisplayStyles = (theme: Theme) => StyleSheet.create({
     nameText: {
         paddingLeft: moderateScale(4),
         paddingRight: moderateScale(4),
-        fontFamily: semiBoldFont
+        fontFamily: semiBoldFont,
     },
     
     scoreContainer: {

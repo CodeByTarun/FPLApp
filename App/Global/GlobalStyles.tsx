@@ -78,12 +78,15 @@ export const globalStyles = StyleSheet.create(
         },
 
         // Make the parent elements overflow: hidden to make this work for only the bottom!
-        bottomShadow: {
+        bottomShadow: (Platform.OS === 'ios') ? {
             shadowColor: 'black',
             shadowOffset: {width: 0, height: 2},
-            shadowRadius: 2,
+            shadowRadius: 1,
             shadowOpacity: 0.15,
-            elevation: 3,
+        } : {
+            elevation: 5,
+            borderBottomWidth: 1,
+            borderColor: 'rgba(10, 10, 10, 0.2)',
         },
 
         topShadow: (Platform.OS === "ios") ? {

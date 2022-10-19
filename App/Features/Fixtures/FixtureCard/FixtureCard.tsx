@@ -64,7 +64,7 @@ const FixtureCard = ({overview, fixture, gameweekData} : FixtureCardProp) => {
                 <View style={[styles.card, globalStyles.shadow]}>
                     <View style={styles.topbar}>
                         <Text style={styles.datetext}>
-                            { moment(fixture.kickoff_time).tz(timezone).format('MMM D, H:mm z') }
+                            { moment(fixture.kickoff_time).tz(timezone).format('MMM D, h:mm A') }
                         </Text>
                     </View>
                     <View style={styles.scoreView}>

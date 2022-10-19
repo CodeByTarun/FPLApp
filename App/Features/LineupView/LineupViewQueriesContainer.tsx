@@ -5,8 +5,8 @@ import { defaultFont, mediumFont, secondaryColor, textPrimaryColor } from "../..
 import { FplFixture } from "../../Models/FplFixtures";
 import { FplOverview } from "../../Models/FplOverview";
 import { useGetGameweekDataQuery, useGetDraftGameweekPicksQuery, useGetDraftOverviewQuery, useGetDraftUserInfoQuery, useGetDraftLeagueInfoQuery, useGetBudgetGameweekPicksQuery, useGetBudgetUserInfoQuery } from "../../Store/fplSlice";
-import { useAppSelector } from "../../Store/hooks";
-import { TeamTypes } from "../../Store/teamSlice";
+import { useAppDispatch, useAppSelector } from "../../Store/hooks";
+import { changeToEmpty, TeamTypes } from "../../Store/teamSlice";
 import LineupView from "./LineupView";
 
 interface LineupViewQueriesContainerProps {
@@ -17,6 +17,7 @@ interface LineupViewQueriesContainerProps {
 const LineupViewQueriesContainer = ({overview, fixtures} : LineupViewQueriesContainerProps) => {
 
     const teamInfo = useAppSelector((state) => state.team);
+    const dispatch = useAppDispatch();
 
     const gameweek = useGetGameweekDataQuery((teamInfo.teamType !== TeamTypes.Empty) ? teamInfo.gameweek : skipToken);
     
@@ -28,6 +29,12 @@ const LineupViewQueriesContainer = ({overview, fixtures} : LineupViewQueriesCont
     const budgetGameweek = useGetBudgetGameweekPicksQuery((teamInfo.teamType === TeamTypes.Budget) ? { entryId: teamInfo.info.id, gameweek: teamInfo.gameweek } : skipToken);
     const budgetUserInfo = useGetBudgetUserInfoQuery((teamInfo.teamType === TeamTypes.Budget) ? teamInfo.info.id : skipToken);
 
+    useEffect(() => {
+        if (fixtures.filter((fixture) => { return fixture.event == (teamInfo.gameweek !== 0 ? teamInfo.gameweek : 1)}).length === 0) {
+            dispatch(changeToEmpty());
+        }
+    }, [teamInfo.gameweek])
+
     return (
         <>
         { ((teamInfo.teamType === TeamTypes.Draft && draftGameweek.isError) || (teamInfo.teamType === TeamTypes.Budget && budgetGameweek.isError)) ?
@@ -35,9 +42,18 @@ const LineupViewQueriesContainer = ({overview, fixtures} : LineupViewQueriesCont
             <Text style={{alignSelf: 'center', fontSize: mediumFont, color: textPrimaryColor, fontFamily: defaultFont, width: '60%', textAlign: 'center'}}>This team does not exist or has no gameweek data.</Text>
         </View> 
         :
+        <>
+        {!gameweek.isSuccess ? 
+        
+        <View style={{flex: 1, justifyContent: 'center' }}>
+            <Text style={{alignSelf: 'center', fontSize: mediumFont, color: textPrimaryColor, fontFamily: defaultFont, width: '60%', textAlign: 'center'}}>This team does not exist or has no gameweek data.</Text>
+        </View> 
+        :
         <LineupView overview={overview} fixtures={fixtures} gameweek={gameweek.data} teamInfo={teamInfo} draftGameweekPicks={draftGameweek.data}
                     draftOverview={draftOverview.data} draftUserInfo={draftUserInfo.data} draftLeagueInfo={draftLeagueInfo.data} 
                     budgetGameweekPicks={budgetGameweek.data} budgetUserInfo={budgetUserInfo.data}/>
+        }
+        </>
         }
         </>
     )
