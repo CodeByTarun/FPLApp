@@ -53,9 +53,6 @@ This project utilized functional components, react native hooks and the redux de
 
 To use this application you must install it via Xcode for iPhones or download the apk file provided for Android.
 
-Open with Expo: https://expo.dev/@codebytarun/FPLApp
-(or open with this link on your device exp://exp.host/@codebytarun/FPLApp?release-channel=default)
-
 Android APK: https://drive.google.com/file/d/1vZzS7Cwq4WA11SWRGeZhBkBHBEnRW1v8/view?usp=sharing
 
 IOS Simulator: https://drive.google.com/file/d/1Fre5dAugUs775VlyO3tv17Z9DqOsQZz5/view?usp=sharing
