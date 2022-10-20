@@ -83,7 +83,11 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         setTeam();
       }
 
-    }, []);
+  }, []);
+
+  useEffect (function liveGameweekChange() {
+    setTeam();
+  }, [teamInfo.liveGameweek])
 
   const setTeam = async() => {
     let teams = await getAllUserTeamInfo();
@@ -95,7 +99,15 @@ const Fixtures = ({overview, fixtures, gameweek}: FixturesViewProp) => {
         dispatch(favouriteTeam?.isDraftTeam ? changeToDraftTeam(favouriteTeam) : changeToBudgetTeam(favouriteTeam))
       }
     } else {
-      setSelectedFixture();
+      if ((teamInfo.teamType === TeamTypes.Empty && fixtures) || (teamInfo.teamType === TeamTypes.Fixture && fixtures)) {
+        let sortedGameweekFixtures: FplFixture[] | undefined = fixtures.filter((fixture) => { return fixture.event === teamInfo.liveGameweek})
+                                                                       .sort((fixture1, fixture2) => SortFixtures(fixture1, fixture2, dateNow));
+
+      
+        if (sortedGameweekFixtures !== undefined && sortedGameweekFixtures.length !== 0) {
+            dispatch(changeToFixture(sortedGameweekFixtures[0]));                            
+        }
+      }
     }
   }
 
