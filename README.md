@@ -93,7 +93,7 @@ Through the bottom navigation bar, you can view the dream team for the gameweek 
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img alt="overview-tfdr" src="/readmeImages/overview-tfdr.PNG" width="30%">
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="fixtures" src="/readmeImages/fixtures.png" width="30%">
+  <img alt="fixtures" src="/readmeImages/fixtures.PNG" width="30%">
 </p>
 
 The players button will open a player table where you can see various stats for players, filter players by price range, minutes played, team, and position. You can also check per 90 values for applicable stats and watchlist players. Selecting a player will open a detailed view of there stats for the year and the history of the player as well. You can filter there stats for different gameweek spans and see there per 90 numbers. If you press the button on the left side of the view toggle button it will open a player comparison popup where you can add up to five players to compare their stats. You can compare these players during certain game spans and there per 90 numbers as well.
