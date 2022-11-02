@@ -8,6 +8,7 @@ export const FixtureRowStyle = (theme: Theme) => StyleSheet.create({
     container: {
         width: '100%',
         height: moderateScale(60, 0.15),
+        paddingTop: moderateScale(10, 0.15),
     },
 
     rowContainer: {

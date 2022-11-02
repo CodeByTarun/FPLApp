@@ -52,7 +52,7 @@ const FixtureGroup = ({fixtureList, overview, gameweekData, date} : FixtureGroup
                 { return (
                     <View key={fixture.id}>
                         <FixtureRow fixture={fixture} overview={overview} gameweekData={gameweekData}/>
-                        {fixtureList.at(-1) !== fixture && Separator(theme)}
+                        {fixtureList[fixtureList.length - 1] !== fixture && Separator(theme)}
                     </View>
                 )})
             }

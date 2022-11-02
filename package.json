@@ -2,7 +2,7 @@
   "name": "fplapp",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start --dev-client",
+    "start": "npx expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
@@ -32,7 +32,7 @@
     "expo-screen-orientation": "~4.3.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
-    "expo-updates": "~0.14.5",
+    "expo-updates": "~0.14.6",
     "globally": "^0.0.0",
     "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
