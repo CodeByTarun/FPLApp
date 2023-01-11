@@ -156,7 +156,7 @@ Distributed under the [MIT License](https://github.com/othneildrew/Best-README-T
 ## Contact
 Tarun Bola - bolatarun@gmail.com
 
-Project Link: [https://github.com/TarunBola/FPLApp](https://github.com/TarunBola/FPLApp)
+Project Link: [https://github.com/CodeByTarun/FPLApp](https://github.com/CodeByTarun/FPLApp)
 
 ## Acknowledgments
 * [React Native Async Storage](https://github.com/react-native-async-storage/async-storage)
